@@ -1,3 +1,4 @@
+const BASE = process.env.BASE_URL || "http://localhost:3000";
 import { fileURLToPath } from "node:url";
 import pathMod from "node:path";
 const PRUEBAS = pathMod.dirname(fileURLToPath(import.meta.url)).split(String.fromCharCode(92)).join("/");
@@ -44,7 +45,7 @@ async function abre() {
     HTMLAnchorElement.prototype.click = function () { if (this.download) window.__arquivos.push({ nome: this.download, blob: window.__ultimoBlob }); return click.call(this); };
   });
   const erros = []; page.on("pageerror", (e) => erros.push(e.message)); page.on("console", (m) => { if (m.type() === "error") erros.push(m.text()); });
-  await page.goto("http://localhost:3000/gerador-de-capa-abnt/", { waitUntil: "networkidle0" });
+  await page.goto(BASE + "/gerador-de-capa-abnt/", { waitUntil: "networkidle0" });
   page.__erros = erros;
   return page;
 }

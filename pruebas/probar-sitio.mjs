@@ -1,5 +1,6 @@
 // Revisión de todas las páginas en 6 anchos de pantalla: sin scroll horizontal, sin errores de consola, sin recursos rotos,
 // sin imágenes sin texto alternativo, objetivos táctiles razonables. Requiere el sitio en http://localhost:3000.
+const BASE = process.env.BASE_URL || "http://localhost:3000";
 import puppeteer from "puppeteer-core";
 const PAGINAS = ["/", "/gerador-de-capa-abnt/", "/sobre/", "/contato/", "/politica-de-privacidade/", "/termos-de-uso/", "/pagina-que-no-existe/"];
 const ANCHOS = [320, 375, 414, 768, 1024, 1280, 1920];
@@ -14,8 +15,8 @@ for (const w of ANCHOS) {
     p.on("pageerror", (e) => errores.push("js: " + e.message));
     p.on("console", (m) => { if (m.type() === "error" && !/404/.test(m.text())) errores.push("consola: " + m.text()); });
     p.on("requestfailed", (r) => errores.push("fallo: " + r.url()));
-    p.on("response", (r) => { if (r.status() >= 400 && r.url() !== "http://localhost:3000" + url) errores.push(r.status() + " " + r.url()); });
-    const resp = await p.goto("http://localhost:3000" + url, { waitUntil: "networkidle0" });
+    p.on("response", (r) => { if (r.status() >= 400 && r.url() !== BASE + url) errores.push(r.status() + " " + r.url()); });
+    const resp = await p.goto(BASE + "" + url, { waitUntil: "networkidle0" });
     const r = await p.evaluate(() => {
       const overflow = document.documentElement.scrollWidth - window.innerWidth;
       const culpables = overflow > 0 ? [...document.querySelectorAll("body *")].filter((e) => e.getBoundingClientRect().right > window.innerWidth + 1).slice(0, 3).map((e) => e.tagName + "." + e.className) : [];

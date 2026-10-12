@@ -1,5 +1,6 @@
 // Capturas completas de la página del generador (celular y computador), con y sin ?ads=preview.
 // Genera: capturas/generador-<aparato>-<modo>.png (página entera) y ...-columnas.png (la misma página repartida en columnas, para verla de un vistazo).
+const BASE = process.env.BASE_URL || "http://localhost:3000";
 import puppeteer from "puppeteer-core";
 import { createCanvas, loadImage } from "@napi-rs/canvas";
 import { fileURLToPath } from "node:url";
@@ -18,7 +19,7 @@ for (const [nome, ap] of Object.entries(APARATOS)) {
   for (const modo of ["sin-anuncios", "con-anuncios"]) {
     const p = await browser.newPage();
     await p.setViewport(ap.vp);
-    await p.goto("http://localhost:3000/gerador-de-capa-abnt/" + (modo === "con-anuncios" ? "?ads=preview" : ""), { waitUntil: "networkidle0" });
+    await p.goto(BASE + "/gerador-de-capa-abnt/" + (modo === "con-anuncios" ? "?ads=preview" : ""), { waitUntil: "networkidle0" });
     await p.evaluate(() => {
       const set = (id, v) => { const e = document.getElementById(id); e.value = v; e.dispatchEvent(new Event("input", { bubbles: true })); };
       set("institution", "Universidade Federal de Viçosa"); set("course", "Curso de Administração");

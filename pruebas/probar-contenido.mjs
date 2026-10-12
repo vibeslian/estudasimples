@@ -1,7 +1,7 @@
 // Etapa 4: contenido, datos estructurados, anuncios y cero peticiones a terceros.
 // Requiere el sitio en http://localhost:3000 (npm run dev).
 import puppeteer from "puppeteer-core";
-const BASE = "http://localhost:3000";
+const BASE = process.env.BASE_URL || "http://localhost:3000";
 const PAGINAS = ["/", "/gerador-de-capa-abnt/", "/sobre/", "/contato/", "/politica-de-privacidade/", "/termos-de-uso/"];
 const ok = (c) => (c ? "OK   " : "FALLA");
 const browser = await puppeteer.launch({ executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe", headless: "new" });
@@ -12,7 +12,7 @@ const marca = (cond, msg) => { console.log(ok(cond), msg); if (!cond) falhas.pus
 async function abre(url, vp = { width: 1280, height: 900 }) {
   const p = await browser.newPage();
   await p.setViewport(vp);
-  p.on("request", (r) => { try { const u = new URL(r.url()); if (/^https?:$/.test(u.protocol) && u.hostname !== "localhost") externos.add(u.hostname + " <- " + url); } catch (e) { /* data: etc. */ } });
+  p.on("request", (r) => { try { const u = new URL(r.url()); if (/^https?:$/.test(u.protocol) && u.hostname !== new URL(BASE).hostname) externos.add(u.hostname + " <- " + url); } catch (e) { /* data: etc. */ } });
   await p.goto(BASE + url, { waitUntil: "networkidle0" });
   return p;
 }

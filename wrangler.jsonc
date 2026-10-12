@@ -1,0 +1,13 @@
+{
+  // Configuración del Worker de Cloudflare que publica el sitio (solo archivos estáticos, sin código).
+  // El nombre debe ser igual al del Worker en el panel de Cloudflare (Workers & Pages > estudasimples).
+  "name": "estudasimples",
+  "compatibility_date": "2026-10-12",
+  "assets": {
+    "directory": "./dist",
+    // Direcciones que no existen: responde con 404 y muestra dist/404.html
+    "not_found_handling": "404-page",
+    // /sobre/ -> sobre/index.html (con barra al final)
+    "html_handling": "auto-trailing-slash"
+  }
+}

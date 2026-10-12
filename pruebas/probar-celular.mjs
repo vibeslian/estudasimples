@@ -1,3 +1,4 @@
+const BASE = process.env.BASE_URL || "http://localhost:3000";
 import { fileURLToPath } from "node:url";
 import pathMod from "node:path";
 const PRUEBAS = pathMod.dirname(fileURLToPath(import.meta.url)).split(String.fromCharCode(92)).join("/");
@@ -9,7 +10,7 @@ const page = await browser.newPage();
 await page.setViewport({ width: 390, height: 844, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
 const erros = []; page.on("pageerror", (e) => erros.push(e.message)); page.on("console", (m) => { if (m.type() === "error") erros.push(m.text()); });
 await page.evaluateOnNewDocument(() => { window.__arq = []; const o = URL.createObjectURL; URL.createObjectURL = (b) => { window.__b = b; return o.call(URL, b); }; const c = HTMLAnchorElement.prototype.click; HTMLAnchorElement.prototype.click = function () { if (this.download) window.__arq.push({ nome: this.download, tipo: window.__b.type, tam: window.__b.size }); return c.call(this); }; });
-await page.goto("http://localhost:3000/gerador-de-capa-abnt/", { waitUntil: "networkidle0" });
+await page.goto(BASE + "/gerador-de-capa-abnt/", { waitUntil: "networkidle0" });
 const log = (k, v) => console.log(k.padEnd(48), JSON.stringify(v));
 const set = (id, v) => page.evaluate((id, v) => { const e = document.getElementById(id); e.value = v; e.dispatchEvent(new Event("input", { bubbles: true })); }, id, v);
 
