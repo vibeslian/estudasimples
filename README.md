@@ -24,12 +24,14 @@ conteudo/faq-capa.json    ← preguntas frecuentes (de aquí salen el texto y lo
 site.config.json          ← nombre, dominio y correo
 build.mjs                 ← arma la carpeta dist/ (lo que se publica)
 docs/                     ← notas: norma ABNT, diseño, exportación, anuncios, contenido, publicación
+wrangler.jsonc            ← configuración del Worker de Cloudflare (404, carpeta dist)
+pruebas/                  ← pruebas automáticas (no se publican)
 ```
 
 ## Publicación
-Cloudflare Pages construye el sitio automáticamente con cada cambio subido a la rama `main`:
-- Comando de build: `npm run build`
-- Carpeta de salida: `dist`
-- Variable: `NODE_VERSION` = `22`
+El sitio se publica con Cloudflare (Workers con archivos estáticos). Cada vez que subes un cambio a la rama `main` de GitHub, Cloudflare construye y publica solo:
+- Comando de build: `npm run build` (genera la carpeta `dist/`)
+- Comando de deploy: `npx wrangler deploy` (usa `wrangler.jsonc`)
+- Nombre del Worker: `estudasimples` (debe coincidir con `wrangler.jsonc`)
 
-Guía completa en `docs/publicar.md`.
+Guía completa (GitHub, Cloudflare, dominio, www, HTTPS, Search Console y correo): `docs/publicar.md`.
