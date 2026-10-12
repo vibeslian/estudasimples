@@ -1,0 +1,82 @@
+[
+  {
+    "p": "A capa tem número de página?",
+    "r": [
+      "Não. A capa não é contada nem numerada: a contagem das páginas começa na folha de rosto, e o número só aparece a partir da primeira página do texto (a introdução), no canto superior direito."
+    ]
+  },
+  {
+    "p": "Precisa do nome do orientador na capa?",
+    "r": [
+      "Não. Pela NBR 14724:2024, o orientador (e o coorientador, se houver) aparece na folha de rosto, não na capa.",
+      "Se a sua faculdade pedir o orientador na capa, siga o modelo dela, porque ela pode ter uma regra própria."
+    ]
+  },
+  {
+    "p": "Qual fonte usar na capa ABNT?",
+    "r": [
+      "A norma não escolhe a fonte. Ela só recomenda o tamanho 12 para todo o texto, inclusive a capa.",
+      "Na prática, Arial e Times New Roman são as mais pedidas pelas faculdades. Use a que o manual da sua instituição indicar."
+    ]
+  },
+  {
+    "p": "Capa de trabalho escolar também segue a ABNT?",
+    "r": [
+      "Depende da escola. A NBR 14724 foi escrita para trabalhos acadêmicos (teses, dissertações, TCCs e similares), mas diz que vale, no que couber, para trabalhos acadêmicos e similares dentro e fora da sala de aula.",
+      "Muitas escolas usam a ABNT como referência, mas quem decide é o professor: pergunte qual modelo ele quer. Se ele não tiver preferência, a capa ABNT é uma boa escolha."
+    ]
+  },
+  {
+    "p": "O nome da instituição é obrigatório na capa?",
+    "r": [
+      "Na norma, é opcional. Mesmo assim, a maioria das faculdades pede, então coloque, a menos que o modelo da sua instituição diga o contrário."
+    ]
+  },
+  {
+    "p": "Preciso colocar o curso ou o departamento na capa?",
+    "r": [
+      "A norma não lista o curso, mas a maioria dos manuais de faculdade o coloca logo abaixo do nome da instituição. Se o seu manual pede, preencha o campo \"Curso ou departamento\"; se não pede, deixe em branco."
+    ]
+  },
+  {
+    "p": "Qual cidade e qual ano colocar na capa?",
+    "r": [
+      "A cidade é a da instituição onde o trabalho será entregue, e não necessariamente a cidade onde você mora. O ano é o da entrega (a norma fala em \"ano de depósito\").",
+      "Se houver cidades com o mesmo nome, acrescente a sigla do estado, como em Viçosa - MG."
+    ]
+  },
+  {
+    "p": "Quais são as margens da capa ABNT?",
+    "r": [
+      "Em folha A4, 3 cm na esquerda e em cima, e 2 cm na direita e embaixo.",
+      "Atenção: a margem padrão do Word costuma ser 2,54 cm nos quatro lados, então é preciso mudar."
+    ]
+  },
+  {
+    "p": "Posso colocar o logo ou o brasão da faculdade na capa?",
+    "r": [
+      "A norma não fala de logotipo. Muitas faculdades pedem o brasão no modelo de capa delas, e nesse caso vale o modelo oficial.",
+      "O gerador do Estuda Simples não insere imagens. Se precisar do brasão, baixe o arquivo em Word e coloque a imagem lá."
+    ]
+  },
+  {
+    "p": "O que mudou na capa com a NBR 14724:2024?",
+    "r": [
+      "Para a capa, quase nada. Os elementos e a ordem são os mesmos da versão de 2011; mudou só a redação (o ano, por exemplo, passou a ser descrito como ano de depósito, ou seja, o da entrega).",
+      "As mudanças maiores da versão de dezembro de 2024 estão em outras partes do trabalho, como a ficha catalográfica e as legendas das ilustrações."
+    ]
+  },
+  {
+    "p": "E se a minha faculdade tiver um modelo próprio de capa?",
+    "r": [
+      "Use o modelo da faculdade: ele vale mais do que qualquer gerador. A ABNT define o básico, e cada instituição pode detalhar o resto (alinhamento, maiúsculas, brasão e assim por diante).",
+      "Você pode usar o Estuda Simples como ponto de partida e ajustar no Word. Em \"Personalizar estilo\", dá para mudar as maiúsculas, o negrito e o tamanho do título."
+    ]
+  },
+  {
+    "p": "Posso baixar a capa em Word e editar?",
+    "r": [
+      "Pode. O arquivo .docx sai com as margens, a fonte e o espaçamento 1,5 já configurados, e você edita como qualquer documento do Word."
+    ]
+  }
+]

@@ -1,0 +1,169 @@
+/* Estilos compartilhados: layout, cabeçalho, rodapé, botões, cartões, hero com manchas.
+   Mobile-first. Cores e fontes vêm de tokens.css. */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--fonte-texto);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--texto);
+  background: var(--fundo);
+}
+img, svg { max-width: 100%; }
+[hidden] { display: none !important; }
+h1, h2, h3 { font-family: var(--fonte-titulo); font-weight: 800; line-height: 1.12; margin: 0 0 .5em; letter-spacing: -0.01em; }
+h1 { font-size: clamp(2.35rem, 7.5vw, 4.25rem); }
+h2 { font-size: clamp(1.75rem, 4.5vw, 2.6rem); }
+h3 { font-size: 1.3rem; line-height: 1.25; }
+p { margin: 0 0 1em; }
+a { color: var(--principal); text-underline-offset: 3px; }
+a:hover { color: var(--texto); }
+:focus-visible { outline: 3px solid var(--principal); outline-offset: 3px; border-radius: 4px; }
+
+.container { width: 100%; max-width: var(--largura); margin: 0 auto; padding-inline: 20px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: absolute; left: 12px; top: -60px; background: var(--principal); color: #fff; padding: 10px 16px; border-radius: 10px; z-index: 50; }
+.skip:focus { top: 12px; }
+
+/* ---------- Cabeçalho ---------- */
+.site-header { position: relative; z-index: 10; }
+.header-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 16px; }
+.logo { white-space: nowrap; font-family: var(--fonte-titulo); font-weight: 800; font-size: 1.5rem; letter-spacing: -0.02em; color: var(--principal-escuro); text-decoration: none; }
+.logo::after { content: ""; display: inline-block; width: .32em; height: .32em; margin-left: .12em; border-radius: 50%; background: var(--acento); }
+.logo:hover { color: var(--principal-escuro); }
+.nav { display: flex; align-items: center; gap: 6px; }
+.nav a { padding: 8px 12px; border-radius: 999px; text-decoration: none; color: var(--texto); font-weight: 700; font-size: .98rem; }
+.nav a:hover { background: var(--salvia-100); }
+.nav a[aria-current="page"] { background: var(--salvia-100); }
+.nav .nav-cta { display: none; }
+
+/* ---------- Botões ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 48px; padding: 12px 22px;
+  font: inherit; font-weight: 700; font-size: 1rem; line-height: 1.2; text-decoration: none; text-align: center;
+  color: var(--texto); background: var(--superficie);
+  border: 2px solid var(--salvia-200); border-radius: 999px; cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease, border-color .18s ease;
+}
+.btn:hover:not(:disabled) { background: var(--salvia-50); border-color: var(--salvia-300); color: var(--texto); }
+.btn:active:not(:disabled) { transform: scale(.97); }
+.btn:disabled { opacity: .55; cursor: not-allowed; }
+.btn-acento { background: var(--acento); border-color: var(--acento); color: var(--texto); box-shadow: 0 4px 14px rgba(232, 103, 74, .3); }
+.btn-acento:hover:not(:disabled) { background: var(--acento-hover); border-color: var(--acento-hover); color: var(--texto); }
+.btn-grande { min-height: 56px; padding: 14px 30px; font-size: 1.1rem; }
+@media (hover: hover) {
+  .btn:hover:not(:disabled) { transform: translateY(-2px); }
+  .btn-acento:hover:not(:disabled) { box-shadow: 0 8px 20px rgba(232, 103, 74, .38); }
+}
+
+/* ---------- Seções ---------- */
+.secao { padding-block: clamp(56px, 9vw, 104px); }
+.secao--salvia { background: var(--salvia-100); }
+.secao--claro { background: var(--superficie); }
+.secao-topo { max-width: 40rem; margin-bottom: clamp(28px, 5vw, 48px); }
+.etiqueta { display: inline-block; margin-bottom: 14px; padding: 6px 14px; border-radius: 999px; background: var(--salvia-100); color: var(--principal); font-weight: 700; font-size: .9rem; letter-spacing: .02em; }
+.secao--salvia .etiqueta { background: var(--superficie); }
+.lead { font-size: clamp(1.1rem, 2.4vw, 1.3rem); color: var(--texto-suave); max-width: 38rem; }
+
+/* ---------- Cartões ---------- */
+.cartao { background: var(--superficie); border: 1px solid var(--salvia-200); border-radius: var(--raio); padding: clamp(22px, 4vw, 32px); box-shadow: var(--sombra); }
+.grade { display: grid; gap: 18px; }
+@media (min-width: 640px) { .grade-2 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 900px) { .grade-3 { grid-template-columns: repeat(3, 1fr); } .grade-4 { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 640px) and (max-width: 899px) { .grade-4 { grid-template-columns: repeat(2, 1fr); } .grade-3 { grid-template-columns: repeat(2, 1fr); } }
+@media (hover: hover) {
+  a.cartao { transition: transform .2s ease, box-shadow .2s ease; }
+  a.cartao:hover { transform: translateY(-4px); box-shadow: var(--sombra-forte); }
+}
+a.cartao { display: block; text-decoration: none; color: var(--texto); }
+a.cartao:active { transform: scale(.985); }
+
+/* ---------- Hero com manchas orgânicas (só CSS, só transform = barato para o celular) ---------- */
+.hero { position: relative; overflow: hidden; isolation: isolate; background: var(--salvia-50); }
+.hero-conteudo { padding-block: clamp(40px, 8vw, 96px) clamp(48px, 9vw, 112px); }
+.hero--compacto .hero-conteudo { padding-block: clamp(16px, 3vw, 32px) clamp(32px, 5vw, 56px); }
+.hero--compacto h1 { font-size: clamp(2rem, 5.5vw, 3.25rem); }
+.hero .site-header { position: relative; }
+.manchas { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.mancha { position: absolute; border-radius: 50%; will-change: transform; animation: flutuar 34s ease-in-out infinite alternate; }
+.mancha-1 { width: min(90vw, 640px); aspect-ratio: 1; top: -22%; left: -12%; background: radial-gradient(closest-side, var(--salvia-300) 0%, rgba(181, 201, 183, 0) 100%); opacity: .95; }
+.mancha-2 { width: min(80vw, 560px); aspect-ratio: 1.3; top: 8%; right: -14%; background: radial-gradient(closest-side, var(--azul-200) 0%, rgba(201, 214, 225, 0) 100%); opacity: 1; animation-duration: 42s; animation-direction: alternate-reverse; }
+.mancha-3 { width: min(60vw, 420px); aspect-ratio: 1; bottom: -26%; left: 34%; background: radial-gradient(closest-side, var(--acento-claro) 0%, rgba(252, 230, 222, 0) 100%); opacity: .9; animation-duration: 50s; }
+@keyframes flutuar {
+  0%   { transform: translate3d(0, 0, 0) rotate(0deg) scale(1, 1); }
+  50%  { transform: translate3d(7%, 9%, 0) rotate(24deg) scale(1.14, .9); }
+  100% { transform: translate3d(-6%, 4%, 0) rotate(-14deg) scale(.94, 1.12); }
+}
+.manchas.pausado .mancha { animation-play-state: paused; }
+
+/* ---------- Início ---------- */
+/* Mini capa de exemplo na portada: só no computador, com entrada suave (uma única vez) */
+.hero-mini { display: none; }
+@media (min-width: 900px) {
+  .hero-grade { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 56px; align-items: center; }
+  .hero-mini { display: block; justify-self: center; }
+}
+.mini-capa {
+  width: 300px; aspect-ratio: 21 / 29.7; padding: 14.3% 9.5% 9.5% 14.3%; /* mesmas margens da ABNT (3/3/2/2 cm) */
+  display: flex; flex-direction: column; text-align: center; font-family: Arial, "Liberation Sans", Helvetica, sans-serif;
+  font-size: 8.5px; line-height: 1.7; color: #000; background: #fff; border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(34, 54, 43, .1), 0 22px 48px rgba(34, 54, 43, .18);
+  transform: rotate(-1.5deg); animation: entrar-mini 1.2s .25s cubic-bezier(.22, .61, .36, 1) both;
+}
+.mini-capa b { display: block; }
+.mini-autor { margin-top: 3.2em; }
+.mini-titulo { margin: auto 0; padding: 1.6em 0; font-size: 9px; }
+.mini-titulo b { display: inline; }
+.mini-base b + b { margin-top: 1.6em; }
+@keyframes entrar-mini {
+  from { opacity: 0; transform: translateY(26px) rotate(-1.5deg); }
+  to   { opacity: 1; transform: translateY(0) rotate(-1.5deg); }
+}
+
+.hero-botoes { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
+.confianca { display: flex; flex-wrap: wrap; gap: 10px 22px; margin: 30px 0 0; padding: 0; list-style: none; color: var(--texto-suave); font-weight: 700; font-size: .98rem; }
+.confianca li::before { content: ""; display: inline-block; width: 9px; height: 9px; margin-right: 8px; border-radius: 50%; background: var(--acento); }
+.cartao.destaque { display: grid; gap: 22px; align-items: center; }
+.destaque h3 { font-size: clamp(1.5rem, 3.4vw, 2rem); }
+.destaque-mini { background: var(--salvia-50); border: 1px solid var(--salvia-200); border-radius: var(--raio-pequeno); padding: 18px; text-align: center; font-size: .78rem; line-height: 1.7; }
+.destaque-mini b { display: block; font-size: .85rem; }
+@media (min-width: 800px) { .cartao.destaque { grid-template-columns: 1fr 260px; gap: 40px; } }
+.passo-grande .num { font-family: var(--fonte-titulo); font-weight: 800; font-size: clamp(3rem, 8vw, 4.5rem); line-height: 1; color: var(--salvia-500); display: block; margin-bottom: 8px; }
+.em-breve { position: relative; background: var(--salvia-50); border-style: dashed; box-shadow: none; }
+.em-breve h3 { margin-bottom: .3em; }
+.em-breve p { color: var(--texto-suave); margin: 0; font-size: .98rem; }
+.pilula { display: inline-block; margin-bottom: 12px; padding: 4px 12px; border-radius: 999px; background: var(--acento-claro); color: var(--erro-texto); font-weight: 700; font-size: .82rem; }
+
+/* ---------- Rodapé ---------- */
+.site-footer { background: var(--principal-escuro); color: var(--salvia-100); padding-block: 40px; font-size: .95rem; }
+.site-footer a { color: var(--fundo); }
+.site-footer a:hover { color: #fff; }
+.site-footer .logo { color: var(--fundo); }
+.footer-links { display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 18px 0; }
+.site-footer p { margin: 0; max-width: 46rem; color: var(--salvia-200); }
+
+/* ---------- Páginas de texto (Sobre, Contato, legais) ---------- */
+.prosa { max-width: var(--largura-texto); }
+.prosa h2 { font-size: clamp(1.4rem, 3vw, 1.8rem); margin-top: 1.8em; }
+.prosa ul, .prosa ol { padding-left: 1.3em; }
+.prosa li { margin-bottom: .4em; }
+
+/* ---------- Aparecer suavemente ao rolar (só quando o JS está ativo; nunca no formulário/prévia) ---------- */
+.js .revelar { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+.js .revelar.visivel { opacity: 1; transform: none; }
+
+/* ---------- Celular pequeno / computador ---------- */
+@media (min-width: 640px) { .nav .nav-cta { display: inline-flex; min-height: 42px; padding: 8px 18px; margin-left: 6px; } }
+@media (max-width: 480px) { .nav a { padding: 8px 10px; font-size: .92rem; } .logo { font-size: 1.35rem; } .nav .nav-ferramentas { display: none; } }
+
+/* ---------- Respeita quem pediu menos movimento ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .mancha { animation: none; will-change: auto; }
+  .mini-capa { animation: none; }
+  .js .revelar { opacity: 1; transform: none; transition: none; }
+  .btn, a.cartao { transition: none; }
+  .btn:hover:not(:disabled), a.cartao:hover { transform: none; }
+}

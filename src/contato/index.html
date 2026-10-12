@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  {{include:head-common}}
+  <title>Contato | {{SITE_NAME}}</title>
+  <meta name="description" content="Fale com o {{SITE_NAME}}: dúvidas, sugestões, erros encontrados e pedidos sobre privacidade (LGPD). E-mail: {{CONTACT_EMAIL}}.">
+  <link rel="canonical" href="{{SITE_URL}}/contato/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="{{SITE_NAME}}">
+  <meta property="og:title" content="Contato | {{SITE_NAME}}">
+  <meta property="og:description" content="Dúvidas, sugestões ou algo que não funcionou? Escreva para {{CONTACT_EMAIL}}.">
+  <meta property="og:url" content="{{SITE_URL}}/contato/">
+</head>
+<body>
+<div class="hero hero--compacto">
+  {{include:manchas}}
+  {{include:header}}
+  <div class="container hero-conteudo">
+    <h1>Contato</h1>
+    <p class="lead">Achou um erro, tem uma sugestão ou algo não funcionou? Escreva.</p>
+  </div>
+</div>
+<main class="secao" id="conteudo">
+  <div class="container"><div class="prosa">
+
+    <div class="cartao">
+      <p style="margin:0 0 6px"><strong>E-mail</strong></p>
+      <p style="margin:0;font-size:1.25rem"><a href="mailto:{{CONTACT_EMAIL}}">{{CONTACT_EMAIL}}</a></p>
+    </div>
+
+    <h2>Para eu entender melhor, conte</h2>
+    <ul>
+      <li>qual ferramenta você estava usando;</li>
+      <li>em que aparelho e navegador (por exemplo, celular Android com Chrome);</li>
+      <li>o que você esperava e o que aconteceu.</li>
+    </ul>
+    <p>Se for um erro de informação sobre a norma ABNT, diga qual trecho e, se puder, onde você viu a regra certa. Isso ajuda a corrigir mais rápido.</p>
+
+    <h2>Respostas</h2>
+    <p>Respondo assim que possível. Não consigo fazer trabalhos sob encomenda nem revisar o conteúdo do seu trabalho, mas ajudo com dúvidas sobre o site e as ferramentas.</p>
+
+    <h2>Privacidade e LGPD</h2>
+    <p>Para pedir informações sobre dados pessoais, ou exercer algum dos seus direitos, use o mesmo e-mail. Os detalhes estão na <a href="/politica-de-privacidade/">Política de Privacidade</a>.</p>
+
+  </div></div>
+</main>
+{{include:footer}}
+</body>
+</html>

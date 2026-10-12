@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  {{include:head-common}}
+  <title>Gerador de Capa ABNT 2026 – Grátis, em PDF e Word | {{SITE_NAME}}</title>
+  <meta name="description" content="Gerador de capa ABNT grátis: preencha os dados, veja a prévia ao vivo e baixe a capa de trabalho em PDF ou Word, conforme a NBR 14724:2024.">
+  <link rel="canonical" href="{{SITE_URL}}/gerador-de-capa-abnt/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="{{SITE_NAME}}">
+  <meta property="og:title" content="Gerador de Capa ABNT 2026 – Grátis, em PDF e Word">
+  <meta property="og:description" content="Preencha os dados, veja a prévia ao vivo e baixe sua capa ABNT em PDF ou Word. Sem cadastro e sem enviar seus dados.">
+  <meta property="og:url" content="{{SITE_URL}}/gerador-de-capa-abnt/">
+  <link rel="stylesheet" href="/gerador-de-capa-abnt/capa.css?v={{BUILD}}">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Gerador de Capa ABNT – {{SITE_NAME}}","url":"{{SITE_URL}}/gerador-de-capa-abnt/","applicationCategory":"EducationalApplication","operatingSystem":"Qualquer (navegador)","inLanguage":"pt-BR","description":"Gerador gratuito de capa ABNT (NBR 14724:2024) com prévia ao vivo e download em PDF e Word. Funciona no navegador, sem cadastro.","offers":{"@type":"Offer","price":"0","priceCurrency":"BRL"},"isAccessibleForFree":true}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"{{SITE_NAME}}","item":"{{SITE_URL}}/"},{"@type":"ListItem","position":2,"name":"Gerador de capa ABNT","item":"{{SITE_URL}}/gerador-de-capa-abnt/"}]}</script>
+  {{FAQ_JSONLD:capa}}
+</head>
+<body>
+<div class="hero hero--compacto">
+  {{include:manchas}}
+  {{include:header}}
+  <div class="container hero-conteudo">
+    <h1>Gerador de Capa ABNT</h1>
+    <p class="lead">Preencha os dados e veja a capa se atualizar ao vivo. Grátis, sem cadastro, e seus dados não saem do seu navegador.</p>
+  </div>
+</div>
+
+<main class="container tool" id="conteudo">
+  <div class="abas" role="tablist" aria-label="Alternar entre dados e prévia">
+    <button type="button" role="tab" id="abaDados" aria-selected="true" aria-controls="painelForm">1. Preencher</button>
+    <button type="button" role="tab" id="abaPrevia" aria-selected="false" aria-controls="painelPrevia">2. Ver prévia</button>
+  </div>
+
+  <div class="tool-grid">
+    <section id="painelForm" class="painel ativo cartao" aria-label="Dados da capa">
+      <form id="form" autocomplete="off" novalidate>
+        <div class="campo">
+          <label for="institution">Instituição <span class="opcional">(opcional)</span></label>
+          <input type="text" id="institution" placeholder="Ex.: Universidade Federal de Minas Gerais">
+        </div>
+
+        <div class="campo">
+          <label for="course">Curso ou departamento <span class="opcional">(opcional)</span></label>
+          <input type="text" id="course" placeholder="Ex.: Curso de Administração">
+        </div>
+
+        <div class="campo">
+          <span class="rotulo" id="rotuloAutores">Autor(es)</span>
+          <div id="autores" role="group" aria-labelledby="rotuloAutores"></div>
+          <button type="button" class="btn btn-pequeno" id="addAutor">+ Adicionar autor</button>
+        </div>
+
+        <div class="campo">
+          <label for="title">Título</label>
+          <textarea id="title" rows="2" placeholder="Ex.: A influência das redes sociais no aprendizado"></textarea>
+        </div>
+
+        <div class="campo">
+          <label for="subtitle">Subtítulo <span class="opcional">(opcional)</span></label>
+          <input type="text" id="subtitle" placeholder="Ex.: um estudo com alunos do ensino médio">
+          <p class="dica-campo">Os dois-pontos entre título e subtítulo são colocados automaticamente.</p>
+        </div>
+
+        <div class="campo">
+          <label for="volume">Número do volume <span class="opcional">(opcional)</span></label>
+          <input type="text" id="volume" inputmode="numeric" placeholder="Ex.: 2">
+          <p class="dica-campo">Preencha só se o trabalho tiver mais de um volume.</p>
+        </div>
+
+        <div class="linha-dupla">
+          <div class="campo">
+            <label for="city">Cidade</label>
+            <input type="text" id="city" placeholder="Ex.: Belo Horizonte">
+          </div>
+          <div class="campo">
+            <label for="year">Ano</label>
+            <input type="number" id="year" inputmode="numeric" min="1900" max="2100">
+          </div>
+        </div>
+        <p class="dica-campo" style="margin-top:-6px;margin-bottom:18px">Cidade da instituição onde o trabalho será entregue e ano da entrega. Se houver cidades com o mesmo nome, acrescente a UF (ex.: Viçosa - MG).</p>
+
+        <div class="campo">
+          <label for="font">Fonte <span class="opcional">(tamanho 12, padrão ABNT)</span></label>
+          <select id="font">
+            <option value="Arial">Arial</option>
+            <option value="Times New Roman">Times New Roman</option>
+          </select>
+        </div>
+
+        <details class="estilo" id="estilo">
+          <summary>Personalizar estilo</summary>
+          <div class="estilo-corpo">
+            <p>A ABNT não define maiúsculas nem negrito na capa, e cada faculdade usa um estilo. O padrão já vem aplicado; mude só se a sua faculdade pedir outro.</p>
+            <table class="tabela-estilo">
+              <thead><tr><th scope="col">Elemento</th><th scope="col">MAIÚSCULAS</th><th scope="col">Negrito</th></tr></thead>
+              <tbody id="tabelaEstilo"></tbody>
+            </table>
+            <div class="campo">
+              <label for="titleSize">Tamanho da letra do título</label>
+              <select id="titleSize">
+                <option value="12">12 (padrão)</option>
+                <option value="14">14</option>
+                <option value="16">16</option>
+              </select>
+              <p class="dica-campo">O subtítulo acompanha o tamanho do título. O volume segue o estilo do subtítulo.</p>
+            </div>
+            <button type="button" class="btn btn-pequeno" id="restaurar">Restaurar estilo padrão</button>
+          </div>
+        </details>
+
+        <div class="acoes">
+          <button type="button" class="btn btn-acento" id="btnPdf">Baixar PDF</button>
+          <button type="button" class="btn btn-acento" id="btnDocx">Baixar Word (.docx)</button>
+          <button type="button" class="btn btn-largo" id="btnNova">Nova capa com os mesmos dados</button>
+        </div>
+        <p class="toast" id="toast" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section id="painelPrevia" class="painel" aria-label="Prévia da capa">
+      <h2 class="previa-titulo">Prévia (A4)</h2>
+      <button type="button" class="btn btn-pequeno btn-ampliar" id="btnAmpliar">Ampliar prévia</button>
+      <div class="sheet-wrap" id="sheetWrap">
+        <div class="sheet" id="sheet" aria-live="off"></div>
+      </div>
+      <p class="aviso-pagina" id="avisoPagina" hidden>O texto está grande demais e passa da área da página. Diminua o tamanho do título ou encurte os textos.</p>
+      <p class="nota-previa">O texto em cinza é só um exemplo e não aparece no arquivo final.</p>
+    </section>
+  </div>
+
+  <aside class="aviso-norma">
+    <p><strong>Importante:</strong> esta capa segue a ABNT NBR 14724:2024 (A4, margens de 3 cm à esquerda e em cima e 2 cm à direita e embaixo). Algumas instituições têm modelo próprio de capa. Confirme com a sua faculdade antes de entregar.</p>
+  </aside>
+  <div class="anuncio anuncio--separado" data-slot="capa-abaixo-da-ferramenta" aria-hidden="true"><span>Anúncio</span></div>
+</main>
+
+<div class="container conteudo-capa">
+  <div class="conteudo-grade">
+    <article class="artigo">
+
+      <section id="o-que-leva">
+        <h2 class="revelar">O que vai na capa ABNT (NBR 14724:2024)</h2>
+        <p class="revelar">A capa é a parte de fora do trabalho. Na versão mais recente da norma, a NBR 14724:2024, que é a que vale para a capa ABNT em 2026, ela leva sete informações, sempre nesta ordem:</p>
+        <ol class="passos revelar">
+          <li><div><h3>Nome da instituição</h3><p>É opcional pela norma, mas a maioria das faculdades pede. Exemplo: Universidade Federal de Viçosa.</p></div></li>
+          <li><div><h3>Nome do autor</h3><p>Em trabalho de grupo, um nome por linha.</p></div></li>
+          <li><div><h3>Título</h3><p>Claro e direto: quem lê precisa entender do que o trabalho trata.</p></div></li>
+          <li><div><h3>Subtítulo, se houver</h3><p>Vem depois de dois-pontos, para mostrar que depende do título. Exemplo: A influência das redes sociais no aprendizado: um estudo com alunos do ensino médio.</p></div></li>
+          <li><div><h3>Número do volume, se houver mais de um</h3><p>Cada volume tem a sua própria capa, com o número do volume correspondente.</p></div></li>
+          <li><div><h3>Cidade</h3><p>A da instituição onde o trabalho será entregue. Se existirem cidades com o mesmo nome, acrescente a sigla do estado: Viçosa - MG.</p></div></li>
+          <li><div><h3>Ano</h3><p>O ano da entrega. A norma chama de "ano de depósito".</p></div></li>
+        </ol>
+        <aside class="dica revelar"><strong class="dica-titulo">Dica</strong><p>O curso ou departamento não está na lista da norma, mas a maioria dos manuais de faculdade o coloca logo abaixo do nome da instituição. Por isso o gerador tem esse campo, que é opcional.</p></aside>
+      </section>
+
+      <section id="margens-fonte-espacamento">
+        <h2 class="revelar">Margens, fonte e espaçamento da capa</h2>
+        <ul class="regras revelar">
+          <li><strong>Papel</strong>A4, com texto em preto.</li>
+          <li><strong>Margens</strong>3 cm na esquerda e em cima. 2 cm na direita e embaixo.</li>
+          <li><strong>Tamanho da letra</strong>12, para todo o texto, inclusive a capa. É uma recomendação da norma.</li>
+          <li><strong>Espaçamento</strong>1,5 entre as linhas.</li>
+        </ul>
+        <p class="revelar"><strong>E a fonte?</strong> A norma não diz qual. Arial e Times New Roman são as mais pedidas nos manuais das faculdades, e por isso o gerador oferece as duas.</p>
+        <p class="revelar"><strong>Maiúsculas, negrito e alinhamento?</strong> A norma também não define. Cada faculdade escolhe. O estilo que já vem pronto aqui (tudo centralizado; instituição, autor e título em maiúsculas e negrito; subtítulo em letra normal) é um modelo comum nos manuais. Se o da sua faculdade for diferente, mude em "Personalizar estilo".</p>
+      </section>
+
+      <div class="anuncio" data-slot="capa-meio-1" aria-hidden="true"><span>Anúncio</span></div>
+
+      <section id="capa-e-folha-de-rosto">
+        <h2 class="revelar">Capa e folha de rosto: qual é a diferença?</h2>
+        <p class="revelar">São duas páginas diferentes, e muita gente troca uma pela outra.</p>
+        <div class="dif revelar">
+          <div class="cartao">
+            <h3>Capa</h3>
+            <p class="sub">Parte externa do trabalho. É a primeira coisa que se vê.</p>
+            <ul>
+              <li>Instituição (opcional)</li>
+              <li>Autor</li>
+              <li>Título e subtítulo</li>
+              <li>Volume, se houver</li>
+              <li>Cidade</li>
+              <li>Ano</li>
+            </ul>
+            <p class="nota">Não leva o orientador e não entra na contagem das páginas.</p>
+          </div>
+          <div class="cartao">
+            <h3>Folha de rosto</h3>
+            <p class="sub">Primeira página interna, logo depois da capa.</p>
+            <ul>
+              <li>Autor</li>
+              <li>Título e subtítulo</li>
+              <li>Volume, se houver</li>
+              <li>Natureza do trabalho: tipo, objetivo, instituição e área de concentração</li>
+              <li>Orientador (e coorientador, se houver)</li>
+              <li>Cidade</li>
+              <li>Ano</li>
+            </ul>
+            <p class="nota">É aqui que o orientador aparece. A contagem das páginas começa nela, mas o número não é impresso.</p>
+          </div>
+        </div>
+        <p class="revelar">Se o seu trabalho pede as duas, comece pela capa aqui. A ferramenta de folha de rosto está nos planos: dá para ver as próximas na <a href="/#ferramentas">página inicial</a>.</p>
+      </section>
+
+      <section id="erros-comuns">
+        <h2 class="revelar">Erros comuns na capa de trabalho ABNT</h2>
+        <div class="comparar revelar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Colocar o nome do orientador na capa.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>O orientador vai só na folha de rosto. Na capa ficam instituição, autor, título, cidade e ano.</p></div></div>
+        <div class="comparar revelar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Escrever a cidade onde você mora ou onde fez a pesquisa.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>A cidade da instituição onde o trabalho será entregue.</p></div></div>
+        <div class="comparar revelar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Usar o ano em que você começou o trabalho.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>O ano da entrega.</p></div></div>
+        <div class="comparar revelar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Separar título e subtítulo com traço ou ponto.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Dois-pontos: Título: subtítulo.</p></div></div>
+        <div class="comparar revelar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Deixar a margem do Word do jeito que veio, igual nos quatro lados.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>3 cm na esquerda e em cima; 2 cm na direita e embaixo.</p></div></div>
+        <div class="comparar revelar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Numerar a capa ou contá-la como página 1.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>A capa fica fora da contagem. Ela começa na folha de rosto.</p></div></div>
+        <aside class="dica revelar"><strong class="dica-titulo">Antes de entregar</strong><p>Procure o manual de normalização da biblioteca da sua faculdade. Se existir um modelo de capa próprio, ele vale mais do que qualquer gerador, este inclusive.</p></aside>
+      </section>
+
+      <div class="anuncio" data-slot="capa-meio-2" aria-hidden="true"><span>Anúncio</span></div>
+
+      <section id="perguntas-frequentes">
+        <h2 class="revelar">Perguntas frequentes sobre a capa ABNT</h2>
+        {{FAQ_HTML:capa}}
+      </section>
+
+      <section id="fontes" class="artigo-meta">
+        <p>Atualizado em 12 de outubro de 2026. Para escrever esta página, li o texto da ABNT NBR 14724:2024 e manuais de normalização de bibliotecas universitárias de 2025, como os da <a href="https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf" rel="noopener" target="_blank">UFV</a> e da <a href="https://portal.uern.br/dsib/wp-content/uploads/sites/2/2025/02/MANUAL-DE-NORMALIZACAO-SIBUERN-2025.pdf" rel="noopener" target="_blank">UERN</a>.</p>
+        <p>A norma é um documento pago da ABNT. Aqui eu explico, com palavras minhas, o que importa para a capa. O Estuda Simples não tem ligação com a ABNT, e na dúvida o manual da sua faculdade manda.</p>
+      </section>
+
+    </article>
+    <aside class="lateral" aria-label="Publicidade">
+      <div class="anuncio anuncio--lateral" data-slot="capa-lateral" aria-hidden="true"><span>Anúncio</span></div>
+    </aside>
+  </div>
+</div>
+<dialog class="zoom" id="dlgZoom" aria-label="Prévia da capa ampliada">
+  <div class="zoom-barra">
+    <strong>Prévia da capa</strong>
+    <button type="button" class="btn" id="zoomMenos" aria-label="Afastar">−</button>
+    <button type="button" class="btn" id="zoomMais" aria-label="Aproximar">+</button>
+    <button type="button" class="btn btn-acento" id="zoomFechar">Fechar</button>
+  </div>
+  <div class="zoom-area" id="zoomArea" tabindex="0">
+    <div class="zoom-wrap" id="zoomWrap"><div class="sheet" id="sheetZoom"></div></div>
+  </div>
+  <p class="zoom-dica">Use + e − para aproximar, ou arraste para mover a página.</p>
+</dialog>
+{{include:footer}}
+<script type="module" src="/gerador-de-capa-abnt/capa.js?v={{BUILD}}"></script>
+</body>
+</html>

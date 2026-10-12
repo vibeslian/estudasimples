@@ -1,0 +1,89 @@
+/* Blocos de conteúdo para as explicações (Etapa 4). Veja exemplos em /_guia-de-estilo/ (só no modo dev).
+   Regra: textos curtos, um assunto por bloco. */
+
+/* ---------- 1) Passos numerados ---------- */
+.passos { list-style: none; counter-reset: passo; margin: 0 0 1.5em; padding: 0; display: grid; gap: 14px; max-width: var(--largura-texto); }
+.passos li { counter-increment: passo; display: grid; grid-template-columns: 52px 1fr; gap: 16px; align-items: start; background: var(--superficie); border: 1px solid var(--salvia-200); border-radius: var(--raio); padding: 18px 20px; }
+.passos li::before { content: counter(passo); display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--principal); color: #fff; font-family: var(--fonte-titulo); font-weight: 800; font-size: 1.5rem; }
+.passos h3 { margin: 2px 0 .15em; font-size: 1.15rem; }
+.passos p { margin: 0; color: var(--texto-suave); }
+
+/* ---------- 2) Erro comum x forma certa ---------- */
+.comparar { display: grid; gap: 14px; margin: 0 0 1.5em; }
+@media (min-width: 720px) { .comparar { grid-template-columns: 1fr 1fr; } }
+.comparar > div { border-radius: var(--raio); padding: 20px 22px; }
+.comparar p { margin: 0; }
+.comparar-rotulo { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-family: var(--fonte-titulo); font-weight: 800; font-size: 1.05rem; }
+.comparar-rotulo::before { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; font-size: .95rem; line-height: 1; flex: none; }
+.comparar-erro { background: var(--erro-bg); color: var(--erro-texto); border: 1px solid #efc9bd; }
+.comparar-erro .comparar-rotulo::before { content: "✕"; background: var(--erro-texto); color: #fff; }
+.comparar-certo { background: var(--certo-bg); color: var(--certo-texto); border: 1px solid var(--salvia-300); }
+.comparar-certo .comparar-rotulo::before { content: "✓"; background: var(--certo-texto); color: #fff; }
+
+/* ---------- 3) Caixa de dica ---------- */
+.dica { max-width: var(--largura-texto); margin: 0 0 1.5em; padding: 16px 20px; background: var(--superficie); border: 1px solid var(--salvia-200); border-left: 6px solid var(--acento); border-radius: var(--raio-pequeno); }
+.dica-titulo { display: block; margin-bottom: 4px; font-family: var(--fonte-titulo); font-weight: 800; color: var(--principal); }
+.dica p { margin: 0; }
+
+/* ---------- 4) Perguntas frequentes (desplegáveis) ---------- */
+.faq { max-width: var(--largura-texto); display: grid; gap: 10px; margin: 0 0 1.5em; }
+.faq details { background: var(--superficie); border: 1px solid var(--salvia-200); border-radius: var(--raio-pequeno); }
+.faq summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 18px; min-height: 56px; cursor: pointer; list-style: none; font-weight: 700; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; flex: none; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--salvia-100); color: var(--principal); font-size: 1.4rem; line-height: 1; }
+.faq details[open] summary::after { content: "−"; }
+.faq details[open] { border-color: var(--salvia-300); }
+.faq .faq-resposta { padding: 0 18px 16px; color: var(--texto-suave); }
+.faq .faq-resposta p:last-child { margin-bottom: 0; }
+
+/* ---------- Texto curto de apoio ---------- */
+.texto-curto { max-width: var(--largura-texto); }
+.texto-curto h2 { margin-top: 1.6em; }
+
+/* ---------- Artigo explicativo (abaixo do gerador): coluna de texto + coluna lateral para anúncio ---------- */
+.conteudo-capa { padding-block: 24px 8px; }
+.conteudo-grade { display: grid; gap: 0; }
+.artigo { max-width: var(--largura-texto); min-width: 0; }
+.artigo > section { margin-bottom: clamp(36px, 6vw, 56px); }
+.artigo h2 { font-size: clamp(1.5rem, 3.6vw, 2rem); margin-bottom: .6em; }
+.artigo h3 { font-size: 1.15rem; }
+.artigo p { max-width: 62ch; }
+.artigo .passos, .artigo .comparar, .artigo .dica, .artigo .faq { max-width: none; }
+.artigo-meta { font-size: .92rem; color: var(--texto-suave); }
+@media (min-width: 1180px) {
+  .conteudo-grade { grid-template-columns: minmax(0, 720px) 300px; gap: 56px; justify-content: space-between; }
+  .artigo { max-width: 720px; }
+}
+
+/* Lista de regras (margens, fonte...) em cartões pequenos */
+.regras { list-style: none; margin: 0 0 1.2em; padding: 0; display: grid; gap: 12px; }
+@media (min-width: 560px) { .regras { grid-template-columns: 1fr 1fr; } }
+.regras li { background: var(--superficie); border: 1px solid var(--salvia-200); border-radius: var(--raio-pequeno); padding: 14px 16px; }
+.regras strong { display: block; font-family: var(--fonte-titulo); font-weight: 800; color: var(--principal); margin-bottom: 2px; }
+
+/* Capa x folha de rosto */
+.dif { display: grid; gap: 14px; margin: 0 0 1.2em; }
+@media (min-width: 720px) { .dif { grid-template-columns: 1fr 1fr; } }
+.dif .cartao { padding: 20px 22px; }
+.dif h3 { margin-bottom: .1em; }
+.dif .sub { margin: 0 0 .8em; color: var(--texto-suave); font-size: .95rem; }
+.dif ul { margin: 0 0 .8em; padding-left: 1.2em; }
+.dif li { margin-bottom: .25em; }
+.dif .nota { margin: 0; padding-top: .8em; border-top: 1px solid var(--salvia-200); font-weight: 700; font-size: .95rem; }
+
+/* ---------- Espaços para anúncios (AdSense) ----------
+   Invisíveis por padrão, mas reservam o espaço para a página não "pular" quando os anúncios chegarem.
+   Para ver onde ficam: abra qualquer página com ?ads=preview no final do endereço. */
+.anuncio { display: block; width: 100%; max-width: 728px; min-height: 280px; margin: 40px auto; }
+.anuncio > span { display: none; }
+.anuncio--separado { margin-top: 64px; } /* longe dos botões de baixar */
+.anuncio--lateral { display: none; }
+.lateral { display: none; }
+@media (min-width: 1180px) {
+  .lateral { display: block; }
+  .anuncio--lateral { display: block; width: 300px; min-height: 600px; margin: 0; position: sticky; top: 24px; }
+}
+.ads-preview .anuncio { display: grid; place-items: center; border: 2px dashed var(--borda-campo); border-radius: var(--raio-pequeno); background: repeating-linear-gradient(135deg, transparent 0 14px, rgba(95, 127, 104, .08) 14px 28px); color: var(--texto-suave); }
+.ads-preview .anuncio > span { display: block; font-weight: 700; letter-spacing: .04em; }
+.ads-preview .anuncio--lateral { display: none; }
+@media (min-width: 1180px) { .ads-preview .anuncio--lateral { display: grid; } }
