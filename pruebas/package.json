@@ -1,0 +1,20 @@
+{
+  "name": "estudasimples-pruebas",
+  "private": true,
+  "type": "module",
+  "description": "Pruebas automáticas del generador de capa (PDF y Word). Ver README.md",
+  "scripts": {
+    "archivos": "node probar-archivos.mjs && node --input-type=commonjs -e \"require('./resumen.cjs')\"",
+    "celular": "node probar-celular.mjs",
+    "comparar": "node comparar-imagenes.mjs",
+    "capturas": "node capturas-sitio.mjs"
+  },
+  "dependencies": {
+    "@napi-rs/canvas": "^1.0.11",
+    "dictionary-pt-br": "^2.0.1",
+    "jszip": "^3.10.2",
+    "nspell": "^2.1.5",
+    "pdfjs-dist": "^6.4.299",
+    "puppeteer-core": "^25.13.0"
+  }
+}

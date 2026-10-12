@@ -1,12 +1,12 @@
-# Pastas que se pueden regenerar o que no deben subirse
+# Pastas que se pueden regenerar
 node_modules/
 dist/
 
-# Material de trabajo que no hace falta en GitHub ni en el sitio
+# Material de trabajo pesado o generado
 capturas/
-pruebas/
-src/_guia-de-estilo/
 ejemplos/
+pruebas/resultados/
+pruebas/*.log
 
 # Archivos del sistema y del editor
 .DS_Store

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  {{include:head-common}}
+  <title>Guia de estilo (só desenvolvimento) | {{SITE_NAME}}</title>
+  <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+<div class="hero hero--compacto">
+  {{include:manchas}}
+  {{include:header}}
+  <div class="container hero-conteudo">
+    <h1>Guia de estilo</h1>
+    <p class="lead">Página só para desenvolvimento: mostra os blocos prontos para usar na Etapa 4. Ela não é publicada.</p>
+  </div>
+</div>
+
+<main id="conteudo">
+  <section class="secao">
+    <div class="container"><div class="texto-curto">
+      <h2>1. Passos numerados</h2>
+      <ol class="passos">
+        <li><div><h3>Escreva o nome da instituição</h3><p>Em letras maiúsculas, centralizado, no alto da página.</p></div></li>
+        <li><div><h3>Coloque o nome do autor</h3><p>Se forem vários, um por linha.</p></div></li>
+        <li><div><h3>Digite o título</h3><p>Claro e direto, no meio da página.</p></div></li>
+      </ol>
+
+      <h2>2. Erro comum x forma certa</h2>
+      <div class="comparar">
+        <div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Colocar o nome do orientador na capa.</p></div>
+        <div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>O orientador entra só na folha de rosto, não na capa.</p></div>
+      </div>
+
+      <h2>3. Caixa de dica</h2>
+      <aside class="dica"><strong class="dica-titulo">Dica</strong><p>Antes de entregar, confira no site da sua faculdade se existe um modelo próprio de capa.</p></aside>
+
+      <h2>4. Perguntas frequentes</h2>
+      <div class="faq">
+        <details><summary>A capa tem número de página?</summary><div class="faq-resposta"><p>Não. A capa não é contada nem numerada.</p></div></details>
+        <details><summary>Preciso colocar o nome da instituição?</summary><div class="faq-resposta"><p>É opcional na norma, mas quase todas as faculdades pedem.</p></div></details>
+        <details><summary>Qual fonte devo usar?</summary><div class="faq-resposta"><p>Arial ou Times New Roman, tamanho 12.</p></div></details>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="secao secao--salvia">
+    <div class="container">
+      <h2>Botões e cartões</h2>
+      <p><a class="btn btn-acento btn-grande" href="#conteudo">Botão principal (coral)</a> <a class="btn btn-grande" href="#conteudo">Botão secundário</a> <button class="btn" disabled>Desativado</button></p>
+      <div class="grade grade-3">
+        <a class="cartao" href="#conteudo"><h3>Cartão clicável</h3><p>Sobe um pouco ao passar o mouse.</p></a>
+        <div class="cartao"><h3>Cartão comum</h3><p>Fundo branco, borda suave e cantos redondos.</p></div>
+        <div class="cartao em-breve"><span class="pilula">Em breve</span><h3>Cartão em breve</h3><p>Borda tracejada.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao">
+    <div class="container">
+      <h2>Paleta</h2>
+      <div class="grade grade-4" id="paleta"></div>
+    </div>
+  </section>
+</main>
+{{include:footer}}
+<script>
+  var cores = ["--fundo","--superficie","--salvia-100","--salvia-300","--salvia-500","--principal","--principal-escuro","--texto","--texto-suave","--acento","--acento-claro","--azul-200"];
+  var el = document.getElementById("paleta");
+  cores.forEach(function (c) {
+    var v = getComputedStyle(document.documentElement).getPropertyValue(c).trim();
+    el.insertAdjacentHTML("beforeend", '<div class="cartao"><div style="height:56px;border-radius:12px;border:1px solid #cfdccf;background:' + v + '"></div><p style="margin:10px 0 0;font-size:.9rem"><b>' + c + '</b><br>' + v + '</p></div>');
+  });
+</script>
+</body>
+</html>
