@@ -6,13 +6,15 @@ const PAGINAS = ["/", "/gerador-de-capa-abnt/", "/sobre/", "/contato/", "/politi
 const ok = (c) => (c ? "OK   " : "FALLA");
 const browser = await puppeteer.launch({ executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe", headless: "new" });
 const externos = new Set();
+// Único tercero declarado en la Política de Privacidade (sección 2.2): estadísticas de Cloudflare, que el borde inyecta en el sitio publicado.
+const PERMITIDOS = new Set(["static.cloudflareinsights.com"]);
 const falhas = [];
 const marca = (cond, msg) => { console.log(ok(cond), msg); if (!cond) falhas.push(msg); };
 
 async function abre(url, vp = { width: 1280, height: 900 }) {
   const p = await browser.newPage();
   await p.setViewport(vp);
-  p.on("request", (r) => { try { const u = new URL(r.url()); if (/^https?:$/.test(u.protocol) && u.hostname !== new URL(BASE).hostname) externos.add(u.hostname + " <- " + url); } catch (e) { /* data: etc. */ } });
+  p.on("request", (r) => { try { const u = new URL(r.url()); if (/^https?:$/.test(u.protocol) && u.hostname !== new URL(BASE).hostname && !PERMITIDOS.has(u.hostname)) externos.add(u.hostname + " <- " + url); } catch (e) { /* data: etc. */ } });
   await p.goto(BASE + url, { waitUntil: "networkidle0" });
   return p;
 }
@@ -62,7 +64,7 @@ console.log("\n== 3) Cero peticiones a terceros (incluye generar PDF y Word) =="
   marca(!(await p.$eval("#toast", (e) => e.classList.contains("erro"))), `descargas OK: "${await p.$eval("#toast", (e) => e.textContent)}"`);
   await p.close();
 }
-marca(externos.size === 0, externos.size ? "peticiones externas: " + [...externos].join(" | ") : "ninguna petición salió del sitio (todas las páginas + generación de PDF y Word)");
+marca(externos.size === 0, externos.size ? "peticiones externas: " + [...externos].join(" | ") : "ninguna petición a terceros salvo las estadísticas de Cloudflare declaradas en la política (todas las páginas + generación de PDF y Word)");
 
 console.log("\n== 4) Anuncios ==");
 async function infoAnuncios(url, vp, preview) {
