@@ -23,7 +23,14 @@
     "p": "Capa de trabalho escolar também segue a ABNT?",
     "r": [
       "Depende da escola. A NBR 14724 foi escrita para trabalhos acadêmicos (teses, dissertações, TCCs e similares), mas diz que vale, no que couber, para trabalhos acadêmicos e similares dentro e fora da sala de aula.",
-      "Muitas escolas usam a ABNT como referência, mas quem decide é o professor: pergunte qual modelo ele quer. Se ele não tiver preferência, a capa ABNT é uma boa escolha."
+      "Muitas escolas usam a ABNT como referência, mas quem decide é o professor: pergunte qual modelo ele quer. Se ele pedir o nome do professor e da disciplina, ative o \"Modelo escolar\" no gerador. Esses dois itens não fazem parte da ABNT."
+    ]
+  },
+  {
+    "p": "Onde colocar a disciplina e o nome do professor na capa?",
+    "r": [
+      "A ABNT não tem lugar definido para esses dados, porque eles não fazem parte da lista de elementos da capa. O costume em trabalhos de escola é colocá-los em um bloco à direita, entre o título e a cidade.",
+      "É assim que o \"Modelo escolar\" do gerador faz. Como cada escola decide o seu modelo, pergunte ao professor se ele quer em outro lugar."
     ]
   },
   {
@@ -53,10 +60,31 @@
     ]
   },
   {
+    "p": "Como fazer a capa ABNT de um trabalho em grupo?",
+    "r": [
+      "Coloque o nome de todos os integrantes na capa, um por linha, centralizados. No gerador, clique em \"+ Adicionar autor\" para cada pessoa.",
+      "A norma não define a ordem dos nomes. Muitas faculdades pedem ordem alfabética, então confira o manual da sua."
+    ]
+  },
+  {
+    "p": "Dá para fazer a capa ABNT no celular?",
+    "r": [
+      "Dá. O gerador funciona no navegador do celular, sem instalar aplicativo e sem cadastro. Preencha os dados, confira a página na aba \"Ver prévia\" (o botão \"Ampliar prévia\" ajuda a ler) e baixe o PDF ou o Word.",
+      "O arquivo vai para a pasta de downloads do aparelho. Para editar o Word, abra o arquivo em um aplicativo que leia .docx, como o Word ou o Google Docs."
+    ]
+  },
+  {
+    "p": "O arquivo Word da capa abre no Google Docs?",
+    "r": [
+      "Abre. Envie o arquivo .docx ao Google Drive e abra com o Google Docs. Margens, fonte e espaçamento costumam vir certos, mas o Docs pode mudar pequenos detalhes de posição, então confira antes de entregar.",
+      "Se a capa precisa ficar exatamente como na prévia, entregue o PDF."
+    ]
+  },
+  {
     "p": "Posso colocar o logo ou o brasão da faculdade na capa?",
     "r": [
-      "A norma não fala de logotipo. Muitas faculdades pedem o brasão no modelo de capa delas, e nesse caso vale o modelo oficial.",
-      "O gerador do Estuda Simples não insere imagens. Se precisar do brasão, baixe o arquivo em Word e coloque a imagem lá."
+      "A norma não fala de logotipo, e muitas faculdades pedem o brasão no modelo de capa delas. Nesse caso vale o modelo oficial; veja o manual da sua instituição.",
+      "No gerador, abra \"Logo da instituição\" e escolha a imagem (PNG, JPG ou WebP). Ela é lida e reduzida no seu navegador e não é enviada a nenhum servidor."
     ]
   },
   {

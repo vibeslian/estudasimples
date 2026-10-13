@@ -2,7 +2,7 @@
 // Requiere el sitio en http://localhost:3000 (npm run dev).
 import puppeteer from "puppeteer-core";
 const BASE = process.env.BASE_URL || "http://localhost:3000";
-const PAGINAS = ["/", "/gerador-de-capa-abnt/", "/sobre/", "/contato/", "/politica-de-privacidade/", "/termos-de-uso/"];
+const PAGINAS = ["/", "/gerador-de-capa-abnt/", "/gerador-de-folha-de-rosto-abnt/", "/sobre/", "/contato/", "/politica-de-privacidade/", "/termos-de-uso/"];
 const ok = (c) => (c ? "OK   " : "FALLA");
 const browser = await puppeteer.launch({ executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe", headless: "new" });
 const externos = new Set();
@@ -14,6 +14,7 @@ const marca = (cond, msg) => { console.log(ok(cond), msg); if (!cond) falhas.pus
 async function abre(url, vp = { width: 1280, height: 900 }) {
   const p = await browser.newPage();
   await p.setViewport(vp);
+  await p.evaluateOnNewDocument(() => { const c = HTMLAnchorElement.prototype.click; HTMLAnchorElement.prototype.click = function () { if (this.download) return; return c.call(this); }; });
   p.on("request", (r) => { try { const u = new URL(r.url()); if (/^https?:$/.test(u.protocol) && u.hostname !== new URL(BASE).hostname && !PERMITIDOS.has(u.hostname)) externos.add(u.hostname + " <- " + url); } catch (e) { /* data: etc. */ } });
   await p.goto(BASE + url, { waitUntil: "networkidle0" });
   return p;
@@ -40,16 +41,16 @@ for (const url of PAGINAS) {
 }
 
 console.log("\n== 2) Datos estructurados (FAQPage) vs. texto visible ==");
-{
-  const p = await abre("/gerador-de-capa-abnt/");
+for (const urlFaq of ["/gerador-de-capa-abnt/", "/gerador-de-folha-de-rosto-abnt/"]) {
+  const p = await abre(urlFaq);
   const r = await p.evaluate(() => {
     const ld = [...document.querySelectorAll('script[type="application/ld+json"]')].map((s) => JSON.parse(s.textContent));
     const faq = ld.find((x) => x["@type"] === "FAQPage");
     const vis = [...document.querySelectorAll(".faq details")].map((d) => ({ q: d.querySelector("summary").textContent.trim(), a: [...d.querySelectorAll(".faq-resposta p")].map((x) => x.textContent.trim()).join(" ").replace(/\s+/g, " ") }));
     return { tipos: ld.map((x) => x["@type"]), faq: faq ? faq.mainEntity.map((m) => ({ q: m.name, a: m.acceptedAnswer.text })) : null, vis };
   });
-  marca(r.tipos.includes("FAQPage") && r.tipos.includes("WebApplication") && r.tipos.includes("BreadcrumbList"), `JSON-LD válido (JSON.parse) con tipos: ${r.tipos.join(", ")}`);
-  marca(r.faq && r.faq.length === r.vis.length && r.faq.every((f, i) => f.q === r.vis[i].q && f.a === r.vis[i].a), `FAQPage: ${r.faq?.length} preguntas, idénticas (pregunta y respuesta) al texto visible`);
+  marca(r.tipos.includes("FAQPage") && r.tipos.includes("WebApplication") && r.tipos.includes("BreadcrumbList"), `${urlFaq} JSON-LD válido (JSON.parse) con tipos: ${r.tipos.join(", ")}`);
+  marca(r.faq && r.faq.length === r.vis.length && r.faq.every((f, i) => f.q === r.vis[i].q && f.a === r.vis[i].a), `${urlFaq} FAQPage: ${r.faq?.length} preguntas, idénticas (pregunta y respuesta) al texto visible`);
   await p.close();
 }
 
@@ -59,7 +60,7 @@ console.log("\n== 3) Cero peticiones a terceros (incluye generar PDF y Word) =="
   await p.evaluate(() => { const set = (id, v) => { const e = document.getElementById(id); e.value = v; e.dispatchEvent(new Event("input", { bubbles: true })); }; set("title", "Teste"); set("city", "Recife"); document.querySelector("#autores input").value = "Ana"; set("institution", "Instituição"); });
   const jaChamou = [];
   p.on("request", (r) => { if (/vendor/.test(r.url())) jaChamou.push(r.url().split("/").pop()); });
-  for (const id of ["btnPdf", "btnDocx"]) { await p.click("#" + id); await new Promise((r) => setTimeout(r, 3000)); }
+  for (const id of ["btnPdf", "btnDocx"]) { await p.$eval("#" + id, (e) => e.click()); await new Promise((r) => setTimeout(r, 3000)); }
   marca(jaChamou.some((x) => x.startsWith("jspdf")) && jaChamou.some((x) => x.startsWith("docx")), `bibliotecas servidas desde el propio sitio: ${[...new Set(jaChamou)].join(", ")}`);
   marca(!(await p.$eval("#toast", (e) => e.classList.contains("erro"))), `descargas OK: "${await p.$eval("#toast", (e) => e.textContent)}"`);
   await p.close();
@@ -81,10 +82,11 @@ async function infoAnuncios(url, vp, preview) {
   await p.close();
   return r;
 }
+for (const [ferr, lateral] of [["/gerador-de-capa-abnt/", "capa-lateral"], ["/gerador-de-folha-de-rosto-abnt/", "folha-lateral"]])
 for (const [nome, vp] of [["computador 1280", { width: 1280, height: 900 }], ["celular 390", { width: 390, height: 844, isMobile: true, hasTouch: true, deviceScaleFactor: 2 }]]) {
-  console.log(`-- ${nome}`);
-  const sin = await infoAnuncios("/gerador-de-capa-abnt/", vp, false);
-  const con = await infoAnuncios("/gerador-de-capa-abnt/", vp, true);
+  console.log(`-- ${ferr} ${nome}`);
+  const sin = await infoAnuncios(ferr, vp, false);
+  const con = await infoAnuncios(ferr, vp, true);
   const vis = sin.slots.filter((s) => s.display !== "none");
   marca(sin.slots.every((s) => s.borde === "none" && !s.fondo && !s.texto), `sin ?ads=preview: ${sin.slots.length} espacios, todos invisibles (sin borde, sin fondo, sin texto)`);
   marca(vis.every((s) => s.h >= 250), `espacios visibles reservan altura: ${vis.map((s) => s.slot + "=" + s.h + "px").join(", ")}`);
@@ -98,8 +100,8 @@ for (const [nome, vp] of [["computador 1280", { width: 1280, height: 900 }], ["c
   marca(masCerca >= 150, `distancia del anuncio más cercano a los botones de descarga: ${masCerca}px (mínimo pedido: bien separado)`);
   const hijosTool = vis.filter((s) => s.y < sin.aviso.bottom);
   marca(hijosTool.length === 0, "no hay anuncios dentro de la zona de la herramienta (formulario, prévia y aviso)");
-  if (nome.startsWith("computador")) marca(sin.slots.some((s) => s.slot === "capa-lateral" && s.display !== "none" && s.h >= 600), "columna lateral de 300x600 presente en computador");
-  else marca(sin.slots.find((s) => s.slot === "capa-lateral").display === "none", "columna lateral oculta en celular");
+  if (nome.startsWith("computador")) marca(sin.slots.some((s) => s.slot === lateral && s.display !== "none" && s.h >= 600), "columna lateral de 300x600 presente en computador");
+  else marca(sin.slots.find((s) => s.slot === lateral).display === "none", "columna lateral oculta en celular");
 }
 {
   const vp = { width: 1280, height: 900 };

@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  {{include:head-common}}
+  <title>Folha de Rosto ABNT (Contra Capa) 2026 – Gerador Grátis | {{SITE_NAME}}</title>
+  <meta name="description" content="Gerador de folha de rosto ABNT (contra capa) grátis: natureza do trabalho, orientador e coorientador, prévia ao vivo, PDF e Word. Pode baixar junto com a capa.">
+  <link rel="canonical" href="{{SITE_URL}}/gerador-de-folha-de-rosto-abnt/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="{{SITE_NAME}}">
+  <meta property="og:title" content="Folha de Rosto ABNT (Contra Capa) – Gerador Grátis, em PDF e Word">
+  <meta property="og:description" content="Monte a folha de rosto com natureza do trabalho e orientador, veja a prévia ao vivo e baixe em PDF ou Word. Sem cadastro e sem enviar seus dados.">
+  <meta property="og:url" content="{{SITE_URL}}/gerador-de-folha-de-rosto-abnt/">
+  <link rel="stylesheet" href="/assets/css/ferramenta.css?v={{BUILD}}">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Gerador de Folha de Rosto ABNT – {{SITE_NAME}}","url":"{{SITE_URL}}/gerador-de-folha-de-rosto-abnt/","applicationCategory":"EducationalApplication","operatingSystem":"Qualquer (navegador)","inLanguage":"pt-BR","description":"Gerador gratuito de folha de rosto ABNT (contra capa, NBR 14724:2024) com natureza do trabalho, orientador, prévia ao vivo e download em PDF e Word, sozinha ou junto com a capa. Funciona no navegador, sem cadastro.","offers":{"@type":"Offer","price":"0","priceCurrency":"BRL"},"isAccessibleForFree":true}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"{{SITE_NAME}}","item":"{{SITE_URL}}/"},{"@type":"ListItem","position":2,"name":"Gerador de folha de rosto ABNT","item":"{{SITE_URL}}/gerador-de-folha-de-rosto-abnt/"}]}</script>
+  {{FAQ_JSONLD:folha}}
+</head>
+<body data-modo="folha">
+<div class="hero hero--compacto">
+  {{include:manchas}}
+  {{include:header}}
+  <div class="container hero-conteudo">
+    <h1>Gerador de Folha de Rosto ABNT (contra capa)</h1>
+    <p class="lead">Preencha os dados e veja a folha de rosto se montar ao vivo. Grátis, sem cadastro, e seus dados não saem do seu navegador.</p>
+  </div>
+</div>
+
+<main class="container tool" id="conteudo">
+  <div class="abas" role="tablist" aria-label="Alternar entre dados e prévia">
+    <button type="button" role="tab" id="abaDados" aria-selected="true" aria-controls="painelForm">1. Preencher</button>
+    <button type="button" role="tab" id="abaPrevia" aria-selected="false" aria-controls="painelPrevia">2. Ver prévia</button>
+  </div>
+
+  <div class="tool-grid">
+    <section id="painelForm" class="painel ativo cartao" aria-label="Dados da folha de rosto">
+      <form id="form" autocomplete="off" novalidate>
+{{include:form-dados}}
+
+        <h2 class="titulo-form">Natureza do trabalho e orientação</h2>
+{{include:form-folha}}
+
+{{include:form-logo}}
+
+{{include:form-escolar}}
+
+        <details class="estilo" id="estilo">
+          <summary>Personalizar estilo</summary>
+          <div class="estilo-corpo">
+            <p>A ABNT não define maiúsculas nem negrito na folha de rosto, e cada faculdade usa um estilo. O padrão já vem aplicado (o mesmo da capa); mude só se a sua faculdade pedir outro.</p>
+            <table class="tabela-estilo">
+              <thead><tr><th scope="col">Elemento</th><th scope="col">MAIÚSCULAS</th><th scope="col">Negrito</th></tr></thead>
+              <tbody id="tabelaEstilo"></tbody>
+            </table>
+            <div class="campo">
+              <label for="titleSize">Tamanho da letra do título</label>
+              <select id="titleSize">
+                <option value="12">12 (padrão)</option>
+                <option value="14">14</option>
+                <option value="16">16</option>
+              </select>
+              <p class="dica-campo">O subtítulo acompanha o tamanho do título. O volume segue o estilo do subtítulo.</p>
+            </div>
+            <label class="marca"><input type="checkbox" id="natureJust" checked> Texto da natureza do trabalho justificado</label>
+            <p class="dica-campo">A norma não diz se o texto da natureza é justificado ou alinhado à esquerda. Os manuais que consultei justificam.</p>
+            <button type="button" class="btn btn-pequeno" id="restaurar">Restaurar estilo padrão</button>
+          </div>
+        </details>
+
+        <div class="campo-juntas">
+          <label class="marca"><input type="checkbox" id="juntas"> Baixar a capa junto, no mesmo arquivo</label>
+          <p class="dica-campo" id="juntasInfo"></p>
+        </div>
+
+        <div class="acoes">
+          <button type="button" class="btn btn-acento" id="btnPdf">Baixar PDF</button>
+          <button type="button" class="btn btn-acento" id="btnDocx">Baixar Word (.docx)</button>
+          <button type="button" class="btn btn-largo" id="btnNova">Nova folha de rosto com os mesmos dados</button>
+          <button type="button" class="btn-secundario btn-largo" id="btnLimpar">Limpar dados</button>
+        </div>
+        <p class="toast" id="toast" role="status" aria-live="polite"></p>
+        <p class="dica-campo">Para você não digitar tudo de novo ao passar da folha de rosto para a capa, o navegador guarda o que você escreveu só nesta aba, no seu aparelho. Nada é enviado, e some quando você fecha a aba ou clica em "Limpar dados".</p>
+      </form>
+    </section>
+
+    <section id="painelPrevia" class="painel" aria-label="Prévia da folha de rosto">
+{{include:previa}}
+    </section>
+  </div>
+
+  <aside class="aviso-norma">
+    <p><strong>Importante:</strong> esta folha de rosto segue a ABNT NBR 14724:2024 (A4, margens de 3 cm à esquerda e em cima e 2 cm à direita e embaixo). Algumas instituições têm modelo próprio. Confirme com a sua faculdade antes de entregar. A ficha catalográfica, que vai no verso, é feita pela biblioteca e não é gerada aqui.</p>
+  </aside>
+  <div class="anuncio anuncio--separado" data-slot="folha-abaixo-da-ferramenta" aria-hidden="true"><span>Anúncio</span></div>
+</main>
+
+<div class="container conteudo-capa">
+  <div class="conteudo-grade">
+    <article class="artigo">
+
+      <section id="o-que-leva">
+        <h2 class="revelar">O que vai na folha de rosto ABNT (NBR 14724:2024)</h2>
+        <p class="revelar">A folha de rosto é a primeira página interna do trabalho, logo depois da capa. Pela NBR 14724:2024, ela leva oito informações, sempre nesta ordem:</p>
+        <ol class="passos revelar">
+          <li><div><h3>Nome do autor</h3><p>Em trabalho de grupo, um nome por linha.</p></div></li>
+          <li><div><h3>Título</h3><p>O mesmo da capa.</p></div></li>
+          <li><div><h3>Subtítulo, se houver</h3><p>Depois de dois-pontos, como na capa.</p></div></li>
+          <li><div><h3>Número do volume, se houver mais de um</h3><p>Cada volume tem a sua folha de rosto, com o número do volume.</p></div></li>
+          <li><div><h3>Natureza do trabalho</h3><p>O tipo do trabalho (TCC, dissertação, tese...), o objetivo, a instituição a que é submetido e a área de concentração. Vai em um bloco à direita da página.</p></div></li>
+          <li><div><h3>Orientador e coorientador</h3><p>O orientador sempre; o coorientador, se houver.</p></div></li>
+          <li><div><h3>Cidade</h3><p>A da instituição onde o trabalho será entregue.</p></div></li>
+          <li><div><h3>Ano</h3><p>O ano da entrega, que a norma chama de "ano de depósito".</p></div></li>
+        </ol>
+        <aside class="dica revelar"><strong class="dica-titulo">Atenção</strong><p>O nome da instituição não fica no topo, como na capa. Ele vai dentro do texto da natureza do trabalho.</p></aside>
+      </section>
+
+      <section id="folha-de-rosto-ou-contra-capa">
+        <h2 class="revelar">Folha de rosto ou contra capa? O nome certo</h2>
+        <p class="revelar">Muita gente procura "contra capa ABNT" ou "capa e contra capa". Em trabalho acadêmico, a contra capa é a <strong>folha de rosto</strong>: a página que vem depois da capa e repete autor e título com os dados do trabalho. É o nome que a norma usa, e a NBR 14724 não usa a palavra "contracapa".</p>
+        <p class="revelar">Em livros impressos, "contracapa" costuma ser a parte de trás da capa, e por isso vale confirmar com o professor. Se ele pediu "capa e contra capa", são a capa e a folha de rosto, e dá para baixar as duas juntas em um só arquivo (marque "Baixar a capa junto, no mesmo arquivo").</p>
+        <p class="revelar">Quer só a primeira página? Use o <a href="/gerador-de-capa-abnt/">gerador de capa ABNT</a>: o que você digitou aqui passa para lá sozinho.</p>
+      </section>
+
+      <div class="anuncio" data-slot="folha-meio-1" aria-hidden="true"><span>Anúncio</span></div>
+
+      <section id="natureza-do-trabalho">
+        <h2 class="revelar">Natureza do trabalho: o bloco da direita</h2>
+        <p class="revelar">A natureza é o texto que explica o que é o trabalho e para que ele serve. A norma manda alinhá-la <strong>do meio da mancha gráfica até a margem direita</strong>, em <strong>espaço simples</strong>. Com as margens da ABNT, o meio fica a 8 cm da margem esquerda, e o texto ocupa os 8 cm da direita. O gerador faz isso sozinho.</p>
+        <p class="revelar">Alguns exemplos de como o texto costuma ser escrito (a redação exata depende da sua faculdade):</p>
+        <ul class="regras regras--texto revelar">
+          <li><strong>TCC</strong>Trabalho de Conclusão de Curso apresentado ao Curso de Administração da Universidade Federal de Viçosa, como requisito parcial para obtenção do título de Bacharel em Administração.</li>
+          <li><strong>Dissertação</strong>Dissertação apresentada ao Programa de Pós-Graduação em Educação da Universidade Federal de Minas Gerais, como requisito parcial para obtenção do título de Mestre em Educação.</li>
+          <li><strong>Trabalho de disciplina</strong>Trabalho apresentado à disciplina de Metodologia da Pesquisa do Curso de Pedagogia da Universidade Federal de Viçosa, como requisito parcial para aprovação na disciplina.</li>
+          <li><strong>Especialização</strong>Trabalho de Conclusão de Curso apresentado ao Curso de Pós-Graduação Lato Sensu em Gestão de Pessoas da Faculdade Exemplo, como requisito parcial para obtenção do título de Especialista em Gestão de Pessoas.</li>
+        </ul>
+        <p class="revelar">No formulário, escolha o tipo de trabalho e preencha o título pretendido. O texto é montado com a sua instituição e o seu curso, e você pode editar à vontade antes de baixar. Em programas de pós-graduação, a área de concentração entra no fim do texto.</p>
+      </section>
+
+      <section id="margens-fonte-espacamento">
+        <h2 class="revelar">Margens, fonte e espaçamento da folha de rosto</h2>
+        <ul class="regras revelar">
+          <li><strong>Papel e margens</strong>A4. 3 cm na esquerda e em cima, 2 cm na direita e embaixo.</li>
+          <li><strong>Tamanho da letra</strong>12, para todo o texto. É uma recomendação da norma.</li>
+          <li><strong>Espaçamento</strong>1,5 entre as linhas. Só a natureza do trabalho usa espaço simples.</li>
+          <li><strong>Numeração</strong>A folha de rosto é contada, mas o número não é impresso nela.</li>
+        </ul>
+        <p class="revelar"><strong>E a fonte, as maiúsculas e o negrito?</strong> A norma não define. O gerador usa o mesmo estilo da capa (Arial ou Times New Roman, centralizado, autor e título em maiúsculas e negrito), que é um modelo comum nos manuais. Se o da sua faculdade for diferente, mude em "Personalizar estilo".</p>
+      </section>
+
+      <section id="orientador-e-coorientador">
+        <h2 class="revelar">Como escrever o orientador e o coorientador</h2>
+        <p class="revelar">O orientador vem logo abaixo da natureza, no mesmo bloco da direita, com o rótulo e o nome. A norma não fixa o rótulo nem a titulação, então escreva como o manual da sua faculdade pede.</p>
+        <div class="comparar revelar"><div class="comparar-erro"><span class="comparar-rotulo">Evite</span><p>Escrever só o nome, sem dizer que é o orientador.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Melhor</span><p>Orientador: Prof. Dr. João Silva</p></div></div>
+        <div class="comparar revelar"><div class="comparar-erro"><span class="comparar-rotulo">Evite</span><p>Colocar o coorientador na mesma linha do orientador.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Melhor</span><p>Uma linha para cada pessoa: Coorientadora: Profa. Dra. Maria Souza</p></div></div>
+        <p class="revelar">No gerador, escolha entre Orientador, Orientadora e Orientador(a), e adicione quantos coorientadores forem precisos.</p>
+      </section>
+
+      <section id="capa-e-folha-juntas">
+        <h2 class="revelar">Capa e folha de rosto no mesmo arquivo</h2>
+        <p class="revelar">As duas ferramentas usam os mesmos dados: instituição, curso, autores, título, subtítulo, cidade e ano. Você preenche uma vez e a outra já vem pronta. Para receber as duas páginas no mesmo PDF ou Word, marque "Baixar a capa junto, no mesmo arquivo": a capa é a página 1 e a folha de rosto é a página 2.</p>
+        <p class="revelar">Os dados ficam guardados só na aba do navegador, para passar de uma ferramenta à outra. Eles não são enviados e somem quando você fecha a aba ou clica em "Limpar dados".</p>
+      </section>
+
+      <section id="logo-e-modelo-escolar">
+        <h2 class="revelar">Logo da faculdade e modelo escolar</h2>
+        <p class="revelar"><strong>Logo ou brasão.</strong> A NBR 14724 não fala de logotipo, e os modelos de folha de rosto de bibliotecas universitárias que consultei não trazem. Se a sua faculdade pedir, abra "Logo da instituição" e marque "Usar na folha de rosto". A imagem é lida e reduzida no seu navegador e não é enviada a ninguém.</p>
+        <p class="revelar"><strong>Modelo escolar.</strong> Professor e disciplina não fazem parte da ABNT, e cada escola tem o seu modelo. Ao ativar "Modelo escolar", a disciplina entra no texto do trabalho (a norma cita "aprovação em disciplina" como exemplo de objetivo) e o professor ocupa o lugar do orientador.</p>
+      </section>
+
+      <section id="erros-comuns">
+        <h2 class="revelar">Erros comuns na folha de rosto</h2>
+        <div class="comparar revelar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Centralizar o texto da natureza do trabalho.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Do meio da página até a margem direita, em espaço simples.</p></div></div>
+        <div class="comparar revelar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Copiar a capa inteira, com a instituição no topo.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Na folha de rosto a instituição entra dentro da natureza do trabalho. Se a sua faculdade pedir diferente, siga o modelo dela.</p></div></div>
+        <div class="comparar revelar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Esquecer o orientador.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>O orientador (e o coorientador, se houver) é um dos elementos da folha de rosto.</p></div></div>
+        <div class="comparar revelar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Escrever o número da página na folha de rosto.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Ela entra na contagem, mas o número não aparece.</p></div></div>
+        <div class="comparar revelar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Usar as margens do Word do jeito que vieram.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>3 cm na esquerda e em cima; 2 cm na direita e embaixo.</p></div></div>
+        <aside class="dica revelar"><strong class="dica-titulo">Antes de entregar</strong><p>Procure o manual de normalização da biblioteca da sua faculdade. Se existir um modelo de folha de rosto próprio, ele vale mais do que qualquer gerador, este inclusive.</p></aside>
+      </section>
+
+      <div class="anuncio" data-slot="folha-meio-2" aria-hidden="true"><span>Anúncio</span></div>
+
+      <section id="perguntas-frequentes">
+        <h2 class="revelar">Perguntas frequentes sobre a folha de rosto (contra capa)</h2>
+        {{FAQ_HTML:folha}}
+      </section>
+
+      <section id="fontes" class="artigo-meta">
+        <p>Atualizado em 12 de outubro de 2026. Para escrever esta página, li o texto da ABNT NBR 14724:2024 (seções 4.2.1.1, 5.1, 5.2 e 5.3) e manuais de normalização de bibliotecas universitárias de 2025, como os da <a href="https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf" rel="noopener" target="_blank">UFV</a> e da <a href="https://portal.uern.br/dsib/wp-content/uploads/sites/2/2025/02/MANUAL-DE-NORMALIZACAO-SIBUERN-2025.pdf" rel="noopener" target="_blank">UERN</a>.</p>
+        <p>A norma é um documento pago da ABNT. Aqui eu explico, com palavras minhas, o que importa para a folha de rosto. O Estuda Simples não tem ligação com a ABNT, e na dúvida o manual da sua faculdade manda.</p>
+      </section>
+
+    </article>
+    <aside class="lateral" aria-label="Publicidade">
+      <div class="anuncio anuncio--lateral" data-slot="folha-lateral" aria-hidden="true"><span>Anúncio</span></div>
+    </aside>
+  </div>
+</div>
+{{include:zoom}}
+{{include:footer}}
+<script type="module" src="/assets/js/abnt/ferramenta.js?v={{BUILD}}"></script>
+</body>
+</html>

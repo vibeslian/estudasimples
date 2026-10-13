@@ -1,0 +1,25 @@
+        <details class="estilo" id="boxEscolar">
+          <summary>Modelo escolar <span class="opcional">(opcional)</span></summary>
+          <div class="estilo-corpo">
+            <p>Para trabalhos de escola. Professor(a) e disciplina não fazem parte da ABNT, e cada escola define o seu modelo: pergunte ao seu professor como ele quer.</p>
+            <label class="marca"><input type="checkbox" id="escolar"> Usar o modelo escolar</label>
+            <div id="camposEscolar" hidden>
+              <div class="campo">
+                <label for="discipline">Disciplina</label>
+                <input type="text" id="discipline" data-campo="discipline" placeholder="Ex.: Língua Portuguesa">
+              </div>
+              <div class="campo">
+                <label for="teacher">Professor(a)</label>
+                <div class="linha-rotulo">
+                  <select id="teacherLabel" aria-label="Como escrever: Professor ou Professora">
+                    <option value="0">Professor</option>
+                    <option value="1">Professora</option>
+                    <option value="2">Professor(a)</option>
+                  </select>
+                  <input type="text" id="teacher" placeholder="Ex.: Ana Lima">
+                </div>
+              </div>
+              <p class="dica-campo">Na capa, a disciplina e o professor ficam no bloco da direita, acima da cidade. Na folha de rosto, a disciplina entra no texto do trabalho e o professor ocupa o lugar do orientador.</p>
+            </div>
+          </div>
+        </details>

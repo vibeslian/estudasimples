@@ -130,6 +130,11 @@ a.cartao:active { transform: scale(.985); }
 .destaque-mini { background: var(--salvia-50); border: 1px solid var(--salvia-200); border-radius: var(--raio-pequeno); padding: 18px; text-align: center; font-size: .78rem; line-height: 1.7; }
 .destaque-mini b { display: block; font-size: .85rem; }
 @media (min-width: 800px) { .cartao.destaque { grid-template-columns: 1fr 260px; gap: 40px; } }
+/* dois cartões lado a lado: o texto em cima, o miniatura embaixo */
+.grade .cartao.destaque--duplo { grid-template-columns: 1fr; grid-template-rows: 1fr auto; gap: 22px; align-items: end; }
+.destaque--duplo > div:first-child { align-self: start; }
+.destaque--duplo .destaque-mini { justify-self: stretch; }
+.mini-nota { display: block; margin: .9em 0 .9em 48%; text-align: left; font-size: .68rem; line-height: 1.4; }
 .passo-grande .num { font-family: var(--fonte-titulo); font-weight: 800; font-size: clamp(3rem, 8vw, 4.5rem); line-height: 1; color: var(--salvia-500); display: block; margin-bottom: 8px; }
 .em-breve { position: relative; background: var(--salvia-50); border-style: dashed; box-shadow: none; }
 .em-breve h3 { margin-bottom: .3em; }

@@ -1,0 +1,15 @@
+<dialog class="zoom" id="dlgZoom" aria-label="Prévia ampliada">
+  <div class="zoom-barra">
+    <strong>Prévia</strong>
+    <button type="button" class="btn" id="zoomMenos" aria-label="Afastar">−</button>
+    <button type="button" class="btn" id="zoomMais" aria-label="Aproximar">+</button>
+    <button type="button" class="btn btn-acento" id="zoomFechar">Fechar</button>
+  </div>
+  <div class="zoom-area" id="zoomArea" tabindex="0">
+    <div class="zoom-wrap" id="zoomWrap">
+      <div class="zoom-pag" id="zoomPagCapa"><div class="sheet" id="sheetZoom"></div></div>
+      <div class="zoom-pag" id="zoomPagFolha" hidden><div class="sheet" id="sheetZoomFolha"></div></div>
+    </div>
+  </div>
+  <p class="zoom-dica">Use + e − para aproximar, ou arraste para mover a página.</p>
+</dialog>

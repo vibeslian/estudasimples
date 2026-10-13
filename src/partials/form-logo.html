@@ -1,0 +1,28 @@
+        <details class="estilo" id="boxLogo">
+          <summary>Logo da instituição <span class="opcional">(opcional)</span></summary>
+          <div class="estilo-corpo">
+            <p>A ABNT não exige logo nem brasão. Algumas faculdades pedem na capa, outras não: veja o modelo da sua. A imagem é lida e reduzida aqui, no seu navegador, e não é enviada a nenhum servidor.</p>
+            <div class="campo">
+              <label for="logoArquivo">Escolher a imagem <span class="opcional">(PNG, JPG ou WebP)</span></label>
+              <input type="file" id="logoArquivo" accept="image/png,image/jpeg,image/webp">
+            </div>
+            <div id="logoOpcoes" hidden>
+              <div class="logo-atual">
+                <img id="logoMini" alt="Logo escolhido" width="64" height="64">
+                <span id="logoNome"></span>
+                <button type="button" class="btn btn-pequeno" id="logoRemover">Remover logo</button>
+              </div>
+              <div class="campo">
+                <label for="logoTamanho">Tamanho do logo</label>
+                <select id="logoTamanho">
+                  <option value="pequeno">Pequeno (1,5 cm de altura)</option>
+                  <option value="medio" selected>Médio (2,5 cm de altura)</option>
+                  <option value="grande">Grande (3,5 cm de altura)</option>
+                </select>
+              </div>
+              <label class="marca"><input type="checkbox" id="logoCapa" checked> Usar na capa</label>
+              <label class="marca"><input type="checkbox" id="logoFolha"> Usar na folha de rosto</label>
+              <p class="dica-campo">Os modelos de folha de rosto que consultei não trazem logo. Marque só se a sua faculdade pedir.</p>
+            </div>
+          </div>
+        </details>

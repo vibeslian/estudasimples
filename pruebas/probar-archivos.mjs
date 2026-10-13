@@ -10,7 +10,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 
-const ROOT = PRUEBAS + "/resultados";
+const ROOT = PRUEBAS + "/../ejemplos/_pruebas/capa"; // los archivos de prueba van a ejemplos/ y no se abren
 const OUT = ROOT;
 const USAR_WORD = process.env.SEM_WORD ? false : true;
 fs.rmSync(OUT, { recursive: true, force: true }); fs.mkdirSync(OUT, { recursive: true });
@@ -42,7 +42,7 @@ async function abre() {
     const orig = URL.createObjectURL;
     URL.createObjectURL = (b) => { window.__ultimoBlob = b; return orig.call(URL, b); };
     const click = HTMLAnchorElement.prototype.click;
-    HTMLAnchorElement.prototype.click = function () { if (this.download) window.__arquivos.push({ nome: this.download, blob: window.__ultimoBlob }); return click.call(this); };
+    HTMLAnchorElement.prototype.click = function () { if (this.download) { window.__arquivos.push({ nome: this.download, blob: window.__ultimoBlob }); return; } return click.call(this); };
   });
   const erros = []; page.on("pageerror", (e) => erros.push(e.message)); page.on("console", (m) => { if (m.type() === "error") erros.push(m.text()); });
   await page.goto(BASE + "/gerador-de-capa-abnt/", { waitUntil: "networkidle0" });
@@ -77,8 +77,9 @@ async function linhasPrevia(page) {
     const o = sheet.getBoundingClientRect();
     const res = [];
     sheet.querySelectorAll("p").forEach((p) => {
-      const r = document.createRange(); r.selectNodeContents(p);
-      const rects = [...r.getClientRects()].filter((x) => x.width > 0.1);
+      const rects = [];
+      const tw = document.createTreeWalker(p, NodeFilter.SHOW_TEXT);
+      for (let n = tw.nextNode(); n; n = tw.nextNode()) { if (!n.textContent.trim()) continue; const r = document.createRange(); r.selectNodeContents(n); rects.push(...[...r.getClientRects()].filter((x) => x.width > 0.1)); }
       const grupos = [];
       for (const x of rects.sort((a, b) => a.top - b.top || a.left - b.left)) {
         const g = grupos.find((g) => Math.abs(g.top - x.top) < 3);
@@ -151,6 +152,9 @@ function palavrasDoPdf(buf) {
 }
 const norm = (s) => s.normalize("NFC");
 function difPalavras(rotulo, esperado, real, comTam) {
+  // uma palavra com hífen pode ser cortada no fim da linha ("Oliveira-" / "Santos"): compara as partes
+  const parte = (l) => l.flatMap((x) => x.w.split(/(?<=-)(?=[^-])/).map((w) => ({ ...x, w })));
+  esperado = parte(esperado); real = parte(real);
   const dif = [];
   if (esperado.length !== real.length) dif.push(`${rotulo}: ${esperado.length} palavras esperadas, ${real.length} encontradas`);
   esperado.forEach((e, i) => { const r = real[i]; if (!r) return; if (norm(e.w) !== norm(r.w)) dif.push(`#${i} texto "${e.w}" ≠ "${r.w}"`); else if (e.b !== r.b) dif.push(`#${i} "${e.w}" negrito prévia=${e.b} arquivo=${r.b}`); else if (comTam && Math.abs(e.tam - r.tam) > 0.1) dif.push(`#${i} "${e.w}" tamanho ${e.tam}≠${r.tam}`); });
@@ -161,7 +165,7 @@ for (const c of CENARIOS) {
   const page = await abre();
   await preenche(page, c.dados);
   const prev = await linhasPrevia(page);
-  const spans = await page.evaluate(() => [...document.querySelectorAll("#sheet p")].flatMap((p) => [...p.children].flatMap((s) => s.textContent.split(/\s+/).filter(Boolean).map((w) => ({ w, b: s.style.fontWeight === "700", tam: parseFloat(p.style.fontSize), fonte: getComputedStyle(document.getElementById("sheet")).fontFamily })))));
+  const spans = await page.evaluate(() => [...document.querySelectorAll("#sheet p")].flatMap((p) => [...p.querySelectorAll(".linha > span")].flatMap((s) => s.textContent.split(/\s+/).filter(Boolean).map((w) => ({ w, b: s.style.fontWeight === "700", tam: parseFloat(p.style.fontSize), fonte: getComputedStyle(document.getElementById("sheet")).fontFamily })))));
   const fonteEsperada = c.dados.font;
   const prevOK = !(await page.$eval("#avisoPagina", (e) => !e.hidden));
   const info = { cenario: c.id, avisoPaginaCheia: !prevOK, errosPagina: page.__erros };
@@ -197,7 +201,7 @@ for (const c of CENARIOS) {
       info.docx.espacamento = [...new Set([...xml.matchAll(/<w:spacing[^>]*w:line="(\d+)"[^>]*w:lineRule="(\w+)"/g)].map((m) => m[1] + "/" + m[2]))];
       if (USAR_WORD) {
         const docW = arquivo; const pdfWord = `${OUT}/${c.id}.word.pdf`; const pdfWordTmp = pdfWord;
-        const ps = `$ErrorActionPreference='Stop'; $w=New-Object -ComObject Word.Application; $w.Visible=$false; $w.DisplayAlerts=0; try { $d=$w.Documents.Open('${docW.replace(/\//g, "\\")}', $false, $true); $pg=$d.ComputeStatistics(2); $d.ExportAsFixedFormat('${pdfWordTmp.replace(/\//g, "\\")}', 17); $d.Close($false); Write-Output "paginas=$pg" } finally { $w.Quit() }`;
+        const ps = `$ErrorActionPreference='Stop'; $w=New-Object -ComObject Word.Application; $w.Visible=$false; $w.DisplayAlerts=0; $w.ScreenUpdating=$false; try { $d=$w.Documents.Open('${docW.replace(/\//g, "\\")}', $false, $true, $false); $pg=$d.ComputeStatistics(2); $d.ExportAsFixedFormat('${pdfWordTmp.replace(/\//g, "\\")}', 17, $false); $d.Close($false); Write-Output "paginas=$pg" } finally { $w.Quit() }`;
         const r = execFileSync("powershell", ["-NoProfile", "-Command", ps], { encoding: "utf8", timeout: 120000 }).trim();
         info.docx.paginasNoWord = r; 
         const pw = await linhasPdf(fs.readFileSync(pdfWord), c.dados.font);

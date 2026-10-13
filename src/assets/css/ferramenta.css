@@ -4,11 +4,11 @@
    Arimo / Tinos, que têm exatamente as mesmas medidas (e só são baixadas nesse caso). */
 @font-face { font-family: "CapaArial"; font-weight: 400; src: local("Arial"), local("ArialMT"); }
 @font-face { font-family: "CapaArial"; font-weight: 700; src: local("Arial Bold"), local("Arial-BoldMT"); }
-@font-face { font-family: "ArimoWeb"; font-weight: 400 700; font-display: swap; src: url("/gerador-de-capa-abnt/fontes/arimo-latin.woff2") format("woff2"); }
+@font-face { font-family: "ArimoWeb"; font-weight: 400 700; font-display: swap; src: url("/assets/fonts/arimo-latin.woff2") format("woff2"); }
 @font-face { font-family: "CapaTimes"; font-weight: 400; src: local("Times New Roman"), local("TimesNewRomanPSMT"); }
 @font-face { font-family: "CapaTimes"; font-weight: 700; src: local("Times New Roman Bold"), local("TimesNewRomanPS-BoldMT"); }
-@font-face { font-family: "TinosWeb"; font-weight: 400; font-display: swap; src: url("/gerador-de-capa-abnt/fontes/tinos-400-latin.woff2") format("woff2"); }
-@font-face { font-family: "TinosWeb"; font-weight: 700; font-display: swap; src: url("/gerador-de-capa-abnt/fontes/tinos-700-latin.woff2") format("woff2"); }
+@font-face { font-family: "TinosWeb"; font-weight: 400; font-display: swap; src: url("/assets/fonts/tinos-400-latin.woff2") format("woff2"); }
+@font-face { font-family: "TinosWeb"; font-weight: 700; font-display: swap; src: url("/assets/fonts/tinos-700-latin.woff2") format("woff2"); }
 
 .tool { padding-block: 8px 24px; }
 
@@ -49,6 +49,22 @@ details.estilo summary { padding: 14px 16px; min-height: 52px; font-weight: 700;
 .tabela-estilo th:first-child, .tabela-estilo td:first-child { text-align: left; }
 .tabela-estilo input[type="checkbox"] { width: 24px; height: 24px; accent-color: var(--principal); }
 
+/* Grupos de campos, caixas de marcar e logo */
+[hidden] { display: none !important; }
+fieldset.grupo { margin: 0 0 18px; padding: 14px 16px 2px; border: 1px solid var(--salvia-200); border-radius: var(--raio-pequeno); background: var(--salvia-50); }
+fieldset.grupo legend { padding: 0 6px; font-weight: 700; }
+.linha-rotulo { display: grid; grid-template-columns: 9.5em minmax(0, 1fr); gap: 8px; }
+#coLabel { margin-bottom: 8px; }
+.marca { display: flex; align-items: center; gap: 12px; min-height: 48px; margin: 0 0 4px; font-weight: 700; cursor: pointer; }
+.marca input[type="checkbox"] { width: 26px; height: 26px; flex: none; accent-color: var(--principal); }
+input[type="file"] { width: 100%; padding: 10px; font: inherit; font-size: 16px; border: 2px dashed var(--borda-campo); border-radius: var(--raio-pequeno); background: #fff; }
+.logo-atual { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+.logo-atual img { width: 64px; height: 64px; object-fit: contain; background: #fff; border: 1px solid var(--salvia-200); border-radius: 8px; }
+.logo-atual span { flex: 1; min-width: 6em; overflow-wrap: anywhere; font-size: .92rem; color: var(--texto-suave); }
+.campo-juntas { margin-top: 22px; padding: 14px 16px 10px; border: 1px solid var(--salvia-300); border-radius: var(--raio-pequeno); background: var(--certo-bg); }
+.campo-juntas .dica-campo { margin: 0 0 4px 38px; }
+.btn-secundario { background: transparent; border: 0; text-decoration: underline; min-height: 44px; font: inherit; color: var(--principal); cursor: pointer; }
+
 .acoes { display: grid; gap: 12px; margin-top: 22px; }
 .toast { margin: 12px 0 0; font-size: .95rem; color: var(--certo-texto); min-height: 1.3em; }
 .toast.erro { color: var(--erro-texto); font-weight: 700; }
@@ -58,17 +74,18 @@ details.estilo summary { padding: 14px 16px; min-height: 52px; font-weight: 700;
 .sheet-wrap { position: relative; overflow: hidden; background: var(--salvia-100); border-radius: var(--raio-pequeno); border: 1px solid var(--salvia-200); }
 .sheet {
   position: absolute; top: 0; left: 0; transform-origin: top left;
-  width: 21cm; height: 29.7cm; padding: 3cm 2cm 2cm 3cm; /* margens ABNT: sup 3, esq 3, dir 2, inf 2 */
+  width: 21cm; height: 29.7cm; /* as linhas são posicionadas pelo motor de layout (margens ABNT: sup 3, esq 3, dir 2, inf 2) */
   background: #fff; color: #000; box-shadow: 0 1px 6px rgba(0, 0, 0, .25);
   line-height: 1.725; /* "espaçamento 1,5" do Word = 1,5 x 1,15 */ text-align: center;
-  font-kerning: none; font-variant-ligatures: none; text-rendering: geometricPrecision; --u: 20.7pt; /* uma linha em branco (12pt x 1,725) */
+  font-kerning: none; font-variant-ligatures: none; text-rendering: geometricPrecision;
 }
-.sheet-inner { height: 100%; display: flex; flex-direction: column; }
-.sheet p { margin: 0; overflow-wrap: break-word; }
-.zona-topo + .zona-autor { margin-top: calc(3 * var(--u)); } /* três linhas de respiro entre o topo e o(s) autor(es) */
-.zona-titulo { margin-top: auto; margin-bottom: auto; padding: var(--u) 0; }
-.zona-titulo p + p, .zona-base p + p { margin-top: var(--u); }
+.sheet p { position: absolute; margin: 0; text-align: left; }
+.sheet .linha { display: block; white-space: pre; }
+.sheet img.logo-bloco { position: absolute; display: block; max-width: none; }
 .fantasma { color: #9ca3af; }
+.pagina-previa { margin: 0 0 14px; }
+.pagina-previa figcaption { display: none; margin: 0 0 6px; font-weight: 700; font-size: .95rem; color: var(--texto-suave); }
+.duas-paginas .pagina-previa figcaption { display: block; }
 .nota-previa { margin: 10px 0 0; font-size: .9rem; color: var(--texto-suave); }
 .aviso-pagina { margin: 10px 0 0; padding: 12px 14px; border-radius: var(--raio-pequeno); background: var(--acento-claro); border: 1px solid #efc9bd; color: var(--erro-texto); font-size: .95rem; }
 .aviso-pagina[hidden] { display: none; }
@@ -86,6 +103,7 @@ dialog.zoom::backdrop { background: rgba(34, 54, 43, .6); }
 .zoom-barra .btn { min-height: 48px; min-width: 48px; padding: 8px 14px; }
 .zoom-area { flex: 1; overflow: auto; padding: 12px; -webkit-overflow-scrolling: touch; }
 .zoom-wrap { position: relative; margin: 0 auto; }
+.zoom-pag { position: relative; margin: 0 auto 14px; }
 .zoom-dica { margin: 0; padding: 8px 12px 12px; font-size: .88rem; color: var(--texto-suave); text-align: center; background: var(--superficie); }
 
 /* Computador: formulário e prévia lado a lado */
@@ -94,6 +112,7 @@ dialog.zoom::backdrop { background: rgba(34, 54, 43, .6); }
   .painel { display: block; }
   .tool-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 480px); gap: 28px; align-items: start; }
   #painelPrevia { position: sticky; top: 16px; }
+  .duas-paginas #painelPrevia { max-height: calc(100vh - 32px); overflow-y: auto; padding-right: 6px; } /* duas páginas A4 não cabem na tela: a prévia rola sozinha */
   .btn-ampliar { display: none; }
   .acoes { grid-template-columns: 1fr 1fr; }
   .acoes .btn-largo { grid-column: 1 / -1; }
@@ -102,3 +121,5 @@ dialog.zoom::backdrop { background: rgba(34, 54, 43, .6); }
 /* Sin movimiento en la herramienta: los botones solo cambian de color, no se desplazan ni animan */
 .tool .btn { transition: none; }
 .tool .btn:hover:not(:disabled), .tool .btn:active:not(:disabled) { transform: none; }
+
+.titulo-form { margin: 30px 0 14px; padding-top: 22px; border-top: 1px solid var(--salvia-200); font-size: 1.25rem; }

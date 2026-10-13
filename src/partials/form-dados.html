@@ -1,0 +1,54 @@
+        <div class="campo">
+          <label for="institution">Instituição <span class="opcional">(opcional na capa)</span></label>
+          <input type="text" id="institution" placeholder="Ex.: Universidade Federal de Minas Gerais">
+          <p class="dica-campo">Na capa é opcional. Na folha de rosto ela entra no texto da natureza do trabalho.</p>
+        </div>
+
+        <div class="campo">
+          <label for="course">Curso ou departamento <span class="opcional">(opcional)</span></label>
+          <input type="text" id="course" placeholder="Ex.: Curso de Administração">
+        </div>
+
+        <div class="campo">
+          <span class="rotulo" id="rotuloAutores">Autor(es)</span>
+          <div id="autores" role="group" aria-labelledby="rotuloAutores"></div>
+          <button type="button" class="btn btn-pequeno" id="addAutor">+ Adicionar autor</button>
+          <p class="dica-campo">Trabalho em grupo: um nome por linha.</p>
+        </div>
+
+        <div class="campo">
+          <label for="title">Título</label>
+          <textarea id="title" rows="2" placeholder="Ex.: A influência das redes sociais no aprendizado"></textarea>
+        </div>
+
+        <div class="campo">
+          <label for="subtitle">Subtítulo <span class="opcional">(opcional)</span></label>
+          <input type="text" id="subtitle" placeholder="Ex.: um estudo com alunos do ensino médio">
+          <p class="dica-campo">Os dois-pontos entre título e subtítulo são colocados automaticamente.</p>
+        </div>
+
+        <div class="campo">
+          <label for="volume">Número do volume <span class="opcional">(opcional)</span></label>
+          <input type="text" id="volume" inputmode="numeric" placeholder="Ex.: 2">
+          <p class="dica-campo">Preencha só se o trabalho tiver mais de um volume.</p>
+        </div>
+
+        <div class="linha-dupla">
+          <div class="campo">
+            <label for="city">Cidade</label>
+            <input type="text" id="city" placeholder="Ex.: Belo Horizonte">
+          </div>
+          <div class="campo">
+            <label for="year">Ano</label>
+            <input type="number" id="year" inputmode="numeric" min="1900" max="2100">
+          </div>
+        </div>
+        <p class="dica-campo" style="margin-top:-6px;margin-bottom:18px">Cidade da instituição onde o trabalho será entregue e ano da entrega. Se houver cidades com o mesmo nome, acrescente a UF (ex.: Viçosa - MG).</p>
+
+        <div class="campo">
+          <label for="font">Fonte <span class="opcional">(tamanho 12, padrão ABNT)</span></label>
+          <select id="font">
+            <option value="Arial">Arial</option>
+            <option value="Times New Roman">Times New Roman</option>
+          </select>
+        </div>

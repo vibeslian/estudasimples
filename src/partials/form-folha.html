@@ -1,0 +1,63 @@
+          <div class="campo">
+            <label for="workType">Tipo de trabalho</label>
+            <select id="workType">
+              <option value="tcc">Trabalho de Conclusão de Curso (TCC)</option>
+              <option value="monografia">Monografia (graduação)</option>
+              <option value="especializacao">Especialização ou MBA</option>
+              <option value="dissertacao">Dissertação (mestrado)</option>
+              <option value="tese">Tese (doutorado)</option>
+              <option value="disciplina">Trabalho de disciplina</option>
+              <option value="projeto">Projeto de pesquisa</option>
+              <option value="relatorio">Relatório de estágio</option>
+              <option value="outro">Outro (escrevo o texto)</option>
+            </select>
+          </div>
+
+          <div class="campo" id="campoGrau">
+            <label for="degree" id="rotuloDegree">Título pretendido <span class="opcional">(opcional)</span></label>
+            <input type="text" id="degree" placeholder="Ex.: Bacharel em Administração">
+          </div>
+
+          <div class="campo" id="campoDisciplinaNat" hidden>
+            <label for="disciplineNat">Disciplina <span class="opcional">(opcional)</span></label>
+            <input type="text" id="disciplineNat" data-campo="discipline" placeholder="Ex.: Metodologia da Pesquisa">
+          </div>
+
+          <div class="campo">
+            <label for="area">Área de concentração <span class="opcional">(opcional)</span></label>
+            <input type="text" id="area" placeholder="Ex.: Gestão de Organizações">
+            <p class="dica-campo">Usada em programas de pós-graduação. Na graduação costuma ficar em branco.</p>
+          </div>
+
+          <div class="campo">
+            <label for="nature">Texto da natureza do trabalho</label>
+            <textarea id="nature" rows="6" placeholder="O texto é montado sozinho com os dados acima"></textarea>
+            <p class="dica-campo">Montado sozinho com a instituição, o curso e os dados acima. Você pode editar. Se editar, ele deixa de se atualizar. Confira se cita a sua instituição.</p>
+            <button type="button" class="btn btn-pequeno" id="refazNature" hidden>Refazer o texto automático</button>
+          </div>
+
+          <fieldset class="grupo" id="blocoOrientador">
+            <legend>Orientação</legend>
+            <div class="campo">
+              <label for="advisor">Orientador(a) <span class="opcional">(opcional)</span></label>
+              <div class="linha-rotulo">
+                <select id="advisorLabel" aria-label="Como escrever: Orientador ou Orientadora">
+                  <option value="0">Orientador</option>
+                  <option value="1">Orientadora</option>
+                  <option value="2">Orientador(a)</option>
+                </select>
+                <input type="text" id="advisor" placeholder="Ex.: Prof. Dr. João Silva">
+              </div>
+              <p class="dica-campo">Escreva a titulação junto do nome, como a sua faculdade pede.</p>
+            </div>
+            <div class="campo">
+              <span class="rotulo" id="rotuloCo">Coorientador(es) <span class="opcional">(se houver)</span></span>
+              <select id="coLabel" aria-label="Como escrever: Coorientador ou Coorientadora">
+                <option value="0">Coorientador</option>
+                <option value="1">Coorientadora</option>
+                <option value="2">Coorientador(a)</option>
+              </select>
+              <div id="coorientadores" role="group" aria-labelledby="rotuloCo"></div>
+              <button type="button" class="btn btn-pequeno" id="addCoorientador">+ Adicionar coorientador</button>
+            </div>
+          </fieldset>

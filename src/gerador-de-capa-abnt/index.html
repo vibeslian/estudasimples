@@ -3,7 +3,7 @@
 <head>
   {{include:head-common}}
   <title>Gerador de Capa ABNT 2026 – Grátis, em PDF e Word | {{SITE_NAME}}</title>
-  <meta name="description" content="Gerador de capa ABNT grátis: preencha os dados, veja a prévia ao vivo e baixe a capa de trabalho em PDF ou Word, conforme a NBR 14724:2024.">
+  <meta name="description" content="Gerador de capa ABNT grátis: prévia ao vivo, PDF ou Word, com logo da faculdade, trabalho em grupo e folha de rosto no mesmo arquivo. Funciona no celular.">
   <link rel="canonical" href="{{SITE_URL}}/gerador-de-capa-abnt/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
@@ -11,12 +11,12 @@
   <meta property="og:title" content="Gerador de Capa ABNT 2026 – Grátis, em PDF e Word">
   <meta property="og:description" content="Preencha os dados, veja a prévia ao vivo e baixe sua capa ABNT em PDF ou Word. Sem cadastro e sem enviar seus dados.">
   <meta property="og:url" content="{{SITE_URL}}/gerador-de-capa-abnt/">
-  <link rel="stylesheet" href="/gerador-de-capa-abnt/capa.css?v={{BUILD}}">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Gerador de Capa ABNT – {{SITE_NAME}}","url":"{{SITE_URL}}/gerador-de-capa-abnt/","applicationCategory":"EducationalApplication","operatingSystem":"Qualquer (navegador)","inLanguage":"pt-BR","description":"Gerador gratuito de capa ABNT (NBR 14724:2024) com prévia ao vivo e download em PDF e Word. Funciona no navegador, sem cadastro.","offers":{"@type":"Offer","price":"0","priceCurrency":"BRL"},"isAccessibleForFree":true}</script>
+  <link rel="stylesheet" href="/assets/css/ferramenta.css?v={{BUILD}}">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Gerador de Capa ABNT – {{SITE_NAME}}","url":"{{SITE_URL}}/gerador-de-capa-abnt/","applicationCategory":"EducationalApplication","operatingSystem":"Qualquer (navegador)","inLanguage":"pt-BR","description":"Gerador gratuito de capa ABNT (NBR 14724:2024) com prévia ao vivo, logo opcional e download em PDF e Word, sozinha ou junto com a folha de rosto. Funciona no navegador, sem cadastro.","offers":{"@type":"Offer","price":"0","priceCurrency":"BRL"},"isAccessibleForFree":true}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"{{SITE_NAME}}","item":"{{SITE_URL}}/"},{"@type":"ListItem","position":2,"name":"Gerador de capa ABNT","item":"{{SITE_URL}}/gerador-de-capa-abnt/"}]}</script>
   {{FAQ_JSONLD:capa}}
 </head>
-<body>
+<body data-modo="capa">
 <div class="hero hero--compacto">
   {{include:manchas}}
   {{include:header}}
@@ -35,58 +35,19 @@
   <div class="tool-grid">
     <section id="painelForm" class="painel ativo cartao" aria-label="Dados da capa">
       <form id="form" autocomplete="off" novalidate>
-        <div class="campo">
-          <label for="institution">Instituição <span class="opcional">(opcional)</span></label>
-          <input type="text" id="institution" placeholder="Ex.: Universidade Federal de Minas Gerais">
-        </div>
+{{include:form-dados}}
 
-        <div class="campo">
-          <label for="course">Curso ou departamento <span class="opcional">(opcional)</span></label>
-          <input type="text" id="course" placeholder="Ex.: Curso de Administração">
-        </div>
+{{include:form-logo}}
 
-        <div class="campo">
-          <span class="rotulo" id="rotuloAutores">Autor(es)</span>
-          <div id="autores" role="group" aria-labelledby="rotuloAutores"></div>
-          <button type="button" class="btn btn-pequeno" id="addAutor">+ Adicionar autor</button>
-        </div>
+{{include:form-escolar}}
 
-        <div class="campo">
-          <label for="title">Título</label>
-          <textarea id="title" rows="2" placeholder="Ex.: A influência das redes sociais no aprendizado"></textarea>
-        </div>
-
-        <div class="campo">
-          <label for="subtitle">Subtítulo <span class="opcional">(opcional)</span></label>
-          <input type="text" id="subtitle" placeholder="Ex.: um estudo com alunos do ensino médio">
-          <p class="dica-campo">Os dois-pontos entre título e subtítulo são colocados automaticamente.</p>
-        </div>
-
-        <div class="campo">
-          <label for="volume">Número do volume <span class="opcional">(opcional)</span></label>
-          <input type="text" id="volume" inputmode="numeric" placeholder="Ex.: 2">
-          <p class="dica-campo">Preencha só se o trabalho tiver mais de um volume.</p>
-        </div>
-
-        <div class="linha-dupla">
-          <div class="campo">
-            <label for="city">Cidade</label>
-            <input type="text" id="city" placeholder="Ex.: Belo Horizonte">
+        <details class="estilo" id="boxFolha">
+          <summary>Dados da folha de rosto <span class="opcional">(para baixar junto)</span></summary>
+          <div class="estilo-corpo">
+            <p>Preencha só se for baixar a folha de rosto junto com a capa. Instituição, curso, autores, título, cidade e ano você já digitou acima.</p>
+{{include:form-folha}}
           </div>
-          <div class="campo">
-            <label for="year">Ano</label>
-            <input type="number" id="year" inputmode="numeric" min="1900" max="2100">
-          </div>
-        </div>
-        <p class="dica-campo" style="margin-top:-6px;margin-bottom:18px">Cidade da instituição onde o trabalho será entregue e ano da entrega. Se houver cidades com o mesmo nome, acrescente a UF (ex.: Viçosa - MG).</p>
-
-        <div class="campo">
-          <label for="font">Fonte <span class="opcional">(tamanho 12, padrão ABNT)</span></label>
-          <select id="font">
-            <option value="Arial">Arial</option>
-            <option value="Times New Roman">Times New Roman</option>
-          </select>
-        </div>
+        </details>
 
         <details class="estilo" id="estilo">
           <summary>Personalizar estilo</summary>
@@ -105,27 +66,29 @@
               </select>
               <p class="dica-campo">O subtítulo acompanha o tamanho do título. O volume segue o estilo do subtítulo.</p>
             </div>
+            <label class="marca"><input type="checkbox" id="natureJust" checked> Texto da natureza do trabalho justificado (folha de rosto)</label>
             <button type="button" class="btn btn-pequeno" id="restaurar">Restaurar estilo padrão</button>
           </div>
         </details>
+
+        <div class="campo-juntas">
+          <label class="marca"><input type="checkbox" id="juntas"> Baixar a folha de rosto junto, no mesmo arquivo</label>
+          <p class="dica-campo" id="juntasInfo"></p>
+        </div>
 
         <div class="acoes">
           <button type="button" class="btn btn-acento" id="btnPdf">Baixar PDF</button>
           <button type="button" class="btn btn-acento" id="btnDocx">Baixar Word (.docx)</button>
           <button type="button" class="btn btn-largo" id="btnNova">Nova capa com os mesmos dados</button>
+          <button type="button" class="btn-secundario btn-largo" id="btnLimpar">Limpar dados</button>
         </div>
         <p class="toast" id="toast" role="status" aria-live="polite"></p>
+        <p class="dica-campo">Para você não digitar tudo de novo ao passar da capa para a folha de rosto, o navegador guarda o que você escreveu só nesta aba, no seu aparelho. Nada é enviado, e some quando você fecha a aba ou clica em "Limpar dados".</p>
       </form>
     </section>
 
     <section id="painelPrevia" class="painel" aria-label="Prévia da capa">
-      <h2 class="previa-titulo">Prévia (A4)</h2>
-      <button type="button" class="btn btn-pequeno btn-ampliar" id="btnAmpliar">Ampliar prévia</button>
-      <div class="sheet-wrap" id="sheetWrap">
-        <div class="sheet" id="sheet" aria-live="off"></div>
-      </div>
-      <p class="aviso-pagina" id="avisoPagina" hidden>O texto está grande demais e passa da área da página. Diminua o tamanho do título ou encurte os textos.</p>
-      <p class="nota-previa">O texto em cinza é só um exemplo e não aparece no arquivo final.</p>
+{{include:previa}}
     </section>
   </div>
 
@@ -170,7 +133,7 @@
 
       <section id="capa-e-folha-de-rosto">
         <h2 class="revelar">Capa e folha de rosto: qual é a diferença?</h2>
-        <p class="revelar">São duas páginas diferentes, e muita gente troca uma pela outra.</p>
+        <p class="revelar">São duas páginas diferentes, e muita gente troca uma pela outra. Quem procura "contra capa" quase sempre quer a folha de rosto.</p>
         <div class="dif revelar">
           <div class="cartao">
             <h3>Capa</h3>
@@ -200,7 +163,23 @@
             <p class="nota">É aqui que o orientador aparece. A contagem das páginas começa nela, mas o número não é impresso.</p>
           </div>
         </div>
-        <p class="revelar">Se o seu trabalho pede as duas, comece pela capa aqui. A ferramenta de folha de rosto está nos planos: dá para ver as próximas na <a href="/#ferramentas">página inicial</a>.</p>
+        <p class="revelar">Se o seu trabalho pede as duas, use o <a href="/gerador-de-folha-de-rosto-abnt/">gerador de folha de rosto (contra capa)</a>: o que você digitou aqui passa para lá sozinho. Para baixar as duas no mesmo arquivo, marque "Baixar a folha de rosto junto" no formulário.</p>
+      </section>
+
+      <section id="logo-e-modelo-escolar">
+        <h2 class="revelar">Logo da faculdade e modelo escolar</h2>
+        <p class="revelar"><strong>Logo ou brasão.</strong> A NBR 14724 não fala de logotipo. Muitas faculdades colocam o brasão no modelo de capa delas e outras não aceitam nenhuma imagem, então veja o manual da sua. Se precisar, abra "Logo da instituição" no formulário e escolha a imagem. Ela é lida e reduzida no seu navegador e não é enviada a ninguém.</p>
+        <p class="revelar"><strong>Modelo escolar.</strong> Trabalho de escola costuma pedir o nome do professor e da disciplina. Isso não faz parte da ABNT, e cada escola tem o seu jeito. Ative "Modelo escolar" e os dois campos aparecem na capa, no bloco da direita, acima da cidade. Pergunte ao professor se é assim que ele quer.</p>
+      </section>
+
+      <section id="grupo-celular-google-docs">
+        <h2 class="revelar">Trabalho em grupo, celular e Google Docs</h2>
+        <h3 class="revelar">Capa de trabalho em grupo</h3>
+        <p class="revelar">Clique em "+ Adicionar autor" e escreva um nome por linha. Todos os nomes ficam na capa, centralizados, um abaixo do outro. A ordem é a que você digitar: muitas faculdades pedem ordem alfabética, então confira.</p>
+        <h3 class="revelar">Fazer a capa no celular</h3>
+        <p class="revelar">A ferramenta funciona no navegador do celular, sem instalar nada. Preencha na aba "Preencher", veja o resultado na aba "Ver prévia" e use "Ampliar prévia" para ler com calma. Ao baixar, o PDF e o Word vão para a pasta de downloads do aparelho.</p>
+        <h3 class="revelar">Abrir o Word no Google Docs</h3>
+        <p class="revelar">O arquivo .docx também abre no Google Docs: envie-o ao Google Drive, clique nele com o botão direito e escolha "Abrir com > Google Docs". Margens, fonte e espaçamento costumam vir certos, mas o Docs pode mudar pequenos detalhes, então confira antes de entregar. Se precisar que nada mude, entregue o PDF.</p>
       </section>
 
       <section id="erros-comuns">
@@ -232,19 +211,8 @@
     </aside>
   </div>
 </div>
-<dialog class="zoom" id="dlgZoom" aria-label="Prévia da capa ampliada">
-  <div class="zoom-barra">
-    <strong>Prévia da capa</strong>
-    <button type="button" class="btn" id="zoomMenos" aria-label="Afastar">−</button>
-    <button type="button" class="btn" id="zoomMais" aria-label="Aproximar">+</button>
-    <button type="button" class="btn btn-acento" id="zoomFechar">Fechar</button>
-  </div>
-  <div class="zoom-area" id="zoomArea" tabindex="0">
-    <div class="zoom-wrap" id="zoomWrap"><div class="sheet" id="sheetZoom"></div></div>
-  </div>
-  <p class="zoom-dica">Use + e − para aproximar, ou arraste para mover a página.</p>
-</dialog>
+{{include:zoom}}
 {{include:footer}}
-<script type="module" src="/gerador-de-capa-abnt/capa.js?v={{BUILD}}"></script>
+<script type="module" src="/assets/js/abnt/ferramenta.js?v={{BUILD}}"></script>
 </body>
 </html>

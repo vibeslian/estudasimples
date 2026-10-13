@@ -1,0 +1,107 @@
+[
+  {
+    "p": "Folha de rosto e contra capa são a mesma coisa?",
+    "r": [
+      "Na prática, sim: quando um estudante fala em \"contra capa\" de trabalho acadêmico, quase sempre se refere à folha de rosto, a página que vem logo depois da capa. O nome que a ABNT usa é folha de rosto, e a norma não usa a palavra contracapa.",
+      "Em livros impressos, \"contracapa\" costuma ser a parte de trás da capa. Se o seu professor falou em contra capa, confirme se ele quer a folha de rosto."
+    ]
+  },
+  {
+    "p": "O que vai na folha de rosto ABNT?",
+    "r": [
+      "Pela NBR 14724:2024, nesta ordem: nome do autor, título, subtítulo (se houver), número do volume (se houver mais de um), natureza do trabalho, nome do orientador e do coorientador (se houver), cidade e ano.",
+      "A natureza é o texto que diz o tipo do trabalho, o objetivo, a instituição a que é submetido e a área de concentração."
+    ]
+  },
+  {
+    "p": "A folha de rosto tem número de página?",
+    "r": [
+      "Não aparece número. A folha de rosto é contada, ou seja, entra na contagem das páginas, mas o número não é impresso nela. O número só aparece a partir da primeira página do texto, no canto superior direito."
+    ]
+  },
+  {
+    "p": "O que é a natureza do trabalho e como alinhar?",
+    "r": [
+      "É o texto que descreve o trabalho. Exemplo: \"Trabalho de Conclusão de Curso apresentado ao Curso de Administração da Universidade Federal de Viçosa, como requisito parcial para obtenção do título de Bacharel em Administração\".",
+      "A norma manda alinhar esse texto do meio da mancha gráfica até a margem direita, em espaço simples. Com as margens da ABNT, o meio da mancha fica a 8 cm da margem esquerda. O gerador já faz isso."
+    ]
+  },
+  {
+    "p": "Precisa do nome da instituição na folha de rosto?",
+    "r": [
+      "Precisa, mas dentro do texto da natureza, e não no topo da página como na capa. É assim na NBR 14724:2024 e nos modelos de bibliotecas universitárias que consultei.",
+      "Se a sua faculdade pedir o nome da instituição no topo, siga o modelo dela."
+    ]
+  },
+  {
+    "p": "Como escrever o orientador e o coorientador?",
+    "r": [
+      "Logo abaixo da natureza, no mesmo bloco da direita, com o rótulo e o nome: \"Orientador: Prof. Dr. João Silva\". Se houver coorientador, vem em outra linha: \"Coorientadora: Profa. Dra. Maria Souza\".",
+      "A norma não fixa o rótulo nem a forma da titulação. Escreva como o manual da sua faculdade pede. No gerador dá para escolher Orientador, Orientadora ou Orientador(a)."
+    ]
+  },
+  {
+    "p": "Onde colocar a disciplina e o professor em trabalho de escola?",
+    "r": [
+      "A ABNT não tem linha própria para professor e disciplina. Na folha de rosto, a disciplina entra dentro do texto da natureza (a norma cita \"aprovação em disciplina\" como exemplo de objetivo), e o nome do professor pode ocupar o lugar do orientador.",
+      "É o que faz o \"Modelo escolar\" do gerador. Cada escola decide o modelo, então pergunte ao professor."
+    ]
+  },
+  {
+    "p": "Qual a diferença entre folha de rosto e folha de aprovação?",
+    "r": [
+      "A folha de rosto identifica o trabalho e vem logo depois da capa. A folha de aprovação vem em seguida e traz a data da aprovação, o nome, a titulação e a assinatura dos integrantes da banca examinadora.",
+      "Pela norma, as duas são obrigatórias nos trabalhos acadêmicos. Em trabalhos menores, como os de disciplina, a faculdade decide o que pede.",
+      "Este gerador faz a folha de rosto. A folha de aprovação depende do modelo de cada instituição."
+    ]
+  },
+  {
+    "p": "E a ficha catalográfica, que vai no verso da folha de rosto?",
+    "r": [
+      "A norma manda a ficha catalográfica no verso da folha de rosto. Em arquivo digital, ela vem em uma página separada, logo depois da folha de rosto. Quem elabora a ficha é a biblioteca da instituição.",
+      "O Estuda Simples não gera a ficha. Muitas instituições só exigem em dissertações e teses; veja o manual da sua."
+    ]
+  },
+  {
+    "p": "Posso baixar a capa e a folha de rosto no mesmo arquivo?",
+    "r": [
+      "Pode. Marque \"Baixar a capa junto, no mesmo arquivo\" e baixe o PDF ou o Word: sai um arquivo de 2 páginas, com a capa e depois a folha de rosto.",
+      "Os dados que se repetem (instituição, autores, título, cidade e ano) são os mesmos nas duas, e você digita uma vez só. Eles ficam guardados apenas na aba do seu navegador."
+    ]
+  },
+  {
+    "p": "Como fica a folha de rosto de trabalho em grupo?",
+    "r": [
+      "Os nomes de todos os autores ficam no topo da página, um por linha, antes do título. No gerador, use \"+ Adicionar autor\" para cada integrante.",
+      "O orientador continua sendo um só bloco, abaixo da natureza do trabalho."
+    ]
+  },
+  {
+    "p": "A folha de rosto de TCC é diferente da de dissertação?",
+    "r": [
+      "A estrutura é a mesma. O que muda é o texto da natureza: tipo do trabalho (TCC, monografia, dissertação, tese), o título que se pretende obter e, em pós-graduação, a área de concentração.",
+      "O gerador monta um texto para cada tipo, e você pode editar à vontade para ficar como o modelo da sua faculdade."
+    ]
+  },
+  {
+    "p": "O que mudou na folha de rosto com a NBR 14724:2024?",
+    "r": [
+      "A lista de elementos, a ordem e a regra de alinhamento da natureza são as mesmas da versão de 2011. A diferença está na ficha catalográfica: em arquivo digital, ela agora vem imediatamente depois da folha de rosto.",
+      "Também mudou um pouco a redação de itens como \"ano de depósito\" (o ano da entrega)."
+    ]
+  },
+  {
+    "p": "Posso colocar logo ou brasão na folha de rosto?",
+    "r": [
+      "A norma não fala de logotipo, e os modelos de folha de rosto de bibliotecas universitárias que consultei não trazem. Algumas faculdades pedem; veja o manual da sua.",
+      "No gerador, o logo é opcional e fica desligado na folha de rosto até você marcar \"Usar na folha de rosto\". A imagem é lida e reduzida no seu navegador e não é enviada a ninguém."
+    ]
+  },
+  {
+    "p": "E se a minha faculdade tiver um modelo próprio de folha de rosto?",
+    "r": [
+      "Use o modelo da faculdade: ele vale mais do que qualquer gerador. A ABNT define a ordem e a regra do bloco da natureza, e cada instituição detalha o resto.",
+      "Você pode usar o Estuda Simples como ponto de partida e ajustar no Word ou, se preferir, editar o texto da natureza antes de baixar."
+    ]
+  }
+]
