@@ -35,20 +35,20 @@ export function geometria() {
 // Divide as "runs" ({text, bold}) em unidades que podem quebrar: palavras (separadas por espaço) e partes depois de hífen.
 function unidades(runs) {
   const us = [];
-  let espacoPendente = null; // {bold} se há espaço antes da próxima unidade
+  let espacoPendente = null; // {bold, italic} se há espaço antes da próxima unidade
   let atual = null; // unidade em construção (pode juntar partes de runs diferentes sem espaço)
   const fecha = () => { if (atual) { us.push(atual); atual = null; } };
   for (const run of runs) {
     for (const parte of run.text.split(/(\s+)/)) {
       if (parte === "") continue;
-      if (/^\s+$/.test(parte)) { fecha(); espacoPendente = { bold: run.bold }; continue; }
+      if (/^\s+$/.test(parte)) { fecha(); espacoPendente = { bold: run.bold, italic: run.italic }; continue; }
       // depois de cada hífen, é possível quebrar
       const pedacos = parte.split(/(?<=-)(?=[^-])/);
       pedacos.forEach((p, i) => {
-        if (i === 0 && atual) { atual.parts.push({ text: p, bold: run.bold }); }
+        if (i === 0 && atual) { atual.parts.push({ text: p, bold: run.bold, italic: run.italic }); }
         else {
           fecha();
-          atual = { parts: [{ text: p, bold: run.bold }], espaco: i === 0 ? espacoPendente : null };
+          atual = { parts: [{ text: p, bold: run.bold, italic: run.italic }], espaco: i === 0 ? espacoPendente : null };
           espacoPendente = null;
         }
         if (i < pedacos.length - 1) fecha();
@@ -61,26 +61,26 @@ function unidades(runs) {
 
 // compressao (só texto justificado): o Word aperta os espaços da linha até essa fração da largura de cada espaço para caber mais uma palavra.
 export function quebraLinhas(runs, larguraMax, medir, { compressao = 0 } = {}) {
-  const larg = (parts) => parts.reduce((s, p) => s + medir(p.text, p.bold), 0);
+  const larg = (parts) => parts.reduce((s, p) => s + medir(p.text, p.bold, p.italic), 0);
   const linhas = [];
   let linha = null;
   const nova = () => { linha = { parts: [], largura: 0, espacos: 0 }; linhas.push(linha); };
   nova();
   for (const u of unidades(runs)) {
     const wU = larg(u.parts);
-    const wEsp = u.espaco && linha.parts.length ? medir(" ", u.espaco.bold) : 0;
-    const folga = compressao ? (linha.espacos + (wEsp ? 1 : 0)) * compressao * medir(" ", false) : 0;
+    const wEsp = u.espaco && linha.parts.length ? medir(" ", u.espaco.bold, u.espaco.italic) : 0;
+    const folga = compressao ? (linha.espacos + (wEsp ? 1 : 0)) * compressao * medir(" ", false, false) : 0;
     if (linha.parts.length && linha.largura + wEsp + wU - folga > larguraMax + 0.01) nova();
-    else if (wEsp) { linha.parts.push({ text: " ", bold: u.espaco.bold }); linha.largura += wEsp; linha.espacos++; }
+    else if (wEsp) { linha.parts.push({ text: " ", bold: u.espaco.bold, italic: u.espaco.italic }); linha.largura += wEsp; linha.espacos++; }
     if (wU > larguraMax && u.parts.length === 1) {
       // palavra maior que a linha inteira: quebra por letras (como overflow-wrap: break-word)
       let resto = u.parts[0].text;
       while (resto) {
         let n = resto.length;
-        while (n > 1 && medir(resto.slice(0, n), u.parts[0].bold) > larguraMax - linha.largura) n--;
+        while (n > 1 && medir(resto.slice(0, n), u.parts[0].bold, u.parts[0].italic) > larguraMax - linha.largura) n--;
         const pedaco = resto.slice(0, n);
-        linha.parts.push({ text: pedaco, bold: u.parts[0].bold });
-        linha.largura += medir(pedaco, u.parts[0].bold);
+        linha.parts.push({ text: pedaco, bold: u.parts[0].bold, italic: u.parts[0].italic });
+        linha.largura += medir(pedaco, u.parts[0].bold, u.parts[0].italic);
         resto = resto.slice(n);
         if (resto) nova();
       }
@@ -109,7 +109,7 @@ export function calculaLayout(modelo, medir) {
     }
     const recuo = b.recuo || 0;
     const larguraBloco = g.larguraArea - recuo;
-    const linhas = quebraLinhas(b.runs, larguraBloco, (t, bold) => medir(t, bold, b.size), { compressao: b.align === "justify" ? COMPRESSAO_JUSTIFICADO : 0 });
+    const linhas = quebraLinhas(b.runs, larguraBloco, (t, bold, italic) => medir(t, bold, b.size, italic), { compressao: b.align === "justify" ? COMPRESSAO_JUSTIFICADO : 0 });
     return { ...b, linhas, larguraBloco, x0: g.margemEsquerda + recuo, altura: linhas.length * b.size * b.fator, topo: 0, antes: 0 };
   });
   const zona = (z) => blocos.filter((b) => b.zone === z);

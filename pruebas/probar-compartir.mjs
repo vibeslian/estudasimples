@@ -5,8 +5,10 @@ import { fileURLToPath } from "node:url";
 import { lanza, abre, preenche, URL_PAGINA, BASE, fs } from "./lib-archivos.mjs";
 
 const AQUI = path.dirname(fileURLToPath(import.meta.url)).split("\\").join("/");
-const LOGO = path.resolve(AQUI, "../ejemplos/_pruebas/folha/logo-transparente.png");
-if (!fs.existsSync(LOGO)) { console.log("Falta el logo de prueba: corre antes probar-folha.mjs"); process.exit(1); }
+import { createCanvas } from "@napi-rs/canvas";
+const LOGO = path.resolve(AQUI, "../ejemplos/_pruebas/logo-compartir.png"); // se crea aquí; no se publica
+fs.mkdirSync(path.dirname(LOGO), { recursive: true });
+{ const c = createCanvas(300, 300); const g = c.getContext("2d"); g.fillStyle = "#1f4e8c"; g.beginPath(); g.arc(150, 150, 130, 0, Math.PI * 2); g.fill(); fs.writeFileSync(LOGO, c.toBuffer("image/png")); }
 const falhas = [];
 const marca = (c, m) => { console.log(c ? "OK   " : "FALLA", m); if (!c) falhas.push(m); };
 
@@ -31,7 +33,7 @@ const est = await page.evaluate(() => {
     institution: v("institution"), course: v("course"), autores: [...document.querySelectorAll("#autores input")].map((i) => i.value), title: v("title"), subtitle: v("subtitle"), volume: v("volume"),
     city: v("city"), year: v("year"), font: v("font"), titleSize: v("titleSize"), workType: v("workType"), degree: v("degree"), area: v("area"), advisor: v("advisor"), advisorLabel: v("advisorLabel"),
     co: [...document.querySelectorAll("#coorientadores input")].map((i) => i.value), coLabel: v("coLabel"), escolar: c("escolar"), discipline: v("discipline"), disciplineNat: v("disciplineNat"), teacher: v("teacher"),
-    juntas: c("juntas"), logoVisivel: !document.getElementById("logoOpcoes").hidden, logoSrc: document.getElementById("logoMini").src.slice(0, 22), logoTam: v("logoTamanho"), logoFolha: c("logoFolha"),
+    incCapa: c("incCapa"), logoVisivel: !document.getElementById("logoOpcoes").hidden, logoSrc: document.getElementById("logoMini").src.slice(0, 22), logoTam: v("logoTamanho"), logoFolha: c("logoFolha"),
     estiloAutor: document.querySelector('input[aria-label="Autor(es): maiúsculas"]').checked, paginasVisiveis: [!document.getElementById("pagCapa").hidden, !document.getElementById("pagFolha").hidden],
     texto: document.getElementById("sheetFolha").textContent.slice(0, 60), natureza: v("nature").slice(0, 60),
   };
@@ -41,14 +43,27 @@ marca(JSON.stringify(est.autores) === JSON.stringify(["Maria Silva", "João Pere
 marca(est.font === "Times New Roman" && est.titleSize === "14" && est.estiloAutor === false, "fuente, tamaño del título y estilo personalizado pasan");
 marca(est.workType === "monografia" && est.degree === "Licenciado em Pedagogia" && est.area === "Educação" && est.advisor === "Profa. Dra. Maria Souza" && est.advisorLabel === "1" && est.coLabel === "2" && JSON.stringify(est.co) === JSON.stringify(["Prof. Dr. Pedro Lima"]), "datos de la folha (tipo, título pretendido, área, orientador y coorientador) pasan");
 marca(est.escolar === true && est.discipline === "Física" && est.disciplineNat === "Física" && est.teacher === "Ana Lima", "modelo escolar y disciplina (en los dos campos) pasan");
-marca(est.juntas === true && JSON.stringify(est.paginasVisiveis) === "[true,true]", "la opción de descargar juntas pasa y se ven las dos páginas");
+marca(est.incCapa === false && JSON.stringify(est.paginasVisiveis) === "[false,true]", "las casillas de \"baixar junto\" son independientes: en la folha de rosto, sin marcar, solo se ve su página");
 marca(est.logoVisivel && est.logoSrc.startsWith("data:image/") && est.logoTam === "grande" && est.logoFolha === true, "el logo (y su tamaño y opciones) pasan");
-marca(await page.evaluate(() => document.querySelectorAll("#sheetFolha img.logo-bloco").length === 1 && document.querySelectorAll("#sheet img.logo-bloco").length === 1), "el logo aparece en las dos páginas de la prévia");
+marca(await page.evaluate(() => document.querySelectorAll("#sheetFolha img.logo-bloco").length === 1), "el logo (marcado para la folha de rosto) aparece en su vista previa");
 
 // 2) cambiar algo en la folha y volver a la capa
 await page.evaluate(() => { const e = document.getElementById("city"); e.value = "Recife"; e.dispatchEvent(new Event("input", { bubbles: true })); });
 await page.goto(BASE + URL_PAGINA.capa, { waitUntil: "networkidle0" });
 marca((await page.$eval("#city", (e) => e.value)) === "Recife", "un cambio hecho en la folha de rosto vuelve a la capa");
+
+// 2b) el sumário: la lista pasa a la capa y a la folha cuando se marca "baixar o sumário junto"
+await page.goto(BASE + "/gerador-de-sumario-abnt/", { waitUntil: "networkidle0" });
+const sumDatos = await page.evaluate(() => ({ title: document.getElementById("title").value, entradas: document.querySelectorAll(".sum-item").length, font: document.getElementById("font").value }));
+marca(sumDatos.title === "Redes sociais" && sumDatos.font === "Times New Roman" && sumDatos.entradas === 0, "los datos comunes llegan al sumário (título y fuente) y su lista empieza vacía");
+await page.evaluate(() => { const t = document.getElementById("colarLista"); t.value = ["1 Introdução ..... 7", "2 Desenvolvimento ..... 9", "2.1 Primeiro tema ..... 9", "Referências ..... 20"].join("\n"); document.getElementById("btnColarSub").click(); });
+await page.goto(BASE + URL_PAGINA.folha, { waitUntil: "networkidle0" });
+await page.evaluate(() => { const e = document.getElementById("incSumario"); e.checked = true; e.dispatchEvent(new Event("input", { bubbles: true })); });
+const conSum = await page.evaluate(() => ({ hojas: [...document.querySelectorAll("#pagsSumario .sheet")].map((s) => s.textContent.slice(0, 90)), info: document.getElementById("incluirInfo").textContent }));
+marca(conSum.hojas.length === 1 && /INTRODUÇÃO/.test(conSum.hojas[0]) && /sumário/.test(conSum.info), `la lista del sumário pasa a la folha de rosto y se baja junto (${conSum.info})`);
+await page.goto(BASE + "/gerador-de-sumario-abnt/", { waitUntil: "networkidle0" });
+marca((await page.evaluate(() => document.querySelectorAll(".sum-item").length)) === 4, "volver al sumário conserva los 4 ítems");
+await page.goto(BASE + URL_PAGINA.capa, { waitUntil: "networkidle0" });
 
 // 3) recargar mantiene; privacidad: nada enviado, sin cookies
 await page.reload({ waitUntil: "networkidle0" });
@@ -71,8 +86,8 @@ await page.$eval("#btnLimpar", (e) => e.click());
 const intermedio = await page.$eval("#btnLimpar", (e) => e.textContent);
 marca(/de novo/.test(intermedio) && (await page.$eval("#title", (e) => e.value)) === "Redes sociais", `el primer clic solo pide confirmar ("${intermedio}") y no borra nada`);
 await Promise.all([page.waitForNavigation({ waitUntil: "networkidle0" }), page.$eval("#btnLimpar", (e) => e.click())]);
-const vacio = await page.evaluate(() => ({ title: document.getElementById("title").value, inst: document.getElementById("institution").value, autores: [...document.querySelectorAll("#autores input")].map((i) => i.value), logo: !document.getElementById("logoOpcoes").hidden, juntas: document.getElementById("juntas").checked, escolar: document.getElementById("escolar").checked, toast: document.getElementById("toast").textContent, claves: Object.keys(sessionStorage), year: document.getElementById("year").value }));
-marca(vacio.title === "" && vacio.inst === "" && JSON.stringify(vacio.autores) === '[""]' && !vacio.logo && !vacio.juntas && !vacio.escolar, "después de Limpar dados el formulario, el logo y las opciones quedan como nuevos");
+const vacio = await page.evaluate(() => ({ title: document.getElementById("title").value, inst: document.getElementById("institution").value, autores: [...document.querySelectorAll("#autores input")].map((i) => i.value), logo: !document.getElementById("logoOpcoes").hidden, escolar: document.getElementById("escolar").checked, toast: document.getElementById("toast").textContent, claves: Object.keys(sessionStorage), year: document.getElementById("year").value }));
+marca(vacio.title === "" && vacio.inst === "" && JSON.stringify(vacio.autores) === '[""]' && !vacio.logo && !vacio.escolar, "después de Limpar dados el formulario, el logo y las opciones quedan como nuevos");
 marca(/apagados/.test(vacio.toast) && vacio.year === String(new Date().getFullYear()), `aviso "${vacio.toast}" y el año vuelve al actual`);
 marca(vacio.claves.length === 0 || vacio.claves.every((k) => k === "es-abnt-v1"), `sessionStorage queda vacío o con el estado recién creado (${vacio.claves.join(", ") || "vacío"})`);
 await page.close();

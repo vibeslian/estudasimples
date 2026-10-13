@@ -9,6 +9,14 @@
 @font-face { font-family: "CapaTimes"; font-weight: 700; src: local("Times New Roman Bold"), local("TimesNewRomanPS-BoldMT"); }
 @font-face { font-family: "TinosWeb"; font-weight: 400; font-display: swap; src: url("/assets/fonts/tinos-400-latin.woff2") format("woff2"); }
 @font-face { font-family: "TinosWeb"; font-weight: 700; font-display: swap; src: url("/assets/fonts/tinos-700-latin.woff2") format("woff2"); }
+/* Cursiva (usada no sumário quando o nível pede): sem estas regras o navegador inventaria uma cursiva com as medidas da letra reta */
+@font-face { font-family: "CapaArial"; font-style: italic; font-weight: 400; src: local("Arial Italic"), local("Arial-ItalicMT"); }
+@font-face { font-family: "CapaArial"; font-style: italic; font-weight: 700; src: local("Arial Bold Italic"), local("Arial-BoldItalicMT"); }
+@font-face { font-family: "ArimoWeb"; font-style: italic; font-weight: 400 700; font-display: swap; src: url("/assets/fonts/arimo-italic-latin.woff2") format("woff2"); }
+@font-face { font-family: "CapaTimes"; font-style: italic; font-weight: 400; src: local("Times New Roman Italic"), local("TimesNewRomanPS-ItalicMT"); }
+@font-face { font-family: "CapaTimes"; font-style: italic; font-weight: 700; src: local("Times New Roman Bold Italic"), local("TimesNewRomanPS-BoldItalicMT"); }
+@font-face { font-family: "TinosWeb"; font-style: italic; font-weight: 400; font-display: swap; src: url("/assets/fonts/tinos-italic-400-latin.woff2") format("woff2"); }
+@font-face { font-family: "TinosWeb"; font-style: italic; font-weight: 700; font-display: swap; src: url("/assets/fonts/tinos-italic-700-latin.woff2") format("woff2"); }
 
 .tool { padding-block: 8px 24px; }
 
@@ -123,3 +131,37 @@ dialog.zoom::backdrop { background: rgba(34, 54, 43, .6); }
 .tool .btn:hover:not(:disabled), .tool .btn:active:not(:disabled) { transform: none; }
 
 .titulo-form { margin: 30px 0 14px; padding-top: 22px; border-top: 1px solid var(--salvia-200); font-size: 1.25rem; }
+
+/* Sumário: lista de itens editável */
+.titulo-form--primeiro { margin-top: 4px; padding-top: 0; border-top: 0; }
+.sum-item { margin: 0 0 12px; padding: 10px 12px; background: #fff; border: 1px solid var(--salvia-200); border-radius: var(--raio-pequeno); }
+.sum-linha1 { display: grid; grid-template-columns: minmax(0, 1fr) 4.6em; grid-template-areas: "num num" "tit pag"; gap: 6px 8px; align-items: center; } /* celular: o número em cima, o título com toda a largura */
+.sum-num { grid-area: num; }
+.sum-titulo { grid-area: tit; }
+.sum-pag { grid-area: pag; }
+@media (min-width: 640px) { .sum-linha1 { grid-template-columns: 4.6em minmax(0, 1fr) 4.6em; grid-template-areas: "num tit pag"; } }
+.sum-num { font-weight: 700; font-size: .92rem; color: var(--principal); overflow-wrap: anywhere; }
+.sum-titulo, .sum-pag { min-height: 48px; }
+.sum-pag { text-align: center; }
+.sum-linha2 { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.sum-tipo { flex: 1 1 100%; min-width: 0; min-height: 44px; padding: 6px 10px; font-size: .95rem; }
+.sum-linha2 .btn-icone { flex: 1 1 44px; }
+@media (min-width: 640px) { .sum-tipo { flex: 1 1 11em; } .sum-linha2 .btn-icone { flex: 0 0 auto; } }
+.btn-icone { min-width: 44px; padding: 8px 10px; font-size: 1.05rem; line-height: 1; }
+.btn-icone:disabled { opacity: .35; cursor: default; }
+.sum-adicionar { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 8px; }
+.linha-sumario { position: relative; }
+
+/* Sumário em computador largo: cada item numa só linha (número, título, página, tipo e botões), para uma lista de 20 ou 30 títulos não ficar tão comprida.
+   A área da ferramenta fica um pouco mais larga e a prévia um pouco mais estreita para sobrar espaço ao título. */
+@media (min-width: 1200px) {
+  body[data-modo="sumario"] main.tool { max-width: 1320px; }
+  body[data-modo="sumario"] .tool-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 420px); }
+  .sum-item { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; padding: 5px 8px; }
+  .sum-linha1, .sum-linha2 { display: contents; }
+  .sum-item .sum-num { grid-area: auto; flex: none; width: 3.9em; font-size: .86rem; }
+  .sum-item .sum-titulo { grid-area: auto; flex: 1 1 0; min-width: 0; min-height: 40px; padding: 6px 10px; }
+  .sum-item .sum-pag { grid-area: auto; flex: none; width: 4.2em; min-height: 40px; padding: 6px 4px; }
+  .sum-item .sum-tipo { flex: none; width: 8.4em; min-height: 40px; padding: 4px 6px; }
+  .sum-item .sum-linha2 .btn-icone { flex: none; min-width: 34px; min-height: 40px; padding: 4px; }
+}

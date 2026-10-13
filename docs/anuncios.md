@@ -13,9 +13,10 @@ Los espacios existen en las páginas, pero **no hay ningún anuncio activo ni ni
 | Generador de capa | `capa-meio-1`, `capa-meio-2` | Entre las secciones de la explicación. |
 | Generador de capa | `capa-lateral` | Columna lateral de 300×600 que sigue al hacer scroll, solo en pantallas de 1180 px o más. Oculta en celular. |
 | Generador de folha de rosto | `folha-abaixo-da-ferramenta`, `folha-meio-1`, `folha-meio-2`, `folha-lateral` | Mismas reglas y mismos tamaños que la capa. |
+| Generador de sumário | `sumario-abaixo-da-ferramenta`, `sumario-meio-1`, `sumario-meio-2`, `sumario-lateral` | Mismas reglas y mismos tamaños. Esta herramienta tiene una lista editable larga: los anuncios van siempre después del aviso "Importante", nunca entre los ítems ni junto a los botones. |
 | Inicio | `inicio-entre-secoes` | Entre "Como funciona" y "Vem aí". |
 
-Reglas que se cumplen en las dos herramientas (y que verifica `pruebas/probar-contenido.mjs`): ningún anuncio encima del formulario, ninguno junto a los botones de descarga (mínimo 150 px; hoy más de 300 px) ni dentro de la herramienta, ninguno en la portada. Las páginas legales, Sobre y Contacto no tienen anuncios.
+Reglas que se cumplen en las tres herramientas (y que verifica `pruebas/probar-contenido.mjs`): ningún anuncio encima del formulario, ninguno junto a los botones de descarga (mínimo 150 px; hoy más de 300 px) ni dentro de la herramienta, ninguno en la portada. Las páginas legales, Sobre y Contacto no tienen anuncios.
 
 ## Alturas reservadas
 280 px en los espacios de contenido (cabe 300×250, 336×280 y 728×90) y 600 px en la columna lateral (300×600). Si el anuncio real es más bajo, quedará aire; si es más alto, el contenido se moverá: por eso conviene no usar tamaños mayores a estos.
@@ -45,4 +46,5 @@ Cosas de la estructura actual que conviene decidir o ajustar al activar AdSense:
 10. **Carga y rendimiento.** Carga el script de AdSense con `async`, solo después del consentimiento, y considera cargar los bloques de más abajo cuando el visitante se acerque (IntersectionObserver) para no tocar el LCP de las herramientas. Vuelve a medir con Lighthouse después de activar.
 11. **Cabecera `X-Frame-Options: DENY`** (en `_headers`). No afecta a los anuncios (ellos van dentro de nuestra página, no al revés). Si una herramienta de AdSense necesitara mostrar tu página dentro de un marco, habría que relajarla solo para eso.
 12. **Content-Security-Policy.** Hoy no hay. Si algún día se agrega, hay que incluir los dominios de AdSense.
-13. **Páginas nuevas.** Cada herramienta nueva debe copiar las cuatro posiciones de anuncio (debajo de la herramienta, dos en el texto y una lateral) y añadirse a la lista de herramientas de la sección de anuncios de `probar-contenido.mjs`.
+13. **Interacción de la lista del sumário.** La lista de ítems tiene botones pequeños (subir, bajar, nivel, quitar) que se usan muchas veces seguidas. Por eso ningún anuncio puede ir cerca de ellos ni dentro del formulario; los anuncios automáticos (punto 1) deben quedar excluidos de esta página.
+14. **Páginas nuevas.** Cada herramienta nueva debe copiar las cuatro posiciones de anuncio (debajo de la herramienta, dos en el texto y una lateral) y añadirse a la lista de herramientas de la sección de anuncios de `probar-contenido.mjs`.

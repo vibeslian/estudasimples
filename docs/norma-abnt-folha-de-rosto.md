@@ -6,6 +6,8 @@ Fontes lidas diretamente (texto extraído dos PDFs, não só resumos):
 - Manuais de bibliotecas de 2025 que seguem a versão 2024: **UFV** (seção 3.1.2, figuras 5 e 6, quadro 2), **UERN/SIB** (seção 2.3.2, figura 12) e **UNISA** (seção 4.2 e 4.3).
 - Fontes secundárias (blogs e materiais de aula) só como pista; nada do que vamos aplicar depende só delas.
 
+> **Edição vigente:** a NBR 14724:2024 tem uma *versão corrigida* de 01/04/2025 (Errata 1; alguns manuais a chamam de "14724/2025"). Comparei o texto palavra por palavra com a cópia que usei aqui: a errata muda uma única palavra, na seção das ilustrações. Nada muda para capa, folha de rosto ou sumário.
+
 ## 1. O que a norma 2024 define para a FOLHA DE ROSTO (4.2.1.1.1) — nesta ordem
 Definição (3.19): "folha que contém os elementos essenciais à identificação do trabalho". Elemento **obrigatório**.
 1. Nome do autor

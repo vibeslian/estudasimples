@@ -13,11 +13,14 @@ export const lanza = () => puppeteer.launch({ executablePath: CHROME, headless: 
 
 const ASC = { Arial: 0.905, "Times New Roman": 0.891 };
 export const PLACEHOLDERS = ["NOME DO AUTOR", "Nome do autor", "TÍTULO DO TRABALHO", "Título do trabalho", "CIDADE", "Cidade", "ANO", "Ano",
-  "Nome do orientador", "Nome do professor", "Nome da disciplina", "Universidade Exemplo"];
+  "Nome do orientador", "Nome do professor", "Nome da disciplina", "Universidade Exemplo", "Título do item"];
 export const achaPlaceholders = (texto) => PLACEHOLDERS.filter((x) => texto.includes(x));
 
 export const URL_PAGINA = { capa: "/gerador-de-capa-abnt/", folha: "/gerador-de-folha-de-rosto-abnt/" };
 export const SHEET = { capa: "sheet", folha: "sheetFolha" };
+export const URL_SUMARIO = "/gerador-de-sumario-abnt/";
+URL_PAGINA.sumario = URL_SUMARIO;
+export const hojasSumario = (page) => page.evaluate(() => [...document.querySelectorAll("#pagsSumario .sheet")].map((s) => s.id));
 
 export async function abre(browser, rota, vp = { width: 1280, height: 900 }) {
   const page = await browser.newPage();
@@ -45,7 +48,7 @@ export async function preenche(page, d) {
     const set = (id, v) => { const e = document.getElementById(id); if (!e) throw new Error("falta #" + id); e.value = v; dispara(e); };
     const marca = (id, v) => { const e = document.getElementById(id); if (e.checked !== v) { e.checked = v; dispara(e); } };
     if (d.escolar !== undefined) marca("escolar", d.escolar);
-    for (const id of ["institution", "course", "workType", "degree", "area", "title", "subtitle", "volume", "city", "year", "font", "titleSize", "advisorLabel", "advisor", "coLabel", "discipline", "teacher", "teacherLabel"]) {
+    for (const id of ["institution", "course", "workType", "degree", "area", "title", "subtitle", "volume", "city", "year", "font", "titleSize", "advisorLabel", "advisor", "coLabel", "discipline", "teacher", "teacherLabel", "sumAlinha", "sumEspaco"]) {
       if (d[id] !== undefined) set(id, d[id]);
     }
     if (d.authors) {
@@ -57,9 +60,18 @@ export async function preenche(page, d) {
       document.querySelectorAll("#coorientadores input").forEach((el, i) => { el.value = d.coadvisors[i] ?? ""; });
     }
     if (d.nature !== undefined) set("nature", d.nature); // texto digitado à mão
-    for (const id of ["juntas", "natureJust", "logoCapa", "logoFolha"]) if (d[id] !== undefined) marca(id, d[id]);
+    // "juntas" (capa + folha) se mantiene como atajo: marca la otra pieza según la página abierta
+    if (d.juntas !== undefined) { const modo = document.body.dataset.modo; for (const id of modo === "capa" ? ["incFolha"] : modo === "folha" ? ["incCapa"] : ["incCapa", "incFolha"]) marca(id, d.juntas); }
+    for (const id of ["incCapa", "incFolha", "incSumario", "natureJust", "logoCapa", "logoFolha", "sumAlinhaPos", "sumPontilhado"]) if (d[id] !== undefined) marca(id, d[id]);
+    if (d.colar !== undefined) { document.getElementById("colarLista").value = d.colar; document.getElementById(d.colarModo === "add" ? "btnColarAdd" : "btnColarSub").click(); }
     set("title", d.title ?? document.getElementById("title").value);
   }, d);
+  for (const [n, [caps, bold, italic]] of Object.entries(d.niveis || {})) {
+    for (const [prop, valor] of [["maiúsculas", caps], ["negrito", bold], ["itálico", italic]]) {
+      const sel = `input[aria-label="Nível ${n}: ${prop}"]`;
+      if ((await page.$eval(sel, (e) => e.checked)) !== valor) await page.$eval(sel, (e) => e.click());
+    }
+  }
   if (d.logoArquivo) {
     const input = await page.$("#logoArquivo");
     await input.uploadFile(d.logoArquivo);
@@ -220,7 +232,8 @@ export const norm = (s) => s.normalize("NFC");
 // Uma palavra com hífen pode ser cortada no fim da linha ("Pós-" / "Graduação"): compara as partes
 const partePorHifen = (lista) => lista.flatMap((x) => x.w.split(/(?<=-)(?=[^-])/).map((w) => ({ ...x, w })));
 export function difPalavras(esperado, real, comTam = true) {
-  esperado = partePorHifen(esperado); real = partePorHifen(real);
+  const semPontos = (l) => l.filter((x) => !/^.{2,}$/.test(x.w));
+  esperado = partePorHifen(semPontos(esperado)); real = partePorHifen(semPontos(real));
   const dif = [];
   if (esperado.length !== real.length) dif.push(`${esperado.length} palavras esperadas, ${real.length} encontradas`);
   esperado.forEach((e, i) => { const r = real[i]; if (!r) return; if (norm(e.w) !== norm(r.w)) dif.push(`#${i} texto "${e.w}" ≠ "${r.w}"`); else if (e.b !== r.b) dif.push(`#${i} "${e.w}" negrito ${e.b}≠${r.b}`); else if (comTam && Math.abs(e.tam - r.tam) > 0.1) dif.push(`#${i} "${e.w}" tamanho ${e.tam}≠${r.tam}`); });

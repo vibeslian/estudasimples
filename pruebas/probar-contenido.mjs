@@ -2,7 +2,7 @@
 // Requiere el sitio en http://localhost:3000 (npm run dev).
 import puppeteer from "puppeteer-core";
 const BASE = process.env.BASE_URL || "http://localhost:3000";
-const PAGINAS = ["/", "/gerador-de-capa-abnt/", "/gerador-de-folha-de-rosto-abnt/", "/sobre/", "/contato/", "/politica-de-privacidade/", "/termos-de-uso/"];
+const PAGINAS = ["/", "/gerador-de-capa-abnt/", "/gerador-de-folha-de-rosto-abnt/", "/gerador-de-sumario-abnt/", "/sobre/", "/contato/", "/politica-de-privacidade/", "/termos-de-uso/"];
 const ok = (c) => (c ? "OK   " : "FALLA");
 const browser = await puppeteer.launch({ executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe", headless: "new" });
 const externos = new Set();
@@ -41,7 +41,7 @@ for (const url of PAGINAS) {
 }
 
 console.log("\n== 2) Datos estructurados (FAQPage) vs. texto visible ==");
-for (const urlFaq of ["/gerador-de-capa-abnt/", "/gerador-de-folha-de-rosto-abnt/"]) {
+for (const urlFaq of ["/gerador-de-capa-abnt/", "/gerador-de-folha-de-rosto-abnt/", "/gerador-de-sumario-abnt/"]) {
   const p = await abre(urlFaq);
   const r = await p.evaluate(() => {
     const ld = [...document.querySelectorAll('script[type="application/ld+json"]')].map((s) => JSON.parse(s.textContent));
@@ -82,7 +82,7 @@ async function infoAnuncios(url, vp, preview) {
   await p.close();
   return r;
 }
-for (const [ferr, lateral] of [["/gerador-de-capa-abnt/", "capa-lateral"], ["/gerador-de-folha-de-rosto-abnt/", "folha-lateral"]])
+for (const [ferr, lateral] of [["/gerador-de-capa-abnt/", "capa-lateral"], ["/gerador-de-folha-de-rosto-abnt/", "folha-lateral"], ["/gerador-de-sumario-abnt/", "sumario-lateral"]])
 for (const [nome, vp] of [["computador 1280", { width: 1280, height: 900 }], ["celular 390", { width: 390, height: 844, isMobile: true, hasTouch: true, deviceScaleFactor: 2 }]]) {
   console.log(`-- ${ferr} ${nome}`);
   const sin = await infoAnuncios(ferr, vp, false);

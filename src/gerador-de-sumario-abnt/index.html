@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  {{include:head-common}}
+  <title>Sumário ABNT 2026: Gerador Grátis, em PDF e Word | {{SITE_NAME}}</title>
+  <meta name="description" content="Gerador de sumário ABNT grátis: numeração automática até 5 níveis, linha de pontos e páginas. Baixe em PDF ou Word, sozinho ou junto com a capa e a folha de rosto.">
+  <link rel="canonical" href="{{SITE_URL}}/gerador-de-sumario-abnt/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="{{SITE_NAME}}">
+  <meta property="og:title" content="Sumário ABNT 2026: Gerador Grátis, em PDF e Word">
+  <meta property="og:description" content="Adicione as seções, veja o sumário se montar ao vivo, com numeração automática, e baixe em PDF ou Word. Sem cadastro e sem enviar seus dados.">
+  <meta property="og:url" content="{{SITE_URL}}/gerador-de-sumario-abnt/">
+  <link rel="stylesheet" href="/assets/css/ferramenta.css?v={{BUILD}}">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Gerador de Sumário ABNT – {{SITE_NAME}}","url":"{{SITE_URL}}/gerador-de-sumario-abnt/","applicationCategory":"EducationalApplication","operatingSystem":"Qualquer (navegador)","inLanguage":"pt-BR","description":"Gerador gratuito de sumário ABNT (NBR 6027 e NBR 6024) com numeração progressiva automática, prévia ao vivo e download em PDF e Word, sozinho ou junto com a capa e a folha de rosto. Funciona no navegador, sem cadastro.","offers":{"@type":"Offer","price":"0","priceCurrency":"BRL"},"isAccessibleForFree":true}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"{{SITE_NAME}}","item":"{{SITE_URL}}/"},{"@type":"ListItem","position":2,"name":"Gerador de sumário ABNT","item":"{{SITE_URL}}/gerador-de-sumario-abnt/"}]}</script>
+  {{FAQ_JSONLD:sumario}}
+</head>
+<body data-modo="sumario">
+<div class="hero hero--compacto">
+  {{include:manchas}}
+  {{include:header}}
+  <div class="container hero-conteudo">
+    <h1>Gerador de Sumário ABNT</h1>
+    <p class="lead">Adicione as seções e veja o sumário se montar ao vivo, com numeração automática e linha de pontos. Grátis, sem cadastro, e seus dados não saem do seu navegador.</p>
+  </div>
+</div>
+
+<main class="container tool" id="conteudo">
+  <div class="abas" role="tablist" aria-label="Alternar entre dados e prévia">
+    <button type="button" role="tab" id="abaDados" aria-selected="true" aria-controls="painelForm">1. Preencher</button>
+    <button type="button" role="tab" id="abaPrevia" aria-selected="false" aria-controls="painelPrevia">2. Ver prévia</button>
+  </div>
+
+  <div class="tool-grid">
+    <section id="painelForm" class="painel ativo cartao" aria-label="Dados do sumário">
+      <form id="form" autocomplete="off" novalidate>
+{{include:form-fonte}}
+
+        <h2 class="titulo-form titulo-form--primeiro">Itens do sumário</h2>
+        <p class="dica-campo">Escreva o título e a página de cada item. A numeração (1, 1.1, 1.1.1…) é feita sozinha e se corrige quando você muda a ordem ou o nível. Não digite o número no título.</p>
+        <div id="listaSumario" role="group" aria-label="Itens do sumário"></div>
+        <div class="sum-adicionar">
+          <button type="button" class="btn btn-pequeno" id="addSecao">+ Seção</button>
+          <button type="button" class="btn btn-pequeno" id="addSubsecao">+ Subseção</button>
+          <button type="button" class="btn btn-pequeno" id="addRef">+ Referências</button>
+          <button type="button" class="btn btn-pequeno" id="addApendice">+ Apêndice</button>
+          <button type="button" class="btn btn-pequeno" id="addAnexo">+ Anexo</button>
+        </div>
+        <p class="dica-campo">Resumo, agradecimentos, listas e o próprio sumário <strong>não entram</strong> no sumário. Referências, apêndices e anexos entram, sem número.</p>
+
+        <details class="estilo" id="boxColar">
+          <summary>Colar uma lista de títulos de uma vez</summary>
+          <div class="estilo-corpo">
+            <p>Cole um título por linha. Pode ter número ("2.1 Conceitos"), ou só recuo (espaços ou tabulação) para marcar as subseções. Se a linha terminar com a página, separe-a com pontos, tabulação ou dois espaços (ex.: <em>Introdução ..... 7</em>).</p>
+            <div class="campo">
+              <label for="colarLista">Lista de títulos</label>
+              <textarea id="colarLista" rows="8" placeholder="1 Introdução ..... 7&#10;2 Referencial teórico ..... 9&#10;2.1 Conceitos básicos ..... 9&#10;3 Metodologia ..... 15"></textarea>
+            </div>
+            <div class="sum-adicionar">
+              <button type="button" class="btn btn-pequeno" id="btnColarSub">Substituir a lista</button>
+              <button type="button" class="btn btn-pequeno" id="btnColarAdd">Adicionar ao final</button>
+              <button type="button" class="btn btn-pequeno" id="btnExemplo">Inserir uma estrutura de exemplo</button>
+            </div>
+            <p class="dica-campo" id="colarInfo" role="status" aria-live="polite"></p>
+          </div>
+        </details>
+
+        <details class="estilo" id="estilo">
+          <summary>Personalizar estilo</summary>
+          <div class="estilo-corpo">
+            <p>A ABNT pede que cada nível tenha um destaque diferente, mas não diz qual. O padrão segue o manual da UERN; mude se a sua faculdade pedir outro. <strong>O mesmo destaque deve ser usado nos títulos dentro do texto do trabalho.</strong></p>
+            <table class="tabela-estilo">
+              <thead><tr><th scope="col">Nível</th><th scope="col">MAIÚSCULAS</th><th scope="col">Negrito</th><th scope="col">Itálico</th></tr></thead>
+              <tbody id="tabelaNiveis"></tbody>
+            </table>
+            <p class="dica-campo">Referências, apêndices e anexos usam o destaque do nível 1, e a palavra SUMÁRIO também.</p>
+            <div class="campo">
+              <label for="sumAlinha">Alinhamento dos títulos</label>
+              <select id="sumAlinha">
+                <option value="indicativo">Alinhados pela margem do número mais longo (recomendado pela NBR 6027)</option>
+                <option value="espaco">Logo depois do número, com um espaço</option>
+              </select>
+            </div>
+            <label class="marca"><input type="checkbox" id="sumAlinhaPos" checked> Alinhar também Referências, Apêndices e Anexos</label>
+            <label class="marca"><input type="checkbox" id="sumPontilhado" checked> Linha de pontos até o número da página</label>
+            <div class="campo">
+              <label for="sumEspaco">Espaçamento entre as linhas</label>
+              <select id="sumEspaco">
+                <option value="1.5">1,5 (padrão da NBR 14724)</option>
+                <option value="1">Simples</option>
+              </select>
+            </div>
+            <button type="button" class="btn btn-pequeno" id="restaurar">Restaurar estilo padrão</button>
+          </div>
+        </details>
+
+        <details class="estilo" id="boxDadosComuns">
+          <summary>Dados da capa e da folha de rosto <span class="opcional">(só para baixar junto)</span></summary>
+          <div class="estilo-corpo">
+            <p>Preencha só se for baixar a capa ou a folha de rosto junto com o sumário. Se você já usou o gerador de capa ou o de folha de rosto, os dados já estão aqui.</p>
+{{include:form-dados}}
+{{include:form-folha}}
+{{include:form-logo}}
+{{include:form-escolar}}
+          </div>
+        </details>
+
+        <div class="campo-juntas">
+          <p class="rotulo">Baixar no mesmo arquivo</p>
+          <label class="marca"><input type="checkbox" id="incCapa"> Baixar a capa junto, no mesmo arquivo</label>
+          <label class="marca"><input type="checkbox" id="incFolha"> Baixar a folha de rosto junto, no mesmo arquivo</label>
+          <p class="dica-campo" id="incluirInfo"></p>
+        </div>
+
+        <div class="acoes">
+          <button type="button" class="btn btn-acento" id="btnPdf">Baixar PDF</button>
+          <button type="button" class="btn btn-acento" id="btnDocx">Baixar Word (.docx)</button>
+          <button type="button" class="btn btn-largo" id="btnNova">Novo sumário (limpar a lista)</button>
+          <button type="button" class="btn-secundario btn-largo" id="btnLimpar">Limpar dados</button>
+        </div>
+        <p class="toast" id="toast" role="status" aria-live="polite"></p>
+        <p class="dica-campo">Para você não digitar tudo de novo ao passar de uma ferramenta à outra, o navegador guarda o que você escreveu (inclusive os itens do sumário) só nesta aba, no seu aparelho. Nada é enviado, e some quando você fecha a aba ou clica em "Limpar dados".</p>
+      </form>
+    </section>
+
+    <section id="painelPrevia" class="painel" aria-label="Prévia do sumário">
+{{include:previa}}
+    </section>
+  </div>
+
+  <aside class="aviso-norma">
+    <p><strong>Importante:</strong> este sumário segue a ABNT NBR 6027:2012 e a NBR 6024:2012, no papel A4 da NBR 14724:2024 (margens de 3 cm à esquerda e em cima e 2 cm à direita e embaixo). A norma não fixa o destaque de cada nível nem a linha de pontos, e muitas faculdades têm modelo próprio. Confirme com a sua antes de entregar, e confira os números de página no trabalho pronto.</p>
+  </aside>
+  <div class="anuncio anuncio--separado" data-slot="sumario-abaixo-da-ferramenta" aria-hidden="true"><span>Anúncio</span></div>
+</main>
+
+<div class="container conteudo-capa">
+  <div class="conteudo-grade">
+    <article class="artigo">
+
+      <section id="o-que-e">
+        <h2 class="revelar">O que é o sumário e onde ele fica</h2>
+        <p class="revelar">O sumário é a lista das partes do trabalho, na mesma ordem e com os mesmos nomes que elas têm no texto, cada uma com a página em que começa. A norma que trata dele é a ABNT NBR 6027:2012, e a NBR 14724:2024 o coloca entre os elementos pré-textuais obrigatórios.</p>
+        <ul class="regras revelar">
+          <li><strong>Posição</strong>É o último elemento pré-textual: vem depois dos resumos e das listas, e antes da Introdução.</li>
+          <li><strong>Título</strong>A palavra SUMÁRIO fica centralizada e sem número, com o mesmo tipo de letra das seções primárias.</li>
+          <li><strong>Páginas</strong>O número da página fica na margem direita. Pode ser só a primeira página (9), a inicial e a final (9-43) ou várias (15, 18, 20-28).</li>
+          <li><strong>Em mais de um volume</strong>O sumário de toda a obra vai em todos os volumes.</li>
+        </ul>
+        <aside class="dica revelar"><strong class="dica-titulo">Sumário não é índice</strong><p>O índice é outro elemento: uma lista de palavras ou assuntos, no fim do trabalho, que segue a NBR 6034. Este gerador faz só o sumário.</p></aside>
+      </section>
+
+      <section id="numeracao">
+        <h2 class="revelar">Como numerar as seções (NBR 6024)</h2>
+        <p class="revelar">A numeração progressiva usa algarismos arábicos e vai até a seção quinária, ou seja, no máximo cinco níveis:</p>
+        <ol class="passos revelar">
+          <li><div><h3>Seção primária: 1, 2, 3…</h3><p>Números inteiros a partir de 1. É a principal divisão do texto.</p></div></li>
+          <li><div><h3>Secundária: 1.1, 1.2, 2.1…</h3><p>O número da primária, um ponto e o número de ordem.</p></div></li>
+          <li><div><h3>Terciária, quaternária e quinária: 1.1.1, 1.1.1.1, 1.1.1.1.1</h3><p>O mesmo processo, um nível de cada vez.</p></div></li>
+        </ol>
+        <p class="revelar">Entre o número e o título vai só um espaço: nada de ponto, hífen, travessão ou parênteses ("1. Introdução" e "1 - Introdução" estão errados). Referências, glossário, apêndices, anexos e índice não recebem número. No gerador a numeração é automática: você só escolhe o nível de cada item.</p>
+      </section>
+
+      <div class="anuncio" data-slot="sumario-meio-1" aria-hidden="true"><span>Anúncio</span></div>
+
+      <section id="passo-a-passo">
+        <h2 class="revelar">Como fazer o sumário ABNT, passo a passo</h2>
+        <ol class="passos revelar">
+          <li><div><h3>Liste as partes do trabalho</h3><p>Clique em "+ Seção" para cada título principal e em "+ Subseção" para os que ficam dentro dele. Se você já tem a lista pronta, cole tudo de uma vez em "Colar uma lista de títulos".</p></div></li>
+          <li><div><h3>Confira os níveis</h3><p>Use as setas para mudar a ordem e os botões de nível para transformar um item em subseção (ou o contrário). A numeração se refaz sozinha.</p></div></li>
+          <li><div><h3>Preencha as páginas</h3><p>Escreva a página em que cada parte começa, como aparece no trabalho pronto. Dá para baixar com as páginas em branco e completar no Word depois.</p></div></li>
+          <li><div><h3>Baixe</h3><p>PDF para entregar ou Word para ajustar. Se o seu trabalho pede capa, folha de rosto e sumário no mesmo arquivo, marque as caixas "Baixar no mesmo arquivo".</p></div></li>
+        </ol>
+        <aside class="dica revelar"><strong class="dica-titulo">Dica</strong><p>As páginas só ficam definitivas quando o trabalho está pronto. Deixe o sumário por último e confira cada número antes de entregar.</p></aside>
+      </section>
+
+      <section id="alinhamento-espacamento-destaque">
+        <h2 class="revelar">Alinhamento, espaçamento e destaque de cada nível</h2>
+        <p class="revelar"><strong>Alinhamento.</strong> Os números ficam alinhados à esquerda. A NBR 6027 recomenda alinhar os títulos pela margem do número mais longo (por exemplo, o de "1.1.1"), inclusive os de referências, apêndices e anexos. É o padrão do gerador. Muitos manuais de faculdade mostram o título logo depois do número, com um espaço, e por isso há essa opção em "Personalizar estilo". Quando um título ocupa mais de uma linha, a continuação fica embaixo da primeira letra do título.</p>
+        <p class="revelar"><strong>Espaçamento e fonte.</strong> A norma de trabalhos acadêmicos pede letra tamanho 12 e espaçamento 1,5 entre as linhas, e o sumário não está entre as exceções. O gerador usa isso, com a opção de espaço simples para quem precisa que o sumário caiba em menos páginas.</p>
+        <p class="revelar"><strong>Maiúsculas, negrito e itálico.</strong> A norma pede que cada nível tenha um destaque diferente do anterior, mas não diz qual. O padrão do gerador é o de um manual de faculdade (UERN): primárias em MAIÚSCULAS e negrito, secundárias com só a primeira letra maiúscula e negrito, e as demais em letra normal. O importante é que <strong>o destaque do sumário seja idêntico ao dos títulos no texto</strong> do trabalho.</p>
+        <p class="revelar"><strong>Linha de pontos.</strong> A norma não fala dela, mas os modelos de bibliotecas universitárias a usam entre o título e o número da página. O gerador a coloca, e dá para tirar.</p>
+      </section>
+
+      <section id="o-que-entra">
+        <h2 class="revelar">O que entra e o que não entra no sumário</h2>
+        <div class="dif revelar">
+          <div class="cartao">
+            <h3>Entram</h3>
+            <p class="sub">Da Introdução em diante.</p>
+            <ul>
+              <li>Introdução, desenvolvimento e conclusão, com os números</li>
+              <li>Todas as subseções, até o quinto nível</li>
+              <li>Referências, glossário e índice, sem número</li>
+              <li>Apêndices e anexos, sem número, como "APÊNDICE A – título"</li>
+            </ul>
+          </div>
+          <div class="cartao">
+            <h3>Não entram</h3>
+            <p class="sub">Os elementos pré-textuais.</p>
+            <ul>
+              <li>Capa e folha de rosto</li>
+              <li>Errata e folha de aprovação</li>
+              <li>Dedicatória, agradecimentos e epígrafe</li>
+              <li>Resumos, listas e o próprio sumário</li>
+            </ul>
+            <p class="nota">As páginas deles são contadas, mas não aparecem no sumário.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="erros-comuns">
+        <h2 class="revelar">Erros comuns no sumário</h2>
+        <div class="comparar revelar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Colocar Resumo, Agradecimentos ou Lista de ilustrações no sumário.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Os elementos pré-textuais ficam de fora. O sumário começa na Introdução.</p></div></div>
+        <div class="comparar revelar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Escrever "1. Introdução" ou "1 - Introdução".</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Número, um espaço e o título: 1 Introdução.</p></div></div>
+        <div class="comparar revelar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Numerar Referências, Apêndices e Anexos.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Eles entram no sumário, mas sem número de seção.</p></div></div>
+        <div class="comparar revelar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Títulos do sumário diferentes dos títulos do texto.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Mesma grafia, mesma ordem e o mesmo destaque (maiúsculas, negrito, itálico) nos dois lugares.</p></div></div>
+        <div class="comparar revelar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Páginas que não batem com o trabalho.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Conferir cada número no trabalho pronto, já com a Introdução na página certa.</p></div></div>
+        <div class="comparar revelar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Pular um nível, como uma seção 1.1.1 logo depois de uma 1.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Um nível de cada vez: 1, 1.1, 1.1.1. O gerador corrige isso sozinho.</p></div></div>
+        <aside class="dica revelar"><strong class="dica-titulo">Antes de entregar</strong><p>Procure o manual de normalização da biblioteca da sua faculdade. Se existir um modelo de sumário próprio, ele vale mais do que qualquer gerador, este inclusive.</p></aside>
+      </section>
+
+      <div class="anuncio" data-slot="sumario-meio-2" aria-hidden="true"><span>Anúncio</span></div>
+
+      <section id="sumario-no-word">
+        <h2 class="revelar">Sumário no Word e no Google Docs</h2>
+        <p class="revelar">O arquivo .docx do gerador já sai com as margens, a fonte, o espaçamento, os recuos e a linha de pontos prontos, e você pode editar o texto como qualquer documento. O número da página fica numa tabulação à direita: se você mudar um título, o número continua no lugar.</p>
+        <p class="revelar">O Word também tem um sumário automático (aba Referências), que lê os títulos formatados com os estilos "Título 1", "Título 2" e assim por diante. É prático para trabalhos grandes, mas as páginas só ficam certas se todos os títulos do texto usarem esses estilos, e o visual dele precisa ser ajustado para seguir a ABNT. O gerador monta o sumário pronto, sem depender de estilos.</p>
+        <p class="revelar">O arquivo .docx abre no Google Docs: envie-o ao Google Drive e abra com o Google Docs. Os recuos e a linha de pontos costumam vir certos, mas o Docs pode mudar pequenos detalhes, então confira. Se precisar que nada mude, entregue o PDF.</p>
+      </section>
+
+      <section id="capa-folha-e-sumario">
+        <h2 class="revelar">Capa, folha de rosto e sumário no mesmo arquivo</h2>
+        <p class="revelar">Os três geradores usam os mesmos dados: instituição, autores, título, cidade e ano. Preencha uma vez e marque "Baixar no mesmo arquivo" para receber, em um só PDF ou Word, a <a href="/gerador-de-capa-abnt/">capa</a>, a <a href="/gerador-de-folha-de-rosto-abnt/">folha de rosto</a> e o sumário, nessa ordem.</p>
+        <p class="revelar">Entre a folha de rosto e o sumário o trabalho costuma ter outros elementos (folha de aprovação, resumo, listas). O arquivo conjunto traz só essas três páginas, e você coloca o resto no meio, no Word.</p>
+      </section>
+
+      <section id="perguntas-frequentes">
+        <h2 class="revelar">Perguntas frequentes sobre o sumário ABNT</h2>
+        {{FAQ_HTML:sumario}}
+      </section>
+
+      <section id="fontes" class="artigo-meta">
+        <p>Atualizado em 13 de outubro de 2026. Para escrever esta página, li o texto da ABNT NBR 6027:2012, da NBR 6024:2012 e da NBR 14724:2024, e manuais de normalização de bibliotecas universitárias de 2025 e 2026, como os da <a href="https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf" rel="noopener" target="_blank">UFV</a> e da <a href="https://portal.uern.br/dsib/wp-content/uploads/sites/2/2025/02/MANUAL-DE-NORMALIZACAO-SIBUERN-2025.pdf" rel="noopener" target="_blank">UERN</a>.</p>
+        <p>As normas são documentos pagos da ABNT. Aqui eu explico, com palavras minhas, o que importa para o sumário. O Estuda Simples não tem ligação com a ABNT, e na dúvida o manual da sua faculdade manda.</p>
+      </section>
+
+    </article>
+    <aside class="lateral" aria-label="Publicidade">
+      <div class="anuncio anuncio--lateral" data-slot="sumario-lateral" aria-hidden="true"><span>Anúncio</span></div>
+    </aside>
+  </div>
+</div>
+{{include:zoom}}
+{{include:footer}}
+<script type="module" src="/assets/js/abnt/ferramenta.js?v={{BUILD}}"></script>
+</body>
+</html>

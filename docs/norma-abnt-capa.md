@@ -6,6 +6,8 @@ Fontes lidas diretamente (não só resumos):
 - Manuais de bibliotecas de 2025 que seguem a versão 2024: **UFV** (2025), **UERN/SIB** (2025), **UNISA** (março/2025).
 - Notícia da PUCPR sobre as mudanças da versão 2024 (fonte secundária).
 
+> **Edição vigente:** a NBR 14724:2024 tem uma *versão corrigida* de 01/04/2025 (Errata 1; alguns manuais a chamam de "14724/2025"). Comparei o texto palavra por palavra com a cópia que usei aqui: a errata muda uma única palavra, na seção das ilustrações. Nada muda para capa, folha de rosto ou sumário.
+
 ## 1. O que a norma 2024 define para a CAPA (4.1.1) — nesta ordem
 1. Nome da instituição *(opcional)*
 2. Nome do autor

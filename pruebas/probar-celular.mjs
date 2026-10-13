@@ -57,7 +57,7 @@ log("sin título → aviso", await page.$eval("#toast", (e) => ({ t: e.textConte
 log("scroll horizontal de la página (debe ser false)", await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth));
 // capa + folha juntas en el celular: la prévia ampliada muestra las dos páginas
 await set("title", "Redes sociais");
-await page.evaluate(() => { const e = document.getElementById("juntas"); e.checked = true; e.dispatchEvent(new Event("input", { bubbles: true })); });
+await page.evaluate(() => { const e = document.getElementById("incFolha") || document.getElementById("incCapa"); e.checked = true; e.dispatchEvent(new Event("input", { bubbles: true })); });
 await page.tap("#abaPrevia"); await new Promise((r) => setTimeout(r, 300));
 log("juntas: las dos páginas se ven en la prévia", await page.evaluate(() => [!document.getElementById("pagCapa").hidden, !document.getElementById("pagFolha").hidden]));
 await page.tap("#btnAmpliar"); await new Promise((r) => setTimeout(r, 400));

@@ -37,6 +37,8 @@
       <form id="form" autocomplete="off" novalidate>
 {{include:form-dados}}
 
+{{include:form-fonte}}
+
 {{include:form-logo}}
 
 {{include:form-escolar}}
@@ -72,8 +74,10 @@
         </details>
 
         <div class="campo-juntas">
-          <label class="marca"><input type="checkbox" id="juntas"> Baixar a folha de rosto junto, no mesmo arquivo</label>
-          <p class="dica-campo" id="juntasInfo"></p>
+          <p class="rotulo">Baixar no mesmo arquivo</p>
+          <label class="marca"><input type="checkbox" id="incFolha"> Baixar a folha de rosto junto, no mesmo arquivo</label>
+          <label class="marca"><input type="checkbox" id="incSumario"> Baixar o sumário junto, no mesmo arquivo</label>
+          <p class="dica-campo" id="incluirInfo"></p>
         </div>
 
         <div class="acoes">
@@ -163,7 +167,7 @@
             <p class="nota">É aqui que o orientador aparece. A contagem das páginas começa nela, mas o número não é impresso.</p>
           </div>
         </div>
-        <p class="revelar">Se o seu trabalho pede as duas, use o <a href="/gerador-de-folha-de-rosto-abnt/">gerador de folha de rosto (contra capa)</a>: o que você digitou aqui passa para lá sozinho. Para baixar as duas no mesmo arquivo, marque "Baixar a folha de rosto junto" no formulário.</p>
+        <p class="revelar">Se o seu trabalho pede as duas, use o <a href="/gerador-de-folha-de-rosto-abnt/">gerador de folha de rosto (contra capa)</a>: o que você digitou aqui passa para lá sozinho. Para baixar as duas no mesmo arquivo, marque "Baixar a folha de rosto junto" no formulário. O mesmo vale para o <a href="/gerador-de-sumario-abnt/">sumário</a>: dá para baixar capa, folha de rosto e sumário em um só arquivo.</p>
       </section>
 
       <section id="logo-e-modelo-escolar">

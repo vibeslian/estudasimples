@@ -282,3 +282,135 @@ export function montaFolha(dados, { previa = false } = {}) {
   um("year", "bottom", String(dados.year ?? ""), "year", "Ano");
   return { font: fonteDe(dados), blocks };
 }
+
+/* ---------- Sumário (NBR 6027:2012 e NBR 6024:2012) ---------- */
+export const NIVEIS_SUMARIO = 5; // até a seção quinária (NBR 6024, 4.1 b)
+// Destaque padrão por nível, como no manual da UERN (a norma só pede hierarquia, sem fixar o recurso de cada nível):
+// 1 = MAIÚSCULAS e negrito; 2 = só a 1ª letra maiúscula e negrito; 3, 4 e 5 = só a 1ª letra maiúscula, sem negrito.
+export const ESTILO_NIVEL_PADRAO = {
+  1: { caps: true, bold: true, italic: false },
+  2: { caps: false, bold: true, italic: false },
+  3: { caps: false, bold: false, italic: false },
+  4: { caps: false, bold: false, italic: false },
+  5: { caps: false, bold: false, italic: false },
+};
+export const OPCOES_SUMARIO_PADRAO = {
+  alinha: "indicativo", // "indicativo": títulos alinhados pela margem do indicativo mais extenso (NBR 6027, 5.2); "espaco": um espaço depois do número
+  alinhaPos: true, // alinhar também Referências, Apêndices e Anexos (6027, 5.2: "inclusive os elementos pós-textuais")
+  pontilhado: true,
+  espaco: "1.5", // "1.5" (padrão da NBR 14724, 5.2) ou "1" (espaço simples)
+};
+export const TIPOS_ITEM = [
+  { id: "num", nome: "Seção" },
+  { id: "sem", nome: "Sem número" },
+  { id: "apendice", nome: "Apêndice" },
+  { id: "anexo", nome: "Anexo" },
+];
+
+// A, B, C… e, esgotado o alfabeto, letras dobradas (AA, BB…): NBR 14724, apêndices e anexos
+export const letraDeItem = (n) => String.fromCharCode(65 + (n % 26)).repeat(Math.floor(n / 26) + 1);
+
+/**
+ * Calcula, para cada item da lista, o nível efetivo e o número (1, 1.1, 1.1.1…).
+ * Um nível nunca pode pular (uma subseção só existe depois de uma seção do nível anterior): é corrigido para o máximo permitido.
+ * Retorna [{ tipo, nivel, numero, letra }] na mesma ordem da lista.
+ */
+export function numeraSumario(entradas) {
+  const cont = [0, 0, 0, 0, 0, 0];
+  let anterior = 0;
+  let ap = 0, an = 0;
+  return (entradas || []).map((e) => {
+    const tipo = TIPOS_ITEM.some((t) => t.id === e.tipo) ? e.tipo : "num";
+    if (tipo === "apendice") return { tipo, nivel: 1, numero: "", letra: letraDeItem(ap++) };
+    if (tipo === "anexo") return { tipo, nivel: 1, numero: "", letra: letraDeItem(an++) };
+    if (tipo === "sem") return { tipo, nivel: 1, numero: "", letra: "" };
+    const pedido = Math.min(NIVEIS_SUMARIO, Math.max(1, Math.round(Number(e.nivel)) || 1));
+    const nivel = Math.min(pedido, anterior + 1);
+    cont[nivel]++;
+    for (let i = nivel + 1; i <= NIVEIS_SUMARIO; i++) cont[i] = 0;
+    anterior = nivel;
+    return { tipo, nivel, numero: cont.slice(1, nivel + 1).join("."), letra: "" };
+  });
+}
+
+const EXEMPLO_SUMARIO = [
+  { tipo: "num", nivel: 1, titulo: "Introdução", pagina: "7" },
+  { tipo: "num", nivel: 1, titulo: "Referencial teórico", pagina: "9" },
+  { tipo: "num", nivel: 2, titulo: "Conceitos básicos", pagina: "9" },
+  { tipo: "num", nivel: 2, titulo: "Estudos anteriores", pagina: "12" },
+  { tipo: "num", nivel: 1, titulo: "Metodologia", pagina: "15" },
+  { tipo: "num", nivel: 1, titulo: "Considerações finais", pagina: "22" },
+  { tipo: "sem", titulo: "Referências", pagina: "24" },
+];
+
+/**
+ * dados.sumario = { entradas: [{ tipo, nivel, titulo, pagina }], opcoes, estiloNivel }
+ * Retorna { font, titulo: { text, bold }, entradas: [{ id, tipo, nivel, numero, texto, bold, italic, pagina, placeholder }], opcoes }
+ * Em prévia, sem itens, mostra uma lista de exemplo (placeholder: true); nunca use previa:true para gerar PDF/Word.
+ */
+export function montaSumario(dados, { previa = false } = {}) {
+  const sum = dados.sumario || {};
+  const opcoes = { ...OPCOES_SUMARIO_PADRAO, ...(sum.opcoes || {}) };
+  const est = {};
+  for (let n = 1; n <= NIVEIS_SUMARIO; n++) est[n] = { ...ESTILO_NIVEL_PADRAO[n], ...((sum.estiloNivel || {})[n] || {}) };
+  let brutas = (sum.entradas || []).map((e) => ({ ...e }));
+  const exemplo = previa && !brutas.length;
+  if (exemplo) brutas = EXEMPLO_SUMARIO.map((e) => ({ ...e }));
+  const nums = numeraSumario(brutas);
+  const entradas = brutas.map((e, i) => {
+    const n = nums[i];
+    const s = est[n.tipo === "num" ? n.nivel : 1];
+    const titulo = limpa(e.titulo);
+    let texto;
+    if (n.tipo === "apendice" || n.tipo === "anexo") {
+      const rot = (n.tipo === "apendice" ? "APÊNDICE " : "ANEXO ") + n.letra;
+      texto = titulo ? `${rot} – ${aplica(titulo, s)}` : rot;
+    } else texto = titulo ? aplica(titulo, s) : "";
+    const vazio = !texto;
+    return { id: "item-" + i, tipo: n.tipo, nivel: n.nivel, numero: n.numero, texto: vazio && previa ? "Título do item" : texto, bold: s.bold, italic: s.italic, pagina: limpa(e.pagina), placeholder: exemplo || (vazio && previa) };
+  });
+  return { font: fonteDe(dados), titulo: { text: "SUMÁRIO", bold: est[1].bold }, entradas, opcoes };
+}
+
+/**
+ * Interpreta uma lista de títulos colada de uma vez (uma linha por item) e devolve { entradas, ignorados }.
+ * Aceita: com número ("1 Introdução", "2.1 Conceitos": o nível vem dos pontos), só com recuo (espaços ou tabulações), com página no fim
+ * (separada por pontos, tabulação ou 2+ espaços). Referências, Glossário, Índice, Apêndice e Anexo viram itens sem número.
+ * Elementos pré-textuais (resumo, agradecimentos, listas, sumário...) não entram no sumário (NBR 6027, 6.3) e vêm em "ignorados".
+ */
+const PRE_TEXTUAL = /^(resumo( em l[íi]ngua estrangeira)?|abstract|resumen|r[ée]sum[ée]|agradecimentos?|dedicat[óo]ria|ep[íi]grafe|lista de [^,]+|sum[áa]rio|folha de (rosto|aprova[çc][ãa]o)|capa|errata|ficha catalogr[áa]fica)$/i;
+const SEM_NUMERO = /^(refer[êe]ncias?|gloss[áa]rio|[íi]ndice|bibliografia|ap[êe]ndices?|anexos?)$/i;
+export function interpretaLista(texto) {
+  const brutas = [];
+  for (const linha0 of String(texto || "").split(/\r?\n/)) {
+    if (!linha0.trim()) continue;
+    const espacos = (linha0.match(/^[ \t]*/)[0] || "").replace(/\t/g, "    ").length;
+    let t = linha0.trim();
+    let pagina = "";
+    const mp = t.match(/^(.*?\S)(?:\s*[.…·]{2,}\s*|\s*…\s*|\t+|\s{2,})(\d+(?:\s*[-–,]\s*\d+)*)$/);
+    if (mp) { t = mp[1].trim(); pagina = mp[2].replace(/\s+/g, ""); }
+    t = t.replace(/^[-–•*·]\s+/, "").trim();
+    if (t) brutas.push({ t, pagina, espacos });
+  }
+  // o nível de uma linha sem número vem da posição do seu recuo entre os recuos de todas as linhas (as numeradas ancoram o nível 1)
+  const recuos = [...new Set(brutas.map((b) => b.espacos))].sort((a, b) => a - b);
+  const entradas = [], ignorados = [];
+  for (const { t, pagina, espacos } of brutas) {
+    const mn = t.match(/^(\d+(?:\.\d+){0,4})\.?(?:\s+|[-–—)]\s*)(\S.*)$/);
+    if (mn) { entradas.push({ tipo: "num", nivel: mn[1].split(".").length, titulo: mn[2].trim(), pagina }); continue; }
+    const ma = t.match(/^(ap[êe]ndice|anexo)s?\b\s*([A-Za-z]{1,2})?\s*(?:[-–—:]\s*|\s+)?(.*)$/i);
+    if (ma && (ma[2] || ma[3] || /^(ap[êe]ndice|anexo)$/i.test(t))) {
+      const titulo = (ma[2] && !ma[3] && ma[2].length > 1 && !/^[A-Z]{1,2}$/.test(ma[2]) ? ma[2] : ma[3]) || "";
+      if (/^(ap[êe]ndices|anexos)$/i.test(t)) { entradas.push({ tipo: "sem", titulo: t, pagina }); continue; }
+      entradas.push({ tipo: /^ap/i.test(t) ? "apendice" : "anexo", titulo: titulo.trim(), pagina });
+      continue;
+    }
+    if (SEM_NUMERO.test(t)) { entradas.push({ tipo: "sem", titulo: t, pagina }); continue; }
+    if (PRE_TEXTUAL.test(t.replace(/:$/, ""))) { ignorados.push(t); continue; }
+    entradas.push({ tipo: "num", nivel: Math.min(NIVEIS_SUMARIO, Math.max(1, recuos.indexOf(espacos) + 1)), titulo: t, pagina });
+  }
+  return { entradas: entradas.slice(0, 300), ignorados };
+}
+
+// Estrutura de exemplo (um TCC típico) para o estudante só trocar os títulos e as páginas
+export const sumarioDeExemplo = () => EXEMPLO_SUMARIO.map((e) => ({ ...e }));

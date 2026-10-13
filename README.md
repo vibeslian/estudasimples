@@ -1,6 +1,6 @@
 # Estuda Simples
 
-Ferramentas gratuitas para trabalhos acadêmicos (**gerador de capa ABNT** y **gerador de folha de rosto ABNT**). Sitio estático: HTML, CSS y JavaScript, sin servidor ni base de datos. Todo funciona en el navegador del estudiante.
+Ferramentas gratuitas para trabalhos acadêmicos (**gerador de capa**, **de folha de rosto** y **de sumário ABNT**). Sitio estático: HTML, CSS y JavaScript, sin servidor ni base de datos. Todo funciona en el navegador del estudiante.
 
 - Sitio: https://estudasimples.com.br
 
@@ -19,8 +19,9 @@ El nombre del sitio, el dominio y el correo se cambian en un solo lugar: `site.c
 src/                      ← el sitio (una carpeta por página/herramienta)
   gerador-de-capa-abnt/   ← página de la capa (HTML y texto explicativo)
   gerador-de-folha-de-rosto-abnt/ ← página de la folha de rosto
+  gerador-de-sumario-abnt/ ← página del sumário (lista de ítems, estilos por nivel)
   assets/                 ← estilos, fuentes y librerías (jsPDF y docx, alojadas aquí)
-    js/abnt/              ← el código de las dos herramientas (modelo, layout, exporta, estado, ferramenta)
+    js/abnt/              ← el código de las tres herramientas (modelo, layout, sumario, exporta, estado, ferramenta)
     css/ferramenta.css    ← estilos del formulario y de la vista previa
   partials/               ← cabecera, pie y bloques compartidos
 conteudo/faq-*.json       ← preguntas frecuentes de cada herramienta (de aquí salen el texto y los datos para Google)

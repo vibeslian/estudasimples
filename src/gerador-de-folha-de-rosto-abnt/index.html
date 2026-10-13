@@ -37,6 +37,8 @@
       <form id="form" autocomplete="off" novalidate>
 {{include:form-dados}}
 
+{{include:form-fonte}}
+
         <h2 class="titulo-form">Natureza do trabalho e orientação</h2>
 {{include:form-folha}}
 
@@ -68,8 +70,10 @@
         </details>
 
         <div class="campo-juntas">
-          <label class="marca"><input type="checkbox" id="juntas"> Baixar a capa junto, no mesmo arquivo</label>
-          <p class="dica-campo" id="juntasInfo"></p>
+          <p class="rotulo">Baixar no mesmo arquivo</p>
+          <label class="marca"><input type="checkbox" id="incCapa"> Baixar a capa junto, no mesmo arquivo</label>
+          <label class="marca"><input type="checkbox" id="incSumario"> Baixar o sumário junto, no mesmo arquivo</label>
+          <p class="dica-campo" id="incluirInfo"></p>
         </div>
 
         <div class="acoes">
@@ -157,7 +161,7 @@
 
       <section id="capa-e-folha-juntas">
         <h2 class="revelar">Capa e folha de rosto no mesmo arquivo</h2>
-        <p class="revelar">As duas ferramentas usam os mesmos dados: instituição, curso, autores, título, subtítulo, cidade e ano. Você preenche uma vez e a outra já vem pronta. Para receber as duas páginas no mesmo PDF ou Word, marque "Baixar a capa junto, no mesmo arquivo": a capa é a página 1 e a folha de rosto é a página 2.</p>
+        <p class="revelar">As duas ferramentas usam os mesmos dados: instituição, curso, autores, título, subtítulo, cidade e ano. Você preenche uma vez e a outra já vem pronta. Para receber as duas páginas no mesmo PDF ou Word, marque "Baixar a capa junto, no mesmo arquivo": a capa é a página 1 e a folha de rosto é a página 2. Se o seu trabalho também precisa do sumário, marque "Baixar o sumário junto" e ele vem como terceira peça (veja o <a href="/gerador-de-sumario-abnt/">gerador de sumário</a>).</p>
         <p class="revelar">Os dados ficam guardados só na aba do navegador, para passar de uma ferramenta à outra. Eles não são enviados e somem quando você fecha a aba ou clica em "Limpar dados".</p>
       </section>
 

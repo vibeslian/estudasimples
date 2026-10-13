@@ -1,0 +1,116 @@
+[
+  {
+    "p": "O que é o sumário e onde ele fica no trabalho?",
+    "r": [
+      "É a lista das divisões e seções do trabalho, na mesma ordem e com a mesma grafia em que aparecem no texto, cada uma com a página em que começa. Pela NBR 6027:2012, ele é o último elemento pré-textual: vem depois dos resumos e das listas e antes da Introdução."
+    ]
+  },
+  {
+    "p": "Como fazer o sumário ABNT?",
+    "r": [
+      "Liste as seções e subseções do trabalho com a numeração progressiva da NBR 6024 (1, 1.1, 1.1.1…), escreva a página de cada uma na margem direita e centralize a palavra SUMÁRIO no alto da página.",
+      "No gerador do Estuda Simples você só adiciona os itens e escolhe o nível de cada um: a numeração, a linha de pontos e os recuos saem prontos."
+    ]
+  },
+  {
+    "p": "O que não entra no sumário?",
+    "r": [
+      "Os elementos pré-textuais: capa, folha de rosto, errata, folha de aprovação, dedicatória, agradecimentos, epígrafe, resumos, listas e o próprio sumário (NBR 6027, item 6.3). As páginas deles são contadas, mas eles não aparecem.",
+      "Referências, glossário, apêndices, anexos e índice, que são pós-textuais, entram, mas sem número de seção."
+    ]
+  },
+  {
+    "p": "Qual a diferença entre sumário e índice?",
+    "r": [
+      "O sumário lista as seções do trabalho na ordem em que aparecem e fica antes da Introdução. O índice é uma lista de palavras ou assuntos, em ordem alfabética ou outra, que indica onde cada um aparece. Fica no fim do trabalho, é opcional e segue a NBR 6034."
+    ]
+  },
+  {
+    "p": "Como numerar as seções do sumário?",
+    "r": [
+      "Com algarismos arábicos, até cinco níveis. As seções primárias recebem números inteiros a partir de 1 (1, 2, 3). As demais levam o número da seção a que pertencem, mais um ponto e o número de ordem: 1.1, 1.2, 1.1.1, e assim até 1.1.1.1.1.",
+      "É a NBR 6024. A numeração do sumário tem de ser a mesma das seções no texto."
+    ]
+  },
+  {
+    "p": "Pode colocar ponto ou hífen depois do número da seção?",
+    "r": [
+      "Não. A NBR 6024 diz que ponto, hífen, travessão, parênteses ou qualquer outro sinal não podem ficar entre o número e o título. Escreva o número, um espaço e o título: 1 Introdução."
+    ]
+  },
+  {
+    "p": "Qual o alinhamento do sumário?",
+    "r": [
+      "Os números das seções ficam alinhados à esquerda. Os títulos vêm depois deles, e a NBR 6027 recomenda alinhá-los pela margem do título do número mais longo, inclusive os de referências, apêndices e anexos. Quando um título ocupa mais de uma linha, a continuação fica embaixo da primeira letra do título.",
+      "Muitos manuais de faculdade mostram o título logo depois do número, com um espaço. No gerador dá para escolher qualquer um dos dois jeitos."
+    ]
+  },
+  {
+    "p": "Qual a fonte e o espaçamento do sumário?",
+    "r": [
+      "A norma de trabalhos acadêmicos (NBR 14724:2024) recomenda letra tamanho 12 e espaçamento 1,5 entre as linhas, e o sumário não está entre as exceções. As fontes mais pedidas pelas faculdades são Arial e Times New Roman.",
+      "Se a sua faculdade pedir espaço simples no sumário (por exemplo, para ele ocupar menos páginas), escolha essa opção em \"Personalizar estilo\"."
+    ]
+  },
+  {
+    "p": "Os níveis do sumário usam maiúsculas e negrito?",
+    "r": [
+      "A norma pede que os títulos tenham destaque hierárquico, da seção primária à quinária (pode ser maiúscula, negrito, itálico ou sublinhado), mas não diz qual recurso usar em cada nível. Um padrão comum, usado por manuais de universidades, é: primárias em MAIÚSCULAS e negrito, secundárias com a primeira letra maiúscula e negrito, e as outras em letra normal.",
+      "O que importa é que o destaque do sumário seja idêntico ao dos títulos no texto do trabalho. O gerador deixa você mudar maiúsculas, negrito e itálico em cada nível."
+    ]
+  },
+  {
+    "p": "A linha de pontos é obrigatória?",
+    "r": [
+      "A NBR 6027 não fala dela: só diz que a paginação fica na margem direita. Mesmo assim, os modelos de bibliotecas universitárias usam uma linha de pontos entre o título e o número da página. O gerador a coloca por padrão, e você pode tirar em \"Personalizar estilo\"."
+    ]
+  },
+  {
+    "p": "O sumário tem número de página?",
+    "r": [
+      "A página do sumário é contada, mas o número dela não é impresso: a numeração aparece só a partir da primeira página do texto (a Introdução), no canto superior direito. O que o sumário tem são os números das páginas de cada seção, na margem direita."
+    ]
+  },
+  {
+    "p": "Como colocar as páginas no sumário?",
+    "r": [
+      "Na margem direita, em uma destas formas: só o número da primeira página (9), as páginas inicial e final separadas por hífen (9-43) ou as páginas em que o texto se distribui (15, 18, 20-28). Para a maioria dos trabalhos, vale a primeira página de cada seção.",
+      "Como o número depende do trabalho pronto, preencha por último. O gerador permite baixar com as páginas em branco e completar no Word."
+    ]
+  },
+  {
+    "p": "Como fazer o sumário ABNT no Word?",
+    "r": [
+      "Há dois caminhos. No manual, você digita os itens com tabulação à direita e linha de pontos, como o arquivo .docx do gerador já faz. No automático (aba Referências > Sumário), o Word monta a lista a partir dos títulos formatados com os estilos \"Título 1\", \"Título 2\" etc.; as páginas só saem certas se todos os títulos do texto usarem esses estilos, e o visual precisa ser ajustado para a ABNT.",
+      "Se você quer o sumário pronto e já no padrão, baixe o Word do gerador e edite o que precisar."
+    ]
+  },
+  {
+    "p": "O que deve ter o sumário de um TCC?",
+    "r": [
+      "As seções do trabalho em ordem: a Introdução (numerada como 1, na maioria dos modelos), o desenvolvimento com suas seções e subseções, a conclusão ou considerações finais, e depois, sem número, as referências, os apêndices e os anexos, se houver.",
+      "Resumo, agradecimentos e listas não entram. Algumas instituições têm regras próprias (por exemplo, Introdução sem número em certos cursos), então confira o manual da sua."
+    ]
+  },
+  {
+    "p": "Posso colar uma lista de títulos de uma vez?",
+    "r": [
+      "Pode. No gerador, abra \"Colar uma lista de títulos\" e cole um título por linha, com número (2.1 Conceitos) ou só com recuo para as subseções. Se a linha terminar com a página, separe-a com pontos, tabulação ou dois espaços.",
+      "Resumo, agradecimentos, listas e o próprio sumário são ignorados, porque não entram no sumário."
+    ]
+  },
+  {
+    "p": "Posso baixar capa, folha de rosto e sumário juntos?",
+    "r": [
+      "Pode. Marque \"Baixar no mesmo arquivo\" e escolha o PDF ou o Word: sai um arquivo com a capa, a folha de rosto e o sumário, nessa ordem. Os dados que se repetem (instituição, autores, título, cidade e ano) você digita uma vez só, e eles ficam guardados apenas na aba do seu navegador.",
+      "O arquivo conjunto traz só essas três peças. Folha de aprovação, resumo e listas você coloca entre a folha de rosto e o sumário, no Word."
+    ]
+  },
+  {
+    "p": "E se a minha faculdade tiver um modelo próprio de sumário?",
+    "r": [
+      "Use o modelo da faculdade: ele vale mais do que qualquer gerador. As normas definem a estrutura e a numeração, e cada instituição pode detalhar o resto (destaque dos níveis, linha de pontos, espaçamento).",
+      "Você pode usar o Estuda Simples como ponto de partida e ajustar em \"Personalizar estilo\" ou no Word."
+    ]
+  }
+]

@@ -12,10 +12,13 @@ Estas pruebas abren el sitio en Chrome, llenan el formulario como un estudiante,
 | `node probar-archivos.mjs` y luego `node resumen.cjs` | 5 casos (Arial/Times, estilo personalizado, tamaños 12/14/16, varios autores, signos de puntuación) + 1 caso bloqueado (falta el título). Compara posición, fuente, negrita, mayúsculas y tamaño palabra por palabra entre vista previa, PDF y Word. Si hay Microsoft Word instalado, abre el .docx en Word real y mide ahí. Para saltar Word: `SEM_WORD=1 node probar-archivos.mjs`. Resultados en `resultados/`. |
 | `node probar-celular.mjs` | Celular emulado: pestañas, "Ampliar prévia" (zoom, cerrar con botón y con Esc), "Nova capa", descarga y avisos, y capa+folha juntas. Para la folha: `RUTA=/gerador-de-folha-de-rosto-abnt/ node probar-celular.mjs` (en Git Bash, antes `export MSYS_NO_PATHCONV=1`). |
 | `node probar-folha.mjs` | Folha de rosto, capa+folha en un archivo, logo y modelo escolar (7 casos + 3 bloqueados). Mismas comparaciones, con Word real oculto (`SEM_WORD=1` lo salta; `SOLO=J1` corre un caso). Resultados en `../ejemplos/_pruebas/folha/`. |
+| `node probar-sumario.mjs` | Sumário (1 y 2 páginas, 5 niveles, cursiva, Times/Arial, alineación y espaciado, lista pegada, sin páginas) y capa + folha + sumário en un archivo (con logo y viniendo desde otra herramienta), más 5 casos bloqueados o con aviso. Mismas comparaciones, con Word real oculto (`SEM_WORD=1` lo salta). Resultados en `../ejemplos/_pruebas/sumario/`. |
+| `node probar-sumario-lista.mjs` | La lista editable del sumário: agregar, numeración automática, mover, niveles, tipos (apéndice, anexo, sin número), pegar una lista (con ignorados), estilos por nivel, opciones, foco del teclado y celular de 360 px. |
 | `node probar-compartir.mjs` | Datos compartidos entre las dos herramientas (sessionStorage), "Limpar dados", pestañas, cookies y peticiones. |
 | `node probar-contenido.mjs` | Estructura de cada página, FAQ vs. datos estructurados, cero terceros, anuncios (las dos herramientas). |
 | `node probar-sitio.mjs` | Todas las páginas en 7 anchos: sin scroll horizontal, sin errores. |
-| `node calibra-word.mjs` | Calibra los saltos de línea contra Word real (98 párrafos con el `.docx` del sitio). |
+| `node calibra-word.mjs` | Calibra los saltos de línea contra Word real (98 párrafos con el `.docx` del sitio). Usa `linhas-docx.ps1`. |
+| `node capturas-sumario.mjs` | Capturas del sumário y de la portada (computador y celular) en `../capturas/sumario-*.png`. |
 | `node capturas-folha.mjs` | Capturas de las dos herramientas y de la portada (computador y celular) en `../capturas/folha-*.png`. |
 | `node ejemplos-finales.mjs` | Genera los ejemplos finales (PDF y Word) en `../ejemplos/` y los revisa convirtiéndolos a PNG (Word oculto). |
 | `node pdf-a-png.mjs <pdf> <carpeta>` | Convierte un PDF en imágenes PNG para revisarlo sin abrir programas. |
