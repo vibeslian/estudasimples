@@ -55,7 +55,8 @@ await page.reload({ waitUntil: "networkidle0" });
 marca((await page.$eval("#title", (e) => e.value)) === "Redes sociais", "recargar la página mantiene los datos (sessionStorage)");
 const cookies = await page.cookies();
 marca(cookies.length === 0, `el sitio no define cookies (${cookies.length})`);
-const nuevos = peticiones.filter((p) => /^https?:/.test(p.u) && (p.m !== "GET" || !p.u.startsWith(BASE)));
+const esCloudflare = (u) => /static\.cloudflareinsights\.com|\/cdn-cgi\/rum/.test(u); // estadísticas anónimas de Cloudflare, declaradas en la política (solo en el sitio publicado)
+const nuevos = peticiones.filter((p) => /^https?:/.test(p.u) && !esCloudflare(p.u) && (p.m !== "GET" || !p.u.startsWith(BASE)));
 marca(nuevos.length === 0, `ninguna petición que no sea GET al propio sitio (${nuevos.map((p) => p.m + " " + p.u).join(", ") || "ninguna"})`);
 const claves = await page.evaluate(() => Object.keys(sessionStorage).concat(Object.keys(localStorage).map((k) => "LOCAL:" + k)));
 marca(claves.every((k) => k.startsWith("es-abnt")) && !claves.some((k) => k.startsWith("LOCAL:")), `solo sessionStorage con claves propias (${claves.join(", ")}); nada en localStorage`);
