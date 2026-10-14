@@ -79,7 +79,7 @@ input[type="file"] { width: 100%; padding: 10px; font: inherit; font-size: 16px;
 
 /* Prévia */
 .previa-titulo { margin: 0 0 10px; font-size: 1.25rem; }
-.sheet-wrap { position: relative; overflow: hidden; background: var(--salvia-100); border-radius: var(--raio-pequeno); border: 1px solid var(--salvia-200); }
+.sheet-wrap { box-sizing: content-box; width: calc(100% - 2px); aspect-ratio: 21 / 29.7; /* reserva a folha antes do JS: nada pula quando a prévia aparece */ position: relative; overflow: hidden; background: var(--salvia-100); border-radius: var(--raio-pequeno); border: 1px solid var(--salvia-200); }
 .sheet {
   position: absolute; top: 0; left: 0; transform-origin: top left;
   width: 21cm; height: 29.7cm; /* as linhas são posicionadas pelo motor de layout (margens ABNT: sup 3, esq 3, dir 2, inf 2) */
@@ -169,3 +169,10 @@ dialog.zoom::backdrop { background: rgba(34, 54, 43, .6); }
 /* Convite discreto para o serviço de formatação, logo depois dos botões de baixar (longe dos espaços de anúncio) */
 .convite-servico { margin: 22px 0 0; padding-top: 16px; border-top: 1px solid var(--salvia-200); font-size: .95rem; color: var(--texto-suave); }
 .convite-servico a { font-weight: 700; }
+
+/* Antes de o JS desenhar a prévia (classe "pronto" no body), mostra só as folhas que vão aparecer e reserva o espaço delas (sem salto de layout) */
+body[data-modo="folha"]:not(.pronto) #pagCapa,
+body[data-modo="sumario"]:not(.pronto) #pagCapa,
+body[data-modo="sumario"]:not(.pronto) #pagFolha { display: none; }
+body[data-modo="folha"]:not(.pronto) #pagFolha { display: block; }
+body[data-modo="sumario"]:not(.pronto) #pagsSumario:empty { aspect-ratio: 21 / 29.7; margin-bottom: 14px; background: var(--salvia-100); border: 1px solid var(--salvia-200); border-radius: var(--raio-pequeno); }

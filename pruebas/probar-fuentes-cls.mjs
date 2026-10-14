@@ -1,6 +1,7 @@
 // Salto de diseño (CLS) por el cambio de tipografía: simula una red lenta retrasando las fuentes del sitio (Nunito e Inter)
 // y mide los "layout shifts" de cada página. Con la letra de respaldo igualada a la web (Etapa 8b) debe quedar casi en cero.
 // Con font-display: optional la fuente del sitio solo se usa si llega a tiempo; si no, la página entera usa la letra de respaldo.
+// También limita la red (4G lenta), porque el JS de las herramientas llega tarde y no debe mover nada (la lista vacía del sumário lo movía 27 px).
 // Uso: node probar-fuentes-cls.mjs            (con el sitio en http://localhost:3000 o BASE_URL)
 //      RETRASO=3000 node probar-fuentes-cls.mjs   (milisegundos de retraso de las fuentes; por defecto 1500)
 import puppeteer from "puppeteer-core";
@@ -16,6 +17,10 @@ for (const [nombre, vp] of VP) {
   for (const url of PAGINAS) {
     const p = await b.newPage();
     await p.setViewport(vp);
+    if (!process.env.SIN_RED_LENTA) { // red 4G lenta: 150 ms de latencia y 1,6 Mbps (como Lighthouse); retrasa también los módulos JS de las herramientas
+      const cdp = await p.createCDPSession(); await cdp.send("Network.enable");
+      await cdp.send("Network.emulateNetworkConditions", { offline: false, latency: 150, downloadThroughput: (1.6 * 1024 * 1024) / 8, uploadThroughput: (750 * 1024) / 8 });
+    }
     await p.setRequestInterception(true);
     p.on("request", (r) => { if (/\/fonts\/(nunito|inter)-latin\.woff2/.test(r.url())) setTimeout(() => r.continue().catch(() => {}), RETRASO); else r.continue().catch(() => {}); });
     await p.evaluateOnNewDocument(() => {

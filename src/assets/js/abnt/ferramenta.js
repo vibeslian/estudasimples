@@ -840,6 +840,7 @@ observador.observe($("sheetWrap"));
 observador.observe($("sheetWrapFolha"));
 observador.observe($("painelPrevia"));
 render();
+document.body.classList.add("pronto"); // a partir daqui valem os atributos hidden que o render() definiu
 // Se as fontes Arimo/Tinos (usadas quando o aparelho não tem Arial/Times) chegarem depois, refaz o cálculo com as medidas certas
 if (document.fonts) { document.fonts.ready.then(render); document.fonts.addEventListener("loadingdone", render); }
 if (pegaAviso()) mensagem("Pronto! Os dados foram apagados deste navegador.");
