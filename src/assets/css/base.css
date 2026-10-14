@@ -166,7 +166,9 @@ a.cartao:active { transform: scale(.985); }
 
 /* ---------- Celular pequeno / computador ---------- */
 @media (min-width: 640px) { .nav .nav-cta { display: inline-flex; min-height: 42px; padding: 8px 18px; margin-left: 6px; } }
-@media (max-width: 480px) { .nav a { padding: 8px 10px; font-size: .92rem; } .logo { font-size: 1.35rem; } .nav .nav-ferramentas { display: none; } }
+@media (max-width: 480px) { .nav a { padding: 8px 10px; font-size: .92rem; } .logo { font-size: 1.35rem; } .nav .nav-sobre { display: none; } }
+@media (max-width: 760px) { .nav .nav-ferramentas { display: none; } }
+@media (max-width: 400px) { .nav .nav-extra { display: none; } .nav a { padding: 8px 6px; } }
 
 /* ---------- Respeita quem pediu menos movimento ---------- */
 @media (prefers-reduced-motion: reduce) {
@@ -177,3 +179,7 @@ a.cartao:active { transform: scale(.985); }
   .btn, a.cartao { transition: none; }
   .btn:hover:not(:disabled), a.cartao:hover { transform: none; }
 }
+
+/* Aviso discreto na portada: leva ao serviço de formatação */
+.hero-aviso { margin: 18px 0 0; font-size: .95rem; color: var(--texto-suave); }
+.hero-aviso a { font-weight: 700; }

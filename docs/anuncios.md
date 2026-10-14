@@ -15,6 +15,7 @@ Los espacios existen en las páginas, pero **no hay ningún anuncio activo ni ni
 | Generador de folha de rosto | `folha-abaixo-da-ferramenta`, `folha-meio-1`, `folha-meio-2`, `folha-lateral` | Mismas reglas y mismos tamaños que la capa. |
 | Generador de sumário | `sumario-abaixo-da-ferramenta`, `sumario-meio-1`, `sumario-meio-2`, `sumario-lateral` | Mismas reglas y mismos tamaños. Esta herramienta tiene una lista editable larga: los anuncios van siempre después del aviso "Importante", nunca entre los ítems ni junto a los botones. |
 | Inicio | `inicio-entre-secoes` | Entre "Como funciona" y "Vem aí". |
+| Formatação ABNT de TCC | (ninguno) | Es una página comercial con botón de WhatsApp: sin anuncios. |
 
 Reglas que se cumplen en las tres herramientas (y que verifica `pruebas/probar-contenido.mjs`): ningún anuncio encima del formulario, ninguno junto a los botones de descarga (mínimo 150 px; hoy más de 300 px) ni dentro de la herramienta, ninguno en la portada. Las páginas legales, Sobre y Contacto no tienen anuncios.
 
@@ -48,3 +49,4 @@ Cosas de la estructura actual que conviene decidir o ajustar al activar AdSense:
 12. **Content-Security-Policy.** Hoy no hay. Si algún día se agrega, hay que incluir los dominios de AdSense.
 13. **Interacción de la lista del sumário.** La lista de ítems tiene botones pequeños (subir, bajar, nivel, quitar) que se usan muchas veces seguidas. Por eso ningún anuncio puede ir cerca de ellos ni dentro del formulario; los anuncios automáticos (punto 1) deben quedar excluidos de esta página.
 14. **Páginas nuevas.** Cada herramienta nueva debe copiar las cuatro posiciones de anuncio (debajo de la herramienta, dos en el texto y una lateral) y añadirse a la lista de herramientas de la sección de anuncios de `probar-contenido.mjs`.
+15. **Bloque del servicio.** En las tres herramientas, el texto "Prefere receber o trabalho inteiro formatado? Conheça nosso serviço" va dentro del formulario, después de la nota sobre los datos guardados (que separa el bloque de los botones de descarga). No es un anuncio y no debe confundirse con uno: nunca pegarlo a un espacio de anuncio (la prueba exige ≥ 150 px).

@@ -2,7 +2,7 @@
 // Requiere el sitio en http://localhost:3000 (npm run dev).
 import puppeteer from "puppeteer-core";
 const BASE = process.env.BASE_URL || "http://localhost:3000";
-const PAGINAS = ["/", "/gerador-de-capa-abnt/", "/gerador-de-folha-de-rosto-abnt/", "/gerador-de-sumario-abnt/", "/sobre/", "/contato/", "/politica-de-privacidade/", "/termos-de-uso/"];
+const PAGINAS = ["/", "/gerador-de-capa-abnt/", "/gerador-de-folha-de-rosto-abnt/", "/gerador-de-sumario-abnt/", "/formatacao-abnt-tcc/", "/sobre/", "/contato/", "/politica-de-privacidade/", "/termos-de-uso/"];
 const ok = (c) => (c ? "OK   " : "FALLA");
 const browser = await puppeteer.launch({ executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe", headless: "new" });
 const externos = new Set();
@@ -41,7 +41,7 @@ for (const url of PAGINAS) {
 }
 
 console.log("\n== 2) Datos estructurados (FAQPage) vs. texto visible ==");
-for (const urlFaq of ["/gerador-de-capa-abnt/", "/gerador-de-folha-de-rosto-abnt/", "/gerador-de-sumario-abnt/"]) {
+for (const urlFaq of ["/gerador-de-capa-abnt/", "/gerador-de-folha-de-rosto-abnt/", "/gerador-de-sumario-abnt/", "/formatacao-abnt-tcc/"]) {
   const p = await abre(urlFaq);
   const r = await p.evaluate(() => {
     const ld = [...document.querySelectorAll('script[type="application/ld+json"]')].map((s) => JSON.parse(s.textContent));
@@ -49,7 +49,7 @@ for (const urlFaq of ["/gerador-de-capa-abnt/", "/gerador-de-folha-de-rosto-abnt
     const vis = [...document.querySelectorAll(".faq details")].map((d) => ({ q: d.querySelector("summary").textContent.trim(), a: [...d.querySelectorAll(".faq-resposta p")].map((x) => x.textContent.trim()).join(" ").replace(/\s+/g, " ") }));
     return { tipos: ld.map((x) => x["@type"]), faq: faq ? faq.mainEntity.map((m) => ({ q: m.name, a: m.acceptedAnswer.text })) : null, vis };
   });
-  marca(r.tipos.includes("FAQPage") && r.tipos.includes("WebApplication") && r.tipos.includes("BreadcrumbList"), `${urlFaq} JSON-LD válido (JSON.parse) con tipos: ${r.tipos.join(", ")}`);
+  marca(r.tipos.includes("FAQPage") && (r.tipos.includes("WebApplication") || r.tipos.includes("Service")) && r.tipos.includes("BreadcrumbList"), `${urlFaq} JSON-LD válido (JSON.parse) con tipos: ${r.tipos.join(", ")}`);
   marca(r.faq && r.faq.length === r.vis.length && r.faq.every((f, i) => f.q === r.vis[i].q && f.a === r.vis[i].a), `${urlFaq} FAQPage: ${r.faq?.length} preguntas, idénticas (pregunta y respuesta) al texto visible`);
   await p.close();
 }

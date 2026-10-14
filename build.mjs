@@ -24,7 +24,26 @@ const minificaCss = (css) =>
     .trim();
 const cssGlobal = CSS_GLOBAL.map((n) => readFileSync(join(cssDir, n + ".css"), "utf8")).join("\n");
 
+// Serviço de formatação (WhatsApp, prazo e preços): tudo vem de site.config.json, para mudar num só lugar
+const sv = config.servico;
+// um link wa.me por página de origem: a mensagem diz de onde o cliente veio (mensagens em site.config.json)
+const waUrl = (id) => {
+  if (!sv.mensagens[id]) throw new Error(`site.config.json: falta servico.mensagens.${id}`);
+  return `https://wa.me/${sv.whatsapp}?text=${encodeURIComponent(sv.mensagens[id])}`;
+};
+// página que mostra o convite para o serviço -> id da mensagem de origem
+const ORIGEM_POR_PAGINA = { "index.html": "inicio", "gerador-de-capa-abnt/index.html": "capa", "gerador-de-folha-de-rosto-abnt/index.html": "folha", "gerador-de-sumario-abnt/index.html": "sumario" };
+for (const id of Object.values(ORIGEM_POR_PAGINA).concat("servico")) waUrl(id);
+const brl = (n) => "R$\u00a0" + n.toLocaleString("pt-BR"); // espaço sem quebra: "R$" e o valor nunca ficam em linhas diferentes
 const values = {
+  "{{WHATSAPP_URL}}": waUrl("servico"),
+  "{{WHATSAPP_ORIGENS}}": JSON.stringify(Object.fromEntries(Object.keys(sv.mensagens).map((id) => [id, waUrl(id)]))),
+  "{{WHATSAPP_EXIBICAO}}": sv.whatsappExibicao,
+  "{{PRAZO}}": sv.prazo,
+  "{{PRECO_ATE30}}": brl(sv.precos.ate30),
+  "{{PRECO_31A60}}": brl(sv.precos.de31a60),
+  "{{PRECO_ATE30_NUM}}": String(sv.precos.ate30),
+  "{{PRECO_31A60_NUM}}": String(sv.precos.de31a60),
   "{{SITE_NAME}}": config.siteName,
   "{{SITE_URL}}": siteUrl,
   "{{CONTACT_EMAIL}}": config.contactEmail,
@@ -60,13 +79,15 @@ function faq(nome) {
   return { html, jsonld: `<script type="application/ld+json">${json}</script>` };
 }
 
-function render(text) {
+function render(text, origem = "servico") {
   text = text
     .replace(/\{\{FAQ_HTML:([\w-]+)\}\}/g, (_, n) => faq(n).html)
     .replace(/\{\{FAQ_JSONLD:([\w-]+)\}\}/g, (_, n) => faq(n).jsonld);
   // fragmentos compartilhados: {{include:header}} -> src/partials/header.html (duas passadas: eles podem incluir outros)
   for (let i = 0; i < 2; i++) text = text.replace(/\{\{include:([\w-]+)\}\}/g, (_, name) => readFileSync(join(SRC, "partials", name + ".html"), "utf8"));
-  for (const [key, val] of Object.entries(values)) text = text.split(key).join(val);
+  for (const [key, val] of Object.entries({ ...values, "{{ORIGEM}}": origem })) text = text.split(key).join(val);
+  // nos dados estruturados o "R$ 80" leva espaço comum (na página fica o espaço sem quebra)
+  text = text.replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/g, (m) => m.replace(/\u00a0/g, " "));
   return text;
 }
 
@@ -85,7 +106,7 @@ for (const file of walk(SRC)) {
   mkdirSync(join(dest, ".."), { recursive: true });
   // as bibliotecas de terceiros (assets/js/vendor) são copiadas sem tocar no conteúdo
   const copiaDireto = partes.includes("vendor");
-  if (TEXT_EXT.has(extname(file)) && !copiaDireto) writeFileSync(dest, render(readFileSync(file, "utf8")));
+  if (TEXT_EXT.has(extname(file)) && !copiaDireto) writeFileSync(dest, render(readFileSync(file, "utf8"), ORIGEM_POR_PAGINA[partes.join("/")]));
   else writeFileSync(dest, readFileSync(file));
 
   if (rel.endsWith("index.html") && !privada) {

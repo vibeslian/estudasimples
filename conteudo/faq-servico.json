@@ -1,0 +1,86 @@
+[
+  {
+    "p": "Quanto custa a formatação de um TCC?",
+    "r": [
+      "Os preços de referência são: até 30 páginas, {{PRECO_ATE30}}; de 31 a 60 páginas, {{PRECO_31A60}}; acima de 60 páginas, o valor é combinado caso a caso. O valor final vem junto com o orçamento, depois que eu vejo o seu arquivo."
+    ]
+  },
+  {
+    "p": "Em quanto tempo o trabalho fica pronto?",
+    "r": [
+      "O prazo é de {{PRAZO}}, conforme o tamanho do trabalho. Ele começa a contar quando eu confirmo o pagamento por Pix e recebo todos os arquivos necessários. O prazo exato vem junto com o orçamento."
+    ]
+  },
+  {
+    "p": "Em que formato eu recebo o trabalho?",
+    "r": [
+      "Em Word (.docx) e em PDF."
+    ]
+  },
+  {
+    "p": "O que está incluído na formatação?",
+    "r": [
+      "Margens, fonte, espaçamento, títulos numerados, sumário automático, paginação, capa, folha de rosto, citações e referências no formato ABNT, e tabelas e figuras com legenda. Uma rodada de ajustes também está incluída no valor."
+    ]
+  },
+  {
+    "p": "O serviço escreve ou corrige o meu TCC?",
+    "r": [
+      "Não. O serviço cuida só da forma, ou seja, da aparência e da organização do trabalho nas normas. Eu não escrevo, não corrijo e não mudo o conteúdo: o texto continua exatamente como você o escreveu. Se você mudar o conteúdo depois da entrega, é um novo orçamento."
+    ]
+  },
+  {
+    "p": "O que acontece se faltar algum dado nas referências?",
+    "r": [
+      "Para montar a referência no formato ABNT é preciso ter os dados da obra, como autor, título, ano, editora, cidade e páginas. Se algum faltar, você precisa me enviar, e o prazo só começa a contar quando eu tiver tudo. Eu não invento dados, porque isso mudaria o conteúdo do seu trabalho."
+    ]
+  },
+  {
+    "p": "O que preciso enviar?",
+    "r": [
+      "O trabalho em Word (.docx) e, se a sua faculdade tiver, o manual ou o modelo de trabalhos acadêmicos dela. Sem manual, a formatação segue a ABNT NBR 14724. Se você só tem o texto no Google Docs, use Arquivo > Fazer download > Microsoft Word (.docx)."
+    ]
+  },
+  {
+    "p": "Como funciona o pagamento?",
+    "r": [
+      "O pedido é todo pelo WhatsApp. Você envia o arquivo, recebe o orçamento e, se aceitar, paga por Pix. O site não recebe pagamentos: o Pix é feito direto para mim. O prazo começa a contar quando eu confirmo o pagamento."
+    ]
+  },
+  {
+    "p": "Posso pedir ajustes depois de receber o trabalho?",
+    "r": [
+      "Sim. Uma rodada de ajustes está incluída no valor. Ela serve para acertar a formatação que ficou diferente do combinado ou do manual da sua faculdade. Se o erro de formatação for meu, eu corrijo de graça, sempre, mesmo depois dessa rodada. Se você mudar o conteúdo do trabalho depois da entrega, é um novo orçamento."
+    ]
+  },
+  {
+    "p": "Posso cancelar ou pedir reembolso?",
+    "r": [
+      "Devolvo o valor integral, pelo Pix, em até 7 dias, se você cancelar antes de eu começar a formatar o seu trabalho ou se eu não cumprir o prazo combinado no orçamento. Depois da entrega o valor não é devolvido, e você conta com a rodada de ajustes. Isso não tira os direitos que o Código de Defesa do Consumidor garante a você. Veja os detalhes nos <a href=\"/termos-de-uso/#servico-formatacao\">Termos de Uso</a>."
+    ]
+  },
+  {
+    "p": "O que acontece com o meu arquivo?",
+    "r": [
+      "Ele é usado só para o serviço. Para formatar, uso ferramentas de inteligência artificial, e o arquivo passa por elas. Eu apago os arquivos 15 dias depois da entrega. Os detalhes estão na <a href=\"/politica-de-privacidade/#servico-formatacao\">Política de Privacidade</a>."
+    ]
+  },
+  {
+    "p": "O serviço serve só para TCC?",
+    "r": [
+      "O foco é o TCC. Se o seu trabalho for de outro tipo, conte pelo WhatsApp qual é e quantas páginas tem, e eu digo se consigo fazer."
+    ]
+  },
+  {
+    "p": "O serviço garante que o trabalho será aprovado?",
+    "r": [
+      "Não. A formatação segue a ABNT e o manual que você enviar, mas quem aprova o trabalho é o orientador e a banca da sua faculdade, e o que eles avaliam vai muito além da formatação."
+    ]
+  },
+  {
+    "p": "Dá para formatar sozinho e de graça?",
+    "r": [
+      "Em parte. O Estuda Simples tem geradores gratuitos de <a href=\"/gerador-de-capa-abnt/\">capa</a>, de <a href=\"/gerador-de-folha-de-rosto-abnt/\">folha de rosto</a> e de <a href=\"/gerador-de-sumario-abnt/\">sumário</a> ABNT, em PDF e Word. O serviço é para quem prefere receber o trabalho inteiro formatado, sem precisar fazer cada parte."
+    ]
+  }
+]

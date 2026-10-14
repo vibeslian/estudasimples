@@ -1,7 +1,7 @@
 # Cómo editar el contenido (Etapa 4)
 
 ## Preguntas frecuentes
-Hay **un archivo por herramienta**: `conteudo/faq-capa.json`, `conteudo/faq-folha.json` y `conteudo/faq-sumario.json` (en la página se insertan con `{{FAQ_HTML:capa}}` / `{{FAQ_JSONLD:capa}}` y los equivalentes con `folha`). Cada pregunta tiene `p` (pregunta) y `r` (lista de párrafos; se permite `<a href>` y `<strong>`).
+Hay **un archivo por herramienta**: `conteudo/faq-capa.json`, `conteudo/faq-folha.json` y `conteudo/faq-sumario.json` y, para el servicio pago, `conteudo/faq-servico.json` (en la página se insertan con `{{FAQ_HTML:capa}}` / `{{FAQ_JSONLD:capa}}` y los equivalentes con `folha`). Cada pregunta tiene `p` (pregunta) y `r` (lista de párrafos; se permite `<a href>` y `<strong>`).
 Al ejecutar `npm run build` (o `npm run dev`) salen de ahí dos cosas: las preguntas desplegables de la página y el dato estructurado `FAQPage` para Google. Como las dos salen del mismo archivo, nunca pueden quedar distintas. Google pide que el dato estructurado coincida con el texto visible.
 
 ## Texto de la página del generador

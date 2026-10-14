@@ -1,0 +1,95 @@
+/* Página do serviço de formatação (/formatacao-abnt-tcc/): resumo de preços na portada, cartões de preço e blocos de texto.
+   Os blocos gerais (regras, dif, passos, faq, dica) vêm de components.css. */
+
+/* Resumo na portada (só no computador, como a mini capa da página inicial) */
+.hero-resumo { align-self: center; width: 100%; max-width: 320px; }
+.resumo-cartao { display: grid; gap: 10px; padding: 22px 24px; background: var(--superficie); border: 1px solid var(--salvia-200); border-radius: var(--raio); box-shadow: var(--sombra-forte); }
+.resumo-titulo { font-family: var(--fonte-titulo); font-weight: 800; font-size: 1.15rem; color: var(--principal); }
+.resumo-linha { display: flex; justify-content: space-between; gap: 14px; align-items: baseline; padding-bottom: 10px; border-bottom: 1px solid var(--salvia-200); font-size: .98rem; }
+.resumo-linha b { font-family: var(--fonte-titulo); font-weight: 800; font-size: 1.15rem; white-space: nowrap; }
+.resumo-nota { font-size: .9rem; color: var(--texto-suave); }
+
+/* Os cartões de "incluído" ocupam a largura toda do container: três colunas no computador */
+@media (min-width: 900px) { .regras--servico { grid-template-columns: repeat(3, 1fr); } }
+.regras--servico li { font-size: .98rem; color: var(--texto-suave); }
+
+.dif--servico .cartao h3 { font-size: 1.2rem; }
+.dica--larga { max-width: none; margin: 18px 0 0; }
+.grade-2 .cartao h3 { margin-bottom: .3em; }
+.grade-2 .cartao p { margin: 0; color: var(--texto-suave); }
+
+/* Os cinco passos em duas colunas no computador */
+.passos--servico { max-width: 52rem; }
+
+/* Preços */
+.precos { margin-bottom: 28px; }
+.preco { text-align: center; }
+.preco h3 { margin: 0 0 .2em; font-size: 1.1rem; }
+.preco-valor { margin: 0; font-family: var(--fonte-titulo); font-weight: 800; font-size: clamp(2.2rem, 6vw, 3rem); line-height: 1.1; color: var(--principal); }
+.preco-valor--texto { font-size: clamp(1.7rem, 4.5vw, 2.2rem); line-height: 1.45; }
+.preco-nota { margin: 6px 0 0; font-size: .92rem; color: var(--texto-suave); }
+.preco-rodape { margin: 0; }
+
+.cartao--privacidade { max-width: 52rem; }
+.cartao--privacidade ul { margin: 0 0 1em; padding-left: 1.2em; }
+.cartao--privacidade li { margin-bottom: .5em; }
+.cartao--privacidade p { margin: 0; }
+
+#perguntas-frequentes .faq { max-width: 52rem; }
+#pedir .secao-topo { max-width: 42rem; }
+#pedir .artigo-meta { max-width: 52rem; }
+
+/* Títulos sem palavra sozinha na última linha */
+.hero h1, .secao-topo h2 { text-wrap: balance; }
+@media (min-width: 900px) { .regras--servico li:last-child { grid-column: 1 / -1; } }
+
+/* ---------- Antes e depois: duas páginas feitas só com HTML e CSS (sem imagem), com dados inventados ----------
+   Cada folha mostra mais ou menos a metade de cima de uma A4 (as medidas em cqw seguem a largura da folha: 12 pt = 2,016 cqw). */
+.antes-depois { display: grid; gap: 36px; justify-items: center; }
+@media (min-width: 760px) { .antes-depois { grid-template-columns: 1fr 1fr; gap: 48px; justify-items: stretch; } }
+.ad-item { display: grid; gap: 16px; justify-items: center; align-content: start; width: 100%; }
+.ad-rotulo { display: inline-block; padding: 4px 16px; border-radius: 999px; font-family: var(--fonte-titulo); font-weight: 800; font-size: 1.05rem; }
+.ad-rotulo--antes { background: var(--erro-bg); color: var(--erro-texto); border: 1px solid #efc9bd; }
+.ad-rotulo--depois { background: var(--certo-bg); color: var(--certo-texto); border: 1px solid var(--salvia-300); }
+.ad-folha { position: relative; width: 100%; max-width: 420px; aspect-ratio: 21 / 15.5; overflow: hidden; background: #fff; color: #000; border-radius: 4px; container-type: inline-size; box-shadow: 0 2px 4px rgba(34, 54, 43, .1), 0 18px 40px rgba(34, 54, 43, .16); }
+.ad-folha::after { content: ""; position: absolute; inset: auto 0 0 0; height: 14%; background: linear-gradient(rgba(255, 255, 255, 0), #fff); pointer-events: none; }
+.ad-conteudo { position: absolute; inset: 0; }
+.ad-conteudo p { position: relative; margin: 0; }
+.ad-marca { position: absolute; z-index: 2; display: grid; place-items: center; width: 6cqw; height: 6cqw; border-radius: 50%; background: var(--acento-texto); color: #fff; font: 800 3.4cqw/1 var(--fonte-titulo); font-style: normal; text-indent: 0; text-align: center; box-shadow: 0 1px 3px rgba(0, 0, 0, .3); }
+.ad-marca--ok { background: var(--certo-texto); }
+.ad-marca--t { right: 1cqw; top: 50%; transform: translateY(-50%); }
+.ad-marca--d { right: -7.6cqw; top: 50%; transform: translateY(-50%); }
+.ad-marca--m { left: 1.2cqw; top: 76%; }
+.ad-folha--depois .ad-marca--m { left: 3.8cqw; }
+/* antes: margens erradas, letras misturadas */
+.ad-folha--antes .ad-conteudo { padding: 4.5% 3.5% 5% 4%; }
+.a-titulo { font: italic 700 4.6cqw/1.1 "Courier New", Courier, monospace; color: #1b3a8a; text-decoration: underline; margin-bottom: 2.4cqw !important; }
+.a-sub { font: 800 2.6cqw/1.1 Verdana, sans-serif; margin-bottom: 1.6cqw !important; }
+.a-texto { font: 2.9cqw/1.12 Georgia, "Times New Roman", serif; margin-bottom: 2cqw !important; }
+.a-texto--b { font: 2.3cqw/1.1 "Trebuchet MS", Verdana, sans-serif; color: #555; }
+.a-corte, .d-corte { margin: 2.6cqw 0 !important; text-align: center; font: 700 3cqw/1 Arial, sans-serif; color: #888; letter-spacing: .4em; }
+.a-ref { font: 2.2cqw/1.1 "Comic Sans MS", "Trebuchet MS", sans-serif; margin-bottom: 1cqw !important; }
+/* depois: margens 3/3/2/2 cm, uma só letra 12 pt, espaçamento 1,5 */
+.ad-folha--depois .ad-conteudo { padding: 14.3% 9.5% 9.5% 14.3%; font: 2.016cqw/1.5 Arial, "Liberation Sans", Arimo, sans-serif; }
+.d-pag { position: absolute; top: 9.5%; right: 9.5%; font-size: 2.016cqw; line-height: 1; }
+.d-h1, .d-h2 { font-weight: 700; margin-bottom: 1.5cqw !important; }
+.d-h1--centro { text-align: center; }
+.d-texto { text-align: justify; text-indent: 5.95cqw; }
+.d-ref { line-height: 1.15; text-align: left; margin-bottom: 2cqw !important; }
+/* legendas */
+.ad-lista { list-style: none; margin: 0; padding: 0; width: 100%; max-width: 420px; counter-reset: ad; display: grid; gap: 8px; font-size: .98rem; }
+.ad-lista li { counter-increment: ad; display: grid; grid-template-columns: 26px 1fr; gap: 10px; align-items: start; }
+.ad-lista li::before { content: counter(ad); display: grid; place-items: center; width: 24px; height: 24px; margin-top: 1px; border-radius: 50%; background: var(--acento-texto); color: #fff; font: 800 .85rem/1 var(--fonte-titulo); }
+.ad-lista--depois li::before { background: var(--certo-texto); }
+.ad-nota { max-width: 44rem; margin: 28px auto 0; font-size: .92rem; color: var(--texto-suave); text-align: center; }
+
+/* ---------- Barra fixa do WhatsApp (só no celular, só nesta página) ---------- */
+.barra-whatsapp { display: none; }
+@media (max-width: 767px) {
+  .barra-whatsapp { display: block; position: fixed; inset: auto 0 0 0; z-index: 40; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: rgba(250, 248, 243, .97); border-top: 1px solid var(--salvia-200); box-shadow: 0 -6px 20px rgba(34, 54, 43, .12); transform: translateY(100%); visibility: hidden; transition: transform .25s ease, visibility 0s linear .25s; }
+  .barra-whatsapp.visivel { transform: none; visibility: visible; transition: transform .25s ease; }
+  .barra-whatsapp .btn { width: 100%; min-height: 52px; padding: 10px 16px; font-size: 1.05rem; }
+  /* o rodapé ganha espaço embaixo para a barra nunca tapar o último texto */
+  .com-barra .site-footer { padding-bottom: calc(86px + env(safe-area-inset-bottom) + 24px); }
+}
+@media (prefers-reduced-motion: reduce) { .barra-whatsapp, .barra-whatsapp.visivel { transition: none; } }
