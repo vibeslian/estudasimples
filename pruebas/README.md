@@ -19,6 +19,7 @@ Estas pruebas abren el sitio en Chrome, llenan el formulario como un estudiante,
 | `node probar-sitio.mjs` | Todas las páginas en 7 anchos: sin scroll horizontal, sin errores. |
 | `node calibra-word.mjs` | Calibra los saltos de línea contra Word real (98 párrafos con el `.docx` del sitio). Usa `linhas-docx.ps1`. |
 | `node probar-servico.mjs` | Página del servicio de formatación: enlace de WhatsApp y mensaje, precios y plazo tomados de `site.config.json` (ninguno escrito a mano), secciones pedidas, datos estructurados (`Service` + `FAQPage`), menú (9 anchos) y pie, sitemap, bloque "Conheça nosso serviço" en las tres herramientas (después de los botones y lejos de los anuncios, computador y celular), Política de Privacidade y Termos, celular 320–390 px. No abre WhatsApp. |
+| `node probar-fuentes-cls.mjs` | Salto de diseño por la tipografía: retrasa las fuentes del sitio (red lenta simulada, `RETRASO=3000` para más) y mide el CLS de las 9 páginas en celular y computador (debe ser ~0), y comprueba que con red rápida se usa la letra del sitio (`RETRASO=0`). |
 | `node capturas-servico.mjs` | Capturas de la página del servicio, del bloque en las herramientas y de la Política en `../capturas/servico/`. |
 | `node capturas-sumario.mjs` | Capturas del sumário y de la portada (computador y celular) en `../capturas/sumario-*.png`. |
 | `node capturas-folha.mjs` | Capturas de las dos herramientas y de la portada (computador y celular) en `../capturas/folha-*.png`. |

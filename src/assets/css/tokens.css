@@ -9,15 +9,39 @@
   font-family: "Nunito";
   font-style: normal;
   font-weight: 700 800;
-  font-display: swap;
+  font-display: optional; /* sem troca de letra no meio do carregamento: se a fonte não chegar rápido, a página inteira usa a letra de respaldo (sem salto de layout) */
   src: url("/assets/fonts/nunito-latin.woff2") format("woff2");
 }
 @font-face {
   font-family: "Inter";
   font-style: normal;
   font-weight: 400 700;
-  font-display: swap;
+  font-display: optional; /* sem troca de letra no meio do carregamento: se a fonte não chegar rápido, a página inteira usa a letra de respaldo (sem salto de layout) */
   src: url("/assets/fonts/inter-latin.woff2") format("woff2");
+}
+
+/* Letras de respaldo com as MEDIDAS do Nunito e do Inter: enquanto a fonte do site carrega (rede lenta), o texto aparece
+   com a letra do aparelho (Arial ou parecida) ajustada para ocupar o mesmo espaço. Quando a fonte chega, nada se mexe
+   (sem salto de layout, o CLS do Lighthouse). Valores medidos no navegador com um texto em português (largura média do Inter 400 =
+   106 % do Arial, Inter 600–700 = 101,8 % do Arial Bold, Nunito 800 = 99 % do Arial Bold) e ascendente/descendente das próprias fontes:
+   Inter 0,96875 / 0,2412 e Nunito 1,011 / 0,353 (÷ size-adjust). Se trocar uma fonte do site, refaça estas contas (docs/design.md). */
+@font-face {
+  font-family: "Inter Fallback";
+  font-weight: 400 500;
+  src: local("Arial"), local("Liberation Sans"), local("Arimo"), local("Helvetica");
+  size-adjust: 106%; ascent-override: 91.4%; descent-override: 22.8%; line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Inter Fallback";
+  font-weight: 600 700;
+  src: local("Arial Bold"), local("Arial-BoldMT"), local("Liberation Sans Bold"), local("LiberationSans-Bold"), local("Arimo Bold"), local("Arimo-Bold"), local("Helvetica Bold"), local("Helvetica-Bold");
+  size-adjust: 101.8%; ascent-override: 95.2%; descent-override: 23.7%; line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Nunito Fallback";
+  font-weight: 700 800;
+  src: local("Arial Bold"), local("Arial-BoldMT"), local("Liberation Sans Bold"), local("LiberationSans-Bold"), local("Arimo Bold"), local("Arimo-Bold"), local("Helvetica Bold"), local("Helvetica-Bold");
+  size-adjust: 99%; ascent-override: 102.1%; descent-override: 35.7%; line-gap-override: 0%;
 }
 
 :root {
@@ -57,8 +81,8 @@
   --certo-texto: #2f5242;
 
   /* ---- Tipografia ---- */
-  --fonte-titulo: "Nunito", ui-rounded, "Segoe UI", system-ui, sans-serif;
-  --fonte-texto: "Inter", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  --fonte-titulo: "Nunito", "Nunito Fallback", ui-rounded, "Segoe UI", system-ui, sans-serif;
+  --fonte-texto: "Inter", "Inter Fallback", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
 
   /* ---- Forma ---- */
   --raio: 24px;
