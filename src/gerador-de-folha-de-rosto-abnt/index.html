@@ -83,6 +83,7 @@
           <button type="button" class="btn-secundario btn-largo" id="btnLimpar">Limpar dados</button>
         </div>
         <p class="toast" id="toast" role="status" aria-live="polite"></p>
+{{include:proximo-passo}}
         <p class="dica-campo">Para você não digitar tudo de novo ao passar da folha de rosto para a capa, o navegador guarda o que você escreveu só nesta aba, no seu aparelho. Nada é enviado, e some quando você fecha a aba ou clica em "Limpar dados".</p>
         {{include:convite-servico}}
       </form>
@@ -93,10 +94,12 @@
     </section>
   </div>
 
+  {{PERCURSO_HTML}}
+
   <aside class="aviso-norma">
     <p><strong>Importante:</strong> esta folha de rosto segue a ABNT NBR 14724:2024 (A4, margens de 3 cm à esquerda e em cima e 2 cm à direita e embaixo). Algumas instituições têm modelo próprio. Confirme com a sua faculdade antes de entregar. A ficha catalográfica, que vai no verso, é feita pela biblioteca e não é gerada aqui.</p>
   </aside>
-  <div class="anuncio anuncio--separado" data-slot="folha-abaixo-da-ferramenta" aria-hidden="true"><span>Anúncio</span></div>
+  {{ESPACO:folha-abaixo-da-ferramenta}}
 </main>
 
 <div class="container conteudo-capa">
@@ -126,7 +129,7 @@
         <p class="revelar">Quer só a primeira página? Use o <a href="/gerador-de-capa-abnt/">gerador de capa ABNT</a>: o que você digitou aqui passa para lá sozinho.</p>
       </section>
 
-      <div class="anuncio" data-slot="folha-meio-1" aria-hidden="true"><span>Anúncio</span></div>
+      {{ESPACO:folha-meio-1}}
 
       <section id="natureza-do-trabalho">
         <h2 class="revelar">Natureza do trabalho: o bloco da direita</h2>
@@ -182,7 +185,7 @@
         <aside class="dica revelar"><strong class="dica-titulo">Antes de entregar</strong><p>Procure o manual de normalização da biblioteca da sua faculdade. Se existir um modelo de folha de rosto próprio, ele vale mais do que qualquer gerador, este inclusive.</p></aside>
       </section>
 
-      <div class="anuncio" data-slot="folha-meio-2" aria-hidden="true"><span>Anúncio</span></div>
+      {{ESPACO:folha-meio-2}}
 
       <section id="perguntas-frequentes">
         <h2 class="revelar">Perguntas frequentes sobre a folha de rosto (contra capa)</h2>
@@ -196,11 +199,13 @@
 
     </article>
     <aside class="lateral" aria-label="Publicidade">
-      <div class="anuncio anuncio--lateral" data-slot="folha-lateral" aria-hidden="true"><span>Anúncio</span></div>
+      {{ESPACO:folha-lateral}}
     </aside>
   </div>
 </div>
 {{include:zoom}}
+<script type="application/json" id="percurso-dados">{{PERCURSO_DADOS}}</script>
+<script type="module" src="/assets/js/progresso.js"></script>
 {{include:footer}}
 <script type="module" src="/assets/js/abnt/ferramenta.js?v={{BUILD}}"></script>
 </body>

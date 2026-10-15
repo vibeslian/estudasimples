@@ -26,8 +26,9 @@ src/                      ← el sitio (una carpeta por página/herramienta)
     css/ferramenta.css    ← estilos del formulario y de la vista previa
   partials/               ← cabecera, pie y bloques compartidos
 conteudo/faq-*.json       ← preguntas frecuentes de cada herramienta (de aquí salen el texto y los datos para Google)
-site.config.json          ← nombre, dominio, correo y datos del servicio (WhatsApp, plazo y precios)
+site.config.json          ← nombre, dominio, correo, servicio de formatación (WhatsApp, plazo, precios), "Monte seu TCC" (pasos) y espacios de anuncio / ofertas propias
 build.mjs                 ← arma la carpeta dist/ (lo que se publica)
+build-conexoes.mjs       ← arma el indicador, las ofertas y los mensajes de origen (los pide build.mjs)
 docs/                     ← notas: norma ABNT, diseño, exportación, anuncios, contenido, publicación
 wrangler.jsonc            ← configuración del Worker de Cloudflare (404, carpeta dist)
 pruebas/                  ← pruebas automáticas (no se publican)

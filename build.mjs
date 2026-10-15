@@ -5,11 +5,12 @@
 //      node build.mjs --dev    (inclui páginas de desenvolvimento, como /_guia-de-estilo/)
 import { readFileSync, writeFileSync, mkdirSync, rmSync, readdirSync, statSync } from "node:fs";
 import { join, extname, relative, sep } from "node:path";
+import { preparaConexoes, mensagensWhatsapp } from "./build-conexoes.mjs";
 
 const SRC = "src";
-const OUT = "dist";
+const OUT = process.env.BUILD_OUT || "dist"; // BUILD_OUT e SITE_CONFIG só servem para as provas montarem uma versão de teste
 const DEV = process.argv.includes("--dev");
-const config = JSON.parse(readFileSync("site.config.json", "utf8"));
+const config = JSON.parse(readFileSync(process.env.SITE_CONFIG || "site.config.json", "utf8"));
 const siteUrl = config.siteUrl.replace(/\/+$/, "");
 
 // CSS global: estes arquivos viram um só (assets/css/site.css), menos pedidos = carrega mais rápido
@@ -26,10 +27,12 @@ const cssGlobal = CSS_GLOBAL.map((n) => readFileSync(join(cssDir, n + ".css"), "
 
 // Serviço de formatação (WhatsApp, prazo e preços): tudo vem de site.config.json, para mudar num só lugar
 const sv = config.servico;
+const mensagens = mensagensWhatsapp(sv); // as de site.config.json + as de página-componente (capa-proximo...)
+const conexoes = preparaConexoes(config);
 // um link wa.me por página de origem: a mensagem diz de onde o cliente veio (mensagens em site.config.json)
 const waUrl = (id) => {
-  if (!sv.mensagens[id]) throw new Error(`site.config.json: falta servico.mensagens.${id}`);
-  return `https://wa.me/${sv.whatsapp}?text=${encodeURIComponent(sv.mensagens[id])}`;
+  if (!mensagens[id]) throw new Error(`site.config.json: falta servico.mensagens.${id}`);
+  return `https://wa.me/${sv.whatsapp}?text=${encodeURIComponent(mensagens[id])}`;
 };
 // página que mostra o convite para o serviço -> id da mensagem de origem
 const ORIGEM_POR_PAGINA = { "index.html": "inicio", "gerador-de-capa-abnt/index.html": "capa", "gerador-de-folha-de-rosto-abnt/index.html": "folha", "gerador-de-sumario-abnt/index.html": "sumario" };
@@ -37,7 +40,7 @@ for (const id of Object.values(ORIGEM_POR_PAGINA).concat("servico")) waUrl(id);
 const brl = (n) => "R$\u00a0" + n.toLocaleString("pt-BR"); // espaço sem quebra: "R$" e o valor nunca ficam em linhas diferentes
 const values = {
   "{{WHATSAPP_URL}}": waUrl("servico"),
-  "{{WHATSAPP_ORIGENS}}": JSON.stringify(Object.fromEntries(Object.keys(sv.mensagens).map((id) => [id, waUrl(id)]))),
+  "{{WHATSAPP_ORIGENS}}": JSON.stringify(Object.fromEntries(Object.keys(mensagens).map((id) => [id, waUrl(id)]))),
   "{{WHATSAPP_EXIBICAO}}": sv.whatsappExibicao,
   "{{PRAZO}}": sv.prazo,
   "{{PRECO_ATE30}}": brl(sv.precos.ate30),
@@ -82,7 +85,10 @@ function faq(nome) {
 function render(text, origem = "servico") {
   text = text
     .replace(/\{\{FAQ_HTML:([\w-]+)\}\}/g, (_, n) => faq(n).html)
-    .replace(/\{\{FAQ_JSONLD:([\w-]+)\}\}/g, (_, n) => faq(n).jsonld);
+    .replace(/\{\{FAQ_JSONLD:([\w-]+)\}\}/g, (_, n) => faq(n).jsonld)
+    .replace(/[{][{]ESPACO:([a-z0-9-]+)[}][}]/g, (_, slot) => conexoes.espaco(slot))
+    .split("{{PERCURSO_HTML}}").join(conexoes.percursoHtml(origem === "servico" ? undefined : origem))
+    .split("{{PERCURSO_DADOS}}").join(conexoes.percursoJson(origem === "servico" ? undefined : origem));
   // fragmentos compartilhados: {{include:header}} -> src/partials/header.html (duas passadas: eles podem incluir outros)
   for (let i = 0; i < 2; i++) text = text.replace(/\{\{include:([\w-]+)\}\}/g, (_, name) => readFileSync(join(SRC, "partials", name + ".html"), "utf8"));
   for (const [key, val] of Object.entries({ ...values, "{{ORIGEM}}": origem })) text = text.split(key).join(val);

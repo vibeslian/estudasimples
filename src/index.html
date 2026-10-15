@@ -44,6 +44,12 @@
 </div>
 
 <main>
+  <section class="percurso-secao" id="passo-a-passo">
+    <div class="container">
+      {{PERCURSO_HTML}}
+    </div>
+  </section>
+
   <section class="secao" id="ferramentas">
     <div class="container">
       <div class="secao-topo revelar">
@@ -114,7 +120,7 @@
     </div>
   </section>
 
-  <div class="container"><div class="anuncio" data-slot="inicio-entre-secoes" aria-hidden="true"><span>Anúncio</span></div></div>
+  <div class="container">{{ESPACO:inicio-entre-secoes}}</div>
 
   <section class="secao">
     <div class="container">
@@ -131,6 +137,8 @@
     </div>
   </section>
 </main>
+<script type="application/json" id="percurso-dados">{{PERCURSO_DADOS}}</script>
+<script type="module" src="/assets/js/progresso.js"></script>
 {{include:footer}}
 </body>
 </html>

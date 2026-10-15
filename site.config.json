@@ -18,6 +18,96 @@
     "precos": {
       "ate30": 80,
       "de31a60": 140
+    },
+    "modeloMensagem": "Olá! Vim pelo site Estuda Simples ({pagina} · {componente}) e quero formatar meu trabalho nas normas ABNT.",
+    "origens": {
+      "_ajuda": "As mensagens por página + componente (capa-proximo, inicio-percurso, folha-oferta...) saem deste modelo. Para uma mensagem diferente, ponha a chave em servico.mensagens.",
+      "paginas": {
+        "inicio": "página inicial",
+        "capa": "gerador de capa",
+        "folha": "gerador de folha de rosto",
+        "sumario": "gerador de sumário"
+      },
+      "componentes": {
+        "proximo": "próximo passo",
+        "percurso": "monte seu TCC",
+        "oferta": "oferta no gerador"
+      }
+    }
+  },
+  "percurso": {
+    "_ajuda": "Indicador 'Monte seu TCC passo a passo' (portada e ferramentas) e painel 'Próximo passo'. Para acrescentar uma ferramenta nova, ponha um item no fim de 'passos' (id, nome, url, convite, botao); o id também é o nome que o JS usa para marcar o que foi baixado. A página nova precisa de um <body data-modo> e do arquivo de ferramenta; o resto aparece sozinho.",
+    "titulo": "Monte seu TCC passo a passo",
+    "passos": [
+      {
+        "id": "capa",
+        "nome": "Capa",
+        "url": "/gerador-de-capa-abnt/",
+        "convite": "Comece pela capa do seu trabalho.",
+        "botao": "Abrir a capa"
+      },
+      {
+        "id": "folha",
+        "nome": "Folha de rosto",
+        "url": "/gerador-de-folha-de-rosto-abnt/",
+        "convite": "Seus dados já estão preenchidos: é só conferir a folha de rosto e baixar.",
+        "botao": "Abrir a folha de rosto"
+      },
+      {
+        "id": "sumario",
+        "nome": "Sumário",
+        "url": "/gerador-de-sumario-abnt/",
+        "convite": "Adicione as seções e a numeração sai sozinha. Dá para baixar junto com a capa e a folha.",
+        "botao": "Abrir o sumário"
+      }
+    ],
+    "final": {
+      "id": "servico",
+      "nome": "Formatação do trabalho inteiro",
+      "etiqueta": "Opcional",
+      "url": "/formatacao-abnt-tcc/",
+      "convite": "Prefere que eu formate o trabalho inteiro? Margens, fonte, sumário, citações e referências, com orçamento pelo WhatsApp.",
+      "botao": "Conhecer o serviço"
+    }
+  },
+  "anuncios": {
+    "_ajuda": "Cada espaço reservado pode ficar livre para o AdSense ('adsense') ou mostrar uma oferta própria ('oferta:<nome>'). Uma oferta desligada (ativa: false) devolve o espaço ao AdSense. No máximo uma oferta própria por página, só em meio-1, meio-2, lateral ou entre-secoes (nunca perto dos botões da ferramenta). O build avisa se algo estiver errado.",
+    "espacos": {
+      "inicio-entre-secoes": "adsense",
+      "capa-abaixo-da-ferramenta": "adsense",
+      "capa-meio-1": "oferta:formatacao",
+      "capa-meio-2": "adsense",
+      "capa-lateral": "adsense",
+      "folha-abaixo-da-ferramenta": "adsense",
+      "folha-meio-1": "oferta:formatacao",
+      "folha-meio-2": "adsense",
+      "folha-lateral": "adsense",
+      "sumario-abaixo-da-ferramenta": "adsense",
+      "sumario-meio-1": "oferta:formatacao",
+      "sumario-meio-2": "adsense",
+      "sumario-lateral": "adsense"
+    },
+    "ofertas": {
+      "formatacao": {
+        "ativa": true,
+        "selo": "Serviço do Estuda Simples",
+        "url": "/formatacao-abnt-tcc/",
+        "botao": "Conhecer o serviço",
+        "paginas": {
+          "capa": {
+            "titulo": "Capa pronta. E o resto do trabalho?",
+            "texto": "Posso deixar o trabalho inteiro nas normas da ABNT: margens, fonte, sumário, citações e referências. Orçamento pelo WhatsApp, a partir de {{PRECO_ATE30}}."
+          },
+          "folha": {
+            "titulo": "Folha de rosto pronta. Quer o trabalho todo formatado?",
+            "texto": "Eu cuido da forma do trabalho inteiro, do começo ao fim, e você só escreve. Orçamento pelo WhatsApp, a partir de {{PRECO_ATE30}}."
+          },
+          "sumario": {
+            "titulo": "Sumário pronto. Falta o resto?",
+            "texto": "Posso conferir e formatar todo o trabalho: títulos numerados, páginas, citações e referências. Orçamento pelo WhatsApp, a partir de {{PRECO_ATE30}}."
+          }
+        }
+      }
     }
   }
 }

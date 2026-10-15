@@ -1,5 +1,15 @@
 # Espacios para anuncios (AdSense)
 
+## Ofertas propias y AdSense (Etapa 8.5)
+Mientras no haya AdSense, algunos espacios reservados muestran una **oferta propia** (hoy solo el servicio de formatação; después, el Kit TCC). Todo se decide en `site.config.json` → `anuncios`:
+- `espacos`: para cada espacio, `"adsense"` (queda libre, como antes) u `"oferta:formatacao"`.
+- `ofertas.formatacao.ativa`: `true/false`. Si se apaga, **todos sus espacios vuelven al AdSense** sin tocar nada más.
+- Textos de la oferta por página (`capa`, `folha`, `sumario`), sello ("Serviço do Estuda Simples") y botón.
+Reglas que el build comprueba y detiene si se rompen (con un mensaje en portugués): **máximo una oferta propia por página** y solo en `meio-1`, `meio-2`, `lateral` o `entre-secoes` (nunca `abaixo-da-ferramenta`, que queda al lado de la herramienta). Hoy: `capa-meio-1`, `folha-meio-1` y `sumario-meio-1`. La portada y los demás espacios (`abaixo-da-ferramenta`, `meio-2`, `lateral`) quedan libres para el AdSense.
+- La oferta se ve distinta de un anuncio de Google: tarjeta con los colores del sitio y el sello "Serviço do Estuda Simples"; **no usa la clase `.anuncio`** (por eso no cuenta como espacio de anuncio ni se ve como caja punteada con `?ads=preview`).
+- Siempre queda lejos de los botones de descarga y de la lista del sumário (están en el texto de explicación; la prueba exige > 300 px).
+- **Cómo convivirán con AdSense:** (1) Hoy: 3 ofertas propias + 10 espacios libres. (2) Al activar AdSense: poner `"ativa": false` en la oferta para devolverle todos sus espacios, o dejarla en un espacio por página y ceder los demás (cambiar `"oferta:formatacao"` por `"adsense"` donde se quiera). (3) Una oferta propia no necesita el aviso de cookies; el AdSense sí (ver la lista de abajo). (4) Los espacios con oferta no deben tener el script de AdSense: el HTML de cada espacio lo decide el build.
+
 ## Cómo están ahora
 Los espacios existen en las páginas, pero **no hay ningún anuncio activo ni ningún script de publicidad**. Son bloques vacíos que reservan altura para que, cuando lleguen los anuncios reales, el contenido no se mueva.
 

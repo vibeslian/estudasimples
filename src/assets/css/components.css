@@ -91,3 +91,48 @@
 /* Exemplos longos (um por linha) */
 .regras--texto { grid-template-columns: 1fr; }
 .regras--texto li { font-size: .95rem; }
+
+/* ---------- Monte seu TCC passo a passo (indicador na portada e nas ferramentas) ----------
+   Os passos vêm de site.config.json. O que o estudante baixou nesta aba fica marcado (o círculo do número vira "✓", sem mudar o tamanho). */
+.percurso-secao { padding-block: 28px 0; }
+.percurso { margin: 28px 0 0; padding: 16px 18px 14px; background: var(--superficie); border: 1px solid var(--salvia-200); border-radius: var(--raio); }
+.percurso-secao .percurso { margin: 0; }
+.percurso-titulo { margin: 0 0 10px; font-family: var(--fonte-titulo); font-weight: 800; font-size: 1.05rem; color: var(--principal); }
+.percurso-lista { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.percurso-passo { display: flex; align-items: center; }
+.percurso-item { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 6px 14px 6px 8px; border: 1px solid var(--salvia-200); border-radius: 999px; background: var(--fundo); color: var(--texto); font-weight: 700; font-size: .95rem; line-height: 1.2; text-decoration: none; }
+a.percurso-item:hover { background: var(--salvia-50); border-color: var(--salvia-300); }
+.percurso-num { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--salvia-100); color: var(--principal); font: 800 .9rem/1 var(--fonte-titulo); }
+.percurso-passo.feito .percurso-num { background: var(--principal); color: #fff; }
+.percurso-atual .percurso-item { background: var(--salvia-100); border-color: var(--salvia-300); }
+.percurso-dica { font-weight: 400; font-size: .82rem; color: var(--texto-suave); }
+.percurso-texto { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 8px; min-width: 0; }
+.percurso-final .percurso-item { border-color: var(--principal); background: var(--superficie); } /* serviço opcional: borda contínua na cor do site (nada de pontilhado, que parece erro) */
+.percurso-etiqueta { display: inline-block; padding: 1px 8px; border-radius: 999px; background: var(--salvia-100); color: var(--principal); font-size: .72rem; font-weight: 700; letter-spacing: .03em; line-height: 1.5; }
+.percurso-nota { margin: 10px 0 0; font-size: .85rem; color: var(--texto-suave); }
+
+/* ---------- Painel "Próximo passo" (aparece dentro da página depois de baixar; fácil de fechar) ---------- */
+.proximo { position: relative; margin: 16px 0 0; padding: 14px 16px; background: var(--salvia-50); border: 1px solid var(--salvia-300); border-left: 4px solid var(--principal); border-radius: var(--raio-pequeno); }
+.proximo[hidden] { display: none; }
+.proximo-titulo { margin: 0 0 2px; padding-right: 40px; font-family: var(--fonte-titulo); font-weight: 800; color: var(--principal); }
+.proximo-texto { margin: 0 0 10px; font-size: .95rem; }
+.proximo-fechar { position: absolute; top: 2px; right: 2px; width: 44px; height: 44px; border: 0; border-radius: 50%; background: transparent; color: var(--texto-suave); font-size: 1.6rem; line-height: 1; cursor: pointer; }
+.proximo-fechar:hover { background: var(--salvia-100); color: var(--texto); }
+
+/* ---------- Oferta própria no lugar de um espaço de anúncio (enquanto não há AdSense) ----------
+   Visual do próprio site (verde-sálvia e coral), com o selo "Serviço do Estuda Simples", para não parecer anúncio de terceiros. */
+.oferta { display: block; width: 100%; max-width: 728px; margin: 40px auto; padding: 22px 24px; background: linear-gradient(135deg, var(--salvia-50), var(--acento-claro)); border: 1px solid var(--salvia-200); border-radius: var(--raio); box-shadow: var(--sombra); }
+.oferta-selo { display: inline-block; margin: 0 0 8px; padding: 3px 12px; border-radius: 999px; background: var(--superficie); color: var(--principal); font-weight: 700; font-size: .82rem; }
+.oferta-titulo { margin: 0 0 6px; font-family: var(--fonte-titulo); font-weight: 800; font-size: 1.3rem; line-height: 1.2; }
+.oferta-texto { margin: 0 0 14px; color: var(--texto-suave); }
+/* celular: os passos em duas colunas, para o indicador não ocupar a tela toda */
+@media (max-width: 639px) {
+  .percurso { padding: 12px 14px 10px; }
+  .percurso-titulo { margin-bottom: 8px; font-size: 1rem; }
+  .percurso-lista { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .percurso-passo { align-items: stretch; }
+  .percurso-item { width: 100%; min-height: 44px; padding: 5px 10px 5px 6px; font-size: .88rem; }
+  .percurso-num { width: 26px; height: 26px; font-size: .85rem; }
+  .percurso-dica { display: none; }
+  .percurso-nota { margin-top: 8px; font-size: .8rem; }
+}

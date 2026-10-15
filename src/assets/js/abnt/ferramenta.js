@@ -8,6 +8,7 @@ import { calculaLayout } from "./layout.js";
 import { calculaSumario } from "./sumario.js";
 import { camposFaltando, geraPdf, geraDocx, baixa, precarrega, medidorCanvas } from "./exporta.js";
 import { lerEstado, gravaEstado, lerLogo, gravaLogo, apagaTudo, pegaAviso, processaLogo } from "./estado.js";
+import { registraDownload, mostraProximo, limpaProgresso } from "../progresso.js";
 
 const $ = (id) => document.getElementById(id);
 const clone = (o) => JSON.parse(JSON.stringify(o));
@@ -688,6 +689,7 @@ async function exporta(tipo) {
   try {
     const { blob, nome } = tipo === "pdf" ? await geraPdf(dados, pags) : await geraDocx(dados, pags);
     baixa(blob, nome);
+    try { registraDownload(pags); mostraProximo(MODO); } catch (e) { /* o "Monte seu TCC" e o "Próximo passo" são extras: nunca podem atrapalhar o download */ }
     const semPagina = pags.includes("sumario") && dados.sumario.entradas.some((e) => !String(e.pagina || "").trim());
     mensagem(`Pronto! O arquivo ${nome} foi baixado.` + (semPagina ? " Atenção: há itens do sumário sem número de página; complete no arquivo." : ""));
   } catch (e) {
@@ -776,6 +778,7 @@ let timerLimpar;
 function limpar() {
   const b = $("btnLimpar");
   if (b.dataset.confirma === "1") {
+    limpaProgresso();
     apagaTudo();
     location.reload();
     return;
