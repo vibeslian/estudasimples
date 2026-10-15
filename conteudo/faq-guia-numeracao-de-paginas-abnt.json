@@ -1,0 +1,34 @@
+[
+  {
+    "p": "A capa conta como página 1?",
+    "r": ["Não, pela NBR 14724. As folhas são contadas a partir da folha de rosto, e a capa fica de fora da contagem. Alguns textos da internet dizem que a contagem começa na capa; o que vale é a norma e o manual da sua faculdade."]
+  },
+  {
+    "p": "Em que página aparece o primeiro número?",
+    "r": ["Na primeira folha da parte textual, a Introdução. Os elementos anteriores (folha de rosto, aprovação, resumos, listas e sumário) são contados, mas não mostram o número. Se do início da folha de rosto até o sumário você contou 5 folhas, a Introdução mostra o 6."]
+  },
+  {
+    "p": "Onde fica o número da página na ABNT?",
+    "r": ["No canto superior direito, a 2 cm da borda de cima, com o último algarismo a 2 cm da borda da direita. Em impressão frente e verso, no verso o número vai no canto superior esquerdo."]
+  },
+  {
+    "p": "Qual é o tamanho da fonte do número da página?",
+    "r": ["Menor que a do texto. Como o texto usa tamanho 12, os manuais costumam indicar tamanho 10 (alguns aceitam 11). Veja a <a href=\"/guias/fonte-e-espacamento-abnt/\">guia de fonte e espaçamento</a>."]
+  },
+  {
+    "p": "Como numerar só a partir da Introdução no Word?",
+    "r": ["Insira uma quebra de seção (Próxima Página) antes da Introdução, desmarque \"Vincular ao Anterior\" no cabeçalho da nova seção, insira o número de página no início da página, à direita, e use \"Formatar Números de Página\", \"Iniciar em\", para dar à Introdução o número certo da contagem."]
+  },
+  {
+    "p": "Os apêndices e anexos entram na numeração?",
+    "r": ["Sim. As folhas dos apêndices e dos anexos são numeradas de forma contínua, seguindo a numeração do texto principal."]
+  },
+  {
+    "p": "E se o trabalho tem mais de um volume?",
+    "r": ["A norma pede uma única sequência de numeração, do primeiro ao último volume. Alguns guias da internet dizem o contrário, mas essa é a regra dos manuais que seguem a NBR 14724."]
+  },
+  {
+    "p": "O verso da folha de rosto é contado?",
+    "r": ["Não. O verso da folha de rosto, onde fica a ficha catalográfica quando ela existe, não é contado nem numerado."]
+  }
+]

@@ -1,0 +1,570 @@
+[
+  {
+    "slug": "normas-abnt",
+    "prioridade": 1,
+    "categoria": "Formatação do trabalho",
+    "rotulo": "Normas ABNT",
+    "ferramentas": [
+      "capa",
+      "folha"
+    ],
+    "titulo": "Normas ABNT 2026: guia completo para trabalhos acadêmicos",
+    "h1": "Normas ABNT para trabalhos acadêmicos: guia completo",
+    "descricao": "Guia das normas ABNT para trabalho acadêmico, pela NBR 14724:2024: margens, fonte, espaçamento, capa, citações e referências, com exemplos.",
+    "lead": "O que a ABNT pede em um trabalho acadêmico, explicado em ordem e com links para cada detalhe.",
+    "resumoIndice": "O mapa de tudo: qual norma vale para quê, a formatação básica e onde ler cada detalhe.",
+    "norma": "ABNT NBR 14724:2024",
+    "atualizado": "2026-10-15",
+    "ferramenta": {
+      "nome": "Gerador de capa ABNT",
+      "texto": "Comece pela capa: margens, fonte e ordem dos elementos já saem como a norma pede. Grátis, sem cadastro.",
+      "botao": "Criar minha capa",
+      "url": "/gerador-de-capa-abnt/"
+    },
+    "relacionadas": [
+      "normas-abnt-tcc",
+      "margens-abnt",
+      "normas-abnt-no-word"
+    ],
+    "fontes": [
+      {
+        "titulo": "UFV, Normalização de trabalhos acadêmicos (2025), com a NBR 14724:2024",
+        "url": "https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf"
+      },
+      {
+        "titulo": "Unifesp, Manual de normalização (atualização 2024)",
+        "url": "https://unifesp.br/campus/gua/images/Biblioteca/tutoriais/Manual_de_normalizacao._Atualizacao_2024.pdf"
+      },
+      {
+        "titulo": "UERN, Manual de normalização do SIB (2025)",
+        "url": "https://portal.uern.br/dsib/wp-content/uploads/sites/2/2025/02/MANUAL-DE-NORMALIZACAO-SIBUERN-2025.pdf"
+      },
+      {
+        "titulo": "UFRGS (BIBBIO), Formatação de trabalhos acadêmicos no Word",
+        "url": "https://www.ufrgs.br/bibbio/formatacao-de-trabalhos-academicos-no-word/"
+      }
+    ]
+  },
+  {
+    "slug": "margens-abnt",
+    "prioridade": 2,
+    "categoria": "Formatação do trabalho",
+    "rotulo": "Margens ABNT",
+    "ferramentas": [
+      "capa"
+    ],
+    "titulo": "Margens ABNT: medidas certas e como configurar no Word",
+    "h1": "Margens ABNT: quanto medem e como configurar",
+    "descricao": "Margens ABNT: 3 cm à esquerda e em cima, 2 cm à direita e embaixo. Veja a folha desenhada e como configurar no Word e no Google Docs.",
+    "lead": "Esquerda e superior de 3 cm, direita e inferior de 2 cm, em folha A4. Veja a folha desenhada e o passo a passo.",
+    "resumoIndice": "As quatro medidas, a folha desenhada, o verso das folhas e como ajustar no Word e no Google Docs.",
+    "norma": "ABNT NBR 14724:2024",
+    "atualizado": "2026-10-15",
+    "ferramenta": {
+      "nome": "Gerador de capa ABNT",
+      "texto": "A capa já sai em A4 com as margens de 3, 3, 2 e 2 cm, e você baixa em PDF ou Word.",
+      "botao": "Criar capa com as margens certas",
+      "url": "/gerador-de-capa-abnt/"
+    },
+    "relacionadas": [
+      "fonte-e-espacamento-abnt",
+      "normas-abnt-no-word",
+      "numeracao-de-paginas-abnt"
+    ],
+    "fontes": [
+      {
+        "titulo": "UFV, Normalização de trabalhos acadêmicos (2025), com a NBR 14724:2024",
+        "url": "https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf"
+      },
+      {
+        "titulo": "Unifesp, Manual de normalização (atualização 2024)",
+        "url": "https://unifesp.br/campus/gua/images/Biblioteca/tutoriais/Manual_de_normalizacao._Atualizacao_2024.pdf"
+      },
+      {
+        "titulo": "UERN, Manual de normalização do SIB (2025)",
+        "url": "https://portal.uern.br/dsib/wp-content/uploads/sites/2/2025/02/MANUAL-DE-NORMALIZACAO-SIBUERN-2025.pdf"
+      },
+      {
+        "titulo": "UFRGS (BIBBIO), Formatação de trabalhos acadêmicos no Word",
+        "url": "https://www.ufrgs.br/bibbio/formatacao-de-trabalhos-academicos-no-word/"
+      }
+    ]
+  },
+  {
+    "slug": "como-fazer-referencia-abnt",
+    "prioridade": 3,
+    "categoria": "Referências e citações",
+    "rotulo": "Como fazer referência ABNT",
+    "titulo": "Como fazer referência ABNT: exemplos de livro, artigo, site",
+    "h1": "Como fazer referência ABNT: exemplos por tipo de documento",
+    "descricao": "Como fazer referência ABNT (NBR 6023:2018): livro, capítulo, artigo, site, lei e vídeo, com a ordem dos elementos e exemplos prontos.",
+    "lead": "A ordem dos elementos e um exemplo de cada tipo de fonte: livro, capítulo, artigo, site, site sem autor, lei e vídeo.",
+    "resumoIndice": "Livro, capítulo, artigo, site, lei e vídeo: a ordem dos elementos e um exemplo de cada.",
+    "norma": "ABNT NBR 6023:2018",
+    "atualizado": "2026-10-15",
+    "ferramenta": {
+      "nome": "Formatação ABNT de TCC",
+      "selo": "Serviço do Estuda Simples",
+      "texto": "Prefere que eu deixe as citações e as referências do seu trabalho no formato da ABNT? Orçamento pelo WhatsApp.",
+      "botao": "Pedir orçamento",
+      "url": "/formatacao-abnt-tcc/"
+    },
+    "relacionadas": [
+      "referencia-de-site-abnt",
+      "citacao-abnt",
+      "normas-abnt-tcc"
+    ],
+    "fontes": [
+      {
+        "titulo": "UFU, Referências (NBR 6023:2018), atualização de 30/10/2024",
+        "url": "https://bibliotecas.ufu.br/sites/bibliotecas.ufu.br/files/media/imagem/referencias_30_out._2024_1.pdf"
+      },
+      {
+        "titulo": "Unicamp (Labjor), Guia para referências NBR 6023",
+        "url": "https://www.labjor.unicamp.br/wp-content/uploads/2023/10/guia_nbr6023_final.pdf"
+      },
+      {
+        "titulo": "UFV, Normalização de trabalhos acadêmicos (2025), com a NBR 14724:2024",
+        "url": "https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf"
+      },
+      {
+        "titulo": "UERN, Manual de normalização do SIB (2025)",
+        "url": "https://portal.uern.br/dsib/wp-content/uploads/sites/2/2025/02/MANUAL-DE-NORMALIZACAO-SIBUERN-2025.pdf"
+      }
+    ]
+  },
+  {
+    "slug": "referencia-de-site-abnt",
+    "prioridade": 4,
+    "categoria": "Referências e citações",
+    "rotulo": "Referência de site ABNT",
+    "titulo": "Referência de site ABNT: com e sem autor, data de acesso",
+    "h1": "Referência de site ABNT: com autor, sem autor e data de acesso",
+    "descricao": "Como referenciar um site na ABNT (NBR 6023:2018): com e sem autor, \"Disponível em\", data de acesso, exemplos e erros comuns.",
+    "lead": "Como escrever a referência de um site, de uma página sem autor e de um texto de jornal ou blog, com a data de acesso.",
+    "resumoIndice": "Site com e sem autor, \"Disponível em\", data de acesso e os erros mais comuns.",
+    "norma": "ABNT NBR 6023:2018",
+    "atualizado": "2026-10-15",
+    "ferramenta": {
+      "nome": "Formatação ABNT de TCC",
+      "selo": "Serviço do Estuda Simples",
+      "texto": "Tem muitas referências de sites para ajustar? Posso deixar a lista toda no formato da ABNT. Orçamento pelo WhatsApp.",
+      "botao": "Pedir orçamento",
+      "url": "/formatacao-abnt-tcc/"
+    },
+    "relacionadas": [
+      "como-fazer-referencia-abnt",
+      "citacao-abnt",
+      "normas-abnt-tcc"
+    ],
+    "fontes": [
+      {
+        "titulo": "UFU, Referências (NBR 6023:2018), atualização de 30/10/2024",
+        "url": "https://bibliotecas.ufu.br/sites/bibliotecas.ufu.br/files/media/imagem/referencias_30_out._2024_1.pdf"
+      },
+      {
+        "titulo": "Unicamp (Labjor), Guia para referências NBR 6023",
+        "url": "https://www.labjor.unicamp.br/wp-content/uploads/2023/10/guia_nbr6023_final.pdf"
+      },
+      {
+        "titulo": "UFV, Normalização de trabalhos acadêmicos (2025), com a NBR 14724:2024",
+        "url": "https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf"
+      },
+      {
+        "titulo": "UNISA, Manual de normatização ABNT (2025)",
+        "url": "https://www.unisa.br/wp-content/uploads/2025/04/2025_Manual-de-Normatizacao_ABNT.pdf"
+      }
+    ]
+  },
+  {
+    "slug": "citacao-abnt",
+    "prioridade": 5,
+    "categoria": "Referências e citações",
+    "rotulo": "Citação ABNT",
+    "titulo": "Citação ABNT: direta, indireta e com recuo de 4 cm",
+    "h1": "Citação ABNT: direta, indireta e citação de citação",
+    "descricao": "Citação ABNT (NBR 10520:2023): direta curta e longa com recuo de 4 cm, indireta, citação de citação, et al., com exemplos.",
+    "lead": "Como citar com aspas, com recuo de 4 cm ou com suas palavras, e como indicar autor, ano e página.",
+    "resumoIndice": "Citação direta curta e longa, indireta, citação de citação e et al., com exemplos.",
+    "norma": "ABNT NBR 10520:2023",
+    "atualizado": "2026-10-15",
+    "ferramenta": {
+      "nome": "Formatação ABNT de TCC",
+      "selo": "Serviço do Estuda Simples",
+      "texto": "Prefere que eu deixe as citações do trabalho no formato da ABNT, com o recuo e a fonte certos? Orçamento pelo WhatsApp.",
+      "botao": "Pedir orçamento",
+      "url": "/formatacao-abnt-tcc/"
+    },
+    "relacionadas": [
+      "como-fazer-referencia-abnt",
+      "fonte-e-espacamento-abnt",
+      "referencia-de-site-abnt"
+    ],
+    "fontes": [
+      {
+        "titulo": "UFSCar (BCo), Manual da NBR 10520:2023",
+        "url": "https://www.bco.ufscar.br/arquivos/manual-bco-nbr-10520-2023.pdf"
+      },
+      {
+        "titulo": "FURB, Citações em documentos (NBR 10520:2023)",
+        "url": "https://www10.furb.br/arquivos/assets/files/Citacoes-em-documentos.pdf"
+      },
+      {
+        "titulo": "UFV, Normalização de trabalhos acadêmicos (2025), com a NBR 14724:2024",
+        "url": "https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf"
+      },
+      {
+        "titulo": "UNISA, Manual de normatização ABNT (2025)",
+        "url": "https://www.unisa.br/wp-content/uploads/2025/04/2025_Manual-de-Normatizacao_ABNT.pdf"
+      }
+    ]
+  },
+  {
+    "slug": "normas-abnt-no-word",
+    "prioridade": 6,
+    "categoria": "Formatação do trabalho",
+    "rotulo": "Normas ABNT no Word",
+    "titulo": "Normas ABNT no Word: como formatar o trabalho passo a passo",
+    "h1": "Como formatar o trabalho nas normas ABNT no Word",
+    "descricao": "Passo a passo para formatar nas normas ABNT no Word: A4, margens, fonte, espaçamento 1,5, recuo, títulos, numeração de páginas e sumário.",
+    "lead": "Do papel A4 ao sumário: cada ajuste do Word, na ordem em que convém fazer, com os menus e os valores.",
+    "resumoIndice": "O passo a passo no Word: A4, margens, fonte, entrelinhas, recuo, títulos e páginas.",
+    "norma": "ABNT NBR 14724:2024",
+    "atualizado": "2026-10-15",
+    "ferramenta": {
+      "nome": "Formatação ABNT de TCC",
+      "selo": "Serviço do Estuda Simples",
+      "texto": "Prefere receber o trabalho já formatado, em Word e PDF? Eu cuido da forma e você só escreve. Orçamento pelo WhatsApp.",
+      "botao": "Pedir orçamento",
+      "url": "/formatacao-abnt-tcc/"
+    },
+    "relacionadas": [
+      "margens-abnt",
+      "fonte-e-espacamento-abnt",
+      "sumario-automatico-word"
+    ],
+    "fontes": [
+      {
+        "titulo": "UFRGS (BIBBIO), Formatação de trabalhos acadêmicos no Word",
+        "url": "https://www.ufrgs.br/bibbio/formatacao-de-trabalhos-academicos-no-word/"
+      },
+      {
+        "titulo": "UFV, Normalização de trabalhos acadêmicos (2025), com a NBR 14724:2024",
+        "url": "https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf"
+      },
+      {
+        "titulo": "Unifesp, Manual de normalização (atualização 2024)",
+        "url": "https://unifesp.br/campus/gua/images/Biblioteca/tutoriais/Manual_de_normalizacao._Atualizacao_2024.pdf"
+      },
+      {
+        "titulo": "UNISA, Manual de normatização ABNT (2025)",
+        "url": "https://www.unisa.br/wp-content/uploads/2025/04/2025_Manual-de-Normatizacao_ABNT.pdf"
+      }
+    ]
+  },
+  {
+    "slug": "modelos-de-capa-abnt",
+    "prioridade": 7,
+    "categoria": "Capa, folha de rosto e sumário",
+    "rotulo": "Modelos de capa ABNT",
+    "ferramentas": [
+      "capa",
+      "folha"
+    ],
+    "titulo": "Modelos de capa ABNT: individual, grupo, TCC e escola",
+    "h1": "Modelos de capa ABNT: individual, em grupo, com logo, escola e TCC",
+    "descricao": "Modelos de capa ABNT para trabalho individual, em grupo, com logo, de escola, de faculdade e de TCC, com a ordem certa dos elementos.",
+    "lead": "Seis modelos de capa desenhados, a ordem dos elementos e o que muda em cada caso.",
+    "resumoIndice": "Seis modelos desenhados: individual, em grupo, com logo, escola, faculdade e TCC.",
+    "norma": "ABNT NBR 14724:2024",
+    "atualizado": "2026-10-15",
+    "ferramenta": {
+      "nome": "Gerador de capa ABNT",
+      "texto": "Escolha o modelo, preencha os dados e baixe a capa em PDF ou Word, com logo se quiser. Grátis e sem cadastro.",
+      "botao": "Criar minha capa",
+      "url": "/gerador-de-capa-abnt/"
+    },
+    "relacionadas": [
+      "normas-abnt-tcc",
+      "margens-abnt",
+      "fonte-e-espacamento-abnt"
+    ],
+    "fontes": [
+      {
+        "titulo": "UFV, Normalização de trabalhos acadêmicos (2025), com a NBR 14724:2024",
+        "url": "https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf"
+      },
+      {
+        "titulo": "UERN, Manual de normalização do SIB (2025)",
+        "url": "https://portal.uern.br/dsib/wp-content/uploads/sites/2/2025/02/MANUAL-DE-NORMALIZACAO-SIBUERN-2025.pdf"
+      },
+      {
+        "titulo": "UNISA, Manual de normatização ABNT (2025)",
+        "url": "https://www.unisa.br/wp-content/uploads/2025/04/2025_Manual-de-Normatizacao_ABNT.pdf"
+      },
+      {
+        "titulo": "Unifesp, Manual de normalização (atualização 2024)",
+        "url": "https://unifesp.br/campus/gua/images/Biblioteca/tutoriais/Manual_de_normalizacao._Atualizacao_2024.pdf"
+      }
+    ]
+  },
+  {
+    "slug": "sumario-automatico-word",
+    "prioridade": 8,
+    "categoria": "Capa, folha de rosto e sumário",
+    "rotulo": "Sumário automático no Word",
+    "ferramentas": [
+      "sumario"
+    ],
+    "titulo": "Sumário automático no Word (ABNT): passo a passo",
+    "h1": "Como fazer o sumário automático no Word nas normas ABNT",
+    "descricao": "Como fazer o sumário automático no Word: estilos de título, inserir o sumário, ajustar para a ABNT e atualizar as páginas.",
+    "lead": "Os estilos de título, o menu certo e os ajustes para o sumário do Word ficar como a ABNT pede.",
+    "resumoIndice": "Estilos de título, inserir o sumário, ajustar à ABNT e atualizar as páginas.",
+    "norma": "ABNT NBR 6027:2012",
+    "atualizado": "2026-10-15",
+    "ferramenta": {
+      "nome": "Gerador de sumário ABNT",
+      "texto": "Sem mexer em estilos: adicione as seções e a numeração sai sozinha, com linha de pontos e páginas. Baixe em PDF ou Word.",
+      "botao": "Criar meu sumário",
+      "url": "/gerador-de-sumario-abnt/"
+    },
+    "relacionadas": [
+      "titulos-e-subtitulos-abnt",
+      "numeracao-de-paginas-abnt",
+      "normas-abnt-no-word"
+    ],
+    "fontes": [
+      {
+        "titulo": "UFRGS (BIBBIO), Formatação de trabalhos acadêmicos no Word",
+        "url": "https://www.ufrgs.br/bibbio/formatacao-de-trabalhos-academicos-no-word/"
+      },
+      {
+        "titulo": "UFV, Normalização de trabalhos acadêmicos (2025), com a NBR 14724:2024",
+        "url": "https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf"
+      },
+      {
+        "titulo": "UERN, Manual de normalização do SIB (2025)",
+        "url": "https://portal.uern.br/dsib/wp-content/uploads/sites/2/2025/02/MANUAL-DE-NORMALIZACAO-SIBUERN-2025.pdf"
+      }
+    ]
+  },
+  {
+    "slug": "resumo-abnt",
+    "prioridade": 9,
+    "categoria": "Estrutura do trabalho",
+    "rotulo": "Resumo ABNT",
+    "titulo": "Resumo ABNT: tamanho, palavras-chave e formato",
+    "h1": "Resumo ABNT: tamanho, palavras-chave e como escrever",
+    "descricao": "Resumo ABNT (NBR 6028:2021): tamanho por tipo de trabalho, como escrever, palavras-chave, parágrafo único e exemplo.",
+    "lead": "Quantas palavras, como escrever em parágrafo único e como colocar as palavras-chave, segundo a NBR 6028:2021.",
+    "resumoIndice": "Tamanho por tipo de trabalho, parágrafo único, palavras-chave e um exemplo.",
+    "norma": "ABNT NBR 6028:2021",
+    "atualizado": "2026-10-15",
+    "ferramenta": {
+      "nome": "Formatação ABNT de TCC",
+      "selo": "Serviço do Estuda Simples",
+      "texto": "Prefere que eu formate o resumo e o resto do trabalho nas normas da ABNT? Orçamento pelo WhatsApp.",
+      "botao": "Pedir orçamento",
+      "url": "/formatacao-abnt-tcc/"
+    },
+    "relacionadas": [
+      "normas-abnt-tcc",
+      "fonte-e-espacamento-abnt",
+      "sumario-automatico-word"
+    ],
+    "fontes": [
+      {
+        "titulo": "Unesp (Faculdade de Odontologia de Araçatuba), Informativo sobre a NBR 6028:2021",
+        "url": "https://www.foa.unesp.br/Home/instituicao/biblioteca108/informativo-gnt---nbr-6028-2021_final.pdf"
+      },
+      {
+        "titulo": "UFV, Normalização de trabalhos acadêmicos (2025), com a NBR 14724:2024",
+        "url": "https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf"
+      },
+      {
+        "titulo": "UERN, Manual de normalização do SIB (2025)",
+        "url": "https://portal.uern.br/dsib/wp-content/uploads/sites/2/2025/02/MANUAL-DE-NORMALIZACAO-SIBUERN-2025.pdf"
+      }
+    ]
+  },
+  {
+    "slug": "normas-abnt-tcc",
+    "prioridade": 10,
+    "categoria": "Estrutura do trabalho",
+    "rotulo": "Normas ABNT para TCC",
+    "ferramentas": [
+      "capa",
+      "folha",
+      "sumario"
+    ],
+    "titulo": "Normas ABNT para TCC: estrutura e elementos obrigatórios",
+    "h1": "Normas ABNT para TCC: estrutura completa e elementos obrigatórios",
+    "descricao": "Estrutura do TCC pela ABNT NBR 14724:2024: elementos pré-textuais, textuais e pós-textuais, quais são obrigatórios e onde fazer cada um.",
+    "lead": "A ordem de tudo o que vai no TCC, o que é obrigatório e o que é opcional, parte por parte.",
+    "resumoIndice": "Elementos pré-textuais, textuais e pós-textuais: o que é obrigatório e onde fazer cada um.",
+    "norma": "ABNT NBR 14724:2024",
+    "atualizado": "2026-10-15",
+    "ferramenta": {
+      "nome": "Gerador de capa ABNT",
+      "texto": "Comece pela capa e siga a ordem: folha de rosto e sumário também têm gerador gratuito, e os dados passam de um para o outro.",
+      "botao": "Criar minha capa",
+      "url": "/gerador-de-capa-abnt/"
+    },
+    "relacionadas": [
+      "normas-abnt",
+      "resumo-abnt",
+      "modelos-de-capa-abnt"
+    ],
+    "fontes": [
+      {
+        "titulo": "UFV, Normalização de trabalhos acadêmicos (2025), com a NBR 14724:2024",
+        "url": "https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf"
+      },
+      {
+        "titulo": "Unifesp, Manual de normalização (atualização 2024)",
+        "url": "https://unifesp.br/campus/gua/images/Biblioteca/tutoriais/Manual_de_normalizacao._Atualizacao_2024.pdf"
+      },
+      {
+        "titulo": "UERN, Manual de normalização do SIB (2025)",
+        "url": "https://portal.uern.br/dsib/wp-content/uploads/sites/2/2025/02/MANUAL-DE-NORMALIZACAO-SIBUERN-2025.pdf"
+      },
+      {
+        "titulo": "UNISA, Manual de normatização ABNT (2025)",
+        "url": "https://www.unisa.br/wp-content/uploads/2025/04/2025_Manual-de-Normatizacao_ABNT.pdf"
+      }
+    ]
+  },
+  {
+    "slug": "titulos-e-subtitulos-abnt",
+    "prioridade": 11,
+    "categoria": "Formatação do trabalho",
+    "rotulo": "Títulos e subtítulos ABNT",
+    "ferramentas": [
+      "sumario"
+    ],
+    "titulo": "Títulos e subtítulos ABNT: numeração progressiva",
+    "h1": "Títulos e subtítulos ABNT: numeração progressiva",
+    "descricao": "Como numerar títulos e subtítulos pela ABNT (NBR 6024): 1, 1.1, 1.1.1, destaque de cada nível, o que não leva número e erros comuns.",
+    "lead": "Como numerar as seções de 1 a 5 níveis, o que fica sem número e como destacar cada título.",
+    "resumoIndice": "Numeração progressiva de 1 a 5 níveis, destaque de cada título e títulos sem número.",
+    "norma": "ABNT NBR 6024:2012",
+    "atualizado": "2026-10-15",
+    "ferramenta": {
+      "nome": "Gerador de sumário ABNT",
+      "texto": "Adicione as seções e a numeração progressiva (1, 1.1, 1.1.1…) sai sozinha, com o destaque de cada nível.",
+      "botao": "Criar meu sumário",
+      "url": "/gerador-de-sumario-abnt/"
+    },
+    "relacionadas": [
+      "sumario-automatico-word",
+      "numeracao-de-paginas-abnt",
+      "normas-abnt-tcc"
+    ],
+    "fontes": [
+      {
+        "titulo": "UFV, Normalização de trabalhos acadêmicos (2025), com a NBR 14724:2024",
+        "url": "https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf"
+      },
+      {
+        "titulo": "UERN, Manual de normalização do SIB (2025)",
+        "url": "https://portal.uern.br/dsib/wp-content/uploads/sites/2/2025/02/MANUAL-DE-NORMALIZACAO-SIBUERN-2025.pdf"
+      },
+      {
+        "titulo": "UNISA, Manual de normatização ABNT (2025)",
+        "url": "https://www.unisa.br/wp-content/uploads/2025/04/2025_Manual-de-Normatizacao_ABNT.pdf"
+      },
+      {
+        "titulo": "UFRGS (BIBBIO), Formatação de trabalhos acadêmicos no Word",
+        "url": "https://www.ufrgs.br/bibbio/formatacao-de-trabalhos-academicos-no-word/"
+      }
+    ]
+  },
+  {
+    "slug": "numeracao-de-paginas-abnt",
+    "prioridade": 12,
+    "categoria": "Formatação do trabalho",
+    "rotulo": "Numeração de páginas ABNT",
+    "ferramentas": [
+      "sumario"
+    ],
+    "titulo": "Numeração de páginas ABNT: onde começa e como fazer",
+    "h1": "Numeração de páginas ABNT: de onde conta e onde aparece",
+    "descricao": "Numeração de páginas ABNT: de onde a contagem começa, em que página o número aparece, posição no canto e como fazer no Word.",
+    "lead": "As páginas são contadas desde a folha de rosto, mas o número só aparece na parte textual. Veja como fazer no Word.",
+    "resumoIndice": "De onde as páginas são contadas, onde o número aparece, a posição no canto e como fazer no Word.",
+    "norma": "ABNT NBR 14724:2024",
+    "atualizado": "2026-10-15",
+    "ferramenta": {
+      "nome": "Gerador de sumário ABNT",
+      "texto": "Depois de numerar, monte o sumário com as páginas de cada seção. Baixe em PDF ou Word.",
+      "botao": "Criar meu sumário",
+      "url": "/gerador-de-sumario-abnt/"
+    },
+    "relacionadas": [
+      "sumario-automatico-word",
+      "titulos-e-subtitulos-abnt",
+      "normas-abnt-no-word"
+    ],
+    "fontes": [
+      {
+        "titulo": "UFV, Normalização de trabalhos acadêmicos (2025), com a NBR 14724:2024",
+        "url": "https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf"
+      },
+      {
+        "titulo": "UFRGS (BIBBIO), Formatação de trabalhos acadêmicos no Word",
+        "url": "https://www.ufrgs.br/bibbio/formatacao-de-trabalhos-academicos-no-word/"
+      },
+      {
+        "titulo": "Unifesp, Manual de normalização (atualização 2024)",
+        "url": "https://unifesp.br/campus/gua/images/Biblioteca/tutoriais/Manual_de_normalizacao._Atualizacao_2024.pdf"
+      },
+      {
+        "titulo": "UERN, Manual de normalização do SIB (2025)",
+        "url": "https://portal.uern.br/dsib/wp-content/uploads/sites/2/2025/02/MANUAL-DE-NORMALIZACAO-SIBUERN-2025.pdf"
+      }
+    ]
+  },
+  {
+    "slug": "fonte-e-espacamento-abnt",
+    "prioridade": 13,
+    "categoria": "Formatação do trabalho",
+    "rotulo": "Fonte e espaçamento ABNT",
+    "titulo": "Fonte e espaçamento ABNT: tamanho 12 e entrelinhas 1,5",
+    "h1": "Fonte e espaçamento ABNT: tamanho, entrelinhas e exceções",
+    "descricao": "Fonte e espaçamento ABNT: Arial ou Times 12, entrelinhas 1,5 e as exceções em espaço simples: citações longas, notas, referências e legendas.",
+    "lead": "Tamanho 12 e entrelinhas 1,5, e a lista do que usa fonte menor e espaço simples.",
+    "resumoIndice": "Tamanho 12, entrelinhas 1,5 e as exceções: citações longas, notas, referências e legendas.",
+    "norma": "ABNT NBR 14724:2024",
+    "atualizado": "2026-10-15",
+    "ferramenta": {
+      "nome": "Gerador de capa ABNT",
+      "texto": "A capa sai em Arial ou Times New Roman 12, com espaçamento 1,5, como a norma recomenda.",
+      "botao": "Criar minha capa",
+      "url": "/gerador-de-capa-abnt/"
+    },
+    "relacionadas": [
+      "margens-abnt",
+      "normas-abnt-no-word",
+      "citacao-abnt"
+    ],
+    "fontes": [
+      {
+        "titulo": "UFV, Normalização de trabalhos acadêmicos (2025), com a NBR 14724:2024",
+        "url": "https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf"
+      },
+      {
+        "titulo": "Unifesp, Manual de normalização (atualização 2024)",
+        "url": "https://unifesp.br/campus/gua/images/Biblioteca/tutoriais/Manual_de_normalizacao._Atualizacao_2024.pdf"
+      },
+      {
+        "titulo": "UERN, Manual de normalização do SIB (2025)",
+        "url": "https://portal.uern.br/dsib/wp-content/uploads/sites/2/2025/02/MANUAL-DE-NORMALIZACAO-SIBUERN-2025.pdf"
+      },
+      {
+        "titulo": "UNISA, Manual de normatização ABNT (2025)",
+        "url": "https://www.unisa.br/wp-content/uploads/2025/04/2025_Manual-de-Normatizacao_ABNT.pdf"
+      }
+    ]
+  }
+]

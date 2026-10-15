@@ -1,0 +1,38 @@
+[
+  {
+    "p": "Como fazer a referência de um site na ABNT?",
+    "r": ["Na ordem: autor, título da página, local e data, o nome do site depois de \"Portal:\", \"Disponível em:\" com o endereço e \"Acesso em:\" com a data em que você abriu a página. Por exemplo: LIMA, Carlos. <strong>Como organizar o tempo de estudo</strong>. São Paulo, 10 mar. 2025. Portal: Exemplo Educação. Disponível em: https://www.exemplo.com.br/tempo-de-estudo. Acesso em: 15 out. 2026."]
+  },
+  {
+    "p": "Como fazer a referência de um site sem autor?",
+    "r": ["A referência começa pelo título, com a primeira palavra (e o artigo ou a palavra de uma sílaba que a abre) em letras maiúsculas. Nesse caso, o título não leva negrito, itálico nem sublinhado: ORGANIZAÇÃO do tempo de estudo. São Paulo, 2025. Portal: Exemplo Educação. Disponível em: ... Acesso em: ..."]
+  },
+  {
+    "p": "A data de acesso é obrigatória?",
+    "r": ["Sim, nos documentos da internet. A NBR 6023:2018 pede o endereço eletrônico depois de \"Disponível em:\" e a data de acesso depois de \"Acesso em:\". A única exceção são os documentos cujo endereço eletrônico não está disponível."]
+  },
+  {
+    "p": "Qual data de acesso eu coloco?",
+    "r": ["A data em que você abriu e leu a página, no formato dia, mês abreviado e ano: 15 out. 2026. Anote no momento da leitura, porque as páginas mudam e podem sair do ar."]
+  },
+  {
+    "p": "Como escrever \"Disponível em\" na referência?",
+    "r": ["Escreva \"Disponível em:\" (com dois-pontos) e, em seguida, o endereço completo da página, sem sinais extras. Depois do endereço, ponto final e \"Acesso em:\" com a data."]
+  },
+  {
+    "p": "O que fazer se o site não tem data de publicação?",
+    "r": ["Procure a data de atualização ou o ano do copirraite no rodapé (c2024, escrito com a letra c e sem espaço). Se não houver nenhuma, indique um ano aproximado entre colchetes, como [2025?] para ano provável ou [ca. 2020] para ano aproximado."]
+  },
+  {
+    "p": "Como fazer a referência de uma notícia, de um blog ou de um post do Instagram?",
+    "r": ["A notícia segue o modelo de página de site, com o jornal depois de \"Portal:\". O texto de blog leva \"In:\" e o nome do blog. A publicação em rede social (Instagram, Facebook, X) traz o nome da rede e o perfil depois da data, como em Instagram: @exemplo.estudos. Os três terminam com \"Disponível em:\" e \"Acesso em:\"."]
+  },
+  {
+    "p": "Posso usar o nome do site como autor?",
+    "r": ["Só quando o autor é a própria instituição dona do site, como uma universidade ou um ministério. Se a página tem um autor, ele abre a referência, e o nome do site vai depois de \"Portal:\"."]
+  },
+  {
+    "p": "Como citar o site no texto do trabalho?",
+    "r": ["Pelo autor e pelo ano, como em Lima (2025) ou (Lima, 2025). Sem autor, usa-se a primeira palavra do título seguida de [...]: (Organização [...], 2025). Veja a <a href=\"/guias/citacao-abnt/\">guia de citação ABNT</a>."]
+  }
+]

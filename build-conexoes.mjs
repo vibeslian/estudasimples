@@ -64,7 +64,9 @@ export function preparaConexoes(config) {
       </aside>`;
     }
     const extra = slot.endsWith("abaixo-da-ferramenta") ? " anuncio--separado" : slot.endsWith("lateral") ? " anuncio--lateral" : "";
-    return `<div class="anuncio${extra}" data-slot="${slot}" aria-hidden="true"><span>Anúncio</span></div>`;
+    // com o AdSense desligado o espaço não ocupa lugar (nenhum buraco na página); ligado, ele reserva a altura para não haver saltos
+    const desligado = an.adsenseAtivo === true ? "" : " anuncio--desligado";
+    return `<div class="anuncio${extra}${desligado}" data-slot="${slot}" aria-hidden="true"><span>Anúncio</span></div>`;
   };
 
   const itens = [...per.passos, per.final];

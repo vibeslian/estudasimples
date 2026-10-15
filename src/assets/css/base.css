@@ -168,7 +168,8 @@ a.cartao:active { transform: scale(.985); }
 @media (min-width: 640px) { .nav .nav-cta { display: inline-flex; min-height: 42px; padding: 8px 18px; margin-left: 6px; } }
 @media (max-width: 480px) { .nav a { padding: 8px 10px; font-size: .92rem; } .logo { font-size: 1.35rem; } .nav .nav-sobre { display: none; } }
 @media (max-width: 760px) { .nav .nav-ferramentas { display: none; } }
-@media (max-width: 400px) { .nav .nav-extra { display: none; } .nav a { padding: 8px 6px; } }
+@media (max-width: 400px) { .nav .nav-extra { display: none; } .nav { gap: 2px; } .nav a { padding: 8px 5px; font-size: .86rem; } .logo { font-size: 1.15rem; } }
+@media (max-width: 340px) { .header-inner { gap: 6px; } .nav a { padding: 8px 4px; } .logo { font-size: 1.05rem; } }
 
 /* ---------- Respeita quem pediu menos movimento ---------- */
 @media (prefers-reduced-motion: reduce) {

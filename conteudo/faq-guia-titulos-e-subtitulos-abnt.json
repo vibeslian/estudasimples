@@ -1,0 +1,38 @@
+[
+  {
+    "p": "Como numerar títulos e subtítulos na ABNT?",
+    "r": ["Com algarismos arábicos e numeração progressiva: 1, 1.1, 1.1.1, 1.1.1.1 e 1.1.1.1.1. As seções primárias recebem números inteiros a partir de 1, e as demais recebem o número da seção a que pertencem, um ponto e o número de ordem."]
+  },
+  {
+    "p": "Posso colocar ponto ou hífen depois do número do título?",
+    "r": ["Não. Entre o número e o título há só um espaço, sem ponto, hífen, travessão ou parênteses. O certo é \"1 Introdução\", e não \"1. Introdução\" nem \"1 - Introdução\"."]
+  },
+  {
+    "p": "Até quantos níveis posso ter?",
+    "r": ["Até cinco, a seção quinária (1.1.1.1.1). A norma pede que a numeração progressiva seja limitada a esse ponto."]
+  },
+  {
+    "p": "A Introdução recebe número?",
+    "r": ["Pela norma, sim: é a seção 1 (1 INTRODUÇÃO). Alguns manuais de faculdades, em áreas de humanas, deixam a Introdução sem número, e nesse caso vale o manual da sua instituição."]
+  },
+  {
+    "p": "Quais títulos não levam número?",
+    "r": ["Errata, agradecimentos, listas (de ilustrações, de abreviaturas e siglas, de símbolos), resumo, abstract, sumário, referências, glossário, apêndice, anexo e índice. O título deles vai centralizado, com o destaque das seções primárias. A folha de aprovação, a dedicatória e a epígrafe não têm título."]
+  },
+  {
+    "p": "Como destacar os títulos de cada nível?",
+    "r": ["A norma pede um destaque diferente para cada nível, da primária à quinária, com maiúsculas, negrito, itálico, sublinhado ou outros recursos, e não define qual vai em qual nível. O essencial é o destaque ser o mesmo no texto e no sumário."]
+  },
+  {
+    "p": "Todo título de seção primária começa em uma página nova?",
+    "r": ["Em monografias, TCCs, dissertações e teses, sim: o título de cada seção primária começa numa página nova, no alto da área de texto. Em artigos científicos, as seções seguem em sequência."]
+  },
+  {
+    "p": "O título tem mais de uma linha. Como alinhar?",
+    "r": ["A segunda linha fica embaixo da primeira letra da primeira palavra do título, e não embaixo do número."]
+  },
+  {
+    "p": "Como fazer a numeração dos títulos no Word?",
+    "r": ["Aplique os estilos Título 1, Título 2 e seguintes aos títulos, ajuste o visual de cada estilo e numere os títulos, à mão ou com a Lista de Vários Níveis, que recalcula os números quando você muda a ordem. Depois, o sumário automático lê esses estilos. Veja a <a href=\"/guias/sumario-automatico-word/\">guia de sumário automático no Word</a>."]
+  }
+]

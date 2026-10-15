@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  {{include:head-common}}
+  {{GUIA_HEAD}}
+  {{FAQ_JSONLD:guia-referencia-de-site-abnt}}
+</head>
+<body class="guia">
+{{GUIA_HERO}}
+<main id="conteudo">
+<div class="container conteudo-capa">
+  <div class="conteudo-grade">
+    <article class="artigo">
+
+      <div class="resposta">
+        <strong class="resposta-titulo">Resposta direta</strong>
+        <p>A referência de uma página da internet segue esta ordem: <strong>AUTOR. Título. Local, data. Portal: Nome do site. Disponível em: endereço. Acesso em: dia mês ano.</strong></p>
+        <p>O endereço vem depois de <em>Disponível em:</em> e a data em que você abriu a página vem depois de <em>Acesso em:</em>. Sem autor, a referência começa pelo título, com a primeira palavra em letras maiúsculas.</p>
+      </div>
+
+      <nav class="indice-guia" aria-label="Neste guia">
+        <strong>Neste guia</strong>
+        <ol>
+          <li><a href="#de-onde-sai">De onde sai cada dado</a></li>
+          <li><a href="#com-autor">Site com autor</a></li>
+          <li><a href="#sem-autor">Site sem autor</a></li>
+          <li><a href="#acesso">Disponível em e data de acesso</a></li>
+          <li><a href="#outros">Notícia, blog, rede social e PDF</a></li>
+          <li><a href="#sem-data">Quando o site não tem data</a></li>
+          <li><a href="#no-texto">Como citar o site no texto</a></li>
+          <li><a href="#erros">Erros comuns</a></li>
+          <li><a href="#perguntas-frequentes">Perguntas frequentes</a></li>
+        </ol>
+      </nav>
+
+      <section id="de-onde-sai">
+        <h2>De onde sai cada dado da referência</h2>
+        <p>Abra a página e procure o autor, o título, a data de publicação e o nome do site. Cada dado entra na referência no lugar mostrado pela mesma cor:</p>
+        <div class="mock-site" aria-hidden="true">
+          <div class="mock-barra"><span></span><span></span><span></span><b><mark style="--c:#d9e5f2">https://www.exemplo.com.br/tempo-de-estudo</mark></b></div>
+          <div class="mock-corpo">
+            <p class="mock-nome"><mark style="--c:#e6e1f3">Exemplo Educação</mark></p>
+            <p class="mock-titulo"><mark style="--c:#fbe0d6">Como organizar o tempo de estudo</mark></p>
+            <p class="mock-autor">Por <mark style="--c:#dcebd9">Carlos Lima</mark> · <mark style="--c:#fdf0c8">10 de março de 2025</mark></p>
+            <p class="mock-linha"></p><p class="mock-linha"></p><p class="mock-linha mock-linha--curta"></p>
+          </div>
+        </div>
+        <div class="anat">
+          <p><mark style="--c:#dcebd9">LIMA, Carlos</mark>. <mark style="--c:#fbe0d6"><strong>Como organizar o tempo de estudo</strong></mark>. São Paulo, <mark style="--c:#fdf0c8">10 mar. 2025</mark>. Portal: <mark style="--c:#e6e1f3">Exemplo Educação</mark>. Disponível em: <mark style="--c:#d9e5f2">https://www.exemplo.com.br/tempo-de-estudo</mark>. Acesso em: 15 out. 2026.</p>
+          <p class="legenda"><span style="--c:#dcebd9">Autor</span><span style="--c:#fbe0d6">Título da página</span><span style="--c:#fdf0c8">Data de publicação</span><span style="--c:#e6e1f3">Nome do site</span><span style="--c:#d9e5f2">Endereço</span></p>
+        </div>
+        <p>A cidade (aqui, São Paulo) entra quando aparece na página; se não aparece, use [S. l.]. O dia e o mês, em geral, só entram quando a página os informa, e o mês é abreviado: jan., fev., mar., abr., maio, jun., jul., ago., set., out., nov., dez. Os exemplos desta guia são inventados.</p>
+      </section>
+
+      <section id="com-autor">
+        <h2>Site com autor</h2>
+        <div class="exemplos">
+          <div class="exemplo"><span class="exemplo-tipo">Página de um site, com autor</span><p>LIMA, Carlos. <strong>Como organizar o tempo de estudo</strong>. São Paulo, 10 mar. 2025. Portal: Exemplo Educação. Disponível em: https://www.exemplo.com.br/tempo-de-estudo. Acesso em: 15 out. 2026.</p></div>
+          <div class="exemplo"><span class="exemplo-tipo">Site inteiro, de uma instituição (autor é a entidade)</span><p>UNIVERSIDADE EXEMPLO. Biblioteca Central. Recife, 2025. Portal. Disponível em: https://www.universidadeexemplo.edu.br/biblioteca. Acesso em: 15 out. 2026.</p><span class="exemplo-nota">Quando o autor é uma instituição, a entrada é o nome dela, em maiúsculas.</span></div>
+        </div>
+      </section>
+
+      {{ESPACO:guia-meio-1}}
+
+      <section id="sem-autor">
+        <h2>Site sem autor</h2>
+        <p>Se nenhum autor aparece, nem pessoa nem instituição responsável, a referência começa pelo título, e a <strong>primeira palavra do título vai em letras maiúsculas</strong>, junto com o artigo ou a palavra de uma sílaba que a abre. Como a maiúscula já destaca o título, ele não leva negrito, itálico nem sublinhado.</p>
+        <div class="exemplos">
+          <div class="exemplo"><span class="exemplo-tipo">Página sem autor</span><p>ORGANIZAÇÃO do tempo de estudo. São Paulo, 2025. Portal: Exemplo Educação. Disponível em: https://www.exemplo.com.br/organizacao. Acesso em: 15 out. 2026.</p></div>
+          <div class="exemplo"><span class="exemplo-tipo">Título que começa por artigo</span><p>OS MELHORES hábitos de estudo para o TCC. [S. l.], 2025. Portal: Exemplo Educação. Disponível em: https://www.exemplo.com.br/habitos. Acesso em: 15 out. 2026.</p></div>
+        </div>
+        <aside class="dica"><strong class="dica-titulo">O nome do site não é o autor</strong><p>Quando a página tem autor, o nome do site vai depois de "Portal:". Só quando o autor é a própria instituição dona do site (uma universidade, um ministério, uma empresa) é que o nome dela abre a referência.</p></aside>
+      </section>
+
+      <section id="acesso">
+        <h2>"Disponível em" e a data de acesso</h2>
+        <p>Nos documentos da internet, além dos dados da obra, a NBR 6023:2018 pede o endereço eletrônico e a data de acesso, cada um com a sua expressão:</p>
+        <ul>
+          <li><strong>Disponível em:</strong> o endereço completo da página, o mesmo que aparece no navegador.</li>
+          <li><strong>Acesso em:</strong> a data em que você abriu a página, no formato dia, mês abreviado e ano: Acesso em: 15 out. 2026.</li>
+        </ul>
+        <p>A data de acesso importa porque as páginas mudam e desaparecem: ela mostra qual versão você leu. Por isso, deixe para anotar o acesso na hora de ler a página, e não no fim do trabalho. Se o documento não tem endereço eletrônico disponível, a regra não se aplica.</p>
+      </section>
+
+      {{GUIA_FERRAMENTA}}
+
+      <section id="outros">
+        <h2>Notícia, blog, rede social e PDF na internet</h2>
+        <div class="exemplos">
+          <div class="exemplo"><span class="exemplo-tipo">Notícia de portal de jornal</span><p>MENDES, Paula. <strong>Escolas ampliam o uso de tecnologia em sala de aula</strong>. [S. l.], 2025. Portal: Jornal Exemplo. Disponível em: https://www.jornalexemplo.com.br/educacao/escolas-tecnologia. Acesso em: 15 out. 2026.</p></div>
+          <div class="exemplo"><span class="exemplo-tipo">Texto de blog</span><p>ROCHA, Bruna. Dicas para fichar um livro. In: ROCHA, Bruna. <strong>Blog Estudo em Dia</strong>. [Recife], 22 maio 2024. Disponível em: https://www.exemplo.com.br/blog/fichar-livro. Acesso em: 15 out. 2026.</p><span class="exemplo-nota">Como o texto é parte do blog, o destaque vai no nome do blog, depois de "In:".</span></div>
+          <div class="exemplo"><span class="exemplo-tipo">Publicação em rede social (Instagram)</span><p>DICAS de estudo para o TCC. Recife, 3 jun. 2025. Instagram: @exemplo.estudos. Disponível em: https://www.instagram.com/exemplo.estudos/. Acesso em: 15 out. 2026.</p><span class="exemplo-nota">Sem autor, a entrada é pelo título, com a primeira palavra em maiúsculas. O mesmo modelo serve para Facebook e X.</span></div>
+          <div class="exemplo"><span class="exemplo-tipo">PDF encontrado na internet</span><p>BRASIL. Ministério da Educação. <strong>Guia de estudos para o ensino superior</strong>. Brasília, DF: MEC, 2022. Disponível em: https://www.exemplo.gov.br/guia-de-estudos.pdf. Acesso em: 15 out. 2026.</p><span class="exemplo-nota">Um documento que existe também no papel (livro, relatório) é referenciado como o documento, e depois vêm o "Disponível em" e o "Acesso em".</span></div>
+        </div>
+      </section>
+
+      <section id="sem-data">
+        <h2>Quando o site não tem data</h2>
+        <p>Toda referência precisa de uma data. Procure a data de publicação, a de atualização ou o ano do copirraite no rodapé (escrito com a letra c e sem espaço, como c2024). Se nada disso existir, indique um ano aproximado entre colchetes: [2025?] (ano provável), [ca. 2020] (ano aproximado) ou [201-?] (década provável).</p>
+      </section>
+
+      {{ESPACO:guia-meio-2}}
+
+      <section id="no-texto">
+        <h2>Como citar o site no texto</h2>
+        <p>No corpo do trabalho, você cita o site como qualquer fonte, pelo autor e pelo ano: Lima (2025) ou (Lima, 2025). Sem autor, usa-se a primeira palavra do título, seguida de [...] e do ano: (Organização [...], 2025). Mais exemplos na <a href="/guias/citacao-abnt/">guia de citação ABNT</a>.</p>
+      </section>
+
+      <section id="erros">
+        <h2>Erros comuns na referência de site</h2>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Colocar só o link, sem autor, título e data.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Referência completa, com o link depois de "Disponível em:".</p></div></div>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Esquecer o "Acesso em:" com a data.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Sempre terminar com a data em que você abriu a página.</p></div></div>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Usar o nome do site como autor quando a página tem autor.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>O autor da página abre a referência; o site vai depois de "Portal:".</p></div></div>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Escrever o título todo em minúsculas, ou todo em maiúsculas, quando não há autor.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Só a primeira palavra do título em maiúsculas (e o artigo ou a palavra de uma sílaba que a abre).</p></div></div>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Referenciar o endereço da página inicial do site no lugar da página que você leu.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Usar o endereço da página exata em que está a informação.</p></div></div>
+      </section>
+
+      <section id="perguntas-frequentes">
+        <h2>Perguntas frequentes sobre referência de site</h2>
+        {{FAQ_HTML:guia-referencia-de-site-abnt}}
+      </section>
+
+      {{GUIA_RELACIONADAS}}
+
+      {{GUIA_FONTES}}
+
+    </article>
+    <aside class="lateral" aria-label="Publicidade">
+      {{ESPACO:guia-lateral}}
+    </aside>
+  </div>
+</div>
+</main>
+{{include:footer}}
+</body>
+</html>

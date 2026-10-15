@@ -1,0 +1,38 @@
+[
+  {
+    "p": "Qual é a margem ABNT em centímetros?",
+    "r": [
+      "Esquerda e superior de 3 cm, direita e inferior de 2 cm, na folha A4. É o que a NBR 14724:2024 define para a frente da folha (o anverso)."
+    ]
+  },
+  {
+    "p": "A capa também segue as margens ABNT?",
+    "r": [
+      "Sim, na prática. Os manuais de bibliotecas, como o da UERN, aplicam as mesmas margens a todas as páginas do TCC, e a capa entra nisso. Veja o <a href=\"/gerador-de-capa-abnt/?origem=guia-margens-abnt\">gerador de capa</a>, que já usa 3, 3, 2 e 2 cm."
+    ]
+  },
+  {
+    "p": "As margens são as mesmas no verso da folha?",
+    "r": [
+      "Não. No verso, direita e superior têm 3 cm, e esquerda e inferior têm 2 cm. Isso só importa se você imprimir dos dois lados; em PDF ou impresso de um lado só, valem as margens do anverso."
+    ]
+  },
+  {
+    "p": "Quanto mede a área de texto na folha A4?",
+    "r": [
+      "16 cm de largura (21 menos 3 e menos 2) por 24,7 cm de altura (29,7 menos 3 e menos 2)."
+    ]
+  },
+  {
+    "p": "O número da página fica dentro da margem?",
+    "r": [
+      "Fica na região da margem superior: a 2 cm da borda de cima e com o último algarismo a 2 cm da borda direita. Veja como na <a href=\"/guias/numeracao-de-paginas-abnt/\">guia de numeração de páginas</a>."
+    ]
+  },
+  {
+    "p": "Minha faculdade pede margens diferentes. Qual vale?",
+    "r": [
+      "Vale a da faculdade. A ABNT é a base, mas muitas instituições têm manual próprio e a banca segue o dele. Pergunte ao orientador ou à biblioteca antes de entregar."
+    ]
+  }
+]

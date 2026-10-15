@@ -1,0 +1,123 @@
+/* Guias ABNT (/guias/): topo com migalhas, resposta direta, tabelas, diagramas da folha (SVG), exemplos de referência,
+   caixa da ferramenta, guias relacionadas e fontes. Os blocos gerais (passos, dica, regras, comparar, faq) vêm de components.css. */
+
+/* ---------- topo ---------- */
+.migalhas { margin: 0 0 14px; font-size: .9rem; }
+.migalhas ol { display: flex; flex-wrap: wrap; gap: 4px 6px; margin: 0; padding: 0; list-style: none; color: var(--texto-suave); }
+.migalhas li + li::before { content: "›"; margin-right: 6px; }
+.migalhas a { color: var(--principal); font-weight: 700; }
+.guia-meta { margin: 14px 0 0; font-size: .92rem; color: var(--texto-suave); }
+
+/* ---------- texto ---------- */
+.guia .artigo { max-width: 720px; }
+.guia .artigo h2 { scroll-margin-top: 16px; }
+.guia .artigo h3 { margin-top: 1.6em; }
+.guia .artigo ul, .guia .artigo ol { padding-left: 1.3em; }
+.guia .artigo li { margin-bottom: .45em; }
+.resposta { margin: 0 0 1.6em; padding: 18px 20px; background: var(--salvia-50); border: 1px solid var(--salvia-300); border-left: 5px solid var(--principal); border-radius: var(--raio-pequeno); }
+.resposta-titulo { display: block; margin-bottom: 6px; font-family: var(--fonte-titulo); font-weight: 800; color: var(--principal); }
+.resposta p { margin: 0 0 .6em; }
+.resposta p:last-child { margin-bottom: 0; }
+.resposta ul { margin: .4em 0 0; }
+.indice-guia { margin: 0 0 1.6em; padding: 14px 20px; background: var(--superficie); border: 1px solid var(--salvia-200); border-radius: var(--raio-pequeno); }
+.indice-guia strong { display: block; margin-bottom: 4px; font-family: var(--fonte-titulo); color: var(--principal); }
+.indice-guia ol { margin: 0; columns: 2 16rem; column-gap: 28px; }
+.indice-guia li { break-inside: avoid; }
+code.cm { font-family: inherit; font-weight: 700; background: var(--salvia-100); padding: 0 .3em; border-radius: 4px; }
+
+/* ---------- tabelas ---------- */
+.rolavel { overflow-x: auto; margin: 0 0 1.4em; -webkit-overflow-scrolling: touch; }
+.tabela-guia { width: 100%; min-width: 480px; border-collapse: collapse; font-size: .95rem; background: var(--superficie); border: 1px solid var(--salvia-200); }
+.tabela-guia caption { padding: 0 0 8px; text-align: left; font-weight: 700; color: var(--texto-suave); caption-side: top; }
+.tabela-guia th, .tabela-guia td { padding: 10px 12px; border-bottom: 1px solid var(--salvia-200); text-align: left; vertical-align: top; }
+.tabela-guia th { background: var(--salvia-100); font-family: var(--fonte-titulo); font-weight: 800; color: var(--principal); }
+.tabela-guia tr:last-child td { border-bottom: 0; }
+.sim { color: var(--certo-texto); font-weight: 700; }
+.nao { color: var(--erro-texto); font-weight: 700; }
+
+/* ---------- diagramas (SVG) ---------- */
+.diagrama { margin: 1.6em 0; }
+.diagrama svg { display: block; width: 100%; max-width: 440px; height: auto; margin: 0 auto; border-radius: 6px; box-shadow: var(--sombra-forte); background: #fff; }
+.diagrama--largo svg { max-width: 640px; }
+.diagrama figcaption { margin-top: 10px; text-align: center; font-size: .92rem; color: var(--texto-suave); }
+.diagrama text { font-family: Arial, "Liberation Sans", Arimo, sans-serif; }
+.pares { display: grid; gap: 22px; margin: 1.6em 0; }
+@media (min-width: 720px) { .pares { grid-template-columns: 1fr 1fr; } }
+.pares .diagrama { margin: 0; }
+
+/* ---------- caminho de menus (Word, Google Docs) ---------- */
+.caminho { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; margin: 0 2px; vertical-align: baseline; }
+.caminho span { padding: 1px 9px; background: var(--salvia-100); border: 1px solid var(--salvia-200); border-radius: 6px; font-size: .92em; font-weight: 700; color: var(--principal); white-space: nowrap; }
+.caminho i { font-style: normal; color: var(--texto-suave); }
+.tecla { display: inline-block; padding: 0 7px; background: var(--superficie); border: 1px solid var(--borda-campo); border-bottom-width: 2px; border-radius: 5px; font-size: .88em; font-weight: 700; }
+
+/* ---------- exemplos de referência e de citação ---------- */
+.exemplos { display: grid; gap: 12px; margin: 0 0 1.5em; }
+.exemplo { margin: 0; padding: 14px 18px; background: var(--superficie); border: 1px solid var(--salvia-200); border-left: 4px solid var(--salvia-500); border-radius: var(--raio-pequeno); }
+.exemplo-tipo { display: block; margin-bottom: 4px; font-family: var(--fonte-titulo); font-weight: 800; font-size: .95rem; color: var(--principal); }
+.exemplo p { margin: 0; line-height: 1.45; overflow-wrap: anywhere; }
+.exemplo p + p { margin-top: .5em; }
+.exemplo-nota { display: block; margin-top: 6px; font-size: .88rem; color: var(--texto-suave); }
+.ref-ano { white-space: nowrap; }
+.anat { display: grid; gap: 8px; margin: 0 0 1.5em; padding: 16px 18px; background: var(--superficie); border: 1px solid var(--salvia-200); border-radius: var(--raio-pequeno); }
+.anat p { margin: 0; line-height: 1.9; overflow-wrap: anywhere; }
+.anat mark { padding: 1px 4px; border-radius: 4px; background: var(--c, var(--salvia-100)); color: var(--texto); }
+.anat .legenda { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 4px; font-size: .88rem; color: var(--texto-suave); }
+.anat .legenda span::before { content: ""; display: inline-block; width: 10px; height: 10px; margin-right: 6px; border-radius: 3px; background: var(--c); border: 1px solid rgba(0, 0, 0, .15); }
+
+/* ---------- caixa da ferramenta ---------- */
+.guia-ferramenta { margin: 1.8em 0; padding: 20px 22px; background: linear-gradient(135deg, var(--salvia-50), var(--acento-claro)); border: 1px solid var(--salvia-200); border-radius: var(--raio); box-shadow: var(--sombra); }
+.guia-ferramenta-selo { display: inline-block; margin: 0 0 8px; padding: 3px 12px; border-radius: 999px; background: var(--superficie); color: var(--principal); font-weight: 700; font-size: .82rem; }
+.guia-ferramenta-titulo { margin: 0 0 4px; font-family: var(--fonte-titulo); font-weight: 800; font-size: 1.25rem; line-height: 1.2; }
+.guia-ferramenta-texto { margin: 0 0 14px; color: var(--texto-suave); }
+
+/* ---------- fontes ---------- */
+.guia-fontes { margin: 2.4em 0 0; padding-top: 1.4em; border-top: 1px solid var(--salvia-200); font-size: .93rem; color: var(--texto-suave); }
+.guia-fontes h2 { font-size: 1.25rem; }
+.guia-fontes ul { margin: 0 0 1em; }
+.guia-fontes li { overflow-wrap: anywhere; }
+.guia-fontes .padrao { margin: 0; }
+.guia-lista-capa { display: flex; flex-wrap: wrap; gap: 8px 10px; margin: 0 0 1.4em; padding: 0 !important; list-style: none; }
+.guia-lista-capa li { margin: 0 !important; }
+.guia-lista-capa a { display: inline-block; padding: 6px 14px; background: var(--salvia-100); border-radius: 999px; font-weight: 700; font-size: .92rem; text-decoration: none; color: var(--principal); }
+
+/* ---------- índice /guias/ ---------- */
+.guias-grande .guia-cartoes { grid-template-columns: 1fr; }
+@media (min-width: 600px) { .guias-grande .guia-cartoes { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .guias-grande .guia-cartoes { grid-template-columns: repeat(3, 1fr); } }
+.guia-destaque { margin: 0 0 2.4em; padding: 22px 24px; background: var(--superficie); border: 1px solid var(--salvia-300); border-radius: var(--raio); box-shadow: var(--sombra); }
+.guia-destaque h2 { margin-top: 0; font-size: 1.4rem; }
+.guias-grupo { margin: 0 0 2.2em; }
+.guias-grupo h2 { font-size: clamp(1.3rem, 3vw, 1.7rem); }
+
+/* ---------- janela de site (mostra de onde sai cada dado da referência) ---------- */
+.mock-site { margin: 0 0 1em; border: 1px solid var(--salvia-300); border-radius: var(--raio-pequeno); overflow: hidden; background: var(--superficie); box-shadow: var(--sombra); }
+.mock-barra { display: flex; align-items: center; gap: 6px; padding: 8px 12px; background: var(--salvia-100); font-size: .85rem; }
+.mock-barra span { width: 10px; height: 10px; border-radius: 50%; background: var(--salvia-300); flex: none; }
+.mock-barra b { flex: 1; min-width: 0; margin-left: 6px; padding: 3px 10px; background: #fff; border: 1px solid var(--salvia-200); border-radius: 999px; font-weight: 400; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mock-corpo { padding: 14px 18px 18px; }
+.mock-corpo p { margin: 0 0 .5em; }
+.mock-corpo mark { padding: 1px 4px; border-radius: 4px; background: var(--c); color: var(--texto); }
+.mock-nome { font-size: .85rem; font-weight: 700; color: var(--texto-suave); }
+.mock-titulo { font-family: var(--fonte-titulo); font-weight: 800; font-size: 1.3rem; line-height: 1.2; }
+.mock-autor { font-size: .9rem; color: var(--texto-suave); }
+.mock-linha { height: 8px; background: var(--salvia-100); border-radius: 4px; }
+.mock-linha--curta { width: 55%; }
+
+/* ---------- exemplo de numeração progressiva ---------- */
+.arvore { margin: 0 0 1.4em; padding: 14px 18px; background: var(--superficie); border: 1px solid var(--salvia-200); border-radius: var(--raio-pequeno); font-family: Arial, "Liberation Sans", Arimo, sans-serif; }
+.arvore p { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; margin: 0; padding: 4px 0; font-size: .98rem; }
+.arvore small { flex: none; font-family: var(--fonte-texto); font-size: .78rem; font-weight: 400; color: var(--texto-suave); text-transform: none; }
+.arvore .n1 { font-weight: 700; }
+.arvore .n2 { margin-left: 18px; font-weight: 700; }
+.arvore .n3 { margin-left: 36px; }
+.arvore .n4 { margin-left: 54px; }
+.arvore .n5 { margin-left: 72px; }
+@media (max-width: 420px) { .arvore .n3 { margin-left: 24px; } .arvore .n4 { margin-left: 36px; } .arvore .n5 { margin-left: 48px; } .arvore small { display: none; } }
+
+/* ---------- galeria de modelos de capa ---------- */
+.modelos-capa { display: grid; gap: 26px; margin: 1.6em 0; grid-template-columns: 1fr; }
+@media (min-width: 640px) { .modelos-capa { grid-template-columns: 1fr 1fr; } }
+.modelos-capa .diagrama { margin: 0; }
+.modelos-capa .diagrama svg { max-width: 320px; }
+.modelos-capa figcaption { font-weight: 700; color: var(--texto); }

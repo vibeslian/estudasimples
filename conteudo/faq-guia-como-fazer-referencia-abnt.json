@@ -1,0 +1,38 @@
+[
+  {
+    "p": "Qual é a ordem dos elementos de uma referência de livro na ABNT?",
+    "r": ["Autor, título e subtítulo, edição, local, editora e ano: AUTOR. Título: subtítulo. edição. Local: Editora, ano. O sobrenome do autor vai em maiúsculas, e o título recebe um destaque (negrito, itálico ou sublinhado)."]
+  },
+  {
+    "p": "A referência ABNT usa espaçamento 1,5?",
+    "r": ["Não. As referências ficam em espaço simples, alinhadas à margem esquerda e separadas entre si por uma linha em branco simples. O espaçamento 1,5 vale para o texto do trabalho, e as referências são uma das exceções."]
+  },
+  {
+    "p": "Como ordenar a lista de referências?",
+    "r": ["Em ordem alfabética pelo elemento de entrada (o sobrenome do primeiro autor), quando as citações do texto são do tipo autor-data. Se o trabalho usa citações numeradas, a lista segue a ordem numérica."]
+  },
+  {
+    "p": "Quantos autores devo colocar na referência?",
+    "r": ["Até três autores, todos, separados por ponto e vírgula. Com quatro ou mais, a norma recomenda indicar todos, mas permite colocar só o primeiro seguido de <em>et al.</em>"]
+  },
+  {
+    "p": "Preciso colocar a data de acesso?",
+    "r": ["Sim, nos documentos da internet. Depois dos elementos essenciais, vem o endereço precedido de \"Disponível em:\" e a data em que você consultou o documento, precedida de \"Acesso em:\" (por exemplo, Acesso em: 15 out. 2026)."]
+  },
+  {
+    "p": "Como fazer a referência de uma obra sem autor?",
+    "r": ["A entrada é feita pelo título, com a primeira palavra em letras maiúsculas (incluindo o artigo ou a palavra de uma sílaba que a abre). Nesse caso, o título não precisa de negrito, itálico ou sublinhado. Veja mais na <a href=\"/guias/referencia-de-site-abnt/\">guia de referência de site</a>."]
+  },
+  {
+    "p": "O que fazer quando o livro não tem ano?",
+    "r": ["Toda referência precisa de uma data, mesmo aproximada, entre colchetes: [2018?] para ano provável, [2017] para ano certo que não consta no item, [ca. 2015] para ano aproximado, [200-] para década certa e [201-?] para década provável."]
+  },
+  {
+    "p": "Como abreviar os meses na referência?",
+    "r": ["O mês vem abreviado, antes do ano: jan., fev., mar., abr., maio, jun., jul., ago., set., out., nov. e dez. Em artigos de revista, a data pode trazer dois meses separados por barra, como jul./dez. 2021."]
+  },
+  {
+    "p": "Qual é a diferença entre citação e referência?",
+    "r": ["A citação é a menção dentro do texto, com autor e ano, por exemplo (Silva, 2022). A referência é a descrição completa da obra, na lista do fim do trabalho. Veja como citar na <a href=\"/guias/citacao-abnt/\">guia de citação ABNT</a>."]
+  }
+]

@@ -72,7 +72,8 @@
   },
   "anuncios": {
     "_ajuda": "Cada espaço reservado pode ficar livre para o AdSense ('adsense') ou mostrar uma oferta própria ('oferta:<nome>'). Uma oferta desligada (ativa: false) devolve o espaço ao AdSense. No máximo uma oferta própria por página, só em meio-1, meio-2, lateral ou entre-secoes (nunca perto dos botões da ferramenta). O build avisa se algo estiver errado.",
-    "espacos": {
+    "adsenseAtivo": false,
+  "espacos": {
       "inicio-entre-secoes": "adsense",
       "capa-abaixo-da-ferramenta": "adsense",
       "capa-meio-1": "oferta:formatacao",
@@ -85,7 +86,10 @@
       "sumario-abaixo-da-ferramenta": "adsense",
       "sumario-meio-1": "oferta:formatacao",
       "sumario-meio-2": "adsense",
-      "sumario-lateral": "adsense"
+      "sumario-lateral": "adsense",
+      "guia-meio-1": "adsense",
+      "guia-meio-2": "adsense",
+      "guia-lateral": "adsense"
     },
     "ofertas": {
       "formatacao": {

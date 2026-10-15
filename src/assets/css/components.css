@@ -83,6 +83,11 @@
   .lateral { display: block; }
   .anuncio--lateral { display: block; width: 300px; min-height: 600px; margin: 0; position: sticky; top: 24px; }
 }
+/* AdSense desligado (site.config.json, anuncios.adsenseAtivo): o espaço não ocupa lugar. Ligado, reserva a altura. */
+.anuncio--desligado { display: none; }
+.conteudo-grade:has(.lateral .anuncio--desligado) { grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 1180px) { .conteudo-grade:has(.lateral .anuncio--desligado) { grid-template-columns: minmax(0, 720px); } }
+html:not(.ads-preview) .lateral:has(> .anuncio--desligado) { display: none !important; }
 .ads-preview .anuncio { display: grid; place-items: center; border: 2px dashed var(--borda-campo); border-radius: var(--raio-pequeno); background: repeating-linear-gradient(135deg, transparent 0 14px, rgba(95, 127, 104, .08) 14px 28px); color: var(--texto-suave); }
 .ads-preview .anuncio > span { display: block; font-weight: 700; letter-spacing: .04em; }
 .ads-preview .anuncio--lateral { display: none; }
@@ -136,3 +141,28 @@ a.percurso-item:hover { background: var(--salvia-50); border-color: var(--salvia
   .percurso-dica { display: none; }
   .percurso-nota { margin-top: 8px; font-size: .8rem; }
 }
+
+/* ---------- cartões de guias (relacionadas e índice) ---------- */
+.guia-cartoes { list-style: none; display: grid; gap: 12px; margin: 0; padding: 0 !important; }
+@media (min-width: 600px) { .guia-cartoes { grid-template-columns: repeat(2, 1fr); } }
+.guia-cartoes li { margin: 0 !important; }
+.guia-cartao { display: block; height: 100%; padding: 16px 18px; background: var(--superficie); border: 1px solid var(--salvia-200); border-radius: var(--raio-pequeno); color: var(--texto); text-decoration: none; }
+.guia-cartao:hover { border-color: var(--salvia-300); background: var(--salvia-50); }
+.guia-cartao-titulo { display: block; margin-bottom: 4px; font-family: var(--fonte-titulo); font-weight: 800; font-size: 1.08rem; line-height: 1.25; color: var(--principal); }
+.guia-cartao-texto { display: block; font-size: .93rem; color: var(--texto-suave); }
+.guia-relacionadas { margin: 2.4em 0 0; }
+@media (min-width: 640px) { @media (min-width: 960px) { 
+.guia-cartoes--tres { grid-template-columns: 1fr; }
+@media (min-width: 600px) { .guia-cartoes--tres { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 960px) { .guia-cartoes--tres { grid-template-columns: repeat(3, 1fr); } }
+
+/* ---------- modelo de sumário (exemplo na página do gerador de sumário) ---------- */
+.modelo-sumario { margin: 1.4em 0; }
+.ms-pagina { max-width: 560px; margin: 0 auto; padding: clamp(18px, 4vw, 34px); background: #fff; color: #000; border-radius: 6px; box-shadow: var(--sombra-forte); font-family: Arial, "Liberation Sans", Arimo, sans-serif; font-size: clamp(.78rem, 2.6vw, .95rem); line-height: 1.5; }
+.ms-titulo { margin: 0 0 1em; text-align: center; font-weight: 700; }
+.ms-pagina ul { list-style: none; margin: 0; padding: 0; }
+.ms-pagina li { display: grid; grid-template-columns: 3.2em minmax(0, auto) 1fr auto; align-items: end; }
+.ms-n1 .ms-t, .ms-n1 .ms-n, .ms-n2 .ms-t, .ms-n2 .ms-n { font-weight: 700; }
+.ms-l { margin: 0 .35em .4em; border-bottom: 2px dotted #555; min-width: .5em; }
+.ms-p { text-align: right; }
+.modelo-sumario figcaption { margin-top: 10px; text-align: center; font-size: .92rem; color: var(--texto-suave); }

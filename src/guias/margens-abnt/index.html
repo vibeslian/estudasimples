@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  {{include:head-common}}
+  {{GUIA_HEAD}}
+  {{FAQ_JSONLD:guia-margens-abnt}}
+</head>
+<body class="guia">
+{{GUIA_HERO}}
+<main id="conteudo">
+<div class="container conteudo-capa">
+  <div class="conteudo-grade">
+    <article class="artigo">
+
+      <div class="resposta">
+        <strong class="resposta-titulo">Resposta direta</strong>
+        <p>As margens ABNT são <strong>3 cm à esquerda</strong>, <strong>3 cm em cima</strong>, <strong>2 cm à direita</strong> e <strong>2 cm embaixo</strong>, em folha A4 (21 × 29,7 cm). É o que a NBR 14724:2024 define para a frente da folha (o anverso).</p>
+        <p>Se o trabalho for impresso dos dois lados, no verso a conta se inverte: 3 cm na direita e em cima, 2 cm na esquerda e embaixo.</p>
+      </div>
+
+      <nav class="indice-guia" aria-label="Neste guia">
+        <strong>Neste guia</strong>
+        <ol>
+          <li><a href="#medidas">As quatro medidas na folha</a></li>
+          <li><a href="#word">Como configurar no Word</a></li>
+          <li><a href="#google-docs">Como configurar no Google Docs</a></li>
+          <li><a href="#verso">Frente e verso</a></li>
+          <li><a href="#erros">Erros comuns</a></li>
+          <li><a href="#perguntas-frequentes">Perguntas frequentes</a></li>
+        </ol>
+      </nav>
+
+      {{GUIA_FERRAMENTA}}
+
+      <section id="medidas">
+        <h2>As quatro medidas na folha</h2>
+        <p>Veja como ficam as margens numa folha A4 em pé. As faixas verdes têm 3 cm e as faixas coral têm 2 cm. O que sobra no meio, de 16 × 24,7 cm, é a área onde o texto pode ficar.</p>
+
+        <figure class="diagrama">
+          <svg viewBox="0 0 210 297" role="img" aria-labelledby="m1-t m1-d" xmlns="http://www.w3.org/2000/svg">
+            <title id="m1-t">Folha A4 com as margens ABNT</title>
+            <desc id="m1-d">Margem esquerda de 3 cm, superior de 3 cm, direita de 2 cm e inferior de 2 cm. A área de texto mede 16 centímetros de largura por 24,7 de altura.</desc>
+            <defs>
+              <marker id="m1-seta" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto-start-reverse"><path d="M0,0 L6,3 L0,6 z" fill="#22362b"/></marker>
+            </defs>
+            <rect width="210" height="297" fill="#fff"/>
+            <rect x="0" y="0" width="210" height="30" fill="#e4ece3"/>
+            <rect x="0" y="30" width="30" height="247" fill="#e4ece3"/>
+            <rect x="0" y="277" width="210" height="20" fill="#fce6de"/>
+            <rect x="190" y="30" width="20" height="247" fill="#fce6de"/>
+            <rect x="30" y="30" width="160" height="247" fill="#fff" stroke="#3b5d4c" stroke-width=".8" stroke-dasharray="3 2"/>
+            <g fill="#cfd8d2">
+              <rect x="30" y="38" width="90" height="5" rx="1"/>
+              <rect x="30" y="52" width="160" height="2.2" rx="1"/><rect x="30" y="59" width="160" height="2.2" rx="1"/><rect x="30" y="66" width="160" height="2.2" rx="1"/><rect x="30" y="73" width="118" height="2.2" rx="1"/>
+              <rect x="30" y="87" width="160" height="2.2" rx="1"/><rect x="30" y="94" width="160" height="2.2" rx="1"/><rect x="30" y="101" width="160" height="2.2" rx="1"/><rect x="30" y="108" width="160" height="2.2" rx="1"/><rect x="30" y="115" width="96" height="2.2" rx="1"/>
+              <rect x="30" y="129" width="160" height="2.2" rx="1"/><rect x="30" y="136" width="160" height="2.2" rx="1"/><rect x="30" y="143" width="160" height="2.2" rx="1"/><rect x="30" y="150" width="160" height="2.2" rx="1"/><rect x="30" y="157" width="140" height="2.2" rx="1"/>
+              <rect x="30" y="171" width="160" height="2.2" rx="1"/><rect x="30" y="178" width="160" height="2.2" rx="1"/><rect x="30" y="185" width="160" height="2.2" rx="1"/><rect x="30" y="192" width="104" height="2.2" rx="1"/>
+              <rect x="30" y="206" width="160" height="2.2" rx="1"/><rect x="30" y="213" width="160" height="2.2" rx="1"/><rect x="30" y="220" width="160" height="2.2" rx="1"/><rect x="30" y="227" width="160" height="2.2" rx="1"/><rect x="30" y="234" width="150" height="2.2" rx="1"/>
+              <rect x="30" y="248" width="160" height="2.2" rx="1"/><rect x="30" y="255" width="160" height="2.2" rx="1"/><rect x="30" y="262" width="160" height="2.2" rx="1"/><rect x="30" y="269" width="72" height="2.2" rx="1"/>
+            </g>
+            <g stroke="#22362b" stroke-width=".7" fill="none">
+              <line x1="105" y1="2" x2="105" y2="28" marker-start="url(#m1-seta)" marker-end="url(#m1-seta)"/>
+              <line x1="2" y1="150" x2="28" y2="150" marker-start="url(#m1-seta)" marker-end="url(#m1-seta)"/>
+              <line x1="192" y1="150" x2="208" y2="150" marker-start="url(#m1-seta)" marker-end="url(#m1-seta)"/>
+              <line x1="105" y1="279" x2="105" y2="295" marker-start="url(#m1-seta)" marker-end="url(#m1-seta)"/>
+            </g>
+            <g font-weight="700" fill="#22362b" text-anchor="middle">
+              <text x="124" y="19" font-size="9" text-anchor="start">3 cm (superior)</text>
+              <text x="15" y="127" font-size="8">3 cm</text>
+              <text x="15" y="136" font-size="5.4">esquerda</text>
+              <text x="200" y="127" font-size="7">2 cm</text>
+              <text x="200" y="136" font-size="5">direita</text>
+              <text x="124" y="291" font-size="8" text-anchor="start">2 cm (inferior)</text>
+              <text x="110" y="168" font-size="7" fill="#3b5d4c" text-anchor="middle" stroke="#fff" stroke-width="2.4" paint-order="stroke">área de texto: 16 × 24,7 cm</text>
+            </g>
+          </svg>
+          <figcaption>Folha A4 em pé, desenhada na proporção real, com as margens ABNT do anverso.</figcaption>
+        </figure>
+
+        <div class="rolavel">
+          <table class="tabela-guia">
+            <caption>Margens por lado da folha</caption>
+            <thead><tr><th>Margem</th><th>Anverso (frente)</th><th>Verso</th></tr></thead>
+            <tbody>
+              <tr><td>Esquerda</td><td>3 cm</td><td>2 cm</td></tr>
+              <tr><td>Superior</td><td>3 cm</td><td>3 cm</td></tr>
+              <tr><td>Direita</td><td>2 cm</td><td>3 cm</td></tr>
+              <tr><td>Inferior</td><td>2 cm</td><td>2 cm</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>A conta da área de texto é simples: 21 cm de largura menos 3 e menos 2 dá 16 cm, e 29,7 cm de altura menos 3 e menos 2 dá 24,7 cm. As notas de rodapé também ficam dentro dessas margens, e as figuras e tabelas devem caber nelas.</p>
+      </section>
+
+      {{ESPACO:guia-meio-1}}
+
+      <section id="word">
+        <h2>Como configurar as margens no Word</h2>
+        <ol class="passos">
+          <li><div><h3>Escolha o papel A4</h3><p>Na aba <span class="caminho"><span>Layout</span></span> (ou Layout da Página), abra <span class="caminho"><span>Tamanho</span></span> e escolha <strong>A4</strong>. A orientação é <strong>Retrato</strong>.</p></div></li>
+          <li><div><h3>Abra as margens personalizadas</h3><p>Em <span class="caminho"><span>Layout</span><i>›</i><span>Margens</span><i>›</i><span>Margens Personalizadas…</span></span>.</p></div></li>
+          <li><div><h3>Digite as quatro medidas</h3><p>Superior <strong>3 cm</strong>, Inferior <strong>2 cm</strong>, Esquerda <strong>3 cm</strong> e Direita <strong>2 cm</strong>.</p></div></li>
+          <li><div><h3>Aplique ao documento todo</h3><p>Em "Aplicar a", deixe <strong>Documento inteiro</strong> e clique em OK. Se quiser que todo documento novo já comece assim, use "Definir como Padrão".</p></div></li>
+        </ol>
+        <aside class="dica"><strong class="dica-titulo">Por que mexer?</strong><p>A margem que o Word usa por padrão costuma ser a "Normal", de 2,54 cm nos quatro lados, e ela não atende à ABNT: faltam 0,46 cm na esquerda e em cima, e sobram 0,54 cm na direita e embaixo. Quem escreve com a margem padrão e só ajusta no fim costuma ver o texto mudar de página.</p></aside>
+      </section>
+
+      <section id="google-docs">
+        <h2>Como configurar as margens no Google Docs</h2>
+        <ol class="passos">
+          <li><div><h3>Abra a configuração da página</h3><p>Em <span class="caminho"><span>Arquivo</span><i>›</i><span>Configuração da página</span></span>.</p></div></li>
+          <li><div><h3>Confira o papel e as margens</h3><p>Em "Tamanho do papel", escolha <strong>A4</strong>. Nos campos de margem, digite superior <strong>3</strong>, inferior <strong>2</strong>, esquerda <strong>3</strong> e direita <strong>2</strong>. Confira se a unidade é centímetros.</p></div></li>
+          <li><div><h3>Salve como padrão, se quiser</h3><p>O botão "Definir como padrão" faz os próximos documentos começarem com essas margens.</p></div></li>
+        </ol>
+        <p>Se for entregar em Word, baixe o arquivo em <span class="caminho"><span>Arquivo</span><i>›</i><span>Fazer download</span><i>›</i><span>Microsoft Word (.docx)</span></span> e confira as margens depois: o Word às vezes muda pequenos detalhes na conversão.</p>
+      </section>
+
+      <section id="verso">
+        <h2>Margens no verso da folha: quando importam</h2>
+        <p>A norma define margens separadas para o verso, e elas são o espelho das do anverso: a margem maior (3 cm) fica sempre do lado da encadernação. Na prática:</p>
+        <ul>
+          <li><strong>Entrega só em PDF, ou impressa de um lado:</strong> só as margens do anverso entram em cena.</li>
+          <li><strong>Impressão frente e verso:</strong> no verso, direita e superior têm 3 cm, e esquerda e inferior têm 2 cm. No Word, use <span class="caminho"><span>Layout</span><i>›</i><span>Margens</span><i>›</i><span>Margens Personalizadas…</span></span> e, em "Várias páginas", escolha <strong>Margens espelho</strong>. Os campos passam a se chamar "Interna" (<strong>3 cm</strong>) e "Externa" (<strong>2 cm</strong>).</li>
+        </ul>
+        <p>A norma recomenda a frente e verso só para os elementos textuais e pós-textuais: os elementos pré-textuais (capa, folha de rosto e outros) começam sempre no anverso. Cada faculdade decide se aceita ou exige a impressão dos dois lados.</p>
+      </section>
+
+      {{ESPACO:guia-meio-2}}
+
+      <section id="erros">
+        <h2>Erros comuns nas margens</h2>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Deixar a margem padrão do Word (2,54 cm nos quatro lados).</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Configurar 3 cm na esquerda e em cima, 2 cm na direita e embaixo.</p></div></div>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Trocar os lados: 2 cm na esquerda e 3 cm na direita.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>A margem de 3 cm fica na esquerda (e em cima) no anverso.</p></div></div>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Usar recuos de parágrafo ou espaços para "empurrar" o texto em vez de mudar a margem.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Configurar as margens da página; o recuo serve só para o início dos parágrafos e para citações longas.</p></div></div>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Deixar a capa e as primeiras páginas com margens diferentes das do resto.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Aplicar as mesmas margens ao documento inteiro, como fazem os manuais das faculdades.</p></div></div>
+      </section>
+
+      <section id="perguntas-frequentes">
+        <h2>Perguntas frequentes sobre margens ABNT</h2>
+        {{FAQ_HTML:guia-margens-abnt}}
+      </section>
+
+      {{GUIA_RELACIONADAS}}
+
+      {{GUIA_FONTES}}
+
+    </article>
+    <aside class="lateral" aria-label="Publicidade">
+      {{ESPACO:guia-lateral}}
+    </aside>
+  </div>
+</div>
+</main>
+{{include:footer}}
+</body>
+</html>

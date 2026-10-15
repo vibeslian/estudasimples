@@ -1,0 +1,38 @@
+[
+  {
+    "p": "O que tem na capa ABNT?",
+    "r": ["Nome da instituição (opcional), nome do autor, título, subtítulo (depois de dois-pontos, se houver), número do volume (se houver mais de um), cidade e ano, nessa ordem. A capa não leva o orientador."]
+  },
+  {
+    "p": "Como fazer a capa de um trabalho em grupo?",
+    "r": ["Use o mesmo modelo da capa individual e coloque o nome de cada integrante, um embaixo do outro, no lugar do nome do autor. A norma não define a ordem dos nomes; siga a que o professor ou a faculdade pedir."]
+  },
+  {
+    "p": "Posso colocar o logo da faculdade na capa?",
+    "r": ["Só se a instituição pedir. A NBR 14724 não fala em logotipo, mas alguns manuais, como o da UERN, incluem o símbolo da universidade no alto da capa. Quando entra, o logo fica centralizado, acima do nome da instituição."]
+  },
+  {
+    "p": "A capa de trabalho de escola segue a ABNT?",
+    "r": ["A norma vale para trabalhos acadêmicos e similares, e muitas escolas a usam como base. Série, turma, professor e disciplina não fazem parte da norma; se a escola pedir, essas linhas entram abaixo do nome da escola ou do aluno."]
+  },
+  {
+    "p": "Qual a fonte e o tamanho da capa?",
+    "r": ["A norma recomenda tamanho 12 para todo o texto, inclusive a capa, em cor preta, e não define o tipo de letra. Os manuais indicam Arial ou Times New Roman. Alguns, como o da UNISA, aumentam o tamanho de alguns itens (14 ou 16)."]
+  },
+  {
+    "p": "O nome do autor vai em maiúsculas?",
+    "r": ["A norma não define. A UFV e a UERN usam maiúsculas; a UNISA usa iniciais maiúsculas e negrito. Os modelos deste guia seguem a maioria dos manuais (maiúsculas e negrito), mas vale seguir o da sua faculdade."]
+  },
+  {
+    "p": "Qual a diferença entre capa e contra capa?",
+    "r": ["A norma não usa o termo contra capa. O que vem depois da capa é a folha de rosto, que repete o autor e o título e acrescenta a natureza do trabalho e o orientador. Veja o <a href=\"/gerador-de-folha-de-rosto-abnt/?origem=guia-modelos-de-capa-abnt\">gerador de folha de rosto</a>."]
+  },
+  {
+    "p": "Onde coloco o subtítulo?",
+    "r": ["Logo depois do título, no mesmo bloco, separado por dois-pontos. Exemplo: A leitura em voz alta: estratégias para o ensino fundamental."]
+  },
+  {
+    "p": "Como criar a capa grátis?",
+    "r": ["No <a href=\"/gerador-de-capa-abnt/?origem=guia-modelos-de-capa-abnt\">gerador de capa ABNT</a> você preenche os dados, vê a prévia e baixa em PDF ou Word, com logo se quiser. É grátis e sem cadastro."]
+  }
+]

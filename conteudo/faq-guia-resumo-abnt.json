@@ -1,0 +1,38 @@
+[
+  {
+    "p": "Quantas palavras tem o resumo de um TCC?",
+    "r": ["De 150 a 500 palavras, segundo a NBR 6028:2021 para trabalhos acadêmicos. Artigos de periódicos têm de 100 a 250 palavras, e documentos de indicação breve, de 50 a 100. Confira também o limite do manual da sua faculdade."]
+  },
+  {
+    "p": "O resumo é em um parágrafo só?",
+    "r": ["Sim. O resumo é escrito em parágrafo único, sem tópicos, e sem recuo na primeira linha."]
+  },
+  {
+    "p": "O que deve ter no resumo do TCC?",
+    "r": ["O objetivo, o método, os resultados e as conclusões do trabalho, em frases curtas e completas. Quem lê só o resumo precisa entender o que foi feito e o que foi encontrado."]
+  },
+  {
+    "p": "Como escrever as palavras-chave?",
+    "r": ["Depois de uma linha em branco, escreva \"Palavras-chave:\", seguida das palavras com iniciais minúsculas, separadas por ponto e vírgula, e termine com ponto final. Exemplo: Palavras-chave: leitura; vocabulário; ensino fundamental."]
+  },
+  {
+    "p": "Quantas palavras-chave devo usar?",
+    "r": ["A norma não fixa um número. O manual da faculdade costuma definir: a UERN aceita no máximo 5 e a UNISA pede 3, por exemplo. Se o seu manual não diz nada, de 3 a 5 termos específicos é uma escolha comum."]
+  },
+  {
+    "p": "Posso escrever o resumo em primeira pessoa?",
+    "r": ["O mais usado nos manuais é a terceira pessoa (\"Aborda…\", \"Conclui…\"). A edição de 2021 da NBR 6028 recomenda a terceira pessoa, e não exige mais a voz ativa. Se o seu orientador pedir outra forma, siga o orientador."]
+  },
+  {
+    "p": "O resumo entra no sumário?",
+    "r": ["Não. O resumo é um elemento pré-textual, vem antes do sumário, e o título RESUMO fica centralizado e sem número."]
+  },
+  {
+    "p": "Qual é o espaçamento do resumo?",
+    "r": ["Depende do manual. Alguns pedem espaço simples e outros, 1,5. A lista de exceções da NBR 14724, que fica em espaço simples, não cita o resumo, então confira o manual da sua faculdade."]
+  },
+  {
+    "p": "Precisa de resumo em inglês?",
+    "r": ["Em TCC, dissertação e tese, sim: a estrutura inclui o resumo em língua estrangeira (abstract, em inglês). Ele traduz o resumo e as palavras-chave, e vem na página seguinte ao resumo em português."]
+  }
+]

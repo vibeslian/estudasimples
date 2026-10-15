@@ -106,5 +106,23 @@
     "r": [
       "Pode. O arquivo .docx sai com as margens, a fonte e o espaçamento 1,5 já configurados, e você edita como qualquer documento do Word."
     ]
+  },
+  {
+    "p": "Quais são as normas da capa ABNT em 2026?",
+    "r": [
+      "A norma é a ABNT NBR 14724:2024, que define os elementos da capa e a ordem deles: instituição (opcional), autor, título, subtítulo, volume, cidade e ano. Papel A4, margens de 3 cm na esquerda e em cima e 2 cm na direita e embaixo, e fonte tamanho 12. A norma não define alinhamento nem maiúsculas; isso vem do manual da faculdade."
+    ]
+  },
+  {
+    "p": "Como fazer a capa de um TCC?",
+    "r": [
+      "Use a ordem da norma: instituição, curso, autor, título com subtítulo depois de dois-pontos, volume (se houver mais de um), cidade e ano. O orientador não vai na capa: ele aparece na folha de rosto, que você pode fazer no <a href=\"/gerador-de-folha-de-rosto-abnt/\">gerador de folha de rosto</a>. Veja também o <a href=\"/guias/normas-abnt-tcc/\">guia de normas ABNT para TCC</a>."
+    ]
+  },
+  {
+    "p": "Como fazer a capa de um trabalho de faculdade?",
+    "r": [
+      "Preencha instituição, curso, autor, título, cidade e ano. Se o professor pedir o nome dele e a disciplina, ative o \"Modelo escolar\"; essas duas linhas não fazem parte da norma. Confira antes se a faculdade tem modelo próprio de capa. Há seis modelos desenhados no <a href=\"/guias/modelos-de-capa-abnt/\">guia de modelos de capa ABNT</a>."
+    ]
   }
 ]

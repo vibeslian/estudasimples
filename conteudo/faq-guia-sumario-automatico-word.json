@@ -1,0 +1,38 @@
+[
+  {
+    "p": "Como fazer o sumário automático no Word?",
+    "r": ["Aplique os estilos Título 1, Título 2 e seguintes aos títulos do trabalho. Depois, com o cursor onde o sumário vai ficar, abra Referências, Sumário e escolha Sumário Automático. O Word monta a lista com os títulos e as páginas."]
+  },
+  {
+    "p": "Por que meu sumário não mostra os títulos?",
+    "r": ["Porque os títulos estão sem estilo de título. O sumário automático do Word só lê os parágrafos com os estilos Título 1, Título 2 e assim por diante. Aplique os estilos e depois use Atualizar Sumário."]
+  },
+  {
+    "p": "Como atualizar o sumário depois de mudar o texto?",
+    "r": ["Clique no sumário e escolha Atualizar Sumário, marcando \"Atualizar o sumário inteiro\". Se você só mudou a paginação, \"Atualizar apenas os números de página\" basta. Faça isso de novo antes de entregar."]
+  },
+  {
+    "p": "Como tirar o Resumo e os Agradecimentos do sumário?",
+    "r": ["Eles não podem ter estilo de título. Aplique o estilo Normal a esses títulos (em negrito e centralizados, se quiser) e atualize o sumário. Pela NBR 6027, os elementos pré-textuais, como resumo, agradecimentos e listas, não entram no sumário."]
+  },
+  {
+    "p": "Referências e anexos entram no sumário?",
+    "r": ["Sim. Os elementos pós-textuais, como Referências, Glossário, Apêndice, Anexo e Índice, entram no sumário, sem número de seção."]
+  },
+  {
+    "p": "Como colocar a linha de pontos no sumário do Word?",
+    "r": ["Em Referências, Sumário, Sumário Personalizado, deixe marcado \"Alinhar números de página à direita\" e escolha o pontilhado em \"Preenchimento de tabulação\". A linha de pontos não é exigida pela norma, mas os modelos de bibliotecas costumam usar."]
+  },
+  {
+    "p": "Em que página fica o sumário?",
+    "r": ["É o último elemento pré-textual: vem depois dos resumos e das listas e antes da Introdução."]
+  },
+  {
+    "p": "Como formatar a palavra SUMÁRIO?",
+    "r": ["Centralizada, sem número, com o mesmo tipo de fonte das seções primárias (em geral, maiúsculas e negrito)."]
+  },
+  {
+    "p": "Dá para fazer o sumário sem usar os estilos do Word?",
+    "r": ["Dá. No <a href=\"/gerador-de-sumario-abnt/?origem=guia-sumario-automatico-word\">gerador de sumário ABNT</a> você digita os títulos e as páginas, a numeração sai sozinha, e o arquivo em Word já vem com a linha de pontos. Você confere as páginas no fim."]
+  }
+]

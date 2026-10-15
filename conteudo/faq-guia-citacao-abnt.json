@@ -1,0 +1,38 @@
+[
+  {
+    "p": "Como fazer citação direta com mais de 3 linhas na ABNT?",
+    "r": ["Separe o trecho do parágrafo, em um bloco com recuo da margem esquerda (a norma recomenda 4 cm), letra menor do que a do texto, espaço simples e sem aspas. No fim, indique autor, ano e página entre parênteses, a não ser que o autor já esteja na frase que apresenta a citação."]
+  },
+  {
+    "p": "O recuo de 4 cm é obrigatório?",
+    "r": ["A NBR 10520 pede um recuo padronizado em relação à margem esquerda e recomenda 4 cm. Os manuais das faculdades costumam adotar exatamente 4 cm, e por isso é a medida mais segura."]
+  },
+  {
+    "p": "Qual é o tamanho da fonte da citação longa?",
+    "r": ["Menor do que a do texto e uniforme em todas as citações longas. Como o texto usa tamanho 12, vários manuais, como o da UERN, indicam tamanho 10. O espaçamento entre as linhas é simples."]
+  },
+  {
+    "p": "A citação curta leva aspas?",
+    "r": ["Sim. A citação direta de até 3 linhas fica dentro do parágrafo, entre aspas duplas. Se o trecho copiado já tiver aspas, elas viram aspas simples dentro da citação."]
+  },
+  {
+    "p": "Como escrever o sobrenome do autor entre parênteses?",
+    "r": ["Pela NBR 10520:2023, só com a inicial maiúscula: (Lima, 2021). A versão anterior, de 2002, pedia o sobrenome todo em maiúsculas, (LIMA, 2021). Se a sua faculdade ainda usa essa forma, siga o manual dela."]
+  },
+  {
+    "p": "Como citar um autor com et al.?",
+    "r": ["Quando a obra tem quatro ou mais autores, é permitido citar só o primeiro seguido de <em>et al.</em>: Lima <em>et al.</em> (2021) ou (Lima <em>et al.</em>, 2021). Na lista de referências, todos os autores continuam constando, e a forma escolhida deve ser a mesma em todas as citações."]
+  },
+  {
+    "p": "O que é citação de citação (apud)?",
+    "r": ["É quando você cita um trecho de um autor que não leu no original, só em outra obra. Use <em>apud</em>, que significa \"citado por\": Souza (2010) <em>apud</em> Lima (2021, p. 15). A obra que entra na lista de referências é a que você leu, a de Lima."]
+  },
+  {
+    "p": "A citação indireta precisa de página?",
+    "r": ["Não. Na citação indireta, em que você conta a ideia do autor com as suas palavras, a página é opcional. O autor e o ano continuam obrigatórios."]
+  },
+  {
+    "p": "Como citar um site ou um texto sem autor?",
+    "r": ["Cite como qualquer documento, com autor e ano: (Lima, 2025). Se não há autor, use a primeira palavra do título (juntando a seguinte, se a primeira for um artigo ou uma palavra de uma sílaba) seguida de [...] e do ano: (Nos canaviais [...], 1995). Veja a <a href=\"/guias/referencia-de-site-abnt/\">guia de referência de site</a>."]
+  }
+]

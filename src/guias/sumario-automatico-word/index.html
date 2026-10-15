@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  {{include:head-common}}
+  {{GUIA_HEAD}}
+  {{FAQ_JSONLD:guia-sumario-automatico-word}}
+</head>
+<body class="guia">
+{{GUIA_HERO}}
+<main id="conteudo">
+<div class="container conteudo-capa">
+  <div class="conteudo-grade">
+    <article class="artigo">
+
+      <div class="resposta">
+        <strong class="resposta-titulo">Resposta direta</strong>
+        <p>Para o sumário automático do Word funcionar, <strong>primeiro aplique os estilos Título 1, Título 2… aos títulos</strong> do trabalho. Depois, com o cursor onde o sumário vai ficar, vá em <strong>Referências › Sumário › Sumário Automático</strong>. Quando mudar algum título ou página, clique no sumário e use <strong>Atualizar Sumário</strong>.</p>
+        <p>Pela ABNT, o sumário fica antes da Introdução, a palavra SUMÁRIO vai centralizada, e as páginas ficam à direita. Resumo, agradecimentos e listas <strong>não entram</strong> nele.</p>
+      </div>
+
+      <nav class="indice-guia" aria-label="Neste guia">
+        <strong>Neste guia</strong>
+        <ol>
+          <li><a href="#como-fica">Como o sumário deve ficar</a></li>
+          <li><a href="#passo-a-passo">Passo a passo no Word</a></li>
+          <li><a href="#ajustes">Ajustes para ficar nas normas</a></li>
+          <li><a href="#problemas">Quando o sumário não sai certo</a></li>
+          <li><a href="#sem-word">Sumário sem mexer em estilos</a></li>
+          <li><a href="#erros">Erros comuns</a></li>
+          <li><a href="#perguntas-frequentes">Perguntas frequentes</a></li>
+        </ol>
+      </nav>
+
+      <section id="como-fica">
+        <h2>Como o sumário deve ficar</h2>
+        <p>A NBR 6027:2012 define o sumário como a lista das partes do trabalho, na mesma ordem e com a mesma grafia que elas têm no texto, cada uma com a página em que começa. Veja um exemplo:</p>
+        <figure class="diagrama">
+          <svg viewBox="0 0 210 150" role="img" aria-labelledby="s1-t s1-d" xmlns="http://www.w3.org/2000/svg">
+            <title id="s1-t">Exemplo de sumário ABNT</title>
+            <desc id="s1-d">A palavra SUMÁRIO centralizada no alto. Abaixo, os títulos do trabalho com o número à esquerda, uma linha de pontos e a página à direita: 1 Introdução, 2 Referencial teórico, 2.1 Conceitos básicos, 3 Metodologia, 4 Considerações finais e Referências.</desc>
+            <rect width="210" height="150" fill="#fff"/>
+            <rect x="0" y="0" width="210" height="14" fill="#e4ece3"/><rect x="0" y="14" width="30" height="136" fill="#e4ece3"/><rect x="190" y="14" width="20" height="136" fill="#fce6de"/>
+            <rect x="30" y="14" width="160" height="136" fill="none" stroke="#3b5d4c" stroke-width=".6" stroke-dasharray="3 2"/>
+            <text x="110" y="26" font-size="4.8" font-weight="700" text-anchor="middle" fill="#000">SUMÁRIO</text>
+            <g font-size="4.2" fill="#000" font-weight="400">
+              <text x="30" y="42" font-weight="700">1  INTRODUÇÃO</text><text x="190" y="42" text-anchor="end" font-weight="700">7</text>
+              <text x="30" y="52" font-weight="700">2  REFERENCIAL TEÓRICO</text><text x="190" y="52" text-anchor="end" font-weight="700">9</text>
+              <text x="30" y="62" font-weight="700">2.1  Conceitos básicos</text><text x="190" y="62" text-anchor="end">9</text>
+              <text x="30" y="72">2.1.1  Leitura em voz alta</text><text x="190" y="72" text-anchor="end">11</text>
+              <text x="30" y="82" font-weight="700">2.2  Estudos anteriores</text><text x="190" y="82" text-anchor="end">13</text>
+              <text x="30" y="92" font-weight="700">3  METODOLOGIA</text><text x="190" y="92" text-anchor="end" font-weight="700">15</text>
+              <text x="30" y="102" font-weight="700">4  CONSIDERAÇÕES FINAIS</text><text x="190" y="102" text-anchor="end" font-weight="700">22</text>
+              <text x="30" y="112" font-weight="700">REFERÊNCIAS</text><text x="190" y="112" text-anchor="end" font-weight="700">24</text>
+            </g>
+            <g stroke="#6f8277" stroke-width=".7" stroke-linecap="round" stroke-dasharray=".1 1.5" fill="none">
+              <line x1="76" y1="42" x2="187" y2="42"/><line x1="96" y1="52" x2="187" y2="52"/><line x1="82" y1="62" x2="187" y2="62"/><line x1="92" y1="72" x2="186" y2="72"/><line x1="86" y1="82" x2="186" y2="82"/><line x1="70" y1="92" x2="186" y2="92"/><line x1="98" y1="102" x2="186" y2="102"/><line x1="64" y1="112" x2="186" y2="112"/>
+            </g>
+            <g font-size="3.8" font-weight="700" fill="#22362b">
+              <text x="30" y="126">SUMÁRIO centralizado, sem número · números à esquerda · páginas à direita</text>
+              <text x="30" y="133">Não entram: capa, folha de rosto, resumo, agradecimentos, listas</text>
+              <text x="30" y="140">Entram: seções numeradas e REFERÊNCIAS, GLOSSÁRIO, APÊNDICE, ANEXO (sem número)</text>
+            </g>
+          </svg>
+          <figcaption>Um sumário de exemplo, com os títulos de cada nível, a linha de pontos e a página.</figcaption>
+        </figure>
+      </section>
+
+      {{ESPACO:guia-meio-1}}
+
+      <section id="passo-a-passo">
+        <h2>Passo a passo do sumário automático no Word</h2>
+        <ol class="passos">
+          <li><div><h3>Aplique os estilos aos títulos</h3><p>Selecione cada título e, em <span class="caminho"><span>Página Inicial</span><i>›</i><span>Estilos</span></span>, aplique <strong>Título 1</strong> (seção primária), <strong>Título 2</strong> (secundária), <strong>Título 3</strong> e assim até o nível 5. É nesses estilos que o Word se baseia: se um título não tem estilo, ele não aparece no sumário.</p></div></li>
+          <li><div><h3>Deixe de fora o que não entra</h3><p>Resumo, abstract, agradecimentos, dedicatória, epígrafe e listas ficam <strong>sem</strong> os estilos de título (use o estilo Normal, em negrito e centralizado, se precisar). Referências, glossário, apêndices e anexos <strong>entram</strong>, sem número.</p></div></li>
+          <li><div><h3>Posicione o cursor</h3><p>Vá para a página depois das listas e antes da Introdução: o sumário é o último elemento pré-textual.</p></div></li>
+          <li><div><h3>Insira o sumário</h3><p>Em <span class="caminho"><span>Referências</span><i>›</i><span>Sumário</span><i>›</i><span>Sumário Automático 1</span></span> (ou 2). O Word monta a lista com os títulos e as páginas.</p></div></li>
+          <li><div><h3>Troque o nome do título para SUMÁRIO</h3><p>O modelo traz uma palavra como "Conteúdo". Troque por <strong>SUMÁRIO</strong>, centralizada, sem número, no destaque das seções primárias.</p></div></li>
+          <li><div><h3>Atualize no fim</h3><p>Depois de mudar títulos ou o tamanho do texto, clique no sumário e escolha <strong>Atualizar Sumário</strong>, em "Atualizar o sumário inteiro". Faça isso de novo antes de entregar.</p></div></li>
+        </ol>
+      </section>
+
+      {{GUIA_FERRAMENTA}}
+
+      <section id="ajustes">
+        <h2>Ajustes para o sumário ficar nas normas</h2>
+        <ul>
+          <li><strong>Níveis:</strong> em <span class="caminho"><span>Referências</span><i>›</i><span>Sumário</span><i>›</i><span>Sumário Personalizado…</span></span>, "Mostrar níveis" deve ir até o último nível que você usa (no máximo 5).</li>
+          <li><strong>Linha de pontos e página à direita:</strong> na mesma janela, deixe marcado "Alinhar números de página à direita" e escolha o pontilhado em "Preenchimento de tabulação". A NBR 6027 pede a paginação à margem direita; a linha de pontos é um costume dos modelos de bibliotecas.</li>
+          <li><strong>Fonte e espaçamento:</strong> em "Modificar…", ajuste os estilos Sumário 1, Sumário 2… para a fonte do trabalho (12) e espaçamento 1,5.</li>
+          <li><strong>Destaque de cada nível:</strong> o sumário deve repetir o destaque dos títulos do texto (por exemplo, primárias em maiúsculas e negrito). Veja a <a href="/guias/titulos-e-subtitulos-abnt/">guia de títulos e subtítulos</a>.</li>
+          <li><strong>Alinhamento dos títulos:</strong> a NBR 6027 recomenda alinhar os títulos pela margem do indicativo mais extenso (o número maior, como 2.1.1). O sumário automático do Word coloca o título logo depois do número, e muitos manuais de faculdades aceitam isso.</li>
+        </ul>
+      </section>
+
+      <section id="problemas">
+        <h2>Quando o sumário não sai certo</h2>
+        <div class="rolavel">
+          <table class="tabela-guia">
+            <caption>Problemas comuns e a solução</caption>
+            <thead><tr><th>O que aconteceu</th><th>Como resolver</th></tr></thead>
+            <tbody>
+              <tr><td>Um título não aparece</td><td>Ele está sem estilo de título. Aplique Título 1, 2… e atualize o sumário.</td></tr>
+              <tr><td>Aparece algo que não devia (Resumo, Agradecimentos)</td><td>Tire o estilo de título dessa parte (use o estilo Normal) e atualize.</td></tr>
+              <tr><td>As páginas estão erradas</td><td>Clique no sumário, escolha "Atualizar Sumário" e marque "Atualizar o sumário inteiro".</td></tr>
+              <tr><td>O número do título é diferente do número do texto</td><td>Se a numeração é manual, corrija no título e atualize. Com "Lista de Vários Níveis", o Word atualiza sozinho.</td></tr>
+              <tr><td>O sumário está com a fonte do Word, e não a do trabalho</td><td>Modifique os estilos Sumário 1, 2… (Referências › Sumário › Sumário Personalizado › Modificar).</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="sem-word">
+        <h2>Sumário sem mexer em estilos</h2>
+        <p>Se o seu trabalho é curto, ou você ainda nem formatou os títulos, dá para montar o sumário de outro jeito: no <a href="/gerador-de-sumario-abnt/?origem=guia-sumario-automatico-word">gerador de sumário ABNT</a> você digita os títulos e as páginas, a numeração (1, 1.1, 1.1.1…) sai sozinha, e o arquivo baixado já vem com a linha de pontos e os recuos. Dá para baixar em Word e colar na página certa do trabalho. Só lembre que, nesse caso, as páginas são digitadas por você e precisam ser conferidas no fim.</p>
+      </section>
+
+      {{ESPACO:guia-meio-2}}
+
+      <section id="erros">
+        <h2>Erros comuns no sumário</h2>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Digitar o sumário à mão com espaços e pontinhos.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Usar o sumário automático (ou o gerador), com tabulação e linha de pontos de verdade.</p></div></div>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Incluir o Resumo, os Agradecimentos e as listas no sumário.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Os elementos pré-textuais não entram. O sumário começa na Introdução.</p></div></div>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Entregar sem atualizar o sumário depois de mudar o texto.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Atualizar o sumário inteiro antes de gerar o PDF.</p></div></div>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Títulos do sumário diferentes dos do texto.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Mesma grafia, mesma ordem e mesmo destaque nos dois lugares.</p></div></div>
+      </section>
+
+      <section id="perguntas-frequentes">
+        <h2>Perguntas frequentes sobre sumário automático no Word</h2>
+        {{FAQ_HTML:guia-sumario-automatico-word}}
+      </section>
+
+      {{GUIA_RELACIONADAS}}
+
+      {{GUIA_FONTES}}
+
+    </article>
+    <aside class="lateral" aria-label="Publicidade">
+      {{ESPACO:guia-lateral}}
+    </aside>
+  </div>
+</div>
+</main>
+{{include:footer}}
+</body>
+</html>

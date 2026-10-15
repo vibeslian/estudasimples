@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  {{include:head-common}}
+  {{GUIA_HEAD}}
+  {{FAQ_JSONLD:guia-titulos-e-subtitulos-abnt}}
+</head>
+<body class="guia">
+{{GUIA_HERO}}
+<main id="conteudo">
+<div class="container conteudo-capa">
+  <div class="conteudo-grade">
+    <article class="artigo">
+
+      <div class="resposta">
+        <strong class="resposta-titulo">Resposta direta</strong>
+        <p>Os títulos levam <strong>numeração progressiva</strong> em algarismos arábicos, de 1 até 5 níveis: <strong>1, 1.1, 1.1.1, 1.1.1.1, 1.1.1.1.1</strong>. O número vem à esquerda, separado do título por <strong>um espaço</strong>, sem ponto, hífen nem travessão depois dele.</p>
+        <p>Cada nível ganha um destaque diferente (maiúsculas, negrito, itálico ou sublinhado), igual no texto e no sumário. Resumo, agradecimentos, referências, glossário, apêndice e anexo <strong>não levam número</strong>.</p>
+      </div>
+
+      <nav class="indice-guia" aria-label="Neste guia">
+        <strong>Neste guia</strong>
+        <ol>
+          <li><a href="#numeracao">Como numerar os títulos</a></li>
+          <li><a href="#destaque">Como destacar cada nível</a></li>
+          <li><a href="#sem-numero">Títulos que não levam número</a></li>
+          <li><a href="#regras">Regras de apresentação</a></li>
+          <li><a href="#word">Como fazer no Word</a></li>
+          <li><a href="#erros">Erros comuns</a></li>
+          <li><a href="#perguntas-frequentes">Perguntas frequentes</a></li>
+        </ol>
+      </nav>
+
+      <section id="numeracao">
+        <h2>Como numerar títulos e subtítulos</h2>
+        <p>A numeração progressiva (NBR 6024:2012) mostra a organização do conteúdo. Cada seção recebe o número da seção a que pertence, um ponto e o seu número de ordem:</p>
+        <div class="arvore" role="img" aria-label="Exemplo de numeração progressiva: 1 Introdução; 2 Referencial teórico; 2.1 Conceitos básicos; 2.1.1 Leitura; 2.1.1.1 Leitura em voz alta; 2.1.1.1.1 Leitura em grupo; 2.2 Estudos anteriores; 3 Metodologia.">
+          <p class="n1" aria-hidden="true"><span>1 INTRODUÇÃO</span><small>seção primária</small></p>
+          <p class="n1" aria-hidden="true"><span>2 REFERENCIAL TEÓRICO</span><small>seção primária</small></p>
+          <p class="n2" aria-hidden="true"><span>2.1 Conceitos básicos</span><small>secundária</small></p>
+          <p class="n3" aria-hidden="true"><span>2.1.1 Leitura</span><small>terciária</small></p>
+          <p class="n4" aria-hidden="true"><span>2.1.1.1 Leitura em voz alta</span><small>quaternária</small></p>
+          <p class="n5" aria-hidden="true"><span>2.1.1.1.1 Leitura em grupo</span><small>quinária</small></p>
+          <p class="n2" aria-hidden="true"><span>2.2 Estudos anteriores</span><small>secundária</small></p>
+          <p class="n1" aria-hidden="true"><span>3 METODOLOGIA</span><small>seção primária</small></p>
+        </div>
+        <ul>
+          <li><strong>Algarismos arábicos</strong>, até a seção quinária (cinco níveis).</li>
+          <li><strong>Seções primárias:</strong> números inteiros, a partir de 1.</li>
+          <li><strong>Demais seções:</strong> o número da seção primária, um ponto e o número de ordem (2.1, 2.2, 2.1.1…).</li>
+          <li><strong>Nada depois do número:</strong> o título vem separado só por um espaço. "1. Introdução", "1 - Introdução" e "1) Introdução" estão errados.</li>
+          <li><strong>Alinhamento:</strong> o número e o título ficam à esquerda. Se o título ocupa mais de uma linha, a segunda linha começa embaixo da primeira letra do título, e não embaixo do número.</li>
+          <li><strong>Todo título tem texto:</strong> cada seção precisa de um texto relacionado a ela.</li>
+        </ul>
+      </section>
+
+      {{ESPACO:guia-meio-1}}
+
+      <section id="destaque">
+        <h2>Como destacar cada nível</h2>
+        <p>A norma pede que os títulos sejam destacados "de forma hierárquica, da primária à quinária", e permite maiúsculas, negrito, itálico, sublinhado e outros recursos. <strong>Ela não diz qual recurso vai em qual nível.</strong> O que ela exige é que o destaque seja <strong>o mesmo no sumário e no texto</strong>.</p>
+        <p>Um padrão usado por manuais de faculdades, como o da UERN, é este:</p>
+        <div class="rolavel">
+          <table class="tabela-guia">
+            <caption>Exemplo de destaque por nível (modelo do manual da UERN)</caption>
+            <thead><tr><th>Nível</th><th>Como fica</th></tr></thead>
+            <tbody>
+              <tr><td>Primária (1)</td><td>LETRAS MAIÚSCULAS e negrito</td></tr>
+              <tr><td>Secundária (1.1)</td><td>Só a primeira letra maiúscula, em negrito</td></tr>
+              <tr><td>Terciária (1.1.1)</td><td>Só a primeira letra maiúscula, sem negrito</td></tr>
+              <tr><td>Quaternária e quinária</td><td>Só a primeira letra maiúscula, sem negrito</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>A norma aceita também itálico e sublinhado, e cada faculdade escolhe o seu padrão. Confira o manual da sua e use o mesmo destaque no texto e no sumário: o <a href="/gerador-de-sumario-abnt/?origem=guia-titulos-e-subtitulos-abnt">gerador de sumário</a> deixa você editar o destaque de cada nível.</p>
+      </section>
+
+      <section id="sem-numero">
+        <h2>Títulos que não levam número</h2>
+        <p>Alguns elementos não fazem parte da numeração. O título deles vai <strong>centralizado</strong>, com o mesmo destaque das seções primárias (em geral, maiúsculas e negrito):</p>
+        <ul class="regras regras--texto">
+          <li><strong>Pré-textuais</strong>Errata, agradecimentos, lista de ilustrações, lista de abreviaturas e siglas, lista de símbolos, resumo, abstract e sumário.</li>
+          <li><strong>Pós-textuais</strong>Referências, glossário, apêndice(s), anexo(s) e índice(s).</li>
+        </ul>
+        <p>A folha de aprovação, a dedicatória e a epígrafe não têm título e não levam número. Já a Introdução, o Desenvolvimento (com as suas seções) e a Conclusão <strong>são numerados</strong>: a Introdução costuma ser a seção 1. Algumas faculdades, em áreas de humanas, deixam a Introdução sem número; é uma regra do manual, e não da norma.</p>
+      </section>
+
+      <section id="regras">
+        <h2>Regras de apresentação dos títulos</h2>
+        <ul>
+          <li><strong>Seção primária em página nova:</strong> em monografias, dissertações e teses, o título de cada seção primária começa numa página nova e fica no alto da área de texto. Em artigos científicos, as seções seguem sem quebra de página.</li>
+          <li><strong>Espaço depois do título:</strong> o título é separado do texto que vem depois por um espaço de 1,5. Os títulos das subseções também ficam separados do texto de antes e de depois por um espaço de 1,5 (veja a <a href="/guias/fonte-e-espacamento-abnt/">guia de fonte e espaçamento</a>).</li>
+          <li><strong>Mesma apresentação no sumário:</strong> o sumário repete os títulos, na mesma ordem e com a mesma grafia e o mesmo destaque (veja a <a href="/guias/sumario-automatico-word/">guia de sumário automático no Word</a>).</li>
+        </ul>
+      </section>
+
+      {{GUIA_FERRAMENTA}}
+
+      <section id="word">
+        <h2>Como fazer os títulos no Word</h2>
+        <ol class="passos">
+          <li><div><h3>Aplique os estilos de título</h3><p>Selecione o título e, em <span class="caminho"><span>Página Inicial</span><i>›</i><span>Estilos</span></span>, aplique <strong>Título 1</strong> (seção primária), <strong>Título 2</strong> (secundária), e assim por diante.</p></div></li>
+          <li><div><h3>Ajuste o visual de cada estilo</h3><p>Clique com o botão direito no estilo e escolha <strong>Modificar…</strong>. A fonte, o tamanho 12, a cor preta, o negrito e as maiúsculas que você escolher valem para todos os títulos daquele nível.</p></div></li>
+          <li><div><h3>Numere os títulos</h3><p>Digite o número no início do título, ou use <span class="caminho"><span>Página Inicial</span><i>›</i><span>Lista de Vários Níveis</span></span> para o Word numerar sozinho e recalcular quando você mudar a ordem.</p></div></li>
+        </ol>
+        <p>Com os estilos aplicados, o sumário automático do Word lê os títulos e monta a lista com as páginas.</p>
+      </section>
+
+      {{ESPACO:guia-meio-2}}
+
+      <section id="erros">
+        <h2>Erros comuns nos títulos</h2>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>"1. Introdução", "1 - Introdução" ou "1) Introdução".</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>1 Introdução: o número e o título, separados só por um espaço.</p></div></div>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Numerar Resumo, Referências, Anexos e Agradecimentos.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Esses títulos ficam sem número e centralizados.</p></div></div>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Pular de nível, como um 1.1.1 logo depois de um 1.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Subir um nível de cada vez: 1, 1.1, 1.1.1.</p></div></div>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Destaque diferente no sumário e no texto.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>O mesmo destaque (maiúsculas, negrito, itálico) nos dois lugares.</p></div></div>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Passar de cinco níveis (1.1.1.1.1.1).</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Limitar a numeração até a seção quinária.</p></div></div>
+      </section>
+
+      <section id="perguntas-frequentes">
+        <h2>Perguntas frequentes sobre títulos e subtítulos ABNT</h2>
+        {{FAQ_HTML:guia-titulos-e-subtitulos-abnt}}
+      </section>
+
+      {{GUIA_RELACIONADAS}}
+
+      {{GUIA_FONTES}}
+
+    </article>
+    <aside class="lateral" aria-label="Publicidade">
+      {{ESPACO:guia-lateral}}
+    </aside>
+  </div>
+</div>
+</main>
+{{include:footer}}
+</body>
+</html>

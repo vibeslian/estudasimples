@@ -103,5 +103,11 @@
       "Use o modelo da faculdade: ele vale mais do que qualquer gerador. A ABNT define a ordem e a regra do bloco da natureza, e cada instituição detalha o resto.",
       "Você pode usar o Estuda Simples como ponto de partida e ajustar no Word ou, se preferir, editar o texto da natureza antes de baixar."
     ]
+  },
+  {
+    "p": "Como fazer a capa e a contra capa ABNT?",
+    "r": [
+      "Faça a capa primeiro, com instituição, autor, título, cidade e ano. Depois faça a contra capa, que é a folha de rosto: ela repete autor, título, cidade e ano e acrescenta a natureza do trabalho e o orientador. Neste gerador, marque \"Baixar a capa junto, no mesmo arquivo\" e as duas páginas saem juntas. Veja os modelos no <a href=\"/guias/modelos-de-capa-abnt/\">guia de modelos de capa ABNT</a>."
+    ]
   }
 ]

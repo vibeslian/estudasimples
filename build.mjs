@@ -6,6 +6,7 @@
 import { readFileSync, writeFileSync, mkdirSync, rmSync, readdirSync, statSync } from "node:fs";
 import { join, extname, relative, sep } from "node:path";
 import { preparaConexoes, mensagensWhatsapp } from "./build-conexoes.mjs";
+import { carregaGuias, preparaGuias } from "./build-guias.mjs";
 
 const SRC = "src";
 const OUT = process.env.BUILD_OUT || "dist"; // BUILD_OUT e SITE_CONFIG só servem para as provas montarem uma versão de teste
@@ -27,7 +28,9 @@ const cssGlobal = CSS_GLOBAL.map((n) => readFileSync(join(cssDir, n + ".css"), "
 
 // Serviço de formatação (WhatsApp, prazo e preços): tudo vem de site.config.json, para mudar num só lugar
 const sv = config.servico;
-const mensagens = mensagensWhatsapp(sv); // as de site.config.json + as de página-componente (capa-proximo...)
+const guiasLista = carregaGuias(); // conteudo/guias.json (Etapa 10)
+const gb = preparaGuias(config, guiasLista);
+const mensagens = { ...gb.mensagens(sv.modeloMensagem), ...mensagensWhatsapp(sv) }; // guia-<slug>, as de site.config.json e as de página-componente (capa-proximo...)
 const conexoes = preparaConexoes(config);
 // um link wa.me por página de origem: a mensagem diz de onde o cliente veio (mensagens em site.config.json)
 const waUrl = (id) => {
@@ -82,11 +85,17 @@ function faq(nome) {
   return { html, jsonld: `<script type="application/ld+json">${json}</script>` };
 }
 
-function render(text, origem = "servico") {
+function render(text, origem = "servico", rel = "") {
+  const guia = (/^guias[\\/]([a-z0-9-]+)[\\/]index\.html$/.exec(rel) || [])[1];
   text = text
     .replace(/\{\{FAQ_HTML:([\w-]+)\}\}/g, (_, n) => faq(n).html)
     .replace(/\{\{FAQ_JSONLD:([\w-]+)\}\}/g, (_, n) => faq(n).jsonld)
     .replace(/[{][{]ESPACO:([a-z0-9-]+)[}][}]/g, (_, slot) => conexoes.espaco(slot))
+    .replace(/[{][{]GUIA_(HEAD|HERO|FERRAMENTA|RELACIONADAS|FONTES)[}][}]/g, (_, k) => { if (!guia) throw new Error(`{{GUIA_${k}}} só vale dentro de src/guias/<guia>/index.html (${rel})`); return gb[{ HEAD: "head", HERO: "hero", FERRAMENTA: "ferramenta", RELACIONADAS: "relacionadas", FONTES: "fontes" }[k]](guia); })
+    .replace(/[{][{]GUIAS_DA_FERRAMENTA:([a-z0-9-]+)[}][}]/g, (_, id) => gb.daFerramenta(id))
+    .split("{{GUIAS_LISTA}}").join(gb.lista())
+    .replace(/[{][{]GUIAS_DESTAQUE:([0-9]+)[}][}]/g, (_, n) => gb.destaque(Number(n)))
+    .split("{{GUIAS_JSONLD}}").join(gb.indiceJson())
     .split("{{PERCURSO_HTML}}").join(conexoes.percursoHtml(origem === "servico" ? undefined : origem))
     .split("{{PERCURSO_DADOS}}").join(conexoes.percursoJson(origem === "servico" ? undefined : origem));
   // fragmentos compartilhados: {{include:header}} -> src/partials/header.html (duas passadas: eles podem incluir outros)
@@ -112,7 +121,7 @@ for (const file of walk(SRC)) {
   mkdirSync(join(dest, ".."), { recursive: true });
   // as bibliotecas de terceiros (assets/js/vendor) são copiadas sem tocar no conteúdo
   const copiaDireto = partes.includes("vendor");
-  if (TEXT_EXT.has(extname(file)) && !copiaDireto) writeFileSync(dest, render(readFileSync(file, "utf8"), ORIGEM_POR_PAGINA[partes.join("/")]));
+  if (TEXT_EXT.has(extname(file)) && !copiaDireto) writeFileSync(dest, render(readFileSync(file, "utf8"), ORIGEM_POR_PAGINA[partes.join("/")], partes.join("/")));
   else writeFileSync(dest, readFileSync(file));
 
   if (rel.endsWith("index.html") && !privada) {

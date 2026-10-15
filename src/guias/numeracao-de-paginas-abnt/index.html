@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  {{include:head-common}}
+  {{GUIA_HEAD}}
+  {{FAQ_JSONLD:guia-numeracao-de-paginas-abnt}}
+</head>
+<body class="guia">
+{{GUIA_HERO}}
+<main id="conteudo">
+<div class="container conteudo-capa">
+  <div class="conteudo-grade">
+    <article class="artigo">
+
+      <div class="resposta">
+        <strong class="resposta-titulo">Resposta direta</strong>
+        <p>As páginas são <strong>contadas desde a folha de rosto</strong> (a capa não entra na conta), mas o <strong>número só aparece a partir da primeira página do texto</strong>, a Introdução. Ele fica no <strong>canto superior direito</strong>, a 2 cm da borda de cima, com o último algarismo a 2 cm da borda da direita, em algarismos arábicos.</p>
+        <p>Exemplo: se da folha de rosto ao sumário você contou 5 folhas, a Introdução mostra o número 6.</p>
+      </div>
+
+      <nav class="indice-guia" aria-label="Neste guia">
+        <strong>Neste guia</strong>
+        <ol>
+          <li><a href="#contar-e-mostrar">Contar não é mostrar</a></li>
+          <li><a href="#posicao">Onde fica o número na folha</a></li>
+          <li><a href="#word">Como fazer no Word</a></li>
+          <li><a href="#casos">Frente e verso, apêndices e mais de um volume</a></li>
+          <li><a href="#erros">Erros comuns</a></li>
+          <li><a href="#perguntas-frequentes">Perguntas frequentes</a></li>
+        </ol>
+      </nav>
+
+      <section id="contar-e-mostrar">
+        <h2>Contar não é mostrar</h2>
+        <p>A NBR 14724:2024 separa duas coisas: quais folhas entram na contagem e em quais folhas o número aparece. Os elementos pré-textuais (folha de rosto, folha de aprovação, resumos, listas, sumário) são <strong>contados, mas não numerados</strong>. A numeração começa a aparecer na primeira folha da parte textual.</p>
+        <figure class="diagrama diagrama--largo">
+          <svg viewBox="0 0 340 150" role="img" aria-labelledby="n1-t n1-d" xmlns="http://www.w3.org/2000/svg">
+            <title id="n1-t">Contagem e numeração das páginas de um TCC</title>
+            <desc id="n1-d">Oito folhas lado a lado. A capa não é contada. Da folha de rosto ao sumário, as folhas de 1 a 5 são contadas, mas o número não aparece. A Introdução é a folha 6 e mostra o número 6 no canto superior direito, e a folha seguinte mostra o 7.</desc>
+            <rect width="340" height="150" fill="#fff"/>
+            <g font-size="8" fill="#22362b" font-weight="700" text-anchor="middle">
+              <!-- capa -->
+              <rect x="6" y="30" width="34" height="48" fill="#f1f5f0" stroke="#b9c4be" stroke-dasharray="2 2"/>
+              <text x="23" y="58" font-size="6.5" fill="#66736b">não conta</text>
+              <text x="23" y="95" font-size="7" fill="#22362b">Capa</text>
+              <!-- pré-textuais 1..5 -->
+              <rect x="48" y="30" width="34" height="48" fill="#fff" stroke="#8fa39a"/><text x="65" y="22" fill="#66736b">1</text><text x="65" y="95" font-size="6.5">Folha de</text><text x="65" y="103" font-size="6.5">rosto</text>
+              <rect x="90" y="30" width="34" height="48" fill="#fff" stroke="#8fa39a"/><text x="107" y="22" fill="#66736b">2</text><text x="107" y="95" font-size="6.5">Folha de</text><text x="107" y="103" font-size="6.5">aprovação</text>
+              <rect x="132" y="30" width="34" height="48" fill="#fff" stroke="#8fa39a"/><text x="149" y="22" fill="#66736b">3</text><text x="149" y="95" font-size="6.5">Resumo</text>
+              <rect x="174" y="30" width="34" height="48" fill="#fff" stroke="#8fa39a"/><text x="191" y="22" fill="#66736b">4</text><text x="191" y="95" font-size="6.5">Abstract</text>
+              <rect x="216" y="30" width="34" height="48" fill="#fff" stroke="#8fa39a"/><text x="233" y="22" fill="#66736b">5</text><text x="233" y="95" font-size="6.5">Sumário</text>
+              <!-- textuais -->
+              <rect x="258" y="30" width="34" height="48" fill="#e4ece3" stroke="#3b5d4c"/><text x="288" y="40" font-size="9" fill="#22362b">6</text><text x="275" y="95" font-size="6.5">Introdução</text>
+              <rect x="300" y="30" width="34" height="48" fill="#e4ece3" stroke="#3b5d4c"/><text x="330" y="40" font-size="9" fill="#22362b">7</text><text x="317" y="95" font-size="6.5">Texto</text>
+            </g>
+            <g fill="#cfd8d2">
+              <rect x="265" y="50" width="20" height="2" rx="1"/><rect x="265" y="56" width="20" height="2" rx="1"/><rect x="265" y="62" width="14" height="2" rx="1"/>
+              <rect x="307" y="50" width="20" height="2" rx="1"/><rect x="307" y="56" width="20" height="2" rx="1"/><rect x="307" y="62" width="14" height="2" rx="1"/>
+            </g>
+            <g font-size="7" font-weight="700">
+              <rect x="48" y="116" width="10" height="10" fill="#fff" stroke="#8fa39a"/><text x="62" y="124" fill="#22362b">Contada, número escondido (número cinza = a conta)</text>
+              <rect x="48" y="131" width="10" height="10" fill="#e4ece3" stroke="#3b5d4c"/><text x="62" y="139" fill="#22362b">Contada e com o número visível no canto superior direito</text>
+            </g>
+          </svg>
+          <figcaption>Um TCC de exemplo: a capa não entra na conta; as folhas de 1 a 5 são contadas, mas sem número; o número aparece a partir da Introdução (folha 6).</figcaption>
+        </figure>
+        <p>Para saber qual número a Introdução recebe, conte as folhas da folha de rosto até o sumário e some 1. Se o seu trabalho tem lista de ilustrações, dedicatória ou outros elementos, eles entram na conta.</p>
+      </section>
+
+      {{ESPACO:guia-meio-1}}
+
+      <section id="posicao">
+        <h2>Onde fica o número na folha</h2>
+        <ul>
+          <li><strong>Posição:</strong> canto superior direito, a 2 cm da borda de cima, com o último algarismo a 2 cm da borda da direita. Como a margem superior mede 3 cm, o número fica dentro da faixa da margem (veja a <a href="/guias/margens-abnt/">guia de margens</a>).</li>
+          <li><strong>Algarismos arábicos</strong> (1, 2, 3…).</li>
+          <li><strong>Tamanho:</strong> letra menor que a do texto; os manuais costumam indicar 10.</li>
+        </ul>
+      </section>
+
+      <section id="word">
+        <h2>Como numerar as páginas no Word, só a partir da Introdução</h2>
+        <p>O truque do Word é dividir o documento em seções: a parte inicial, sem número, e a parte textual, com número. O passo a passo:</p>
+        <ol class="passos">
+          <li><div><h3>Quebre a seção antes da Introdução</h3><p>Coloque o cursor no fim da página anterior à Introdução (o sumário) e vá em <span class="caminho"><span>Layout</span><i>›</i><span>Quebras</span><i>›</i><span>Próxima Página</span></span>, em "Quebras de Seção".</p></div></li>
+          <li><div><h3>Desvincule o cabeçalho da seção anterior</h3><p>Dê dois cliques no cabeçalho da primeira página da Introdução. Na aba <span class="caminho"><span>Design</span></span>, desmarque <strong>Vincular ao Anterior</strong>.</p></div></li>
+          <li><div><h3>Insira o número no canto direito</h3><p>Em <span class="caminho"><span>Inserir</span><i>›</i><span>Número de Página</span><i>›</i><span>Início da Página</span></span>, escolha o estilo <strong>Simples</strong> com o número à direita.</p></div></li>
+          <li><div><h3>Diga qual número a Introdução recebe</h3><p>Em <span class="caminho"><span>Número de Página</span><i>›</i><span>Formatar Números de Página…</span></span>, marque <strong>Iniciar em</strong> e digite o número que a Introdução tem na contagem a partir da folha de rosto (6, no exemplo).</p></div></li>
+          <li><div><h3>Confira as páginas iniciais</h3><p>As folhas anteriores à Introdução não podem mostrar número. Se aparecer algum, apague-o no cabeçalho dessa seção (com o vínculo já desfeito, o número da Introdução não some).</p></div></li>
+        </ol>
+        <p>Depois, é só montar o sumário com as páginas certas: veja a <a href="/guias/sumario-automatico-word/">guia de sumário automático no Word</a>.</p>
+      </section>
+
+      {{GUIA_FERRAMENTA}}
+
+      <section id="casos">
+        <h2>Frente e verso, apêndices e mais de um volume</h2>
+        <ul>
+          <li><strong>Impressão frente e verso:</strong> no anverso o número fica no canto superior direito; no verso, no canto superior esquerdo, também a 2 cm da borda.</li>
+          <li><strong>Apêndices e anexos:</strong> a numeração continua a do texto principal, sem recomeçar.</li>
+          <li><strong>Trabalho com mais de um volume:</strong> a numeração é uma só, do primeiro ao último volume.</li>
+          <li><strong>Verso da folha de rosto</strong> (onde fica a ficha catalográfica, quando existe): não é contado nem numerado.</li>
+        </ul>
+      </section>
+
+      {{ESPACO:guia-meio-2}}
+
+      <section id="erros">
+        <h2>Erros comuns na numeração de páginas</h2>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Numerar a partir da capa, ou mostrar o número na folha de rosto e no sumário.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Contar da folha de rosto, mas mostrar o número só a partir da Introdução.</p></div></div>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Recomeçar a numeração em 1 na Introdução.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>A Introdução leva o número que ela tem na contagem (6, no exemplo), e não 1.</p></div></div>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Número no rodapé ou no centro da folha.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Canto superior direito, a 2 cm da borda de cima e da borda da direita.</p></div></div>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Reiniciar a numeração nos apêndices e anexos.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Seguir a sequência do texto principal.</p></div></div>
+      </section>
+
+      <section id="perguntas-frequentes">
+        <h2>Perguntas frequentes sobre numeração de páginas ABNT</h2>
+        {{FAQ_HTML:guia-numeracao-de-paginas-abnt}}
+      </section>
+
+      {{GUIA_RELACIONADAS}}
+
+      {{GUIA_FONTES}}
+
+    </article>
+    <aside class="lateral" aria-label="Publicidade">
+      {{ESPACO:guia-lateral}}
+    </aside>
+  </div>
+</div>
+</main>
+{{include:footer}}
+</body>
+</html>

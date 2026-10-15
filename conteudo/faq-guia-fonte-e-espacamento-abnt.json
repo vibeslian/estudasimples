@@ -1,0 +1,34 @@
+[
+  {
+    "p": "Qual é a fonte da ABNT?",
+    "r": ["A norma recomenda letra tamanho 12 em todo o trabalho, na cor preta, e não define o tipo de letra. Os manuais de bibliotecas indicam Arial ou Times New Roman, as duas mais usadas."]
+  },
+  {
+    "p": "Qual é o espaçamento entre linhas na ABNT?",
+    "r": ["1,5 em todo o texto do trabalho. As exceções, em espaço simples, são as citações com mais de 3 linhas, as notas de rodapé, as referências, as legendas das ilustrações e das tabelas e a natureza do trabalho na folha de rosto."]
+  },
+  {
+    "p": "O que usa fonte menor que 12?",
+    "r": ["As citações com mais de 3 linhas, as notas de rodapé, a paginação, as legendas e as fontes das ilustrações e das tabelas, e a ficha catalográfica. A letra menor deve ser uniforme; os manuais costumam indicar tamanho 10 (alguns aceitam 11)."]
+  },
+  {
+    "p": "As referências usam espaçamento 1,5?",
+    "r": ["Não. As referências ficam em espaço simples, alinhadas à esquerda e separadas entre si por uma linha em branco simples. Veja o modelo na <a href=\"/guias/como-fazer-referencia-abnt/\">guia de referência ABNT</a>."]
+  },
+  {
+    "p": "A capa também usa fonte 12 e espaçamento 1,5?",
+    "r": ["Sim. A norma recomenda a fonte tamanho 12 para todo o trabalho, inclusive a capa, e o espaçamento 1,5 vale para o texto em geral. Veja os modelos na <a href=\"/guias/modelos-de-capa-abnt/\">guia de modelos de capa</a>."]
+  },
+  {
+    "p": "O texto precisa ser justificado e ter recuo na primeira linha?",
+    "r": ["A NBR 14724 não define o alinhamento do texto nem o recuo do parágrafo. Os manuais de bibliotecas costumam pedir texto justificado e recuo da primeira linha de 1,25 cm, e quem decide é o manual da sua faculdade."]
+  },
+  {
+    "p": "Como colocar espaçamento 1,5 no Word?",
+    "r": ["Selecione o texto (Ctrl + T seleciona tudo), abra Página Inicial, Parágrafo, Opções de Espaçamento de Linha e escolha 1,5 linhas em \"Espaçamento entre linhas\". Deixe 0 pt antes e 0 pt depois nos parágrafos."]
+  },
+  {
+    "p": "Posso usar duas fontes no mesmo trabalho?",
+    "r": ["Não é o indicado. Os manuais pedem a mesma fonte em todo o trabalho, variando só o tamanho nas partes que usam letra menor e o destaque (negrito, itálico) nos títulos de seção."]
+  }
+]

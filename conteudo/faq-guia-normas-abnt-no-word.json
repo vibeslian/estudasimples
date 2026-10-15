@@ -1,0 +1,34 @@
+[
+  {
+    "p": "Como formatar o trabalho nas normas ABNT no Word?",
+    "r": ["Configure o papel A4, as margens (3 cm à esquerda e em cima, 2 cm à direita e embaixo), a fonte (Arial ou Times New Roman 12), o espaçamento 1,5 e os estilos de título antes de escrever. Depois, numere as páginas a partir da Introdução e insira o sumário automático."]
+  },
+  {
+    "p": "Qual é a margem ABNT no Word?",
+    "r": ["Em Layout, Margens, Margens Personalizadas: superior 3 cm, inferior 2 cm, esquerda 3 cm e direita 2 cm. A margem padrão do Word costuma ser Normal (2,54 cm nos quatro lados) e não serve. Veja a <a href=\"/guias/margens-abnt/\">guia de margens ABNT</a>."]
+  },
+  {
+    "p": "Como colocar espaçamento 1,5 no Word?",
+    "r": ["Selecione o texto com Ctrl + T, abra Página Inicial, Parágrafo, Opções de Espaçamento de Linha e escolha 1,5 linhas. Deixe 0 pt antes e 0 pt depois, para não haver espaço extra entre os parágrafos."]
+  },
+  {
+    "p": "Qual fonte e tamanho usar no Word?",
+    "r": ["A norma recomenda o tamanho 12 e não define o tipo de letra. Os manuais indicam Arial ou Times New Roman. Use uma só fonte em todo o trabalho."]
+  },
+  {
+    "p": "Como fazer o recuo de 4 cm da citação longa no Word?",
+    "r": ["Selecione o parágrafo da citação, abra Parágrafo e, em Recuo, \"À esquerda\", digite 4 cm. Use espaçamento simples, letra menor (os manuais costumam indicar 10) e não coloque aspas. Veja a <a href=\"/guias/citacao-abnt/\">guia de citação ABNT</a>."]
+  },
+  {
+    "p": "Como numerar as páginas só a partir da Introdução?",
+    "r": ["Faça uma quebra de seção (Próxima Página) antes da Introdução, desmarque \"Vincular ao Anterior\" no cabeçalho da nova seção, insira o número de página no canto superior direito e use \"Iniciar em\" para dar à Introdução o número certo da contagem. Veja a <a href=\"/guias/numeracao-de-paginas-abnt/\">guia de numeração de páginas</a>."]
+  },
+  {
+    "p": "Como fazer o sumário no Word?",
+    "r": ["Aplique os estilos Título 1, Título 2 e seguintes aos títulos e, em Referências, Sumário, escolha Sumário Automático. Depois de mudar títulos ou páginas, clique no sumário e use Atualizar Sumário. Veja a <a href=\"/guias/sumario-automatico-word/\">guia de sumário automático</a>."]
+  },
+  {
+    "p": "Posso formatar o trabalho depois de escrever tudo?",
+    "r": ["Pode, mas dá mais trabalho e costuma mudar a paginação. O melhor é configurar a página, o texto e os estilos de título antes de escrever. Se o trabalho já está pronto, o serviço de <a href=\"/formatacao-abnt-tcc/?origem=guia-normas-abnt-no-word\">formatação ABNT de TCC</a> faz isso por você."]
+  }
+]

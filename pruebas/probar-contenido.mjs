@@ -2,7 +2,9 @@
 // Requiere el sitio en http://localhost:3000 (npm run dev).
 import puppeteer from "puppeteer-core";
 const BASE = process.env.BASE_URL || "http://localhost:3000";
-const PAGINAS = ["/", "/gerador-de-capa-abnt/", "/gerador-de-folha-de-rosto-abnt/", "/gerador-de-sumario-abnt/", "/formatacao-abnt-tcc/", "/sobre/", "/contato/", "/politica-de-privacidade/", "/termos-de-uso/"];
+import fs from "node:fs";
+const GUIAS = JSON.parse(fs.readFileSync("../conteudo/guias.json", "utf8")).map((g) => `/guias/${g.slug}/`);
+const PAGINAS = ["/", "/gerador-de-capa-abnt/", "/gerador-de-folha-de-rosto-abnt/", "/gerador-de-sumario-abnt/", "/formatacao-abnt-tcc/", "/sobre/", "/contato/", "/politica-de-privacidade/", "/termos-de-uso/", "/guias/", ...GUIAS];
 const ok = (c) => (c ? "OK   " : "FALLA");
 const browser = await puppeteer.launch({ executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe", headless: "new" });
 const externos = new Set();
@@ -68,8 +70,12 @@ console.log("\n== 3) Cero peticiones a terceros (incluye generar PDF y Word) =="
 marca(externos.size === 0, externos.size ? "peticiones externas: " + [...externos].join(" | ") : "ninguna petición a terceros salvo las estadísticas de Cloudflare declaradas en la política (todas las páginas + generación de PDF y Word)");
 
 console.log("\n== 4) Anuncios ==");
-async function infoAnuncios(url, vp, preview) {
+// site.config.json → anuncios.adsenseAtivo. Apagado: los espacios no ocupan lugar (ningún hueco). Encendido: reservan su altura (sin saltos).
+// Para probar el estado encendido sin rehacer el sitio, se les quita la clase "anuncio--desligado" en la página (es lo único que cambia el build).
+const ADS_ON = JSON.parse(fs.readFileSync("../site.config.json", "utf8")).anuncios.adsenseAtivo === true;
+async function infoAnuncios(url, vp, { preview = false, activar = false } = {}) {
   const p = await abre(url + (preview ? "?ads=preview" : ""), vp);
+  if (activar) await p.evaluate(() => document.querySelectorAll(".anuncio--desligado").forEach((a) => a.classList.remove("anuncio--desligado")));
   const r = await p.evaluate(() => {
     const doc = document.documentElement.scrollHeight;
     const slots = [...document.querySelectorAll(".anuncio")].map((a) => {
@@ -82,33 +88,35 @@ async function infoAnuncios(url, vp, preview) {
   await p.close();
   return r;
 }
+marca(true, "anuncios.adsenseAtivo = " + ADS_ON + (ADS_ON ? " (espacios reservados)" : " (los espacios no ocupan lugar)"));
 for (const [ferr, lateral] of [["/gerador-de-capa-abnt/", "capa-lateral"], ["/gerador-de-folha-de-rosto-abnt/", "folha-lateral"], ["/gerador-de-sumario-abnt/", "sumario-lateral"]])
 for (const [nome, vp] of [["computador 1280", { width: 1280, height: 900 }], ["celular 390", { width: 390, height: 844, isMobile: true, hasTouch: true, deviceScaleFactor: 2 }]]) {
-  console.log(`-- ${ferr} ${nome}`);
-  const sin = await infoAnuncios(ferr, vp, false);
-  const con = await infoAnuncios(ferr, vp, true);
-  const vis = sin.slots.filter((s) => s.display !== "none");
-  marca(sin.slots.every((s) => s.borde === "none" && !s.fondo && !s.texto), `sin ?ads=preview: ${sin.slots.length} espacios, todos invisibles (sin borde, sin fondo, sin texto)`);
-  marca(vis.every((s) => s.h >= 250), `espacios visibles reservan altura: ${vis.map((s) => s.slot + "=" + s.h + "px").join(", ")}`);
-  marca(sin.doc === con.doc, `la altura de la página es la misma con y sin ?ads=preview (${sin.doc}px): nada salta`);
-  const prevVis = con.slots.filter((s) => s.display !== "none");
-  marca(prevVis.every((s) => s.borde === "dashed" && s.texto), `con ?ads=preview: ${prevVis.length} cajas con borde punteado y texto "Anúncio"`);
+  console.log("-- " + ferr + " " + nome);
+  const real = await infoAnuncios(ferr, vp);
+  const on = ADS_ON ? real : await infoAnuncios(ferr, vp, { activar: true });
+  if (!ADS_ON) {
+    marca(real.slots.length > 0 && real.slots.every((s) => s.display === "none" && s.h === 0), "AdSense apagado: " + real.slots.length + " espacios en el HTML y ninguno ocupa lugar (display none, 0 px)");
+    const prev = await infoAnuncios(ferr, vp, { preview: true });
+    const pv = prev.slots.filter((s) => s.display !== "none");
+    marca(pv.length > 0 && pv.every((s) => s.borde === "dashed" && s.texto), "con ?ads=preview se ven " + pv.length + " cajas con borde punteado y texto \"Anúncio\" (para saber dónde irán)");
+  }
+  const vis = on.slots.filter((s) => s.display !== "none");
+  marca(vis.every((s) => s.borde === "none" && !s.fondo && !s.texto), "encendido: " + vis.length + " espacios visibles, sin borde, sin fondo y sin texto");
+  marca(vis.length > 0 && vis.every((s) => s.h >= 250), "encendido: reservan altura (" + vis.map((s) => s.slot + "=" + s.h + "px").join(", ") + ")");
   const primero = Math.min(...vis.map((s) => s.y));
-  marca(primero > (sin.form ? sin.form.bottom : 0), `ningún anuncio encima del formulario (primer anuncio y=${primero}px; formulario termina y=${sin.form?.bottom}px)`);
-  const sep = vis.map((s) => s.y - sin.botones.bottom).filter((d) => d > -9999 && d > 0);
-  const masCerca = Math.min(...vis.filter((s) => s.y > sin.botones.bottom).map((s) => s.y - sin.botones.bottom));
-  marca(masCerca >= 150, `distancia del anuncio más cercano a los botones de descarga: ${masCerca}px (mínimo pedido: bien separado)`);
-  const hijosTool = vis.filter((s) => s.y < sin.aviso.bottom);
-  marca(hijosTool.length === 0, "no hay anuncios dentro de la zona de la herramienta (formulario, prévia y aviso)");
-  if (nome.startsWith("computador")) marca(sin.slots.some((s) => s.slot === lateral && s.display !== "none" && s.h >= 600), "columna lateral de 300x600 presente en computador");
-  else marca(sin.slots.find((s) => s.slot === lateral).display === "none", "columna lateral oculta en celular");
+  marca(primero > (on.form ? on.form.bottom : 0), "ningún anuncio encima del formulario (primer anuncio y=" + primero + "px; formulario termina y=" + on.form?.bottom + "px)");
+  const masCerca = Math.min(...vis.filter((s) => s.y > on.botones.bottom).map((s) => s.y - on.botones.bottom));
+  marca(masCerca >= 150, "distancia del anuncio más cercano a los botones de descarga: " + masCerca + "px (mínimo pedido: bien separado)");
+  marca(vis.filter((s) => s.y < on.aviso.bottom).length === 0, "no hay anuncios dentro de la zona de la herramienta (formulario, prévia y aviso)");
+  if (nome.startsWith("computador")) marca(on.slots.some((s) => s.slot === lateral && s.display !== "none" && s.h >= 600), "encendido: columna lateral de 300x600 presente en computador");
+  else marca(on.slots.find((s) => s.slot === lateral).display === "none", "columna lateral oculta en celular");
 }
 {
   const vp = { width: 1280, height: 900 };
-  const sin = await infoAnuncios("/", vp, false);
-  const con = await infoAnuncios("/", vp, true);
+  const on = ADS_ON ? await infoAnuncios("/", vp) : await infoAnuncios("/", vp, { activar: true });
   console.log("-- inicio");
-  marca(sin.slots.length === 1 && sin.slots[0].y > sin.hero.bottom && sin.doc === con.doc, `1 espacio entre secciones (y=${sin.slots[0].y}px), debajo de la portada (termina y=${sin.hero.bottom}px); altura estable`);
+  marca(on.slots.length === 1 && on.slots[0].y > on.hero.bottom, "1 espacio entre secciones (y=" + on.slots[0].y + "px), debajo de la portada (termina y=" + on.hero.bottom + "px)");
+  if (!ADS_ON) { const real = await infoAnuncios("/", vp); marca(real.slots[0].h === 0, "portada con AdSense apagado: el espacio no ocupa lugar"); }
 }
 await browser.close();
 console.log(falhas.length ? `\n${falhas.length} FALLAS` : "\nTodo OK");

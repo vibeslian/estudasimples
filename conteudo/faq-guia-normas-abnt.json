@@ -1,0 +1,38 @@
+[
+  {
+    "p": "Quais são as normas ABNT para trabalhos acadêmicos?",
+    "r": ["A principal é a NBR 14724:2024, que define a estrutura e a apresentação do trabalho. Ela é complementada pela NBR 6023:2018 (referências), NBR 10520:2023 (citações), NBR 6024 (numeração progressiva), NBR 6027 (sumário) e NBR 6028:2021 (resumo)."]
+  },
+  {
+    "p": "Qual é a formatação básica da ABNT?",
+    "r": ["Papel A4, margens de 3 cm à esquerda e em cima e de 2 cm à direita e embaixo, fonte tamanho 12 e espaçamento 1,5 entre as linhas. Citações com mais de três linhas, notas, legendas e referências têm tratamento próprio."]
+  },
+  {
+    "p": "Qual é a versão atual das normas ABNT?",
+    "r": ["A versão vigente da NBR 14724 que usei neste guia é a de 2024 (com uma versão corrigida de abril de 2025), que substituiu a de 2011. As citações seguem a NBR 10520:2023 e as referências, a NBR 6023:2018."]
+  },
+  {
+    "p": "As normas ABNT são obrigatórias?",
+    "r": ["Para o aluno, o que costuma ser obrigatório é o manual da faculdade, que normalmente adota a ABNT como base. Confira com o seu curso ou orientador se há um manual próprio."]
+  },
+  {
+    "p": "Qual fonte devo usar nos trabalhos acadêmicos?",
+    "r": ["A norma recomenda o tamanho 12 e não define o tipo de letra. Os manuais das bibliotecas indicam Arial ou Times New Roman. Veja o <a href=\"/guias/fonte-e-espacamento-abnt/\">guia de fonte e espaçamento</a>."]
+  },
+  {
+    "p": "Por onde começo a formatar o trabalho?",
+    "r": ["Configure a página (A4 e margens) e os estilos de texto e de título antes de escrever, no <a href=\"/guias/normas-abnt-no-word/\">Word</a>. Depois, monte a capa, a folha de rosto e o sumário, que têm geradores gratuitos neste site."]
+  },
+  {
+    "p": "As regras valem para trabalho escolar?",
+    "r": ["A norma vale para trabalhos acadêmicos e similares, dentro ou fora de sala de aula, e muitas escolas usam a ABNT como base. Detalhes como série, turma e professor na capa dependem da escola."]
+  },
+  {
+    "p": "Posso pedir que alguém formate o meu trabalho?",
+    "r": ["Pode. O <a href=\"/formatacao-abnt-tcc/?origem=guia-normas-abnt\">serviço de formatação ABNT de TCC</a> deixa o trabalho no formato da norma, em Word e PDF, com orçamento pelo WhatsApp."]
+  },
+  {
+    "p": "Onde comprar ou ler as normas oficiais?",
+    "r": ["As normas completas são vendidas pela ABNT. Os manuais de normalização das bibliotecas das universidades resumem as regras e muitos estão disponíveis na internet, como os que usamos nas fontes deste guia."]
+  }
+]

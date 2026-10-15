@@ -1,0 +1,38 @@
+[
+  {
+    "p": "Quais são os elementos obrigatórios de um TCC?",
+    "r": ["Pela NBR 14724:2024: capa, folha de rosto, folha de aprovação, resumo em português, resumo em língua estrangeira e sumário (pré-textuais); introdução, desenvolvimento e conclusão (textuais); e referências (pós-textuais). Os demais, como dedicatória, epígrafe, listas, glossário, apêndice e anexo, são opcionais."]
+  },
+  {
+    "p": "Qual é a ordem das partes do TCC?",
+    "r": ["Capa, folha de rosto, folha de aprovação, dedicatória, agradecimentos, epígrafe, resumo, abstract, listas, sumário, introdução, desenvolvimento, conclusão, referências, glossário, apêndice, anexo e índice. A lombada fica na parte externa e a errata, quando existir, vem logo depois da folha de rosto."]
+  },
+  {
+    "p": "O que entra no sumário do TCC?",
+    "r": ["Só o que vem depois dele: as seções da introdução ao desenvolvimento e à conclusão, as referências e os elementos pós-textuais (glossário, apêndice, anexo e índice). Os elementos pré-textuais, como resumo, agradecimentos e listas, não entram."]
+  },
+  {
+    "p": "A folha de rosto é a mesma coisa que a contra capa?",
+    "r": ["Na prática, sim: muita gente chama a folha de rosto de \"contra capa\". A NBR 14724 usa o nome folha de rosto, que é obrigatória e vem logo depois da capa. Veja o <a href=\"/gerador-de-folha-de-rosto-abnt/?origem=guia-normas-abnt-tcc\">gerador de folha de rosto</a>."]
+  },
+  {
+    "p": "Todas as páginas do TCC têm número?",
+    "r": ["Todas são contadas a partir da folha de rosto, mas o número só aparece a partir da Introdução, no canto superior direito. A capa não é contada. Veja o <a href=\"/guias/numeracao-de-paginas-abnt/\">guia de numeração de páginas</a>."]
+  },
+  {
+    "p": "Qual a diferença entre apêndice e anexo?",
+    "r": ["O apêndice é um texto ou documento que você mesmo elaborou, como um questionário. O anexo é um documento que você não elaborou, como uma lei ou um relatório de terceiros. Os dois são opcionais e ficam depois das referências."]
+  },
+  {
+    "p": "Agradecimentos e dedicatória são obrigatórios?",
+    "r": ["Não. São opcionais pela norma, mas alguns manuais os exigem em casos específicos: a UFV, por exemplo, pede agradecimentos em teses e dissertações."]
+  },
+  {
+    "p": "Cada faculdade pode ter regras próprias?",
+    "r": ["Pode. A NBR 14724 é a base, e muitas instituições têm um manual com modelos próprios e algumas exigências a mais. Se o seu curso tem manual, siga o manual, e use este guia para entender o porquê de cada item."]
+  },
+  {
+    "p": "O TCC em formato de artigo tem a mesma estrutura?",
+    "r": ["Nem sempre. Algumas faculdades, como a UERN, aceitam o artigo científico como TCC e têm uma estrutura própria para ele, com elementos opcionais diferentes. Confira o manual do seu curso."]
+  }
+]

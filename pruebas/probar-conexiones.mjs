@@ -221,7 +221,7 @@ function construye(cambia, nombre) {
 }
 {
   const v = construye((c) => { c.anuncios.ofertas.formatacao.ativa = false; }, "oferta-apagada");
-  marca(v.ok && !/class="oferta"/.test(v.html("gerador-de-capa-abnt")) && /data-slot="capa-meio-1"/.test(v.html("gerador-de-capa-abnt")) && /class="anuncio" data-slot="capa-meio-1"/.test(v.html("gerador-de-capa-abnt")), "con la oferta desactivada (ativa: false) no queda ninguna oferta y el espacio vuelve a ser un espacio libre para el AdSense");
+  marca(v.ok && !/class="oferta"/.test(v.html("gerador-de-capa-abnt")) && /data-slot="capa-meio-1"/.test(v.html("gerador-de-capa-abnt")) && /class="anuncio[^"]*" data-slot="capa-meio-1"/.test(v.html("gerador-de-capa-abnt")), "con la oferta desactivada (ativa: false) no queda ninguna oferta y el espacio vuelve a ser un espacio libre para el AdSense");
 }
 {
   const v = construye((c) => { for (const k of Object.keys(c.anuncios.espacos)) c.anuncios.espacos[k] = "adsense"; }, "todo-adsense");

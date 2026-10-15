@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  {{include:head-common}}
+  <title>Guias ABNT: normas, referências, citações, capa e TCC</title>
+  <meta name="description" content="Guias práticas das normas ABNT para trabalhos acadêmicos: margens, referências, citações, capa, sumário, resumo e estrutura do TCC.">
+  <link rel="canonical" href="{{SITE_URL}}/guias/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="{{SITE_NAME}}">
+  <meta property="og:title" content="Guias ABNT: normas, referências, citações, capa e TCC">
+  <meta property="og:description" content="Margens, referências, citações, capa, sumário, resumo e estrutura do TCC, explicados com exemplos.">
+  <meta property="og:url" content="{{SITE_URL}}/guias/">
+  <link rel="stylesheet" href="/assets/css/guias.css?v={{BUILD}}">
+  <script type="application/ld+json">{{GUIAS_JSONLD}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"{{SITE_NAME}}","item":"{{SITE_URL}}/"},{"@type":"ListItem","position":2,"name":"Guias ABNT","item":"{{SITE_URL}}/guias/"}]}</script>
+</head>
+<body class="guia">
+<div class="hero hero--compacto">
+  {{include:manchas}}
+  {{include:header}}
+  <div class="container hero-conteudo">
+    <nav class="migalhas" aria-label="Você está em">
+      <ol><li><a href="/">Início</a></li><li aria-current="page">Guias ABNT</li></ol>
+    </nav>
+    <h1>Guias ABNT para trabalhos acadêmicos</h1>
+    <p class="lead">Margens, fonte, referências, citações, capa, sumário, resumo e a estrutura completa do TCC, em guias diretas e com exemplos desenhados.</p>
+  </div>
+</div>
+<main class="secao" id="conteudo">
+  <div class="container guias-grande">
+    <div class="guia-destaque">
+      <h2>Por onde começar</h2>
+      <p>Se você ainda não sabe o que a ABNT pede, comece pelo <a href="/guias/normas-abnt/">guia completo das normas ABNT</a>: ele mostra o que vale para cada parte e leva para cada guia. Se o trabalho é um TCC, siga para <a href="/guias/normas-abnt-tcc/">a estrutura completa do TCC</a>.</p>
+      <p>Para fazer a parte inicial do trabalho, use as ferramentas gratuitas: <a href="/gerador-de-capa-abnt/">capa</a>, <a href="/gerador-de-folha-de-rosto-abnt/">folha de rosto</a> e <a href="/gerador-de-sumario-abnt/">sumário</a>. Se prefere receber o trabalho todo formatado, veja o <a href="/formatacao-abnt-tcc/">serviço de formatação</a>.</p>
+    </div>
+    {{GUIAS_LISTA}}
+    <p class="artigo-meta">Todas as guias seguem a ABNT NBR 14724:2024 e as outras normas citadas em cada uma, e terminam com a lista de fontes. Se a sua faculdade tem manual próprio, é ele que vale.</p>
+  </div>
+</main>
+{{include:footer}}
+</body>
+</html>

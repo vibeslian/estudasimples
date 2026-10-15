@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  {{include:head-common}}
+  {{GUIA_HEAD}}
+  {{FAQ_JSONLD:guia-como-fazer-referencia-abnt}}
+</head>
+<body class="guia">
+{{GUIA_HERO}}
+<main id="conteudo">
+<div class="container conteudo-capa">
+  <div class="conteudo-grade">
+    <article class="artigo">
+
+      <div class="resposta">
+        <strong class="resposta-titulo">Resposta direta</strong>
+        <p>Uma referência ABNT junta os dados do documento numa ordem fixa. Para um livro: <strong>AUTOR. Título: subtítulo. edição. Local: Editora, ano.</strong></p>
+        <p>As referências vão numa lista chamada REFERÊNCIAS, no fim do trabalho, em ordem alfabética, em espaço simples, alinhadas à esquerda e separadas por uma linha em branco. Se o documento é da internet, acrescente <em>Disponível em:</em> e <em>Acesso em:</em>.</p>
+      </div>
+
+      <nav class="indice-guia" aria-label="Neste guia">
+        <strong>Neste guia</strong>
+        <ol>
+          <li><a href="#anatomia">A ordem dos elementos</a></li>
+          <li><a href="#exemplos">Exemplos por tipo de documento</a></li>
+          <li><a href="#lista">Como montar a lista de referências</a></li>
+          <li><a href="#autores">Autores, entidades e obras sem autor</a></li>
+          <li><a href="#faltando">Quando falta algum dado</a></li>
+          <li><a href="#erros">Erros comuns</a></li>
+          <li><a href="#perguntas-frequentes">Perguntas frequentes</a></li>
+        </ol>
+      </nav>
+
+      <section id="anatomia">
+        <h2>A ordem dos elementos de uma referência</h2>
+        <p>A NBR 6023:2018 chama de <strong>elementos essenciais</strong> os dados sem os quais o documento não é identificado. Eles ficam sempre na mesma sequência e com a pontuação padronizada. Veja um livro, com cada elemento pintado de uma cor:</p>
+        <div class="anat">
+          <p><mark style="--c:#dcebd9">SILVA, Maria Helena</mark>. <mark style="--c:#fbe0d6"><strong>Escrita acadêmica na prática: do projeto ao TCC</strong></mark>. <mark style="--c:#e6e1f3">2. ed.</mark> <mark style="--c:#dbe8f4">São Paulo</mark>: <mark style="--c:#fdf0c8">Editora Exemplo</mark>, <mark style="--c:#e8e8e8">2022</mark>.</p>
+          <p class="legenda"><span style="--c:#dcebd9">Autor</span><span style="--c:#fbe0d6">Título: subtítulo (em destaque)</span><span style="--c:#e6e1f3">Edição</span><span style="--c:#dbe8f4">Local</span><span style="--c:#fdf0c8">Editora</span><span style="--c:#e8e8e8">Ano</span></p>
+        </div>
+        <ul>
+          <li><strong>Autor:</strong> sobrenome em letras maiúsculas, vírgula e prenome. Esse é o elemento de entrada: é ele que define a ordem alfabética da lista.</li>
+          <li><strong>Título:</strong> recebe um destaque (negrito, itálico ou sublinhado). Escolha um só e use em todas as referências. O subtítulo vem depois de dois-pontos.</li>
+          <li><strong>Edição:</strong> se constar no documento, com o número e "ed." (2. ed.).</li>
+          <li><strong>Local e editora:</strong> a cidade, dois-pontos e o nome da editora, sem palavras como "Ltda." ou "S.A.".</li>
+          <li><strong>Ano:</strong> toda referência precisa de uma data.</li>
+        </ul>
+        <p>Os exemplos deste guia são inventados, só para mostrar o formato. Quando você montar as suas, os dados saem do próprio documento: da folha de rosto do livro, do cabeçalho do artigo, da página do site.</p>
+      </section>
+
+      <section id="exemplos">
+        <h2>Exemplos por tipo de documento</h2>
+        <div class="exemplos">
+          <div class="exemplo"><span class="exemplo-tipo">Livro com um autor</span><p>SILVA, Maria Helena. <strong>Escrita acadêmica na prática: do projeto ao TCC</strong>. 2. ed. São Paulo: Editora Exemplo, 2022.</p></div>
+          <div class="exemplo"><span class="exemplo-tipo">Livro com dois ou três autores</span><p>SOUZA, João Pedro; LIMA, Ana Clara. <strong>Métodos de pesquisa em educação</strong>. Recife: Editora Exemplo, 2020.</p><span class="exemplo-nota">Os autores ficam separados por ponto e vírgula.</span></div>
+          <div class="exemplo"><span class="exemplo-tipo">Livro com quatro ou mais autores</span><p>ALVES, Beatriz <em>et al.</em> <strong>Leitura e escrita no ensino superior</strong>. Belo Horizonte: Editora Exemplo, 2019.</p><span class="exemplo-nota">A norma recomenda citar todos, mas permite indicar só o primeiro, seguido de <em>et al.</em></span></div>
+          <div class="exemplo"><span class="exemplo-tipo">Capítulo de livro</span><p>COSTA, Rafael. A leitura na universidade. In: SILVA, Maria Helena (org.). <strong>Escrita acadêmica na prática: do projeto ao TCC</strong>. 2. ed. São Paulo: Editora Exemplo, 2022. cap. 3, p. 45-62.</p><span class="exemplo-nota">O capítulo vem sem destaque; o título da obra, com destaque, vem depois de "In:".</span></div>
+          <div class="exemplo"><span class="exemplo-tipo">Artigo de revista (periódico)</span><p>PEREIRA, Carla. Redes sociais e aprendizagem. <strong>Revista Exemplo de Educação</strong>, São Paulo, v. 12, n. 2, p. 33-48, jul./dez. 2021.</p><span class="exemplo-nota">Aqui o destaque vai no nome da revista, e não no título do artigo.</span></div>
+          <div class="exemplo"><span class="exemplo-tipo">Artigo de revista na internet</span><p>PEREIRA, Carla. Redes sociais e aprendizagem. <strong>Revista Exemplo de Educação</strong>, São Paulo, v. 12, n. 2, p. 33-48, jul./dez. 2021. DOI: https://doi.org/10.1234/exemplo.2021. Disponível em: https://www.revistaexemplo.com.br/artigo/123. Acesso em: 15 out. 2026.</p></div>
+          <div class="exemplo"><span class="exemplo-tipo">Site com autor</span><p>SOUZA, Marta. <strong>Como planejar a semana de provas</strong>. Recife, 2 jun. 2025. Portal: Exemplo Escola. Disponível em: https://www.exemplo.com.br/semana-de-provas. Acesso em: 15 out. 2026.</p><span class="exemplo-nota">Mais casos (site sem autor, notícia, blog, rede social) na <a href="/guias/referencia-de-site-abnt/">guia de referência de site</a>.</span></div>
+          <div class="exemplo"><span class="exemplo-tipo">Site sem autor</span><p>PLANEJAMENTO da semana de provas. Recife, 2025. Portal: Exemplo Escola. Disponível em: https://www.exemplo.com.br/planejamento. Acesso em: 15 out. 2026.</p><span class="exemplo-nota">A primeira palavra do título fica em maiúsculas e ocupa o lugar do autor; por isso o título não leva negrito.</span></div>
+          <div class="exemplo"><span class="exemplo-tipo">Lei</span><p>BRASIL. Lei nº 9.610, de 19 de fevereiro de 1998. Altera, atualiza e consolida a legislação sobre direitos autorais e dá outras providências. Brasília, DF: Presidência da República, 1998. Disponível em: https://www.planalto.gov.br/ccivil_03/leis/l9610.htm. Acesso em: 15 out. 2026.</p><span class="exemplo-nota">O autor da lei é a jurisdição (BRASIL), seguida do número, da data e da ementa.</span></div>
+          <div class="exemplo"><span class="exemplo-tipo">Vídeo (YouTube)</span><p>COMO fazer um bom resumo acadêmico. [S. l.: s. n.], 2024. 1 vídeo (12 min). Publicado pelo canal Exemplo Estudos. Disponível em: https://www.youtube.com/watch?v=XXXXXXXXXXX. Acesso em: 15 out. 2026.</p><span class="exemplo-nota">Sem autor, a entrada é pelo título. O canal entra como informação do vídeo.</span></div>
+          <div class="exemplo"><span class="exemplo-tipo">TCC, dissertação ou tese</span><p>SANTOS, Ana. <strong>Leitura em voz alta na sala de aula</strong>. 2023. Trabalho de Conclusão de Curso (Graduação em Pedagogia) – Faculdade de Educação, Universidade Exemplo, Recife, 2023.</p></div>
+        </div>
+        <aside class="dica"><strong class="dica-titulo">Como abreviar os meses</strong><p>Na data, o mês vem abreviado: jan., fev., mar., abr., maio, jun., jul., ago., set., out., nov. e dez. O dia vem antes do mês (10 mar. 2025), e o mês vem antes do ano.</p></aside>
+      </section>
+
+      {{ESPACO:guia-meio-1}}
+
+      {{GUIA_FERRAMENTA}}
+
+      <section id="lista">
+        <h2>Como montar a lista de referências</h2>
+        <p>Veja como fica a página das referências, desenhada em A4. Três dos exemplos acima formam a lista:</p>
+        <figure class="diagrama">
+          <svg viewBox="0 0 210 175" role="img" aria-labelledby="r1-t r1-d" xmlns="http://www.w3.org/2000/svg">
+            <title id="r1-t">Página de referências ABNT</title>
+            <desc id="r1-d">A palavra REFERÊNCIAS em negrito e centralizada no alto, sem número. Abaixo, três referências em ordem alfabética, alinhadas à esquerda, em espaço simples, separadas por uma linha em branco.</desc>
+            <rect width="210" height="175" fill="#fff"/>
+            <rect x="0" y="0" width="210" height="30" fill="#e4ece3"/><rect x="0" y="30" width="30" height="145" fill="#e4ece3"/><rect x="190" y="30" width="20" height="145" fill="#fce6de"/>
+            <rect x="30" y="30" width="160" height="145" fill="none" stroke="#3b5d4c" stroke-width=".6" stroke-dasharray="3 2"/>
+            <text x="110" y="42" font-size="4.6" font-weight="700" text-anchor="middle" fill="#000">REFERÊNCIAS</text>
+            <g font-size="4.2" fill="#000">
+              <text x="30" y="58">ALVES, Beatriz <tspan font-style="italic">et al</tspan>. <tspan font-weight="700">Leitura e escrita no ensino superior</tspan>. Belo</text>
+              <text x="30" y="63">Horizonte: Editora Exemplo, 2019.</text>
+              <text x="30" y="75">COSTA, Rafael. A leitura na universidade. In: SILVA, Maria Helena (org.).</text>
+              <text x="30" y="80"><tspan font-weight="700">Escrita acadêmica na prática</tspan>. 2. ed. São Paulo: Editora Exemplo, 2022.</text>
+              <text x="30" y="85">cap. 3, p. 45-62.</text>
+              <text x="30" y="97">SILVA, Maria Helena. <tspan font-weight="700">Escrita acadêmica na prática: do projeto ao</tspan></text>
+              <text x="30" y="102"><tspan font-weight="700">TCC</tspan>. 2. ed. São Paulo: Editora Exemplo, 2022.</text>
+            </g>
+            <g font-size="3.8" font-weight="700" fill="#22362b">
+              <text x="34" y="122">1 Em ordem alfabética pelo sobrenome do primeiro autor</text>
+              <text x="34" y="129">2 Espaço simples dentro de cada referência</text>
+              <text x="34" y="136">3 Uma linha em branco entre as referências</text>
+              <text x="34" y="143">4 Alinhadas à margem esquerda (sem recuo)</text>
+              <text x="34" y="150">5 Título REFERÊNCIAS centralizado, sem número</text>
+            </g>
+          </svg>
+          <figcaption>Página de referências: o desenho mostra a parte de cima da folha A4, com as margens ABNT.</figcaption>
+        </figure>
+        <ol>
+          <li><strong>Título:</strong> a palavra REFERÊNCIAS, centralizada, sem número. Ela entra no sumário, sem numeração.</li>
+          <li><strong>Ordem:</strong> alfabética pelo elemento de entrada (o sobrenome do primeiro autor), quando as citações do texto são do tipo autor-data. Se o trabalho usa citações numeradas, a lista segue a ordem numérica.</li>
+          <li><strong>Espaçamento:</strong> espaço simples entre as linhas de cada referência e uma linha em branco simples entre elas. Não use o espaçamento 1,5 do resto do texto.</li>
+          <li><strong>Alinhamento:</strong> à margem esquerda, sem recuo.</li>
+          <li><strong>Padrão:</strong> o mesmo destaque do título e a mesma pontuação em todas as referências.</li>
+        </ol>
+        <p>A fonte e o espaçamento do resto do trabalho estão na <a href="/guias/fonte-e-espacamento-abnt/">guia de fonte e espaçamento</a>.</p>
+      </section>
+
+      <section id="autores">
+        <h2>Autores, entidades e obras sem autor</h2>
+        <div class="rolavel">
+          <table class="tabela-guia">
+            <caption>Como escrever a entrada</caption>
+            <thead><tr><th>Caso</th><th>Como fica</th></tr></thead>
+            <tbody>
+              <tr><td>Uma pessoa</td><td>SILVA, Maria Helena.</td></tr>
+              <tr><td>Até três autores</td><td>SOUZA, João Pedro; LIMA, Ana Clara.</td></tr>
+              <tr><td>Quatro ou mais</td><td>Todos os nomes, ou só o primeiro e <em>et al.</em>: ALVES, Beatriz <em>et al.</em></td></tr>
+              <tr><td>Organizador ou coordenador</td><td>MUSSALIM, Fernanda; BENTES, Anna Christina (org.).</td></tr>
+              <tr><td>Entidade (órgão, empresa, universidade)</td><td>UNIVERSIDADE FEDERAL DE UBERLÂNDIA. Instituto de Letras e Linguística. Título…</td></tr>
+              <tr><td>Governo e leis</td><td>BRASIL. Ministério da Educação. Título…</td></tr>
+              <tr><td>Sem autor</td><td>Entrada pelo título, com a primeira palavra em maiúsculas: UM GUIA do conhecimento…</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Nas obras sem autor, a primeira palavra do título (incluindo o artigo ou a palavra de uma sílaba que a abre) fica em letras maiúsculas. Por isso o título não precisa de negrito, itálico ou sublinhado.</p>
+      </section>
+
+      <section id="faltando">
+        <h2>Quando falta algum dado</h2>
+        <p>Se o dado não está no documento, a norma permite procurá-lo em outra fonte e indicá-lo entre colchetes. Quando ele não existe, usam-se estas formas:</p>
+        <ul>
+          <li><strong>Sem local:</strong> [S. l.] (sine loco), entre colchetes.</li>
+          <li><strong>Sem editora:</strong> [s. n.] (sine nomine), entre colchetes.</li>
+          <li><strong>Sem local e sem editora:</strong> [S. l.: s. n.].</li>
+          <li><strong>Sem data:</strong> toda referência precisa de uma data, ainda que aproximada, entre colchetes: [2018?] (ano provável), [2017] (ano certo, que não aparece no item), [ca. 2015] (ano aproximado), [200-] (década certa) e [201-?] (década provável).</li>
+        </ul>
+        <p>Outro ponto: quando você usa um elemento complementar (como o número de páginas ou o nome do orientador), ele deve aparecer em todas as referências do mesmo tipo de documento.</p>
+      </section>
+
+      {{ESPACO:guia-meio-2}}
+
+      <section id="erros">
+        <h2>Erros comuns nas referências</h2>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Usar negrito em umas referências e itálico em outras.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Escolher um destaque para o título e usar em todas.</p></div></div>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Esquecer o "Disponível em:" e o "Acesso em:" nos documentos da internet.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Endereço precedido de "Disponível em:" e data de acesso precedida de "Acesso em:".</p></div></div>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Colocar as referências no espaçamento 1,5 e sem linha em branco entre elas.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Espaço simples dentro de cada uma e uma linha em branco simples entre elas.</p></div></div>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Deixar a lista fora da ordem alfabética.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Ordenar pelo sobrenome do primeiro autor (ou pela primeira palavra do título, nas obras sem autor).</p></div></div>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Citar no texto uma obra que não está na lista de referências (ou o contrário).</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Toda obra citada no texto aparece na lista, e a lista só traz obras citadas. Veja a <a href="/guias/citacao-abnt/">guia de citação</a>.</p></div></div>
+      </section>
+
+      <section id="perguntas-frequentes">
+        <h2>Perguntas frequentes sobre referência ABNT</h2>
+        {{FAQ_HTML:guia-como-fazer-referencia-abnt}}
+      </section>
+
+      {{GUIA_RELACIONADAS}}
+
+      {{GUIA_FONTES}}
+
+    </article>
+    <aside class="lateral" aria-label="Publicidade">
+      {{ESPACO:guia-lateral}}
+    </aside>
+  </div>
+</div>
+</main>
+{{include:footer}}
+</body>
+</html>
