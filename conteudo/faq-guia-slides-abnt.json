@@ -1,0 +1,38 @@
+[
+  {
+    "p": "Existe norma ABNT para slides?",
+    "r": ["Não. As normas da ABNT para trabalhos acadêmicos tratam do texto escrito, e não de apresentações em slides. O tamanho da letra e as cores dos slides vêm de orientações de universidades e do que o professor ou a banca pedir."]
+  },
+  {
+    "p": "Qual o tamanho de letra dos slides?",
+    "r": ["Não há valor da ABNT. Um guia da UFRGS sugere título em 32 (negrito), corpo de 24 a 28 e referências de 16 a 18; um material da biblioteca da USP/ESALQ diz que abaixo de 24 é pequeno demais. São sugestões, e o professor pode pedir outro tamanho."]
+  },
+  {
+    "p": "Qual a fonte (tipo de letra) dos slides?",
+    "r": ["A ABNT não define. Os guias pedem atenção ao tamanho e ao tipo da letra e ao contraste com o fundo (não use fundo muito escuro). Mantenha o mesmo padrão em todos os slides."]
+  },
+  {
+    "p": "Quantos slides devo fazer?",
+    "r": ["Depende do tempo. Os guias da UFRGS e da USP/ESALQ sugerem calcular cerca de um slide por minuto; a UFRGS indica uma média de 15 slides."]
+  },
+  {
+    "p": "Como referenciar imagens em slides?",
+    "r": ["Coloque a legenda (Figura 1 – título) em cima e a fonte abaixo, no padrão \"Fonte: Autor (ano).\", e a referência completa no último slide. Para uma imagem da internet: SOBRENOME, Nome. Título. Data. 1 fotografia. Disponível em: endereço. Acesso em: data."]
+  },
+  {
+    "p": "Preciso colocar a fonte de imagem feita por mim?",
+    "r": ["Sim. A norma pede que a ilustração produzida pelo autor traga a indicação \"elaborado pelo próprio autor\" na fonte. No slide, escreva \"Fonte: Elaborado pelo autor (ano)\"."]
+  },
+  {
+    "p": "Os slides precisam de capa?",
+    "r": ["Não há regra da ABNT. Os guias pedem um primeiro slide com título, autor, e-mail e instituição. Se o professor ou a faculdade tiver modelo, use o dele."]
+  },
+  {
+    "p": "Preciso de slide de referências?",
+    "r": ["Se citou autores, dados ou imagens de outras pessoas, sim: os guias recomendam colocar as referências ao final da apresentação, em letra menor."]
+  },
+  {
+    "p": "Posso copiar imagens da internet para os slides?",
+    "r": ["Citar a fonte é obrigatório para ser honesto sobre a origem, mas não dá permissão de uso. Muitas imagens têm direitos autorais. Dê preferência a imagens suas, de bancos com licença livre ou que o autor permita usar."]
+  }
+]

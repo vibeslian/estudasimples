@@ -1,0 +1,42 @@
+[
+  {
+    "p": "Como fazer um trabalho escolar nas normas ABNT?",
+    "r": ["Use folha A4 branca, texto preto em Arial ou Times New Roman tamanho 12, margens de 3 cm à esquerda e em cima e 2 cm à direita e embaixo, e espaçamento 1,5. Monte a capa, o texto (introdução, desenvolvimento e conclusão) e as referências, e confira se a escola tem modelo."]
+  },
+  {
+    "p": "Qual a estrutura de um trabalho escolar?",
+    "r": ["Na versão completa, de um guia de escola: capa, folha de rosto, sumário, introdução, desenvolvimento, conclusão, referências e anexos. Para trabalhos curtos, o professor pode pedir só capa, texto e referências."]
+  },
+  {
+    "p": "Quais as margens do trabalho escolar?",
+    "r": ["Esquerda e superior 3 cm, direita e inferior 2 cm, em papel A4. Veja o <a href=\"/guias/margens-abnt/\">guia de margens ABNT</a> para configurar no Word ou no Google Docs."]
+  },
+  {
+    "p": "Qual a fonte do trabalho escolar?",
+    "r": ["Arial ou Times New Roman, tamanho 12, na cor preta. A norma recomenda o tamanho 12 e não define o tipo de letra; os guias de escolas e faculdades indicam essas duas."]
+  },
+  {
+    "p": "Qual o espaçamento do trabalho escolar?",
+    "r": ["1,5 entre as linhas, com o texto justificado, no padrão dos trabalhos acadêmicos. Pela NBR 14724, citações longas e referências ficam em espaço simples; confira com a escola."]
+  },
+  {
+    "p": "O que vai na capa do trabalho escolar?",
+    "r": ["Pela ABNT: nome da instituição (opcional), nome do autor, título, cidade e ano. A escola costuma acrescentar o professor, a disciplina e a turma. Use o gerador de capa com o \"Modelo escolar\" ou o modelo da sua escola."]
+  },
+  {
+    "p": "Trabalho escolar precisa de folha de rosto e sumário?",
+    "r": ["Depende do professor. O guia de uma escola mostra a estrutura completa, com folha de rosto e sumário, mas em trabalhos curtos o professor pode pedir só capa, texto e referências. Pergunte antes."]
+  },
+  {
+    "p": "Como colocar as referências no trabalho escolar?",
+    "r": ["Em ordem alfabética, com o sobrenome do autor primeiro, em maiúsculas. Livro: SOBRENOME, Nome. Título. Edição. Cidade: Editora, ano. Site: AUTOR. Título. Disponível em: endereço. Acesso em: data. Veja o <a href=\"/guias/como-fazer-referencia-abnt/\">guia de referência ABNT</a>."]
+  },
+  {
+    "p": "Posso copiar da internet para o trabalho?",
+    "r": ["Não sem citar. Se você usar textos, dados ou imagens de outras pessoas, coloque o autor e a fonte, e use as suas palavras. Copiar sem citar é plágio, e o professor costuma perceber."]
+  },
+  {
+    "p": "O trabalho escolar é igual ao trabalho de faculdade?",
+    "r": ["Segue a mesma base da ABNT, em uma versão mais simples. A faculdade pede mais elementos (como folha de aprovação e resumo, no TCC). Veja o <a href=\"/guias/normas-abnt-tcc/\">guia de normas ABNT para TCC</a>."]
+  }
+]

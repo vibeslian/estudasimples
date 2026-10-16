@@ -1,0 +1,42 @@
+[
+  {
+    "p": "O que é um fichamento?",
+    "r": ["É o registro, em itens ou em fichas, dos pontos importantes de um texto, para estudar e consultar depois. Ele começa pela referência da obra e traz temas, ideias com as suas palavras, trechos literais e, em alguns tipos, comentários seus."]
+  },
+  {
+    "p": "Quais são os tipos de fichamento?",
+    "r": ["Os principais são o bibliográfico (dados da obra e temas), o de resumo (ideias principais com as suas palavras), o de citação (trechos literais com a página) e o de comentário, também chamado misto ou analítico, que reúne os anteriores e acrescenta o seu comentário."]
+  },
+  {
+    "p": "Qual a diferença entre fichamento e resumo?",
+    "r": ["O resumo é um texto corrido que apresenta de forma concisa as ideias do texto. O fichamento é um registro em itens, feito para consulta, e pode ter citações literais e comentários. O fichamento de resumo é o tipo que mais se parece com um resumo."]
+  },
+  {
+    "p": "Qual a diferença entre fichamento e resenha?",
+    "r": ["Na resenha crítica é preciso emitir sua análise e opinião sobre o conteúdo; o fichamento reúne os pontos mais relevantes do texto. A resenha é feita para ser lida por outras pessoas, e o fichamento é, principalmente, uma ferramenta pessoal de estudo. Veja o <a href=\"/guias/resenha-critica/\">guia de resenha crítica</a>."]
+  },
+  {
+    "p": "Como fazer um fichamento de leitura?",
+    "r": ["Escreva o cabeçalho e a referência da obra e depois registre, em itens curtos, as ideias principais, com as suas palavras e a página de cada uma. O fichamento de leitura é o mesmo que o fichamento de resumo (ou de conteúdo)."]
+  },
+  {
+    "p": "O fichamento tem um modelo da ABNT?",
+    "r": ["Não. Não há uma norma da ABNT para o fichamento, e ele é um método de estudo pessoal, sem modelo único. A referência da obra deve seguir a NBR 6023 e as citações, a NBR 10520. Se o professor tiver um modelo, siga o dele."]
+  },
+  {
+    "p": "Como fazer a citação direta no fichamento?",
+    "r": ["Escreva o trecho exatamente como está na obra, entre aspas, e indique o autor, o ano e a página: \"texto do autor\" (ASSIS, 1899, cap. I). Se omitir uma parte, use reticências entre colchetes. Veja o <a href=\"/guias/citacao-abnt/\">guia de citação ABNT</a>."]
+  },
+  {
+    "p": "O fichamento precisa de comentário do aluno?",
+    "r": ["Só no tipo de comentário (misto ou analítico). Os fichamentos bibliográfico, de resumo e de citação não levam opinião. Confira qual tipo o professor pediu."]
+  },
+  {
+    "p": "Preciso colocar a referência da obra?",
+    "r": ["Sim. A referência completa, no padrão da NBR 6023, é o item que abre a ficha. Veja o <a href=\"/guias/como-fazer-referencia-abnt/\">guia de referência ABNT</a>."]
+  },
+  {
+    "p": "Posso fazer fichamento no computador?",
+    "r": ["Pode. O fichamento pode ser em ficha de papel ou em ficha eletrônica, e um arquivo ou uma tabela organizados por obra e por palavra-chave facilitam achar depois o que você registrou."]
+  }
+]

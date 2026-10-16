@@ -15,14 +15,16 @@ const falhas = [];
 const marca = (c, m) => { console.log(c ? "OK   " : "FALLA", m); if (!c) falhas.push(m); };
 const norm = (t) => t.replace(/ /g, " ").replace(/\s+/g, " ").trim();
 
+// la red a veces corta una conexión: se reintenta antes de dar la prueba por mala
+async function red(url, opc) { for (let i = 0; i < 5; i++) { try { return await fetch(url, opc); } catch (e) { if (i === 4) throw e; await new Promise((r) => setTimeout(r, 3000)); } } }
 async function leePagina(url) {
-  if (LIVE) { const r = await fetch(BASE + url); return r.ok ? await r.text() : null; }
+  if (LIVE) { const r = await red(BASE + url); return r.ok ? await r.text() : null; }
   const f = path.join(DIST, url.replace(/^\//, ""), url.endsWith("/") ? "index.html" : "");
   return fs.existsSync(f) ? fs.readFileSync(f, "utf8") : null;
 }
 const existeRuta = async (url) => {
   const limpio = url.split("#")[0].split("?")[0];
-  if (LIVE) { const r = await fetch(BASE + limpio, { method: "HEAD" }); return r.ok; }
+  if (LIVE) { const r = await red(BASE + limpio, { method: "HEAD" }); return r.ok; }
   const f = path.join(DIST, limpio.replace(/^\//, ""));
   return fs.existsSync(f) && (fs.statSync(f).isFile() || fs.existsSync(path.join(f, "index.html")));
 };
@@ -31,13 +33,13 @@ const todas = ["/", "/guias/", "/gerador-de-capa-abnt/", "/gerador-de-folha-de-r
 const html = {};
 for (const u of todas) html[u] = await leePagina(u);
 
-console.log("== A1) Las 23 guías y el índice existen y están completos ==");
-marca(guias.length === 23, `guias.json tiene 23 guías (${guias.length})`);
+console.log("== A1) Las 29 guías y el índice existen y están completos ==");
+marca(guias.length === 29, `guias.json tiene 29 guías (${guias.length})`);
 for (const g of guias) {
   const h = html[`/guias/${g.slug}/`];
   marca(!!h && !/\{\{[A-Za-z_:]/.test(h), `/guias/${g.slug}/ existe y no tiene marcas sin resolver`);
 }
-marca(!!html["/guias/"] && guias.every((g) => html["/guias/"].includes(`href="/guias/${g.slug}/"`)), "el índice /guias/ enlaza las 23 guías");
+marca(!!html["/guias/"] && guias.every((g) => html["/guias/"].includes(`href="/guias/${g.slug}/"`)), "el índice /guias/ enlaza las 29 guías");
 
 console.log("\n== A2) Títulos y descripciones únicos, de buen tamaño ==");
 const titulos = new Map(), descs = new Map();
@@ -122,7 +124,7 @@ console.log("\n== A6) La guía principal enlaza a las otras 12 ==");
 {
   const h = html["/guias/normas-abnt/"] || "";
   const faltan = guias.filter((g) => g.slug !== "normas-abnt" && !h.includes(`href="/guias/${g.slug}/"`)).map((g) => g.slug);
-  marca(faltan.length === 0, `normas-abnt enlaza a las 22 guías${faltan.length ? " (faltan: " + faltan.join(", ") + ")" : ""}`);
+  marca(faltan.length === 0, `normas-abnt enlaza a las 28 guías${faltan.length ? " (faltan: " + faltan.join(", ") + ")" : ""}`);
 }
 
 {
@@ -135,6 +137,19 @@ console.log("\n== A6) La guía principal enlaza a las otras 12 ==");
   marca(tcc.every((g) => t.includes(`href="/guias/${g.slug}/"`)), "«Normas ABNT para TCC» enlaza a las 10 guías nuevas");
   const m = html["/guias/como-fazer-tcc/"] || "";
   marca(tcc.filter((g) => g.slug !== "como-fazer-tcc").every((g) => m.includes(`href="/guias/${g.slug}/"`)) && ["/gerador-de-capa-abnt/", "/gerador-de-folha-de-rosto-abnt/", "/gerador-de-sumario-abnt/"].every((u) => m.includes(u)), "«Como fazer TCC» enlaza a las otras 9 guías y a las 3 herramientas");
+}
+
+{
+  const sem = guias.filter((g) => g.categoria === "Trabalhos do semestre");
+  marca(sem.length === 6, `la sección "Trabalhos do semestre" tiene 6 guías (${sem.length})`);
+  const idx = html["/guias/"] || "";
+  const sec = (idx.match(/<h2>Trabalhos do semestre<\/h2>[\s\S]*?<\/section>/) || [""])[0];
+  marca(sem.every((g) => sec.includes(`href="/guias/${g.slug}/"`)), "/guias/ muestra la sección «Trabalhos do semestre» con las 6 guías");
+  const hub = html["/guias/normas-abnt/"] || "";
+  marca(sem.every((g) => hub.includes(`href="/guias/${g.slug}/"`)), "la guía principal enlaza a las 6 guías de «Trabalhos do semestre»");
+  // cada guía nueva la enlaza al menos otra guía que no sea solo "relacionadas" (enlaces desde el texto o desde la guía principal)
+  const entrantes = (slug) => guias.filter((g) => g.slug !== slug && (html[`/guias/${g.slug}/`] || "").includes(`href="/guias/${slug}/"`)).length;
+  marca(sem.every((g) => entrantes(g.slug) >= 3), `cada guía de «Trabalhos do semestre» recibe enlaces de al menos 3 guías (${sem.map((g) => g.slug.split("-")[0] + ":" + entrantes(g.slug)).join(", ")})`);
 }
 
 console.log("\n== A7) Sin párrafos repetidos entre guías ==");
@@ -156,11 +171,11 @@ console.log("\n== A7) Sin párrafos repetidos entre guías ==");
 
 console.log("\n== A8) Sitemap ==");
 {
-  const sm = LIVE ? await (await fetch(BASE + "/sitemap.xml")).text() : fs.readFileSync(path.join(DIST, "sitemap.xml"), "utf8");
+  const sm = LIVE ? await (await red(BASE + "/sitemap.xml")).text() : fs.readFileSync(path.join(DIST, "sitemap.xml"), "utf8");
   const urls = [...sm.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
   const esperadas = ["/guias/", ...guias.map((g) => `/guias/${g.slug}/`)];
   const faltan = esperadas.filter((e) => !urls.some((u) => u.endsWith(e)));
-  marca(faltan.length === 0, `el sitemap incluye /guias/ y las 23 guías${faltan.length ? " (faltan: " + faltan.join(", ") + ")" : ""}`);
+  marca(faltan.length === 0, `el sitemap incluye /guias/ y las 29 guías${faltan.length ? " (faltan: " + faltan.join(", ") + ")" : ""}`);
   marca(new Set(urls).size === urls.length, `el sitemap no repite URLs (${urls.length})`);
 }
 

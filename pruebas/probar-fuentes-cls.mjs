@@ -8,7 +8,7 @@ import puppeteer from "puppeteer-core";
 const BASE = process.env.BASE_URL || "http://localhost:3000";
 const RETRASO = +(process.env.RETRASO || 1500);
 const LIMITE = 0.01;
-const PAGINAS = ["/", "/gerador-de-capa-abnt/", "/gerador-de-folha-de-rosto-abnt/", "/gerador-de-sumario-abnt/", "/formatacao-abnt-tcc/", "/sobre/", "/contato/", "/politica-de-privacidade/", "/termos-de-uso/", "/guias/", "/guias/margens-abnt/", "/guias/modelos-de-capa-abnt/", "/guias/resumo-abnt/", "/guias/normas-abnt/", "/guias/como-fazer-tcc/", "/guias/folha-de-aprovacao-abnt/", "/guias/agradecimentos-tcc/"];
+const PAGINAS = ["/", "/gerador-de-capa-abnt/", "/gerador-de-folha-de-rosto-abnt/", "/gerador-de-sumario-abnt/", "/formatacao-abnt-tcc/", "/sobre/", "/contato/", "/politica-de-privacidade/", "/termos-de-uso/", "/guias/", "/guias/margens-abnt/", "/guias/modelos-de-capa-abnt/", "/guias/resumo-abnt/", "/guias/normas-abnt/", "/guias/como-fazer-tcc/", "/guias/folha-de-aprovacao-abnt/", "/guias/agradecimentos-tcc/", "/guias/resenha-critica/", "/guias/slides-abnt/"];
 const VP = [["celular 390", { width: 390, height: 844, isMobile: true, hasTouch: true, deviceScaleFactor: 2 }], ["computador 1280", { width: 1280, height: 900 }]];
 const b = await puppeteer.launch({ executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe", headless: "new" });
 let falhas = 0, maximo = 0;

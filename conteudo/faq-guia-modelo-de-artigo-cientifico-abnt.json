@@ -1,0 +1,42 @@
+[
+  {
+    "p": "Qual é a norma ABNT do artigo científico?",
+    "r": ["A ABNT NBR 6022, atualizada em 2018, que trata do artigo em publicação periódica técnica e/ou científica. O resumo do artigo segue a NBR 6028, as citações a NBR 10520 e as referências a NBR 6023."]
+  },
+  {
+    "p": "Qual é a estrutura de um artigo científico na ABNT?",
+    "r": ["Elementos pré-textuais (título, autor, resumo e datas de submissão e aprovação, mais título e resumo em outro idioma, opcionais), elementos textuais (introdução, desenvolvimento e considerações finais) e elementos pós-textuais (referências, e opcionalmente glossário, apêndice, anexo e agradecimentos)."]
+  },
+  {
+    "p": "Quantas palavras tem o resumo do artigo?",
+    "r": ["De 100 a 250 palavras para artigos de periódicos, segundo a NBR 6028:2021. As palavras-chave vêm logo depois, separadas por ponto e vírgula e finalizadas por ponto."]
+  },
+  {
+    "p": "O artigo precisa de abstract?",
+    "r": ["Pela NBR 6022, o título e o resumo em outro idioma são opcionais. Muitas revistas, eventos e faculdades o exigem, então confira as instruções do local de envio."]
+  },
+  {
+    "p": "Qual a fonte e o espaçamento do artigo?",
+    "r": ["A NBR 6022 recomenda fonte tamanho 12 e espaçamento simples, segundo a UFMG. Alguns manuais, como o da Metodista, usam 1,5 a partir da introdução. Siga o modelo do local de envio."]
+  },
+  {
+    "p": "Como colocar os autores no artigo?",
+    "r": ["Com o nome (prenome e sobrenome) e um número de chamada para uma nota de rodapé com um currículo sucinto, o vínculo institucional e o e-mail."]
+  },
+  {
+    "p": "O artigo tem sumário?",
+    "r": ["Não. Os elementos do artigo, pela NBR 6022, não incluem o sumário. A estrutura é mais curta que a do TCC."]
+  },
+  {
+    "p": "Posso usar o modelo de artigo como TCC?",
+    "r": ["Só se o seu curso aceitar o artigo como TCC. Algumas faculdades, como a UERN, aceitam e têm uma estrutura própria. Veja o manual do curso."]
+  },
+  {
+    "p": "O que são as datas de submissão e de aprovação?",
+    "r": ["São as datas em que o artigo foi enviado e aprovado pela revista. A norma as lista como elemento pré-textual obrigatório, mas em geral quem as registra é a revista, e em artigos de faculdade ou de evento costumam não se aplicar."]
+  },
+  {
+    "p": "Onde fica o modelo de artigo do meu curso?",
+    "r": ["Na biblioteca ou na secretaria do curso, ou no site da revista ou do evento. O modelo oficial vale mais do que qualquer guia geral."]
+  }
+]

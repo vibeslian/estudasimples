@@ -995,5 +995,273 @@
         "url": "https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf"
       }
     ]
+  },
+  {
+    "categoria": "Trabalhos do semestre",
+    "atualizado": "2026-10-15",
+    "slug": "resenha-critica",
+    "prioridade": 24,
+    "rotulo": "Resenha crítica",
+    "norma": "ABNT NBR 6028:2021",
+    "titulo": "Resenha crítica: o que é, estrutura e como fazer, com exemplos",
+    "h1": "Resenha crítica: o que é, estrutura, como fazer e dois exemplos completos",
+    "descricao": "Como fazer uma resenha crítica: o que é, estrutura, formato ABNT e dois exemplos completos (escolar e acadêmico) com cada parte marcada em cores.",
+    "lead": "A estrutura da resenha crítica, o que a norma diz, como formatar e dois exemplos prontos, sobre obras de domínio público.",
+    "resumoIndice": "O que é, estrutura, formato ABNT e dois exemplos completos com cada parte marcada.",
+    "ferramenta": {
+      "nome": "Gerador de capa ABNT",
+      "texto": "Se o professor pedir capa e folha de rosto na resenha, monte as duas grátis e baixe em PDF ou Word.",
+      "botao": "Criar minha capa",
+      "url": "/gerador-de-capa-abnt/"
+    },
+    "relacionadas": [
+      "fichamento",
+      "resumo-abnt",
+      "citacao-abnt"
+    ],
+    "fontes": [
+      {
+        "titulo": "Unesp (Faculdade de Odontologia de Araçatuba), Informativo sobre a NBR 6028:2021",
+        "url": "https://www.foa.unesp.br/Home/instituicao/biblioteca108/informativo-gnt---nbr-6028-2021_final.pdf"
+      },
+      {
+        "titulo": "FURG (Arqueologia), Fichamento e resenha: o que é",
+        "url": "https://arqueologia.furg.br/images/Fichamento_e_Resenha_-_o_que_.pdf"
+      },
+      {
+        "titulo": "Wikisource, Dom Casmurro (Garnier, 1899)",
+        "url": "https://pt.wikisource.org/wiki/Dom_Casmurro",
+        "nota": "Obra em domínio público; usada nos exemplos."
+      },
+      {
+        "titulo": "Wikisource, O Cortiço (Garnier, 1890)",
+        "url": "https://pt.wikisource.org/wiki/O_Corti%C3%A7o",
+        "nota": "Obra em domínio público; usada nos exemplos."
+      },
+      {
+        "titulo": "UFV, Normalização de trabalhos acadêmicos (2025), com a NBR 14724:2024",
+        "url": "https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf"
+      }
+    ]
+  },
+  {
+    "categoria": "Trabalhos do semestre",
+    "atualizado": "2026-10-15",
+    "slug": "fichamento",
+    "prioridade": 25,
+    "rotulo": "Fichamento",
+    "norma": "ABNT NBR 6023:2018",
+    "titulo": "Fichamento: o que é, tipos e modelo de cada tipo",
+    "h1": "Fichamento: o que é, os 4 tipos e um modelo de cada um",
+    "descricao": "Como fazer um fichamento: o que é, os tipos (bibliográfico, de citação, de resumo e de comentário) e um modelo de cada um, sobre um texto de domínio público.",
+    "lead": "Os quatro tipos de fichamento, o que cada um leva e um modelo pronto de cada, feito com um texto de domínio público.",
+    "resumoIndice": "Os 4 tipos de fichamento e um modelo de cada um, com texto de domínio público.",
+    "ferramenta": {
+      "nome": "Formatação ABNT de TCC",
+      "selo": "Serviço do Estuda Simples",
+      "texto": "Vai usar as fichas no seu trabalho? Eu posso conferir as citações e as referências e deixar tudo no formato da ABNT. Orçamento pelo WhatsApp.",
+      "botao": "Pedir orçamento",
+      "url": "/formatacao-abnt-tcc/"
+    },
+    "relacionadas": [
+      "resenha-critica",
+      "citacao-abnt",
+      "como-fazer-referencia-abnt"
+    ],
+    "fontes": [
+      {
+        "titulo": "Instituto de Aplicação da UERJ, Material de apoio didático: Fichamento (eduCAPES)",
+        "url": "https://educapes.capes.gov.br/bitstream/capes/1171316/2/Fichamento.pdf"
+      },
+      {
+        "titulo": "FURG (Arqueologia), Fichamento e resenha: o que é",
+        "url": "https://arqueologia.furg.br/images/Fichamento_e_Resenha_-_o_que_.pdf"
+      },
+      {
+        "titulo": "Wikisource, Dom Casmurro (Garnier, 1899)",
+        "url": "https://pt.wikisource.org/wiki/Dom_Casmurro",
+        "nota": "Obra em domínio público; usada nos exemplos."
+      },
+      {
+        "titulo": "UFV, Normalização de trabalhos acadêmicos (2025), com a NBR 14724:2024",
+        "url": "https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf"
+      }
+    ]
+  },
+  {
+    "categoria": "Trabalhos do semestre",
+    "atualizado": "2026-10-15",
+    "slug": "relatorio-abnt",
+    "prioridade": 26,
+    "rotulo": "Relatório ABNT",
+    "norma": "ABNT NBR 10719",
+    "titulo": "Relatório ABNT: estrutura, relatório de estágio e de aula",
+    "h1": "Relatório ABNT: estrutura, relatório de estágio e de aula prática",
+    "descricao": "Como fazer um relatório nas normas ABNT: estrutura da NBR 10719 (capa, folha de rosto, introdução, desenvolvimento, conclusão), estágio e aula prática.",
+    "lead": "A estrutura de um relatório pela NBR 10719, o que muda no relatório de estágio e no de aula prática e as ferramentas para montar cada parte.",
+    "resumoIndice": "Estrutura pela NBR 10719, relatório de estágio e de aula prática.",
+    "ferramentas": [
+      "capa",
+      "folha",
+      "sumario"
+    ],
+    "ferramenta": {
+      "nome": "Gerador de capa ABNT",
+      "texto": "Comece pela capa. A folha de rosto e o sumário usam os mesmos dados e também têm gerador gratuito.",
+      "botao": "Criar minha capa",
+      "url": "/gerador-de-capa-abnt/"
+    },
+    "relacionadas": [
+      "normas-abnt-tcc",
+      "modelos-de-capa-abnt",
+      "resumo-abnt"
+    ],
+    "fontes": [
+      {
+        "titulo": "ABNT NBR 10719:2011, Relatório técnico e/ou científico (cópia hospedada pela UFG)",
+        "url": "https://files.cercomp.ufg.br/weby/up/1582/o/NBR_10719_-_2011.pdf",
+        "nota": "A edição vigente é a de 2015; li a de 2011 e o roteiro abaixo, que segue a de 2015."
+      },
+      {
+        "titulo": "UniFACHA, Roteiro para elaboração de relatórios técnico-científicos (2024), baseado na NBR 10719:2015",
+        "url": "https://www.facha.edu.br/sfc/docs/ROTEIRO_PARA_ELABORACAO_DE_RELATORIO_TECNICO_CIENTIFICO_2024_1_outubro.pdf"
+      },
+      {
+        "titulo": "Ifes, Modelo de relatório técnico (2022), conforme a NBR 10719:2015",
+        "url": "https://posinfra.vitoria.ifes.edu.br/images/stories/Formul%C3%A1rios_e_Orienta%C3%A7%C3%B5es/Template/TemplateRelat%C3%B3rio_T%C3%A9cnico_-_Engenharia_de_Infraestrutura.pdf"
+      },
+      {
+        "titulo": "UFV, Normalização de trabalhos acadêmicos (2025), com a NBR 14724:2024",
+        "url": "https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf"
+      }
+    ]
+  },
+  {
+    "categoria": "Trabalhos do semestre",
+    "atualizado": "2026-10-15",
+    "slug": "slides-abnt",
+    "prioridade": 27,
+    "rotulo": "Slides ABNT",
+    "norma": "ABNT NBR 14724:2024 e NBR 10520:2023",
+    "titulo": "Slides ABNT: o que a norma diz (e não diz) sobre slides",
+    "h1": "Slides ABNT: o que a norma diz e não diz, fonte, imagens e referências",
+    "descricao": "Slides nas normas ABNT: a ABNT não tem norma para slides. Veja o tamanho de letra que os guias de bibliotecas sugerem e como citar imagens e fontes.",
+    "lead": "O que a ABNT não define para slides, o que guias de universidades recomendam e como colocar a fonte e a referência de uma imagem.",
+    "resumoIndice": "O que a ABNT não define, tamanho de letra sugerido e como citar imagens no slide.",
+    "ferramentas": [],
+    "ferramenta": {
+      "nome": "Gerador de capa ABNT",
+      "texto": "A apresentação costuma acompanhar um trabalho escrito. Monte a capa dele grátis, em PDF ou Word.",
+      "botao": "Criar minha capa",
+      "url": "/gerador-de-capa-abnt/"
+    },
+    "relacionadas": [
+      "citacao-abnt",
+      "lista-de-ilustracoes-e-tabelas-abnt",
+      "como-fazer-referencia-abnt"
+    ],
+    "fontes": [
+      {
+        "titulo": "UFRGS (Propesq), Como elaborar uma apresentação oral",
+        "url": "https://www.ufrgs.br/propesq1/iniciacaocientifica/wp-content/uploads/2019/10/COMO-ELABORAR-UMA-APRESENTA%C3%87%C3%83O-ORAL.pdf"
+      },
+      {
+        "titulo": "USP/ESALQ (biblioteca), Dicas de apresentação oral de trabalhos acadêmicos",
+        "url": "https://www.esalq.usp.br/biblioteca/pdf/Apoio%20Acad%C3%AAmico/Dicas-de-apresentacao-oral-de-trabalhos-academicos.pdf"
+      },
+      {
+        "titulo": "UFV, Normalização de trabalhos acadêmicos (2025), com a NBR 14724:2024",
+        "url": "https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf"
+      },
+      {
+        "titulo": "UERN, Manual de normalização do SIB (2025)",
+        "url": "https://portal.uern.br/dsib/wp-content/uploads/sites/2/2025/02/MANUAL-DE-NORMALIZACAO-SIBUERN-2025.pdf"
+      }
+    ]
+  },
+  {
+    "categoria": "Trabalhos do semestre",
+    "atualizado": "2026-10-15",
+    "slug": "modelo-de-artigo-cientifico-abnt",
+    "prioridade": 28,
+    "rotulo": "Artigo científico",
+    "norma": "ABNT NBR 6022:2018",
+    "titulo": "Modelo de artigo científico ABNT (NBR 6022): estrutura",
+    "h1": "Modelo de artigo científico ABNT (NBR 6022): estrutura e primeira página",
+    "descricao": "Modelo de artigo científico pela NBR 6022:2018: elementos obrigatórios, resumo e abstract, estrutura do texto e a primeira página desenhada.",
+    "lead": "Os elementos do artigo pela NBR 6022:2018, o resumo e o abstract e o desenho da primeira página.",
+    "resumoIndice": "Elementos da NBR 6022, resumo e abstract e a primeira página desenhada.",
+    "ferramenta": {
+      "nome": "Formatação ABNT de TCC",
+      "selo": "Serviço do Estuda Simples",
+      "texto": "Vai enviar um artigo e quer o texto no formato da ABNT, com citações e referências? Orçamento pelo WhatsApp.",
+      "botao": "Pedir orçamento",
+      "url": "/formatacao-abnt-tcc/"
+    },
+    "relacionadas": [
+      "resumo-abnt",
+      "citacao-abnt",
+      "como-fazer-referencia-abnt"
+    ],
+    "fontes": [
+      {
+        "titulo": "UFMG (Periódicos), Sobre a norma para artigo de publicação periódica (NBR 6022:2018)",
+        "url": "https://www.ufmg.br/periodicos/sobre-a-norma-para-artigo-de-publicacao-periodica/"
+      },
+      {
+        "titulo": "Metodista (Sistemas de Bibliotecas), Manual de elaboração do artigo científico segundo a NBR 6022 (2024)",
+        "url": "https://lp.metodista.br/wp-content/uploads/2025/04/2024-manual-de-artigo-cientifico.pdf"
+      },
+      {
+        "titulo": "Unesp (Faculdade de Odontologia de Araçatuba), Informativo sobre a NBR 6028:2021",
+        "url": "https://www.foa.unesp.br/Home/instituicao/biblioteca108/informativo-gnt---nbr-6028-2021_final.pdf"
+      },
+      {
+        "titulo": "UERN, Manual de normalização do SIB (2025)",
+        "url": "https://portal.uern.br/dsib/wp-content/uploads/sites/2/2025/02/MANUAL-DE-NORMALIZACAO-SIBUERN-2025.pdf"
+      }
+    ]
+  },
+  {
+    "categoria": "Trabalhos do semestre",
+    "atualizado": "2026-10-15",
+    "slug": "trabalho-escolar-abnt",
+    "prioridade": 29,
+    "rotulo": "Trabalho escolar",
+    "norma": "ABNT NBR 14724:2024",
+    "titulo": "Trabalho escolar nas normas ABNT: modelo simples e capa",
+    "h1": "Trabalho escolar nas normas ABNT: capa, margens, fonte e referências",
+    "descricao": "Trabalho escolar nas normas ABNT para ensino fundamental e médio: capa, folha de rosto, margens, fonte, referências e um modelo simples, passo a passo.",
+    "lead": "A versão simples das normas para trabalhos de escola: o que entra, as medidas e uma capa de exemplo.",
+    "resumoIndice": "Versão simples para ensino fundamental e médio: capa, margens, fonte e referências.",
+    "ferramentas": [
+      "capa"
+    ],
+    "ferramenta": {
+      "nome": "Gerador de capa ABNT",
+      "texto": "Ative o \"Modelo escolar\" para colocar professor e disciplina, escolha o modelo e baixe a capa em PDF ou Word.",
+      "botao": "Criar minha capa",
+      "url": "/gerador-de-capa-abnt/"
+    },
+    "relacionadas": [
+      "modelos-de-capa-abnt",
+      "margens-abnt",
+      "fonte-e-espacamento-abnt"
+    ],
+    "fontes": [
+      {
+        "titulo": "Colégio La Salle (Niterói), Ações para organização de trabalhos escolares",
+        "url": "https://www.lasalle.edu.br/public/uploads/publications/niteroi/0707868815da08ed2c5797ea7b8df3eb.pdf",
+        "nota": "Guia de uma escola, adaptado de um manual universitário de 2014."
+      },
+      {
+        "titulo": "UFV, Normalização de trabalhos acadêmicos (2025), com a NBR 14724:2024",
+        "url": "https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf"
+      },
+      {
+        "titulo": "UERN, Manual de normalização do SIB (2025)",
+        "url": "https://portal.uern.br/dsib/wp-content/uploads/sites/2/2025/02/MANUAL-DE-NORMALIZACAO-SIBUERN-2025.pdf"
+      }
+    ]
   }
 ]

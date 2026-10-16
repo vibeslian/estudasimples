@@ -1,0 +1,42 @@
+[
+  {
+    "p": "Qual é a estrutura de um relatório pela ABNT?",
+    "r": ["Pela NBR 10719: capa (opcional), folha de rosto, resumo e sumário (obrigatórios), introdução, desenvolvimento e considerações finais, e referências (obrigatórias quando há citações). Listas, glossário, apêndice, anexo e índice são opcionais."]
+  },
+  {
+    "p": "Qual norma da ABNT vale para relatório?",
+    "r": ["A NBR 10719, que trata do relatório técnico e/ou científico. Ela se baseia nas normas de resumo (6028), sumário (6027), numeração progressiva (6024), citações (10520) e referências (6023). A edição vigente é a de 2015."]
+  },
+  {
+    "p": "O relatório precisa de capa?",
+    "r": ["Pela NBR 10719, a capa é opcional e a folha de rosto é obrigatória. Muitas faculdades exigem a capa. Confira o modelo do seu curso."]
+  },
+  {
+    "p": "Qual o espaçamento do relatório ABNT?",
+    "r": ["A NBR 10719 recomenda espaço simples. Alguns modelos de instituições usam 1,5 entre as linhas, como em TCC. Se o professor não especificou, pergunte; na dúvida, siga o modelo da faculdade."]
+  },
+  {
+    "p": "Quais são as margens do relatório?",
+    "r": ["Esquerda e superior 3 cm, direita e inferior 2 cm no anverso da folha; no verso, direita e superior 3 cm e esquerda e inferior 2 cm. A fonte recomendada é a de tamanho 12."]
+  },
+  {
+    "p": "Como fazer um relatório de estágio nas normas ABNT?",
+    "r": ["Use a estrutura da NBR 10719 e o modelo da faculdade: capa e folha de rosto, resumo, sumário, introdução com os objetivos do estágio, desenvolvimento com a descrição do local, as atividades e a relação com o curso, considerações finais e referências. A ABNT não tem norma própria para relatório de estágio."]
+  },
+  {
+    "p": "Como fazer um relatório de aula prática?",
+    "r": ["Normalmente em introdução (objetivo), desenvolvimento (materiais e métodos, procedimento e resultados) e considerações finais (discussão e conclusão), com folha de rosto e referências. O nome das seções varia conforme o professor."]
+  },
+  {
+    "p": "O relatório precisa de sumário?",
+    "r": ["Pela NBR 10719, o sumário é obrigatório. Se o professor dispensar o sumário em relatórios curtos, siga o professor. Para montar, use o <a href=\"/gerador-de-sumario-abnt/?origem=guia-relatorio-abnt\">gerador de sumário</a>."]
+  },
+  {
+    "p": "Qual a diferença entre relatório e TCC?",
+    "r": ["O TCC segue a NBR 14724 (com folha de aprovação, espaçamento 1,5 e dedicatória e epígrafe opcionais) e o relatório segue a NBR 10719 (capa opcional, espaçamento simples). Na prática, alguns cursos acrescentam ao relatório elementos do TCC, como a folha de aprovação. Veja o <a href=\"/guias/normas-abnt-tcc/\">guia de normas ABNT para TCC</a>."]
+  },
+  {
+    "p": "Posso fazer a capa e a folha de rosto do relatório neste site?",
+    "r": ["Pode. O <a href=\"/gerador-de-capa-abnt/?origem=guia-relatorio-abnt\">gerador de capa</a> e o <a href=\"/gerador-de-folha-de-rosto-abnt/?origem=guia-relatorio-abnt\">gerador de folha de rosto</a> são gratuitos e fazem PDF e Word. Confira o modelo do seu curso."]
+  }
+]

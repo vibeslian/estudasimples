@@ -23,3 +23,10 @@ Tres espacios por guía: `guia-meio-1`, `guia-meio-2`, `guia-lateral` (en `site.
 
 ## Pruebas
 `pruebas/probar-guias.mjs`: títulos y descripciones únicos, JSON-LD válido (Article, BreadcrumbList, FAQPage solo con preguntas visibles), enlaces internos y anclas, sitemap, enlaces guía ↔ herramienta con `?origem`, guías relacionadas, fuentes con `rel="noopener"`, párrafos no repetidos, y en navegador (320/390/1280 px) sin scroll horizontal ni errores. Con `LIVE=1 BASE_URL=https://estudasimples.com.br` la parte A corre contra el sitio publicado.
+
+## Etapas 11 y 12 (guías de TCC y de trabajos del semestre)
+- `conteudo/guias.json` ahora tiene 29 guías en 6 categorías (`CATEGORIAS` en `build-guias.mjs`): «TCC passo a passo» (10 guías, Etapa 11), «Trabalhos do semestre» (6 guías, Etapa 12: resenha-critica, fichamento, relatorio-abnt, slides-abnt, modelo-de-artigo-cientifico-abnt, trabalho-escolar-abnt) y las 4 de la Etapa 10.
+- `prioridade` ordena las tarjetas de cada categoría (el orden de búsqueda pedido) y la portada muestra las 3 primeras (`como-fazer-tcc` = 1,5).
+- Fuentes nuevas: Gerhardt y Silveira (UFRGS, 2009) para tipos de pesquisa y proyecto; UTFPR «10 passos do TCC»; tutorial del Unisagrado (listas en Word); FURG y eduCAPES/UERJ (fichamento y resenha); informativo Unesp de la NBR 6028:2021; NBR 10719 (cópia 2011 de la UFG) y roteiro UniFACHA 2024 (basado en la edición 2015); UFRGS y USP/ESALQ (slides); UFMG y Metodista (NBR 6022:2018); guía del Colégio La Salle (trabajo escolar).
+- Ejemplos de textos con obras de dominio público (Dom Casmurro, O Cortiço): citas literales solo cuando se confirmaron en dos fuentes; los demás textos son originales. Las epígrafes con autores inventados llevan la etiqueta «Exemplo fictício» (`.ficticio`) y las reales «Citação real» (`.real`).
+- Donde no hay norma (slides, relatório de estágio, trabalho escolar) la guía lo dice y no inventa reglas.

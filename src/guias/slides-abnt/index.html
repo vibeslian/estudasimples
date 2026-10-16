@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  {{include:head-common}}
+  {{GUIA_HEAD}}
+  {{FAQ_JSONLD:guia-slides-abnt}}
+</head>
+<body class="guia">
+{{GUIA_HERO}}
+<main id="conteudo">
+<div class="container conteudo-capa">
+  <div class="conteudo-grade">
+    <article class="artigo">
+
+      <div class="resposta">
+        <strong class="resposta-titulo">Resposta direta</strong>
+        <p><strong>A ABNT não tem uma norma para slides.</strong> As normas de trabalhos acadêmicos (NBR 14724, NBR 10520 e NBR 6023) tratam do texto escrito: margens, fonte, citações e referências. O tamanho da letra, as cores e o número de slides não são definidos por elas.</p>
+        <p>O que vale na prática são <strong>orientações de universidades</strong> (como as da UFRGS e da USP) e as <strong>regras da ABNT para citar</strong> quando o slide traz imagem, tabela ou texto de outro autor: legenda, <strong>fonte logo abaixo</strong> e <strong>referência completa no fim</strong>. O que o professor ou a banca pedir tem prioridade sobre qualquer guia.</p>
+      </div>
+
+      <nav class="indice-guia" aria-label="Neste guia">
+        <strong>Neste guia</strong>
+        <ol>
+          <li><a href="#norma">O que a norma diz e o que não diz</a></li>
+          <li><a href="#fonte">Tamanho de letra recomendado</a></li>
+          <li><a href="#slide-modelo">Um slide com as regras aplicadas</a></li>
+          <li><a href="#imagens">Como colocar fonte e referência de imagens</a></li>
+          <li><a href="#estrutura">Estrutura e tempo da apresentação</a></li>
+          <li><a href="#erros">Erros comuns</a></li>
+          <li><a href="#perguntas-frequentes">Perguntas frequentes</a></li>
+        </ol>
+      </nav>
+
+      <section id="norma">
+        <h2>O que a norma diz e o que não diz</h2>
+        <div class="rolavel">
+          <table class="tabela-guia">
+            <caption>Slides e a ABNT</caption>
+            <thead><tr><th>Assunto</th><th>A ABNT define?</th><th>De onde vem a regra</th></tr></thead>
+            <tbody>
+              <tr><td>Tamanho da letra, tipo, cores, fundo</td><td>Não</td><td>Guias de universidades e bom senso</td></tr>
+              <tr><td>Número de slides e tempo</td><td>Não</td><td>O professor ou a banca; guias sugerem cerca de 1 slide por minuto</td></tr>
+              <tr><td>Legenda e fonte de figuras, gráficos e tabelas</td><td>Sim, para trabalhos escritos (NBR 14724)</td><td>Costuma-se adaptar para o slide</td></tr>
+              <tr><td>Citação de autores</td><td>Sim (NBR 10520)</td><td>Vale também no slide</td></tr>
+              <tr><td>Referências</td><td>Sim (NBR 6023)</td><td>Lista no último slide</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Nos manuais de normalização de bibliotecas que usei para os outros guias (UFV, UERN, UNISA, Unifesp), que tratam do trabalho escrito, não encontrei regras para slides. As indicações de tamanho de letra abaixo vêm de guias de apresentação oral de universidades, e não da ABNT.</p>
+      </section>
+
+      <section id="fonte">
+        <h2>Tamanho de letra recomendado</h2>
+        <p>Dois materiais de universidades brasileiras dão números parecidos:</p>
+        <div class="rolavel">
+          <table class="tabela-guia">
+            <caption>Sugestões de guias de universidades (não são normas)</caption>
+            <thead><tr><th>Elemento do slide</th><th>UFRGS (Propesq, Biblioteconomia)</th><th>USP/ESALQ (biblioteca)</th></tr></thead>
+            <tbody>
+              <tr><td>Título</td><td>32, em negrito</td><td>Usar o título como ponto principal do slide</td></tr>
+              <tr><td>Corpo do texto</td><td>24 a 28</td><td>Abaixo de 24 é pequeno demais</td></tr>
+              <tr><td>Referências bibliográficas</td><td>16 a 18</td><td>Colocadas ao final</td></tr>
+              <tr><td>Quantidade de texto</td><td>No máximo sete linhas, com sete palavras cada</td><td>Preferir tópicos a texto corrido</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Outras recomendações dos mesmos guias: usar fundo claro e contraste forte, evitar animações que distraem e calcular cerca de um slide por minuto; a UFRGS sugere uma média de 15 slides. O primeiro slide leva título, autor, e-mail e instituição (USP/ESALQ).</p>
+      </section>
+
+      {{GUIA_FERRAMENTA}}
+
+      <section id="slide-modelo">
+        <h2>Um slide com as regras aplicadas</h2>
+        <figure class="diagrama diagrama--largo">
+          <svg viewBox="0 0 160 90" role="img" aria-labelledby="sl1-t sl1-d" xmlns="http://www.w3.org/2000/svg">
+            <title id="sl1-t">Slide com título, texto, imagem com legenda e fonte, e referência</title>
+            <desc id="sl1-d">Slide horizontal com o título em negrito no alto, três tópicos curtos à esquerda, uma imagem à direita com a legenda Figura 1 acima e a fonte abaixo, e a referência completa em letra pequena no rodapé.</desc>
+            <rect width="160" height="90" fill="#fff"/>
+            <rect x="0" y="0" width="160" height="2.5" fill="#3b5d4c"/>
+            <text x="8" y="14" font-size="8" font-weight="700" fill="#000">Leitura em voz alta na escola</text>
+            <g font-size="5.4" fill="#000">
+              <text x="8" y="30">• Planejada pelo professor</text>
+              <text x="8" y="40">• Seguida de conversa</text>
+              <text x="8" y="50">• Vocabulário e compreensão</text>
+            </g>
+            <text x="96" y="27" font-size="3.6" fill="#000">Figura 1 – Roda de leitura na escola</text>
+            <rect x="96" y="30" width="56" height="30" fill="#e4ece3" stroke="#3b5d4c" stroke-width=".4"/>
+            <text x="124" y="47" font-size="4" text-anchor="middle" fill="#3b5d4c">imagem</text>
+            <text x="96" y="64" font-size="3.2" fill="#000">Fonte: Silva (2025).</text>
+            <line x1="8" y1="76" x2="152" y2="76" stroke="#c8d3cc" stroke-width=".3"/>
+            <text x="8" y="81" font-size="2.9" fill="#555">SILVA, Ana. Roda de leitura. 2025. 1 fotografia.</text>
+            <text x="8" y="85.5" font-size="2.9" fill="#555">Disponível em: https://www.exemplo.com.br/roda.jpg. Acesso em: 15 out. 2026.</text>
+          </svg>
+          <figcaption>Slide de exemplo, com os tamanhos proporcionais aos sugeridos (título maior, corpo médio, fonte e referência menores).</figcaption>
+        </figure>
+        <ul>
+          <li><strong>Legenda:</strong> a palavra da ilustração (Figura, Gráfico, Quadro), o número, um travessão e o título.</li>
+          <li><strong>Fonte:</strong> logo abaixo da ilustração, mesmo que seja sua ("Elaborado pelo autor").</li>
+          <li><strong>Referência completa:</strong> no último slide, em letra menor.</li>
+        </ul>
+      </section>
+
+      {{ESPACO:guia-meio-1}}
+
+      <section id="imagens">
+        <h2>Como colocar fonte e referência de imagens</h2>
+        <p>A NBR 14724 manda indicar a fonte consultada imediatamente após a ilustração, no padrão da NBR 10520, e escrever "elaborado pelo autor" quando a ilustração é sua (UFV, seção 4.9). No slide, a regra é a mesma, só que em tamanho menor:</p>
+        <div class="exemplos">
+          <div class="exemplo"><span class="exemplo-tipo">Fonte abaixo da imagem (no slide)</span><p>Fonte: Silva (2025).</p><span class="exemplo-nota">É a citação do autor e do ano; a referência completa vai no último slide.</span></div>
+          <div class="exemplo"><span class="exemplo-tipo">Imagem feita por você</span><p>Fonte: Elaborado pelo autor (2026).</p></div>
+          <div class="exemplo"><span class="exemplo-tipo">Referência de imagem da internet (último slide)</span><p>SILVA, Ana. <strong>Roda de leitura</strong>. 2025. 1 fotografia. Disponível em: https://www.exemplo.com.br/roda.jpg. Acesso em: 15 out. 2026.</p><span class="exemplo-nota">Modelo da NBR 6023 para documento iconográfico em meio eletrônico: autor, título, data, tipo de documento, endereço e data de acesso (UFV, seção 5.12.30). O autor e o endereço do exemplo são inventados.</span></div>
+        </div>
+        <p>Antes de usar, confira se a imagem pode ser usada: muitas imagens da internet têm direitos autorais, e a citação da fonte não substitui a permissão. Veja também o <a href="/guias/citacao-abnt/">guia de citação</a> e o <a href="/guias/como-fazer-referencia-abnt/">guia de referência</a>.</p>
+      </section>
+
+      <section id="estrutura">
+        <h2>Estrutura e tempo da apresentação</h2>
+        <ol class="passos">
+          <li><div><h3>Primeiro slide</h3><p>Título, nome do autor, e-mail e instituição.</p></div></li>
+          <li><div><h3>Roteiro</h3><p>Introdução, objetivo, desenvolvimento e considerações finais. Em uma defesa, a ordem costuma seguir o resumo: introdução, objetivos, métodos, resultados e conclusões.</p></div></li>
+          <li><div><h3>Um slide, uma ideia</h3><p>Tópicos curtos, que você explica falando. Não leia os slides na íntegra.</p></div></li>
+          <li><div><h3>Referências no fim</h3><p>Uma lista no último slide, ou antes do slide de perguntas.</p></div></li>
+        </ol>
+        <p>Calcule cerca de um slide por minuto e ensaie com o relógio.</p>
+      </section>
+
+      <section id="erros">
+        <h2>Erros comuns</h2>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Procurar uma "norma ABNT de slides" e inventar regras.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Seguir o que o professor ou a banca pediu e os guias da universidade.</p></div></div>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Letra pequena e muito texto em cada slide.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Corpo de 24 a 28 e poucas linhas.</p></div></div>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Imagem sem legenda e sem fonte.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Legenda em cima e fonte embaixo, com a referência completa no fim.</p></div></div>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Citar autores no texto do slide e não pôr a obra nas referências.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Toda citação do slide entra na lista final.</p></div></div>
+      </section>
+
+      {{ESPACO:guia-meio-2}}
+
+      <section id="perguntas-frequentes">
+        <h2>Perguntas frequentes sobre slides e ABNT</h2>
+        {{FAQ_HTML:guia-slides-abnt}}
+      </section>
+
+      {{GUIA_RELACIONADAS}}
+
+      {{GUIA_FONTES}}
+
+    </article>
+    <aside class="lateral" aria-label="Publicidade">
+      {{ESPACO:guia-lateral}}
+    </aside>
+  </div>
+</div>
+</main>
+{{include:footer}}
+</body>
+</html>

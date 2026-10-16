@@ -143,3 +143,10 @@ code.cm { font-family: inherit; font-weight: 700; background: var(--salvia-100);
 .ficticio { background: var(--erro-bg); color: var(--erro-texto); border: 1px solid #efc9bd; }
 .real { background: var(--certo-bg); color: var(--certo-texto); border: 1px solid var(--salvia-300); }
 .aviso-ficticio { margin: 0 0 1em; padding: 12px 16px; background: var(--acento-claro); border-left: 4px solid var(--acento); border-radius: var(--raio-pequeno); }
+
+/* ---------- fichas (guia de fichamento) ---------- */
+.ficha { margin: 0 0 16px; background: #fff; border: 1px solid var(--salvia-300); border-radius: var(--raio-pequeno); overflow: hidden; }
+.ficha-topo { padding: 8px 16px; background: var(--salvia-100); font-family: var(--fonte-titulo); font-weight: 800; color: var(--principal); }
+.ficha-corpo { padding: 12px 16px 14px; }
+.ficha-corpo p { margin: .35em 0; line-height: 1.5; overflow-wrap: anywhere; }
+.ficha-corpo .ficha-rotulo { display: block; margin-top: .7em; font-size: .82rem; font-weight: 800; letter-spacing: .03em; text-transform: uppercase; color: var(--texto-suave); }
