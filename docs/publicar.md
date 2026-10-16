@@ -102,7 +102,13 @@ git push
 ```
 Cloudflare construye y publica en 1–2 minutos (Worker > **Deployments** > *View build history*). Para volver atrás: Worker > **Deployments** > elige una versión anterior > **Rollback**.
 
-Cuando el sitio ya esté en vivo, avisa a Bing y otros buscadores con IndexNow: `node indexnow.mjs --cambiadas` (detalles en `docs/indexnow.md`). Google no lo usa.
+### Paso fijo después de publicar: IndexNow
+Orden: **1)** `git push` → **2)** esperar el deploy y verificar en vivo (las URLs nuevas responden 200, pruebas) → **3)** avisar a Bing y otros buscadores:
+```bash
+node indexnow.mjs --cambiadas   # URLs nuevas o cambiadas del último commit
+node indexnow.mjs --todas       # si cambió el menú, el CSS, el JS, partials, build*.mjs o site.config.json
+```
+Respuesta 200 o 202 = aviso recibido. Se anota el resultado en el reporte y en la Bitácora (nunca el valor de la clave). Claude lo hace solo; está en `CLAUDE.md`. Detalles en `docs/indexnow.md`. Google no usa IndexNow: para Google sigue valiendo Search Console.
 
 ## 10. Verificar después de publicar
 Con el sitio publicado, estos comandos del proyecto comprueban todo (la dirección va en `BASE_URL`):
