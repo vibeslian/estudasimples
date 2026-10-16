@@ -102,6 +102,8 @@ git push
 ```
 Cloudflare construye y publica en 1–2 minutos (Worker > **Deployments** > *View build history*). Para volver atrás: Worker > **Deployments** > elige una versión anterior > **Rollback**.
 
+Cuando el sitio ya esté en vivo, avisa a Bing y otros buscadores con IndexNow: `node indexnow.mjs --cambiadas` (detalles en `docs/indexnow.md`). Google no lo usa.
+
 ## 10. Verificar después de publicar
 Con el sitio publicado, estos comandos del proyecto comprueban todo (la dirección va en `BASE_URL`):
 ```bash
