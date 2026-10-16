@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  {{include:head-common}}
+  {{GUIA_HEAD}}
+  {{FAQ_JSONLD:guia-lista-de-ilustracoes-e-tabelas-abnt}}
+</head>
+<body class="guia">
+{{GUIA_HERO}}
+<main id="conteudo">
+<div class="container conteudo-capa">
+  <div class="conteudo-grade">
+    <article class="artigo">
+
+      <div class="resposta">
+        <strong class="resposta-titulo">Resposta direta</strong>
+        <p>A <strong>lista de ilustrações</strong> e a <strong>lista de tabelas</strong> são elementos <strong>opcionais</strong> pela ABNT. A norma recomenda uma lista para cada tipo de ilustração (figuras, quadros, gráficos...), e o manual da Unifesp indica fazê-la quando há cinco ou mais itens do mesmo tipo. Cada item tem o nome específico, um travessão, o título e a página: <strong>Figura 1 – Título ......... 12</strong>.</p>
+        <p>No Word, a lista é gerada sozinha a partir das legendas, em <strong>Referências, Inserir Índice de Ilustrações</strong>. Ela vem antes do sumário.</p>
+      </div>
+
+      <nav class="indice-guia" aria-label="Neste guia">
+        <strong>Neste guia</strong>
+        <ol>
+          <li><a href="#quando">Quando fazer a lista</a></li>
+          <li><a href="#modelo">Como a lista fica</a></li>
+          <li><a href="#legenda">Como escrever a legenda</a></li>
+          <li><a href="#word">Como gerar a lista no Word</a></li>
+          <li><a href="#erros">Erros comuns</a></li>
+          <li><a href="#perguntas-frequentes">Perguntas frequentes</a></li>
+        </ol>
+      </nav>
+
+      <section id="quando">
+        <h2>Quando fazer a lista</h2>
+        <ul>
+          <li><strong>É opcional:</strong> a norma não obriga. Se o seu trabalho quase não tem figuras ou tabelas, não precisa.</li>
+          <li><strong>Quando vale a pena:</strong> o manual da Unifesp recomenda uma lista para cada tipo de ilustração quando há a partir de cinco elementos desse tipo.</li>
+          <li><strong>Uma lista por tipo:</strong> a norma recomenda uma lista própria para cada tipo de ilustração (figuras, desenhos, esquemas, fluxogramas, fotografias, gráficos, mapas, quadros etc.). A tabela tem lista própria.</li>
+          <li><strong>Posição:</strong> entre os elementos pré-textuais, depois dos resumos e antes do sumário. A ordem é: lista de ilustrações, lista de tabelas, lista de abreviaturas e siglas, lista de símbolos.</li>
+          <li><strong>Sumário:</strong> as listas não entram no sumário, como os outros elementos pré-textuais.</li>
+        </ul>
+        <p>Se a sua faculdade exige as listas, isso vem no manual do curso.</p>
+      </section>
+
+      <section id="modelo">
+        <h2>Como a lista fica</h2>
+        <figure class="modelo-sumario">
+          <div class="ms-pagina ms-lista" role="img" aria-label="Modelo de lista de ilustrações com itens, linha de pontos e números de página">
+            <p class="ms-titulo">LISTA DE ILUSTRAÇÕES</p>
+            <ul>
+              <li><span class="ms-t">Figura 1 – Escola participante da pesquisa</span><span class="ms-l"></span><span class="ms-p">14</span></li>
+              <li><span class="ms-t">Figura 2 – Roteiro das aulas de leitura</span><span class="ms-l"></span><span class="ms-p">18</span></li>
+              <li><span class="ms-t">Quadro 1 – Tipos de pesquisa usados</span><span class="ms-l"></span><span class="ms-p">20</span></li>
+              <li><span class="ms-t">Gráfico 1 – Participação nas aulas por semana</span><span class="ms-l"></span><span class="ms-p">26</span></li>
+            </ul>
+          </div>
+          <figcaption>Modelo de lista de ilustrações. A lista de tabelas é separada, com o título LISTA DE TABELAS.</figcaption>
+        </figure>
+        <ul>
+          <li><strong>Título:</strong> LISTA DE ILUSTRAÇÕES (ou LISTA DE TABELAS), em maiúsculas, negrito e centralizado, sem número, no alto da página.</li>
+          <li><strong>Itens:</strong> na ordem em que aparecem no texto, cada um com o nome específico, o travessão, o título e a página.</li>
+          <li><strong>Texto:</strong> fonte 12, espaçamento 1,5, justificado (UERN, Unisagrado).</li>
+        </ul>
+      </section>
+
+      {{GUIA_FERRAMENTA}}
+
+      <section id="legenda">
+        <h2>Como escrever a legenda</h2>
+        <p>A lista só pega o que tem legenda. A legenda de cada ilustração e de cada tabela é escrita assim:</p>
+        <div class="exemplos">
+          <div class="exemplo"><span class="exemplo-tipo">Legenda de figura (em cima)</span><p>Figura 1 – Escola participante da pesquisa</p></div>
+          <div class="exemplo"><span class="exemplo-tipo">Fonte (embaixo, em tamanho menor)</span><p>Fonte: Elaborado pela autora (2026).</p><span class="exemplo-nota">Mesmo que a ilustração seja sua, a fonte vai abaixo.</span></div>
+        </div>
+        <ul>
+          <li>A legenda vem <strong>em cima</strong>, com o nome específico (Figura, Quadro, Gráfico, Tabela...), o número de ordem, espaço, travessão, espaço e o título.</li>
+          <li>A <strong>fonte</strong> vem embaixo, em tamanho menor (os manuais indicam 10), mesmo que a ilustração seja de sua autoria (Unisagrado).</li>
+          <li>A numeração é sequencial para cada tipo: Figura 1, Figura 2; Quadro 1, Quadro 2; Tabela 1, Tabela 2.</li>
+        </ul>
+      </section>
+
+      {{ESPACO:guia-meio-1}}
+
+      <section id="word">
+        <h2>Como gerar a lista no Word</h2>
+        <p>No Word, não se digita a lista: ela é montada a partir das legendas. Os passos abaixo seguem o tutorial da biblioteca do Unisagrado (feito para o Word 2010; os nomes dos menus podem mudar um pouco na sua versão).</p>
+        <ol class="passos">
+          <li><div><h3>Insira a legenda de cada ilustração</h3><p>Clique na ilustração e vá em <span class="caminho"><span>Referências</span><i>›</i><span>Inserir Legenda</span></span>. Em "Rótulo", escolha o tipo (Figura, Quadro, Gráfico...) ou crie um em "Novo Rótulo", e digite o título. O Word coloca o nome e o número sozinho.</p></div></li>
+          <li><div><h3>Ajuste a formatação da legenda</h3><p>Selecione a legenda e deixe-a na fonte do texto (tamanho 12). Escreva a fonte logo abaixo da ilustração, em tamanho 10.</p></div></li>
+          <li><div><h3>Escolha onde a lista vai</h3><p>Coloque o cursor na página da lista, antes do sumário, em <span class="caminho"><span>Referências</span><i>›</i><span>Inserir Índice de Ilustrações</span></span>.</p></div></li>
+          <li><div><h3>Escolha o tipo de ilustração</h3><p>Em "Nome da legenda", escolha o tipo (Figura, por exemplo) e clique em OK. Repita para cada tipo. A tabela recebe uma lista própria.</p></div></li>
+          <li><div><h3>Corrija a formatação da lista</h3><p>Espaçamento 1,5, fonte 12, texto justificado. O título da lista fica centralizado, em negrito e em maiúsculas.</p></div></li>
+          <li><div><h3>Atualize antes de entregar</h3><p>Selecione a lista e, em <span class="caminho"><span>Referências</span><i>›</i><span>Atualizar Índice de Ilustrações</span></span>, escolha "Atualizar apenas os números de página" ou "Atualizar o índice inteiro".</p></div></li>
+        </ol>
+        <p>Se uma figura não aparece na lista, é quase sempre porque a legenda foi digitada à mão, e não inserida pelo Word. A lista também só pega ilustrações do mesmo rótulo que você escolheu.</p>
+      </section>
+
+      <section id="erros">
+        <h2>Erros comuns</h2>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Digitar a legenda à mão ("Figura 1") e esperar que a lista a encontre.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Inserir a legenda pelo Word, em Referências.</p></div></div>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Misturar figuras, quadros e gráficos em uma lista só, sem separar.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Uma lista para cada tipo, quando há vários itens de cada.</p></div></div>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Esquecer de colocar a fonte embaixo da ilustração.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Fonte embaixo, em tamanho menor, mesmo quando é sua.</p></div></div>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Entregar sem atualizar a lista depois de mudar o texto.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Atualizar o índice de ilustrações antes de gerar o PDF.</p></div></div>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Colocar as listas no sumário.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>As listas ficam antes do sumário e não entram nele.</p></div></div>
+      </section>
+
+      {{ESPACO:guia-meio-2}}
+
+      <section id="perguntas-frequentes">
+        <h2>Perguntas frequentes sobre lista de ilustrações e tabelas</h2>
+        {{FAQ_HTML:guia-lista-de-ilustracoes-e-tabelas-abnt}}
+      </section>
+
+      {{GUIA_RELACIONADAS}}
+
+      {{GUIA_FONTES}}
+
+    </article>
+    <aside class="lateral" aria-label="Publicidade">
+      {{ESPACO:guia-lateral}}
+    </aside>
+  </div>
+</div>
+</main>
+{{include:footer}}
+</body>
+</html>

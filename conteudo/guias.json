@@ -566,5 +566,434 @@
         "url": "https://www.unisa.br/wp-content/uploads/2025/04/2025_Manual-de-Normatizacao_ABNT.pdf"
       }
     ]
+  },
+  {
+    "categoria": "TCC passo a passo",
+    "atualizado": "2026-10-15",
+    "norma": "ABNT NBR 14724:2024",
+    "slug": "como-fazer-tcc",
+    "prioridade": 1.5,
+    "rotulo": "Como fazer TCC passo a passo",
+    "titulo": "Como fazer TCC passo a passo: do tema à entrega",
+    "h1": "Como fazer um TCC passo a passo: do tema à entrega",
+    "descricao": "Como fazer um TCC em 10 passos: tema, orientador, projeto, pesquisa, escrita, formatação ABNT, defesa e versão final, com linha do tempo.",
+    "lead": "Os dez passos de um TCC, na ordem em que acontecem, com um cronograma de exemplo e o link do guia de cada parte.",
+    "resumoIndice": "Os 10 passos do tema à versão final, com linha do tempo e o guia de cada parte.",
+    "ferramentas": [
+      "capa",
+      "folha",
+      "sumario"
+    ],
+    "ferramenta": {
+      "nome": "Gerador de capa ABNT",
+      "texto": "Quando chegar a hora de montar o trabalho, comece pela capa. A folha de rosto e o sumário usam os mesmos dados.",
+      "botao": "Criar minha capa",
+      "url": "/gerador-de-capa-abnt/"
+    },
+    "relacionadas": [
+      "normas-abnt-tcc",
+      "introducao-do-tcc",
+      "metodologia-do-tcc"
+    ],
+    "fontes": [
+      {
+        "titulo": "UTFPR (Curitiba), Os 10 passos do TCC (2022)",
+        "url": "https://antigo.utfpr.edu.br/cursos/coordenacoes/graduacao/curitiba/ct-tecnologia-em-sistemas-de-telecomunicacoes/documentos/tcc/os-10-passos-do-tcc-2020_10_14.pdf",
+        "nota": "Exemplo de um curso; as datas e as exigências variam."
+      },
+      {
+        "titulo": "Gerhardt e Silveira (orgs.), Métodos de pesquisa, Editora da UFRGS (2009)",
+        "url": "https://www.ufrgs.br/cursopgdr/downloadsSerie/derad005.pdf"
+      },
+      {
+        "titulo": "UFV, Normalização de trabalhos acadêmicos (2025), com a NBR 14724:2024",
+        "url": "https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf"
+      },
+      {
+        "titulo": "Unifesp, Manual de normalização (atualização 2024)",
+        "url": "https://unifesp.br/campus/gua/images/Biblioteca/tutoriais/Manual_de_normalizacao._Atualizacao_2024.pdf"
+      }
+    ]
+  },
+  {
+    "categoria": "TCC passo a passo",
+    "atualizado": "2026-10-15",
+    "norma": "ABNT NBR 14724:2024",
+    "slug": "agradecimentos-tcc",
+    "prioridade": 15,
+    "rotulo": "Agradecimentos do TCC",
+    "titulo": "Agradecimentos TCC: como fazer, formato ABNT e 8 exemplos",
+    "h1": "Agradecimentos do TCC: como fazer, formato ABNT e 8 exemplos",
+    "descricao": "Como escrever os agradecimentos do TCC: formato ABNT, ordem, tamanho e 8 exemplos originais (curto, família, orientador, emocionante e em dupla).",
+    "lead": "O formato da página, a ordem de quem agradecer e oito exemplos escritos do zero para você adaptar.",
+    "resumoIndice": "Formato ABNT, ordem de quem agradecer e 8 exemplos originais para adaptar.",
+    "ferramenta": {
+      "nome": "Formatação ABNT de TCC",
+      "selo": "Serviço do Estuda Simples",
+      "texto": "Prefere que eu deixe todas as páginas iniciais do trabalho no formato da ABNT? Orçamento pelo WhatsApp.",
+      "botao": "Pedir orçamento",
+      "url": "/formatacao-abnt-tcc/"
+    },
+    "relacionadas": [
+      "dedicatoria-e-epigrafe-abnt",
+      "normas-abnt-tcc",
+      "como-fazer-tcc"
+    ],
+    "fontes": [
+      {
+        "titulo": "UFV, Normalização de trabalhos acadêmicos (2025), com a NBR 14724:2024",
+        "url": "https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf"
+      },
+      {
+        "titulo": "UERN, Manual de normalização do SIB (2025)",
+        "url": "https://portal.uern.br/dsib/wp-content/uploads/sites/2/2025/02/MANUAL-DE-NORMALIZACAO-SIBUERN-2025.pdf"
+      },
+      {
+        "titulo": "UNISA, Manual de normatização ABNT (2025)",
+        "url": "https://www.unisa.br/wp-content/uploads/2025/04/2025_Manual-de-Normatizacao_ABNT.pdf"
+      }
+    ]
+  },
+  {
+    "categoria": "TCC passo a passo",
+    "atualizado": "2026-10-15",
+    "norma": "ABNT NBR 14724:2024",
+    "slug": "metodologia-do-tcc",
+    "prioridade": 16,
+    "rotulo": "Metodologia do TCC",
+    "titulo": "Metodologia do TCC: tipos de pesquisa e exemplo pronto",
+    "h1": "Metodologia do TCC: tipos de pesquisa, o que escrever e um exemplo",
+    "descricao": "Como escrever a metodologia do TCC: tipos de pesquisa por abordagem, objetivos e procedimentos, o que incluir e um exemplo armado, passo a passo.",
+    "lead": "Os tipos de pesquisa explicados sem jargão, o que a metodologia precisa dizer e um exemplo pronto para adaptar.",
+    "resumoIndice": "Tipos de pesquisa, o que a metodologia precisa dizer e um exemplo armado.",
+    "ferramenta": {
+      "nome": "Formatação ABNT de TCC",
+      "selo": "Serviço do Estuda Simples",
+      "texto": "Quer ajuda para deixar o texto no formato da ABNT, com citações e referências? Eu cuido da forma. Orçamento pelo WhatsApp.",
+      "botao": "Pedir orçamento",
+      "url": "/formatacao-abnt-tcc/"
+    },
+    "relacionadas": [
+      "introducao-do-tcc",
+      "referencial-teorico-do-tcc",
+      "como-fazer-tcc"
+    ],
+    "fontes": [
+      {
+        "titulo": "Gerhardt e Silveira (orgs.), Métodos de pesquisa, Editora da UFRGS (2009)",
+        "url": "https://www.ufrgs.br/cursopgdr/downloadsSerie/derad005.pdf"
+      },
+      {
+        "titulo": "UFRGS, Comitê de Ética em Pesquisa: documentação e Plataforma Brasil",
+        "url": "https://www.ufrgs.br/cep/?p=982"
+      },
+      {
+        "titulo": "UERN, Manual de normalização do SIB (2025)",
+        "url": "https://portal.uern.br/dsib/wp-content/uploads/sites/2/2025/02/MANUAL-DE-NORMALIZACAO-SIBUERN-2025.pdf"
+      },
+      {
+        "titulo": "UNISA, Manual de normatização ABNT (2025)",
+        "url": "https://www.unisa.br/wp-content/uploads/2025/04/2025_Manual-de-Normatizacao_ABNT.pdf"
+      }
+    ]
+  },
+  {
+    "categoria": "TCC passo a passo",
+    "atualizado": "2026-10-15",
+    "norma": "ABNT NBR 14724:2024",
+    "slug": "introducao-do-tcc",
+    "prioridade": 17,
+    "rotulo": "Introdução do TCC",
+    "titulo": "Introdução do TCC: o que escrever, passo a passo e exemplo",
+    "h1": "Introdução do TCC: o que escrever, passo a passo e exemplo",
+    "descricao": "Como escrever a introdução do TCC: tema, problema, objetivos, justificativa e organização do texto, com um exemplo marcado parte por parte.",
+    "lead": "As cinco partes de uma introdução, um exemplo com cada parte marcada e os erros que mais aparecem.",
+    "resumoIndice": "Tema, problema, objetivos, justificativa e estrutura, com exemplo marcado.",
+    "ferramenta": {
+      "nome": "Formatação ABNT de TCC",
+      "selo": "Serviço do Estuda Simples",
+      "texto": "Prefere que eu formate o trabalho inteiro nas normas da ABNT enquanto você cuida do texto? Orçamento pelo WhatsApp.",
+      "botao": "Pedir orçamento",
+      "url": "/formatacao-abnt-tcc/"
+    },
+    "relacionadas": [
+      "metodologia-do-tcc",
+      "consideracoes-finais-tcc",
+      "como-fazer-tcc"
+    ],
+    "fontes": [
+      {
+        "titulo": "Gerhardt e Silveira (orgs.), Métodos de pesquisa, Editora da UFRGS (2009)",
+        "url": "https://www.ufrgs.br/cursopgdr/downloadsSerie/derad005.pdf"
+      },
+      {
+        "titulo": "UERN, Manual de normalização do SIB (2025)",
+        "url": "https://portal.uern.br/dsib/wp-content/uploads/sites/2/2025/02/MANUAL-DE-NORMALIZACAO-SIBUERN-2025.pdf"
+      },
+      {
+        "titulo": "Unifesp, Manual de normalização (atualização 2024)",
+        "url": "https://unifesp.br/campus/gua/images/Biblioteca/tutoriais/Manual_de_normalizacao._Atualizacao_2024.pdf"
+      },
+      {
+        "titulo": "UNISA, Manual de normatização ABNT (2025)",
+        "url": "https://www.unisa.br/wp-content/uploads/2025/04/2025_Manual-de-Normatizacao_ABNT.pdf"
+      },
+      {
+        "titulo": "UFV, Normalização de trabalhos acadêmicos (2025), com a NBR 14724:2024",
+        "url": "https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf"
+      }
+    ]
+  },
+  {
+    "categoria": "TCC passo a passo",
+    "atualizado": "2026-10-15",
+    "norma": "ABNT NBR 14724:2024",
+    "slug": "consideracoes-finais-tcc",
+    "prioridade": 18,
+    "rotulo": "Considerações finais do TCC",
+    "titulo": "Considerações finais do TCC: como escrever, com exemplo",
+    "h1": "Considerações finais (conclusão) do TCC: como escrever, com exemplo",
+    "descricao": "Como escrever as considerações finais ou a conclusão do TCC: retomar o problema, responder aos objetivos, limites e sugestões, com um exemplo.",
+    "lead": "O que a conclusão precisa trazer, o que ela não deve fazer e um exemplo com cada parte marcada.",
+    "resumoIndice": "Retomar o problema, responder aos objetivos, limites e sugestões, com exemplo.",
+    "ferramenta": {
+      "nome": "Formatação ABNT de TCC",
+      "selo": "Serviço do Estuda Simples",
+      "texto": "Terminou o texto? Eu posso deixar o trabalho inteiro no formato da ABNT, em Word e PDF. Orçamento pelo WhatsApp.",
+      "botao": "Pedir orçamento",
+      "url": "/formatacao-abnt-tcc/"
+    },
+    "relacionadas": [
+      "introducao-do-tcc",
+      "resumo-abnt",
+      "como-fazer-tcc"
+    ],
+    "fontes": [
+      {
+        "titulo": "UERN, Manual de normalização do SIB (2025)",
+        "url": "https://portal.uern.br/dsib/wp-content/uploads/sites/2/2025/02/MANUAL-DE-NORMALIZACAO-SIBUERN-2025.pdf"
+      },
+      {
+        "titulo": "Unifesp, Manual de normalização (atualização 2024)",
+        "url": "https://unifesp.br/campus/gua/images/Biblioteca/tutoriais/Manual_de_normalizacao._Atualizacao_2024.pdf"
+      },
+      {
+        "titulo": "UFV, Normalização de trabalhos acadêmicos (2025), com a NBR 14724:2024",
+        "url": "https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf"
+      },
+      {
+        "titulo": "Gerhardt e Silveira (orgs.), Métodos de pesquisa, Editora da UFRGS (2009)",
+        "url": "https://www.ufrgs.br/cursopgdr/downloadsSerie/derad005.pdf"
+      }
+    ]
+  },
+  {
+    "categoria": "TCC passo a passo",
+    "atualizado": "2026-10-15",
+    "norma": "ABNT NBR 14724:2024",
+    "slug": "dedicatoria-e-epigrafe-abnt",
+    "prioridade": 19,
+    "rotulo": "Dedicatória e epígrafe",
+    "titulo": "Dedicatória e epígrafe ABNT: formato, posição e exemplos",
+    "h1": "Dedicatória e epígrafe ABNT: formato, posição na folha e exemplos",
+    "descricao": "Dedicatória e epígrafe ABNT: onde ficam na página, se levam título, formato do texto e exemplos originais, com a folha desenhada.",
+    "lead": "As duas páginas opcionais do começo do trabalho: onde o texto fica na folha, como formatar e exemplos para adaptar.",
+    "resumoIndice": "Posição na folha, formato e exemplos originais das duas páginas opcionais.",
+    "ferramenta": {
+      "nome": "Gerador de folha de rosto ABNT",
+      "texto": "Depois da folha de rosto, siga a ordem das páginas iniciais. Monte a folha de rosto grátis, com a natureza do trabalho e o orientador.",
+      "botao": "Criar minha folha de rosto",
+      "url": "/gerador-de-folha-de-rosto-abnt/"
+    },
+    "relacionadas": [
+      "agradecimentos-tcc",
+      "folha-de-aprovacao-abnt",
+      "normas-abnt-tcc"
+    ],
+    "fontes": [
+      {
+        "titulo": "UFV, Normalização de trabalhos acadêmicos (2025), com a NBR 14724:2024",
+        "url": "https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf"
+      },
+      {
+        "titulo": "UERN, Manual de normalização do SIB (2025)",
+        "url": "https://portal.uern.br/dsib/wp-content/uploads/sites/2/2025/02/MANUAL-DE-NORMALIZACAO-SIBUERN-2025.pdf"
+      },
+      {
+        "titulo": "UNISA, Manual de normatização ABNT (2025)",
+        "url": "https://www.unisa.br/wp-content/uploads/2025/04/2025_Manual-de-Normatizacao_ABNT.pdf"
+      }
+    ]
+  },
+  {
+    "categoria": "TCC passo a passo",
+    "atualizado": "2026-10-15",
+    "norma": "ABNT NBR 14724:2024",
+    "slug": "folha-de-aprovacao-abnt",
+    "prioridade": 20,
+    "rotulo": "Folha de aprovação",
+    "titulo": "Folha de aprovação ABNT: elementos, modelo e quando usar",
+    "h1": "Folha de aprovação ABNT: elementos, modelo e quando a faculdade exige",
+    "descricao": "Folha de aprovação ABNT: o que leva, ordem dos elementos, a folha desenhada e quando a faculdade pede um modelo próprio, com assinaturas só depois da defesa.",
+    "lead": "Os elementos da folha de aprovação, o desenho da página e o que muda de uma faculdade para outra.",
+    "resumoIndice": "Elementos, folha desenhada e quando a faculdade exige modelo próprio.",
+    "ferramentas": [
+      "folha"
+    ],
+    "ferramenta": {
+      "nome": "Gerador de folha de rosto ABNT",
+      "texto": "A folha de aprovação repete os dados da folha de rosto. Monte a folha de rosto grátis e copie a natureza do trabalho.",
+      "botao": "Criar minha folha de rosto",
+      "url": "/gerador-de-folha-de-rosto-abnt/"
+    },
+    "relacionadas": [
+      "normas-abnt-tcc",
+      "dedicatoria-e-epigrafe-abnt",
+      "como-fazer-tcc"
+    ],
+    "fontes": [
+      {
+        "titulo": "UFV, Normalização de trabalhos acadêmicos (2025), com a NBR 14724:2024",
+        "url": "https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf"
+      },
+      {
+        "titulo": "UERN, Manual de normalização do SIB (2025)",
+        "url": "https://portal.uern.br/dsib/wp-content/uploads/sites/2/2025/02/MANUAL-DE-NORMALIZACAO-SIBUERN-2025.pdf"
+      },
+      {
+        "titulo": "UTFPR (Curitiba), Os 10 passos do TCC (2022)",
+        "url": "https://antigo.utfpr.edu.br/cursos/coordenacoes/graduacao/curitiba/ct-tecnologia-em-sistemas-de-telecomunicacoes/documentos/tcc/os-10-passos-do-tcc-2020_10_14.pdf",
+        "nota": "Exemplo de um curso; as datas e as exigências variam."
+      },
+      {
+        "titulo": "UNISA, Manual de normatização ABNT (2025)",
+        "url": "https://www.unisa.br/wp-content/uploads/2025/04/2025_Manual-de-Normatizacao_ABNT.pdf"
+      }
+    ]
+  },
+  {
+    "categoria": "TCC passo a passo",
+    "atualizado": "2026-10-15",
+    "norma": "ABNT NBR 14724:2024",
+    "slug": "apendice-e-anexo-abnt",
+    "prioridade": 21,
+    "rotulo": "Apêndice e anexo",
+    "titulo": "Apêndice e anexo ABNT: diferença, como nomear e exemplos",
+    "h1": "Apêndice e anexo ABNT: diferença, como nomear e como entram no sumário",
+    "descricao": "Apêndice e anexo ABNT: qual é a diferença, como nomear (APÊNDICE A – título), onde ficam no trabalho e como entram no sumário, com exemplos.",
+    "lead": "A diferença em uma frase, como dar nome a cada um e o que muda no sumário.",
+    "resumoIndice": "Diferença, como nomear (APÊNDICE A) e como entram no sumário.",
+    "ferramentas": [
+      "sumario"
+    ],
+    "ferramenta": {
+      "nome": "Gerador de sumário ABNT",
+      "texto": "Monte o sumário com os apêndices e anexos sem número de seção, na ordem certa. Baixe em PDF ou Word.",
+      "botao": "Criar meu sumário",
+      "url": "/gerador-de-sumario-abnt/"
+    },
+    "relacionadas": [
+      "normas-abnt-tcc",
+      "sumario-automatico-word",
+      "lista-de-ilustracoes-e-tabelas-abnt"
+    ],
+    "fontes": [
+      {
+        "titulo": "UFV, Normalização de trabalhos acadêmicos (2025), com a NBR 14724:2024",
+        "url": "https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf"
+      },
+      {
+        "titulo": "UERN, Manual de normalização do SIB (2025)",
+        "url": "https://portal.uern.br/dsib/wp-content/uploads/sites/2/2025/02/MANUAL-DE-NORMALIZACAO-SIBUERN-2025.pdf"
+      },
+      {
+        "titulo": "Unifesp, Manual de normalização (atualização 2024)",
+        "url": "https://unifesp.br/campus/gua/images/Biblioteca/tutoriais/Manual_de_normalizacao._Atualizacao_2024.pdf"
+      }
+    ]
+  },
+  {
+    "categoria": "TCC passo a passo",
+    "atualizado": "2026-10-15",
+    "norma": "ABNT NBR 14724:2024",
+    "slug": "lista-de-ilustracoes-e-tabelas-abnt",
+    "prioridade": 22,
+    "rotulo": "Lista de ilustrações e tabelas",
+    "titulo": "Lista de ilustrações e tabelas ABNT: como fazer no Word",
+    "h1": "Lista de ilustrações e tabelas ABNT: quando fazer e como montar no Word",
+    "descricao": "Lista de ilustrações e de tabelas ABNT: quando é obrigatória, como numerar a legenda e como gerar a lista no Word, passo a passo e atualizada.",
+    "lead": "Quando a lista entra, como se escreve cada item e o passo a passo para gerar a lista no Word sem digitar nada.",
+    "resumoIndice": "Quando fazer, como escrever cada item e como gerar a lista no Word.",
+    "ferramentas": [
+      "sumario"
+    ],
+    "ferramenta": {
+      "nome": "Gerador de sumário ABNT",
+      "texto": "A lista de ilustrações vem antes do sumário. Monte o sumário grátis, com a linha de pontos e as páginas.",
+      "botao": "Criar meu sumário",
+      "url": "/gerador-de-sumario-abnt/"
+    },
+    "relacionadas": [
+      "sumario-automatico-word",
+      "apendice-e-anexo-abnt",
+      "normas-abnt-tcc"
+    ],
+    "fontes": [
+      {
+        "titulo": "Unisagrado (biblioteca), Tutorial: como criar listas de ilustrações e tabelas (2019)",
+        "url": "https://unisagrado.edu.br/uploads/2008/biblioteca/normatiacao/2020/tutorial-como-criar-listas-de-figuras-e-tabelas.pdf"
+      },
+      {
+        "titulo": "UERN, Manual de normalização do SIB (2025)",
+        "url": "https://portal.uern.br/dsib/wp-content/uploads/sites/2/2025/02/MANUAL-DE-NORMALIZACAO-SIBUERN-2025.pdf"
+      },
+      {
+        "titulo": "Unifesp, Manual de normalização (atualização 2024)",
+        "url": "https://unifesp.br/campus/gua/images/Biblioteca/tutoriais/Manual_de_normalizacao._Atualizacao_2024.pdf"
+      },
+      {
+        "titulo": "UFV, Normalização de trabalhos acadêmicos (2025), com a NBR 14724:2024",
+        "url": "https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf"
+      }
+    ]
+  },
+  {
+    "categoria": "TCC passo a passo",
+    "atualizado": "2026-10-15",
+    "norma": "ABNT NBR 14724:2024",
+    "slug": "referencial-teorico-do-tcc",
+    "prioridade": 23,
+    "rotulo": "Referencial teórico do TCC",
+    "titulo": "Referencial teórico do TCC: como montar, citar e exemplo",
+    "h1": "Referencial teórico do TCC: como montar, como citar e um exemplo de estrutura",
+    "descricao": "Como montar o referencial teórico do TCC: escolher os autores, organizar por temas, citar certo na ABNT e um exemplo de estrutura e de parágrafo.",
+    "lead": "Como organizar a revisão da literatura por temas, como citar os autores sem copiar e um exemplo de estrutura.",
+    "resumoIndice": "Como organizar por temas, citar sem copiar e exemplo de estrutura.",
+    "ferramenta": {
+      "nome": "Formatação ABNT de TCC",
+      "selo": "Serviço do Estuda Simples",
+      "texto": "Prefere que eu deixe as citações e as referências do trabalho no formato da ABNT? Orçamento pelo WhatsApp.",
+      "botao": "Pedir orçamento",
+      "url": "/formatacao-abnt-tcc/"
+    },
+    "relacionadas": [
+      "citacao-abnt",
+      "como-fazer-referencia-abnt",
+      "metodologia-do-tcc"
+    ],
+    "fontes": [
+      {
+        "titulo": "Gerhardt e Silveira (orgs.), Métodos de pesquisa, Editora da UFRGS (2009)",
+        "url": "https://www.ufrgs.br/cursopgdr/downloadsSerie/derad005.pdf"
+      },
+      {
+        "titulo": "UERN, Manual de normalização do SIB (2025)",
+        "url": "https://portal.uern.br/dsib/wp-content/uploads/sites/2/2025/02/MANUAL-DE-NORMALIZACAO-SIBUERN-2025.pdf"
+      },
+      {
+        "titulo": "UFV, Normalização de trabalhos acadêmicos (2025), com a NBR 14724:2024",
+        "url": "https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf"
+      }
+    ]
   }
 ]

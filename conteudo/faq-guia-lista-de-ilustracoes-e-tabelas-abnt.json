@@ -1,0 +1,38 @@
+[
+  {
+    "p": "A lista de ilustrações é obrigatória?",
+    "r": ["Pela ABNT, não: a lista de ilustrações e a lista de tabelas são elementos opcionais. O manual da Unifesp recomenda uma lista para cada tipo de ilustração quando há a partir de cinco elementos desse tipo. Veja se o manual da sua faculdade exige."]
+  },
+  {
+    "p": "Qual é a diferença entre lista de ilustrações e lista de tabelas?",
+    "r": ["A lista de ilustrações reúne figuras, quadros, gráficos, mapas, fotografias e outras imagens. A tabela, que é um dado em linhas e colunas, tem a sua lista própria."]
+  },
+  {
+    "p": "Como é um item da lista de ilustrações?",
+    "r": ["Cada item é escrito com o nome específico da ilustração, um travessão, o título e a página, na ordem em que aparece no texto. Exemplo: Figura 1 – Escola participante da pesquisa ......... 14."]
+  },
+  {
+    "p": "Como fazer a lista de ilustrações no Word?",
+    "r": ["Insira a legenda de cada ilustração em Referências, Inserir Legenda. Depois, na página da lista, use Referências, Inserir Índice de Ilustrações e escolha o tipo. Para atualizar, use Atualizar Índice de Ilustrações."]
+  },
+  {
+    "p": "Por que minha figura não aparece na lista do Word?",
+    "r": ["Na maioria das vezes porque a legenda foi digitada à mão. A lista só encontra legendas inseridas pelo Word, com o mesmo rótulo (Figura, Quadro...) escolhido na hora de gerar a lista. Insira a legenda de novo pelo comando do Word."]
+  },
+  {
+    "p": "Onde ficam as listas no trabalho?",
+    "r": ["Entre os elementos pré-textuais: depois dos resumos e antes do sumário. A ordem é lista de ilustrações, lista de tabelas, lista de abreviaturas e siglas e lista de símbolos."]
+  },
+  {
+    "p": "Qual é a formatação do título da lista?",
+    "r": ["LISTA DE ILUSTRAÇÕES (ou LISTA DE TABELAS) em maiúsculas, negrito, centralizado e sem número, com fonte 12 e espaçamento 1,5; o texto da lista é justificado."]
+  },
+  {
+    "p": "Onde vai a legenda e onde vai a fonte?",
+    "r": ["A legenda (Figura 1 – Título) vai em cima da ilustração ou da tabela, e a fonte vai embaixo, em tamanho menor, mesmo que a ilustração seja de sua autoria."]
+  },
+  {
+    "p": "As listas entram no sumário?",
+    "r": ["Não. As listas são elementos pré-textuais e não entram no sumário, que lista só as partes que vêm depois dele."]
+  }
+]

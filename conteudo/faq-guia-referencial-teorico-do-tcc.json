@@ -1,0 +1,38 @@
+[
+  {
+    "p": "O que é o referencial teórico do TCC?",
+    "r": ["É a parte do trabalho em que se apresentam, organizadas por tema, as ideias de outros autores que sustentam a pesquisa: conceitos, o que já se sabe sobre o assunto e estudos anteriores. Também se chama revisão de literatura ou fundamentação teórica."]
+  },
+  {
+    "p": "Qual a diferença entre referencial teórico e revisão de literatura?",
+    "r": ["Na prática, os dois nomes costumam ser usados como sinônimos. O que importa é o nome que o manual do seu curso e o seu orientador pedem."]
+  },
+  {
+    "p": "Como fazer o referencial teórico do TCC?",
+    "r": ["Liste os conceitos de que o trabalho depende, procure livros e artigos sobre cada um, leia e anote a referência na hora, agrupe as ideias por tema e escreva parágrafos que juntem ideia, autor citado e o seu comentário. Veja os passos neste guia."]
+  },
+  {
+    "p": "O referencial teórico é um capítulo à parte na ABNT?",
+    "r": ["A NBR 14724 não usa esse nome: ele fica dentro do desenvolvimento, em uma ou mais seções. Muitos cursos pedem uma seção chamada \"Referencial teórico\" logo depois da introdução, e a numeração segue o padrão das seções."]
+  },
+  {
+    "p": "Quantas páginas tem o referencial teórico?",
+    "r": ["A ABNT não fixa. Costuma ser uma das maiores partes do desenvolvimento, mas o tamanho depende do curso e do tema. Pergunte ao orientador."]
+  },
+  {
+    "p": "Como citar autores no referencial teórico?",
+    "r": ["Com o sobrenome e o ano, no texto: Lima (2021) ou (Lima, 2021). Para citação direta, acrescente a página. Cada autor citado precisa estar na lista de referências. Veja o <a href=\"/guias/citacao-abnt/\">guia de citação ABNT</a>."]
+  },
+  {
+    "p": "Posso usar sites e blogs no referencial teórico?",
+    "r": ["O livro de métodos da UFRGS lembra que nem tudo que está na internet tem caráter científico, e que é preciso observar a procedência do site. Dê preferência a livros, artigos de revistas científicas, teses e dissertações, e confira com o orientador se uma fonte da internet é aceita."]
+  },
+  {
+    "p": "Como não copiar os autores?",
+    "r": ["Entenda a ideia, escreva com as suas palavras e cite o autor mesmo assim: ideia de outra pessoa sempre leva a citação. Use citações diretas só quando as palavras exatas do autor forem necessárias, e comente cada uma."]
+  },
+  {
+    "p": "Quantos autores preciso citar?",
+    "r": ["Não há número fixo. O importante é que as fontes sejam suficientes e adequadas para sustentar cada conceito do trabalho. O orientador e o manual do curso podem indicar uma quantidade mínima."]
+  }
+]

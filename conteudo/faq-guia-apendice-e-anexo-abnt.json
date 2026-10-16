@@ -1,0 +1,42 @@
+[
+  {
+    "p": "Qual é a diferença entre apêndice e anexo?",
+    "r": ["O apêndice é um texto ou documento elaborado pelo próprio autor, para complementar a argumentação, como um questionário que ele aplicou. O anexo não foi elaborado pelo autor e serve para fundamentar, comprovar ou ilustrar, como uma lei ou um relatório de terceiros."]
+  },
+  {
+    "p": "Como colocar apêndice e anexo na ABNT?",
+    "r": ["Depois das referências, na ordem glossário, apêndice, anexo e índice. Cada um leva a palavra APÊNDICE ou ANEXO, uma letra maiúscula, um travessão e o título, por exemplo APÊNDICE A – QUESTIONÁRIO APLICADO AOS ALUNOS."]
+  },
+  {
+    "p": "Apêndice e anexo são obrigatórios?",
+    "r": ["Não. Os dois são elementos opcionais do TCC. Use quando precisar mostrar documentos que apoiam o trabalho sem colocá-los no meio do texto."]
+  },
+  {
+    "p": "Apêndice e anexo entram no sumário?",
+    "r": ["Sim. Eles entram no sumário sem número de seção, com o título e a página, depois das referências."]
+  },
+  {
+    "p": "Apêndice e anexo levam número de seção?",
+    "r": ["Não. Eles são identificados por letras maiúsculas consecutivas (A, B, C...) e não recebem número de seção, nem como \"6\" ou \"7\"."]
+  },
+  {
+    "p": "O que fazer quando as letras acabam?",
+    "r": ["Quando as letras do alfabeto se esgotam, a norma manda usar letras maiúsculas dobradas (AA, BB, CC...)."]
+  },
+  {
+    "p": "O apêndice vem antes ou depois do anexo?",
+    "r": ["Antes. A ordem dos elementos pós-textuais é: referências, glossário, apêndice, anexo e índice."]
+  },
+  {
+    "p": "As páginas do apêndice e do anexo são numeradas?",
+    "r": ["Sim. A numeração é contínua e segue a do texto principal: se o texto termina na página 38, o apêndice continua dali."]
+  },
+  {
+    "p": "O questionário que apliquei é apêndice ou anexo?",
+    "r": ["Apêndice, porque foi você quem o elaborou. Se você usou um questionário já pronto, de outro autor, e quer mostrá-lo, ele é anexo."]
+  },
+  {
+    "p": "Posso ter só um apêndice?",
+    "r": ["Pode. Mesmo com um só, a identificação usa a letra A (APÊNDICE A – título), como nos modelos dos manuais."]
+  }
+]

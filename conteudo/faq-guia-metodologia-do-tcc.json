@@ -1,0 +1,42 @@
+[
+  {
+    "p": "O que é a metodologia do TCC?",
+    "r": ["É a parte que conta como a pesquisa foi feita: o tipo de pesquisa, onde e com quem foi realizada, como os dados foram coletados e analisados e, se há pessoas envolvidas, os cuidados éticos. Serve para que o leitor entenda e possa avaliar o caminho que levou aos resultados."]
+  },
+  {
+    "p": "Quais são os tipos de pesquisa no TCC?",
+    "r": ["Quanto à abordagem: qualitativa ou quantitativa. Quanto à natureza: básica ou aplicada. Quanto aos objetivos: exploratória, descritiva ou explicativa. Quanto aos procedimentos: bibliográfica, documental, experimental, levantamento, estudo de caso, pesquisa-ação, pesquisa de campo e outros."]
+  },
+  {
+    "p": "Qual a diferença entre pesquisa qualitativa e quantitativa?",
+    "r": ["A qualitativa procura compreender o fenômeno como um todo, com interpretação, sem depender de números. A quantitativa trabalha com dados numéricos e procedimentos estatísticos. Uma pesquisa também pode combinar as duas."]
+  },
+  {
+    "p": "O que é pesquisa exploratória, descritiva e explicativa?",
+    "r": ["A exploratória dá mais familiaridade com um problema, para torná-lo mais claro. A descritiva descreve as características de um fenômeno ou de um grupo. A explicativa procura os fatores que determinam o fenômeno. Segundo o livro de métodos da UFRGS, alunos iniciantes geralmente fazem pesquisas exploratórias."]
+  },
+  {
+    "p": "O que é pesquisa bibliográfica?",
+    "r": ["É a pesquisa feita a partir de textos já publicados, como livros, artigos científicos e páginas da internet confiáveis. Todo trabalho científico começa com ela, e alguns TCCs se baseiam só nela, como as revisões da literatura."]
+  },
+  {
+    "p": "O que escrever na metodologia de um TCC de revisão da literatura?",
+    "r": ["Diga onde você buscou (bases de dados e bibliotecas), com quais palavras de busca, em que período, quais critérios usou para incluir ou excluir textos e como analisou o que encontrou. Escrever só \"foi feita uma pesquisa em livros e artigos\" é pouco."]
+  },
+  {
+    "p": "A metodologia fica na introdução ou em seção própria?",
+    "r": ["Na maioria dos trabalhos, em seção própria, com um resumo na introdução. Alguns manuais pedem diferente: a UNISA, por exemplo, pede a metodologia só dentro da introdução em dissertações de Ciências Humanas e Sociais. Veja o manual do seu curso."]
+  },
+  {
+    "p": "A metodologia se escreve no passado ou no futuro?",
+    "r": ["No TCC pronto, no passado (\"foi realizada\", \"foram aplicados\"), porque conta o que aconteceu. No projeto de pesquisa, no futuro (\"será realizada\")."]
+  },
+  {
+    "p": "Preciso de comitê de ética para o TCC?",
+    "r": ["Se o trabalho envolve pessoas, converse com o comitê de ética da faculdade antes de coletar dados. A regra nacional tem casos de dispensa, mas a interpretação varia entre instituições. Pergunte ao orientador e ao comitê e guarde a resposta."]
+  },
+  {
+    "p": "Posso usar um exemplo de metodologia pronto?",
+    "r": ["Pode usar como modelo da estrutura, e trocar tudo pelo que você fez de verdade. A metodologia precisa descrever a sua pesquisa; um texto copiado de outro trabalho vai contar um caminho que você não percorreu."]
+  }
+]

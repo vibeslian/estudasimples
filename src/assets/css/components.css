@@ -166,3 +166,7 @@ a.percurso-item:hover { background: var(--salvia-50); border-color: var(--salvia
 .ms-l { margin: 0 .35em .4em; border-bottom: 2px dotted #555; min-width: .5em; }
 .ms-p { text-align: right; }
 .modelo-sumario figcaption { margin-top: 10px; text-align: center; font-size: .92rem; color: var(--texto-suave); }
+.ms-lista li { grid-template-columns: minmax(0, auto) 1fr auto; }
+.ms-lista .ms-t { font-weight: 400; }
+.ms-lista .ms-titulo { margin-top: 0; }
+.ms-lista .ms-sep { height: .8em; }

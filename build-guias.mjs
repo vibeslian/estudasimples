@@ -8,7 +8,7 @@ const jsonSeguro = (o) => JSON.stringify(o).replace(/</g, "\\u003c").replace(/>/
 const MESES = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
 export const dataLonga = (iso) => { const [a, m, d] = iso.split("-").map(Number); return `${d} de ${MESES[m - 1]} de ${a}`; };
 
-export const CATEGORIAS = ["Formatação do trabalho", "Referências e citações", "Estrutura do trabalho", "Capa, folha de rosto e sumário"];
+export const CATEGORIAS = ["TCC passo a passo", "Formatação do trabalho", "Referências e citações", "Estrutura do trabalho", "Capa, folha de rosto e sumário"];
 
 export function carregaGuias(arquivo = "conteudo/guias.json") {
   const guias = JSON.parse(readFileSync(arquivo, "utf8"));

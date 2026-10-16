@@ -1,0 +1,62 @@
+[
+  {
+    "p": "A dedicatória e a epígrafe são obrigatórias?",
+    "r": [
+      "Não. As duas são elementos opcionais do TCC. Se você usar, siga a posição e o formato do manual da sua faculdade."
+    ]
+  },
+  {
+    "p": "Onde fica a dedicatória no TCC?",
+    "r": [
+      "Depois da folha de aprovação e antes dos agradecimentos, em uma página própria, com o texto na parte de baixo da folha, do lado direito."
+    ]
+  },
+  {
+    "p": "Onde fica a epígrafe no TCC?",
+    "r": [
+      "Depois dos agradecimentos e antes do resumo, em uma página própria. O texto fica na parte de baixo da folha, do lado direito. A epígrafe também pode abrir as seções primárias."
+    ]
+  },
+  {
+    "p": "A dedicatória leva título?",
+    "r": [
+      "Não. Não se escreve a palavra \"Dedicatória\" nem se numera. É um elemento sem título e sem indicativo numérico."
+    ]
+  },
+  {
+    "p": "A epígrafe leva título?",
+    "r": [
+      "Não. Também é um elemento sem título e sem número. A página tem só a citação e a indicação de autoria."
+    ]
+  },
+  {
+    "p": "Como colocar a epígrafe na ABNT?",
+    "r": [
+      "Escreva a citação entre aspas, com a indicação de autoria, no padrão da NBR 10520, por exemplo (Brandão, 2015, p. 29). O texto fica na parte de baixo da folha, à direita. A obra deve entrar na lista de referências."
+    ]
+  },
+  {
+    "p": "Qual é o recuo da dedicatória e da epígrafe?",
+    "r": [
+      "A norma não fixa. A UERN usa recuo de 8 cm da margem esquerda, com texto justificado; a UFV pede o texto alinhado à direita. Siga o modelo da sua faculdade."
+    ]
+  },
+  {
+    "p": "Posso usar uma frase famosa na epígrafe?",
+    "r": [
+      "Pode, desde que seja uma citação real, com autoria correta, relacionada ao tema do trabalho. Confira a frase na fonte original, porque muitas frases circulam com autor errado, e coloque a obra na lista de referências se o seu manual pedir. Há um exemplo com uma frase de Dom Casmurro, de Machado de Assis, neste guia."
+    ]
+  },
+  {
+    "p": "A dedicatória pode ser longa?",
+    "r": [
+      "Não é indicado. Os manuais pedem uma dedicatória breve, de uma ou poucas linhas."
+    ]
+  },
+  {
+    "p": "Os exemplos de epígrafe deste guia são reais?",
+    "r": [
+      "Os três primeiros são fictícios, e estão marcados como \"Exemplo fictício\": servem só para mostrar o formato. O exemplo de Machado de Assis é uma citação real, conferida em uma edição da obra. A epígrafe do seu trabalho deve ser uma citação real, com autor e fonte."
+    ]
+  }
+]

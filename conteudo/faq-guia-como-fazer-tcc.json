@@ -1,0 +1,46 @@
+[
+  {
+    "p": "Como fazer um TCC do zero?",
+    "r": ["Comece pelo regulamento do curso. Depois escolha e delimite o tema, escolha o orientador, faça o projeto de pesquisa, leia e monte o referencial teórico, colete e analise os dados, escreva o texto, monte as partes iniciais e finais, formate nas normas da ABNT, defenda para a banca e entregue a versão final com as correções."]
+  },
+  {
+    "p": "Quanto tempo leva para fazer um TCC?",
+    "r": ["Depende do curso. Muitos cursos dividem o trabalho em dois semestres, e algumas faculdades dão até um ano depois da aprovação da proposta, como a UTFPR. Seis meses é uma divisão comum para planejar; veja a sugestão de cronograma neste guia."]
+  },
+  {
+    "p": "Quantas páginas tem um TCC?",
+    "r": ["A ABNT não define um número de páginas. Quem define é o curso ou o orientador, e varia muito de um curso para outro. Veja no manual de TCC do seu curso."]
+  },
+  {
+    "p": "Por onde começar o TCC?",
+    "r": ["Pelo manual de TCC do curso e pela conversa com um possível orientador. Em seguida, defina uma pergunta pequena e específica como tema, e faça um projeto de pesquisa com a justificativa, os objetivos, a metodologia e o cronograma."]
+  },
+  {
+    "p": "Como escolher o tema do TCC?",
+    "r": ["Escolha algo que apareceu no curso, no estágio ou no trabalho, para o qual existam textos publicados e que dê para estudar no prazo. Transforme o tema em uma pergunta. Confira se o orientador aprova e se o curso tem linhas de pesquisa."]
+  },
+  {
+    "p": "Como escolher o orientador?",
+    "r": ["Procure um professor que conheça a área do tema e que tenha tempo para orientar. Leia alguma coisa que ele escreveu, converse sobre o tema antes de pedir e combine a frequência das reuniões. Algumas faculdades limitam o número de orientandos por professor."]
+  },
+  {
+    "p": "O que é o projeto de pesquisa do TCC?",
+    "r": ["É o plano do trabalho: título, introdução com o tema, o problema, a justificativa e os objetivos, a revisão bibliográfica, os procedimentos metodológicos, as referências e o cronograma. Em muitos cursos ele é entregue e avaliado antes da escrita do TCC."]
+  },
+  {
+    "p": "Quais partes tem um TCC?",
+    "r": ["Elementos pré-textuais (capa, folha de rosto, folha de aprovação, resumo, abstract e sumário são os obrigatórios), elementos textuais (introdução, desenvolvimento e conclusão) e elementos pós-textuais (referências, e opcionalmente glossário, apêndice e anexo). Veja o <a href=\"/guias/normas-abnt-tcc/\">guia de normas ABNT para TCC</a>."]
+  },
+  {
+    "p": "Como é a defesa do TCC?",
+    "r": ["O aluno apresenta o trabalho para a banca, que costuma ter o orientador e outros professores, e depois responde às perguntas. O tempo e as regras mudam por curso: na UTFPR, por exemplo, a apresentação dura cerca de 30 minutos e a banca faz as perguntas depois."]
+  },
+  {
+    "p": "Preciso de aprovação do comitê de ética?",
+    "r": ["Se o TCC envolve pessoas (questionário, entrevista, observação), converse com o comitê de ética da faculdade antes de coletar dados. A regra tem exceções e a interpretação varia entre instituições; para TCC, a UFRGS, por exemplo, orienta enviar ao comitê os trabalhos que envolvem seres humanos e são projetos de pesquisa."]
+  },
+  {
+    "p": "Posso pedir ajuda para formatar o TCC?",
+    "r": ["Pode. Os geradores gratuitos do site montam a <a href=\"/gerador-de-capa-abnt/?origem=guia-como-fazer-tcc\">capa</a>, a <a href=\"/gerador-de-folha-de-rosto-abnt/?origem=guia-como-fazer-tcc\">folha de rosto</a> e o <a href=\"/gerador-de-sumario-abnt/?origem=guia-como-fazer-tcc\">sumário</a>, e o <a href=\"/formatacao-abnt-tcc/?origem=guia-como-fazer-tcc\">serviço de formatação ABNT de TCC</a> deixa o trabalho inteiro no formato da norma."]
+  }
+]

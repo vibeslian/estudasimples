@@ -31,13 +31,13 @@ const todas = ["/", "/guias/", "/gerador-de-capa-abnt/", "/gerador-de-folha-de-r
 const html = {};
 for (const u of todas) html[u] = await leePagina(u);
 
-console.log("== A1) Las 13 guías y el índice existen y están completos ==");
-marca(guias.length === 13, `guias.json tiene 13 guías (${guias.length})`);
+console.log("== A1) Las 23 guías y el índice existen y están completos ==");
+marca(guias.length === 23, `guias.json tiene 23 guías (${guias.length})`);
 for (const g of guias) {
   const h = html[`/guias/${g.slug}/`];
   marca(!!h && !/\{\{[A-Za-z_:]/.test(h), `/guias/${g.slug}/ existe y no tiene marcas sin resolver`);
 }
-marca(!!html["/guias/"] && guias.every((g) => html["/guias/"].includes(`href="/guias/${g.slug}/"`)), "el índice /guias/ enlaza las 13 guías");
+marca(!!html["/guias/"] && guias.every((g) => html["/guias/"].includes(`href="/guias/${g.slug}/"`)), "el índice /guias/ enlaza las 23 guías");
 
 console.log("\n== A2) Títulos y descripciones únicos, de buen tamaño ==");
 const titulos = new Map(), descs = new Map();
@@ -122,7 +122,19 @@ console.log("\n== A6) La guía principal enlaza a las otras 12 ==");
 {
   const h = html["/guias/normas-abnt/"] || "";
   const faltan = guias.filter((g) => g.slug !== "normas-abnt" && !h.includes(`href="/guias/${g.slug}/"`)).map((g) => g.slug);
-  marca(faltan.length === 0, `normas-abnt enlaza a las 12 guías${faltan.length ? " (faltan: " + faltan.join(", ") + ")" : ""}`);
+  marca(faltan.length === 0, `normas-abnt enlaza a las 22 guías${faltan.length ? " (faltan: " + faltan.join(", ") + ")" : ""}`);
+}
+
+{
+  const tcc = guias.filter((g) => g.categoria === "TCC passo a passo");
+  marca(tcc.length === 10, `la sección "TCC passo a passo" tiene 10 guías (${tcc.length})`);
+  const idx = html["/guias/"] || "";
+  const sec = (idx.match(/<h2>TCC passo a passo<\/h2>[\s\S]*?<\/section>/) || [""])[0];
+  marca(tcc.every((g) => sec.includes(`href="/guias/${g.slug}/"`)), "/guias/ muestra la sección «TCC passo a passo» con las 10 guías");
+  const t = html["/guias/normas-abnt-tcc/"] || "";
+  marca(tcc.every((g) => t.includes(`href="/guias/${g.slug}/"`)), "«Normas ABNT para TCC» enlaza a las 10 guías nuevas");
+  const m = html["/guias/como-fazer-tcc/"] || "";
+  marca(tcc.filter((g) => g.slug !== "como-fazer-tcc").every((g) => m.includes(`href="/guias/${g.slug}/"`)) && ["/gerador-de-capa-abnt/", "/gerador-de-folha-de-rosto-abnt/", "/gerador-de-sumario-abnt/"].every((u) => m.includes(u)), "«Como fazer TCC» enlaza a las otras 9 guías y a las 3 herramientas");
 }
 
 console.log("\n== A7) Sin párrafos repetidos entre guías ==");
@@ -131,7 +143,7 @@ console.log("\n== A7) Sin párrafos repetidos entre guías ==");
   for (const g of guias) {
     const h = html[`/guias/${g.slug}/`] || "";
     // las tarjetas de "guías relacionadas" y de "fontes" repiten a propósito el resumen del índice (son enlaces)
-    const cuerpo = (h.match(/<article[\s\S]*?<\/article>/) || [""])[0].replace(/<section class="guia-relacionadas[\s\S]*?<\/section>/g, "").replace(/<p class="padrao">[\s\S]*?<\/p>/g, "");
+    const cuerpo = (h.match(/<article[\s\S]*?<\/article>/) || [""])[0].replace(/<section class="guia-relacionadas[\s\S]*?<\/section>/g, "").replace(/<p class="padrao">[\s\S]*?<\/p>/g, "").replace(/<section class="guia-fontes"[\s\S]*?<\/section>/g, "");
     for (const m of cuerpo.matchAll(/<(p|li)[ >][\s\S]*?<\/\1>/g)) {
       const t = norm(m[0].replace(/<[^>]+>/g, ""));
       if (t.length < 90) continue;
@@ -148,7 +160,7 @@ console.log("\n== A8) Sitemap ==");
   const urls = [...sm.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
   const esperadas = ["/guias/", ...guias.map((g) => `/guias/${g.slug}/`)];
   const faltan = esperadas.filter((e) => !urls.some((u) => u.endsWith(e)));
-  marca(faltan.length === 0, `el sitemap incluye /guias/ y las 13 guías${faltan.length ? " (faltan: " + faltan.join(", ") + ")" : ""}`);
+  marca(faltan.length === 0, `el sitemap incluye /guias/ y las 23 guías${faltan.length ? " (faltan: " + faltan.join(", ") + ")" : ""}`);
   marca(new Set(urls).size === urls.length, `el sitemap no repite URLs (${urls.length})`);
 }
 

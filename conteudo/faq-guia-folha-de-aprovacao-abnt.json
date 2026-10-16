@@ -1,0 +1,38 @@
+[
+  {
+    "p": "A folha de aprovação é obrigatória?",
+    "r": ["Pela NBR 14724:2024, sim: é um elemento pré-textual obrigatório. Mas cada faculdade define o modelo e a forma de assinar, então confira com o seu curso o que é exigido na versão final."]
+  },
+  {
+    "p": "O que leva a folha de aprovação?",
+    "r": ["O nome do autor, o título e o subtítulo (se houver), a natureza do trabalho (tipo, objetivo, instituição e área de concentração), a data de aprovação e o nome, a titulação, a assinatura e a instituição de cada membro da banca examinadora."]
+  },
+  {
+    "p": "Onde fica a folha de aprovação?",
+    "r": ["Depois da folha de rosto (e da errata, se houver) e antes da dedicatória, dos agradecimentos, da epígrafe e dos resumos."]
+  },
+  {
+    "p": "A folha de aprovação tem título e número de página?",
+    "r": ["Não. É um elemento sem título e sem indicativo numérico, e não entra no sumário. Como os outros elementos pré-textuais, ela é contada na paginação, mas o número não aparece."]
+  },
+  {
+    "p": "Quando se assina a folha de aprovação?",
+    "r": ["Depois da aprovação do trabalho. A norma diz que a data e as assinaturas são colocadas depois da aprovação; antes disso, a folha fica com a data e as assinaturas em branco."]
+  },
+  {
+    "p": "Qual a diferença entre folha de rosto e folha de aprovação?",
+    "r": ["A folha de rosto identifica o trabalho (autor, título, natureza, orientador, cidade e ano) e vem logo depois da capa. A folha de aprovação registra a aprovação, com a data e a banca. A natureza do trabalho aparece nas duas."]
+  },
+  {
+    "p": "Quem assina a folha de aprovação?",
+    "r": ["Os membros da banca examinadora, e a identificação do orientador. Em alguns modelos de pós-graduação, como o da UFV para teses e dissertações, assinam também o autor e o orientador, na linha \"Assentimento\"."]
+  },
+  {
+    "p": "A folha de aprovação precisa ser assinada no arquivo final em PDF?",
+    "r": ["Depende da faculdade. Algumas pedem a folha digitalizada com as assinaturas; outras, como a UTFPR, pedem a folha sem assinaturas e registram a aprovação em documentos eletrônicos separados. Veja o regulamento do seu curso."]
+  },
+  {
+    "p": "Dá para fazer a folha de aprovação neste site?",
+    "r": ["A folha de aprovação repete a natureza do trabalho da folha de rosto. Monte a natureza no <a href=\"/gerador-de-folha-de-rosto-abnt/?origem=guia-folha-de-aprovacao-abnt\">gerador de folha de rosto</a> e copie o texto para o modelo da faculdade."]
+  }
+]

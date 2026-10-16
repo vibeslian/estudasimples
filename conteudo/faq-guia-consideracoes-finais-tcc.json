@@ -1,0 +1,38 @@
+[
+  {
+    "p": "O que escrever nas considerações finais do TCC?",
+    "r": ["Retome o problema e o objetivo, resuma os resultados mais importantes, diga se o objetivo foi alcançado e responda à pergunta do trabalho. Em geral também entram os limites da pesquisa e sugestões para pesquisas futuras."]
+  },
+  {
+    "p": "Qual a diferença entre conclusão e considerações finais?",
+    "r": ["A NBR 14724 usa o nome conclusão, e muitos cursos aceitam considerações finais para o mesmo lugar. A UERN, por exemplo, usa \"Conclusão\" em monografias e \"Considerações finais\" no TCC em formato de artigo. O que importa é seguir o nome que o manual do seu curso pede."]
+  },
+  {
+    "p": "A conclusão do TCC é um elemento obrigatório?",
+    "r": ["Sim. Os elementos textuais são a introdução, o desenvolvimento e a conclusão, e todos são obrigatórios. A conclusão entra no sumário, com número, e vem antes das referências."]
+  },
+  {
+    "p": "Quantas páginas devem ter as considerações finais?",
+    "r": ["A ABNT não fixa o tamanho. Em geral, é uma parte curta, menor que a introdução. Se o manual ou o orientador definir um limite, siga-o."]
+  },
+  {
+    "p": "As considerações finais podem ter citações?",
+    "r": ["O mais comum é que elas retomem o que o próprio trabalho já mostrou, sem trazer autores ou dados novos. Se a sua faculdade ou o seu orientador permitir, uma citação pontual não é um problema, e ela precisa estar nas referências."]
+  },
+  {
+    "p": "Posso falar de pesquisas futuras e dos limites do trabalho?",
+    "r": ["Pode, e é recomendável. O manual da UERN diz que se podem fazer apreciações sobre o alcance do trabalho e incluir sugestões que o ampliem em pesquisas futuras."]
+  },
+  {
+    "p": "O que fazer se a hipótese não se confirmou?",
+    "r": ["Diga isso na conclusão, com clareza, e explique o que os dados mostraram em vez disso. Um resultado diferente do esperado também é um resultado de pesquisa."]
+  },
+  {
+    "p": "As considerações finais respondem aos objetivos?",
+    "r": ["Sim. Segundo a UFV, a conclusão apresenta as conclusões que correspondem aos objetivos ou às hipóteses; por isso, a ordem das respostas costuma seguir a ordem dos objetivos da introdução."]
+  },
+  {
+    "p": "Escrevo a conclusão antes ou depois do resumo?",
+    "r": ["Antes. O resumo conta o trabalho inteiro, inclusive as conclusões, e por isso é mais fácil escrevê-lo depois de terminar as considerações finais. Veja o <a href=\"/guias/resumo-abnt/\">guia de resumo ABNT</a>."]
+  }
+]

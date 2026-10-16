@@ -121,3 +121,25 @@ code.cm { font-family: inherit; font-weight: 700; background: var(--salvia-100);
 .modelos-capa .diagrama { margin: 0; }
 .modelos-capa .diagrama svg { max-width: 320px; }
 .modelos-capa figcaption { font-weight: 700; color: var(--texto); }
+
+/* ---------- linha do tempo (Como fazer TCC) ---------- */
+.linha-tempo { list-style: none; counter-reset: lt; margin: 1.6em 0 1.6em 15px; padding: 0; border-left: 3px solid var(--salvia-300); }
+.linha-tempo li { counter-increment: lt; position: relative; margin: 0; padding: 0 0 24px 30px; }
+.linha-tempo li:last-child { padding-bottom: 0; }
+.linha-tempo li::before { content: counter(lt); position: absolute; left: -18px; top: 0; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--principal); color: #fff; font-family: var(--fonte-titulo); font-weight: 800; font-size: .98rem; }
+.linha-tempo h3 { margin: 0 0 4px; font-size: 1.12rem; }
+.linha-tempo p { margin: 0 0 6px; }
+.lt-quando { display: inline-block; margin-bottom: 6px; padding: 2px 10px; border-radius: 999px; background: var(--salvia-100); color: var(--principal); font-size: .82rem; font-weight: 700; }
+.lt-links { display: flex; flex-wrap: wrap; gap: 6px 10px; margin: 0; padding: 0; list-style: none; font-size: .93rem; }
+.lt-links li { padding: 0; margin: 0; counter-increment: none; position: static; }
+.lt-links li::before { content: none; }
+.lt-links a { font-weight: 700; }
+.artigo .linha-tempo .lt-links { margin: 6px 0 0 !important; padding: 0 !important; }
+.artigo .linha-tempo li { padding-bottom: 18px; }
+.artigo .linha-tempo .lt-links li { padding: 0; }
+
+/* ---------- etiquetas de exemplo fictício / citação real ---------- */
+.ficticio, .real { display: inline-block; margin-left: 8px; padding: 1px 9px; border-radius: 999px; font-family: var(--fonte-texto); font-size: .76rem; font-weight: 700; vertical-align: middle; }
+.ficticio { background: var(--erro-bg); color: var(--erro-texto); border: 1px solid #efc9bd; }
+.real { background: var(--certo-bg); color: var(--certo-texto); border: 1px solid var(--salvia-300); }
+.aviso-ficticio { margin: 0 0 1em; padding: 12px 16px; background: var(--acento-claro); border-left: 4px solid var(--acento); border-radius: var(--raio-pequeno); }
