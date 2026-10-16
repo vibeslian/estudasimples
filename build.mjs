@@ -13,6 +13,11 @@ const OUT = process.env.BUILD_OUT || "dist"; // BUILD_OUT e SITE_CONFIG só serv
 const DEV = process.argv.includes("--dev");
 const config = JSON.parse(readFileSync(process.env.SITE_CONFIG || "site.config.json", "utf8"));
 const siteUrl = config.siteUrl.replace(/\/+$/, "");
+function pinterestMeta(codigo) {
+  if (!codigo) return "";
+  if (!/^[A-Za-z0-9]{16,64}$/.test(codigo)) throw new Error("site.config.json: pinterestVerificacao deve ter só letras e números (o código do Pinterest, 16–64 caracteres)");
+  return `<meta name="p:domain_verify" content="${codigo}">`;
+}
 
 // CSS global: estes arquivos viram um só (assets/css/site.css), menos pedidos = carrega mais rápido
 const CSS_GLOBAL = ["tokens", "base", "components"];
@@ -55,6 +60,8 @@ const values = {
   "{{CONTACT_EMAIL}}": config.contactEmail,
   "{{TAGLINE}}": config.tagline,
   "{{YEAR}}": String(new Date().getFullYear()),
+  // etiqueta de verificação do Pinterest (config.pinterestVerificacao); vazia = não escreve nada no <head>
+  "{{PINTEREST_META}}": pinterestMeta(config.pinterestVerificacao),
   "{{BUILD}}": Date.now().toString(36), // muda a cada build: evita CSS/JS antigo em cache
 };
 

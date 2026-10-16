@@ -1,0 +1,499 @@
+[
+  {
+    "id": "modelo-de-sumario",
+    "pagina": "/guias/sumario-automatico-word/",
+    "tablero": "Normas ABNT",
+    "tipo": "svg",
+    "sel": "figure.diagrama svg",
+    "idx": 0,
+    "titulo": "Modelo de sumário ABNT",
+    "sub": "Número, título, pontinhos e página",
+    "chips": [
+      "Mesma ordem e grafia do texto",
+      "Gere o seu grátis"
+    ],
+    "tituloPin": "Modelo de sumário ABNT: exemplo com numeração, pontinhos e página",
+    "descricao": "Modelo de sumário ABNT pronto: o número do título à esquerda, a linha de pontos e a página à direita, com as partes na mesma ordem e grafia do texto. Veja como fazer sumário e monte o seu no gerador de sumário gratuito do Estuda Simples. Serve para TCC, monografia e trabalhos acadêmicos.",
+    "keywords": [
+      "sumário ABNT",
+      "modelo de sumário",
+      "como fazer sumário",
+      "sumário de TCC",
+      "gerador de sumário"
+    ],
+    "link": "/gerador-de-sumario-abnt/",
+    "vb": "26 10 168 112"
+  },
+  {
+    "id": "resenha-critica",
+    "pagina": "/guias/resenha-critica/",
+    "tablero": "Trabalhos escolares",
+    "tipo": "anat-resumo",
+    "sel": ".anat",
+    "idx": 0,
+    "titulo": "Resenha crítica",
+    "sub": "Exemplo pronto, parte por parte",
+    "chips": [
+      "Exemplo escolar e acadêmico"
+    ],
+    "tituloPin": "Resenha crítica: exemplo pronto, parte por parte, com modelo para copiar a estrutura",
+    "descricao": "Como fazer uma resenha crítica: veja um exemplo de resenha crítica dividido por cores em referência, apresentação da obra, panorama, resumo, análise crítica e indicação. O guia traz dois exemplos completos de resenha crítica, um escolar sobre Dom Casmurro e um acadêmico sobre O Cortiço, para você entender a estrutura da resenha.",
+    "keywords": [
+      "resenha crítica",
+      "como fazer uma resenha crítica",
+      "exemplo de resenha crítica",
+      "estrutura da resenha"
+    ],
+    "link": "/guias/resenha-critica/"
+  },
+  {
+    "id": "capa-individual",
+    "pagina": "/guias/modelos-de-capa-abnt/",
+    "tablero": "Capas ABNT",
+    "tipo": "svg",
+    "sel": ".modelos-capa svg",
+    "idx": 0,
+    "vb": "26 26 168 255",
+    "titulo": "Modelo de capa ABNT",
+    "sub": "Trabalho individual",
+    "chips": [
+      "Autor, título, cidade e ano",
+      "Gere a sua grátis"
+    ],
+    "tituloPin": "Modelo de capa ABNT para trabalho individual: instituição, autor, título, cidade e ano",
+    "descricao": "Veja como fica a capa ABNT de um trabalho individual: instituição no topo, nome do autor, título, cidade e ano, cada item no lugar certo. Use este modelo de capa e gere a sua no gerador de capa gratuito do Estuda Simples. Serve para trabalho de faculdade e capa de TCC.",
+    "keywords": [
+      "capa ABNT",
+      "modelo de capa",
+      "gerador de capa",
+      "capa de TCC",
+      "capa de trabalho"
+    ],
+    "link": "/gerador-de-capa-abnt/"
+  },
+  {
+    "id": "referencia-abnt",
+    "pagina": "/guias/como-fazer-referencia-abnt/",
+    "tablero": "Normas ABNT",
+    "tipo": "svg",
+    "sel": "#lista figure.diagrama svg",
+    "idx": 0,
+    "titulo": "Como fazer referência ABNT",
+    "sub": "A página de referências pronta",
+    "chips": [
+      "Ordem alfabética",
+      "Espaço simples, à esquerda"
+    ],
+    "tituloPin": "Como fazer referência ABNT: como fica a página de referências, com exemplos",
+    "descricao": "Veja como fazer referência ABNT na página final do trabalho: a palavra REFERÊNCIAS em negrito e centralizada, sem número, com as referências em ordem alfabética, alinhadas à esquerda, em espaço simples e separadas por uma linha em branco. O guia traz exemplos por tipo de documento para a sua lista de referências.",
+    "keywords": [
+      "referência ABNT",
+      "como fazer referência",
+      "lista de referências",
+      "referências bibliográficas",
+      "normas ABNT"
+    ],
+    "link": "/guias/como-fazer-referencia-abnt/"
+  },
+  {
+    "id": "fichamento",
+    "pagina": "/guias/fichamento/",
+    "tablero": "Trabalhos escolares",
+    "tipo": "fichas",
+    "sel": ".ficha",
+    "idx": 0,
+    "titulo": "Fichamento",
+    "sub": "Os 4 tipos, com um modelo de cada",
+    "chips": [
+      "Texto de domínio público: Dom Casmurro"
+    ],
+    "tituloPin": "Fichamento: os 4 tipos com modelo (bibliográfico, de resumo, de citação e de comentário)",
+    "descricao": "Fichamento na prática: veja um modelo de cada tipo, o bibliográfico, o de resumo, o de citação e o de comentário, feitos com um texto de domínio público, Dom Casmurro, de Machado de Assis. Aprenda o que é um fichamento e como fazer fichamento de livro, com um modelo de fichamento para cada caso.",
+    "keywords": [
+      "fichamento",
+      "como fazer fichamento",
+      "modelo de fichamento",
+      "tipos de fichamento",
+      "fichamento de livro"
+    ],
+    "link": "/guias/fichamento/"
+  },
+  {
+    "id": "estrutura-do-tcc",
+    "pagina": "/guias/normas-abnt-tcc/",
+    "tablero": "TCC passo a passo",
+    "tipo": "estrutura",
+    "sel": "#ordem table.tabela-guia",
+    "idx": 0,
+    "titulo": "Estrutura do TCC",
+    "sub": "A ordem das partes e o que é obrigatório",
+    "chips": [
+      "NBR 14724:2024"
+    ],
+    "tituloPin": "Estrutura do TCC: a ordem dos elementos e o que é obrigatório (NBR 14724)",
+    "descricao": "Estrutura do TCC na ordem em que aparece no arquivo: elementos pré-textuais, textuais e pós-textuais, com os obrigatórios em destaque, como capa, folha de rosto, folha de aprovação, resumo, sumário e referências, e os opcionais. Guia completo de normas ABNT para TCC, para quem está começando o TCC passo a passo.",
+    "keywords": [
+      "estrutura do TCC",
+      "TCC passo a passo",
+      "normas ABNT para TCC",
+      "elementos pré-textuais"
+    ],
+    "link": "/guias/normas-abnt-tcc/"
+  },
+  {
+    "id": "margens-abnt",
+    "pagina": "/guias/margens-abnt/",
+    "tablero": "Normas ABNT",
+    "tipo": "svg",
+    "sel": "figure.diagrama svg",
+    "idx": 0,
+    "titulo": "Margens ABNT",
+    "sub": "As medidas certas na folha A4",
+    "chips": [
+      "Esquerda e superior: 3 cm",
+      "Direita e inferior: 2 cm"
+    ],
+    "tituloPin": "Margens ABNT: 3 cm e 2 cm na folha A4, com o desenho das medidas",
+    "descricao": "Margens ABNT para trabalho acadêmico: 3 cm à esquerda e em cima, 2 cm à direita e embaixo, em folha A4, o que deixa uma área de texto de 16 x 24,7 cm. Veja o desenho e aprenda a configurar as margens no Word e no Google Docs. Confira também a formatação ABNT completa.",
+    "keywords": [
+      "margens ABNT",
+      "margem ABNT",
+      "formatação ABNT",
+      "trabalho acadêmico",
+      "configurar margens no Word"
+    ],
+    "link": "/guias/margens-abnt/"
+  },
+  {
+    "id": "folha-de-rosto",
+    "pagina": "/gerador-de-folha-de-rosto-abnt/",
+    "tablero": "Capas ABNT",
+    "tipo": "captura",
+    "sel": "#sheetFolha",
+    "idx": 0,
+    "titulo": "Folha de rosto ABNT",
+    "sub": "A contra capa, pronta para preencher",
+    "chips": [
+      "Autor, título e orientador",
+      "Gere a sua grátis"
+    ],
+    "tituloPin": "Folha de rosto ABNT (contra capa): modelo para preencher e gerar grátis",
+    "descricao": "A folha de rosto ABNT, que muita gente chama de contra capa, leva autor, título, natureza do trabalho, orientador, cidade e ano. Veja o modelo de folha de rosto e crie a sua no gerador gratuito do Estuda Simples. Serve para a folha de rosto do TCC e de outros trabalhos acadêmicos.",
+    "keywords": [
+      "folha de rosto ABNT",
+      "contra capa",
+      "modelo de folha de rosto",
+      "folha de rosto TCC",
+      "gerador de folha de rosto"
+    ],
+    "link": "/gerador-de-folha-de-rosto-abnt/",
+    "recorte": [
+      0.1,
+      0.07,
+      0.93,
+      0.95
+    ],
+    "escurecer": true,
+    "preencher": {
+      "#year": ""
+    },
+    "trocas": [
+      [
+        "Ano",
+        "ANO"
+      ]
+    ]
+  },
+  {
+    "id": "resumo-abnt",
+    "pagina": "/guias/resumo-abnt/",
+    "tablero": "TCC passo a passo",
+    "tipo": "svg",
+    "sel": "figure.diagrama svg",
+    "idx": 0,
+    "titulo": "Resumo ABNT",
+    "sub": "Como fica na página",
+    "chips": [
+      "Um único parágrafo",
+      "Palavras-chave no final"
+    ],
+    "tituloPin": "Resumo ABNT: como fica na página, com parágrafo único e palavras-chave",
+    "descricao": "Resumo ABNT na página: a palavra RESUMO em maiúsculas, negrito e centralizada no alto, sem número, um único parágrafo sem recuo na primeira linha e, depois de uma linha em branco, as palavras-chave. Veja o desenho e o guia de como fazer resumo de TCC, com tamanho e exemplos.",
+    "keywords": [
+      "resumo ABNT",
+      "como fazer resumo",
+      "resumo de TCC",
+      "palavras-chave",
+      "resumo acadêmico"
+    ],
+    "link": "/guias/resumo-abnt/",
+    "vb": "26 10 168 114"
+  },
+  {
+    "id": "citacao-longa",
+    "pagina": "/guias/citacao-abnt/",
+    "tablero": "Normas ABNT",
+    "tipo": "svg",
+    "sel": "#longa figure.diagrama svg",
+    "idx": 0,
+    "titulo": "Citação longa ABNT",
+    "sub": "Mais de 3 linhas viram um bloco",
+    "chips": [
+      "Recuo recomendado: 4 cm",
+      "Letra menor, espaço simples, sem aspas"
+    ],
+    "tituloPin": "Citação longa ABNT: bloco com recuo de 4 cm, letra menor, espaço simples e sem aspas",
+    "descricao": "Citação longa ABNT: quando a citação direta passa de 3 linhas, ela vira um bloco recuado, com recuo de 4 cm (o recomendado) da margem esquerda, letra menor, espaço simples e sem aspas, com autor, ano e página no final. Veja o desenho na folha e aprenda a fazer a citação direta certa no seu trabalho.",
+    "keywords": [
+      "citação longa ABNT",
+      "citação direta",
+      "recuo de 4 cm",
+      "letra menor",
+      "espaço simples"
+    ],
+    "link": "/guias/citacao-abnt/"
+  },
+  {
+    "id": "capa-tcc",
+    "pagina": "/guias/modelos-de-capa-abnt/",
+    "tablero": "Capas ABNT",
+    "tipo": "svg",
+    "sel": ".modelos-capa svg",
+    "idx": 5,
+    "vb": "26 26 168 255",
+    "titulo": "Capa de TCC ABNT",
+    "sub": "Com subtítulo e volume",
+    "chips": [
+      "Subtítulo depois de dois-pontos",
+      "Gere a sua grátis"
+    ],
+    "tituloPin": "Capa de TCC ABNT: modelo com subtítulo, volume, cidade e ano",
+    "descricao": "Modelo de capa de TCC ABNT com subtítulo depois de dois-pontos, número do volume, cidade e ano. Veja onde cada elemento vai na capa e gere a sua no gerador de capa ABNT gratuito do Estuda Simples. Um modelo de capa para quem está montando a capa do TCC.",
+    "keywords": [
+      "capa de TCC",
+      "capa ABNT",
+      "modelo de capa",
+      "capa de TCC ABNT",
+      "gerador de capa ABNT"
+    ],
+    "link": "/gerador-de-capa-abnt/"
+  },
+  {
+    "id": "slides-abnt",
+    "pagina": "/guias/slides-abnt/",
+    "tablero": "Trabalhos escolares",
+    "tipo": "svg",
+    "sel": "figure.diagrama svg",
+    "idx": 0,
+    "titulo": "Slides ABNT",
+    "sub": "O que a norma diz e o que não diz",
+    "chips": [
+      "Legenda e fonte nas imagens",
+      "Referência no rodapé"
+    ],
+    "tituloPin": "Slides ABNT: o que a norma diz e não diz, com imagem, fonte e referência",
+    "descricao": "Slides ABNT: a ABNT não tem uma norma específica para slides, mas você pode usar um slide organizado, com título, poucos tópicos, imagem com legenda e fonte, e a referência completa em letra pequena no rodapé. Veja o exemplo de slide ABNT e o guia para a sua apresentação de trabalho.",
+    "keywords": [
+      "slides ABNT",
+      "slide ABNT",
+      "apresentação de trabalho",
+      "referência completa"
+    ],
+    "link": "/guias/slides-abnt/"
+  },
+  {
+    "id": "referencia-de-site",
+    "pagina": "/guias/referencia-de-site-abnt/",
+    "tablero": "Normas ABNT",
+    "tipo": "anat",
+    "sel": ".anat",
+    "idx": 0,
+    "titulo": "Referência de site ABNT",
+    "sub": "Cada parte em uma cor",
+    "chips": [
+      "Com data de acesso"
+    ],
+    "tituloPin": "Referência de site ABNT: cada parte em uma cor, com exemplo e data de acesso",
+    "descricao": "Referência de site ABNT: autor, título da página, data de publicação, nome do site, endereço e data de acesso, cada parte destacada por uma cor. O guia mostra como fazer referência de site com autor, sem autor e com data de acesso, em exemplos fáceis de copiar.",
+    "keywords": [
+      "referência de site ABNT",
+      "como fazer referência de site",
+      "data de acesso",
+      "título da página",
+      "nome do site"
+    ],
+    "link": "/guias/referencia-de-site-abnt/"
+  },
+  {
+    "id": "capa-faculdade",
+    "pagina": "/guias/modelos-de-capa-abnt/",
+    "tablero": "Capas ABNT",
+    "tipo": "svg",
+    "sel": ".modelos-capa svg",
+    "idx": 4,
+    "vb": "26 26 168 255",
+    "titulo": "Capa de faculdade ABNT",
+    "sub": "Com centro e curso",
+    "chips": [
+      "Instituição, centro, departamento e curso",
+      "Gere a sua grátis"
+    ],
+    "tituloPin": "Capa de faculdade ABNT: modelo com instituição, centro, departamento e curso",
+    "descricao": "Modelo de capa ABNT para faculdade, com instituição, centro ou faculdade, departamento, curso, autor, título, cidade e ano. Veja a posição de cada item e gere a sua capa no gerador de capa gratuito do Estuda Simples. Um modelo de capa para trabalhos de graduação.",
+    "keywords": [
+      "capa de faculdade",
+      "capa ABNT",
+      "modelo de capa",
+      "capa de trabalho de faculdade",
+      "gerador de capa"
+    ],
+    "link": "/gerador-de-capa-abnt/"
+  },
+  {
+    "id": "agradecimentos-tcc",
+    "pagina": "/guias/agradecimentos-tcc/",
+    "tablero": "TCC passo a passo",
+    "tipo": "svg",
+    "sel": "figure.diagrama svg",
+    "idx": 0,
+    "titulo": "Agradecimentos do TCC",
+    "sub": "Formato ABNT na folha",
+    "chips": [
+      "Texto justificado",
+      "Fonte 12, espaçamento 1,5"
+    ],
+    "tituloPin": "Agradecimentos do TCC: formato ABNT na folha, com 8 exemplos para adaptar",
+    "descricao": "Como fazer os agradecimentos do TCC: a palavra AGRADECIMENTOS em maiúsculas, negrito e centralizada no alto, e o texto em parágrafos curtos, justificado, em fonte 12 com espaçamento 1,5. O guia de agradecimentos ABNT traz 8 exemplos de agradecimentos para você adaptar ao seu trabalho.",
+    "keywords": [
+      "agradecimentos do TCC",
+      "agradecimentos ABNT",
+      "exemplos de agradecimentos",
+      "fonte 12",
+      "parágrafos curtos"
+    ],
+    "link": "/guias/agradecimentos-tcc/",
+    "vb": "26 10 168 126"
+  },
+  {
+    "id": "fonte-e-espacamento",
+    "pagina": "/guias/fonte-e-espacamento-abnt/",
+    "tablero": "Normas ABNT",
+    "tipo": "svg",
+    "sel": "figure.diagrama svg",
+    "idx": 0,
+    "titulo": "Fonte e espaçamento ABNT",
+    "sub": "1,5 no texto, simples na citação",
+    "chips": [
+      "Texto: espaçamento 1,5",
+      "Citação longa: espaço simples"
+    ],
+    "tituloPin": "Fonte e espaçamento ABNT: 1,5 no texto e espaço simples na citação longa",
+    "descricao": "Fonte e espaçamento ABNT na prática: o texto com entrelinhas de 1,5 e a citação longa em espaço simples, com letra menor e recuada, na mesma folha. Veja o desenho e as exceções no guia de fonte e espaçamento ABNT, com o tamanho da fonte e o espaçamento 1,5 explicados.",
+    "keywords": [
+      "fonte ABNT",
+      "espaçamento ABNT",
+      "espaço simples",
+      "tamanho da fonte",
+      "formatação de trabalho"
+    ],
+    "link": "/guias/fonte-e-espacamento-abnt/"
+  },
+  {
+    "id": "capa-escola",
+    "pagina": "/guias/modelos-de-capa-abnt/",
+    "tablero": "Capas ABNT",
+    "tipo": "svg",
+    "sel": ".modelos-capa svg",
+    "idx": 3,
+    "vb": "26 26 168 255",
+    "titulo": "Capa de trabalho escolar",
+    "sub": "Escola, turma, aluno e título",
+    "chips": [
+      "Nome da escola e turma no alto",
+      "Gere a sua grátis"
+    ],
+    "tituloPin": "Capa de trabalho escolar ABNT: modelo com escola, turma, aluno, título, cidade e ano",
+    "descricao": "Modelo de capa de trabalho escolar nas normas ABNT, com o nome da escola, a turma, o nome do aluno, o título, a cidade e o ano. Veja o modelo de capa para trabalho de escola e gere a sua no gerador de capa gratuito do Estuda Simples, que tem um modelo escolar pronto.",
+    "keywords": [
+      "capa de trabalho escolar",
+      "capa de escola",
+      "capa ABNT",
+      "modelo de capa",
+      "gerador de capa"
+    ],
+    "link": "/gerador-de-capa-abnt/"
+  },
+  {
+    "id": "numeracao-de-paginas",
+    "pagina": "/guias/numeracao-de-paginas-abnt/",
+    "tablero": "Normas ABNT",
+    "tipo": "svg",
+    "sel": "figure.diagrama svg",
+    "idx": 0,
+    "titulo": "Numeração de páginas ABNT",
+    "sub": "Quais folhas contam e quais mostram o número",
+    "chips": [
+      "Contadas, sem número: da folha de rosto ao sumário"
+    ],
+    "tituloPin": "Numeração de páginas ABNT: quais folhas contam e onde o número aparece",
+    "descricao": "Numeração de páginas ABNT: a capa não é contada; da folha de rosto ao sumário as folhas são contadas, mas o número não aparece, e ele surge na primeira folha da parte textual, no canto superior direito. Veja o desenho de um TCC e o guia de paginação ABNT com todos os casos.",
+    "keywords": [
+      "numeração de páginas ABNT",
+      "paginação ABNT",
+      "folha de rosto",
+      "parte textual",
+      "canto superior direito"
+    ],
+    "link": "/guias/numeracao-de-paginas-abnt/"
+  },
+  {
+    "id": "capa-grupo",
+    "pagina": "/guias/modelos-de-capa-abnt/",
+    "tablero": "Capas ABNT",
+    "tipo": "svg",
+    "sel": ".modelos-capa svg",
+    "idx": 1,
+    "vb": "26 26 168 255",
+    "titulo": "Capa de trabalho em grupo",
+    "sub": "Nomes um embaixo do outro",
+    "chips": [
+      "Integrantes no lugar do autor",
+      "Gere a sua grátis"
+    ],
+    "tituloPin": "Capa de trabalho em grupo ABNT: modelo com os nomes dos integrantes",
+    "descricao": "Modelo de capa ABNT para trabalho em grupo: os nomes dos integrantes ficam um embaixo do outro, no lugar do nome do autor, acima do título. Veja o modelo de capa em grupo e gere a sua no gerador de capa gratuito do Estuda Simples, com o nome de todos os integrantes.",
+    "keywords": [
+      "capa de trabalho em grupo",
+      "capa ABNT",
+      "modelo de capa",
+      "capa em grupo",
+      "gerador de capa"
+    ],
+    "link": "/gerador-de-capa-abnt/"
+  },
+  {
+    "id": "capa-com-logo",
+    "pagina": "/guias/modelos-de-capa-abnt/",
+    "tablero": "Capas ABNT",
+    "tipo": "svg",
+    "sel": ".modelos-capa svg",
+    "idx": 2,
+    "vb": "26 26 168 255",
+    "titulo": "Capa ABNT com logo",
+    "sub": "Logo da instituição no alto",
+    "chips": [
+      "Logo centralizado acima da instituição",
+      "Gere a sua grátis"
+    ],
+    "tituloPin": "Capa ABNT com logo da instituição: modelo com o logo centralizado no alto",
+    "descricao": "Modelo de capa ABNT com logo: o logo da instituição fica centralizado no alto, acima do nome da instituição, seguido do autor, do título, da cidade e do ano. Veja o modelo de capa com logo e gere a sua no gerador de capa ABNT gratuito do Estuda Simples, enviando o logo da sua faculdade.",
+    "keywords": [
+      "capa com logo",
+      "capa ABNT com logo",
+      "modelo de capa",
+      "logo da instituição",
+      "gerador de capa ABNT"
+    ],
+    "link": "/gerador-de-capa-abnt/"
+  }
+]
