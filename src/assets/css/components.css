@@ -151,7 +151,6 @@ a.percurso-item:hover { background: var(--salvia-50); border-color: var(--salvia
 .guia-cartao-titulo { display: block; margin-bottom: 4px; font-family: var(--fonte-titulo); font-weight: 800; font-size: 1.08rem; line-height: 1.25; color: var(--principal); }
 .guia-cartao-texto { display: block; font-size: .93rem; color: var(--texto-suave); }
 .guia-relacionadas { margin: 2.4em 0 0; }
-@media (min-width: 640px) { @media (min-width: 960px) { 
 .guia-cartoes--tres { grid-template-columns: 1fr; }
 @media (min-width: 600px) { .guia-cartoes--tres { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 960px) { .guia-cartoes--tres { grid-template-columns: repeat(3, 1fr); } }
