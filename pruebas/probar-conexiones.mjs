@@ -6,11 +6,12 @@ import os from "node:os";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { lanza, abre, preenche, URL_PAGINA, BASE } from "./lib-archivos.mjs";
+import { llena } from "./lib-referencias.mjs";
 
 const cfg = JSON.parse(fs.readFileSync("../site.config.json", "utf8"));
 const falhas = [];
 const marca = (c, m) => { console.log(c ? "OK   " : "FALLA", m); if (!c) falhas.push(m); };
-const PAGINAS = { capa: "/gerador-de-capa-abnt/", folha: "/gerador-de-folha-de-rosto-abnt/", sumario: "/gerador-de-sumario-abnt/", inicio: "/" };
+const PAGINAS = { capa: "/gerador-de-capa-abnt/", folha: "/gerador-de-folha-de-rosto-abnt/", sumario: "/gerador-de-sumario-abnt/", referencias: "/gerador-de-referencias-abnt/", inicio: "/" };
 const SERVICO = "/formatacao-abnt-tcc/";
 const DADOS = { institution: "Universidade Exemplo", authors: ["Ana Souza"], title: "Redes sociais e estudo", city: "Recife", year: "2026" };
 const PASOS = cfg.percurso.passos.map((p) => p.id);
@@ -112,20 +113,29 @@ const p = await abre(browser, PAGINAS.capa);
   marca(f.visible && /Sumário/.test(f.titulo) && f.href === "/gerador-de-sumario-abnt/?origem=folha-proximo", `folha de rosto → sugiere el sumário: "${f.titulo}" (${f.href})`);
   marca(JSON.stringify(await feitos(p)) === '["capa","folha"]', "indicador: capa y folha de rosto marcadas");
 
-  // sumário → servicio
+  // sumário → referências
   await ir(p, PAGINAS.sumario);
   await preenche(p, { ...DADOS, colar: "1 Introdução ..... 7\n2 Conclusão ..... 20" });
   await descarga(p, "pdf");
-  const su = await estadoPanel(p);
-  marca(su.visible && /Prefere que eu formate o trabalho inteiro\?/.test(su.texto) && su.href === "/formatacao-abnt-tcc/?origem=sumario-proximo" && su.botonTxt === "Conhecer o serviço", `sumário → sugiere el servicio: "${su.texto}" (${su.href})`);
+  const sr = await estadoPanel(p);
+  marca(sr.visible && /Escolha o tipo de fonte/.test(sr.texto) && sr.href === "/gerador-de-referencias-abnt/?origem=sumario-proximo" && sr.botonTxt === "Abrir as referências", `sumário → sugiere las referências: "${sr.texto}" (${sr.href})`);
+  const su = sr;
   marca(su.debajo && su.sinTapar, "en el sumário el panel no tapa los botones de descarga ni la lista");
   const lista = await p.evaluate(() => { const l = document.getElementById("listaSumario").getBoundingClientRect(), pn = document.getElementById("proximoPasso").getBoundingClientRect(); return { sinSolape: pn.top >= l.bottom }; });
   marca(lista.sinSolape, "el panel del sumário queda por debajo de la lista de ítems (no se mezcla con sus botones)");
   marca(JSON.stringify(await feitos(p)) === '["capa","folha","sumario"]', "indicador: las tres partes marcadas");
+  // referências → servicio (una referencia agregada a la lista y el PDF)
+  await ir(p, PAGINAS.referencias);
+  await llena(p, { tipo: "livro", autoria: { modo: "pessoa", pessoas: [{ sobrenome: "Silva", nome: "Ana" }] }, titulo: "Exemplo", local: "Recife", editora: "Editora X", pub: { ano: "2020" } });
+  await p.$eval("#btnAdicionar", (e) => e.click());
+  await descarga(p, "pdf");
+  const rf = await estadoPanel(p);
+  marca(rf.visible && /Prefere que eu formate o trabalho inteiro\?/.test(rf.texto) && rf.href === "/formatacao-abnt-tcc/?origem=referencias-proximo" && rf.botonTxt === "Conhecer o serviço", `referências → sugiere el servicio: "${rf.texto}" (${rf.href})`);
+  marca(JSON.stringify(await feitos(p)) === '["capa","folha","sumario","referencias"]', "indicador: las cuatro partes marcadas");
   // el servicio recibe el origen y cambia el mensaje de WhatsApp
-  await ir(p, su.href);
+  await ir(p, rf.href);
   const wa = await p.evaluate(() => [...document.querySelectorAll("a[data-whatsapp]")].map((a) => decodeURIComponent(a.getAttribute("href"))));
-  marca(wa.length >= 3 && wa.every((h) => h.includes("(gerador de sumário · próximo passo)")), "al llegar desde ese panel, los botones de WhatsApp dicen \"(gerador de sumário · próximo passo)\"");
+  marca(wa.length >= 3 && wa.every((h) => h.includes("(gerador de referências · próximo passo)")), "al llegar desde ese panel, los botones de WhatsApp dicen \"(gerador de referências · próximo passo)\"");
 }
 
 console.log("\n== 3) Qué se sugiere según lo que ya se descargó ==");
@@ -133,8 +143,9 @@ async function sugiere(baixados, pagina) {
   const q = await abre(browser, pagina);
   await q.evaluate((b) => sessionStorage.setItem("es-progresso-v1", JSON.stringify({ baixados: Object.fromEntries(b.map((x) => [x, 1])), dispensados: {} })), baixados);
   await q.goto(BASE + pagina, { waitUntil: "networkidle0" });
-  await preenche(q, DADOS);
+  if (pagina !== PAGINAS.referencias) await preenche(q, DADOS);
   if (pagina === PAGINAS.sumario) await preenche(q, { colar: "1 Introdução ..... 7" });
+  if (pagina === PAGINAS.referencias) { await llena(q, { tipo: "livro", autoria: { modo: "pessoa", pessoas: [{ sobrenome: "Silva", nome: "Ana" }] }, titulo: "Exemplo", local: "Recife", editora: "Editora X", pub: { ano: "2020" } }); await q.$eval("#btnAdicionar", (e) => e.click()); }
   await descarga(q, "pdf");
   const s = await estadoPanel(q);
   await q.close();
@@ -143,9 +154,11 @@ async function sugiere(baixados, pagina) {
 for (const [baixados, pagina, espera, etiqueta] of [
   [[], PAGINAS.capa, "/gerador-de-folha-de-rosto-abnt/", "capa (nada más descargado) → folha"],
   [["folha"], PAGINAS.capa, "/gerador-de-sumario-abnt/", "capa, con la folha ya descargada → salta a sumário"],
-  [["folha", "sumario"], PAGINAS.capa, "/formatacao-abnt-tcc/", "capa, con folha y sumário ya hechos → servicio"],
-  [["sumario"], PAGINAS.folha, "/formatacao-abnt-tcc/", "folha, con el sumário ya hecho → servicio"],
-  [[], PAGINAS.sumario, "/formatacao-abnt-tcc/", "sumário (aunque falten las otras) → servicio"],
+  [["folha", "sumario"], PAGINAS.capa, "/gerador-de-referencias-abnt/", "capa, con folha y sumário ya hechos → referências"],
+  [["sumario"], PAGINAS.folha, "/gerador-de-referencias-abnt/", "folha, con el sumário ya hecho → referências"],
+  [[], PAGINAS.sumario, "/gerador-de-referencias-abnt/", "sumário (aunque falten las otras) → referências"],
+  [["folha", "sumario", "referencias"], PAGINAS.capa, "/formatacao-abnt-tcc/", "capa, con folha, sumário y referências ya hechos → servicio"],
+  [[], PAGINAS.referencias, "/formatacao-abnt-tcc/", "referências (aunque falten las otras) → servicio"],
 ]) {
   const s = await sugiere(baixados, pagina);
   marca(s.visible && s.href.startsWith(espera + "?origem="), `${etiqueta}: ${s.href}`);
@@ -157,7 +170,7 @@ for (const [baixados, pagina, espera, etiqueta] of [
   const pr = await progreso(q);
   marca(pr && pr.baixados.capa && pr.baixados.folha && pr.baixados.sumario, "un archivo con capa + folha + sumário juntos marca las tres partes: " + JSON.stringify(pr?.baixados));
   const s = await estadoPanel(q);
-  marca(s.visible && /formate o trabalho inteiro/.test(s.texto), "y entonces sugiere el servicio");
+  marca(s.visible && /Escolha o tipo de fonte/.test(s.texto), "y entonces sugiere las referências");
   // Limpar dados borra también el progreso
   await q.$eval("#btnLimpar", (e) => e.click());
   await Promise.all([q.waitForNavigation({ waitUntil: "networkidle0" }), q.$eval("#btnLimpar", (e) => e.click())]);
@@ -236,10 +249,10 @@ function construye(cambia, nombre) {
   marca(!v.ok && /perto da ferramenta/.test(v.error), "una oferta pegada a la herramienta: el build se detiene (\"...fica perto da ferramenta...\")");
 }
 {
-  const v = construye((c) => { c.percurso.passos.push({ id: "referencias", nome: "Referências", url: "/gerador-de-referencias-abnt/", convite: "Monte a lista de referências.", botao: "Abrir as referências" }); }, "paso-nuevo");
+  const v = construye((c) => { c.percurso.passos.push({ id: "apendices", nome: "Apêndices", url: "/guias/apendice-e-anexo-abnt/", convite: "Monte os apêndices.", botao: "Abrir os apêndices" }); }, "paso-nuevo");
   const h = v.ok ? v.html("gerador-de-capa-abnt") : "";
   const dados = v.ok ? JSON.parse(/id="percurso-dados">([^<]+)</.exec(h)[1]) : null;
-  marca(v.ok && (h.match(/class="percurso-passo/g) || []).length === 5 && /Referências/.test(h) && dados.passos.length === 4 && dados.passos[3].id === "referencias", "agregar un paso nuevo SOLO en site.config.json (referências) lo muestra en el indicador y en los datos del panel, sin tocar código");
+  marca(v.ok && (h.match(/class="percurso-passo/g) || []).length === 6 && /Apêndices/.test(h) && dados.passos.length === 5 && dados.passos[4].id === "apendices", "agregar un paso nuevo SOLO en site.config.json (apêndices) lo muestra en el indicador y en los datos del panel, sin tocar código");
 }
 {
   const v = construye((c) => { c.servico.origens.componentes.kit = "kit TCC"; }, "componente-nuevo");
@@ -252,8 +265,8 @@ console.log("\n== 6) Medición: parámetro ?origem en todos los enlaces nuevos y
 {
   const q = await abre(browser, SERVICO);
   const claves = await q.evaluate(() => Object.keys(JSON.parse(document.getElementById("whatsapp-origens").textContent)));
-  const combos = ["inicio", "capa", "folha", "sumario"].flatMap((pg) => ["proximo", "percurso", "oferta"].map((c) => `${pg}-${c}`));
-  marca(combos.every((k) => claves.includes(k)) && ["servico", "inicio", "capa", "folha", "sumario"].every((k) => claves.includes(k)), `el servicio conoce los ${claves.length} orígenes (páginas × componentes): ${combos.length} nuevos + los 5 de antes`);
+  const combos = ["inicio", "capa", "folha", "sumario", "referencias"].flatMap((pg) => ["proximo", "percurso", "oferta"].map((c) => `${pg}-${c}`));
+  marca(combos.every((k) => claves.includes(k)) && ["servico", "inicio", "capa", "folha", "sumario", "referencias"].every((k) => claves.includes(k)), `el servicio conoce los ${claves.length} orígenes (páginas × componentes): ${combos.length} nuevos + los 5 de antes`);
   await q.close();
   for (const [id] of Object.entries(PAGINAS)) {
     for (const comp of ["percurso", "oferta"]) {

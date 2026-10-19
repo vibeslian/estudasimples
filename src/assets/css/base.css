@@ -135,6 +135,10 @@ a.cartao:active { transform: scale(.985); }
 .destaque--duplo > div:first-child { align-self: start; }
 .destaque--duplo .destaque-mini { justify-self: stretch; }
 .destaque-mini--sumario { text-align: left; }
+.destaque-mini--referencias { text-align: left; }
+.destaque-mini--referencias > b { text-align: center; margin-bottom: .6em; }
+.mini-ref { display: block; margin: 0 0 .5em; font-size: .72rem; line-height: 1.4; }
+.mini-ref b { display: inline; font-size: inherit; }
 .destaque-mini--sumario > b { text-align: center; margin-bottom: .6em; }
 .mini-linha { display: flex; align-items: baseline; gap: 4px; font-size: .78rem; line-height: 1.9; }
 .mini-linha b { display: inline; font-size: inherit; }
@@ -169,7 +173,7 @@ a.cartao:active { transform: scale(.985); }
 @media (max-width: 480px) { .nav a { padding: 8px 10px; font-size: .92rem; } .logo { font-size: 1.35rem; } .nav .nav-sobre { display: none; } }
 @media (max-width: 760px) { .nav .nav-ferramentas { display: none; } }
 @media (max-width: 400px) { .nav .nav-extra { display: none; } .nav { gap: 2px; } .nav a { padding: 8px 5px; font-size: .86rem; } .logo { font-size: 1.15rem; } }
-@media (max-width: 340px) { .header-inner { gap: 6px; } .nav a { padding: 8px 4px; } .logo { font-size: 1.05rem; } }
+@media (max-width: 340px) { .header-inner { gap: 6px; } .nav a { padding: 8px 4px; } .logo { font-size: 1.05rem; padding-block: 6px; } }
 
 /* ---------- Respeita quem pediu menos movimento ---------- */
 @media (prefers-reduced-motion: reduce) {

@@ -5,7 +5,7 @@
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const jsonSeguro = (o) => JSON.stringify(o).replace(/</g, "\\u003c").replace(/>/g, "\\u003e").replace(/&/g, "\\u0026");
 
-export const PAGINAS_ORIGEM = ["inicio", "capa", "folha", "sumario"];
+export const PAGINAS_ORIGEM = ["inicio", "capa", "folha", "sumario", "referencias"];
 // Uma oferta própria nunca fica junto da ferramenta: só nos espaços do meio do texto, na coluna lateral e entre as seções da portada
 const SLOT_PERMITIDO_PARA_OFERTA = /-(meio-1|meio-2|lateral|entre-secoes)$/;
 const paginaDoSlot = (slot) => slot.split("-")[0];

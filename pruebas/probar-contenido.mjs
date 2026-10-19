@@ -4,7 +4,7 @@ import puppeteer from "puppeteer-core";
 const BASE = process.env.BASE_URL || "http://localhost:3000";
 import fs from "node:fs";
 const GUIAS = JSON.parse(fs.readFileSync("../conteudo/guias.json", "utf8")).map((g) => `/guias/${g.slug}/`);
-const PAGINAS = ["/", "/gerador-de-capa-abnt/", "/gerador-de-folha-de-rosto-abnt/", "/gerador-de-sumario-abnt/", "/formatacao-abnt-tcc/", "/sobre/", "/contato/", "/politica-de-privacidade/", "/termos-de-uso/", "/guias/", ...GUIAS];
+const PAGINAS = ["/", "/gerador-de-capa-abnt/", "/gerador-de-folha-de-rosto-abnt/", "/gerador-de-sumario-abnt/", "/gerador-de-referencias-abnt/", "/formatacao-abnt-tcc/", "/sobre/", "/contato/", "/politica-de-privacidade/", "/termos-de-uso/", "/guias/", ...GUIAS];
 const ok = (c) => (c ? "OK   " : "FALLA");
 const browser = await puppeteer.launch({ executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe", headless: "new" });
 const externos = new Set();

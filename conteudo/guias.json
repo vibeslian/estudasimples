@@ -103,11 +103,10 @@
     "norma": "ABNT NBR 6023:2018",
     "atualizado": "2026-10-15",
     "ferramenta": {
-      "nome": "Formatação ABNT de TCC",
-      "selo": "Serviço do Estuda Simples",
-      "texto": "Prefere que eu deixe as citações e as referências do seu trabalho no formato da ABNT? Orçamento pelo WhatsApp.",
-      "botao": "Pedir orçamento",
-      "url": "/formatacao-abnt-tcc/"
+      "nome": "Gerador de Referências ABNT",
+      "texto": "Escolha o tipo de fonte, preencha os dados e copie a referência pronta, com a citação para o texto e a lista em ordem alfabética. Grátis, sem cadastro.",
+      "botao": "Abrir o gerador",
+      "url": "/gerador-de-referencias-abnt/"
     },
     "relacionadas": [
       "referencia-de-site-abnt",
@@ -131,6 +130,9 @@
         "titulo": "UERN, Manual de normalização do SIB (2025)",
         "url": "https://portal.uern.br/dsib/wp-content/uploads/sites/2/2025/02/MANUAL-DE-NORMALIZACAO-SIBUERN-2025.pdf"
       }
+    ],
+    "ferramentas": [
+      "referencias"
     ]
   },
   {
@@ -146,11 +148,10 @@
     "norma": "ABNT NBR 6023:2018",
     "atualizado": "2026-10-15",
     "ferramenta": {
-      "nome": "Formatação ABNT de TCC",
-      "selo": "Serviço do Estuda Simples",
-      "texto": "Tem muitas referências de sites para ajustar? Posso deixar a lista toda no formato da ABNT. Orçamento pelo WhatsApp.",
-      "botao": "Pedir orçamento",
-      "url": "/formatacao-abnt-tcc/"
+      "nome": "Gerador de Referências ABNT",
+      "texto": "Escolha \"Site\" ou \"Notícia online\", cole o endereço e a referência sai pronta, com o mês abreviado e a data de acesso de hoje. Grátis, sem cadastro.",
+      "botao": "Abrir o gerador",
+      "url": "/gerador-de-referencias-abnt/"
     },
     "relacionadas": [
       "como-fazer-referencia-abnt",
@@ -174,6 +175,9 @@
         "titulo": "UNISA, Manual de normatização ABNT (2025)",
         "url": "https://www.unisa.br/wp-content/uploads/2025/04/2025_Manual-de-Normatizacao_ABNT.pdf"
       }
+    ],
+    "ferramentas": [
+      "referencias"
     ]
   },
   {
@@ -189,11 +193,10 @@
     "norma": "ABNT NBR 10520:2023",
     "atualizado": "2026-10-15",
     "ferramenta": {
-      "nome": "Formatação ABNT de TCC",
-      "selo": "Serviço do Estuda Simples",
-      "texto": "Prefere que eu deixe as citações do trabalho no formato da ABNT, com o recuo e a fonte certos? Orçamento pelo WhatsApp.",
-      "botao": "Pedir orçamento",
-      "url": "/formatacao-abnt-tcc/"
+      "nome": "Gerador de Referências ABNT",
+      "texto": "Cada referência que o gerador monta vem com a citação certa para usar no texto, entre parênteses e na frase, no padrão da NBR 10520:2023.",
+      "botao": "Abrir o gerador",
+      "url": "/gerador-de-referencias-abnt/"
     },
     "relacionadas": [
       "como-fazer-referencia-abnt",
@@ -217,6 +220,9 @@
         "titulo": "UNISA, Manual de normatização ABNT (2025)",
         "url": "https://www.unisa.br/wp-content/uploads/2025/04/2025_Manual-de-Normatizacao_ABNT.pdf"
       }
+    ],
+    "ferramentas": [
+      "referencias"
     ]
   },
   {
@@ -396,7 +402,8 @@
     "ferramentas": [
       "capa",
       "folha",
-      "sumario"
+      "sumario",
+      "referencias"
     ],
     "titulo": "Normas ABNT para TCC: estrutura e elementos obrigatórios",
     "h1": "Normas ABNT para TCC: estrutura completa e elementos obrigatórios",

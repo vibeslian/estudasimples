@@ -348,4 +348,4 @@ export async function geraDocx(dados, paginas = ["capa"]) {
   return { blob: await Packer.toBlob(documento), nome: nomeArquivo(dados, "docx", paginas) };
 }
 
-export { NOME_PAGINA, FATOR_LINHA };
+export { NOME_PAGINA, FATOR_LINHA, carrega, paraWinAnsi, estiloPdf };

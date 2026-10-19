@@ -12,7 +12,8 @@
       "inicio": "Olá! Vim pelo site Estuda Simples (página inicial) e quero formatar meu trabalho nas normas ABNT.",
       "capa": "Olá! Vim pelo site Estuda Simples (gerador de capa) e quero formatar meu trabalho nas normas ABNT.",
       "folha": "Olá! Vim pelo site Estuda Simples (gerador de folha de rosto) e quero formatar meu trabalho nas normas ABNT.",
-      "sumario": "Olá! Vim pelo site Estuda Simples (gerador de sumário) e quero formatar meu trabalho nas normas ABNT."
+      "sumario": "Olá! Vim pelo site Estuda Simples (gerador de sumário) e quero formatar meu trabalho nas normas ABNT.",
+      "referencias": "Olá! Vim pelo site Estuda Simples (gerador de referências) e quero formatar meu trabalho nas normas ABNT."
     },
     "prazo": "48 a 72 horas",
     "precos": {
@@ -26,7 +27,8 @@
         "inicio": "página inicial",
         "capa": "gerador de capa",
         "folha": "gerador de folha de rosto",
-        "sumario": "gerador de sumário"
+        "sumario": "gerador de sumário",
+        "referencias": "gerador de referências"
       },
       "componentes": {
         "proximo": "próximo passo",
@@ -59,6 +61,13 @@
         "url": "/gerador-de-sumario-abnt/",
         "convite": "Adicione as seções e a numeração sai sozinha. Dá para baixar junto com a capa e a folha.",
         "botao": "Abrir o sumário"
+      },
+      {
+        "id": "referencias",
+        "nome": "Referências",
+        "url": "/gerador-de-referencias-abnt/",
+        "convite": "Escolha o tipo de fonte (livro, artigo, site...) e a referência sai pronta, em ordem alfabética.",
+        "botao": "Abrir as referências"
       }
     ],
     "final": {
@@ -89,7 +98,11 @@
       "sumario-lateral": "adsense",
       "guia-meio-1": "adsense",
       "guia-meio-2": "adsense",
-      "guia-lateral": "adsense"
+      "guia-lateral": "adsense",
+      "referencias-abaixo-da-ferramenta": "adsense",
+      "referencias-meio-1": "oferta:formatacao",
+      "referencias-meio-2": "adsense",
+      "referencias-lateral": "adsense"
     },
     "ofertas": {
       "formatacao": {
@@ -109,6 +122,10 @@
           "sumario": {
             "titulo": "Sumário pronto. Falta o resto?",
             "texto": "Posso conferir e formatar todo o trabalho: títulos numerados, páginas, citações e referências. Orçamento pelo WhatsApp, a partir de {{PRECO_ATE30}}."
+          },
+          "referencias": {
+            "titulo": "Referências prontas. E o resto do trabalho?",
+            "texto": "Posso conferir as suas referências e formatar o trabalho inteiro nas normas da ABNT: margens, fonte, sumário e citações. Orçamento pelo WhatsApp, a partir de {{PRECO_ATE30}}."
           }
         }
       }

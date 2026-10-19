@@ -9,7 +9,7 @@ const cfg = JSON.parse(fs.readFileSync("../site.config.json", "utf8")).servico;
 const brl = (n) => "R$\u00a0" + n.toLocaleString("pt-BR");
 const urlDe = (id) => `https://wa.me/${cfg.whatsapp}?text=${encodeURIComponent(cfg.mensagens[id])}`;
 const esperadoUrl = urlDe("servico");
-const ORIGENES = { capa: "gerador de capa", folha: "gerador de folha de rosto", sumario: "gerador de sumário", inicio: "página inicial", servico: "página de formatação" };
+const ORIGENES = { capa: "gerador de capa", folha: "gerador de folha de rosto", sumario: "gerador de sumário", referencias: "gerador de referências", inicio: "página inicial", servico: "página de formatação" };
 const PERMITIDOS = new Set(["static.cloudflareinsights.com"]);
 const falhas = [];
 const marca = (c, m) => { console.log(c ? "OK   " : "FALLA", m); if (!c) falhas.push(m); };
@@ -42,7 +42,7 @@ marca(!/\b\d+\s*a\s*\d+\s*horas/.test(fuenteTexto) && !fuenteTexto.includes("wa.
   });
   marca(d.ctas.length >= 3 && d.ctas.every((c) => c.href === esperadoUrl), `${d.ctas.length} botones de WhatsApp, todos con el mismo enlace: ${esperadoUrl}`);
   marca(new URL(d.ctas[0].href).searchParams.get("text") === "Olá! Vim pelo site Estuda Simples (página de formatação) e quero formatar meu trabalho nas normas ABNT.", "mensaje de la página del servicio: \"Olá! Vim pelo site Estuda Simples (página de formatação) e quero formatar meu trabalho nas normas ABNT.\"");
-  marca(Object.keys(cfg.mensagens).sort().join() === "capa,folha,inicio,servico,sumario" && Object.entries(cfg.mensagens).every(([id, m]) => m === `Olá! Vim pelo site Estuda Simples (${ORIGENES[id]}) e quero formatar meu trabalho nas normas ABNT.`), "los 5 mensajes (servicio, inicio, capa, folha, sumario) están en site.config.json e identifican el sitio y la página de origen");
+  marca(Object.keys(cfg.mensagens).sort().join() === "capa,folha,inicio,referencias,servico,sumario" && Object.entries(cfg.mensagens).every(([id, m]) => m === `Olá! Vim pelo site Estuda Simples (${ORIGENES[id]}) e quero formatar meu trabalho nas normas ABNT.`), "los 6 mensajes (servicio, inicio, capa, folha, sumario, referencias) están en site.config.json e identifican el sitio y la página de origen");
   marca(d.ctas.every((c) => c.target === "_blank" && /noopener/.test(c.rel)), "los enlaces de WhatsApp abren en otra pestaña con rel=noopener");
   marca(d.ctas.every((c) => c.h >= 44), `los botones de WhatsApp miden ≥ 44 px de alto (${d.ctas.map((c) => c.h).join(", ")})`);
   // origen: el mismo botón cambia de mensaje según la página de donde viene el visitante (?origem=)
@@ -101,7 +101,7 @@ marca(!/\b\d+\s*a\s*\d+\s*horas/.test(fuenteTexto) && !fuenteTexto.includes("wa.
 }
 
 console.log("\n== 4) Menú, pie y sitemap ==");
-for (const url of ["/", "/gerador-de-capa-abnt/", "/gerador-de-folha-de-rosto-abnt/", "/gerador-de-sumario-abnt/", "/sobre/", "/contato/", "/politica-de-privacidade/", "/termos-de-uso/", SERVICO]) {
+for (const url of ["/", "/gerador-de-capa-abnt/", "/gerador-de-folha-de-rosto-abnt/", "/gerador-de-sumario-abnt/", "/gerador-de-referencias-abnt/", "/sobre/", "/contato/", "/politica-de-privacidade/", "/termos-de-uso/", SERVICO]) {
   const p = await abre(url);
   const r = await p.evaluate(() => ({ menu: !!document.querySelector('.nav a[href="/formatacao-abnt-tcc/"]'), pie: !!document.querySelector('.footer-links a[href="/formatacao-abnt-tcc/"]') }));
   marca(r.menu && r.pie, `${url.padEnd(34)} menú ${r.menu ? "✓" : "✗"}  pie ${r.pie ? "✓" : "✗"}`);
@@ -182,7 +182,7 @@ for (const [nombre, vp] of [["computador 1280", { width: 1280, height: 900 }], [
 }
 console.log("\n== 5c) Primera persona del singular en todo el sitio ==");
 {
-  const paginas = ["/", "/gerador-de-capa-abnt/", "/gerador-de-folha-de-rosto-abnt/", "/gerador-de-sumario-abnt/", SERVICO, "/sobre/", "/contato/", "/politica-de-privacidade/", "/termos-de-uso/"];
+  const paginas = ["/", "/gerador-de-capa-abnt/", "/gerador-de-folha-de-rosto-abnt/", "/gerador-de-sumario-abnt/", "/gerador-de-referencias-abnt/", SERVICO, "/sobre/", "/contato/", "/politica-de-privacidade/", "/termos-de-uso/"];
   const malos = [];
   for (const u of paginas) {
     const p = await abre(u);

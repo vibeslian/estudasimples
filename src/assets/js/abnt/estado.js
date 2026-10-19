@@ -4,6 +4,7 @@
 const CHAVE = "es-abnt-v1";
 const CHAVE_LOGO = "es-abnt-logo-v1";
 const CHAVE_AVISO = "es-abnt-aviso";
+const CHAVE_REFERENCIAS = "es-abnt-refs-v1"; // lista do gerador de referências (referencias.js)
 
 const tenta = (fn, padrao = null) => { try { return fn(); } catch (e) { return padrao; } };
 
@@ -18,7 +19,7 @@ export const gravaLogo = (logo) => tenta(() => {
 
 // "Limpar dados": apaga tudo e deixa um aviso para a página mostrar depois de recarregar
 export function apagaTudo() {
-  tenta(() => { sessionStorage.removeItem(CHAVE); sessionStorage.removeItem(CHAVE_LOGO); sessionStorage.setItem(CHAVE_AVISO, "1"); });
+  tenta(() => { sessionStorage.removeItem(CHAVE); sessionStorage.removeItem(CHAVE_LOGO); sessionStorage.removeItem(CHAVE_REFERENCIAS); sessionStorage.setItem(CHAVE_AVISO, "1"); });
 }
 export function pegaAviso() {
   const tem = tenta(() => sessionStorage.getItem(CHAVE_AVISO) === "1", false);

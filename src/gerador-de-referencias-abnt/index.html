@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  {{include:head-common}}
+  <title>Gerador de Referências ABNT grátis (NBR 6023:2018) | {{SITE_NAME}}</title>
+  <meta name="description" content="Gerador de referências ABNT grátis: livro, capítulo, artigo, site, notícia, lei, vídeo e TCC. A referência sai pronta, com a citação no texto. Baixe em Word e PDF.">
+  <link rel="canonical" href="{{SITE_URL}}/gerador-de-referencias-abnt/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="{{SITE_NAME}}">
+  <meta property="og:title" content="Gerador de Referências ABNT grátis, com a citação no texto">
+  <meta property="og:description" content="Escolha o tipo de fonte, preencha e copie a referência pronta (NBR 6023:2018). A lista se ordena sozinha e você baixa a página REFERÊNCIAS em Word e PDF.">
+  <meta property="og:url" content="{{SITE_URL}}/gerador-de-referencias-abnt/">
+  <link rel="stylesheet" href="/assets/css/ferramenta.css?v={{BUILD}}">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Gerador de Referências ABNT – {{SITE_NAME}}","url":"{{SITE_URL}}/gerador-de-referencias-abnt/","applicationCategory":"EducationalApplication","operatingSystem":"Qualquer (navegador)","inLanguage":"pt-BR","description":"Gerador gratuito de referências ABNT (NBR 6023:2018) para livro, capítulo de livro, artigo, site, notícia, lei, vídeo e TCC, com a citação no texto (NBR 10520:2023), lista em ordem alfabética e download da página REFERÊNCIAS em Word e PDF. Funciona no navegador, sem cadastro.","offers":{"@type":"Offer","price":"0","priceCurrency":"BRL"},"isAccessibleForFree":true}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"{{SITE_NAME}}","item":"{{SITE_URL}}/"},{"@type":"ListItem","position":2,"name":"Gerador de referências ABNT","item":"{{SITE_URL}}/gerador-de-referencias-abnt/"}]}</script>
+  {{FAQ_JSONLD:referencias}}
+</head>
+<body data-modo="referencias">
+<div class="hero hero--compacto">
+  {{include:manchas}}
+  {{include:header}}
+  <div class="container hero-conteudo">
+    <h1>Gerador de Referências ABNT grátis</h1>
+    <p class="lead">Escolha o tipo de fonte, preencha os dados e a referência sai pronta, com a citação para usar no texto. A lista se ordena sozinha e você baixa em Word e PDF. Sem cadastro, e seus dados não saem do seu navegador.</p>
+  </div>
+</div>
+
+<main class="container tool" id="conteudo">
+  <div class="abas" role="tablist" aria-label="Alternar entre dados e prévia">
+    <button type="button" role="tab" id="abaDados" aria-selected="true" aria-controls="painelForm">1. Preencher</button>
+    <button type="button" role="tab" id="abaPrevia" aria-selected="false" aria-controls="painelPrevia">2. Ver prévia</button>
+  </div>
+
+  <div class="tool-grid">
+    <section id="painelForm" class="painel ativo cartao" aria-label="Dados da referência">
+      <form id="form" autocomplete="off" novalidate>
+        <h2 class="titulo-form titulo-form--primeiro">1. O que você está citando?</h2>
+        <div class="campo">
+          <label for="tipo">Tipo de fonte</label>
+          <select id="tipo">{{REF_TIPOS}}</select>
+          <p class="dica-campo" id="tipoExemplo">{{REF_EXEMPLO_INICIAL}}</p>
+        </div>
+{{REF_FORMS}}
+
+        <h2 class="titulo-form">2. Sua referência</h2>
+        <div class="ref-resultado" id="resultado" aria-live="polite">
+          <p class="ref-vazio" id="refVazio">Preencha os campos acima e a referência aparece aqui, já com a pontuação e o negrito da norma. Os dados do documento ficam na folha de rosto do livro, no cabeçalho do artigo ou na própria página do site.</p>
+          <div id="refConteudo" hidden>
+            <p class="ref-texto" id="refTexto"></p>
+            <p class="ref-avisos" id="refAvisos" hidden></p>
+            <div class="ref-citacoes">
+              <p class="ref-cita-titulo">Como citar no texto</p>
+              <p class="ref-cita"><span class="ref-cita-rotulo">Entre parênteses:</span> <span id="citPar"></span> <button type="button" class="btn btn-mini" id="btnCopiarPar" aria-label="Copiar a citação entre parênteses">Copiar</button></p>
+              <p class="ref-cita"><span class="ref-cita-rotulo">Na frase:</span> <span id="citNar"></span> <button type="button" class="btn btn-mini" id="btnCopiarNar" aria-label="Copiar a citação na frase">Copiar</button></p>
+              <p class="dica-campo">Se você copiar um trecho do texto (citação direta), acrescente a página depois do ano: <span id="citPagina"></span>.</p>
+            </div>
+          </div>
+          <p class="ref-falta" id="refFalta" hidden></p>
+          <div class="ref-acoes">
+            <button type="button" class="btn btn-acento" id="btnAdicionar" disabled>Adicionar à lista</button>
+            <button type="button" class="btn" id="btnCopiarRef" disabled>Copiar referência</button>
+            <button type="button" class="btn btn-secundario" id="btnCancelarEdicao" hidden>Cancelar a edição</button>
+          </div>
+          <p class="dica-campo">"Copiar" mantém o negrito quando você cola no Word ou no Google Docs.</p>
+        </div>
+
+        <h2 class="titulo-form">3. Sua lista de referências <span class="ref-conta" id="contaLista"></span></h2>
+        <div id="lista" class="ref-lista" role="list" aria-label="Referências da lista">
+          <p class="dica-campo" id="listaVazia">A lista está vazia. Depois de montar uma referência, clique em "Adicionar à lista": ela entra na ordem alfabética, e você pode editar, copiar ou remover cada uma.</p>
+        </div>
+        <button type="button" class="btn btn-pequeno" id="btnCopiarLista" hidden>Copiar a lista toda</button>
+
+        <details class="estilo" id="opcoes">
+          <summary>Fonte e estilo da citação</summary>
+          <div class="estilo-corpo">
+{{include:form-fonte}}
+            <div class="campo">
+              <label for="estiloCita">Estilo da citação no texto</label>
+              <select id="estiloCita">
+                <option value="novo">(Silva, 2020): padrão atual, NBR 10520:2023</option>
+                <option value="antigo">(SILVA, 2020): modelo antigo, em maiúsculas</option>
+              </select>
+              <p class="dica-campo">Use o antigo só se o manual da sua faculdade ainda pedir o sobrenome todo em maiúsculas entre parênteses.</p>
+            </div>
+          </div>
+        </details>
+
+        <div class="acoes">
+          <button type="button" class="btn btn-acento" id="btnPdf">Baixar PDF</button>
+          <button type="button" class="btn btn-acento" id="btnDocx">Baixar Word (.docx)</button>
+          <button type="button" class="btn btn-largo" id="btnNova">Nova lista (limpar as referências)</button>
+          <button type="button" class="btn-secundario btn-largo" id="btnLimpar">Limpar dados</button>
+        </div>
+        <p class="toast" id="toast" role="status" aria-live="polite"></p>
+{{include:proximo-passo}}
+        <p class="dica-campo">Para você não digitar tudo de novo ao passar de uma ferramenta à outra, o navegador guarda o que você escreveu (inclusive a sua lista de referências) só nesta aba, no seu aparelho. Nada é enviado, e some quando você fecha a aba ou clica em "Limpar dados".</p>
+        {{include:convite-servico}}
+      </form>
+    </section>
+
+    <section id="painelPrevia" class="painel" aria-label="Prévia da página de referências">
+      <h2 class="previa-titulo" id="previaTitulo">Prévia (A4)</h2>
+      <button type="button" class="btn btn-pequeno btn-ampliar" id="btnAmpliar">Ampliar prévia</button>
+      <div id="pagsRef">
+        <figure class="pagina-previa">
+          <figcaption>Página 1: referências</figcaption>
+          <div class="sheet-wrap" id="sheetWrapRef1"><div class="sheet" id="sheetRef1" aria-live="off"></div></div>
+        </figure>
+      </div>
+      <p class="nota-previa" id="notaPrevia">O texto em cinza é só um exemplo e não aparece no arquivo final.</p>
+      <p class="nota-previa nota-rascunho" id="notaRascunho" hidden>A referência em coral é a que você está montando. Ela só entra no arquivo depois de "Adicionar à lista".</p>
+    </section>
+  </div>
+
+  {{PERCURSO_HTML}}
+
+  <aside class="aviso-norma">
+    <p><strong>Importante:</strong> as referências seguem a ABNT NBR 6023:2018, e a citação no texto, a NBR 10520:2023. O gerador usa só o que você digita, no seu navegador, e não procura nada na internet: confira os dados no documento original. A página REFERÊNCIAS sai no papel A4 da NBR 14724:2024 (margens de 3 cm à esquerda e em cima e 2 cm à direita e embaixo), com espaço simples. O Estuda Simples não tem ligação com a ABNT, e na dúvida o manual da sua faculdade manda.</p>
+  </aside>
+  {{ESPACO:referencias-abaixo-da-ferramenta}}
+</main>
+
+<div class="container conteudo-capa">
+  <div class="conteudo-grade">
+    <article class="artigo">
+
+      <section id="como-fazer">
+        <h2 class="revelar">Como fazer uma referência ABNT com o gerador</h2>
+        <ol class="passos revelar">
+          <li><div><h3>Escolha o tipo de fonte</h3><p>Livro, capítulo de livro, artigo de revista, site, notícia, lei, vídeo do YouTube ou TCC, dissertação e tese. Cada tipo pede só os dados que a norma usa.</p></div></li>
+          <li><div><h3>Preencha com o que está no documento</h3><p>Copie da folha de rosto do livro, do cabeçalho do artigo ou da página do site. O sobrenome e o nome do autor ficam em campos separados, e o que faltar sai entre colchetes, como [S. l.] e [s. n.].</p></div></li>
+          <li><div><h3>Confira a referência e a citação</h3><p>Ela aparece na hora, com o negrito do título e a pontuação da norma, e logo abaixo vem a citação para usar no texto, entre parênteses e na frase.</p></div></li>
+          <li><div><h3>Adicione à lista e baixe</h3><p>As referências se ordenam sozinhas em ordem alfabética. Copie uma ou a lista toda, ou baixe a página REFERÊNCIAS em Word ou PDF.</p></div></li>
+        </ol>
+      </section>
+
+      <section id="exemplos">
+        <h2 class="revelar">Exemplos de referência por tipo de fonte</h2>
+        <p class="revelar">Os exemplos abaixo são inventados, só para mostrar o formato. O título do livro, do periódico ou do trabalho recebe negrito, e o subtítulo, que vem depois de dois-pontos, não (nem os dois-pontos).</p>
+        <div class="ref-exemplos revelar">
+          <div class="ref-exemplo"><span class="ref-exemplo-tipo">Livro</span><p>SILVA, Maria Helena. <strong>Escrita acadêmica na prática</strong>: do projeto ao TCC. 2. ed. São Paulo: Editora Exemplo, 2022.</p></div>
+          <div class="ref-exemplo"><span class="ref-exemplo-tipo">Capítulo de livro</span><p>COSTA, Rafael. A leitura na universidade. In: SILVA, Maria Helena (org.). <strong>Escrita acadêmica na prática</strong>: do projeto ao TCC. 2. ed. São Paulo: Editora Exemplo, 2022. cap. 3, p. 45-62.</p></div>
+          <div class="ref-exemplo"><span class="ref-exemplo-tipo">Artigo de revista</span><p>PEREIRA, Carla. Redes sociais e aprendizagem. <strong>Revista Exemplo de Educação</strong>, São Paulo, v. 12, n. 2, p. 33-48, jul./dez. 2021.</p></div>
+          <div class="ref-exemplo"><span class="ref-exemplo-tipo">Site</span><p>SOUZA, Marta. <strong>Como planejar a semana de provas.</strong> Recife, 2 jun. 2025. Portal: Exemplo Escola. Disponível em: https://www.exemplo.com.br/semana-de-provas. Acesso em: 15 out. 2026.</p></div>
+          <div class="ref-exemplo"><span class="ref-exemplo-tipo">Site sem autor</span><p>PLANEJAMENTO da semana de provas. Recife, 2025. Portal: Exemplo Escola. Disponível em: https://www.exemplo.com.br/planejamento. Acesso em: 15 out. 2026.</p></div>
+          <div class="ref-exemplo"><span class="ref-exemplo-tipo">Notícia online</span><p>LIMA, Paulo. Escolas adotam leitura diária. <strong>Jornal Exemplo</strong>, Recife, 3 mar. 2026. Educação. Disponível em: https://www.jornalexemplo.com.br/leitura. Acesso em: 15 out. 2026.</p></div>
+          <div class="ref-exemplo"><span class="ref-exemplo-tipo">Lei</span><p>BRASIL. Lei nº 9.610, de 19 de fevereiro de 1998. Altera, atualiza e consolida a legislação sobre direitos autorais e dá outras providências. Brasília, DF: Presidência da República, 1998. Disponível em: https://www.planalto.gov.br/ccivil_03/leis/l9610.htm. Acesso em: 15 out. 2026.</p></div>
+          <div class="ref-exemplo"><span class="ref-exemplo-tipo">Vídeo do YouTube</span><p>COMO fazer um bom resumo acadêmico. [S. l.: s. n.], 2024. 1 vídeo (12 min). Publicado pelo canal Exemplo Estudos. Disponível em: https://www.youtube.com/watch?v=XXXXXXXXXXX. Acesso em: 15 out. 2026.</p></div>
+          <div class="ref-exemplo"><span class="ref-exemplo-tipo">TCC, dissertação ou tese</span><p>SANTOS, Ana. <strong>Leitura em voz alta na sala de aula.</strong> 2023. Trabalho de Conclusão de Curso (Graduação em Pedagogia) – Faculdade de Educação, Universidade Exemplo, Recife, 2023.</p></div>
+        </div>
+      </section>
+
+      {{ESPACO:referencias-meio-1}}
+
+      <section id="o-que-o-gerador-faz">
+        <h2 class="revelar">O que o gerador faz sozinho (NBR 6023:2018)</h2>
+        <ul class="regras revelar">
+          <li><strong>Autores</strong>SOBRENOME em maiúsculas, vírgula e nome. Até três autores entram todos, separados por ponto e vírgula. Com quatro ou mais, você escolhe: todos, ou só o primeiro seguido de et al.</li>
+          <li><strong>Sem autor</strong>A entrada é o título, com a primeira palavra em maiúsculas. Se o título começa por artigo ou por uma palavra de uma sílaba (O, UM, EM, NA), a palavra seguinte também vai em maiúsculas, e o título não leva negrito.</li>
+          <li><strong>Instituição</strong>Órgãos e empresas entram pelo nome, em maiúsculas. Governo e leis entram por BRASIL, pelo estado ou pelo município.</li>
+          <li><strong>Destaque</strong>O negrito vai no título (livro, TCC, site, vídeo), no título do livro depois de "In:" (capítulo) e no nome da revista ou do jornal (artigo e notícia). O mesmo recurso em todas as referências.</li>
+          <li><strong>Dados que faltam</strong>[S. l.] sem cidade, [s. n.] sem editora e, para o ano, as formas da norma: [2018?], [2017], [ca. 2015], [200-] e [201-?].</li>
+          <li><strong>Datas</strong>Mês abreviado em português: jan., fev., mar., abr., maio, jun., jul., ago., set., out., nov. e dez. O dia vem antes do mês, e o mês antes do ano.</li>
+          <li><strong>Internet</strong>Com o endereço, entram "Disponível em:" e "Acesso em:", com a data de hoje já preenchida (mude se a sua visita foi outro dia).</li>
+          <li><strong>Lista</strong>Em ordem alfabética pela entrada, em espaço simples, alinhada à esquerda e com uma linha em branco entre as referências. Duas obras do mesmo autor no mesmo ano ganham 2020a e 2020b, na referência e na citação.</li>
+        </ul>
+      </section>
+
+      <section id="citar-no-texto">
+        <h2 class="revelar">Como citar no texto (NBR 10520:2023)</h2>
+        <p class="revelar">Embaixo de cada referência, o gerador mostra a citação que combina com ela. Pela norma de 2023, o sobrenome leva só a inicial maiúscula:</p>
+        <div class="comparar revelar"><div class="comparar-certo"><span class="comparar-rotulo">Entre parênteses</span><p>(Silva, 2020) · (Souza; Lima, 2020) · (Alves et al., 2019) · (Brasil, 1998)</p></div><div class="comparar-certo"><span class="comparar-rotulo">Dentro da frase</span><p>Silva (2020) · Souza e Lima (2020) · Alves et al. (2019) · Brasil (1998)</p></div></div>
+        <p class="revelar">Com quatro ou mais autores, a citação usa o primeiro seguido de et al. Sem autor, ela usa a primeira palavra do título (ou o artigo e a palavra seguinte) e [...]: (Anteprojeto [...], 1987). Se o manual da sua faculdade ainda usa o modelo antigo, (SILVA, 2020), é só trocar em "Fonte e estilo da citação". Para as regras completas, veja o <a href="/guias/citacao-abnt/">guia de citação ABNT</a>.</p>
+      </section>
+
+      {{ESPACO:referencias-meio-2}}
+
+      <section id="onde-os-manuais-divergem">
+        <h2 class="revelar">Onde os manuais divergem e o que o gerador escolhe</h2>
+        <p class="revelar">Os manuais de bibliotecas seguem a mesma norma, mas nem sempre escrevem igual. Nesses pontos, o gerador fica com a norma ou com a forma mais comum:</p>
+        <div class="ref-rolavel revelar">
+          <table class="ref-tabela">
+            <caption>Diferenças entre manuais e a escolha do gerador</caption>
+            <thead><tr><th>Ponto</th><th>O que acontece nos manuais</th><th>O gerador usa</th></tr></thead>
+            <tbody>
+              <tr><td>Subtítulo</td><td>A norma destaca só o título; alguns exemplos destacam tudo, ou incluem os dois-pontos no negrito</td><td>Negrito só no título; os dois-pontos e o subtítulo ficam sem negrito</td></tr>
+              <tr><td>Número da lei</td><td>nº, n° e n.</td><td>nº, a forma mais comum nos manuais</td></tr>
+              <tr><td>Sem cidade</td><td>[S. l.] depois de ponto e [s. l.] depois de vírgula</td><td>As duas formas, conforme a posição</td></tr>
+              <tr><td>Vídeo sem local e editora</td><td>[S. l. : s. n.] com espaços, ou [S. l.: s. n.]</td><td>[S. l.: s. n.]</td></tr>
+              <tr><td>Mês de maio</td><td>maio, e às vezes mai.</td><td>maio, como na norma</td></tr>
+              <tr><td>Hífen ou travessão na vinculação do TCC</td><td>"-" ou "–"</td><td>Travessão (–)</td></tr>
+              <tr><td>Sobrenome na citação</td><td>(SILVA, 2020) na norma de 2002; (Silva, 2020) na de 2023</td><td>(Silva, 2020), com a opção do modelo antigo</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="word-e-pdf">
+        <h2 class="revelar">A página REFERÊNCIAS em Word e PDF</h2>
+        <p class="revelar">O arquivo traz a palavra REFERÊNCIAS centralizada e em negrito, sem número, e as suas referências em espaço simples, alinhadas à margem esquerda e com uma linha em branco entre elas, em papel A4 com as margens da ABNT. A prévia, o PDF e o Word saem iguais. O Word abre no Google Docs: envie o arquivo ao Google Drive e abra com o Google Docs. A página REFERÊNCIAS entra no sumário, sem número, e vai no fim do trabalho: veja a <a href="/gerador-de-sumario-abnt/">ferramenta de sumário</a>.</p>
+      </section>
+
+      <section id="perguntas-frequentes">
+        <h2 class="revelar">Perguntas frequentes sobre referências ABNT</h2>
+        {{FAQ_HTML:referencias}}
+      </section>
+
+      {{GUIAS_DA_FERRAMENTA:referencias}}
+
+      <section id="fontes" class="artigo-meta">
+        <p>Atualizado em 19 de outubro de 2026. Para montar as regras e conferir o gerador, comparei a saída dele com exemplos de manuais de normalização de bibliotecas universitárias baseados na NBR 6023:2018, como os da <a href="https://bibliotecas.ufu.br/sites/bibliotecas.ufu.br/files/media/imagem/referencias_30_out._2024_1.pdf" rel="noopener">UFU (2024)</a> e da <a href="https://www.labjor.unicamp.br/wp-content/uploads/2023/10/guia_nbr6023_final.pdf" rel="noopener">Unicamp</a>, e, para a citação no texto e a nova versão da norma de trabalhos acadêmicos, os da <a href="https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf" rel="noopener">UFV (2025)</a> e da <a href="https://portal.uern.br/dsib/wp-content/uploads/sites/2/2025/02/MANUAL-DE-NORMALIZACAO-SIBUERN-2025.pdf" rel="noopener">UERN (2025)</a>.</p>
+        <p>As normas são documentos pagos da ABNT. Aqui eu explico, com palavras minhas, o que importa para a referência. O Estuda Simples não tem ligação com a ABNT, e na dúvida o manual da sua faculdade manda.</p>
+      </section>
+
+    </article>
+    <aside class="lateral" aria-label="Publicidade">
+      {{ESPACO:referencias-lateral}}
+    </aside>
+  </div>
+</div>
+<dialog class="zoom" id="dlgZoom" aria-label="Prévia ampliada">
+  <div class="zoom-barra">
+    <strong>Prévia</strong>
+    <button type="button" class="btn" id="zoomMenos" aria-label="Afastar">−</button>
+    <button type="button" class="btn" id="zoomMais" aria-label="Aproximar">+</button>
+    <button type="button" class="btn btn-acento" id="zoomFechar">Fechar</button>
+  </div>
+  <div class="zoom-area" id="zoomArea" tabindex="0">
+    <div class="zoom-wrap" id="zoomWrap"><div id="zoomPagsRef"></div></div>
+  </div>
+  <p class="zoom-dica">Use + e − para aproximar, ou arraste para mover a página.</p>
+</dialog>
+<script type="application/json" id="percurso-dados">{{PERCURSO_DADOS}}</script>
+<script type="module" src="/assets/js/progresso.js"></script>
+{{include:footer}}
+<script type="module" src="/assets/js/abnt/referencias.js?v={{BUILD}}"></script>
+</body>
+</html>

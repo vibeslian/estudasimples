@@ -7,6 +7,7 @@ import { readFileSync, writeFileSync, mkdirSync, rmSync, readdirSync, statSync }
 import { join, extname, relative, sep } from "node:path";
 import { preparaConexoes, mensagensWhatsapp } from "./build-conexoes.mjs";
 import { carregaGuias, preparaGuias } from "./build-guias.mjs";
+import { montaFormulariosReferencias } from "./build-referencias.mjs";
 
 const SRC = "src";
 const OUT = process.env.BUILD_OUT || "dist"; // BUILD_OUT e SITE_CONFIG só servem para as provas montarem uma versão de teste
@@ -37,16 +38,20 @@ const guiasLista = carregaGuias(); // conteudo/guias.json (Etapa 10)
 const gb = preparaGuias(config, guiasLista);
 const mensagens = { ...gb.mensagens(sv.modeloMensagem), ...mensagensWhatsapp(sv) }; // guia-<slug>, as de site.config.json e as de página-componente (capa-proximo...)
 const conexoes = preparaConexoes(config);
+const refForms = montaFormulariosReferencias(); // formulários do gerador de referências (campos em src/assets/js/abnt/referencias-campos.js)
 // um link wa.me por página de origem: a mensagem diz de onde o cliente veio (mensagens em site.config.json)
 const waUrl = (id) => {
   if (!mensagens[id]) throw new Error(`site.config.json: falta servico.mensagens.${id}`);
   return `https://wa.me/${sv.whatsapp}?text=${encodeURIComponent(mensagens[id])}`;
 };
 // página que mostra o convite para o serviço -> id da mensagem de origem
-const ORIGEM_POR_PAGINA = { "index.html": "inicio", "gerador-de-capa-abnt/index.html": "capa", "gerador-de-folha-de-rosto-abnt/index.html": "folha", "gerador-de-sumario-abnt/index.html": "sumario" };
+const ORIGEM_POR_PAGINA = { "index.html": "inicio", "gerador-de-capa-abnt/index.html": "capa", "gerador-de-folha-de-rosto-abnt/index.html": "folha", "gerador-de-sumario-abnt/index.html": "sumario", "gerador-de-referencias-abnt/index.html": "referencias" };
 for (const id of Object.values(ORIGEM_POR_PAGINA).concat("servico")) waUrl(id);
 const brl = (n) => "R$\u00a0" + n.toLocaleString("pt-BR"); // espaço sem quebra: "R$" e o valor nunca ficam em linhas diferentes
 const values = {
+  "{{REF_TIPOS}}": refForms.opcoes,
+  "{{REF_FORMS}}": refForms.forms,
+  "{{REF_EXEMPLO_INICIAL}}": refForms.exemploInicial,
   "{{WHATSAPP_URL}}": waUrl("servico"),
   "{{WHATSAPP_ORIGENS}}": JSON.stringify(Object.fromEntries(Object.keys(mensagens).map((id) => [id, waUrl(id)]))),
   "{{WHATSAPP_EXIBICAO}}": sv.whatsappExibicao,

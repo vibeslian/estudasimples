@@ -1,7 +1,7 @@
 [
   {
     "p": "Qual é a ordem dos elementos de uma referência de livro na ABNT?",
-    "r": ["Autor, título e subtítulo, edição, local, editora e ano: AUTOR. Título: subtítulo. edição. Local: Editora, ano. O sobrenome do autor vai em maiúsculas, e o título recebe um destaque (negrito, itálico ou sublinhado)."]
+    "r": ["Autor, título e subtítulo, edição, local, editora e ano: AUTOR. Título: subtítulo. edição. Local: Editora, ano. O sobrenome do autor vai em maiúsculas, e o título recebe um destaque (negrito, itálico ou sublinhado), e o subtítulo e os dois-pontos que o antecedem, não."]
   },
   {
     "p": "A referência ABNT usa espaçamento 1,5?",

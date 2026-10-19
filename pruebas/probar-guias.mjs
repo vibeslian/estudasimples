@@ -29,7 +29,7 @@ const existeRuta = async (url) => {
   return fs.existsSync(f) && (fs.statSync(f).isFile() || fs.existsSync(path.join(f, "index.html")));
 };
 
-const todas = ["/", "/guias/", "/gerador-de-capa-abnt/", "/gerador-de-folha-de-rosto-abnt/", "/gerador-de-sumario-abnt/", "/formatacao-abnt-tcc/", "/sobre/", "/contato/", "/politica-de-privacidade/", "/termos-de-uso/", ...guias.map((g) => `/guias/${g.slug}/`)];
+const todas = ["/", "/guias/", "/gerador-de-capa-abnt/", "/gerador-de-folha-de-rosto-abnt/", "/gerador-de-sumario-abnt/", "/gerador-de-referencias-abnt/", "/formatacao-abnt-tcc/", "/sobre/", "/contato/", "/politica-de-privacidade/", "/termos-de-uso/", ...guias.map((g) => `/guias/${g.slug}/`)];
 const html = {};
 for (const u of todas) html[u] = await leePagina(u);
 
@@ -221,7 +221,7 @@ if (!LIVE) {
       if (cfg.anuncios.adsenseAtivo !== true) {
         for (const [nombre, vp] of [["390", { width: 390, height: 800 }], ["1280", { width: 1280, height: 900 }]]) {
           const conHueco = [];
-          for (const url of ["/", "/guias/", ...guias.map((g) => `/guias/${g.slug}/`), "/gerador-de-capa-abnt/", "/gerador-de-folha-de-rosto-abnt/", "/gerador-de-sumario-abnt/"]) {
+          for (const url of ["/", "/guias/", ...guias.map((g) => `/guias/${g.slug}/`), "/gerador-de-capa-abnt/", "/gerador-de-folha-de-rosto-abnt/", "/gerador-de-sumario-abnt/", "/gerador-de-referencias-abnt/"]) {
             const p = await b.newPage(); await p.setViewport(vp);
             await p.goto(BASE + url, { waitUntil: "networkidle0" });
             const n = await p.evaluate(() => [...document.querySelectorAll(".anuncio")].filter((a) => a.getBoundingClientRect().height > 0).length);

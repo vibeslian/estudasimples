@@ -32,8 +32,8 @@
 .campo { margin-bottom: 18px; }
 .campo label, .campo .rotulo { display: block; font-weight: 700; margin-bottom: 6px; }
 .campo .opcional { font-weight: 400; color: var(--texto-suave); }
-.dica-campo { margin: 6px 0 0; font-size: .9rem; line-height: 1.45; color: var(--texto-suave); }
-input[type="text"], input[type="number"], textarea, select {
+.dica-campo { margin: 6px 0 0; font-size: .9rem; line-height: 1.45; color: var(--texto-suave); overflow-wrap: anywhere; }
+input[type="text"], input[type="number"], input[type="date"], textarea, select {
   width: 100%; min-height: 48px; padding: 11px 14px; font: inherit; font-size: 16px; /* 16px evita o zoom automático no iPhone */
   border: 2px solid var(--borda-campo); border-radius: var(--raio-pequeno); background: #fff; color: var(--texto);
 }
@@ -176,3 +176,62 @@ body[data-modo="sumario"]:not(.pronto) #pagCapa,
 body[data-modo="sumario"]:not(.pronto) #pagFolha { display: none; }
 body[data-modo="folha"]:not(.pronto) #pagFolha { display: block; }
 body[data-modo="sumario"]:not(.pronto) #pagsSumario:empty { aspect-ratio: 21 / 29.7; margin-bottom: 14px; background: var(--salvia-100); border: 1px solid var(--salvia-200); border-radius: var(--raio-pequeno); }
+
+/* ---------- Gerador de referências ABNT ---------- */
+.ref-subtitulo { margin: 22px 0 10px; font-size: 1.05rem; }
+.ref-linha { display: grid; gap: 0 12px; }
+.ref-linha .campo { min-width: 0; }
+.ref-pessoa { flex-wrap: wrap; }
+.ref-pessoa input { flex: 1 1 9em; min-width: 0; }
+.ref-pessoas { margin-bottom: 6px; }
+.ref-quatro { margin-top: 14px; }
+.ref-dica-topo { margin: 0 0 12px; }
+.ref-data-linha { display: grid; gap: 10px; margin-bottom: 14px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.ref-data-parte label { display: block; margin-bottom: 4px; font-weight: 700; font-size: .92rem; }
+.ref-data-parte .opcional { font-weight: 400; color: var(--texto-suave); }
+.ref-data-1 { grid-template-columns: minmax(0, 8em); }
+.ref-data-3 .ref-data-parte:first-child { grid-column: 1; }
+@media (min-width: 560px) {
+  .ref-linha-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ref-linha-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .ref-data-3 { grid-template-columns: 6em minmax(0, 1fr) 7em; }
+}
+.ref-data-3 { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.ref-data-3 .ref-data-parte:nth-child(2) { grid-column: 1 / -1; }
+
+.btn-mini { min-height: 38px; padding: 4px 12px; font-size: .88rem; }
+.btn-perigo { color: var(--erro-texto); }
+
+.ref-resultado { min-height: 170px; padding: 16px 18px; background: var(--certo-bg); border: 1px solid var(--salvia-300); border-radius: var(--raio-pequeno); }
+.ref-vazio { margin: 0; color: var(--texto-suave); line-height: 1.5; }
+.ref-texto { margin: 0 0 12px; font-size: 1.05rem; line-height: 1.55; overflow-wrap: anywhere; color: #000; }
+.ref-avisos { margin: 0 0 12px; padding: 8px 12px; border-radius: 10px; background: var(--acento-claro); color: var(--erro-texto); font-size: .92rem; }
+.ref-falta { margin: 10px 0 0; font-size: .95rem; font-weight: 700; color: var(--erro-texto); }
+.ref-citacoes { padding-top: 10px; border-top: 1px solid var(--salvia-300); }
+.ref-cita-titulo { margin: 0 0 6px; font-weight: 800; font-family: var(--fonte-titulo); }
+.ref-cita { margin: 0 0 8px; line-height: 1.8; }
+.ref-cita-rotulo { font-weight: 700; }
+.ref-acoes { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.ref-conta { font-weight: 400; color: var(--texto-suave); font-size: 1rem; }
+
+.sheet p.rascunho { color: #c4472b; }
+.nota-rascunho { color: #c4472b; font-weight: 700; }
+.ref-lista { margin: 0 0 12px; }
+.ref-item { margin: 0 0 12px; padding: 12px 14px; background: #fff; border: 1px solid var(--salvia-200); border-radius: var(--raio-pequeno); }
+.ref-item.editando { border-color: var(--acento); box-shadow: 0 0 0 2px var(--acento-claro); }
+.ref-item-tipo { display: block; margin-bottom: 4px; font-family: var(--fonte-titulo); font-weight: 800; font-size: .85rem; color: var(--principal); }
+.ref-item-texto { margin: 0 0 6px; line-height: 1.5; overflow-wrap: anywhere; color: #000; }
+.ref-item-cita { margin: 0 0 8px; font-size: .9rem; color: var(--texto-suave); }
+.ref-item-botoes { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.ref-exemplos { display: grid; gap: 12px; margin: 0 0 1.5em; }
+.ref-exemplo { margin: 0; padding: 14px 18px; background: var(--superficie); border: 1px solid var(--salvia-200); border-left: 4px solid var(--salvia-500); border-radius: var(--raio-pequeno); }
+.ref-exemplo-tipo { display: block; margin-bottom: 4px; font-family: var(--fonte-titulo); font-weight: 800; font-size: .95rem; color: var(--principal); }
+.ref-exemplo p { margin: 0; line-height: 1.45; overflow-wrap: anywhere; }
+.ref-rolavel { overflow-x: auto; margin: 0 0 1.4em; -webkit-overflow-scrolling: touch; }
+.ref-tabela { width: 100%; min-width: 480px; border-collapse: collapse; font-size: .95rem; background: var(--superficie); border: 1px solid var(--salvia-200); }
+.ref-tabela caption { padding: 0 0 8px; text-align: left; font-weight: 700; color: var(--texto-suave); caption-side: top; }
+.ref-tabela th, .ref-tabela td { padding: 10px 12px; border-bottom: 1px solid var(--salvia-200); text-align: left; vertical-align: top; }
+.ref-tabela thead th { background: var(--salvia-100); }
+@media (min-width: 1200px) { body[data-modo="referencias"] main.tool { max-width: 1320px; } body[data-modo="referencias"] .tool-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 460px); } }
+body[data-modo="referencias"] #pagsRef:empty { aspect-ratio: 21 / 29.7; margin-bottom: 14px; background: var(--salvia-100); border: 1px solid var(--salvia-200); border-radius: var(--raio-pequeno); }

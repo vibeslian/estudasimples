@@ -1,0 +1,80 @@
+[
+  {
+    "p": "Como fazer uma referência ABNT?",
+    "r": [
+      "Escolha o tipo de fonte no gerador (livro, artigo, site...) e preencha os dados que estão no documento: autor, título, edição, cidade, editora e ano. A referência sai na ordem e com a pontuação da NBR 6023:2018, e você copia ou baixa em Word e PDF."
+    ]
+  },
+  {
+    "p": "Qual é a ordem dos elementos de uma referência de livro?",
+    "r": [
+      "SOBRENOME, Nome. Título: subtítulo. Edição. Cidade: Editora, ano. Por exemplo: SILVA, Maria Helena. Escrita acadêmica na prática: do projeto ao TCC. 2. ed. São Paulo: Editora Exemplo, 2022. O título recebe destaque (aqui, o negrito); o subtítulo, não."
+    ]
+  },
+  {
+    "p": "Como referenciar um site com e sem autor?",
+    "r": [
+      "Com autor: SOBRENOME, Nome. Título da página. Cidade, data. Portal: Nome do site. Disponível em: endereço. Acesso em: data. Sem autor, a entrada é o título, com a primeira palavra em maiúsculas, e ele não leva negrito. Veja mais casos no <a href=\"/guias/referencia-de-site-abnt/\">guia de referência de site ABNT</a>."
+    ]
+  },
+  {
+    "p": "Como escrever a data de acesso e os meses?",
+    "r": [
+      "\"Acesso em:\" vem com o dia, o mês abreviado e o ano, sem zero na frente do dia: Acesso em: 5 out. 2026. Os meses abreviados são jan., fev., mar., abr., maio, jun., jul., ago., set., out., nov. e dez. O gerador faz isso sozinho e já preenche a data de hoje quando você coloca um endereço."
+    ]
+  },
+  {
+    "p": "Quantos autores posso colocar na referência?",
+    "r": [
+      "Até três autores, todos, separados por ponto e vírgula. Com quatro ou mais, a norma recomenda indicar todos, mas permite só o primeiro seguido de et al. No gerador, a opção aparece quando você adiciona o quarto autor."
+    ]
+  },
+  {
+    "p": "O que faço quando o documento não tem autor?",
+    "r": [
+      "A entrada passa a ser o título, com a primeira palavra em maiúsculas. Se o título começa por artigo ou por palavra de uma sílaba, a palavra seguinte também vai em maiúsculas, como em UM GUIA do conhecimento ou EM BUSCA de um sonho. Não se escreve \"Anônimo\"."
+    ]
+  },
+  {
+    "p": "O que significam [S. l.] e [s. n.]?",
+    "r": [
+      "São abreviaturas em latim para o que não consta no documento: [S. l.] (sine loco) é \"sem local\", e [s. n.] (sine nomine) é \"sem editora\". Sem os dois, escreve-se [S. l.: s. n.]. O gerador usa essas formas quando você deixa a cidade ou a editora em branco."
+    ]
+  },
+  {
+    "p": "A referência leva negrito, itálico ou sublinhado?",
+    "r": [
+      "A norma pede um destaque no título, e o mesmo em todas as referências do trabalho. O gerador usa o negrito, que é o mais comum. Se a sua faculdade pedir itálico, cole no Word e troque em todas. Nos artigos e nas notícias, o destaque vai no nome da revista ou do jornal, e nas obras sem autor não se usa."
+    ]
+  },
+  {
+    "p": "Como ordenar as referências em ordem alfabética?",
+    "r": [
+      "Pela entrada, que é o sobrenome do primeiro autor (ou o nome da instituição, ou a primeira palavra do título). No gerador, a lista se ordena sozinha cada vez que você adiciona ou edita uma referência. Duas obras do mesmo autor e do mesmo ano recebem as letras a e b depois do ano."
+    ]
+  },
+  {
+    "p": "Na citação, escrevo (Silva, 2020) ou (SILVA, 2020)?",
+    "r": [
+      "Pela NBR 10520:2023, só a inicial em maiúscula: (Silva, 2020). A versão de 2002 pedia o sobrenome todo em maiúsculas, e alguns manuais ainda mostram esse modelo. O gerador usa o de 2023, e você pode trocar em \"Fonte e estilo da citação\". Veja o <a href=\"/guias/citacao-abnt/\">guia de citação ABNT</a>."
+    ]
+  },
+  {
+    "p": "O gerador procura os dados da referência sozinho pelo link?",
+    "r": [
+      "Não. Ele só organiza o que você digita, no seu navegador, e não envia nada para a internet. Por isso vale conferir os dados no documento original: título, ano, páginas e edição."
+    ]
+  },
+  {
+    "p": "Meu manual escreve diferente. Qual vale?",
+    "r": [
+      "O manual da sua faculdade vale mais do que qualquer gerador. Os manuais seguem a mesma norma, mas escolhem formas diferentes em alguns pontos (como nº ou n. nas leis, ou o destaque do subtítulo). Nesses casos, o gerador fica com o que diz a NBR 6023:2018 ou com a forma mais comum, e a tabela \"Onde os manuais divergem\" desta página mostra cada escolha."
+    ]
+  },
+  {
+    "p": "Meus dados ficam guardados?",
+    "r": [
+      "Só nesta aba do navegador, no seu aparelho, para você não perder a lista ao passar de uma ferramenta à outra. Nada é enviado a nenhum servidor, não há cookies, e tudo some quando você fecha a aba ou clica em \"Limpar dados\"."
+    ]
+  }
+]
