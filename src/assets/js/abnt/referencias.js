@@ -229,7 +229,7 @@ function atualiza() {
   $("btnCopiarPar").disabled = $("btnCopiarNar").disabled = !atual.completa;
   $("btnAdicionar").textContent = editandoId !== null ? "Salvar alterações" : "Adicionar à lista";
   $("btnCancelarEdicao").hidden = editandoId === null;
-  renderPrevia();
+  agendaPrevia();
   guarda();
 }
 
@@ -285,7 +285,7 @@ async function aoClicarNaLista(ev) {
   if (b.dataset.acao === "remover") {
     itens = itens.filter((x) => x.id !== id);
     if (editandoId === id) cancelaEdicao();
-    renderLista(); renderPrevia(); atualiza();
+    renderLista(); atualiza();
     mensagem("Referência removida.");
     $("tipo").focus();
   } else if (b.dataset.acao === "copiar") {
@@ -318,7 +318,7 @@ function adicionaOuSalva() {
     mensagem(`Referência adicionada (${itens.length} na lista), em ordem alfabética. Monte a próxima.`);
   }
   limpaForm(tipo);
-  renderLista(); renderPrevia(); atualiza();
+  renderLista(); atualiza();
   const primeiro = document.querySelector(`#form-${tipo} input[type="text"]`);
   if (primeiro) primeiro.focus();
 }
@@ -413,6 +413,11 @@ function criaFigura(n, total) {
   return fig;
 }
 
+let previaPendente = 0;
+function agendaPrevia() {
+  if (previaPendente) return;
+  previaPendente = requestAnimationFrame(() => { previaPendente = 0; renderPrevia(); });
+}
 function renderPrevia() {
   const modelo = modeloDaPrevia();
   const lay = calculaReferencias({ font: modelo.font, refs: modelo.refs }, medidorCanvas(modelo.font));
@@ -516,7 +521,7 @@ function novaLista() {
   itens = [];
   editandoId = null;
   limpaForm(tipoAtual());
-  renderLista(); renderPrevia(); atualiza();
+  renderLista(); atualiza();
   mensagem("Pronto! A lista foi limpa. Monte as referências do novo trabalho.");
   mostraAba("dados");
   $("tipo").focus();
@@ -589,9 +594,8 @@ window.addEventListener("resize", () => { if ($("dlgZoom").open) aplicaZoom(); }
 new ResizeObserver(ajustaEscala).observe($("painelPrevia"));
 
 renderLista();
-renderPrevia();
-atualiza();
+atualiza(); // desenha a prévia
 document.body.classList.add("pronto");
 // se as fontes Arimo/Tinos (usadas quando o aparelho não tem Arial/Times) chegarem depois, refaz o cálculo com as medidas certas
-if (document.fonts) { document.fonts.ready.then(() => { renderLista(); renderPrevia(); }); document.fonts.addEventListener("loadingdone", renderPrevia); }
+if (document.fonts) { document.fonts.ready.then(() => { renderLista(); agendaPrevia(); }); document.fonts.addEventListener("loadingdone", agendaPrevia); }
 if (pegaAviso()) mensagem("Pronto! Os dados foram apagados deste navegador.");

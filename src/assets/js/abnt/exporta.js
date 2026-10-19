@@ -216,9 +216,19 @@ export function medidorCanvas(fonte) {
   ctx.fontKerning = "none";
   // mesmas famílias da prévia (ferramenta.js): Arial/Times do aparelho ou, se não houver, Arimo/Tinos (mesmas medidas)
   const familia = fonte === "Arial" ? '"CapaArial", "ArimoWeb", Arial, Helvetica, sans-serif' : '"CapaTimes", "TinosWeb", "Times New Roman", Times, serif';
+  // Cada chamada de medidorCanvas cria um medidor novo (com memória própria): se uma fonte chegar depois, o próximo desenho mede de novo.
+  const memoria = new Map();
+  let fonteAtual = "";
   return (texto, bold, tamanho, italic) => {
-    ctx.font = `${italic ? "italic " : ""}${bold ? 700 : 400} 100px ${familia}`;
-    return (ctx.measureText(texto).width * tamanho) / 100; // em pt
+    const fonte = `${italic ? "italic " : ""}${bold ? 700 : 400} 100px ${familia}`;
+    const chave = fonte.charAt(0) + (bold ? "b" : "n") + texto;
+    let w = memoria.get(chave);
+    if (w === undefined) {
+      if (fonte !== fonteAtual) { ctx.font = fonte; fonteAtual = fonte; }
+      w = ctx.measureText(texto).width;
+      memoria.set(chave, w);
+    }
+    return (w * tamanho) / 100; // em pt
   };
 }
 
