@@ -243,6 +243,9 @@ function renderLista() {
   const lista = montaListaAtual();
   cont.textContent = "";
   if (!lista.length) cont.append(listaVazia);
+  // só é "lista" para os leitores de tela quando tem itens (uma lista sem itens é um erro de acessibilidade)
+  if (lista.length) { cont.setAttribute("role", "list"); cont.setAttribute("aria-label", "Referências da lista"); }
+  else { cont.removeAttribute("role"); cont.removeAttribute("aria-label"); }
   lista.forEach((it) => {
     const item = document.createElement("div");
     item.className = "ref-item" + (it.id === editandoId ? " editando" : "");

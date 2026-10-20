@@ -66,7 +66,7 @@
         </div>
 
         <h2 class="titulo-form">3. Sua lista de referências <span class="ref-conta" id="contaLista"></span></h2>
-        <div id="lista" class="ref-lista" role="list" aria-label="Referências da lista">
+        <div id="lista" class="ref-lista">
           <p class="dica-campo" id="listaVazia">A lista está vazia. Depois de montar uma referência, clique em "Adicionar à lista": ela entra na ordem alfabética, e você pode editar, copiar ou remover cada uma.</p>
         </div>
         <button type="button" class="btn btn-pequeno" id="btnCopiarLista" hidden>Copiar a lista toda</button>
@@ -179,7 +179,7 @@
       <section id="onde-os-manuais-divergem">
         <h2 class="revelar">Onde os manuais divergem e o que o gerador escolhe</h2>
         <p class="revelar">Os manuais de bibliotecas seguem a mesma norma, mas nem sempre escrevem igual. Nesses pontos, o gerador fica com a norma ou com a forma mais comum:</p>
-        <div class="ref-rolavel revelar">
+        <div class="ref-rolavel revelar" role="region" tabindex="0" aria-label="Diferenças entre manuais e a escolha do gerador">
           <table class="ref-tabela">
             <caption>Diferenças entre manuais e a escolha do gerador</caption>
             <thead><tr><th>Ponto</th><th>O que acontece nos manuais</th><th>O gerador usa</th></tr></thead>

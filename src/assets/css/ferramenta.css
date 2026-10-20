@@ -90,7 +90,7 @@ input[type="file"] { width: 100%; padding: 10px; font: inherit; font-size: 16px;
 .sheet p { position: absolute; margin: 0; text-align: left; }
 .sheet .linha { display: block; white-space: pre; }
 .sheet img.logo-bloco { position: absolute; display: block; max-width: none; }
-.fantasma { color: #9ca3af; }
+.fantasma { color: #767676; } /* texto de exemplo da prévia: cinza claro, mas com contraste 4,5:1 sobre o branco (o #9ca3af anterior dava 2,5:1) */
 .pagina-previa { margin: 0 0 14px; }
 .pagina-previa figcaption { display: none; margin: 0 0 6px; font-weight: 700; font-size: .95rem; color: var(--texto-suave); }
 .duas-paginas .pagina-previa figcaption { display: block; }
