@@ -150,3 +150,19 @@ code.cm { font-family: inherit; font-weight: 700; background: var(--salvia-100);
 .ficha-corpo { padding: 12px 16px 14px; }
 .ficha-corpo p { margin: .35em 0; line-height: 1.5; overflow-wrap: anywhere; }
 .ficha-corpo .ficha-rotulo { display: block; margin-top: .7em; font-size: .82rem; font-weight: 800; letter-spacing: .03em; text-transform: uppercase; color: var(--texto-suave); }
+
+/* ---------- "Recomendado para o seu trabalho": livros e cursos com link de afiliado (fim das guias, antes de "Guias relacionadas") ---------- */
+.afiliados { margin: 2.4em 0 0; padding: 18px 20px 16px; background: var(--salvia-50); border: 1px solid var(--salvia-200); border-left: 6px solid var(--principal); border-radius: var(--raio-pequeno); }
+.afiliados h2 { margin: 0 0 12px; font-size: 1.25rem; }
+.afiliados-lista { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); gap: 12px; margin: 0; padding: 0 !important; }
+.afiliado { display: flex; flex-direction: column; gap: 6px; margin: 0 !important; padding: 14px 16px; background: var(--superficie); border: 1px solid var(--salvia-200); border-radius: var(--raio-pequeno); }
+.afiliado p { margin: 0; max-width: none; }
+.afiliado-topo { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 8px; font-size: .8rem; }
+.afiliado-tipo { font-weight: 800; letter-spacing: .03em; text-transform: uppercase; color: var(--principal); }
+.afiliado-selo { padding: 1px 9px; border-radius: 999px; background: var(--acento-claro); color: var(--texto); font-weight: 700; }
+.afiliado-titulo { font-family: var(--fonte-titulo); font-weight: 800; font-size: 1.02rem; line-height: 1.25; }
+.afiliado-autor { font-size: .9rem; color: var(--texto-suave); }
+.afiliado-frase { font-size: .93rem; color: var(--texto-suave); }
+.afiliado-botao { margin-top: auto; align-self: flex-start; min-height: 44px; padding: 8px 16px; font-size: .95rem; }
+.afiliados-nota { margin: 12px 0 0; font-size: .82rem; line-height: 1.5; color: var(--texto-suave); }
+.guia .artigo .afiliados-nota a { color: inherit; text-decoration: underline; }

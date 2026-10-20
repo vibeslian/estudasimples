@@ -3,27 +3,16 @@
 // Uso: node probar-accesibilidad.mjs            (sitio local en :3000)
 //      BASE_URL=https://estudasimples.com.br node probar-accesibilidad.mjs
 //      PAGINAS=/gerador-de-referencias-abnt/,/sobre/ node probar-accesibilidad.mjs   (solo algunas)
-// Se desactiva la regla "region" (consejo, no norma: pide que hasta el título del encabezado esté dentro de un landmark; Lighthouse no la usa).
-// axe-core: se busca en pruebas/node_modules y en la caché de npx (donde lo trae Lighthouse); o se indica con AXE_PATH.
+// axe-core y la regla "region" desactivada: ver lib-axe.mjs.
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import puppeteer from "puppeteer-core";
 import { llena } from "./lib-referencias.mjs";
+import { axeEn, describeAxe } from "./lib-axe.mjs";
 import { CASOS } from "./ejemplos-referencias.mjs";
 
 const BASE = process.env.BASE_URL || "http://localhost:3000";
-
-function buscaAxe() {
-  if (process.env.AXE_PATH) return process.env.AXE_PATH;
-  const candidatos = [path.resolve("node_modules/axe-core/axe.min.js")];
-  const npx = path.join(os.homedir(), "AppData", "Local", "npm-cache", "_npx");
-  if (fs.existsSync(npx)) for (const d of fs.readdirSync(npx)) candidatos.push(path.join(npx, d, "node_modules", "axe-core", "axe.min.js"));
-  const hallado = candidatos.find((p) => fs.existsSync(p));
-  if (!hallado) throw new Error("No encuentro axe-core. Corre una vez 'npx lighthouse@12 --version' (lo trae) o indica AXE_PATH.");
-  return hallado;
-}
-const AXE = fs.readFileSync(buscaAxe(), "utf8");
 
 async function urlsDelSitio() {
   if (process.env.PAGINAS) return process.env.PAGINAS.split(",");
@@ -36,21 +25,10 @@ let fallos = 0, total = 0;
 const VP = { celular: { width: 390, height: 844, isMobile: true, hasTouch: true, deviceScaleFactor: 1 }, computador: { width: 1280, height: 900, deviceScaleFactor: 1 } };
 
 async function auditar(p, etiqueta) {
-  await p.addStyleTag({ content: ".revelar{opacity:1!important;transform:none!important;transition:none!important}" }).catch(() => {});
-  await p.evaluate(AXE);
-  const r = await p.evaluate(async () => {
-    const res = await axe.run(document, { runOnly: { type: "tag", values: ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa", "best-practice"] }, rules: { region: { enabled: false } }, resultTypes: ["violations"] });
-    return res.violations.map((v) => ({ id: v.id, impacto: v.impact, ayuda: v.help, nodos: v.nodes.slice(0, 3).map((n) => ({ sel: n.target.join(" "), res: (n.any.concat(n.all, n.none)[0] || {}).message || "" })), cuantos: v.nodes.length }));
-  });
+  const r = await axeEn(p);
   total++;
-  if (r.length) {
-    fallos++;
-    console.log(`FALLA ${etiqueta}`);
-    for (const v of r) {
-      console.log(`   - ${v.id} (${v.impacto}, ${v.cuantos} elementos): ${v.ayuda}`);
-      for (const n of v.nodos) console.log(`       · ${n.sel.slice(0, 110)} | ${n.res.replace(/\s+/g, " ").slice(0, 170)}`);
-    }
-  } else console.log(`OK    ${etiqueta}`);
+  if (r.length) { fallos++; console.log(`FALLA ${etiqueta}`); console.log(describeAxe(r)); }
+  else console.log(`OK    ${etiqueta}`);
 }
 
 const b = await puppeteer.launch({ executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe", headless: "new", userDataDir: fs.mkdtempSync(path.join(os.tmpdir(), "es-axe-")) });

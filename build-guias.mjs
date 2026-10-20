@@ -31,7 +31,7 @@ export function carregaGuias(arquivo = "conteudo/guias.json") {
   return guias;
 }
 
-export function preparaGuias(config, guias, parceiroDaGuia = () => "") {
+export function preparaGuias(config, guias, parceiroDaGuia = () => "", afiliadosDaGuia = () => "") {
   const siteUrl = config.siteUrl.replace(/\/+$/, "");
   const por = Object.fromEntries(guias.map((g) => [g.slug, g]));
   const get = (slug) => { if (!por[slug]) throw new Error(`conteudo/guias.json: não existe a guia "${slug}"`); return por[slug]; };
@@ -101,11 +101,12 @@ export function preparaGuias(config, guias, parceiroDaGuia = () => "") {
   const relacionadas = (slug) => {
     const g = get(slug);
     const parceiro = parceiroDaGuia(slug); // cartão "Parceiro recomendado" (vazio enquanto não houver anúncio)
+    const afiliados = afiliadosDaGuia(slug); // "Recomendado para o seu trabalho" (vazio enquanto estiver desligado)
     const cartoes = g.relacionadas.map((r) => {
       const x = get(r);
       return `<li><a class="guia-cartao" href="/guias/${r}/"><span class="guia-cartao-titulo">${esc(x.rotulo)}</span><span class="guia-cartao-texto">${esc(x.resumoIndice)}</span></a></li>`;
     }).join("\n          ");
-    return `<section class="guia-relacionadas" aria-labelledby="relacionadas">
+    return `${afiliados ? afiliados + "\n      " : ""}<section class="guia-relacionadas" aria-labelledby="relacionadas">
         <h2 id="relacionadas">Guias relacionadas</h2>
         <ul class="guia-cartoes">
           ${cartoes}

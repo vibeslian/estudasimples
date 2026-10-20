@@ -182,5 +182,146 @@
       "anuncios": []
     }
   },
+  "afiliados": {
+    "_ajuda": "Recomendações 'Recomendado para o seu trabalho' (livros e cursos com link de afiliado) no fim das guias, antes de 'Guias relacionadas'. Está DESLIGADO. Para ligar: 1) ponha o seu ID de afiliado da Amazon em 'amazonTag' (ex.: 'meusite-20'; é acrescentado aos links de amazon.com.br que ainda não tenham ?tag=); 2) cole o link de cada produto em 'url' (https; produto sem link NÃO aparece); 3) preencha 'legalAtualizadoEm' com a data de hoje (ex.: '2026-11-05'); 4) ponha 'ativo': true e rode o build. Ao ligar, os Termos de Uso e a Política de Privacidade ganham a seção 'Links de afiliado' (e a frase da Amazon, se houver link da Amazon). Cada guia mostra no máximo 3 produtos, na ordem da lista. 'tipo' é 'livro' ou 'curso' (o botão diz 'Ver na Amazon', 'Ver o livro' ou 'Ver o curso'; 'botao' muda o texto). 'guias' é a lista de pastas de guias (ou ['todas']).",
+    "ativo": false,
+    "amazonTag": "",
+    "legalAtualizadoEm": null,
+    "produtos": [
+      {
+        "id": "gil-projetos-de-pesquisa",
+        "tipo": "livro",
+        "titulo": "Como Elaborar Projetos de Pesquisa",
+        "autor": "Antonio Carlos Gil",
+        "frase": "Passo a passo para planejar o projeto de pesquisa do TCC, do tema até a metodologia.",
+        "url": "",
+        "guias": [
+          "como-fazer-tcc",
+          "introducao-do-tcc"
+        ]
+      },
+      {
+        "id": "gil-pesquisa-social",
+        "tipo": "livro",
+        "titulo": "Métodos e Técnicas de Pesquisa Social",
+        "autor": "Antonio Carlos Gil",
+        "frase": "Explica os tipos de pesquisa e as técnicas para coletar dados: ajuda a escrever a metodologia.",
+        "url": "",
+        "guias": [
+          "metodologia-do-tcc"
+        ]
+      },
+      {
+        "id": "marconi-lakatos-fundamentos",
+        "tipo": "livro",
+        "titulo": "Fundamentos de Metodologia Científica",
+        "autor": "Marina de Andrade Marconi e Eva Maria Lakatos",
+        "frase": "Clássico de metodologia: o que é pesquisa científica, os tipos de pesquisa e como organizar o trabalho.",
+        "url": "",
+        "guias": [
+          "metodologia-do-tcc",
+          "referencial-teorico-do-tcc"
+        ]
+      },
+      {
+        "id": "marconi-lakatos-trabalho-cientifico",
+        "tipo": "livro",
+        "titulo": "Metodologia do Trabalho Científico",
+        "autor": "Marina de Andrade Marconi e Eva Maria Lakatos",
+        "frase": "Manual prático para projetos, pesquisa bibliográfica e trabalhos como TCC e artigos.",
+        "url": "",
+        "guias": [
+          "como-fazer-tcc",
+          "normas-abnt-tcc",
+          "normas-abnt",
+          "relatorio-abnt",
+          "modelo-de-artigo-cientifico-abnt",
+          "consideracoes-finais-tcc"
+        ]
+      },
+      {
+        "id": "severino-trabalho-cientifico",
+        "tipo": "livro",
+        "titulo": "Metodologia do Trabalho Científico",
+        "autor": "Antônio Joaquim Severino",
+        "frase": "Muito usado nas faculdades: leitura de textos, fichamentos e como elaborar trabalhos científicos.",
+        "url": "",
+        "guias": [
+          "referencial-teorico-do-tcc",
+          "introducao-do-tcc",
+          "normas-abnt-tcc",
+          "resenha-critica",
+          "fichamento",
+          "consideracoes-finais-tcc"
+        ]
+      },
+      {
+        "id": "eco-como-se-faz-uma-tese",
+        "tipo": "livro",
+        "titulo": "Como se Faz uma Tese",
+        "autor": "Umberto Eco",
+        "frase": "Conselhos práticos para escolher o tema, pesquisar e escrever uma tese ou monografia.",
+        "url": "",
+        "guias": [
+          "como-fazer-tcc",
+          "referencial-teorico-do-tcc"
+        ]
+      },
+      {
+        "id": "medeiros-redacao-cientifica",
+        "tipo": "livro",
+        "titulo": "Redação Científica: a prática de fichamentos, resumos, resenhas",
+        "autor": "João Bosco Medeiros",
+        "frase": "Ensina a fazer fichamentos, resumos e resenhas, com orientações sobre referências e TCC.",
+        "url": "",
+        "guias": [
+          "como-fazer-referencia-abnt",
+          "citacao-abnt",
+          "resumo-abnt",
+          "resenha-critica",
+          "fichamento",
+          "modelo-de-artigo-cientifico-abnt"
+        ]
+      },
+      {
+        "id": "andrade-introducao-metodologia",
+        "tipo": "livro",
+        "titulo": "Introdução à Metodologia do Trabalho Científico",
+        "autor": "Maria Margarida de Andrade",
+        "frase": "Guia para trabalhos da graduação, com pesquisa bibliográfica e regras de apresentação.",
+        "url": "",
+        "guias": [
+          "normas-abnt-tcc",
+          "normas-abnt",
+          "como-fazer-referencia-abnt",
+          "citacao-abnt",
+          "resumo-abnt",
+          "relatorio-abnt"
+        ]
+      },
+      {
+        "id": "cervo-bervian-metodologia-cientifica",
+        "tipo": "livro",
+        "titulo": "Metodologia Científica",
+        "autor": "Cervo, Bervian e Silva",
+        "frase": "Introdução clara aos conceitos e métodos da pesquisa científica, usada em disciplinas de metodologia.",
+        "url": "",
+        "guias": [
+          "introducao-do-tcc"
+        ]
+      },
+      {
+        "id": "creswell-projeto-de-pesquisa",
+        "tipo": "livro",
+        "titulo": "Projeto de Pesquisa: Métodos Qualitativo, Quantitativo e Misto",
+        "autor": "John W. Creswell e J. David Creswell",
+        "frase": "Mostra como planejar uma pesquisa qualitativa, quantitativa ou mista: útil para escolher o método do TCC.",
+        "url": "",
+        "guias": [
+          "metodologia-do-tcc"
+        ]
+      }
+    ]
+  },
   "pinterestVerificacao": "a24dba43757f4389b8b422c90fb63bf3"
 }
