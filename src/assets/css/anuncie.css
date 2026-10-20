@@ -1,0 +1,34 @@
+/* Página "Anuncie no Estuda Simples" (/anuncie/): números do site, níveis de preço, ferramentas e contato.
+   Usa também o servico.css (resumo da portada, cartões de preço, "dif") e o cartão .parceiro do components.css. */
+
+.hero h1, .secao-topo h2 { text-wrap: balance; }
+
+/* O que os visitantes usam */
+.usam { margin-top: 36px; }
+.usam-titulo { margin: 0 0 14px; font-size: 1.2rem; }
+.ferramentas-lista { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.ferramentas-lista a { display: inline-block; padding: 9px 18px; background: var(--superficie); border: 1px solid var(--salvia-200); border-radius: 999px; color: var(--principal); text-decoration: none; }
+.ferramentas-lista a:hover { background: var(--salvia-50); border-color: var(--salvia-300); }
+
+/* Números do site: três cartões grandes */
+.numeros { display: grid; gap: 16px; }
+@media (min-width: 640px) { .numeros { grid-template-columns: repeat(3, 1fr); } }
+.numero { display: grid; gap: 4px; padding: 24px 22px; text-align: center; background: var(--superficie); border: 1px solid var(--salvia-200); border-radius: var(--raio); box-shadow: var(--sombra); }
+.numero b { font-family: var(--fonte-titulo); font-weight: 800; font-size: clamp(2.2rem, 7vw, 3rem); line-height: 1.1; color: var(--principal); }
+.numero span { color: var(--texto-suave); }
+.numeros-nota { margin: 14px 0 0; text-align: center; font-size: .92rem; color: var(--texto-suave); }
+
+/* Exemplo do cartão "Parceiro recomendado" */
+.exemplo-anuncio { max-width: 640px; margin: 32px auto 0; }
+.exemplo-anuncio .parceiro { margin-top: 0; }
+.exemplo-anuncio figcaption { margin-top: 10px; text-align: center; font-size: .92rem; color: var(--texto-suave); }
+
+/* Níveis de preço (usa .preco do servico.css) */
+.nivel .nivel-resumo { margin: 12px 0 0; font-weight: 700; }
+.nivel .nivel-lista { margin: 12px 0 0; padding-left: 1.2em; text-align: left; color: var(--texto-suave); }
+.nivel .nivel-lista li { margin-bottom: .45em; }
+
+/* Contato */
+#contato .secao-topo { max-width: 42rem; }
+.anuncie-contato { display: flex; flex-wrap: wrap; gap: 14px; }
+.anuncie-email { margin: 18px 0 0; }

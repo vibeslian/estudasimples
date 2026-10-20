@@ -8,6 +8,7 @@ import { join, extname, relative, sep } from "node:path";
 import { preparaConexoes, mensagensWhatsapp } from "./build-conexoes.mjs";
 import { carregaGuias, preparaGuias } from "./build-guias.mjs";
 import { montaFormulariosReferencias } from "./build-referencias.mjs";
+import { preparaAnuncie, URL_ANUNCIE } from "./build-anuncie.mjs";
 
 const SRC = "src";
 const OUT = process.env.BUILD_OUT || "dist"; // BUILD_OUT e SITE_CONFIG só servem para as provas montarem uma versão de teste
@@ -35,7 +36,8 @@ const cssGlobal = CSS_GLOBAL.map((n) => readFileSync(join(cssDir, n + ".css"), "
 // Serviço de formatação (WhatsApp, prazo e preços): tudo vem de site.config.json, para mudar num só lugar
 const sv = config.servico;
 const guiasLista = carregaGuias(); // conteudo/guias.json (Etapa 10)
-const gb = preparaGuias(config, guiasLista);
+const anuncie = preparaAnuncie(config, guiasLista); // página /anuncie/ (escondida enquanto anuncie.ativo for false) e cartão "Parceiro recomendado"
+const gb = preparaGuias(config, guiasLista, anuncie.parceiroDaGuia);
 const mensagens = { ...gb.mensagens(sv.modeloMensagem), ...mensagensWhatsapp(sv) }; // guia-<slug>, as de site.config.json e as de página-componente (capa-proximo...)
 const conexoes = preparaConexoes(config);
 const refForms = montaFormulariosReferencias(); // formulários do gerador de referências (campos em src/assets/js/abnt/referencias-campos.js)
@@ -68,6 +70,7 @@ const values = {
   // etiqueta de verificação do Pinterest (config.pinterestVerificacao); vazia = não escreve nada no <head>
   "{{PINTEREST_META}}": pinterestMeta(config.pinterestVerificacao),
   "{{BUILD}}": Date.now().toString(36), // muda a cada build: evita CSS/JS antigo em cache
+  ...anuncie.valores,
 };
 
 const TEXT_EXT = new Set([".html", ".css", ".js", ".json", ".xml", ".txt", ".svg", ".webmanifest"]);
@@ -137,6 +140,7 @@ for (const file of walk(SRC)) {
   else writeFileSync(dest, readFileSync(file));
 
   if (rel.endsWith("index.html") && !privada) {
+    if ("/" + rel.slice(0, -"index.html".length).split(sep).join("/") === URL_ANUNCIE && !anuncie.ativo) continue; // página escondida: fora do sitemap
     pages.push("/" + rel.slice(0, -"index.html".length).split(sep).join("/")); // "/" ou "/gerador-de-capa-abnt/"
   }
 }

@@ -71,6 +71,8 @@ function urlsCambiadas(desde, hasta) {
       urls.add(paginaDe("guias")); // el índice /guias/ lista todas
     } else if (GLOBALES.some((re) => re.test(f))) globales.push(f);
   }
+  // /anuncie/ está escondida mientras anuncie.ativo sea false (noindex, fuera del sitemap): no se avisa a los buscadores
+  if (!(cfg.anuncie && cfg.anuncie.ativo === true)) urls.delete(paginaDe("anuncie"));
   return { urls: [...urls], globales };
 }
 

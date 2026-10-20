@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  {{include:head-common}}
+  <title>Anuncie no {{SITE_NAME}} | Para empresas de educação</title>
+  <meta name="description" content="Anuncie no {{SITE_NAME}}: cartão Parceiro recomendado, banners e menção nos vídeos, a partir de {{ANUNCIE_PRECO_MINIMO}} por mês. Só empresas de educação.">
+  {{ANUNCIE_ROBOTS}}
+  <link rel="canonical" href="{{SITE_URL}}/anuncie/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="{{SITE_NAME}}">
+  <meta property="og:title" content="Anuncie no {{SITE_NAME}}">
+  <meta property="og:description" content="Fale com estudantes de TCC, faculdade e ensino médio. Anúncios só de educação, sempre marcados como Patrocinado.">
+  <meta property="og:url" content="{{SITE_URL}}/anuncie/">
+  <link rel="stylesheet" href="/assets/css/servico.css?v={{BUILD}}">
+  <link rel="stylesheet" href="/assets/css/anuncie.css?v={{BUILD}}">
+</head>
+<body>
+<div class="hero">
+  {{include:manchas}}
+  {{include:header}}
+  <div class="container hero-conteudo hero-grade" id="conteudo">
+    <div class="hero-texto">
+      <span class="etiqueta">Para empresas de educação</span>
+      <h1>Anuncie no Estuda Simples</h1>
+      <p class="lead">Fale com estudantes de TCC, de faculdade e do ensino médio na hora em que eles estão fazendo o trabalho e procurando ajuda. Os anúncios são só de educação e sempre aparecem marcados como “Patrocinado”.</p>
+      <div class="hero-botoes">
+        <a class="btn btn-acento btn-grande" href="{{ANUNCIE_WHATSAPP_URL}}" target="_blank" rel="noopener">Falar pelo WhatsApp</a>
+        <a class="btn btn-grande" href="mailto:{{CONTACT_EMAIL}}?subject=Anunciar%20no%20Estuda%20Simples">Enviar e-mail</a>
+      </div>
+      <ul class="confianca">
+        <li>A partir de {{ANUNCIE_PRECO_MINIMO}} por mês</li>
+        <li>Só empresas de educação</li>
+        <li>Sempre marcado como Patrocinado</li>
+      </ul>
+    </div>
+    <div class="hero-mini hero-resumo" aria-hidden="true">
+      <div class="resumo-cartao">
+        <b class="resumo-titulo">Três jeitos de aparecer</b>
+        <span class="resumo-linha"><span>Cartão nas guias</span><b>Parceiro</b></span>
+        <span class="resumo-linha"><span>Espaços da página</span><b>Banner</b></span>
+        <span class="resumo-linha"><span>Canal acheiunsite</span><b>Vídeos</b></span>
+        <span class="resumo-nota">Todo anúncio leva o selo “Patrocinado”.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main>
+  <section class="secao secao--claro" id="publico">
+    <div class="container">
+      <div class="secao-topo revelar">
+        <span class="etiqueta">Quem visita</span>
+        <h2>Estudantes no meio do trabalho</h2>
+        <p class="lead">O Estuda Simples ajuda a deixar o trabalho acadêmico nas normas da ABNT. Quem chega está fazendo o trabalho agora e procura ajuda para terminá-lo.</p>
+      </div>
+      <div class="grade grade-3 revelar">
+        <div class="cartao">
+          <h3>Estudantes de TCC e de faculdade</h3>
+          <p>Montam o trabalho de conclusão de curso, a monografia ou o trabalho do semestre e precisam de capa, sumário e referências no padrão.</p>
+        </div>
+        <div class="cartao">
+          <h3>Estudantes do ensino médio</h3>
+          <p>Fazem trabalhos escolares e pesquisas e querem saber como apresentar o trabalho do jeito que o professor pede.</p>
+        </div>
+        <div class="cartao">
+          <h3>Quem está procurando ajuda</h3>
+          <p>Chegam a partir de buscas como “como fazer capa ABNT” ou “como fazer referência”. É o momento de ser lembrado por um serviço de educação.</p>
+        </div>
+      </div>
+      <div class="usam revelar">
+        <h3 class="usam-titulo">O que eles usam no site</h3>
+        {{ANUNCIE_FERRAMENTAS}}
+      </div>
+    </div>
+  </section>
+
+  <section class="secao" id="numeros">
+    <div class="container">
+      <div class="secao-topo revelar">
+        <span class="etiqueta">Números do site</span>
+        <h2>O tamanho da audiência</h2>
+        <p class="lead">Números reais, atualizados por mim a cada mês.</p>
+      </div>
+      {{ANUNCIE_NUMEROS}}
+    </div>
+  </section>
+
+  <section class="secao secao--salvia" id="formatos">
+    <div class="container">
+      <div class="secao-topo revelar">
+        <span class="etiqueta">Formatos</span>
+        <h2>Como o seu serviço aparece</h2>
+        <p class="lead">Três formatos, que podem ser combinados. Em todos eles o anúncio é identificado como “Patrocinado”.</p>
+      </div>
+      <div class="grade grade-3 revelar">
+        <div class="cartao">
+          <h3>Parceiro recomendado</h3>
+          <p>Um cartão no fim das guias ABNT que combinam com o seu serviço, junto das guias relacionadas. Leva o seu nome, uma frase e um botão para o seu site.</p>
+        </div>
+        <div class="cartao">
+          <h3>Banner</h3>
+          <p>Um banner nos espaços reservados das páginas do site, sem atrapalhar as ferramentas: nunca fica perto dos botões de baixar.</p>
+        </div>
+        <div class="cartao">
+          <h3>Menção nos vídeos</h3>
+          <p>O seu serviço citado nos vídeos do canal acheiunsite, que levam o público para as ferramentas e guias do site.</p>
+        </div>
+      </div>
+      <figure class="exemplo-anuncio revelar">
+        <div aria-hidden="true">{{ANUNCIE_EXEMPLO_PARCEIRO}}</div>
+        <figcaption>Exemplo de como o cartão “Parceiro recomendado” aparece no fim de uma guia (texto de mostra).</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="secao" id="precos">
+    <div class="container">
+      <div class="secao-topo revelar">
+        <span class="etiqueta">Preços por mês</span>
+        <h2>Escolha o seu nível</h2>
+        <p class="lead">Os valores são por mês. Os detalhes (guias escolhidas, espaços e datas) são combinados por e-mail ou WhatsApp antes de começar.</p>
+      </div>
+      <div class="grade grade-3 precos niveis revelar">
+        {{ANUNCIE_NIVEIS}}
+      </div>
+    </div>
+  </section>
+
+  <section class="secao secao--salvia" id="regras">
+    <div class="container">
+      <div class="secao-topo revelar">
+        <span class="etiqueta">Regras</span>
+        <h2>Só educação, e tudo às claras</h2>
+      </div>
+      <div class="dif dif--servico revelar">
+        <div class="cartao">
+          <h3>O que eu aceito</h3>
+          <p class="sub">Empresas e serviços de educação, como:</p>
+          <ul>
+            <li>Cursinhos e preparatórios para o ENEM</li>
+            <li>Pós-graduação e cursos EAD</li>
+            <li>Cursos de idiomas</li>
+            <li>Revisão de texto</li>
+            <li>Verificação de plágio</li>
+            <li>Editoras e livros</li>
+            <li>Papelarias e material escolar</li>
+          </ul>
+        </div>
+        <div class="cartao">
+          <h3>O que eu não aceito</h3>
+          <p class="sub">Mesmo que o anunciante pague.</p>
+          <ul>
+            <li>Venda de TCC pronto</li>
+            <li>Trabalhos feitos por encomenda, em que outra pessoa escreve o trabalho no lugar do aluno</li>
+            <li>Apostas e jogos de azar</li>
+            <li>Qualquer anúncio enganoso: promessa falsa, “aprovação garantida” ou preço escondido</li>
+          </ul>
+        </div>
+      </div>
+      <aside class="dica dica--larga revelar"><strong class="dica-titulo">Sempre marcado como Patrocinado</strong><p>Todo anúncio leva o selo “Patrocinado” e nunca se passa por conteúdo do site. Os links dos anunciantes levam o aviso de link patrocinado. Eu posso recusar ou tirar do ar qualquer anúncio que não siga estas regras.</p></aside>
+    </div>
+  </section>
+
+  <section class="secao" id="contato">
+    <div class="container">
+      <div class="secao-topo revelar">
+        <span class="etiqueta">Contato</span>
+        <h2>Vamos conversar</h2>
+        <p class="lead">Conte o nome da sua empresa, o que ela oferece e qual formato interessa. Respondo por e-mail ou WhatsApp.</p>
+      </div>
+      <div class="anuncie-contato revelar">
+        <a class="btn btn-acento btn-grande" href="{{ANUNCIE_WHATSAPP_URL}}" target="_blank" rel="noopener">Falar pelo WhatsApp</a>
+        <a class="btn btn-grande" href="mailto:{{CONTACT_EMAIL}}?subject=Anunciar%20no%20Estuda%20Simples">Enviar e-mail</a>
+      </div>
+      <p class="anuncie-email revelar">E-mail: <a href="mailto:{{CONTACT_EMAIL}}">{{CONTACT_EMAIL}}</a></p>
+    </div>
+  </section>
+</main>
+{{include:footer}}
+</body>
+</html>

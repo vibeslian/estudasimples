@@ -131,5 +131,56 @@
       }
     }
   },
+  "anuncie": {
+    "_ajuda": "Página /anuncie/ (para empresas de educação anunciarem). Fica ESCONDIDA enquanto 'ativo' for false: a página existe, mas tem noindex, não entra no sitemap e nenhuma página tem link para ela. Para ligar: preencha os 'numeros' com dados reais, ponha 'ativo': true e rode o build (entra no sitemap, sai o noindex e aparece o link 'Anuncie' no rodapé). O build recusa ligar com números em branco. Preços, textos dos níveis e mensagem do WhatsApp também se mudam só aqui.",
+    "ativo": false,
+    "visitasMinimas": 10000,
+    "mensagemWhatsapp": "Olá! Quero anunciar no Estuda Simples.",
+    "numeros": {
+      "_ajuda": "Números REAIS do site, mês a mês (nunca estimados). 'referencia' é o mês dos dados, por exemplo 'setembro de 2026'. 'fonte' é opcional (por exemplo 'Google Analytics').",
+      "referencia": null,
+      "fonte": null,
+      "visitasMes": null,
+      "paginasVistasMes": null,
+      "percentualCelular": null
+    },
+    "niveis": [
+      {
+        "id": "basico",
+        "nome": "Banner",
+        "preco": 200,
+        "resumo": "Para começar a aparecer.",
+        "inclui": ["Banner em um espaço reservado das páginas", "Selo “Patrocinado” em todo anúncio"]
+      },
+      {
+        "id": "parceiro",
+        "nome": "Parceiro recomendado",
+        "preco": 500,
+        "resumo": "O cartão do seu serviço dentro das guias.",
+        "inclui": ["Cartão “Parceiro recomendado” nas guias relacionadas ao seu serviço", "Banner em um espaço reservado das páginas", "Selo “Patrocinado” em todo anúncio"]
+      },
+      {
+        "id": "completo",
+        "nome": "Parceiro + vídeos",
+        "preco": 1000,
+        "resumo": "O site e o canal juntos.",
+        "inclui": ["Cartão “Parceiro recomendado” nas guias relacionadas ao seu serviço", "Banners nos espaços reservados das páginas", "Menção nos vídeos do canal acheiunsite", "Selo “Patrocinado” em todo anúncio"]
+      }
+    ],
+    "parceiroRecomendado": {
+      "_ajuda": "Cartão 'Parceiro recomendado' (sempre com o selo 'Patrocinado') no fim das guias, junto das guias relacionadas. Está DESLIGADO e sem anúncios. Para usar: ponha 'ativo': true e um item em 'anuncios' (veja '_exemplo'). 'guias' é a lista de guias (o nome da pasta, como 'como-fazer-capa-abnt') ou ['todas']. Uma guia só pode ter um parceiro. Só links https.",
+      "ativo": false,
+      "_exemplo": {
+        "ativo": true,
+        "anunciante": "Nome da empresa",
+        "titulo": "Título curto do anúncio (até 60 letras)",
+        "texto": "Uma ou duas frases sobre o serviço (até 160 letras).",
+        "botao": "Conhecer",
+        "url": "https://www.exemplo.com.br/?utm_source=estudasimples",
+        "guias": ["todas"]
+      },
+      "anuncios": []
+    }
+  },
   "pinterestVerificacao": "a24dba43757f4389b8b422c90fb63bf3"
 }
