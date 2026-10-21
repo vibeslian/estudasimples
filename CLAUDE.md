@@ -28,12 +28,12 @@ Lian trabaja directo conmigo: soy su asesor y su programador a la vez. Estas reg
    - **Lo que hice** (corto).
    - **Tareas manuales para ti**: solo lo que Lian debe hacer (capturas, claves, cuentas, pagos). **Siempre paso a paso** (1, 2, 3...), con el nombre exacto de cada menú y botón, dónde hacer clic y qué debe ver en pantalla, y qué me manda de vuelta; sin suponer que se acuerda de nada ni que conoce el panel (Amazon, Hotmart, AdSense, Search Console, Cloudflare). Si no estoy seguro del nombre de un menú, lo digo y le pido una captura.
    - **Próximo paso**.
-8. **Solo cuando Lian lo pida** ("dame el informe"), dar un bloque de código titulado **"INFORME PARA CLAUDE"**, de máximo 25 líneas, para que Lian lo copie a su asesor y haga una segunda revisión. No darlo por costumbre: Lian quiere ahorrar tokens. Incluye: qué se hizo, commits, URLs afectadas, resultado de pruebas, lo que encontró el revisor, lo que no se pudo verificar y el próximo paso. Sin relleno.
+8. **Solo cuando Lian lo pida** ("dame el informe") **o cuando haga falta abrir otra conversación** (regla 13), dar un bloque de código titulado **"INFORME PARA CLAUDE"**, de máximo 25 líneas, para que Lian lo copie a su asesor y haga una segunda revisión. No darlo por costumbre: Lian quiere ahorrar tokens. Incluye: qué se hizo, commits, URLs afectadas, resultado de pruebas, lo que encontró el revisor, lo que no se pudo verificar y el próximo paso. Sin relleno.
 9. Si el asesor de Lian pide correcciones y Lian las pega tal cual: aplicarlas y dar un nuevo informe corto.
 10. Nunca escribir contraseñas, CPF, datos bancarios ni la clave de IndexNow (las contraseñas las escribe Lian). No abrir programas visibles ni dejar archivos en Descargas. Los archivos del Kit TCC nunca se publican.
 11. Cada cosa importante (se probó, se decidió, se rompió, se publicó) se apunta sola en la Bitácora del Cerebro REONDIAL (ver la sección "Bitácora"), con comandos, errores, rutas y enlaces.
 12. Para indexar en Google, dar como máximo **3 URLs**: solo las importantes y que no estén ya indexadas.
-13. Cuando una etapa termine, recordar a Lian que abra una **conversación nueva** para ahorrar tokens.
+13. (Cambiada el 21/10/2026, igual que en FériasClaras y en el CLAUDE.md global.) Seguimos en la misma conversación. Pedirle a Lian que abra una **conversación nueva** SOLO cuando haga falta (por ejemplo, si esta ya gasta demasiado contexto o tokens sin necesidad), y entonces darle el INFORME PARA CLAUDE y el resumen para retomar en un bloque de código.
 14. Lo que Lian diga en la conversación actual manda sobre estas reglas.
 
 ### Lista de espera (en este orden)
