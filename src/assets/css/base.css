@@ -117,6 +117,14 @@ a.cartao:active { transform: scale(.985); }
 .mini-titulo { margin: auto 0; padding: 1.6em 0; font-size: 9px; }
 .mini-titulo b { display: inline; }
 .mini-base b + b { margin-top: 1.6em; }
+/* A capa de exemplo "se escreve sozinha" (site.js, só no computador e só sem movimento reduzido). Só muda a opacidade: não mexe no layout (CLS 0). */
+.mini-capa.digitando .ch { opacity: 0; }
+.mini-capa.digitando .ch.on { opacity: 1; }
+.mini-selos { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin: 18px 0 0; font-size: .82rem; font-weight: 700; color: var(--texto-suave); }
+.mini-selos span { padding: 3px 10px; border-radius: 999px; background: var(--superficie); border: 1px solid var(--salvia-200); }
+.mini-selos span:last-child { border: 0; background: none; font-weight: 600; width: 100%; text-align: center; }
+.mini-selos { transition: opacity .6s ease; }
+.js .hero-mini.espera .mini-selos { opacity: 0; }
 @keyframes entrar-mini {
   from { opacity: 0; transform: translateY(26px) rotate(-1.5deg); }
   to   { opacity: 1; transform: translateY(0) rotate(-1.5deg); }
@@ -130,6 +138,9 @@ a.cartao:active { transform: scale(.985); }
 .destaque-mini { background: var(--salvia-50); border: 1px solid var(--salvia-200); border-radius: var(--raio-pequeno); padding: 18px; text-align: center; font-size: .78rem; line-height: 1.7; }
 .destaque-mini b { display: block; font-size: .85rem; }
 @media (min-width: 800px) { .cartao.destaque { grid-template-columns: 1fr 260px; gap: 40px; } }
+/* Início: as 4 ferramentas em 2 x 2 (texto à esquerda, miniatura à direita) em vez de 3 + 1 sozinha */
+@media (min-width: 900px) { .grade.grade-ferramentas .cartao.destaque--duplo { grid-template-columns: minmax(0, 1fr) 208px; align-items: center; align-content: center; gap: 24px; } }
+#guias p.revelar { margin-top: 32px; }
 /* dois cartões lado a lado: o texto em cima, o miniatura embaixo */
 .grade .cartao.destaque--duplo { grid-template-columns: 1fr; grid-template-rows: auto auto; gap: 22px; align-items: start; align-content: start; }
 .destaque--duplo > div:first-child { align-self: start; }
@@ -167,6 +178,9 @@ a.cartao:active { transform: scale(.985); }
 /* ---------- Aparecer suavemente ao rolar (só quando o JS está ativo; nunca no formulário/prévia) ---------- */
 .js .revelar { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
 .js .revelar.visivel { opacity: 1; transform: none; }
+/* respaldo: ao imprimir, ou se o site.js não carregar em 4 s (head-common.html), nada fica escondido */
+.sem-js-site .revelar { opacity: 1 !important; transform: none !important; }
+@media print { .js .revelar { opacity: 1; transform: none; } }
 
 /* ---------- Celular pequeno / computador ---------- */
 @media (min-width: 640px) { .nav .nav-cta { display: inline-flex; min-height: 42px; padding: 8px 18px; margin-left: 6px; } }

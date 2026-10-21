@@ -119,7 +119,7 @@ for (const g of GUIAS_CON) {
   const hallados = [...b.matchAll(/class="afiliado-titulo">([^<]+)</g)].map((m) => m[1].replace(/&amp;/g, "&"));
   ok(JSON.stringify(hallados) === JSON.stringify(esperados.concat(g === "resumo-abnt" ? [CURSO.titulo] : [])), `${g}: productos y orden como en la lista`, hallados.join(" | "));
   ok(hallados.length >= 1 && hallados.length <= 3, `${g}: de 1 a 3 productos`);
-  const cartones = (b.match(/<li class="afiliado">/g) || []).length;
+  const cartones = (b.match(/<li class="afiliado[ "][^>]*>/g) || []).length;
   ok((b.match(/Link de afiliado<\/span>/g) || []).length === cartones, `${g}: cada tarjeta lleva la etiqueta visible "Link de afiliado"`);
   ok((b.match(/rel="sponsored nofollow noopener noreferrer"/g) || []).length === cartones && (b.match(/target="_blank"/g) || []).length === cartones, `${g}: todos los enlaces llevan rel="sponsored nofollow noopener noreferrer" y abren en otra pestaña`);
   ok(html.indexOf('class="afiliados"') < html.indexOf('class="guia-relacionadas"') && html.indexOf('class="guia-ferramenta"') < html.indexOf('class="afiliados"') && html.indexOf('class="afiliados"') < html.indexOf('id="fontes"'), `${g}: queda después de la caja de la herramienta y justo antes de "Guias relacionadas"`);
@@ -132,11 +132,11 @@ ok((bTcc.match(/>Ver na Amazon</g) || []).length === 3 && /class="afiliado-tipo"
 ok(bTcc.includes(FRASE) && /<p class="afiliados-nota">/.test(bTcc), "la frase de Amazon está debajo del bloque (letra pequeña)");
 const bCurso = bloqueDe("resumo-abnt");
 ok(bCurso.includes(">Ver o curso<") && bCurso.includes("utm_source=estudasimples") && !/tag=exemplo-20[^"]*curso/.test(bCurso), "el curso dice 'Ver o curso' y conserva su enlace tal cual (sin ID de Amazon)");
-ok(!/class="afiliado-autor"/.test((/<li class="afiliado">(?:(?!<\/li>)[\s\S])*Curso de exemplo[\s\S]*?<\/li>/.exec(bCurso) || [""])[0]), "un curso sin autor no deja una línea vacía");
+ok(!/class="afiliado-autor"/.test((/<li class="afiliado[ "][^>]*>(?:(?!<\/li>)[\s\S])*Curso de exemplo[\s\S]*?<\/li>/.exec(bCurso) || [""])[0]), "un curso sin autor no deja una línea vacía");
 const soloCurso = constr({ afiliados: { ativo: true, legalAtualizadoEm: "2026-10-21", produtos: [CURSO] } }, "af-curso");
 ok(soloCurso.ok && !/Associado da Amazon/.test(leer(soloCurso.dir, "guias/resumo-abnt/index.html") + leer(soloCurso.dir, "termos-de-uso/index.html")), "con solo un curso (no Amazon) no sale la frase de Amazon");
 const algunos = constr({ afiliados: { ativo: true, amazonTag: "exemplo-20", legalAtualizadoEm: "2026-10-21", produtos: conEnlaces(2) } }, "af-2");
-const nTarjetas = (g) => (leer(algunos.dir, `guias/${g}/index.html`).match(/<li class="afiliado">/g) || []).length;
+const nTarjetas = (g) => (leer(algunos.dir, `guias/${g}/index.html`).match(/<li class="afiliado[ "][^>]*>/g) || []).length;
 ok(nTarjetas("como-fazer-tcc") === 1 && nTarjetas("metodologia-do-tcc") === 1 && nTarjetas("referencial-teorico-do-tcc") === 0, "con solo 2 productos con enlace (los otros 8 sin enlace), solo esos 2 aparecen");
 // páginas legales
 for (const [pag, clave] of [["termos-de-uso", "Termos"], ["politica-de-privacidade", "Política"]]) {

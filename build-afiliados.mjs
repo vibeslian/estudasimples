@@ -62,9 +62,9 @@ export function preparaAfiliados(config, guias) {
   const porExemplo = lojas.length ? ` (por exemplo, ${lojas.join(" e ")})` : "";
   if (algumVisivel && !a.legalAtualizadoEm) throw new Error(`${onde}: para mostrar produtos, preencha legalAtualizadoEm (a data, como "2026-11-05", em que os Termos e a Política passam a falar de links de afiliado)`);
 
-  const cartao = (p) => {
+  const cartao = (p, i) => {
     const botao = p.botao || (p.tipo === "curso" ? "Ver o curso" : p.amazon ? "Ver na Amazon" : "Ver o livro");
-    return `<li class="afiliado">
+    return `<li class="afiliado afiliado--${p.tipo} revelar" style="--i:${i}">
             <p class="afiliado-topo"><span class="afiliado-tipo">${TIPOS[p.tipo]}</span><span class="afiliado-selo">Link de afiliado</span></p>
             <p class="afiliado-titulo">${esc(p.titulo)}</p>${p.autor ? `\n            <p class="afiliado-autor">${esc(p.autor)}</p>` : ""}
             <p class="afiliado-frase">${esc(p.frase)}</p>
@@ -78,6 +78,7 @@ export function preparaAfiliados(config, guias) {
     const nota = `Links de afiliado: se você comprar por eles, o ${nome} pode receber uma pequena comissão, sem custo a mais para você.${itens.some((p) => p.amazon) ? " " + FRASE_AMAZON : ""}${itens.some((p) => p.tipo === "livro") ? " Livros podem trazer versões antigas das normas da ABNT: confira sempre a norma atual e o manual da sua instituição." : ""} <a href="/termos-de-uso/#links-de-afiliado">Saiba mais</a>`;
     return `<section class="afiliados" aria-labelledby="recomendados">
         <h2 id="recomendados">Recomendado para o seu trabalho</h2>
+        <p class="afiliados-sub">${itens.some((p) => p.tipo === "curso") ? "Livros e cursos" : "Livros"} que combinam com esta guia. Os links abaixo são <strong>links de afiliado</strong>: se você comprar por eles, o ${nome} pode ganhar uma pequena comissão e o preço não muda para você.</p>
         <ul class="afiliados-lista">
           ${itens.map(cartao).join("\n          ")}
         </ul>
