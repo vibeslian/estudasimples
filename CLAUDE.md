@@ -26,7 +26,7 @@ Lian trabaja directo conmigo: soy su asesor y su programador a la vez. Estas reg
 6. Al final de cada etapa, **antes de decir que está lista**, lanzar un subagente revisor que NO haya visto el trabajo. Debe revisar el código, la verificación en vivo, los textos en portugués, las normas ABNT y los datos (enlaces, precios, fechas) contra sus fuentes. Corregir lo que encuentre. Al subagente se le da un encargo completo y autosuficiente, y se le prohíbe hacer clic en enlaces de afiliado con tag y escribir la clave de IndexNow.
 7. Al final de cada respuesta separar siempre:
    - **Lo que hice** (corto).
-   - **Tareas manuales para ti**: solo lo que Lian debe hacer (capturas, claves, cuentas, pagos), paso a paso y completo, sin suponer que se acuerda de nada.
+   - **Tareas manuales para ti**: solo lo que Lian debe hacer (capturas, claves, cuentas, pagos). **Siempre paso a paso** (1, 2, 3...), con el nombre exacto de cada menú y botón, dónde hacer clic y qué debe ver en pantalla, y qué me manda de vuelta; sin suponer que se acuerda de nada ni que conoce el panel (Amazon, Hotmart, AdSense, Search Console, Cloudflare). Si no estoy seguro del nombre de un menú, lo digo y le pido una captura.
    - **Próximo paso**.
 8. Al terminar cada etapa, dar un bloque de código titulado **"INFORME PARA CLAUDE"**, de máximo 25 líneas, para que Lian lo copie a su asesor y haga una segunda revisión. Incluye: qué se hizo, commits, URLs afectadas, resultado de pruebas, lo que encontró el revisor, lo que no se pudo verificar y el próximo paso. Sin relleno.
 9. Si el asesor de Lian pide correcciones y Lian las pega tal cual: aplicarlas y dar un nuevo informe corto.
@@ -37,7 +37,11 @@ Lian trabaja directo conmigo: soy su asesor y su programador a la vez. Estas reg
 14. Lo que Lian diga en la conversación actual manda sobre estas reglas.
 
 ### Lista de espera (en este orden)
-a) Cursos de Hotmart en el bloque de afiliados (cuando le aprueben): TCC Sem Desespero, Defender TCC, Como fazer TCCs em Direito. Hay que sacar sus hotlinks. Cómo se agregan: `docs/afiliados.md`.
+a) Cursos de Hotmart en el bloque de afiliados: TCC Sem Desespero, Defender TCC, Como fazer TCCs em Direito. Hay que sacar sus hotlinks (Lian los pega en el chat). Cómo se agregan: `docs/afiliados.md`. Estado al 20/10/2026:
+   - *Como fazer TCCs, dissertações e teses em Direito* (Salah Khaled Jr., Canal Ciências Criminais; ID Hotmart 307763; comisión hasta R$ 35,76 sobre R$ 199): Lian YA es afiliado (afiliación de 1 clic; no llega e-mail). Falta su link de divulgación.
+   - *TCC sem Desespero: o passo a passo para organizar, escrever e entregar no prazo* (e-book; en el Mercado de Afiliação de Hotmart): falta afiliarse y sacar el link.
+   - *Defender TCC*: no se encontró en la búsqueda web; Lian debe decir el nombre exacto o el productor.
+   - Antes de ponerlos, mostrar en las páginas legales y en el bloque la frase de afiliado de Hotmart y mantener la etiqueta "Link de afiliado" (un curso solo para Derecho debe decirlo en la frase y aparecer solo donde tenga sentido).
 b) Sitios para backlinks (investigar + mensajes de contacto).
 c) Mensajes para grupos de estudiantes.
 d) Post de LinkedIn.
@@ -48,6 +52,6 @@ h) Videos del canal acheiunsite (ya hay 5 guiones).
 
 ### Pendientes fijos
 - Encender `/anuncie/` cuando el sitio pase de 10 mil visitas al mes (ver `docs/anuncie.md`).
-- Revisar AdSense el **27/10/2026**.
+- Revisar AdSense el **27/10/2026** (estado de cada sitio en adsense.google.com → Sites). Estado al 20/10/2026: AdSense está en **feriasclaras.com.br** (código y ads.txt en vivo); **estudasimples.com.br NO lo tiene** (sin código, `/ads.txt` da 404). Para ponerlo en Estuda Simples hace falta una etapa propia: Lian agrega el sitio en AdSense y pasa el código; yo lo agrego por configuración (apagado por defecto), creo `ads.txt` y preparo el aviso de cookies que la Política ya promete antes de mostrar anuncios personalizados. Cuidar PageSpeed 90+ móvil y CLS 0.
 - Revisar Search Console y Cloudflare **una vez por semana**.
 - Si el libro de Cervo (`8576050471`) se agota en Amazon, reemplazarlo (ver `docs/afiliados.md`).
