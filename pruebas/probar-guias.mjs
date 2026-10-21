@@ -158,7 +158,7 @@ console.log("\n== A7) Sin párrafos repetidos entre guías ==");
   for (const g of guias) {
     const h = html[`/guias/${g.slug}/`] || "";
     // las tarjetas de "guías relacionadas" y de "fontes" repiten a propósito el resumen del índice (son enlaces)
-    const cuerpo = (h.match(/<article[\s\S]*?<\/article>/) || [""])[0].replace(/<section class="guia-relacionadas[\s\S]*?<\/section>/g, "").replace(/<p class="padrao">[\s\S]*?<\/p>/g, "").replace(/<section class="guia-fontes"[\s\S]*?<\/section>/g, "");
+    const cuerpo = (h.match(/<article[\s\S]*?<\/article>/) || [""])[0].replace(/<section class="guia-relacionadas[\s\S]*?<\/section>/g, "").replace(/<section class="afiliados"[\s\S]*?<\/section>/g, "").replace(/<p class="padrao">[\s\S]*?<\/p>/g, "").replace(/<section class="guia-fontes"[\s\S]*?<\/section>/g, "");
     for (const m of cuerpo.matchAll(/<(p|li)[ >][\s\S]*?<\/\1>/g)) {
       const t = norm(m[0].replace(/<[^>]+>/g, ""));
       if (t.length < 90) continue;

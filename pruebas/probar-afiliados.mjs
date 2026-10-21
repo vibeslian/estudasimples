@@ -25,26 +25,52 @@ const FRASE = "Como Associado da Amazon, ganho com compras qualificadas.";
 const sitemapUrls = (dir) => [...leer(dir, "sitemap.xml").matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
 
 // productos de EJEMPLO: los 10 de la lista real, con enlaces inventados (solo para probar y fotografiar; nunca van al sitio)
-const conEnlaces = (n = AF.produtos.length) => AF.produtos.map((p, i) => (i < n ? { ...p, url: `https://www.amazon.com.br/dp/B00EJEMPLO${String(i + 1).padStart(2, "0")}` } : p));
+const conEnlaces = (n = AF.produtos.length) => AF.produtos.map((p, i) => (i < n ? { ...p, url: `https://www.amazon.com.br/dp/B00EJEMPLO${String(i + 1).padStart(2, "0")}` } : { ...p, url: "" }));
 const CURSO = { id: "curso-ejemplo", tipo: "curso", titulo: "Curso de exemplo: escrita acadêmica", autor: "", frase: "Aulas curtas sobre como organizar e escrever o trabalho acadêmico.", url: "https://www.exemplo.com.br/curso?utm_source=estudasimples", guias: ["resumo-abnt"] };
 const ON = (extra = {}) => ({ afiliados: { ativo: true, amazonTag: "exemplo-20", legalAtualizadoEm: "2026-10-21", produtos: conEnlaces().concat(CURSO), ...extra } });
 const GUIAS_CON = [...new Set(AF.produtos.flatMap((p) => p.guias))]; // guías que deben mostrar el bloque
 
+const SIN_URL = AF.produtos.map((p) => ({ ...p, url: "" }));
+const OFF = { afiliados: { ativo: false } }; // la configuración real con el interruptor apagado
+
+// ---------- R) configuración real (la que se publica) ----------
+seccion("R) configuración real");
+ok(AF && AF.ativo === true && AF.amazonTag === "estudasimples-20" && AF.legalAtualizadoEm === "2026-10-20", "afiliados encendido, con el ID estudasimples-20 y la fecha legal 2026-10-20");
+ok(AF.produtos.length === 10 && AF.produtos.every((p) => p.tipo === "livro"), "10 productos, todos libros (todavía sin cursos)");
+const hostOk = (u) => { try { const x = new URL(u); return x.protocol === "https:" && x.hostname === "www.amazon.com.br" && /^\/dp\/[0-9]{9}[0-9X]$/.test(x.pathname) && x.searchParams.get("tag") === "estudasimples-20" && [...x.searchParams.keys()].length === 1; } catch { return false; } };
+ok(AF.produtos.every((p) => hostOk(p.url)), "los 10 enlaces son https://www.amazon.com.br/dp/<ISBN>?tag=estudasimples-20", AF.produtos.filter((p) => !hostOk(p.url)).map((p) => p.id).join(", "));
+const isbnOk = (a) => [...a].reduce((t, c, i) => t + (c === "X" ? 10 : +c) * (10 - i), 0) % 11 === 0;
+ok(AF.produtos.every((p) => isbnOk(new URL(p.url).pathname.slice(4))), "los 10 códigos son ISBN-10 válidos (dígito de control)");
+const real = constr({}, "af-real");
+ok(real.ok, "el build con la configuración real funciona", real.salida.slice(-300));
+const guiasReal = paginasHtml(real.dir).filter((p) => /^guias\/[^/]+\/index\.html$/.test(p));
+const conReal = guiasReal.filter((p) => /class="afiliados"/.test(leer(real.dir, p))).map((p) => p.split("/")[1]).sort();
+const GUIAS_REAL = [...new Set(AF.produtos.flatMap((p) => p.guias))].sort();
+ok(conReal.length === 14 && JSON.stringify(conReal) === JSON.stringify(GUIAS_REAL), "el bloque sale en las 14 guías elegidas", conReal.join(","));
+let botonesBien = true;
+for (const g of conReal) {
+  const b = (/<section class="afiliados"[\s\S]*?<\/section>/.exec(leer(real.dir, `guias/${g}/index.html`)) || [""])[0];
+  const esp = AF.produtos.filter((p) => p.guias.includes(g)).map((p) => p.url);
+  const hall = [...b.matchAll(/class="btn afiliado-botao" href="([^"]+)"/g)].map((m) => m[1].replace(/&amp;/g, "&"));
+  if (JSON.stringify(hall) !== JSON.stringify(esp)) { botonesBien = false; console.log("  ", g, hall, esp); }
+  ok(b.includes("Como Associado da Amazon, ganho com compras qualificadas."), `${g}: la frase de Amazon se ve`);
+}
+ok(botonesBien, "cada botón apunta exactamente al libro y enlace correctos, con tag=estudasimples-20");
+ok(leer(real.dir, "termos-de-uso/index.html").includes("12. Links de afiliado") && leer(real.dir, "politica-de-privacidade/index.html").includes("12. Links de afiliado"), "Termos y Política tienen la sección 12");
+
 // ---------- A) apagado ----------
-seccion("A) apagado (configuración real)");
-ok(AF && AF.ativo === false, "en site.config.json, afiliados.ativo debe estar en false hasta que haya enlaces");
-ok(AF.produtos.length === 10 && AF.produtos.every((p) => p.url === ""), "hay 10 productos propuestos, todos sin enlace");
+seccion("A) apagado");
 ok(AF.produtos.every((p) => p.tipo === "livro" && p.autor && p.titulo && p.frase && p.guias.length), "cada producto tiene tipo, título, autor, frase y guías");
 const cuenta = {};
 for (const p of AF.produtos) for (const g of p.guias) cuenta[g] = (cuenta[g] || 0) + 1;
 ok(Object.values(cuenta).every((n) => n <= 3), "ninguna guía recibe más de 3 productos", JSON.stringify(Object.entries(cuenta).filter(([, n]) => n > 3)));
-const off = constr({}, "af-off");
+const off = constr(OFF, "af-off");
 ok(off.ok, "el build apagado funciona", off.salida.slice(-300));
 const pagOff = paginasHtml(off.dir);
 const conAlgo = pagOff.filter((p) => /afiliado|Recomendado para o seu trabalho|class="afiliados"|Associado da Amazon/i.test(leer(off.dir, p)));
 ok(conAlgo.length === 0, "apagado: ninguna página menciona afiliados ni muestra el bloque", conAlgo.join(", "));
 ok(leer(off.dir, "termos-de-uso/index.html").includes("Última atualização: 14 de outubro de 2026.") && leer(off.dir, "politica-de-privacidade/index.html").includes("Última atualização: 14 de outubro de 2026."), "apagado: Termos y Política conservan su fecha y texto");
-const sinEnlaceEncendido = constr({ afiliados: { ativo: true, amazonTag: "exemplo-20" } }, "af-sinurl");
+const sinEnlaceEncendido = constr({ afiliados: { ativo: true, amazonTag: "exemplo-20", produtos: SIN_URL } }, "af-sinurl");
 ok(sinEnlaceEncendido.ok && !paginasHtml(sinEnlaceEncendido.dir).some((p) => /class="afiliados"|links-de-afiliado/.test(leer(sinEnlaceEncendido.dir, p))), "interruptor encendido pero productos sin enlace: no se muestra nada (ni las secciones legales)");
 const apagadoConEnlaces = constr({ afiliados: { ativo: false, produtos: conEnlaces() } }, "af-off2");
 ok(!paginasHtml(apagadoConEnlaces.dir).some((p) => /class="afiliados"|links-de-afiliado/.test(leer(apagadoConEnlaces.dir, p))), "interruptor apagado con enlaces cargados: no se muestra nada");
@@ -53,7 +79,7 @@ ok(sinFalta.length === 0, "ninguna página queda con marcas {{...}} sin reemplaz
 
 // ---------- comparación con un commit anterior ----------
 if (process.env.BASE_REF) {
-  seccion(`todo apagado: idéntico a ${process.env.BASE_REF}`);
+  seccion(`afiliados apagado: idéntico a ${process.env.BASE_REF}`);
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "es-base-"));
   limpiables.push(path.join(tmp, "dist"));
   execFileSync("git", ["-C", RAIZ, "worktree", "add", "--detach", path.join(tmp, "arbol"), process.env.BASE_REF], { stdio: "ignore" });
