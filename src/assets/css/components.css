@@ -88,6 +88,22 @@
 .conteudo-grade:has(.lateral .anuncio--desligado) { grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 1180px) { .conteudo-grade:has(.lateral .anuncio--desligado) { grid-template-columns: minmax(0, 720px); } }
 html:not(.ads-preview) .lateral:has(> .anuncio--desligado) { display: none !important; }
+/* AdSense ligado: o rótulo "Anúncio" só aparece quando o Google preencheu o bloco; o espaço continua reservado (sem saltos) */
+.anuncio:has(> ins[data-ad-status="filled"]) > span { display: block; margin-bottom: 4px; text-align: center; font-size: .75rem; letter-spacing: .04em; text-transform: uppercase; color: var(--texto-suave); }
+.anuncio > ins.adsbygoogle { max-width: 100%; }
+/* Aviso de cookies e anúncios (só existe com o AdSense ligado). Fixo na base da tela: não empurra o conteúdo (CLS 0). Os dois botões têm o mesmo peso. */
+.aviso-anuncios { position: fixed; z-index: 60; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); max-width: 680px; margin-inline: auto; padding: 14px 16px; background: var(--superficie); color: var(--texto); border: 2px solid var(--salvia-200); border-radius: var(--raio-pequeno); box-shadow: var(--sombra-forte); }
+.aviso-anuncios[hidden] { display: none; }
+.aviso-anuncios p { margin: 0; }
+.aviso-anuncios-texto { font-size: .88rem; line-height: 1.4; color: var(--texto-suave); }
+.aviso-anuncios-texto strong { color: var(--principal); }
+.aviso-anuncios-botoes { display: grid; gap: 8px; margin-top: 10px; }
+@media (max-width: 400px) { .aviso-anuncios { padding: 12px; } .aviso-anuncios-texto { font-size: .8rem; line-height: 1.35; } .aviso-anuncios-botoes { gap: 6px; margin-top: 8px; } .aviso-anuncios-botoes .btn { font-size: .88rem; padding: 6px 10px; } }
+.aviso-anuncios-botoes .btn { min-height: 44px; padding: 8px 16px; font-size: .95rem; }
+@media (min-width: 560px) { .aviso-anuncios-botoes { grid-template-columns: 1fr 1fr; } }
+.com-aviso-anuncios { padding-bottom: 220px; } /* mientras el aviso está abierto, el final de la página sigue alcanzable */
+@media (min-width: 560px) { .com-aviso-anuncios { padding-bottom: 170px; } }
+@media print { .aviso-anuncios { display: none; } .com-aviso-anuncios { padding-bottom: 0; } }
 .ads-preview .anuncio { display: grid; place-items: center; border: 2px dashed var(--borda-campo); border-radius: var(--raio-pequeno); background: repeating-linear-gradient(135deg, transparent 0 14px, rgba(95, 127, 104, .08) 14px 28px); color: var(--texto-suave); }
 .ads-preview .anuncio > span { display: block; font-weight: 700; letter-spacing: .04em; }
 .ads-preview .anuncio--lateral { display: none; }

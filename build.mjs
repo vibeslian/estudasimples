@@ -6,10 +6,11 @@
 import { readFileSync, writeFileSync, mkdirSync, rmSync, readdirSync, statSync } from "node:fs";
 import { join, extname, relative, sep } from "node:path";
 import { preparaConexoes, mensagensWhatsapp } from "./build-conexoes.mjs";
-import { carregaGuias, preparaGuias } from "./build-guias.mjs";
+import { carregaGuias, preparaGuias, dataLonga } from "./build-guias.mjs";
 import { montaFormulariosReferencias } from "./build-referencias.mjs";
 import { preparaAnuncie, URL_ANUNCIE } from "./build-anuncie.mjs";
 import { preparaAfiliados } from "./build-afiliados.mjs";
+import { preparaAdsense } from "./build-adsense.mjs";
 
 const SRC = "src";
 const OUT = process.env.BUILD_OUT || "dist"; // BUILD_OUT e SITE_CONFIG só servem para as provas montarem uma versão de teste
@@ -41,7 +42,8 @@ const anuncie = preparaAnuncie(config, guiasLista); // página /anuncie/ (escond
 const afiliados = preparaAfiliados(config, guiasLista); // "Recomendado para o seu trabalho" (apagado enquanto afiliados.ativo for false)
 const gb = preparaGuias(config, guiasLista, anuncie.parceiroDaGuia, afiliados.daGuia);
 const mensagens = { ...gb.mensagens(sv.modeloMensagem), ...mensagensWhatsapp(sv) }; // guia-<slug>, as de site.config.json e as de página-componente (capa-proximo...)
-const conexoes = preparaConexoes(config);
+const adsense = preparaAdsense(config); // Google AdSense (apagado enquanto anuncios.adsenseAtivo for false; o ads.txt e a etiqueta de verificação existem sempre)
+const conexoes = preparaConexoes(config, adsense);
 const refForms = montaFormulariosReferencias(); // formulários do gerador de referências (campos em src/assets/js/abnt/referencias-campos.js)
 // um link wa.me por página de origem: a mensagem diz de onde o cliente veio (mensagens em site.config.json)
 const waUrl = (id) => {
@@ -74,7 +76,11 @@ const values = {
   "{{BUILD}}": Date.now().toString(36), // muda a cada build: evita CSS/JS antigo em cache
   ...anuncie.valores,
   ...afiliados.valores,
+  ...adsense.valores,
 };
+// "Última atualização" dos Termos e da Política: a mais recente entre os links de afiliado (se há produtos à mostra) e o AdSense (se ligado)
+const datasLegais = [afiliados.visiveis > 0 ? config.afiliados.legalAtualizadoEm : null, adsense.legalAtualizadoEm].filter(Boolean).sort();
+if (datasLegais.length) values["{{LEGAL_ATUALIZADO}}"] = dataLonga(datasLegais[datasLegais.length - 1]);
 
 const TEXT_EXT = new Set([".html", ".css", ".js", ".json", ".xml", ".txt", ".svg", ".webmanifest"]);
 
@@ -118,6 +124,7 @@ function render(text, origem = "servico", rel = "") {
     .split("{{PERCURSO_DADOS}}").join(conexoes.percursoJson(origem === "servico" ? undefined : origem));
   // fragmentos compartilhados: {{include:header}} -> src/partials/header.html (duas passadas: eles podem incluir outros)
   for (let i = 0; i < 2; i++) text = text.replace(/\{\{include:([\w-]+)\}\}/g, (_, name) => readFileSync(join(SRC, "partials", name + ".html"), "utf8"));
+  text = adsense.marcas(text); // <!--ADS:OFF--> / <!--ADS:ON-->: textos que mudam quando o AdSense é ligado
   for (const [key, val] of Object.entries({ ...values, "{{ORIGEM}}": origem })) text = text.split(key).join(val);
   // nos dados estruturados o "R$ 80" leva espaço comum (na página fica o espaço sem quebra)
   text = text.replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/g, (m) => m.replace(/\u00a0/g, " "));
@@ -133,6 +140,7 @@ for (const file of walk(SRC)) {
   if (partes[0] === "partials") continue; // fragmentos não são publicados sozinhos
   const privada = partes.some((p, i) => i < partes.length - 1 && p.startsWith("_")); // pastas _algo = só desenvolvimento
   if (privada && !DEV) continue;
+  if (rel === join("assets", "js", "anuncios.js") && !adsense.ativo) continue; // aviso de cookies: só existe com o AdSense ligado
   if (partes[0] === "assets" && partes[1] === "css" && CSS_GLOBAL.includes(partes[2].replace(".css", ""))) continue; // já vão no site.css
 
   const dest = join(OUT, rel);
@@ -157,6 +165,7 @@ const sitemap =
   pages.sort().map((p) => `  <url><loc>${siteUrl}${p}</loc><lastmod>${today}</lastmod></url>`).join("\n") +
   `\n</urlset>\n`;
 writeFileSync(join(OUT, "sitemap.xml"), sitemap);
+writeFileSync(join(OUT, "ads.txt"), adsense.adsTxt);
 writeFileSync(join(OUT, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${siteUrl}/sitemap.xml\n`);
 
 // Cloudflare Pages: cache longo para fontes e bibliotecas (têm a versão no nome do arquivo)

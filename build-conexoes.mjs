@@ -24,7 +24,7 @@ export function mensagensWhatsapp(sv) {
   return { ...m, ...sv.mensagens };
 }
 
-export function preparaConexoes(config) {
+export function preparaConexoes(config, adsense) {
   const per = config.percurso;
   const an = config.anuncios;
   if (!per || !Array.isArray(per.passos) || !per.final) throw new Error("site.config.json: falta o bloco percurso (passos e final)");
@@ -65,8 +65,10 @@ export function preparaConexoes(config) {
     }
     const extra = slot.endsWith("abaixo-da-ferramenta") ? " anuncio--separado" : slot.endsWith("lateral") ? " anuncio--lateral" : "";
     // com o AdSense desligado o espaço não ocupa lugar (nenhum buraco na página); ligado, ele reserva a altura para não haver saltos
-    const desligado = an.adsenseAtivo === true ? "" : " anuncio--desligado";
-    return `<div class="anuncio${extra}${desligado}" data-slot="${slot}" aria-hidden="true"><span>Anúncio</span></div>`;
+    const ligado = an.adsenseAtivo === true;
+    const estado = ligado ? " anuncio--ligado" : " anuncio--desligado";
+    // ligado: o bloco <ins> do Google entra aqui, mas o script só é carregado depois que o visitante escolhe no aviso de cookies (anuncios.js)
+    return `<div class="anuncio${extra}${estado}" data-slot="${slot}" aria-hidden="true"><span>Anúncio</span>${adsense ? adsense.bloco(slot) : ""}</div>`;
   };
 
   const itens = [...per.passos, per.final];

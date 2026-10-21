@@ -82,6 +82,15 @@
   "anuncios": {
     "_ajuda": "Cada espaço reservado pode ficar livre para o AdSense ('adsense') ou mostrar uma oferta própria ('oferta:<nome>'). Uma oferta desligada (ativa: false) devolve o espaço ao AdSense. No máximo uma oferta própria por página, só em meio-1, meio-2, lateral ou entre-secoes (nunca perto dos botões da ferramenta). O build avisa se algo estiver errado.",
     "adsenseAtivo": false,
+    "adsense": {
+      "_ajuda": "Google AdSense (Etapa 18). 'cliente' é o ID do editor (o mesmo da conta do feriasclaras.com.br; é público: aparece no ads.txt). Com adsenseAtivo = false o site NÃO carrega nada do Google: só o /ads.txt e a etiqueta de verificação (sem cookies). Para ligar: 1) o AdSense aprovou o estudasimples.com.br; 2) crie no painel (Anúncios > Por bloco de anúncios) um bloco 'Anúncio de display' responsivo para o texto e um 300x600 para a lateral, e cole o ID de cada um (10 números) em 'blocos'; 3) preencha 'legalAtualizadoEm' com a data de hoje; 4) ponha adsenseAtivo = true e rode o build. Ao ligar aparecem o aviso de cookies (com a opção de recusar anúncios personalizados), o link 'Preferências de anúncios' no rodapé e os textos da Política e dos Termos no presente. O script do Google só carrega depois da escolha do visitante. Desligue os anúncios automáticos no painel.",
+      "cliente": "ca-pub-3212984323046188",
+      "blocos": {
+        "conteudo": "",
+        "lateral": ""
+      },
+      "legalAtualizadoEm": ""
+    },
     "espacos": {
       "inicio-entre-secoes": "adsense",
       "capa-abaixo-da-ferramenta": "adsense",

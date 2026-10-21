@@ -11,9 +11,20 @@
       <a href="/sobre/">Sobre</a>
       <a href="/contato/">Contato</a>
       <a href="/politica-de-privacidade/">Política de Privacidade</a>
-      <a href="/termos-de-uso/">Termos de Uso</a>{{ANUNCIE_LINK_RODAPE}}
+      <a href="/termos-de-uso/">Termos de Uso</a><!--ADS:ON-->
+      <a href="/politica-de-privacidade/#anuncios" data-anuncios-preferencias>Preferências de anúncios</a><!--/ADS:ON-->{{ANUNCIE_LINK_RODAPE}}
     </nav>
     <p>© {{YEAR}} {{SITE_NAME}}. Ferramentas gratuitas; o que você digita fica no seu navegador. Algumas instituições têm modelo próprio de trabalho: confirme sempre com a sua faculdade.</p>
   </div>
 </footer>
+<!--ADS:ON-->
+<div id="aviso-anuncios" class="aviso-anuncios" role="dialog" aria-modal="false" aria-labelledby="aviso-anuncios-titulo" hidden>
+  <p class="aviso-anuncios-texto"><strong id="aviso-anuncios-titulo">Cookies e anúncios.</strong> Este site mostra anúncios do Google, que usam cookies. Você pode aceitar anúncios personalizados (baseados nos seus interesses) ou recusá-los: os anúncios continuam, sem personalização, e o Google ainda pode usar cookies para medir anúncios e evitar fraudes. Nada do Google é carregado antes da sua escolha. <a href="/politica-de-privacidade/#anuncios">Política de Privacidade</a></p>
+  <div class="aviso-anuncios-botoes">
+    <button type="button" class="btn" data-anuncios-escolha="nao-personalizados">Recusar anúncios personalizados</button>
+    <button type="button" class="btn" data-anuncios-escolha="personalizados">Aceitar anúncios personalizados</button>
+  </div>
+</div>
+<script src="/assets/js/anuncios.js?v={{BUILD}}" defer></script>
+<!--/ADS:ON-->
 <script src="/assets/js/site.js?v={{BUILD}}" defer></script>

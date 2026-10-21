@@ -1,5 +1,32 @@
 # Espacios para anuncios (AdSense)
 
+## Etapa 18: AdSense preparado y APAGADO (21/10/2026)
+Todo está listo, pero **no se carga nada del Google** hasta que se encienda. Qué existe hoy, con `anuncios.adsenseAtivo = false`:
+- **`/ads.txt`** (lo genera `build.mjs` desde `anuncios.adsense.cliente`): una línea, `google.com, pub-…, DIRECT, f08c47fec0942fa0`. El ID del editor es el mismo de la cuenta que usa feriasclaras.com.br; es público (está en cualquier `ads.txt`).
+- **`<meta name="google-adsense-account">`** en el `<head>` de todas las páginas: la etiqueta de verificación del AdSense. No carga scripts ni usa cookies.
+- Nada más: ni script del Google, ni aviso de cookies, ni `<ins>`, ni `localStorage`. Las páginas quedan idénticas a las de antes salvo esa etiqueta, el `id="anuncios"` de la sección 4 de la Política y el CSS nuevo (comprobado comparando todo el HTML con el commit anterior).
+
+### Cómo se enciende (cuando AdSense apruebe el sitio)
+1. En adsense.google.com → **Sites** → añadir `estudasimples.com.br` y verificarlo (la etiqueta ya está). Esperar la aprobación.
+2. En **Anúncios → Por bloco de anúncios** crear un bloque *Anúncio de display* **responsivo** (texto) y uno **300×600** (lateral). Copiar el ID de cada uno (10 números).
+3. En `site.config.json` → `anuncios.adsense.blocos`: pegar `conteudo` y `lateral`; `legalAtualizadoEm`: la fecha de ese día; `anuncios.adsenseAtivo`: `true`. `node build.mjs`.
+4. En el panel desactivar los **anuncios automáticos** (y *anchor* / *vignette*): solo bloques manuales.
+El build se **detiene** con un mensaje claro si falta un ID de bloque o la fecha.
+
+### Qué cambia al encender
+- **Aviso de cookies** (`src/partials/footer.html`, `assets/js/anuncios.js`; CSS `.aviso-anuncios` en `components.css`): fijo abajo (no mueve la página, CLS 0), dos botones del mismo tamaño: *Recusar personalizados* / *Aceitar anúncios personalizados*. **Nada del Google se carga antes de elegir.** Recusar → `requestNonPersonalizedAds = 1` (los anuncios siguen, sin personalización; el Google aún puede usar cookies de medición y antifraude, y el aviso y la Política lo dicen). La elección va en `localStorage` (clave `es-anuncios`, valor `<elección>@<fecha de legalAtualizadoEm>`; no es cookie). Si cambia `legalAtualizadoEm` (la Política cambió), el aviso **vuelve a preguntar**. Sin `localStorage` (modo privado) el aviso vuelve en cada página: nunca se asume el consentimiento.
+- **Rodapé:** enlace *Preferências de anúncios* en todas las páginas: reabre el aviso (Esc lo cierra si ya hay elección; el foco del teclado vuelve al enlace). Si la persona cambia de idea, la página se recarga con la nueva elección.
+- **Espacios:** cada `div.anuncio` recibe su `<ins class="adsbygoogle">` (el espacio con oferta propia no lo recibe). El rótulo "Anúncio" aparece solo si el Google llenó el bloque; el espacio sigue reservando su altura (sin saltos). Los espacios ocultos (lateral en celular) no piden anuncio.
+- **Política y Termos:** los trozos entre `<!--ADS:OFF-->…<!--/ADS:OFF-->` / `<!--ADS:ON-->…<!--/ADS:ON-->` cambian a presente (el aviso, el `localStorage`, "Preferências de anúncios", sección 4 con ancla `#anuncios`). "Última atualização" = la fecha más reciente entre afiliados y AdSense. Esas marcas sirven para cualquier página.
+- Para un texto que cambie según el AdSense en otra página, usar las mismas marcas (el build las resuelve y no dejan rastro).
+
+### Pruebas
+`node probar-adsense.mjs` (desde `pruebas/`; no necesita el servidor :3000): apagado (nada del Google), encendido con IDs de ejemplo, errores del build y navegador con el Google **interceptado** (nunca se contacta). 128 comprobaciones. **No prueba que el Google sirva anuncios de verdad**: eso solo se ve en el sitio publicado, ya aprobado.
+- Limitaciones conocidas: el aviso es propio, no un CMP certificado por Google (TCF); para visitas de la UE/Reino Unido Google podría limitar anuncios (el sitio es solo para Brasil). Con anuncios que no llenan o con bloqueador de anuncios el espacio reservado queda vacío (se decidió reservar la altura para CLS 0; si se prefiere colapsar, `.anuncio:has(ins[data-ad-status="unfilled"]) { display: none; }`, sabiendo que mueve el contenido de abajo).
+- Lo que sigue sin verificar hasta encender: que los bloques se llenen, el rendimiento real con anuncios (volver a medir con Lighthouse; bajará, es normal) y el comportamiento del aviso en un iPhone/Android reales.
+
+---
+
 ## Ofertas propias y AdSense (Etapa 8.5)
 Mientras no haya AdSense, algunos espacios reservados muestran una **oferta propia** (hoy solo el servicio de formatação; después, el Kit TCC). Todo se decide en `site.config.json` → `anuncios`:
 - `espacos`: para cada espacio, `"adsense"` (queda libre, como antes) u `"oferta:formatacao"`.
@@ -32,10 +59,10 @@ Reglas que se cumplen en las tres herramientas (y que verifica `pruebas/probar-c
 ## Alturas reservadas
 280 px en los espacios de contenido (cabe 300×250, 336×280 y 728×90) y 600 px en la columna lateral (300×600). Si el anuncio real es más bajo, quedará aire; si es más alto, el contenido se moverá: por eso conviene no usar tamaños mayores a estos.
 
-## Antes de activar AdSense (lista de tareas, no hechas todavía)
+## Antes de activar AdSense (lista original; los puntos 2, 3 y parte del 4 ya están hechos en la Etapa 18, ver arriba)
 1. **Cuenta y aprobación** en Google AdSense con el dominio `estudasimples.com.br`. AdSense revisa que haya contenido propio, Política de Privacidade, Sobre y Contato (ya existen).
 2. **Aviso de cookies con opción de recusar anúncios personalizados.** La Política de Privacidade ya promete que se mostrará antes de los anuncios personalizados (sección 4). Hay que implementarlo (por ejemplo con la herramienta de consentimiento de Google, o una propia) **antes** de poner el script de AdSense.
-3. **Archivo `ads.txt`** en la raíz del sitio con tu ID de editor (`src/ads.txt`; AdSense te dice qué línea poner).
+3. **Archivo `ads.txt`**: lo genera `build.mjs` desde `anuncios.adsense.cliente` (no crear `src/ads.txt`: el build lo sobrescribiría).
 4. **Script de AdSense** en `head-common.html` y, dentro de cada `<div class="anuncio" data-slot="...">`, el bloque `<ins class="adsbygoogle" ...>` con su propio ID de bloque. Quita `aria-hidden="true"` de esos `div` cuando tengan un anuncio real.
 5. Actualizar la Política de Privacidade (fecha y, si usas una herramienta de consentimiento, su nombre).
 6. Volver a medir con Lighthouse: los anuncios bajarán el Performance (es normal).
@@ -52,7 +79,7 @@ Cosas de la estructura actual que conviene decidir o ajustar al activar AdSense:
 5. **`aria-hidden="true"`.** Los `div.anuncio` lo llevan mientras están vacíos. Quítalo de cada bloque que tenga un anuncio real y deja la etiqueta "Anúncio" visible encima (AdSense lo pide en varios formatos).
 6. **Contenido para el rastreador de AdSense.** La explicación de cada herramienta está en el HTML estático (no depende de JavaScript) y la herramienta se dibuja con JavaScript: es lo correcto para la política de "contenido propio y suficiente". Las páginas legales, Sobre, Contacto y la 404 siguen sin anuncios y así deben quedar (poco texto).
 7. **`robots.txt` y el rastreador de AdSense.** El `robots.txt` administrado por Cloudflare bloquea solo rastreadores de IA y deja `User-agent: *` con `Allow: /`, así que `Mediapartners-Google` (el rastreador de AdSense) y Googlebot pasan (verificado el 13/10/2026). Si cambias la política de bots de IA en Cloudflare, vuelve a mirar `https://estudasimples.com.br/robots.txt`.
-8. **`ads.txt`.** Ponlo en `src/ads.txt`; `build.mjs` copia los `.txt`. Tras publicar, comprueba que `https://estudasimples.com.br/ads.txt` devuelva 200 con la línea de AdSense.
+8. **`ads.txt`.** Lo genera `build.mjs` (no hace falta `src/ads.txt`). Tras publicar, comprueba que `https://estudasimples.com.br/ads.txt` devuelva 200 con la línea de AdSense.
 9. **Consentimiento y política.** El aviso de cookies sigue pendiente (ver arriba). La Política de Privacidade ya declara las estadísticas de Cloudflare y el `sessionStorage` de las herramientas; al activar AdSense hay que añadir el nombre de la herramienta de consentimiento y actualizar la fecha.
 10. **Carga y rendimiento.** Carga el script de AdSense con `async`, solo después del consentimiento, y considera cargar los bloques de más abajo cuando el visitante se acerque (IntersectionObserver) para no tocar el LCP de las herramientas. Vuelve a medir con Lighthouse después de activar.
 11. **Cabecera `X-Frame-Options: DENY`** (en `_headers`). No afecta a los anuncios (ellos van dentro de nuestra página, no al revés). Si una herramienta de AdSense necesitara mostrar tu página dentro de un marco, habría que relajarla solo para eso.
