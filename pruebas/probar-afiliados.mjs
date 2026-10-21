@@ -35,12 +35,14 @@ const OFF = { afiliados: { ativo: false } }; // la configuración real con el in
 
 // ---------- R) configuración real (la que se publica) ----------
 seccion("R) configuración real");
-ok(AF && AF.ativo === true && AF.amazonTag === "estudasimples-20" && AF.legalAtualizadoEm === "2026-10-20", "afiliados encendido, con el ID estudasimples-20 y la fecha legal 2026-10-20");
-ok(AF.produtos.length === 10 && AF.produtos.every((p) => p.tipo === "livro"), "10 productos, todos libros (todavía sin cursos)");
+ok(AF && AF.ativo === true && AF.amazonTag === "estudasimples-20" && AF.legalAtualizadoEm === "2026-10-21", "afiliados encendido, con el ID estudasimples-20 y la fecha legal 2026-10-21");
+const LIBROS = AF.produtos.filter((p) => p.tipo === "livro"), CURSOS = AF.produtos.filter((p) => p.tipo === "curso");
+ok(AF.produtos.length === 11 && LIBROS.length === 10 && CURSOS.length === 1, "11 productos: 10 libros y 1 curso (ABNT Descomplicada, de Hotmart)");
+ok(CURSOS[0].url === "https://go.hotmart.com/G108129335U" && JSON.stringify(CURSOS[0].guias) === JSON.stringify(["normas-abnt", "citacao-abnt", "como-fazer-referencia-abnt", "modelo-de-artigo-cientifico-abnt"]), "el curso usa su hotlink de Hotmart y solo 4 guías de contenido (nunca las de puro formato)");
 const hostOk = (u) => { try { const x = new URL(u); return x.protocol === "https:" && x.hostname === "www.amazon.com.br" && /^\/dp\/[0-9]{9}[0-9X]$/.test(x.pathname) && x.searchParams.get("tag") === "estudasimples-20" && [...x.searchParams.keys()].length === 1; } catch { return false; } };
-ok(AF.produtos.every((p) => hostOk(p.url)), "los 10 enlaces son https://www.amazon.com.br/dp/<ISBN>?tag=estudasimples-20", AF.produtos.filter((p) => !hostOk(p.url)).map((p) => p.id).join(", "));
+ok(LIBROS.every((p) => hostOk(p.url)), "los 10 enlaces de libros son https://www.amazon.com.br/dp/<ISBN>?tag=estudasimples-20", LIBROS.filter((p) => !hostOk(p.url)).map((p) => p.id).join(", "));
 const isbnOk = (a) => [...a].reduce((t, c, i) => t + (c === "X" ? 10 : +c) * (10 - i), 0) % 11 === 0;
-ok(AF.produtos.every((p) => isbnOk(new URL(p.url).pathname.slice(4))), "los 10 códigos son ISBN-10 válidos (dígito de control)");
+ok(LIBROS.every((p) => isbnOk(new URL(p.url).pathname.slice(4))), "los 10 códigos son ISBN-10 válidos (dígito de control)");
 const real = constr({}, "af-real");
 ok(real.ok, "el build con la configuración real funciona", real.salida.slice(-300));
 const guiasReal = paginasHtml(real.dir).filter((p) => /^guias\/[^/]+\/index\.html$/.test(p));
@@ -60,7 +62,7 @@ ok(leer(real.dir, "termos-de-uso/index.html").includes("12. Links de afiliado") 
 
 // ---------- A) apagado ----------
 seccion("A) apagado");
-ok(AF.produtos.every((p) => p.tipo === "livro" && p.autor && p.titulo && p.frase && p.guias.length), "cada producto tiene tipo, título, autor, frase y guías");
+ok(AF.produtos.every((p) => ["livro", "curso"].includes(p.tipo) && p.autor && p.titulo && p.frase && p.guias.length), "cada producto tiene tipo, título, autor, frase y guías");
 const cuenta = {};
 for (const p of AF.produtos) for (const g of p.guias) cuenta[g] = (cuenta[g] || 0) + 1;
 ok(Object.values(cuenta).every((n) => n <= 3), "ninguna guía recibe más de 3 productos", JSON.stringify(Object.entries(cuenta).filter(([, n]) => n > 3)));
@@ -161,6 +163,23 @@ const xss = constr(ON({ produtos: [{ ...conEnlaces()[0], titulo: '<img src=x one
 const hx = leer(xss.dir, "guias/como-fazer-tcc/index.html");
 ok(!hx.includes("<img src=x") && hx.includes("&lt;img src=x onerror=alert(1)&gt;") && hx.includes("A &quot;B&quot; &amp; C"), "título y autor se escapan (no entra HTML)");
 ok(!hx.includes("<b onmouseover") && !hx.includes("<i>ver</i>") && hx.includes("&lt;b onmouseover=1&gt;hola&lt;/b&gt;") && hx.includes("&lt;i&gt;ver&lt;/i&gt;"), "frase y botón también se escapan");
+
+// ---------- H) curso de Hotmart ----------
+seccion("H) curso de Hotmart (enlace intacto, texto legal y frase de Amazon según corresponda)");
+const HOT = { id: "curso-hotmart", tipo: "curso", titulo: "Curso de exemplo Hotmart", autor: "Autora Exemplo", frase: "Curso em vídeo de exemplo sobre normas da ABNT.", url: "https://go.hotmart.com/X123456789Y", guias: ["normas-abnt"] };
+const LIBROS_EJ = LIBROS.map((p, i) => ({ ...p, url: `https://www.amazon.com.br/dp/B00EJEMPLO${String(i + 1).padStart(2, "0")}` }));
+const bloqueNormas = (dir) => (/<section class="afiliados"[\s\S]*?<\/section>/.exec(leer(dir, "guias/normas-abnt/index.html")) || [""])[0];
+const soHot = constr({ afiliados: { ativo: true, amazonTag: "exemplo-20", legalAtualizadoEm: "2026-10-21", produtos: [HOT] } }, "af-hot");
+ok(soHot.ok, "el build con solo un curso de Hotmart funciona", soHot.salida.slice(-300));
+const bH = bloqueNormas(soHot.dir), polH = leer(soHot.dir, "politica-de-privacidade/index.html");
+ok(bH.includes('href="https://go.hotmart.com/X123456789Y"') && !/tag=/.test(bH), "solo Hotmart: el hotlink sale exacto y SIN tag de Amazon");
+ok(!bH.includes(FRASE) && !polH.includes(FRASE) && !/Livros podem trazer/.test(bH), "solo Hotmart: no aparece la frase de Amazon ni el aviso de libros");
+ok(/<li><strong>lojas parceiras \(por exemplo, a Hotmart\)<\/strong>/.test(polH) && /Ao clicar em um link de afiliado, a Hotmart pode definir cookies/.test(polH) && /vai para a loja \(por exemplo, a Hotmart\)/.test(polH), "solo Hotmart: la Política dice «a Hotmart» en las secciones 3, 5 y 12");
+const ambos = constr({ afiliados: { ativo: true, amazonTag: "exemplo-20", legalAtualizadoEm: "2026-10-21", produtos: LIBROS_EJ.concat(HOT) } }, "af-ambos");
+ok(ambos.ok, "el build con libros de Amazon + curso de Hotmart funciona", ambos.salida.slice(-300));
+const bA = bloqueNormas(ambos.dir), polA = leer(ambos.dir, "politica-de-privacidade/index.html");
+ok(bA.includes(FRASE) && /Livros podem trazer/.test(bA) && bA.includes('href="https://go.hotmart.com/X123456789Y"'), "ambos: la guía con libros lleva la frase de Amazon, el aviso de libros y el hotlink de Hotmart intacto");
+ok(/lojas parceiras \(por exemplo, a Amazon e a Hotmart\)/.test(polA) && /Ao clicar em um link de afiliado, a Amazon ou a Hotmart pode definir cookies/.test(polA), "ambos: la Política nombra a la Amazon y a la Hotmart");
 
 // ---------- C) errores ----------
 seccion("C) errores que el build debe dar");

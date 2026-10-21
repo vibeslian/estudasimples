@@ -206,10 +206,10 @@
     }
   },
   "afiliados": {
-    "_ajuda": "Recomendações 'Recomendado para o seu trabalho' (livros e cursos com link de afiliado) no fim das guias, antes de 'Guias relacionadas'. Está DESLIGADO. Para ligar: 1) ponha o seu ID de afiliado da Amazon em 'amazonTag' (ex.: 'meusite-20'; é acrescentado aos links de amazon.com.br que ainda não tenham ?tag=); 2) cole o link de cada produto em 'url' (https; produto sem link NÃO aparece); 3) preencha 'legalAtualizadoEm' com a data de hoje (ex.: '2026-11-05'); 4) ponha 'ativo': true e rode o build. Ao ligar, os Termos de Uso e a Política de Privacidade ganham a seção 'Links de afiliado' (e a frase da Amazon, se houver link da Amazon). Cada guia mostra no máximo 3 produtos, na ordem da lista. 'tipo' é 'livro' ou 'curso' (o botão diz 'Ver na Amazon', 'Ver o livro' ou 'Ver o curso'; 'botao' muda o texto). 'guias' é a lista de pastas de guias (ou ['todas']).",
+    "_ajuda": "Recomendações 'Recomendado para o seu trabalho' (livros e cursos com link de afiliado) no fim das guias, antes de 'Guias relacionadas'. Está DESLIGADO. Para ligar: 1) ponha o seu ID de afiliado da Amazon em 'amazonTag' (ex.: 'meusite-20'; é acrescentado aos links de amazon.com.br que ainda não tenham ?tag=); 2) cole o link de cada produto em 'url' (https; produto sem link NÃO aparece); 3) preencha 'legalAtualizadoEm' com a data de hoje (ex.: '2026-11-05'); 4) ponha 'ativo': true e rode o build. Ao ligar, os Termos de Uso e a Política de Privacidade ganham a seção 'Links de afiliado' (e a frase da Amazon, se houver link da Amazon). Cada guia mostra no máximo 3 produtos, na ordem da lista. 'tipo' é 'livro' ou 'curso' (o botão diz 'Ver na Amazon', 'Ver o livro' ou 'Ver o curso'; 'botao' muda o texto). 'guias' é a lista de pastas de guias (ou ['todas']). Cursos da Hotmart: use o hotlink go.hotmart.com/... exatamente como a Hotmart o dá (sem tag da Amazon); os textos legais passam a citar 'a Hotmart' e a frase da Amazon só sai nas guias que têm link da Amazon.",
     "ativo": true,
     "amazonTag": "estudasimples-20",
-    "legalAtualizadoEm": "2026-10-20",
+    "legalAtualizadoEm": "2026-10-21",
     "produtos": [
       {
         "id": "gil-projetos-de-pesquisa",
@@ -342,6 +342,20 @@
         "url": "https://www.amazon.com.br/dp/6581334189?tag=estudasimples-20",
         "guias": [
           "metodologia-do-tcc"
+        ]
+      },
+      {
+        "id": "gulka-abnt-descomplicada",
+        "tipo": "curso",
+        "titulo": "ABNT Descomplicada",
+        "autor": "Ju Gulka | Jornada Acadêmica",
+        "frase": "Curso em vídeo sobre as normas da ABNT para TCC, teses e artigos, com templates editáveis como bônus.",
+        "url": "https://go.hotmart.com/G108129335U",
+        "guias": [
+          "normas-abnt",
+          "citacao-abnt",
+          "como-fazer-referencia-abnt",
+          "modelo-de-artigo-cientifico-abnt"
         ]
       }
     ]

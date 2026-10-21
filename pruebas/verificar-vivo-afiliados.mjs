@@ -6,6 +6,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import puppeteer from "puppeteer-core";
+import { dataLonga } from "../build-guias.mjs";
 
 const BASE = process.env.BASE_URL || "https://estudasimples.com.br";
 const CFG = JSON.parse(fs.readFileSync("../site.config.json", "utf8")).afiliados;
@@ -30,7 +31,7 @@ for (const g of guias) {
   const hrefs = [...b.matchAll(/class="btn afiliado-botao" href="([^"]+)"/g)].map((m) => m[1].replace(/&amp;/g, "&"));
   const titulos = [...b.matchAll(/class="afiliado-titulo">([^<]+)</g)].map((m) => m[1]);
   ok(r.status === 200 && JSON.stringify(hrefs) === JSON.stringify(esperado.map((p) => p.url)), `${g}: ${esperado.length} botón(es) con el enlace exacto (…?tag=estudasimples-20)`, hrefs.join(" | "));
-  ok(hrefs.every((h) => new URL(h).searchParams.get("tag") === "estudasimples-20" && new URL(h).hostname === "www.amazon.com.br"), `${g}: todos con tag=estudasimples-20 en amazon.com.br`);
+  ok(esperado.every((p, i) => { const h = new URL(hrefs[i] || "https://x.invalid"); return p.tipo === "livro" ? h.searchParams.get("tag") === "estudasimples-20" && h.hostname === "www.amazon.com.br" : h.href === new URL(p.url).href && !h.searchParams.has("tag"); }), `${g}: libros con tag=estudasimples-20 en amazon.com.br; cursos con su hotlink exacto y sin tag de Amazon`);
   ok(titulos.length === esperado.length && titulos.every((t, i) => t.replace(/&amp;/g, "&") === esperado[i].titulo), `${g}: los títulos coinciden con la lista`, titulos.join(" | "));
   ok(b.includes(FRASE) && (b.match(/Link de afiliado<\/span>/g) || []).length === esperado.length && (b.match(/rel="sponsored nofollow noopener noreferrer"/g) || []).length === esperado.length, `${g}: frase de Amazon, etiqueta "Link de afiliado" y rel=sponsored nofollow`);
   ok(r.texto.indexOf('class="afiliados"') < r.texto.indexOf('class="guia-relacionadas"'), `${g}: el bloque va antes de "Guias relacionadas"`);
@@ -50,7 +51,7 @@ for (const [ruta, nombre] of [["/termos-de-uso/", "Termos de Uso"], ["/politica-
   const r = await bajar(ruta);
   ok(/<h2 id="links-de-afiliado">12\. Links de afiliado<\/h2>/.test(r.texto), `${nombre}: sección "12. Links de afiliado"`);
   ok(r.texto.includes(FRASE), `${nombre}: tiene la frase de Amazon`);
-  ok(r.texto.includes("Última atualização: 20 de outubro de 2026."), `${nombre}: fecha de actualización 20 de outubro de 2026`);
+  ok(r.texto.includes(`Última atualização: ${dataLonga(CFG.legalAtualizadoEm)}.`), `${nombre}: fecha de actualización ${dataLonga(CFG.legalAtualizadoEm)}`);
 }
 
 // 5) capturas en vivo: /guias/como-fazer-tcc/

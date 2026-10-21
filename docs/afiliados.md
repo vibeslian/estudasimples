@@ -1,7 +1,7 @@
 # Recomendações com link de afiliado (Etapa 17)
 
 Bloco **"Recomendado para o seu trabalho"**: de 1 a 3 cartões pequenos (livro ou curso) no fim de algumas guias, **antes de "Guias relacionadas"**.
-**Estado (20/10/2026): LIGADO** (`afiliados.ativo: true`), com os 10 livros, o ID `estudasimples-20` e a data legal `2026-10-20`. Aparece em 14 guias.
+**Estado (21/10/2026): LIGADO** (`afiliados.ativo: true`), com os 10 livros (Amazon, ID `estudasimples-20`) e 1 curso da Hotmart (*ABNT Descomplicada*, de Ju Gulka | Jornada Acadêmica; hotlink `go.hotmart.com/G108129335U`), e a data legal `2026-10-21`. Aparece em 14 guias (o curso, em 4: `normas-abnt`, `citacao-abnt`, `como-fazer-referencia-abnt` e `modelo-de-artigo-cientifico-abnt`; as guias só de formato continuam sem bloco).
 Se `ativo` voltar a `false` (ou se um produto ficar sem link), o bloco, as seções "12. Links de afiliado" e as frases novas dos Termos e da Política somem, e as páginas ficam idênticas às de antes (provado byte a byte: `BASE_REF=<commit-sem-afiliados> node pruebas/probar-afiliados.mjs`).
 Código: `build-afiliados.mjs`, `build-guias.mjs` (onde entra), CSS `.afiliados` em `src/assets/css/guias.css` (só as guias o carregam), prova `pruebas/probar-afiliados.mjs`.
 
@@ -37,3 +37,9 @@ Regras da Amazon a lembrar: não mostrar preço (só a API de Associados pode), 
 ## Provas
 `cd pruebas && BASE_REF=<commit> node probar-afiliados.mjs`: apagado (nada aparece, igual ao commit), ligado com exemplos (onde aparece e onde nunca, etiqueta, rel, tag, frase da Amazon, Termos e Política), erros do build, e layout em 320/390/1280 px (sem rolagem lateral, CLS 0, botões de 44 px, letra de 12 px ou mais, axe sem problemas).
 Capturas: `node capturas-afiliados.mjs` (usa links de EXEMPLO inventados, nunca vão ao site).
+
+## Cursos da Hotmart (21/10/2026)
+- Use o hotlink que a Hotmart dá (Sou afiliado > Links de divulgação), **exatamente como está**: o build NÃO acrescenta tag da Amazon a links que não são da Amazon. Antes de pôr, confira com `curl -L` adónde redireciona e que a página de vendas carrega (os três primeiros destinos que Lian tinha estavam mortos). Aqui a página de vendas é a própria da Hotmart (`hotmart.com/pt-br/marketplace/produtos/...`).
+- Quando há link da Hotmart à mostra, os textos legais (Política 3, 5 e 12) dizem "a Hotmart" ao lado de "a Amazon" (`build-afiliados.mjs`, `ehHotmart`). A frase "Como Associado da Amazon…" só sai nas guias com algum link da Amazon; o aviso "Livros podem trazer versões antigas…" só sai nas guias com algum livro.
+- Regras da Hotmart para afiliados: sem spam (mensagens em massa), sem usar a marca da Hotmart como se o produto fosse dela, sem prometer resultados garantidos. A frase do cartão só diz o que a página do produto mostra.
+- Afiliação de Lian: 21/10/2026, produto 1496737 (comissão 20 %, cookie eterno, último clique). Relatórios de vendas: painel da Hotmart.

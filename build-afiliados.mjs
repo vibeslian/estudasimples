@@ -11,6 +11,7 @@ const DATA_LEGAL_ORIGINAL = "14 de outubro de 2026"; // "Última atualização" 
 
 // lojas da Amazon (amazon.com.br, amzn.to, a.co...): levam a frase obrigatória e o ID de afiliado
 const ehAmazon = (host) => /(^|\.)amazon\.[a-z.]+$/.test(host) || /^amzn\./.test(host) || host === "a.co";
+const ehHotmart = (host) => /(^|\.)hotmart\.com$/.test(host) || host === "hotm.art";
 const amazonCompleta = (host) => /(^|\.)amazon\.[a-z.]+$/.test(host); // só estes aceitam ?tag=
 
 export function preparaAfiliados(config, guias) {
@@ -47,7 +48,7 @@ export function preparaAfiliados(config, guias) {
       }
       url = u.toString();
     }
-    return { ...p, urlFinal: url, amazon: url ? ehAmazon(new URL(url).hostname) : false };
+    return { ...p, urlFinal: url, amazon: url ? ehAmazon(new URL(url).hostname) : false, hotmart: url ? ehHotmart(new URL(url).hostname) : false };
   });
 
   // ---- o que aparece: só com o interruptor ligado e só produtos com link ----
@@ -56,6 +57,9 @@ export function preparaAfiliados(config, guias) {
   for (const g of guias) { const n = daGuiaLista(g.slug).length; if (n > MAX_POR_GUIA) throw new Error(`${onde}: a guia "${g.slug}" teria ${n} produtos (o máximo é ${MAX_POR_GUIA})`); }
   const algumVisivel = visiveis.length > 0;
   const algumAmazon = visiveis.some((p) => p.amazon);
+  const algumHotmart = visiveis.some((p) => p.hotmart);
+  const lojas = [algumAmazon && "a Amazon", algumHotmart && "a Hotmart"].filter(Boolean); // lojas/plataformas citadas nos textos legais
+  const porExemplo = lojas.length ? ` (por exemplo, ${lojas.join(" e ")})` : "";
   if (algumVisivel && !a.legalAtualizadoEm) throw new Error(`${onde}: para mostrar produtos, preencha legalAtualizadoEm (a data, como "2026-11-05", em que os Termos e a Política passam a falar de links de afiliado)`);
 
   const cartao = (p) => {
@@ -71,7 +75,7 @@ export function preparaAfiliados(config, guias) {
   const daGuia = (slug) => {
     const itens = daGuiaLista(slug);
     if (!itens.length) return "";
-    const nota = `Links de afiliado: se você comprar por eles, o ${nome} pode receber uma pequena comissão, sem custo a mais para você.${itens.some((p) => p.amazon) ? " " + FRASE_AMAZON : ""} Livros podem trazer versões antigas das normas da ABNT: confira sempre a norma atual e o manual da sua instituição. <a href="/termos-de-uso/#links-de-afiliado">Saiba mais</a>`;
+    const nota = `Links de afiliado: se você comprar por eles, o ${nome} pode receber uma pequena comissão, sem custo a mais para você.${itens.some((p) => p.amazon) ? " " + FRASE_AMAZON : ""}${itens.some((p) => p.tipo === "livro") ? " Livros podem trazer versões antigas das normas da ABNT: confira sempre a norma atual e o manual da sua instituição." : ""} <a href="/termos-de-uso/#links-de-afiliado">Saiba mais</a>`;
     return `<section class="afiliados" aria-labelledby="recomendados">
         <h2 id="recomendados">Recomendado para o seu trabalho</h2>
         <ul class="afiliados-lista">
@@ -91,12 +95,12 @@ export function preparaAfiliados(config, guias) {
   const privacidade = !algumVisivel ? "" : `
 
     <h2 id="links-de-afiliado">12. Links de afiliado</h2>
-    <p>As recomendações de livros e cursos nas guias usam links de afiliado. O ${nome} não põe cookies nem ferramentas de rastreamento nesses links, e não recebe o seu nome, o seu e-mail nem os seus dados de pagamento: os relatórios da loja mostram para mim só totais, como cliques e compras.</p>
-    <p>Ao clicar em um desses links, você sai do site e vai para a loja${algumAmazon ? " (por exemplo, a Amazon)" : ""}. Para saber que você veio do ${nome} e me pagar a comissão, a loja pode usar cookies ou identificadores. A partir daí, os seus dados são tratados conforme a política de privacidade da loja, e não por esta. Se você não quiser isso, é só não clicar nesses links ou bloquear cookies de terceiros nas configurações do navegador (como na lista "Pelo navegador" da seção 4).</p>${frase}`;
+    <p>As recomendações de livros e cursos nas guias usam links de afiliado. O ${nome} não põe cookies nem ferramentas de rastreamento nesses links, e não pede nem usa o seu nome, o seu e-mail nem os seus dados de pagamento. Nos relatórios das lojas, uso só totais, como cliques, compras e comissão.</p>
+    <p>Ao clicar em um desses links, você sai do site e vai para a loja${porExemplo}. Para saber que você veio do ${nome} e me pagar a comissão, a loja pode usar cookies ou identificadores. A partir daí, os seus dados são tratados conforme a política de privacidade da loja, e não por esta. Se você não quiser isso, é só não clicar nesses links ou bloquear cookies de terceiros nas configurações do navegador (como na lista "Pelo navegador" da seção 4).</p>${frase}`;
 
-  const loja = algumAmazon ? "a Amazon" : "a loja";
+  const loja = lojas.length ? lojas.join(" ou ") : "a loja";
   const politica25 = !algumVisivel ? "" : `\n    <p>Atenção: algumas guias têm recomendações de livros e cursos com links de afiliado. Eles não são anúncios de uma rede de publicidade e não carregam nada de terceiros na página, mas, se você comprar depois de clicar, o ${nome} pode receber uma comissão. Os detalhes estão na seção 12.</p>`;
-  const politica5 = !algumVisivel ? "" : `\n      <li><strong>lojas parceiras${algumAmazon ? " (por exemplo, a Amazon)" : ""}</strong>, somente se você clicar em um link de afiliado, conforme a seção 12: o site não envia dados a elas, mas o seu navegador passa a se comunicar com a loja;</li>`;
+  const politica5 = !algumVisivel ? "" : `\n      <li><strong>lojas parceiras${porExemplo}</strong>, somente se você clicar em um link de afiliado, conforme a seção 12: o site não envia dados a elas, mas o seu navegador passa a se comunicar com a loja;</li>`;
   const politica3 = !algumVisivel ? "" : `\n    <p>Ao clicar em um link de afiliado, ${loja} pode definir cookies no seu navegador (seção 12).</p>`;
   const termos9 = !algumVisivel ? "" : `\n    <p>Hoje, algumas guias já têm links de afiliado para livros e cursos: eles rendem uma comissão ao site, sem custo a mais para você, e vêm sempre com a etiqueta "Link de afiliado". Veja a seção 12.</p>`;
 
