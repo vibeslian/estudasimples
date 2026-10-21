@@ -1,6 +1,6 @@
 // Etapa 17: "Recomendado para o seu trabalho" (livros y cursos con link de afiliado, al final de las guías, antes de "Guias relacionadas").
 // Construye el sitio varias veces con copias de site.config.json (no toca dist/ ni el servidor :3000) y comprueba:
-//   A) apagado (la configuración real, con los 10 productos SIN enlace): no aparece nada y las páginas no cambian;
+//   A) apagado (la configuración real con el interruptor en false, y también con enlaces cargados o con el interruptor encendido pero sin enlaces): no aparece nada y las páginas no cambian;
 //   B) encendido con productos de ejemplo: dónde aparece (y dónde nunca), etiqueta "Link de afiliado", rel="sponsored nofollow", ID de Amazon,
 //      frase obligatoria de Amazon, secciones nuevas en Termos y Política;
 //   C) los errores que el build debe dar;
@@ -74,6 +74,9 @@ const sinEnlaceEncendido = constr({ afiliados: { ativo: true, amazonTag: "exempl
 ok(sinEnlaceEncendido.ok && !paginasHtml(sinEnlaceEncendido.dir).some((p) => /class="afiliados"|links-de-afiliado/.test(leer(sinEnlaceEncendido.dir, p))), "interruptor encendido pero productos sin enlace: no se muestra nada (ni las secciones legales)");
 const apagadoConEnlaces = constr({ afiliados: { ativo: false, produtos: conEnlaces() } }, "af-off2");
 ok(!paginasHtml(apagadoConEnlaces.dir).some((p) => /class="afiliados"|links-de-afiliado/.test(leer(apagadoConEnlaces.dir, p))), "interruptor apagado con enlaces cargados: no se muestra nada");
+const distintasOff = pagOff.filter((p) => leer(off.dir, p).replace(/\?v=[a-z0-9]+/g, "") !== leer(apagadoConEnlaces.dir, p).replace(/\?v=[a-z0-9]+/g, ""));
+ok(distintasOff.length === 0, "apagado con enlaces cargados = apagado sin enlaces: todas las páginas idénticas (sin necesitar BASE_REF)", distintasOff.slice(0, 5).join(", "));
+ok(!/lojas parceiras|Hoje, algumas guias já têm links de afiliado|comissão/.test(leer(off.dir, "politica-de-privacidade/index.html") + leer(off.dir, "termos-de-uso/index.html")), "apagado: Termos y Política sin ninguna frase nueva de afiliados");
 const sinFalta = paginasHtml(off.dir).filter((p) => /\{\{[A-Za-z0-9_:-]+\}\}/.test(leer(off.dir, p)));
 ok(sinFalta.length === 0, "ninguna página queda con marcas {{...}} sin reemplazar", sinFalta.join(", "));
 
@@ -141,12 +144,23 @@ for (const [pag, clave] of [["termos-de-uso", "Termos"], ["politica-de-privacida
   ok(h.includes("Última atualização: 21 de outubro de 2026."), `${clave}: la fecha de actualización cambia`);
 }
 ok(/rel="sponsored/.test(bTcc) && /href="\/termos-de-uso\/#links-de-afiliado"/.test(bTcc), "la nota de cada bloque enlaza a la sección de los Termos");
+ok(bTcc.includes("Livros podem trazer versões antigas das normas da ABNT"), "la nota avisa que los libros pueden traer versiones antiguas de las normas ABNT");
+const pol = leer(on.dir, "politica-de-privacidade/index.html"), ter = leer(on.dir, "termos-de-uso/index.html");
+ok(/Atenção: algumas guias têm recomendações de livros e cursos com links de afiliado/.test(pol), "Política 2.5: ya no dice solo 'sin anuncios': menciona los links de afiliado");
+ok(/<li><strong>lojas parceiras \(por exemplo, a Amazon\)<\/strong>, somente se você clicar/.test(pol), "Política 5: las tiendas aparecen entre los terceros");
+ok(/Ao clicar em um link de afiliado, a Amazon pode definir cookies/.test(pol), "Política 3 (Cookies): menciona los cookies de la tienda");
+ok(/A partir daí/.test(pol) && !/Daí em diante/.test(pol) && /lista "Pelo navegador" da seção 4/.test(pol), "Política 12: portugués y remisión correctos");
+ok(/Hoje, algumas guias já têm links de afiliado/.test(ter) && /Escolho os livros e os cursos por tratarem do assunto de cada guia/.test(ter), "Termos 9 y 12: textos nuevos");
+ok(!/Eu escolho os livros|pelo que acho útil/.test(ter), "Termos 12: sin la afirmación subjetiva");
+const soloCursoPol = leer(soloCurso.dir, "politica-de-privacidade/index.html");
+ok(/Ao clicar em um link de afiliado, a loja pode definir cookies/.test(soloCursoPol) && !/Amazon/.test(soloCursoPol.split("12. Links de afiliado")[1] || ""), "con solo un curso (no Amazon), la Política habla de 'a loja' y no de Amazon");
 const resto = pagOn.filter((p) => /\{\{[A-Za-z0-9_:-]+\}\}/.test(leer(on.dir, p)));
 ok(resto.length === 0, "encendido: ninguna página con marcas {{...}} sin reemplazar", resto.join(", "));
 ok(sitemapUrls(on.dir).length === sitemapUrls(off.dir).length, "el sitemap no cambia");
-const xss = constr(ON({ produtos: [{ ...conEnlaces()[0], titulo: '<img src=x onerror=alert(1)>', autor: 'A "B" & C' }] }), "af-xss");
+const xss = constr(ON({ produtos: [{ ...conEnlaces()[0], titulo: '<img src=x onerror=alert(1)>', autor: 'A "B" & C', frase: '<b onmouseover=1>hola</b>', botao: '<i>ver</i>' }] }), "af-xss");
 const hx = leer(xss.dir, "guias/como-fazer-tcc/index.html");
-ok(!hx.includes("<img src=x") && hx.includes("&lt;img src=x onerror=alert(1)&gt;") && hx.includes("A &quot;B&quot; &amp; C"), "los textos se escapan (no entra HTML)");
+ok(!hx.includes("<img src=x") && hx.includes("&lt;img src=x onerror=alert(1)&gt;") && hx.includes("A &quot;B&quot; &amp; C"), "título y autor se escapan (no entra HTML)");
+ok(!hx.includes("<b onmouseover") && !hx.includes("<i>ver</i>") && hx.includes("&lt;b onmouseover=1&gt;hola&lt;/b&gt;") && hx.includes("&lt;i&gt;ver&lt;/i&gt;"), "frase y botón también se escapan");
 
 // ---------- C) errores ----------
 seccion("C) errores que el build debe dar");
@@ -154,6 +168,7 @@ const falla = (mod, quiere, msg) => { const r = construye(mod, "af-err"); limpia
 falla(ON({ amazonTag: "" }), /precisa do ID de afiliado/, "enlace de Amazon sin ID de afiliado (encendido): se niega");
 falla(ON({ legalAtualizadoEm: null }), /legalAtualizadoEm/, "encendido con productos pero sin fecha legal: se niega");
 falla(ON({ produtos: [{ ...conEnlaces()[0], url: "http://www.amazon.com.br/dp/X" }] }), /https/, "enlace sin https: se niega");
+falla(ON({ produtos: [{ ...conEnlaces()[0], url: "https://www.amazon.com.br/dp/B00EJEMPLO01?tag=otra-cuenta-20" }] }), /outra conta/, "enlace con tag de otra cuenta: se niega (la comisión iría a otro lado)");
 falla(ON({ produtos: [{ ...conEnlaces()[0], url: "javascript:alert(1)" }] }), /https|inválida/, "enlace javascript: se niega");
 falla(ON({ produtos: [{ ...conEnlaces()[0], guias: ["no-existe"] }] }), /não existe/, "guía inexistente: se niega");
 falla(ON({ produtos: [{ ...conEnlaces()[0], tipo: "pelicula" }] }), /livro.*curso/, "tipo inválido: se niega");

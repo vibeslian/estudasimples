@@ -1,7 +1,8 @@
 # Recomendações com link de afiliado (Etapa 17)
 
 Bloco **"Recomendado para o seu trabalho"**: de 1 a 3 cartões pequenos (livro ou curso) no fim de algumas guias, **antes de "Guias relacionadas"**.
-Está **desligado** (`afiliados.ativo: false`) e os 10 produtos propostos estão **sem link**: não aparece nada e as páginas ficam idênticas às de antes (provado byte a byte com `BASE_REF`).
+**Estado (20/10/2026): LIGADO** (`afiliados.ativo: true`), com os 10 livros, o ID `estudasimples-20` e a data legal `2026-10-20`. Aparece em 14 guias.
+Se `ativo` voltar a `false` (ou se um produto ficar sem link), o bloco, as seções "12. Links de afiliado" e as frases novas dos Termos e da Política somem, e as páginas ficam idênticas às de antes (provado byte a byte: `BASE_REF=<commit-sem-afiliados> node pruebas/probar-afiliados.mjs`).
 Código: `build-afiliados.mjs`, `build-guias.mjs` (onde entra), CSS `.afiliados` em `src/assets/css/guias.css` (só as guias o carregam), prova `pruebas/probar-afiliados.mjs`.
 
 ## Como ligar (tudo em `site.config.json`, bloco `afiliados`)
@@ -23,7 +24,14 @@ O build **se recusa** a ligar se: um link da Amazon não tem ID de afiliado; fal
 - Visual próprio (fundo verde-claro e faixa lateral verde; etiqueta coral), diferente dos anúncios (`.anuncio`), da oferta própria (`.oferta`) e do "Parceiro recomendado" (`.parceiro`, borda tracejada).
 
 ## Lista inicial (verificada em catálogos de bibliotecas, editoras e livrarias; título e autor)
-Ver `site.config.json` → `afiliados.produtos` (10 livros, todos sem link). Títulos, autores e guias estão ali; as edições não são citadas, porque mudam.
+Ver `site.config.json` → `afiliados.produtos` (10 livros, todos com link da Amazon). Títulos, autores e guias estão ali; as edições não são citadas, porque mudam. Os 10 códigos (ISBN-10) foram conferidos nas páginas da Amazon (sem o tag) e em catálogos.
+- Os textos de cada cartão só dizem o que dá para verificar (o assunto do livro); evite "clássico", "o mais usado" e parecidos.
+- O livro de Andrade (2010) e o de Cervo, Bervian e Silva (2006) são antigos: por isso o bloco avisa "Livros podem trazer versões antigas das normas da ABNT". Se um livro esgotar na Amazon (ex.: Cervo, `8576050471`), troque o `url` e o título, ou tire o produto da lista.
+- O build recusa um link da Amazon com `?tag=` diferente de `amazonTag` (a comissão iria para outra conta).
+- Lembrete da Amazon: uma conta nova precisa de vendas qualificadas nos primeiros 180 dias (a regra vigente deve ser conferida no painel de Associados), senão pode ser encerrada.
+
+## Textos legais que mudam ao ligar
+Com os afiliados à mostra, entram: Termos 9 (frase sobre links de afiliado) e 12; Política 2.5, 3, 5 (lojas parceiras) e 12. Os ganchos ficam em `src/termos-de-uso/index.html` e `src/politica-de-privacidade/index.html` (`{{AFILIADOS_*}}`) e os textos em `build-afiliados.mjs`.
 Regras da Amazon a lembrar: não mostrar preço (só a API de Associados pode), não esconder o link (nada de encurtadores que disfarcem o destino) e manter a frase de associado.
 
 ## Provas

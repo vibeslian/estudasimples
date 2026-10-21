@@ -230,7 +230,7 @@
         "tipo": "livro",
         "titulo": "Fundamentos de Metodologia Científica",
         "autor": "Marina de Andrade Marconi e Eva Maria Lakatos",
-        "frase": "Clássico de metodologia: o que é pesquisa científica, os tipos de pesquisa e como organizar o trabalho.",
+        "frase": "Explica o que é pesquisa científica, os tipos de pesquisa e como organizar o trabalho.",
         "url": "https://www.amazon.com.br/dp/8597026561?tag=estudasimples-20",
         "guias": [
           "metodologia-do-tcc",
@@ -258,7 +258,7 @@
         "tipo": "livro",
         "titulo": "Metodologia do Trabalho Científico",
         "autor": "Antônio Joaquim Severino",
-        "frase": "Muito usado nas faculdades: leitura de textos, fichamentos e como elaborar trabalhos científicos.",
+        "frase": "Costuma aparecer em ementas de metodologia: leitura de textos, fichamentos e elaboração de trabalhos científicos.",
         "url": "https://www.amazon.com.br/dp/8524924489?tag=estudasimples-20",
         "guias": [
           "referencial-teorico-do-tcc",
@@ -302,7 +302,7 @@
         "tipo": "livro",
         "titulo": "Introdução à Metodologia do Trabalho Científico",
         "autor": "Maria Margarida de Andrade",
-        "frase": "Guia para trabalhos da graduação, com pesquisa bibliográfica e regras de apresentação.",
+        "frase": "Guia para trabalhos da graduação, com pesquisa bibliográfica e orientações de redação.",
         "url": "https://www.amazon.com.br/dp/8522458561?tag=estudasimples-20",
         "guias": [
           "normas-abnt-tcc",
@@ -317,8 +317,8 @@
         "id": "cervo-bervian-metodologia-cientifica",
         "tipo": "livro",
         "titulo": "Metodologia Científica",
-        "autor": "Cervo, Bervian e Silva",
-        "frase": "Introdução clara aos conceitos e métodos da pesquisa científica, usada em disciplinas de metodologia.",
+        "autor": "Amado Luiz Cervo, Pedro Alcino Bervian e Roberto da Silva",
+        "frase": "Introdução aos conceitos e métodos da pesquisa científica; costuma aparecer em ementas de metodologia.",
         "url": "https://www.amazon.com.br/dp/8576050471?tag=estudasimples-20",
         "guias": [
           "introducao-do-tcc"
