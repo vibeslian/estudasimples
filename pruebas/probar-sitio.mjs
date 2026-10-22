@@ -21,7 +21,7 @@ for (const w of ANCHOS) {
       const overflow = document.documentElement.scrollWidth - window.innerWidth;
       const culpables = overflow > 0 ? [...document.querySelectorAll("body *")].filter((e) => e.getBoundingClientRect().right > window.innerWidth + 1).slice(0, 3).map((e) => e.tagName + "." + e.className) : [];
       const sinAlt = [...document.querySelectorAll("img:not([alt])")].length;
-      const peque = [...document.querySelectorAll("a, button, summary, input, select, textarea")].filter((e) => { const b = e.getBoundingClientRect(); const s = getComputedStyle(e); return b.width > 0 && b.height > 0 && s.visibility !== "hidden" && (b.height < 24 || b.width < 24) && !e.closest(".sr-only") && !e.matches(".skip") && e.type !== "checkbox" && !(e.tagName === "A" && e.closest("p, li, dd, .artigo-meta, .faq-resposta")); }).map((e) => (e.textContent || e.id || e.tagName).trim().slice(0, 25));
+      const peque = [...document.querySelectorAll("a, button, summary, input, select, textarea")].filter((e) => { const b = e.getBoundingClientRect(); const s = getComputedStyle(e); return b.width > 0 && b.height > 0 && s.visibility !== "hidden" && (b.height < 24 || b.width < 24) && !e.closest(".sr-only") && !e.matches(".skip, .pular-exemplo") && e.type !== "checkbox" && !(e.tagName === "A" && e.closest("p, li, dd, .artigo-meta, .faq-resposta")); }).map((e) => (e.textContent || e.id || e.tagName).trim().slice(0, 25));
       return { overflow, culpables, sinAlt, peque, h1: document.querySelectorAll("h1").length };
     });
     const esperado404 = url.includes("no-existe");

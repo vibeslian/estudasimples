@@ -664,6 +664,7 @@ let gerando = false;
 const TEXTO_EXCEDE = (p) => `O texto da ${NOME_PAGINA[p] || "página"} passa da página. Diminua o tamanho do título ou encurte os textos antes de baixar.`;
 async function exporta(tipo) {
   if (gerando) return;
+  if (typeof demoRodando !== "undefined" && demoRodando) { mensagem("Espere o exemplo terminar de ser preenchido para baixar.", false); return; }
   const dados = lerDados();
   const pags = ativas();
   const falta = camposFaltando(dados, pags);
@@ -691,7 +692,9 @@ async function exporta(tipo) {
     baixa(blob, nome);
     try { registraDownload(pags); mostraProximo(MODO); } catch (e) { /* o "Monte seu TCC" e o "Próximo passo" são extras: nunca podem atrapalhar o download */ }
     const semPagina = pags.includes("sumario") && dados.sumario.entradas.some((e) => !String(e.pagina || "").trim());
-    mensagem(`Pronto! O arquivo ${nome} foi baixado.` + (semPagina ? " Atenção: há itens do sumário sem número de página; complete no arquivo." : ""));
+    const ehExemplo = dados.institution === "Universidade Exemplo" && dados.authors.some((a) => a === "Maria Silva");
+    mensagem(`Pronto! O arquivo ${nome} foi baixado.` + (semPagina ? " Atenção: há itens do sumário sem número de página; complete no arquivo." : "") + (ehExemplo ? " Atenção: ele tem os dados de EXEMPLO (Maria Silva). Troque pelos seus dados e baixe de novo." : ""), false, 30); // 30 s: o convite "Indicar a um colega" vai junto desta mensagem
+    try { celebra(); } catch (e) { /* a festa e o convite para compartilhar também são extras */ }
   } catch (e) {
     mensagem(
       e && /^excede/.test(e.message || "")
@@ -753,6 +756,7 @@ function restaurarPadrao() {
 }
 
 function novaCapa() {
+  if (typeof demoRodando !== "undefined" && demoRodando) demoCancelada = true; // uma demonstração em andamento para (e não refaz o título)
   if (MODO === "sumario") {
     // limpa só a lista de itens: os dados, o estilo e o logo ficam
     sumarioEstado.entradas = [];
@@ -776,6 +780,7 @@ function novaCapa() {
 // "Limpar dados": pede um segundo clique para evitar apagar sem querer; depois recarrega a página já vazia
 let timerLimpar;
 function limpar() {
+  if (typeof demoRodando !== "undefined" && demoRodando) demoCancelada = true; // uma demonstração em andamento para
   const b = $("btnLimpar");
   if (b.dataset.confirma === "1") {
     limpaProgresso();
@@ -819,6 +824,141 @@ $("form").addEventListener("input", (e) => {
   render();
 });
 $("form").addEventListener("submit", (e) => e.preventDefault());
+
+/* ---------- "Preencher com exemplo" (capa e folha de rosto) ----------
+   Os campos se preenchem letra por letra e a prévia se monta ao vivo (serve de demonstração: também abre sozinho com ?exemplo=1).
+   Só aparece com o formulário vazio, nunca apaga o que a pessoa já digitou, e para se ela mexer em algo durante a demonstração. */
+const reduzMovimento = !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
+const esperaMs = (ms) => new Promise((r) => setTimeout(r, ms));
+const CAMPOS_EXEMPLO = ["institution", "course", "title", "subtitle", "city", "advisor"];
+const formVazio = () => !CAMPOS_EXEMPLO.some((id) => $(id) && $(id).value.trim()) && !autores.valores().some((v) => v.trim());
+// um único lugar decide se o convite ao exemplo aparece (a capa sobre a prévia e o botão que só aparece ao navegar por teclado)
+function mostraExemplo(sim) {
+  if ($("exemploRapido")) $("exemploRapido").hidden = !sim;
+  if ($("btnExemploTeclado")) $("btnExemploTeclado").hidden = !sim;
+}
+const abasVisiveis = () => !!$("abaPrevia") && getComputedStyle($("abaPrevia").parentElement).display !== "none"; // no celular a prévia é outra aba
+// aviso na própria prévia (no celular o aviso normal fica na aba 1, escondida)
+function avisoNaPrevia(texto) {
+  const nota = document.querySelector(".nota-previa");
+  if (!nota) return;
+  if (!nota.dataset.original) nota.dataset.original = nota.textContent;
+  nota.textContent = texto;
+  clearTimeout(timerNota);
+  timerNota = setTimeout(() => { nota.textContent = nota.dataset.original; }, 12000);
+}
+let timerNota;
+let demoRodando = false, demoCancelada = false;
+async function preencheExemplo() {
+  const caixa = $("exemploRapido");
+  if (demoRodando || !caixa || !formVazio()) return;
+  demoRodando = true; demoCancelada = false;
+  mostraExemplo(false);
+  try { history.replaceState(null, "", location.pathname + location.hash); } catch (e) { /* sem isso, "Limpar dados" (que recarrega a página) refaria o exemplo */ }
+  const celular = abasVisiveis();
+  const rapido = reduzMovimento || celular;
+  try { (celular ? $("abaPrevia") : $("institution")).focus({ preventScroll: true }); } catch (e) { /* o foco não pode ficar perdido no <body> */ }
+  const dispara = (el) => el.dispatchEvent(new Event("input", { bubbles: true }));
+  const digita = async (el, texto) => {
+    if (!el) return;
+    if (rapido) { el.value = texto; dispara(el); return; }
+    for (let i = 1; i <= texto.length && !demoCancelada; i++) {
+      el.value = texto.slice(0, i);
+      if (i % 3 === 0 || i === texto.length) dispara(el); // a prévia se refaz a cada 3 letras: mesmo efeito, 3x menos trabalho
+      await esperaMs(22);
+    }
+    if (!demoCancelada) await esperaMs(160);
+  };
+  const PASSOS = [["institution", "Universidade Exemplo"], ["course", "Curso de Administração"], ["autor", "Maria Silva"], ["title", "A influência das redes sociais no aprendizado"],
+    ["subtitle", "um estudo com alunos do ensino médio"], ["city", "Belo Horizonte"], ["advisor", "Prof. Dr. João Silva"]];
+  for (const [id, texto] of PASSOS) {
+    if (demoCancelada) break;
+    if (id === "autor") { autores.define([""]); await digita($("autores").querySelector("input"), texto); }
+    else await digita($(id), texto);
+  }
+  demoRodando = false;
+  if (demoCancelada) return;
+  if (celular) { avisoNaPrevia("Exemplo preenchido! Volte à aba 1 para trocar pelos seus dados."); mostraAba("previa"); }
+  else if (!$("toast").textContent.trim() || /^Espere o exemplo/.test($("toast").textContent)) mensagem("Exemplo preenchido! Troque pelos seus dados: é só digitar nos campos.", false, 10); // não apaga o "Pronto!" de um download feito durante a demonstração
+}
+// A capa fica SOBRE a vista previa vazia (position: absolute): aparecer e sumir nao empurra nada (CLS 0).
+const FOLHA_ALVO = $(MODO === "folha" ? "sheetWrapFolha" : "sheetWrap"); // na página da folha de rosto a página visível é a segunda
+if (MODO !== "sumario" && FOLHA_ALVO) {
+  const caixa = document.createElement("div");
+  caixa.id = "exemploRapido";
+  caixa.className = "exemplo-rapido";
+  caixa.hidden = true;
+  caixa.innerHTML = '<p class="exemplo-rapido-texto"><strong>Quer ver funcionando?</strong> Veja a prévia se montar ao vivo com um exemplo. Depois é só trocar pelos seus dados.</p><button type="button" class="btn btn-acento btn-pequeno" id="btnExemploRapido">Preencher com exemplo</button> <button type="button" class="btn-secundario btn-dispensa" id="exemploDispensa">Agora não</button>';
+  FOLHA_ALVO.appendChild(caixa);
+}
+if ($("exemploRapido") && MODO !== "sumario") {
+  // quem navega pelo teclado encontra o convite logo no começo do formulário (só aparece ao receber o foco)
+  const teclado = document.createElement("button");
+  teclado.type = "button"; teclado.id = "btnExemploTeclado"; teclado.className = "pular-exemplo"; teclado.textContent = "Preencher com exemplo";
+  $("form").prepend(teclado);
+  mostraExemplo(formVazio());
+  $("btnExemploRapido").addEventListener("click", preencheExemplo);
+  teclado.addEventListener("click", preencheExemplo);
+  $("exemploDispensa").addEventListener("click", () => { mostraExemplo(false); if (!abasVisiveis()) $("institution").focus({ preventScroll: true }); });
+  $("form").addEventListener("input", (e) => { if (e.isTrusted) { if (demoRodando) demoCancelada = true; mostraExemplo(false); } });
+  if (/[?&]exemplo=1(&|$)/.test(location.search)) {
+    if (formVazio()) setTimeout(preencheExemplo, 700);
+    else setTimeout(() => mensagem("Seu formulário já tem dados, por isso o exemplo não foi preenchido. Clique em «Limpar dados» para ver o exemplo.", false, 12), 700);
+  }
+}
+
+/* ---------- Depois do download: uma pequena festa e o convite para compartilhar ---------- */
+function celebra() {
+  const caixa = $("compartilhar");
+  if (!caixa) return;
+  const link = caixa.dataset.link || location.origin + "/";
+  const texto = "Achei um site grátis que monta a capa, a folha de rosto, o sumário e as referências ABNT, em PDF ou Word: " + link;
+  $("compZap").href = "https://wa.me/?text=" + encodeURIComponent(texto);
+  if (!$("compCopiar").dataset.pronto) {
+    $("compCopiar").dataset.pronto = "1";
+    $("compCopiar").addEventListener("click", async () => {
+      let ok = false;
+      try { await navigator.clipboard.writeText(link); ok = true; } catch (e) { /* sem permissão: abaixo o link aparece para copiar à mão */ }
+      $("compAviso").textContent = ok ? "Link copiado! Cole na conversa com o seu colega." : "Não consegui copiar sozinho. O link é: " + link;
+    });
+  }
+  if (!$("compFechar").dataset.pronto) {
+    $("compFechar").dataset.pronto = "1";
+    const fecha = () => {
+      caixa.hidden = true;
+      const volta = $("btnIndicar") || $("btnPdf");
+      if (volta) volta.focus({ preventScroll: true });
+    };
+    $("compFechar").addEventListener("click", fecha);
+    caixa.addEventListener("keydown", (e) => { if (e.key === "Escape") fecha(); });
+  }
+  // o convite é só um link junto da mensagem "Pronto!": a cartinha abre se a pessoa tocar (nada aparece sozinho por cima da página)
+  const toast = $("toast");
+  const antigo = $("btnIndicar");
+  if (antigo) antigo.remove();
+  const indicar = document.createElement("button");
+  indicar.type = "button"; indicar.id = "btnIndicar"; indicar.className = "btn-secundario btn-indicar"; indicar.textContent = "Gostou? Indicar a um colega";
+  indicar.addEventListener("click", () => { caixa.hidden = false; $("compZap").focus({ preventScroll: true }); });
+  toast.append(" ", indicar);
+  if (reduzMovimento) return;
+  const area = document.querySelector(".acoes");
+  if (!area) return;
+  const nuvem = document.createElement("span");
+  nuvem.className = "confete";
+  nuvem.setAttribute("aria-hidden", "true");
+  const cores = ["#e8674a", "#3b5d4c", "#5f7f68", "#f0b84a", "#b5c9b7"];
+  for (let i = 0; i < 22; i++) {
+    const p = document.createElement("i");
+    p.style.setProperty("--x", Math.round((Math.random() - 0.5) * 280) + "px");
+    p.style.setProperty("--y", -(60 + Math.round(Math.random() * 120)) + "px");
+    p.style.setProperty("--g", Math.round((Math.random() - 0.5) * 540) + "deg");
+    p.style.setProperty("--d", Math.round(Math.random() * 160) + "ms");
+    p.style.background = cores[i % cores.length];
+    nuvem.appendChild(p);
+  }
+  area.appendChild(nuvem);
+  setTimeout(() => nuvem.remove(), 1700);
+}
 $("restaurar").addEventListener("click", restaurarPadrao);
 $("refazNature").addEventListener("click", () => { natureManual = false; render(); $("nature").focus(); });
 $("btnNova").addEventListener("click", novaCapa);

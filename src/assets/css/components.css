@@ -71,6 +71,8 @@
 .dif li { margin-bottom: .25em; }
 .dif .nota { margin: 0; padding-top: .8em; border-top: 1px solid var(--salvia-200); font-weight: 700; font-size: .95rem; }
 
+.artigo a { overflow-wrap: anywhere; } /* endereços longos (e-mail, URL) não estouram a largura no celular */
+
 /* ---------- Espaços para anúncios (AdSense) ----------
    Invisíveis por padrão, mas reservam o espaço para a página não "pular" quando os anúncios chegarem.
    Para ver onde ficam: abra qualquer página com ?ads=preview no final do endereço. */
