@@ -53,7 +53,8 @@ export function preparaAfiliados(config, guias) {
 
   // ---- o que aparece: só com o interruptor ligado e só produtos com link ----
   const visiveis = ativo ? produtos.filter((p) => p.urlFinal) : [];
-  const daGuiaLista = (slug) => visiveis.filter((p) => p.guias.includes("todas") || p.guias.includes(slug));
+  const ehEnem = (slug) => { const g = guias.find((x) => x.slug === slug); return !!g && /ENEM/.test(g.categoria || ""); }; // os livros de ABNT não vão para as guias do ENEM
+  const daGuiaLista = (slug) => visiveis.filter((p) => (p.guias.includes("todas") && !ehEnem(slug)) || p.guias.includes(slug));
   for (const g of guias) { const n = daGuiaLista(g.slug).length; if (n > MAX_POR_GUIA) throw new Error(`${onde}: a guia "${g.slug}" teria ${n} produtos (o máximo é ${MAX_POR_GUIA})`); }
   const algumVisivel = visiveis.length > 0;
   const algumAmazon = visiveis.some((p) => p.amazon);
@@ -103,6 +104,9 @@ export function preparaAfiliados(config, guias) {
   const politica25 = !algumVisivel ? "" : `\n    <p>Atenção: algumas guias têm recomendações de livros e cursos com links de afiliado. Eles não são anúncios de uma rede de publicidade e não carregam nada de terceiros na página, mas, se você comprar depois de clicar, o ${nome} pode receber uma comissão. Os detalhes estão na seção 12.</p>`;
   const politica5 = !algumVisivel ? "" : `\n      <li><strong>lojas parceiras${porExemplo}</strong>, somente se você clicar em um link de afiliado, conforme a seção 12: o site não envia dados a elas, mas o seu navegador passa a se comunicar com a loja;</li>`;
   const politica3 = !algumVisivel ? "" : `\n    <p>Ao clicar em um link de afiliado, ${loja} pode definir cookies no seu navegador (seção 12).</p>`;
+  const promessaHome = !algumVisivel ? "" : `<li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Links de afiliado vêm sempre marcados com «Link de afiliado».</span></li>`;
+  const sobre = !algumVisivel ? "" : `
+    <p>Algumas guias trazem links de afiliado (livros e cursos). Se você comprar por eles, o site pode receber uma pequena comissão, sem custo extra para você, e esses links vêm sempre marcados com «Link de afiliado».</p>`;
   const termos9 = !algumVisivel ? "" : `\n    <p>Hoje, algumas guias já têm links de afiliado para livros e cursos: eles rendem uma comissão ao site, sem custo a mais para você, e vêm sempre com a etiqueta "Link de afiliado". Veja a seção 12.</p>`;
 
   return {
@@ -116,6 +120,8 @@ export function preparaAfiliados(config, guias) {
       "{{AFILIADOS_POLITICA_5}}": politica5,
       "{{AFILIADOS_POLITICA_3}}": politica3,
       "{{AFILIADOS_TERMOS_9}}": termos9,
+      "{{AFILIADOS_SOBRE}}": sobre,
+      "{{AFILIADOS_PROMESSA_HOME}}": promessaHome,
       // data de "Última atualização" dos Termos e da Política: a de sempre, até os links de afiliado entrarem
       "{{LEGAL_ATUALIZADO}}": algumVisivel ? dataLonga(a.legalAtualizadoEm) : DATA_LEGAL_ORIGINAL,
     },

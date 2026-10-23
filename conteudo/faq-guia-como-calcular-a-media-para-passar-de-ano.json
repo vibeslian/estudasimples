@@ -1,0 +1,44 @@
+[
+  {
+    "p": "Qual é a fórmula para saber quanto preciso tirar na última etapa?",
+    "r": [
+      "Sem pesos: nota necessária = (média da escola × número de etapas) − soma das notas que você já tem. Com pesos: (média × soma dos pesos − soma de cada nota × seu peso) ÷ peso da última etapa."
+    ]
+  },
+  {
+    "p": "Qual é a média para passar de ano?",
+    "r": [
+      "Não existe um número único no país: a escola define a sua média no regimento. Confirme o valor na secretaria antes de fazer a conta."
+    ]
+  },
+  {
+    "p": "Qual é a diferença entre média simples e média ponderada?",
+    "r": [
+      "Na média simples, todas as etapas valem o mesmo e você divide a soma das notas pelo número de etapas. Na ponderada, cada nota é multiplicada pelo seu peso e o total é dividido pela soma dos pesos, de modo que as etapas de peso maior influenciam mais o resultado."
+    ]
+  },
+  {
+    "p": "O que significa uma nota necessária maior que 10?",
+    "r": [
+      "Que a última etapa, sozinha, não consegue levar a média até o valor da escola, mesmo com a nota máxima. O passo seguinte depende do regimento: vale perguntar se há recuperação e como a nota dela é usada."
+    ]
+  },
+  {
+    "p": "Toda escola tem recuperação?",
+    "r": [
+      "A Lei de Diretrizes e Bases (Lei 9.394/1996) fala em estudos de recuperação para os casos de baixo rendimento na educação básica e deixa as regras para cada escola, no regimento. O formato, a época e o modo como a nota entra na média variam de uma escola para outra."
+    ]
+  },
+  {
+    "p": "Como a calculadora do site pode me ajudar?",
+    "r": [
+      "A <a href=\"/calculadora-de-media/?origem=guia-como-calcular-a-media-para-passar-de-ano\">calculadora de média</a> faz as contas desta página: você informa a média da sua escola e as notas que já tem, e ela mostra quanto falta na última etapa, com opção de pesos. Ela é uma conta de apoio e não substitui o regimento da escola."
+    ]
+  },
+  {
+    "p": "As regras são as mesmas na faculdade?",
+    "r": [
+      "A matemática da média é a mesma, mas as regras de aprovação, de arredondamento e de recuperação (ou de prova final) ficam no regulamento da instituição de ensino superior. Confirme com a coordenação do curso."
+    ]
+  }
+]

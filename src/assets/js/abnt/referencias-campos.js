@@ -31,7 +31,7 @@ export const TIPOS_ANO = [
   ["decada", "Só sei a década (certa): [200-]"],
   ["decadaProvavel", "Só sei a década (provável): [201-?]"],
 ];
-export const TIPOS_NORMA = ["Lei", "Lei complementar", "Decreto", "Decreto-lei", "Medida provisória", "Portaria", "Resolução", "Instrução normativa", "Emenda constitucional"];
+export const TIPOS_NORMA = ["Lei", "Lei complementar", "Decreto", "Decreto-lei", "Medida provisória", "Portaria", "Resolução", "Instrução normativa", "Emenda constitucional", "Constituição Federal"];
 export const TIPOS_TRABALHO = [
   ["tcc", "Trabalho de Conclusão de Curso", "Graduação"],
   ["tccEsp", "Trabalho de Conclusão de Curso", "Especialização"],
@@ -147,10 +147,10 @@ export const TIPOS = [
     blocos: [
       { k: "texto", id: "jurisdicao", rotulo: "Jurisdição", obrig: true, valor: "BRASIL", ajuda: "País, estado ou município. Ex.: BRASIL, SÃO PAULO (Estado), CAMPINAS", placeholder: "Ex.: BRASIL" },
       { k: "texto", id: "orgao", rotulo: "Órgão", opcional: true, ajuda: "Só para portarias, resoluções etc. Ex.: Ministério da Educação", placeholder: "Ex.: Ministério da Educação" },
-      { k: "select", id: "tipoNorma", rotulo: "Tipo da norma", opcoes: TIPOS_NORMA.map((t) => [t, t]) },
+      { k: "select", id: "tipoNorma", rotulo: "Tipo da norma", ajuda: "Para a Constituição, escolha «Constituição Federal»: o número da norma não é usado, a data é a da promulgação (5 de outubro de 1988) e o ano da publicação é o da versão que você consultou.", opcoes: TIPOS_NORMA.map((t) => [t, t]) },
       { k: "texto", id: "numero", rotulo: "Número", opcional: true, ajuda: "Como está na lei. Ex.: 9610 (os pontos saem sozinhos)", placeholder: "Ex.: 9610" },
       { k: "texto", id: "dataNorma", rotulo: "Data da norma", obrig: true, tipoCampo: "date" },
-      { k: "area", id: "ementa", rotulo: "Ementa", obrig: true, ajuda: "É o resumo que vem logo abaixo do nome da lei. Copie como está.", placeholder: "Ex.: Altera, atualiza e consolida a legislação sobre direitos autorais e dá outras providências." },
+      { k: "area", id: "ementa", rotulo: "Ementa", obrig: true, ajuda: "É o resumo que vem logo abaixo do nome da lei. Copie como está. Na Constituição, escreva o título: Constituição da República Federativa do Brasil de 1988.", placeholder: "Ex.: Altera, atualiza e consolida a legislação sobre direitos autorais e dá outras providências." },
       { k: "texto", id: "local", rotulo: "Local da publicação", valor: "Brasília, DF", placeholder: "Ex.: Brasília, DF" },
       { k: "texto", id: "publicador", rotulo: "Quem publica", valor: "Presidência da República", ajuda: "No site do Planalto: Presidência da República.", placeholder: "Ex.: Presidência da República" },
       { k: "data", id: "pub", rotulo: "Ano da publicação", partes: ["ano"], obrig: true, ajuda: "Em geral, o mesmo ano da lei." },

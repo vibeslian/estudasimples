@@ -84,7 +84,7 @@ export function preparaAnuncie(config, guias) {
   const passos = (config.percurso && config.percurso.passos) || [];
   const ferramentasHtml = () => {
     const itens = passos.map((p) => `<li><a href="${p.url}"><strong>Gerador de ${esc(p.nome.toLowerCase())}</strong></a></li>`);
-    itens.push(`<li><a href="/guias/"><strong>${guias.length} guias ABNT</strong></a></li>`);
+    itens.push(`<li><a href="/guias/"><strong>${guias.filter((g) => g.categoria !== "ENEM e escola").length} guias ABNT</strong></a></li>`);
     return `<ul class="ferramentas-lista">
         ${itens.join("\n        ")}
       </ul>`;

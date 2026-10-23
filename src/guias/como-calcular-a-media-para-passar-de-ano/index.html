@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  {{include:head-common}}
+  {{GUIA_HEAD}}
+  {{FAQ_JSONLD:guia-como-calcular-a-media-para-passar-de-ano}}
+</head>
+<body class="guia">
+{{GUIA_HERO}}
+<main id="conteudo">
+<div class="container conteudo-capa">
+  <div class="conteudo-grade">
+    <article class="artigo">
+
+      <div class="resposta">
+        <strong class="resposta-titulo">Resposta direta</strong>
+        <p>Para saber quanto falta tirar na última etapa, multiplique a média da escola pelo número de etapas e subtraia a soma das notas que você já tem: <strong>nota necessária = (média × número de etapas) − soma das notas</strong>. Exemplo: média 6,0 em 4 bimestres, com notas 7,5, 6,0 e 5,5. A conta é 6,0 × 4 = 24; as notas somam 19; faltam <strong>5,0</strong> no último bimestre.</p>
+        <p>Cada escola define a sua média e as suas regras de recuperação. Este guia mostra só a matemática: o que vale para você está no regimento da sua escola.</p>
+      </div>
+
+      <nav class="indice-guia" aria-label="Neste guia">
+        <strong>Neste guia</strong>
+        <ol>
+          <li><a href="#simples">Média aritmética simples</a></li>
+          <li><a href="#ponderada">Média ponderada (com pesos)</a></li>
+          <li><a href="#maior-que-10">E se der mais que 10?</a></li>
+          <li><a href="#escola">O que depende da sua escola</a></li>
+          <li><a href="#erros">Erros comuns</a></li>
+          <li><a href="#perguntas-frequentes">Perguntas frequentes</a></li>
+        </ol>
+      </nav>
+
+      {{GUIA_FERRAMENTA}}
+
+      <section id="simples">
+        <h2>Média aritmética simples: a conta passo a passo</h2>
+        <p>Na média simples, todas as etapas valem o mesmo. A média final é a soma das notas dividida pelo número de etapas. Para descobrir a nota que falta, basta inverter essa conta.</p>
+        <ol class="passos">
+          <li><div><h3>Descubra a média da sua escola</h3><p>Pergunte na secretaria ou procure no regimento. Aqui vou chamá-la de <strong>M</strong>.</p></div></li>
+          <li><div><h3>Multiplique M pelo número de etapas</h3><p>Isso dá o total de pontos que as notas precisam somar ao fim do ano. Com 4 bimestres, é M × 4. Com 3 trimestres, M × 3. Com 2 semestres, M × 2.</p></div></li>
+          <li><div><h3>Subtraia as notas que você já tem</h3><p>Some as notas das etapas já encerradas e tire esse valor do total do passo anterior. O resultado é a nota que falta.</p></div></li>
+          <li><div><h3>Compare com a nota máxima</h3><p>Se a nota que falta for até 10 (ou até a nota máxima da sua escola), ainda dá para atingir a média na última etapa.</p></div></li>
+        </ol>
+
+        <div class="rolavel" role="region" tabindex="0" aria-label="Exemplos de média simples">
+          <table class="tabela-guia">
+            <caption>Dois exemplos de média simples</caption>
+            <thead><tr><th>Situação</th><th>Conta</th><th>Falta tirar</th></tr></thead>
+            <tbody>
+              <tr><td>Média 6,0, 4 bimestres; notas 7,5, 6,0 e 5,5</td><td>6,0 × 4 = 24; 7,5 + 6,0 + 5,5 = 19; 24 − 19</td><td><strong>5,0</strong></td></tr>
+              <tr><td>Média 7,0, 3 trimestres; notas 8,0 e 5,5</td><td>7,0 × 3 = 21; 8,0 + 5,5 = 13,5; 21 − 13,5</td><td><strong>7,5</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Os números dessa tabela são exemplos que montei para mostrar a conta, não notas de ninguém. Troque-os pelos seus e use o mesmo caminho. Se quiser conferir a sua conta sem fazer à mão, a <a href="/calculadora-de-media/?origem=guia-como-calcular-a-media-para-passar-de-ano">calculadora de média</a> faz exatamente esses passos.</p>
+      </section>
+
+      {{ESPACO:guia-meio-1}}
+
+      <section id="ponderada">
+        <h2>Média ponderada: quando as etapas valem pesos diferentes</h2>
+        <p>Em algumas escolas, uma etapa vale mais que outra. Cada nota é multiplicada pelo seu peso, os resultados são somados e o total é dividido pela soma dos pesos. Para achar a nota que falta, o raciocínio é o mesmo da média simples, só que com os pesos:</p>
+        <p><strong>nota necessária = (média × soma dos pesos − soma de cada nota × seu peso) ÷ peso da última etapa</strong></p>
+        <p>Veja um exemplo que inventei. A escola tem 4 etapas com pesos 1, 2, 2 e 3 (soma 8) e a média é 6,0. Você tirou 7,0 na primeira, 5,0 na segunda e 6,0 na terceira.</p>
+        <div class="exemplos">
+          <div class="exemplo">
+            <span class="exemplo-tipo">Conta completa</span>
+            <p>Total de pontos necessário: 6,0 × 8 = 48.</p>
+            <p>Pontos que você já tem: 7,0 × 1 + 5,0 × 2 + 6,0 × 2 = 7 + 10 + 12 = 29.</p>
+            <p>Faltam 48 − 29 = 19 pontos, e a última etapa tem peso 3: 19 ÷ 3 ≈ 6,33.</p>
+            <span class="exemplo-nota">Na prática, arredonde para cima: com 6,3 a média fica um pouco abaixo de 6,0 (cerca de 5,99) e com 6,4 ela passa de 6,0 (cerca de 6,03). Por isso a nota a buscar é 6,4.</span>
+          </div>
+        </div>
+        <p>O arredondamento também é decisão da escola. Alguns regimentos arredondam para cima a partir de certa casa decimal, outros não arredondam. Por segurança, ao planejar, prefira o valor que sobra um pouco, como feito acima.</p>
+      </section>
+
+      <section id="maior-que-10">
+        <h2>E se a nota necessária for maior que 10?</h2>
+        <p>Significa que, mesmo tirando a nota máxima na última etapa, a média da escola não é atingida só com ela. Exemplo: média 7,0 em 4 bimestres e notas 4,0, 5,0 e 6,0. A conta é 7,0 × 4 = 28; as notas somam 15; faltariam 13 pontos, o que passa de 10.</p>
+        <p>Nesse caso, a matemática sozinha não resolve, e o que vem depois depende da escola. A Lei de Diretrizes e Bases (Lei 9.394/1996) prevê, na educação básica, estudos de recuperação para os casos de baixo rendimento, e diz que eles são disciplinados pelas escolas em seus regimentos. Ou seja: se existe recuperação, como ela funciona e como a nota dela entra na média está no regimento, e não em uma regra nacional.</p>
+        <aside class="dica"><strong class="dica-titulo">O que fazer agora</strong><p>Peça o regimento ou o calendário de recuperação na secretaria, converse com o professor sobre trabalhos e provas que ainda podem valer nota, e organize o tempo que resta. O <a href="/guias/como-montar-um-cronograma-de-estudos-para-o-enem/">guia do cronograma de estudos</a> mostra um jeito de dividir as horas sem se esgotar.</p></aside>
+      </section>
+
+      <section id="escola">
+        <h2>O que depende da sua escola</h2>
+        <p>A conta é matemática, mas as regras em volta dela são da escola. Antes de confiar no resultado, confira estes pontos no regimento:</p>
+        <ul>
+          <li><strong>A média para passar:</strong> não existe um número único para o país.</li>
+          <li><strong>Como o ano é dividido:</strong> bimestres, trimestres ou semestres.</li>
+          <li><strong>Se há pesos:</strong> e quais são, em cada etapa.</li>
+          <li><strong>Como a média final é formada:</strong> há escolas que somam pontos em vez de calcular a média; a lógica da conta é a mesma, mas o total muda.</li>
+          <li><strong>Arredondamento:</strong> se existe e como funciona.</li>
+          <li><strong>Recuperação:</strong> se existe, em que época acontece e como a nota entra.</li>
+          <li><strong>Frequência:</strong> a nota não é a única exigência para passar de ano.</li>
+        </ul>
+        <p>Se você está no ensino superior, o raciocínio da conta é o mesmo, mas as regras estão no regulamento da instituição, e não no regimento de uma escola.</p>
+      </section>
+
+      {{ESPACO:guia-meio-2}}
+
+      <section id="erros">
+        <h2>Erros comuns no cálculo</h2>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Fazer a média das notas que você já tem e comparar com a média da escola.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Contar também a etapa que falta: o total de pontos é a média multiplicada por todas as etapas, inclusive a última.</p></div></div>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Usar a média de outra escola, de um amigo ou de uma matéria da internet.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Usar a média do regimento da sua escola.</p></div></div>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Ignorar os pesos quando a escola os usa.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Multiplicar cada nota pelo seu peso e dividir pela soma dos pesos.</p></div></div>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Arredondar a nota necessária para baixo e ficar com uma casa decimal a menos.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Arredondar para cima ao planejar, para não ficar um décimo abaixo da média.</p></div></div>
+        <div class="comparar"><div class="comparar-erro"><span class="comparar-rotulo">Erro comum</span><p>Tratar o resultado da conta como decisão final de aprovação.</p></div><div class="comparar-certo"><span class="comparar-rotulo">Forma certa</span><p>Usar o resultado como uma estimativa e confirmar o resto no regimento e com a escola.</p></div></div>
+      </section>
+
+      <section id="perguntas-frequentes">
+        <h2>Perguntas frequentes sobre o cálculo da média</h2>
+        {{FAQ_HTML:guia-como-calcular-a-media-para-passar-de-ano}}
+      </section>
+
+      <p>Se a nota que falta é alta, vale organizar o tempo de estudo: veja o <a href="/guias/como-montar-um-cronograma-de-estudos-para-o-enem/">guia do cronograma</a>. E, para quem também vai fazer o ENEM, há o guia sobre as <a href="/guias/quantas-linhas-tem-a-redacao-do-enem/">linhas da redação</a>.</p>
+
+      {{GUIA_RELACIONADAS}}
+
+      {{GUIA_FONTES}}
+
+    </article>
+    <aside class="lateral" aria-label="Publicidade">
+      {{ESPACO:guia-lateral}}
+    </aside>
+  </div>
+</div>
+</main>
+{{include:footer}}
+</body>
+</html>

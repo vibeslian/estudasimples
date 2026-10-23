@@ -1,0 +1,44 @@
+[
+  {
+    "p": "Quantas linhas tem a folha de redação do ENEM?",
+    "r": [
+      "Pela Cartilha do Participante do Inep, o texto definitivo vai na folha de redação e comporta até 30 linhas. Tudo o que você quiser entregar como redação precisa caber ali."
+    ]
+  },
+  {
+    "p": "Qual é o mínimo de linhas para não tirar zero?",
+    "r": [
+      "A cartilha manda dar nota zero à redação com até 7 linhas escritas, por «texto insuficiente». Por isso, o mínimo para não zerar por causa do tamanho é 8 linhas escritas por você. Ter 8 linhas não garante boa nota: só evita esse zero específico."
+    ]
+  },
+  {
+    "p": "Trechos copiados dos textos da prova contam como linhas?",
+    "r": [
+      "Não. Segundo a cartilha, as linhas que tenham trecho copiado da prova de redação ou do caderno de questões, inteiras ou em parte, ficam fora da contagem do mínimo. Só valem as linhas que você produziu."
+    ]
+  },
+  {
+    "p": "O título entra na contagem das linhas?",
+    "r": [
+      "Entra. A Cartilha do Participante diz que o título é opcional e que, embora seja considerado linha escrita, não é avaliado nas competências da correção. Ele ocupa uma das 30 linhas da folha, e pode levar à nota zero se tiver característica de anulação. Confira a cartilha do ano da sua prova."
+    ]
+  },
+  {
+    "p": "Quantas palavras a redação do ENEM deve ter?",
+    "r": [
+      "Não há regra oficial de palavras na cartilha do Inep: o limite é dado em linhas. Quantas palavras cabem em uma linha depende da sua letra, e é por isso que vale treinar em folha pautada para conhecer o seu ritmo."
+    ]
+  },
+  {
+    "p": "O contador de linhas do site mostra o número exato?",
+    "r": [
+      "Não, ele faz uma estimativa. Você informa quantos caracteres cabem em uma linha com a sua letra e o <a href=\"/contador-de-linhas-enem/?origem=guia-quantas-linhas-tem-a-redacao-do-enem\">contador</a> calcula as linhas a partir daí. Para saber o número real, a referência é a sua própria folha de treino."
+    ]
+  },
+  {
+    "p": "A regra pode mudar de um ano para o outro?",
+    "r": [
+      "Pode. As informações desta página vêm da cartilha de 2025. Antes da prova, abra a cartilha e o edital do ano em que você vai fazer o ENEM, no site do Inep, e confira se algo mudou."
+    ]
+  }
+]

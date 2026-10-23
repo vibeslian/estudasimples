@@ -12,6 +12,8 @@ const cfg = JSON.parse(fs.readFileSync(path.join(RAIZ, "site.config.json"), "utf
 const guias = JSON.parse(fs.readFileSync(path.join(RAIZ, "conteudo", "guias.json"), "utf8"));
 const LIVE = process.env.LIVE === "1";
 const falhas = [];
+const ABNT = guias.filter((g) => g.categoria !== "ENEM e escola"); // la guía principal enlaza a todas las de ABNT; las de «ENEM e escola» se enlazan desde sus herramientas y entre sí
+const ENEM = guias.filter((g) => g.categoria === "ENEM e escola");
 const marca = (c, m) => { console.log(c ? "OK   " : "FALLA", m); if (!c) falhas.push(m); };
 const norm = (t) => t.replace(/ /g, " ").replace(/\s+/g, " ").trim();
 
@@ -29,17 +31,17 @@ const existeRuta = async (url) => {
   return fs.existsSync(f) && (fs.statSync(f).isFile() || fs.existsSync(path.join(f, "index.html")));
 };
 
-const todas = ["/", "/guias/", "/gerador-de-capa-abnt/", "/gerador-de-folha-de-rosto-abnt/", "/gerador-de-sumario-abnt/", "/gerador-de-referencias-abnt/", "/formatacao-abnt-tcc/", "/sobre/", "/contato/", "/politica-de-privacidade/", "/termos-de-uso/", ...guias.map((g) => `/guias/${g.slug}/`)];
+const todas = ["/", "/guias/", "/gerador-de-capa-abnt/", "/gerador-de-folha-de-rosto-abnt/", "/gerador-de-sumario-abnt/", "/gerador-de-referencias-abnt/", "/contador-de-linhas-enem/", "/cronograma-de-estudos-enem/", "/calculadora-de-media/", "/formatacao-abnt-tcc/", "/sobre/", "/contato/", "/politica-de-privacidade/", "/termos-de-uso/", ...guias.map((g) => `/guias/${g.slug}/`)];
 const html = {};
 for (const u of todas) html[u] = await leePagina(u);
 
-console.log("== A1) Las 29 guías y el índice existen y están completos ==");
-marca(guias.length === 29, `guias.json tiene 29 guías (${guias.length})`);
+console.log("== A1) Las 32 guías (29 de ABNT + 3 de ENEM e escola) y el índice existen y están completos ==");
+marca(guias.length === 32 && ABNT.length === 29 && ENEM.length === 3, `guias.json tiene 32 guías: 29 de ABNT + 3 de «ENEM e escola» (${guias.length}: ${ABNT.length} + ${ENEM.length})`);
 for (const g of guias) {
   const h = html[`/guias/${g.slug}/`];
   marca(!!h && !/\{\{[A-Za-z_:]/.test(h), `/guias/${g.slug}/ existe y no tiene marcas sin resolver`);
 }
-marca(!!html["/guias/"] && guias.every((g) => html["/guias/"].includes(`href="/guias/${g.slug}/"`)), "el índice /guias/ enlaza las 29 guías");
+marca(!!html["/guias/"] && guias.every((g) => html["/guias/"].includes(`href="/guias/${g.slug}/"`)), "el índice /guias/ enlaza las 32 guías");
 
 console.log("\n== A2) Títulos y descripciones únicos, de buen tamaño ==");
 const titulos = new Map(), descs = new Map();
@@ -111,20 +113,20 @@ for (const g of guias) {
   marca(g.fontes.length >= 3 && g.fontes.every((f) => h.includes(`href="${f.url}"`)) && fuentes.every((m) => /rel="[^"]*noopener/.test(m[0])), `${g.slug}: ${g.fontes.length} fuentes con enlace y rel="noopener"`);
   marca(/id="fontes"|class="guia-fontes"/.test(h) && /Fontes/.test(h), `${g.slug}: sección "Fontes" al final`);
 }
-for (const [id, url] of [["capa", "/gerador-de-capa-abnt/"], ["folha", "/gerador-de-folha-de-rosto-abnt/"], ["sumario", "/gerador-de-sumario-abnt/"]]) {
+for (const [id, url] of [["capa", "/gerador-de-capa-abnt/"], ["folha", "/gerador-de-folha-de-rosto-abnt/"], ["sumario", "/gerador-de-sumario-abnt/"], ["contador", "/contador-de-linhas-enem/"], ["cronograma", "/cronograma-de-estudos-enem/"], ["media", "/calculadora-de-media/"]]) {
   const h = html[url] || "";
   const con = guias.filter((g) => (g.ferramentas || []).includes(id));
-  marca(con.length >= 2 && con.every((g) => h.includes(`href="/guias/${g.slug}/"`)), `la herramienta ${id} enlaza a sus ${con.length} guías`);
+  marca(con.length >= (ENEM.some((g) => (g.ferramentas || []).includes(id)) ? 1 : 2) && con.every((g) => h.includes(`href="/guias/${g.slug}/"`)), `la herramienta ${id} enlaza a sus ${con.length} guías`);
 }
 marca(html["/"] && html["/"].includes('href="/guias/"') && html["/"].includes('href="/guias/normas-abnt/"'), "la portada enlaza al índice y a la guía principal");
 for (const u of todas) { const h = html[u]; if (h && !h.includes('href="/guias/"')) marca(false, `${u}: falta el enlace "Guias" en el menú o el pie`); }
 marca(todas.every((u) => !html[u] || html[u].includes('href="/guias/"')), "el menú o el pie de todas las páginas enlazan a /guias/");
 
-console.log("\n== A6) La guía principal enlaza a las otras 12 ==");
+console.log("\n== A6) La guía principal enlaza a las otras 28 de ABNT ==");
 {
   const h = html["/guias/normas-abnt/"] || "";
-  const faltan = guias.filter((g) => g.slug !== "normas-abnt" && !h.includes(`href="/guias/${g.slug}/"`)).map((g) => g.slug);
-  marca(faltan.length === 0, `normas-abnt enlaza a las 28 guías${faltan.length ? " (faltan: " + faltan.join(", ") + ")" : ""}`);
+  const faltan = ABNT.filter((g) => g.slug !== "normas-abnt" && !h.includes(`href="/guias/${g.slug}/"`)).map((g) => g.slug);
+  marca(faltan.length === 0, `normas-abnt enlaza a las 28 guías de ABNT${faltan.length ? " (faltan: " + faltan.join(", ") + ")" : ""}`);
 }
 
 {
@@ -175,7 +177,7 @@ console.log("\n== A8) Sitemap ==");
   const urls = [...sm.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
   const esperadas = ["/guias/", ...guias.map((g) => `/guias/${g.slug}/`)];
   const faltan = esperadas.filter((e) => !urls.some((u) => u.endsWith(e)));
-  marca(faltan.length === 0, `el sitemap incluye /guias/ y las 29 guías${faltan.length ? " (faltan: " + faltan.join(", ") + ")" : ""}`);
+  marca(faltan.length === 0, `el sitemap incluye /guias/ y las 32 guías${faltan.length ? " (faltan: " + faltan.join(", ") + ")" : ""}`);
   marca(new Set(urls).size === urls.length, `el sitemap no repite URLs (${urls.length})`);
 }
 
@@ -207,7 +209,7 @@ if (!LIVE) {
           if (r.ov > 0 || erros.length || r.navOv > 1) sin.push(`${url} (desborde ${r.ov}, menú ${r.navOv}${r.sobra.length ? ", " + r.sobra.join("/") : ""}${erros.length ? ", errores: " + erros[0] : ""})`);
           await p.close();
         }
-        marca(sin.length === 0, `ancho ${nombre}: las 14 páginas sin scroll horizontal, sin errores de consola y con el menú dentro de la pantalla${sin.length ? " → " + sin.join("; ") : ""}`);
+        marca(sin.length === 0, `ancho ${nombre}: las ${guias.length + 1} páginas sin scroll horizontal, sin errores de consola y con el menú dentro de la pantalla${sin.length ? " → " + sin.join("; ") : ""}`);
       }
       // /guias/: tarjetas en 1 columna por debajo de 600 px
       for (const [ancho, esperadas] of [[390, 1], [599, 1], [700, 2], [1280, 3]]) {

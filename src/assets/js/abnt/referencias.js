@@ -563,6 +563,10 @@ $("tipo").addEventListener("change", () => {
   tocado = false;
   atualiza();
 });
+$("form").addEventListener("focusin", (e) => {
+  const el = e.target;
+  if (el && el.matches && el.matches('input[type="text"]') && el.defaultValue && el.value === el.defaultValue) el.select(); // BRASIL, Brasília, DF... já vêm preenchidos: digitar por cima substitui
+});
 $("form").addEventListener("input", (e) => {
   if (e.target.closest(".ref-form")) tocado = true;
   if (e.target.id === "font") { guardaFonte(e.target.value); renderPrevia(); }

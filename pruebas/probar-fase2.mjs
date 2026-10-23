@@ -255,7 +255,7 @@ seccion("5b) correcciones de la revisión: foco, teclado, ?exemplo=1 + Limpar, d
 seccion("6) portada: el botón lleva al ejemplo en vivo");
 {
   const { p, ctx } = await abre("/");
-  const hrefs = await p.$$eval(".hero-botoes a", (l) => l.map((a) => a.getAttribute("href") + "|" + a.textContent.trim()));
+  const hrefs = await p.$$eval(".hero-exemplo a", (l) => l.map((a) => a.getAttribute("href") + "|" + a.textContent.trim()));
   ok(hrefs.some((h) => h === "/gerador-de-capa-abnt/?exemplo=1|Ver um exemplo ao vivo"), "el botón de la portada abre la capa con ?exemplo=1", hrefs.join(" ; "));
   await ctx.close();
 }

@@ -1270,5 +1270,127 @@
         "url": "https://portal.uern.br/dsib/wp-content/uploads/sites/2/2025/02/MANUAL-DE-NORMALIZACAO-SIBUERN-2025.pdf"
       }
     ]
+  },
+  {
+    "categoria": "ENEM e escola",
+    "atualizado": "2026-10-22",
+    "norma": "Cartilha do Participante do Inep (redação no Enem 2025)",
+    "slug": "quantas-linhas-tem-a-redacao-do-enem",
+    "prioridade": 30,
+    "rotulo": "Linhas da redação do ENEM",
+    "titulo": "Quantas linhas tem a redação do ENEM? Mínimo e máximo",
+    "h1": "Quantas linhas tem a redação do ENEM? Mínimo, máximo e o que não conta",
+    "descricao": "A redação do ENEM cabe em até 30 linhas, e com até 7 linhas escritas a nota é zero. Veja o mínimo, o que não conta e como conferir o seu texto.",
+    "lead": "O limite da folha, o piso de 8 linhas para não zerar por tamanho, as linhas que não contam e se o título conta.",
+    "resumoIndice": "Até 30 linhas na folha, mínimo de 8 para não zerar por tamanho, trechos copiados e o título, que conta como linha.",
+    "ferramentas": [
+      "contador"
+    ],
+    "ferramenta": {
+      "nome": "Contador de linhas da redação",
+      "texto": "Cole o seu texto, diga quantos caracteres cabem em uma linha da sua letra e veja uma estimativa das linhas. Grátis, sem cadastro, e o texto não sai do seu aparelho.",
+      "botao": "Contar as linhas",
+      "url": "/contador-de-linhas-enem/"
+    },
+    "relacionadas": [
+      "como-montar-um-cronograma-de-estudos-para-o-enem",
+      "como-calcular-a-media-para-passar-de-ano"
+    ],
+    "fontes": [
+      {
+        "titulo": "Inep, Cartilha do Participante «A redação no Enem 2025»",
+        "url": "https://download.inep.gov.br/publicacoes/institucionais/avaliacoes_e_exames_da_educacao_basica/a_redacao_no_enem_2025_cartilha_do_participante.pdf",
+        "nota": "Edição de 2025: confira a cartilha do ano da sua prova."
+      },
+      {
+        "titulo": "Inep, página do Enem (áreas de conhecimento, dois dias de prova, legislação e editais)",
+        "url": "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem"
+      },
+      {
+        "titulo": "Inep, notícias do Enem (onde saem as datas e as orientações de cada edição)",
+        "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/noticias/enem"
+      }
+    ]
+  },
+  {
+    "categoria": "ENEM e escola",
+    "atualizado": "2026-10-22",
+    "metaTexto": "Cada escola define a sua média: vale o regimento",
+    "slug": "como-calcular-a-media-para-passar-de-ano",
+    "prioridade": 31,
+    "rotulo": "Média para passar de ano",
+    "titulo": "Como calcular a média para passar de ano, com exemplos",
+    "h1": "Como calcular a média para passar de ano: quanto falta tirar",
+    "descricao": "Como calcular quanto tirar no último bimestre ou trimestre: média simples e ponderada, fórmulas, exemplos e o que fazer se a nota passar de 10.",
+    "lead": "A fórmula da nota que falta, com média simples e com pesos, exemplos com números e o que depende do regimento da sua escola.",
+    "resumoIndice": "Média simples e ponderada, a fórmula da nota que falta, exemplos e o que fazer se passar de 10.",
+    "ferramentas": [
+      "media"
+    ],
+    "ferramenta": {
+      "nome": "Calculadora de média",
+      "texto": "Coloque a média da sua escola e as notas que já tem: a calculadora mostra quanto falta na última etapa, com pesos opcionais. As notas não saem do seu aparelho.",
+      "botao": "Calcular a nota que falta",
+      "url": "/calculadora-de-media/"
+    },
+    "relacionadas": [
+      "como-montar-um-cronograma-de-estudos-para-o-enem",
+      "quantas-linhas-tem-a-redacao-do-enem"
+    ],
+    "fontes": [
+      {
+        "titulo": "Lei de Diretrizes e Bases (Lei 9.394/1996), art. 24: verificação do rendimento e estudos de recuperação",
+        "url": "https://www.planalto.gov.br/ccivil_03/leis/l9394.htm"
+      },
+      {
+        "titulo": "Toda Matéria, Média aritmética: simples e ponderada",
+        "url": "https://www.todamateria.com.br/media/"
+      },
+      {
+        "titulo": "Khan Academy, Entendendo e aplicando a média ponderada",
+        "url": "https://pt.khanacademy.org/math/9-ano-mat-pr-conhecimentos-previos/x307af68e27461e8f:3-trimestre/x307af68e27461e8f:media-estatistica/a/entendendo-e-aplicando-a-media-ponderada"
+      }
+    ]
+  },
+  {
+    "categoria": "ENEM e escola",
+    "atualizado": "2026-10-22",
+    "metaTexto": "Um método de organização, não uma regra do Inep",
+    "slug": "como-montar-um-cronograma-de-estudos-para-o-enem",
+    "prioridade": 32,
+    "rotulo": "Cronograma de estudos para o ENEM",
+    "titulo": "Como montar um cronograma de estudos para o ENEM",
+    "h1": "Como montar um cronograma de estudos para o ENEM, passo a passo",
+    "descricao": "Passo a passo para montar o cronograma de estudos do ENEM: contar as semanas, definir as horas, repartir as 5 áreas, o dia livre e a revisão.",
+    "lead": "Cinco passos para organizar o seu tempo até a prova, com um exemplo de semana, sem promessa de nota e sem data inventada.",
+    "resumoIndice": "Contar semanas, escolher as horas, repartir as 5 áreas, dia livre e revisão, com um exemplo de semana.",
+    "ferramentas": [
+      "cronograma"
+    ],
+    "ferramenta": {
+      "nome": "Cronograma de estudos do ENEM",
+      "texto": "Escolha a data da prova, as horas por dia e as áreas de reforço, e veja o plano semana a semana, com um dia livre. Grátis, sem cadastro.",
+      "botao": "Montar meu cronograma",
+      "url": "/cronograma-de-estudos-enem/"
+    },
+    "relacionadas": [
+      "quantas-linhas-tem-a-redacao-do-enem",
+      "como-calcular-a-media-para-passar-de-ano"
+    ],
+    "fontes": [
+      {
+        "titulo": "Inep, página do Enem (áreas de conhecimento, dois dias de prova, legislação e editais)",
+        "url": "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem"
+      },
+      {
+        "titulo": "Inep, notícias do Enem (onde saem as datas e as orientações de cada edição)",
+        "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/noticias/enem"
+      },
+      {
+        "titulo": "Inep, Cartilha do Participante «A redação no Enem 2025» (a redação como parte da prova)",
+        "url": "https://download.inep.gov.br/publicacoes/institucionais/avaliacoes_e_exames_da_educacao_basica/a_redacao_no_enem_2025_cartilha_do_participante.pdf",
+        "nota": "Edição de 2025: confira a cartilha do ano da sua prova."
+      }
+    ]
   }
 ]

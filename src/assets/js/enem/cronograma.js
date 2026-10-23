@@ -43,14 +43,15 @@ function elemento(tag, classe, texto) {
 }
 
 function desenhaDia(dia, indice) {
-  const li = elemento("li", "sem-dia" + (dia.tipo === "livre" || dia.tipo === "fora" ? " livre" : ""));
+  const li = elemento("li", "sem-dia" + (dia.tipo === "livre" || dia.tipo === "fora" ? " livre" : "") + (dia.tipo === "fora" ? " fora" : ""));
   const cab = elemento("span", "dia");
   cab.append(DIAS_LONGOS[indice].slice(0, 3), elemento("small", "", dia.rotulo));
   const corpo = elemento("span", "blocos");
   if (dia.tipo === "estudo") {
     dia.blocos.forEach((b) => {
-      const el = elemento("span", `bloco bloco--${b.area}`, b.nome);
-      el.append(elemento("small", "", `${b.horas} h`));
+      const el = elemento("span", `bloco bloco--${b.area}`);
+      // nome curto nas 7 colunas do computador; nome completo na lista do celular
+      el.append(elemento("span", "n-curto", b.nome), elemento("span", "n-longo", b.nomeLongo || b.nome), elemento("small", "", `${b.horas} h`));
       corpo.append(el);
     });
   } else if (dia.tipo === "livre") {
@@ -88,8 +89,8 @@ function mostraSemana() {
   const fim = [...s.dias].reverse().find((d) => d.tipo !== "fora") || s.dias[6];
   $("semanaTitulo").textContent = `Semana ${s.numero} de ${plano.totalSemanas} · ${ini.rotulo} a ${fim.rotulo}`;
   // aria-disabled (e não disabled): o foco do teclado não se perde quando se chega à primeira ou à última semana
-  $("anterior").setAttribute("aria-disabled", String(semanaAtual === 0));
-  $("proxima").setAttribute("aria-disabled", String(semanaAtual === plano.semanas.length - 1));
+  for (const id of ["anterior", "anterior2"]) $(id).setAttribute("aria-disabled", String(semanaAtual === 0));
+  for (const id of ["proxima", "proxima2"]) $(id).setAttribute("aria-disabled", String(semanaAtual === plano.semanas.length - 1));
 }
 
 function monta(focar) {
@@ -103,6 +104,7 @@ function monta(focar) {
     erro.textContent = r.erro;
     erro.setAttribute("role", focar ? "alert" : "status"); // só «grita» quando a pessoa clicou em Montar
     erro.hidden = !focar && !v.prova; // sem data ainda e sem clique: não mostra erro a quem acabou de chegar
+    if (!erro.hidden && focar) erro.scrollIntoView({ block: "nearest" });
     $("plano").hidden = true;
     $("vazio").hidden = false;
     return;
@@ -117,7 +119,10 @@ function monta(focar) {
   $("planoResumo").textContent = `${sem} ${sem === 1 ? "semana" : "semanas"} no plano · ${r.diasPorSemana} ${r.diasPorSemana === 1 ? "dia" : "dias"} de estudo por semana · ${r.horas} h por dia`;
   desenha();
   guarda();
-  if (focar) $("planoTitulo").focus({ preventScroll: false });
+  if (focar) {
+    $("planoTitulo").focus({ preventScroll: true });
+    $("plano").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" }); // leva a tela ao resultado
+  }
 }
 
 // a data mínima é amanhã
@@ -131,8 +136,13 @@ try { aplicaForm(JSON.parse(localStorage.getItem(CHAVE) || "null")); } catch (e)
 form.addEventListener("submit", (e) => { e.preventDefault(); monta(true); });
 // depois da primeira vez, mudar qualquer resposta refaz o plano na hora
 form.addEventListener("change", () => { guarda(); if (plano || $("data").value) monta(false); });
-$("anterior").addEventListener("click", () => { if (plano && semanaAtual > 0) { semanaAtual--; mostraSemana(); } });
-$("proxima").addEventListener("click", () => { if (plano && semanaAtual < plano.semanas.length - 1) { semanaAtual++; mostraSemana(); } });
+const vaiAnterior = () => { if (plano && semanaAtual > 0) { semanaAtual--; mostraSemana(); } };
+const vaiProxima = () => { if (plano && semanaAtual < plano.semanas.length - 1) { semanaAtual++; mostraSemana(); } };
+$("anterior").addEventListener("click", vaiAnterior);
+$("proxima").addEventListener("click", vaiProxima);
+// os mesmos botões no fim da semana: na lista do celular não é preciso voltar ao alto para trocar de semana
+$("anterior2").addEventListener("click", vaiAnterior);
+$("proxima2").addEventListener("click", () => { vaiProxima(); $("semanaTitulo").scrollIntoView({ block: "nearest" }); });
 $("imprimir").addEventListener("click", () => window.print());
 
 if ($("data").value) monta(false);

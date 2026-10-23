@@ -53,7 +53,7 @@ seccion("0) páginas, sitemap, portada y rodapé");
   }
   const { p, ctx } = await abre("/");
   ok(!(await p.evaluate(() => /Em breve/.test(document.body.textContent))), "la portada ya no dice «Em breve»");
-  const hrefs = await p.$$eval("#enem a.cartao", (l) => l.map((a) => a.getAttribute("href")));
+  const hrefs = await p.$$eval("#enem a.enem-item", (l) => l.map((a) => a.getAttribute("href")));
   ok(JSON.stringify(hrefs) === JSON.stringify(["/contador-de-linhas-enem/", "/cronograma-de-estudos-enem/", "/calculadora-de-media/"]), "la portada enlaza a las 3 herramientas", JSON.stringify(hrefs));
   const pie = await p.$$eval(".footer-links a", (l) => l.map((a) => a.getAttribute("href")));
   ok(["/contador-de-linhas-enem/", "/cronograma-de-estudos-enem/", "/calculadora-de-media/"].every((h) => pie.includes(h)), "el pie de página enlaza a las 3 herramientas");
@@ -75,7 +75,7 @@ seccion("1) contador de linhas");
   await poneTexto(p, "#texto", "Uma frase curta.");
   ok(await texto(p, "#numLinhas") === "1" && /insuficiente/i.test(await texto(p, "#rotuloEstado")), "1 línea = texto insuficiente");
   ok(/nota zero/.test(await texto(p, "#explicaEstado")) && /8 linhas/.test(await texto(p, "#explicaEstado")), "explica nota cero y el mínimo de 8");
-  ok(await p.$eval("#resultado", (e) => e.dataset.estado) === "erro", "estado de error");
+  ok(await p.$eval("#resultado", (e) => e.dataset.estado) === "aviso", "con pocas líneas el aviso es calmo (naranja suave), no rojo alarmista");
   // 8 líneas: 8 párrafos
   await poneTexto(p, "#texto", Array(8).fill(lorem(5)).join("\n"));
   ok(await texto(p, "#numLinhas") === "8" && /Dentro do limite/.test(await texto(p, "#rotuloEstado")), "8 líneas = dentro del límite");
@@ -160,8 +160,9 @@ seccion("2) calculadora de média");
   await poneTexto(p, "#nota1", "9"); await poneTexto(p, "#nota2", "9"); await poneTexto(p, "#nota3", "9");
   ok(await texto(p, "#numNota") === "0,0" && /já garantiu/.test(await texto(p, "#pergunta")), "ya aprobado con 9,9,9");
   await poneTexto(p, "#media", "7"); await poneTexto(p, "#nota1", "2"); await poneTexto(p, "#nota2", "2"); await poneTexto(p, "#nota3", "2");
-  ok(await p.$eval("#resultado", (e) => e.dataset.estado) === "erro" && await texto(p, "#numNota") === "22,0", "imposible: muestra cuánto haría falta (22,0) en estado de alerta", await texto(p, "#numNota"));
-  ok(/recuperação/.test(await texto(p, "#conta")), "imposible: manda ver el reglamento");
+  ok(await p.$eval("#resultado", (e) => e.dataset.estado) === "aviso" && await texto(p, "#numNota") === "22,0", "imposible: muestra cuánto haría falta (22,0) en tono calmo", await texto(p, "#numNota"));
+  ok(!(await p.$eval("#passos", (e) => e.hidden)) && /recuperação/.test(await texto(p, "#passos")), "imposible: aparecen «O que fazer agora» con pasos concretos");
+  ok(/recuperar/.test(await texto(p, "#conta")), "imposible: dice que el año no está perdido");
   await poneTexto(p, "#nota3", "abc");
   ok(/não está certa/.test(await texto(p, "#pergunta")), "nota inválida avisa");
   await poneTexto(p, "#nota3", "11");
@@ -344,6 +345,84 @@ seccion("3) cronograma de estudos");
   await mid.ctx.close();
   const d2 = { ctx: { close: async () => {} } };
   await d2.ctx.close();
+}
+
+// ============ 3b) mejoras tras la evaluación con visitantes ============
+seccion("3b) resultado fijo en el celular, «Veja também», avisos de campo, cronograma en lista");
+{
+  // contador en celular: el resultado se queda arriba al bajar
+  const m = await abre("/contador-de-linhas-enem/", { w: 390, h: 800, movil: true });
+  await poneTexto(m.p, "#texto", Array(12).fill(lorem(30)).join("\n"));
+  await m.p.evaluate(() => window.scrollTo(0, 900));
+  await espera(300);
+  const top = await m.p.$eval("#resultado", (e) => Math.round(e.getBoundingClientRect().top));
+  const alto = await m.p.$eval("#resultado", (e) => Math.round(e.getBoundingClientRect().height));
+  ok(top <= 1 && top >= -1, "celular: el resultado queda fijo arriba al bajar por la página", String(top));
+  ok(alto < 170, "celular: el resultado fijo es compacto (no tapa el texto)", String(alto));
+  ok(await m.p.$eval("#explicaMovel", (e) => getComputedStyle(e).display !== "none" && e.textContent.length > 10), "celular: la explicación del resultado aparece bajo el texto");
+  ok((await sinDesborde(m.p)) <= 0, "celular: sin scroll horizontal con el resultado fijo");
+  // aviso de campo: caracteres por línea
+  await m.p.evaluate(() => { const el = document.getElementById("car"); el.value = "abc"; el.dispatchEvent(new Event("input", { bubbles: true })); });
+  ok(/só números/.test(await texto(m.p, "#carAviso")) && await m.p.$eval("#car", (e) => e.getAttribute("aria-invalid") === "true"), "escribir letras en «caracteres por línea» avisa y marca el campo");
+  await m.p.evaluate(() => { const el = document.getElementById("car"); el.value = "500"; el.dispatchEvent(new Event("input", { bubbles: true })); });
+  ok(/entre 30 e 120/.test(await texto(m.p, "#carAviso")), "un número fuera de rango avisa con el rango");
+  await m.p.$eval("#car", (e) => e.dispatchEvent(new Event("change", { bubbles: true })));
+  ok(/Ajustei para 120/.test(await texto(m.p, "#carAviso")) && await m.p.$eval("#car", (e) => e.value) === "120", "al salir del campo se ajusta y lo dice");
+  await m.p.focus("#car"); await m.p.keyboard.press("ArrowDown");
+  ok(await m.p.$eval("#car", (e) => e.value) === "115", "las flechas ↑/↓ cambian el número de 5 en 5");
+  ok(/com espaços/.test(await texto(m.p, "#contagens")), "el contador de caracteres dice «com espaços»");
+  const vt = await m.p.$$eval(".veja-tambem a", (l) => l.map((a) => a.getAttribute("href")));
+  ok(vt.includes("/cronograma-de-estudos-enem/") && vt.includes("/calculadora-de-media/") && vt.some((h) => h.startsWith("https://wa.me/?text=")), "«Veja também» enlaza al cronograma, a la média y al WhatsApp", JSON.stringify(vt));
+  const wa = await m.p.$eval('.veja-tambem a[href^="https://wa.me/"]', (a) => ({ href: a.href, rel: a.rel, target: a.target }));
+  ok(wa.rel.includes("noopener") && wa.target === "_blank" && !/redac|texto=|nota/i.test(decodeURIComponent(wa.href).split("text=")[1] || ""), "el botón de WhatsApp abre en otra pestaña y no lleva datos del usuario", wa.href);
+  await m.ctx.close();
+
+  // calculadora en celular: resultado fijo y errores marcados
+  const c = await abre("/calculadora-de-media/", { w: 390, h: 800, movil: true });
+  await poneTexto(c.p, "#media", "7"); await poneTexto(c.p, "#nota1", "2"); await poneTexto(c.p, "#nota2", "2"); await poneTexto(c.p, "#nota3", "2");
+  await c.p.evaluate(() => window.scrollTo(0, 500));
+  await espera(300);
+  const top2 = await c.p.$eval("#resultado", (e) => Math.round(e.getBoundingClientRect().top));
+  ok(top2 <= 1 && top2 >= -1, "calculadora en celular: el resultado queda fijo arriba", String(top2));
+  ok(!(await c.p.$eval("#passos", (e) => e.hidden)), "caso imposible: los pasos concretos están visibles");
+  ok((await sinDesborde(c.p)) <= 0, "calculadora en celular: sin scroll horizontal");
+  await poneTexto(c.p, "#nota1", "45"); await poneTexto(c.p, "#nota3", "");
+  ok(/não está certa/.test(await texto(c.p, "#pergunta")) && await c.p.$eval("#nota1", (e) => e.getAttribute("aria-invalid") === "true"), "una nota inválida (45) se avisa ANTES de «falta la nota 3» y marca el campo");
+  await poneTexto(c.p, "#nota1", "7");
+  ok(await c.p.$eval("#nota1", (e) => !e.hasAttribute("aria-invalid")), "al corregir, la marca de error desaparece");
+  await c.ctx.close();
+
+  // cronograma en celular: nombres completos, sin días «fuera», botones al final
+  const k = await abre("/cronograma-de-estudos-enem/", { w: 390, h: 800, movil: true });
+  await poneTexto(k.p, "#data", enDias(20));
+  await k.p.click("#montar");
+  await espera(900);
+  ok(await k.p.$eval("#plano", (e) => Math.abs(e.getBoundingClientRect().top) < 120), "celular: al montar, la pantalla baja sola hasta el plan");
+  const largos = await k.p.$$eval(".bloco .n-longo", (l) => l.filter((e) => getComputedStyle(e).display !== "none").map((e) => e.textContent));
+  ok(largos.some((t) => /Ciências Humanas|Ciências da Natureza/.test(t)), "celular: se ven los nombres completos de las áreas", largos.slice(0, 5).join(","));
+  const fuera = await k.p.$$eval(".sem-dia.fora", (l) => l.filter((e) => getComputedStyle(e).display !== "none").length);
+  ok(fuera === 0, "celular: los días anteriores a hoy no ocupan espacio en la lista", String(fuera));
+  ok(await k.p.$eval("#proxima2", (e) => getComputedStyle(e).display !== "none" && e.getBoundingClientRect().height >= 44), "celular: hay botón «próxima semana» también al final de la lista");
+  const sem1 = await texto(k.p, "#semanaTitulo");
+  await k.p.click("#proxima2");
+  ok(await texto(k.p, "#semanaTitulo") !== sem1, "el botón del final cambia de semana");
+  const marcas = await k.p.$eval('.opcoes-dias .opcao input:checked + span', (e) => getComputedStyle(e, "::before").content);
+  ok(/✓/.test(marcas), "los días marcados llevan ✓ (no dependen solo del color)", marcas);
+  await k.ctx.close();
+
+  // pie: foco visible y enlaces de 44 px
+  const f = await abre("/contador-de-linhas-enem/", { w: 1280, h: 800 });
+  const altos = await f.p.$$eval(".footer-links a", (l) => l.map((a) => Math.round(a.getBoundingClientRect().height)));
+  ok(altos.every((h) => h >= 44), "pie: todos los enlaces miden al menos 44 px de alto", altos.join(","));
+  await f.p.evaluate(() => document.querySelector(".footer-links a").focus());
+  await f.p.keyboard.press("Tab");
+  const ring = await f.p.evaluate(() => { const e = document.activeElement; const s = getComputedStyle(e); return s.outlineColor + " " + s.outlineWidth; });
+  ok(/250, 248, 243/.test(ring) && /3px/.test(ring), "pie: el foco del teclado se ve (anillo claro de 3 px sobre fondo oscuro)", ring);
+  // «Pular para o conteúdo» lleva el foco al contenido
+  await f.p.evaluate(() => { window.scrollTo(0, 0); document.querySelector("a.skip").focus(); });
+  await f.p.keyboard.press("Enter");
+  ok(await f.p.evaluate(() => document.activeElement && document.activeElement.id === "conteudo"), "«Pular para o conteúdo» mueve el foco al contenido");
+  await f.ctx.close();
 }
 
 // ============ 4) todos los anchos ============

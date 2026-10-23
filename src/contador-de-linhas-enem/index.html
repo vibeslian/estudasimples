@@ -47,7 +47,7 @@
           <label for="texto">Texto da redação</label>
           <textarea id="texto" rows="11" placeholder="Cole ou escreva aqui o texto da sua redação." spellcheck="true" autocomplete="off"></textarea>
           <div class="enem-rodape-campo">
-            <span id="contagens">0 palavras · 0 caracteres</span>
+            <span id="contagens">0 palavras · 0 caracteres (com espaços)</span>
             <span class="enem-privado">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2f5242" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>
               O texto fica só no seu aparelho
@@ -59,9 +59,12 @@
         </div>
       </div>
 
+      <p class="dica-minimo resultado-movel" id="explicaMovel"></p>
+      <p class="dica-minimo">Pela cartilha do Inep, a redação precisa ter pelo menos 8 linhas escritas por você e no máximo 30.</p>
+
       <div class="cartao" style="background: var(--salvia-50)">
         <h2>Ajuste para a sua letra</h2>
-        <p class="dica-campo" style="margin: 0 0 16px">Letra grande ocupa mais linhas, letra pequena ocupa menos. Escreva um parágrafo na folha de treino, conte quantos caracteres cabem em uma linha (contando os espaços entre as palavras) e coloque o número aqui.</p>
+        <p class="dica-campo" style="margin: 0 0 16px">Letra grande ocupa mais linhas; letra pequena ocupa menos. Se a sua letra é grande, diminua o número. <strong>Não sabe qual é o seu? Deixe em 70.</strong> Para chegar mais perto, conte quantos caracteres (com espaços) cabem em uma linha da sua folha de treino.</p>
         <div class="campo">
           <label for="car">Caracteres por linha</label>
           <div class="passo">
@@ -70,6 +73,7 @@
             <button type="button" class="btn btn-redondo" id="mais" aria-label="Aumentar caracteres por linha">+</button>
             <button type="button" class="btn btn-pequeno" id="padrao">Voltar ao 70</button>
           </div>
+          <p class="aviso-campo" id="carAviso" role="status"></p>
           <p class="dica-campo" id="carDica">O 70 é só um ponto de partida: <strong>não é regra do Inep</strong>. Cada letra é diferente, então ajuste o número para a sua.</p>
         </div>
       </div>
@@ -89,6 +93,7 @@
 
 <div class="container">
   <article class="artigo" style="padding-block: 24px 48px">
+    {{include:veja-tambem-contador}}
     <section id="como">
       <h2 class="revelar">Como a contagem é feita</h2>
       <ol class="enem-passos revelar">
@@ -110,8 +115,10 @@
       {{FAQ_HTML:contador-enem}}
     </section>
 
+    {{GUIAS_DA_FERRAMENTA:contador}}
+
     <section id="fontes" class="artigo-meta">
-      <p>Atualizado em 22 de outubro de 2026. Para escrever esta página, li a <a href="https://download.inep.gov.br/publicacoes/institucionais/avaliacoes_e_exames_da_educacao_basica/a_redacao_no_enem_2025_cartilha_do_participante.pdf" target="_blank" rel="noopener noreferrer">Cartilha do Participante «A redação no Enem 2025»<span class="sr-only"> (abre em outra aba)</span></a>, do Inep. A estimativa de caracteres por linha é uma conta nossa, não um dado oficial. O Estuda Simples não tem ligação com o Inep nem com o MEC.</p>
+      <p>Atualizado em 22 de outubro de 2026. Para escrever esta página, li a <a href="https://download.inep.gov.br/publicacoes/institucionais/avaliacoes_e_exames_da_educacao_basica/a_redacao_no_enem_2025_cartilha_do_participante.pdf" target="_blank" rel="noopener noreferrer">Cartilha do Participante «A redação no Enem 2025»<span class="sr-only"> (abre em outra aba)</span></a>, do Inep. A estimativa de caracteres por linha é uma conta minha, não um dado oficial. O Estuda Simples não tem ligação com o Inep nem com o MEC.</p>
     </section>
   </article>
 </div>

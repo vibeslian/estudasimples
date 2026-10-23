@@ -45,6 +45,10 @@
 .resultado { padding: 18px 22px; background: var(--salvia-100); border: 1px solid var(--salvia-200); border-left: 6px solid var(--certo-texto); border-radius: var(--raio); }
 .resultado[data-estado="erro"] { background: var(--erro-bg); border-color: #e8a592; border-left-color: var(--erro-texto); }
 .resultado[data-estado="neutro"] { background: var(--salvia-50); border-left-color: var(--salvia-500); }
+.resultado[data-estado="aviso"] { background: #fff4ec; border-color: #e8c9b8; border-left-color: var(--acento-texto); } /* tom calmo: pede atenção sem alarmar */
+.resultado[data-estado="aviso"] .resultado-num { color: var(--erro-texto); }
+.resultado[data-estado="aviso"] .etiqueta-estado { color: var(--erro-texto); }
+.resultado[data-estado="aviso"] .barra-media i { background: var(--erro-texto); }
 .resultado-linha { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
 .resultado-num { font-family: var(--fonte-titulo); font-weight: 800; font-size: clamp(3rem, 12vw, 4rem); line-height: 1; color: var(--principal-escuro); }
 .resultado[data-estado="erro"] .resultado-num { color: var(--erro-texto); }
@@ -169,3 +173,56 @@
 /* cronograma: formulário estreito à esquerda, plano à direita */
 @media (min-width: 900px) { .enem-grid--cron { grid-template-columns: minmax(0, 340px) minmax(0, 1fr); } }
 @media (min-width: 1180px) { .semana { gap: 6px; } .sem-dia { padding: 6px; gap: 8px; } .sem-dia .bloco { flex-direction: column; align-items: flex-start; gap: 0; padding: 7px 5px; font-size: .78rem; } .sem-dia .bloco small { font-size: .72rem; } .bloco-livre { padding: 8px 4px; font-size: .85rem; } }
+
+/* resultado fixo no alto da tela (celular): fica à vista enquanto se digita */
+.resultado-movel { display: none; }
+@media (max-width: 899px) {
+  .enem-grid--contador > .resultado, .enem-grid--media > .resultado { position: sticky; top: 0; z-index: 6; padding: 10px 16px; border-radius: 0 0 var(--raio-pequeno) var(--raio-pequeno); box-shadow: 0 8px 18px rgba(34, 54, 43, .14); margin-inline: -20px; border-left-width: 6px; }
+  .enem-grid--contador > .resultado .resultado-num, .enem-grid--media > .resultado .resultado-num { font-size: 2.3rem; }
+  .enem-grid--contador > .resultado .resultado-explica { display: none; }
+  .enem-grid--contador > .resultado .resultado-linha { flex-wrap: nowrap; }
+  .enem-grid--contador > .resultado .faixa { margin-top: 6px; }
+  .enem-grid--contador > .resultado .faixa i { height: 8px; }
+  .enem-grid--contador > .resultado .etiqueta-estado, .enem-grid--media > .resultado .etiqueta-estado { margin-top: 4px; padding: 3px 10px; font-size: .85rem; }
+  .resultado-movel { display: block; }
+}
+.dica-minimo { margin: 0; padding: 12px 14px; background: var(--salvia-50); border: 1px solid var(--salvia-200); border-radius: var(--raio-pequeno); font-size: .92rem; line-height: 1.45; color: var(--texto-suave); }
+.aviso-campo { margin: 6px 0 0; min-height: 1.4em; font-size: .9rem; font-weight: 600; color: var(--erro-texto); } /* altura reservada: o aviso aparece sem empurrar nada */
+.enem input[aria-invalid="true"] { border-color: var(--erro-texto); background: var(--erro-bg); }
+
+/* "Veja também" no fim das ferramentas */
+.veja-tambem { margin-top: 24px; padding: 20px; background: var(--salvia-100); border-radius: var(--raio); }
+.veja-tambem h2 { margin: 0 0 4px; font-size: 1.25rem; }
+.veja-tambem p { margin: 0 0 12px; color: var(--texto-suave); font-size: .95rem; }
+.veja-links { display: grid; gap: 8px; }
+.veja-links a { display: flex; align-items: center; justify-content: space-between; min-height: 52px; padding: 0 16px; background: #fff; border-radius: var(--raio-pequeno); text-decoration: none; color: var(--texto); font-weight: 700; }
+.veja-links a:hover { background: var(--salvia-50); }
+.veja-tambem .btn { margin-top: 12px; width: 100%; }
+@media (min-width: 760px) { .veja-links { grid-template-columns: repeat(2, minmax(0, 1fr)); } .veja-tambem .btn { width: auto; } }
+
+/* calculadora: no computador formulário à esquerda e resultado à direita; no celular o resultado fica fixo no alto */
+@media (min-width: 900px) {
+  .enem-grid--media { grid-template-areas: "form res" "form extra"; }
+  .enem-grid--media > .enem-form { grid-area: form; }
+  .enem-grid--media > .resultado { grid-area: res; }
+  .enem-grid--media > .enem-col-media { grid-area: extra; }
+}
+@media (max-width: 899px) {
+  .enem-grid--media > .resultado { order: -1; }
+  .enem-grid--media > .resultado .barra-media, .enem-grid--media > .resultado .barra-escala, .enem-grid--media > .resultado .conta { display: none; }
+  .enem-grid--media > .resultado .resultado-explica { font-size: .85rem; margin-bottom: 2px !important; }
+}
+
+/* cronograma: nomes das áreas, dias fora do plano, marca de selecionado sem depender só da cor */
+.bloco .n-longo { display: inline; }
+.bloco .n-curto { display: none; }
+@media (min-width: 1180px) { .bloco .n-longo { display: none; } .bloco .n-curto { display: inline; } }
+.sem-dia.fora { display: none; }
+@media (min-width: 1180px) { .sem-dia.fora { display: flex; } }
+.plano-nav--fim { margin: 16px 0 0; }
+.plano-nav-texto { font-weight: 700; color: var(--texto-suave); font-size: .95rem; }
+@media (min-width: 1180px) { .plano-nav--fim { display: none; } }
+@media print { .plano-nav--fim { display: none !important; } .sem-dia.fora { display: flex !important; } }
+.opcoes-horas .opcao input:checked + span::before, .opcoes-dias .opcao input:checked + span::before { content: "\2713\00a0"; font-weight: 800; }
+.erro-campo { margin-top: 12px; }
+

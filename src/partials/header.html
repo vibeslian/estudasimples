@@ -2,12 +2,39 @@
 <header class="site-header">
   <div class="container header-inner">
     <a class="logo" href="/" aria-label="{{SITE_NAME}} – página inicial">{{SITE_NAME}}</a>
-    <nav class="nav" aria-label="Menu principal">
-      <a class="nav-ferramentas" href="/#ferramentas">Ferramentas</a>
-      <a class="nav-guias" href="/guias/">Guias<span class="nav-extra"> ABNT</span></a>
+    <button type="button" class="menu-botao" id="menuBotao" aria-expanded="false" aria-controls="menuPrincipal" aria-label="Abrir o menu">
+      <svg class="menu-icone menu-icone--abrir" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="menu-icone menu-icone--fechar" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <nav class="nav" id="menuPrincipal" aria-label="Menu principal">
+      <div class="nav-grupo">
+        <a class="nav-ferramentas" href="/#ferramentas">Ferramentas<svg class="nav-seta" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
+        <div class="mega" id="menuFerramentas">
+          <div class="mega-coluna">
+            <p class="mega-titulo">Faculdade e TCC</p>
+            <a class="mega-item" href="/gerador-de-capa-abnt/"><span class="mega-icone"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zM8 8h8M8 12h8M10 17h4"/></svg></span><span><strong>Capa ABNT</strong><small>Preencha e veja a capa ao vivo</small></span></a>
+            <a class="mega-item" href="/gerador-de-folha-de-rosto-abnt/"><span class="mega-icone"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zM9 8h6M8 12h8M9 16h6"/></svg></span><span><strong>Folha de rosto</strong><small>Com orientador e natureza</small></span></a>
+            <a class="mega-item" href="/gerador-de-sumario-abnt/"><span class="mega-icone"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg></span><span><strong>Sumário</strong><small>Itens e páginas com pontilhado</small></span></a>
+            <a class="mega-item" href="/gerador-de-referencias-abnt/"><span class="mega-icone"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h10l4 4v12H5zM14 4v5h5M8 13h8M8 17h6"/></svg></span><span><strong>Referências</strong><small>Livros, artigos, sites e leis</small></span></a>
+          </div>
+          <div class="mega-coluna mega-coluna--enem">
+            <p class="mega-titulo mega-titulo--enem">ENEM e escola</p>
+            <a class="mega-item" href="/contador-de-linhas-enem/"><span class="mega-icone mega-icone--enem"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span><span><strong>Contador de linhas</strong><small>Redação na folha de 30 linhas</small></span></a>
+            <a class="mega-item" href="/cronograma-de-estudos-enem/"><span class="mega-icone mega-icone--enem"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v3M17 3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/></svg></span><span><strong>Cronograma de estudos</strong><small>Semanas até a prova</small></span></a>
+            <a class="mega-item" href="/calculadora-de-media/"><span class="mega-icone mega-icone--enem"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zM8 7h8M8 12h2M12 12h2M8 16h2M12 16h2"/></svg></span><span><strong>Calculadora de média</strong><small>Quanto falta para passar</small></span></a>
+          </div>
+          <div class="mega-servico">
+            <p class="mega-titulo mega-titulo--servico">Sem tempo?</p>
+            <strong class="mega-servico-titulo">Formatação de TCC nas normas da ABNT</strong>
+            <p>A partir de {{PRECO_ATE30}}, por WhatsApp.</p>
+            <a class="btn btn-acento" href="/formatacao-abnt-tcc/?origem={{ORIGEM}}">Conhecer o serviço</a>
+          </div>
+        </div>
+      </div>
+      <a class="nav-guias" href="/guias/">Guias</a>
       <a class="nav-servico" href="/formatacao-abnt-tcc/">Formatação<span class="nav-extra"> de TCC</span></a>
       <a class="nav-sobre" href="/sobre/">Sobre</a>
-      <a class="btn btn-acento nav-cta" href="/gerador-de-capa-abnt/">Criar capa</a>
+      <a class="btn btn-acento nav-cta" href="/#escolha">Começar grátis</a>
     </nav>
   </div>
 </header>

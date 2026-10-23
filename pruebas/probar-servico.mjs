@@ -113,8 +113,10 @@ for (const url of ["/", "/gerador-de-capa-abnt/", "/gerador-de-folha-de-rosto-ab
 }
 for (const w of [320, 360, 390, 480, 500, 640, 768, 1024, 1280]) {
   const p = await abre("/", { width: w, height: 800, isMobile: w < 768, hasTouch: w < 768 });
-  const r = await p.evaluate(() => { const n = document.querySelector(".nav").getBoundingClientRect(); const links = [...document.querySelectorAll(".nav a")].filter((a) => a.offsetParent); return { derecha: Math.round(n.right), limite: innerWidth - 20, enlaces: links.map((a) => a.textContent.trim()), servicio: links.some((a) => a.getAttribute("href") === "/formatacao-abnt-tcc/"), altos: links.map((a) => Math.round(a.getBoundingClientRect().height)) }; });
-  marca(r.derecha <= r.limite + 1 && r.servicio, `menú a ${w}px: cabe (${r.derecha} ≤ ${r.limite}) y muestra "Formatação" (${r.enlaces.join(" | ")})`);
+  const movil = w < 900;
+  if (movil) await p.click("#menuBotao"); // en pantallas angostas el menú está detrás del botón de hamburguesa
+  const r = await p.evaluate(() => { const links = [...document.querySelectorAll(".nav a")].filter((a) => a.offsetParent); const n = document.querySelector(".nav").getBoundingClientRect(); return { derecha: Math.round(n.right), limite: innerWidth, desborde: document.documentElement.scrollWidth - innerWidth, enlaces: links.map((a) => a.textContent.trim().replace(/\s+/g, " ")), servicio: links.some((a) => /Formatação/.test(a.textContent)) }; });
+  marca(r.derecha <= r.limite + 1 && r.desborde <= 0 && r.servicio, `menú a ${w}px${movil ? " (abierto con la hamburguesa)" : ""}: cabe y muestra "Formatação" (${r.enlaces.slice(0, 6).join(" | ")})`);
   await p.close();
 }
 
@@ -175,7 +177,7 @@ for (const [nombre, vp] of [["computador 1280", { width: 1280, height: 900 }], [
 console.log("\n== 5b) Aviso discreto en la portada ==");
 for (const [nombre, vp] of [["computador 1280", { width: 1280, height: 900 }], ["celular 390", { width: 390, height: 844, isMobile: true, hasTouch: true, deviceScaleFactor: 2 }]]) {
   const p = await abre("/", vp);
-  const r = await p.evaluate(() => { const a = document.querySelector(".hero-aviso"); if (!a) return null; const l = a.querySelector("a"); const hero = document.querySelector(".hero").getBoundingClientRect(); const bb = a.getBoundingClientRect(); return { texto: a.textContent.trim(), href: l.getAttribute("href"), dentroHero: bb.bottom <= hero.bottom + 1 && !!a.closest(".hero"), size: parseFloat(getComputedStyle(a).fontSize), ov: document.documentElement.scrollWidth - innerWidth, h: document.querySelector(".hero-botoes a").getBoundingClientRect().top < bb.top }; });
+  const r = await p.evaluate(() => { const a = document.querySelector(".hero-aviso"); if (!a) return null; const l = a.querySelector("a"); const hero = document.querySelector(".hero").getBoundingClientRect(); const bb = a.getBoundingClientRect(); return { texto: a.textContent.trim(), href: l.getAttribute("href"), dentroHero: bb.bottom <= hero.bottom + 1 && !!a.closest(".hero"), size: parseFloat(getComputedStyle(a).fontSize), ov: document.documentElement.scrollWidth - innerWidth, h: document.querySelector(".escolha-cartao").getBoundingClientRect().top < bb.top }; });
   marca(!!r && r.texto === "Prefere receber o trabalho inteiro formatado? Conheça meu serviço de formatação de TCC." && r.href === SERVICO + "?origem=inicio", `${nombre}: aviso en la portada → ${r?.href}`);
   marca(!!r && r.dentroHero && r.size <= 16 && r.h && r.ov <= 0, `${nombre}: dentro de la portada, debajo de los botones principales, discreto (${r?.size}px) y sin scroll horizontal`);
   await p.close();

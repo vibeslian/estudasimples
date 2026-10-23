@@ -19,6 +19,16 @@ export function capitaliza(s, { particulas = true } = {}) {
   return s.toLocaleLowerCase("pt-BR").split(" ").map((p, i) => (i && particulas && PARTICULAS.has(p) ? p : p.replace(/(^|[-'’])(\p{L})/gu, (m, a, b) => a + b.toLocaleUpperCase("pt-BR")))).join(" ");
 }
 
+// Nome de entidade na citação: uma sigla sozinha (STF, IBGE, ONU) continua em maiúsculas; "BRASIL" vira "Brasil".
+// Países curtos que se escrevem em maiúsculas na entrada (PERU, CUBA...) não são siglas.
+const PAISES_CURTOS = new Set(["PERU", "CUBA", "CHILE", "JAPÃO", "ÍNDIA", "GANA", "MALI", "TOGO", "IRÃ", "OMÃ", "ITÁLIA", "ÁFRICA", "CHINA", "RÚSSIA", "SÍRIA", "LÍBIA", "NEPAL", "QUÊNIA", "SUÍÇA"]);
+const PALAVRAS_COMUNS = new Set(["UM", "UMA", "UNS", "DE", "DO", "DA", "DOS", "DAS", "NO", "NA", "NOS", "NAS", "AO", "OS", "AS", "COM", "SEM", "POR", "PARA", "MAIS", "COMO", "ENTRE", "ATÉ", "EM", "OU", "SE", "QUE", "NÃO", "ELE", "ELA", "ESTE", "ESTA", "ISSO", "TODO", "TODA", "CASA", "VIDA", "AMOR", "SER", "TER", "ONDE", "QUEM", "COISA", "RIO", "SOL", "MAR", "SAL", "PAZ", "FIM", "DIA", "ANO", "MÃE", "PAI", "VOZ", "LUZ", "REI", "TERRA", "CIDADE", "MUNDO"]);
+export function nomeEntidadeCita(s) {
+  const t = limpa(s);
+  if (/^[A-ZÀ-Ú]{2,5}$/.test(t) && !PAISES_CURTOS.has(t)) return t;
+  return capitaliza(t);
+}
+
 /* ---------- datas ---------- */
 export const mesAbreviado = (m) => MESES[Number(m) - 1] || "";
 export function dataExtenso(iso) {
@@ -107,7 +117,7 @@ function entradaAutoria(aut, { papel = false } = {}) {
     const ent = limpa(aut.entidade);
     if (!ent) return null;
     const orgao = limpa(aut.orgao);
-    return { texto: maiusSemParenteses(ent) + (orgao ? ". " + orgao : ""), chave: ent + "\u0001" + orgao, nomeCita: capitaliza(ent.replace(/\s*\([^)]*\)\s*$/, "")), plural: false, pessoas: 0 };
+    return { texto: maiusSemParenteses(ent) + (orgao ? ". " + orgao : ""), chave: ent + "\u0001" + orgao, nomeCita: nomeEntidadeCita(ent.replace(/\s*\([^)]*\)\s*$/, "")), plural: false, pessoas: 0 };
   }
   const ps = pessoasValidas(aut);
   if (!ps.length) return null;
@@ -236,7 +246,22 @@ function montaNoticia(d, ctx) {
   return { segs, ent, ano: anoTexto(d.pub && d.pub.ano, d.anoTipo, ctx.sufixo) };
 }
 
+function montaConstituicao(d, ctx) {
+  // BRASIL. [Constituição (1988)]. Constituição da República Federativa do Brasil de 1988. Brasília, DF: Presidência da República, [2016]. Disponível em: … Acesso em: …
+  const jur = maiusSemParenteses(limpa(d.jurisdicao));
+  const anoConst = (/^(\d{4})/.exec(limpa(d.dataNorma)) || [])[1] || "";
+  const titulo = limpa(d.ementa) || (anoConst ? `Constituição da República Federativa do Brasil de ${anoConst}` : "Constituição");
+  const segs = [[r(jur)], [r(`[Constituição${anoConst ? " (" + anoConst + ")" : ""}]`)], [r(titulo)]];
+  const pub = [limpa(d.local), limpa(d.publicador)].filter(Boolean);
+  const anoVersao = anoTexto(d.pub && d.pub.ano, "documento", ctx.sufixo);
+  segs.push([r(`${pub.length === 2 ? pub[0] + ": " + pub[1] : pub[0] || "[S. l.]"}${anoVersao ? ", [" + anoVersao + "]" : ""}`)]);
+  segs.push(...onlineSeg(d.online));
+  const ent = { texto: jur, chave: jur + "\u0001", nomeCita: capitaliza(limpa(d.jurisdicao).replace(/\s*\([^)]*\)\s*$/, "")), plural: false, pessoas: 0 }; // jurisdição é um lugar (BAHIA, RIO, BRASIL): nunca vira sigla
+  return { segs, ent, ano: anoConst || anoVersao }; // na citação vale o ano da Constituição: (Brasil, 1988)
+}
+
 function montaLei(d, ctx) {
+  if (limpa(d.tipoNorma) === "Constituição Federal") return montaConstituicao(d, ctx);
   const jur = maiusSemParenteses(limpa(d.jurisdicao));
   const orgao = limpa(d.orgao);
   const numero = numeroDeLei(d.numero);
@@ -248,7 +273,7 @@ function montaLei(d, ctx) {
   const ano = anoTexto(d.pub && d.pub.ano, "documento", ctx.sufixo);
   segs.push([r(`${pub.length === 2 ? pub[0] + ": " + pub[1] : pub[0] || "[S. l.]"}, ${ano}`)]);
   segs.push(...onlineSeg(d.online));
-  const ent = { texto: jur + (orgao ? ". " + orgao : ""), chave: jur + "\u0001" + orgao, nomeCita: capitaliza(limpa(d.jurisdicao).replace(/\s*\([^)]*\)\s*$/, "")), plural: false, pessoas: 0 };
+  const ent = { texto: jur + (orgao ? ". " + orgao : ""), chave: jur + "\u0001" + orgao, nomeCita: capitaliza(limpa(d.jurisdicao).replace(/\s*\([^)]*\)\s*$/, "")), plural: false, pessoas: 0 }; // jurisdição é um lugar (BAHIA, RIO, BRASIL): nunca vira sigla
   return { segs, ent, ano };
 }
 
@@ -308,7 +333,7 @@ export function camposFaltando(d) {
         if (b.id === "obraAutoria" && a && a.modo === "pessoa" && !pessoasValidas(a).length) falta.push({ id: b.id, rotulo: "o sobrenome do autor do livro (ou escolha \"Sem autor\")" });
       } else if (b.k === "data") {
         if (b.obrig && !limpa(d[b.id] && d[b.id].ano)) falta.push({ id: b.id + "-ano", rotulo: "o ano" });
-      } else if (b.obrig && ["texto", "num", "area"].includes(b.k) && !limpa(d[b.id])) falta.push({ id: b.id, rotulo: (b.rotulo || b.id).replace(/^./, (c) => c.toLowerCase()) });
+      } else if (b.obrig && ["texto", "num", "area"].includes(b.k) && !limpa(d[b.id]) && !(d.tipo === "lei" && b.id === "ementa" && limpa(d.tipoNorma) === "Constituição Federal")) falta.push({ id: b.id, rotulo: (b.rotulo || b.id).replace(/^./, (c) => c.toLowerCase()) });
     }
   };
   olha(tipo.blocos);
@@ -337,7 +362,10 @@ function citacao({ ent, ano, ctx, estilo }) {
     const maisTexto = palavras.length > n;
     const marca = maisTexto ? (antigo ? "..." : " [...]") : "";
     // só a primeira letra em maiúscula ("Nos canaviais [...]"); o que o estudante digitou com maiúsculas e minúsculas fica como está
-    const frase = ehMaiuscula(parteTitulo) ? parteTitulo.toLocaleLowerCase("pt-BR") : parteTitulo;
+    // uma sigla no começo do título ("STF decide…") continua em maiúsculas
+    const siglaNoInicio = /^\p{Lu}{2,5}$/u.test(parteTitulo) && /\p{Ll}/u.test(limpa(completo))
+      && (!/[AEIOUÀ-Ú]/.test(parteTitulo) || (parteTitulo.length <= 4 && !PALAVRAS_COMUNS.has(parteTitulo))); // STF, ONU, IBGE sim; NOBEL, UMA, COMO não
+    const frase = ehMaiuscula(parteTitulo) && !siglaNoInicio ? parteTitulo.toLocaleLowerCase("pt-BR") : parteTitulo;
     const t = frase.replace(/^(\p{L})/u, (m) => m.toLocaleUpperCase("pt-BR"));
     par = `(${antigo ? parteTitulo.toLocaleUpperCase("pt-BR") : t}${marca}, ${ano})`;
     nar = `${t}${marca} (${ano})`;

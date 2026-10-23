@@ -1,0 +1,32 @@
+[
+  {
+    "p": "É grátis mesmo?",
+    "r": [
+      "Sim. As ferramentas do Estuda Simples são gratuitas e não pedem cadastro. O único serviço pago é a formatação de TCC, que é opcional e tem o preço escrito na página do serviço."
+    ]
+  },
+  {
+    "p": "Meus dados ficam guardados?",
+    "r": [
+      "O que você digita nas ferramentas fica só no seu aparelho e não é enviado para o site. A <a href=\"/politica-de-privacidade/\">Política de Privacidade</a> explica o que o navegador guarda e por quanto tempo."
+    ]
+  },
+  {
+    "p": "A minha faculdade aceita esse formato?",
+    "r": [
+      "As ferramentas seguem a ABNT NBR 14724. Algumas instituições têm modelo próprio, então confira o manual da biblioteca ou pergunte ao orientador antes de entregar."
+    ]
+  },
+  {
+    "p": "As ferramentas do ENEM dão a nota ou o número exato de linhas?",
+    "r": [
+      "Não. O contador de linhas e o cronograma são ajudas de estudo: o contador mostra uma estimativa, que depende da sua letra, e o cronograma é uma sugestão de organização. A regra oficial está na cartilha do Inep."
+    ]
+  },
+  {
+    "p": "Quem faz o Estuda Simples?",
+    "r": [
+      "Eu, Lian Martínez, criei o site como um projeto independente. Sou MEI (Lian Marcos Martinez Navarro, CNPJ 67.704.102/0001-69). Na página <a href=\"/sobre/\">Sobre</a> você encontra o contato."
+    ]
+  }
+]

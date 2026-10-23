@@ -15,7 +15,7 @@ Cartilha do Participante «A redação no Enem 2025» (download.inep.gov.br/publ
 - O texto definitivo vai na folha própria, **até 30 linhas**.
 - Recebe **nota zero** a redação que tiver **até 7 linhas escritas** («texto insuficiente»). Então o mínimo para não zerar por tamanho é **8 linhas**. (A frase «de 7 a 30» que estava na portada estava errada; foi corrigida.)
 - Linhas com trecho copiado dos textos da prova **não contam** para o mínimo.
-- Não está confirmado se o título conta como linha: o contador **não** conta o título e a FAQ diz para somar uma linha e conferir.
+- O título conta como linha escrita (a cartilha diz «embora seja considerado linha escrita», e que ele é opcional e não é avaliado nas competências): quem cola o texto com o título já o tem na contagem.
 As constantes estão em `calculos.js` (`LIMITE_LINHAS`, `MAX_SEM_ZERO`, `MIN_LINHAS`). **Todo ano, conferir a cartilha nova do Inep** e ajustar se mudar.
 
 ## O que é estimativa (e o que é dado)

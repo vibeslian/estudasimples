@@ -8,7 +8,8 @@ const jsonSeguro = (o) => JSON.stringify(o).replace(/</g, "\\u003c").replace(/>/
 const MESES = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
 export const dataLonga = (iso) => { const [a, m, d] = iso.split("-").map(Number); return `${d} de ${MESES[m - 1]} de ${a}`; };
 
-export const CATEGORIAS = ["TCC passo a passo", "Trabalhos do semestre", "Formatação do trabalho", "Referências e citações", "Estrutura do trabalho", "Capa, folha de rosto e sumário"];
+export const CATEGORIA_ENEM = "ENEM e escola"; // guias que não são de ABNT: levam outra etiqueta, outra linha de norma e outro aviso no fim
+export const CATEGORIAS = ["TCC passo a passo", "Trabalhos do semestre", "Formatação do trabalho", "Referências e citações", "Estrutura do trabalho", "Capa, folha de rosto e sumário", CATEGORIA_ENEM];
 
 export function carregaGuias(arquivo = "conteudo/guias.json") {
   const guias = JSON.parse(readFileSync(arquivo, "utf8"));
@@ -17,7 +18,8 @@ export function carregaGuias(arquivo = "conteudo/guias.json") {
   for (const g of guias) {
     const onde = `conteudo/guias.json, guia "${g.slug}"`;
     if (!/^[a-z0-9-]+$/.test(g.slug)) throw new Error(`${onde}: slug inválido`);
-    for (const k of ["titulo", "h1", "descricao", "lead", "resumoIndice", "categoria", "atualizado", "norma", "ferramenta", "relacionadas", "fontes", "rotulo"]) if (!g[k]) throw new Error(`${onde}: falta "${k}"`);
+    for (const k of ["titulo", "h1", "descricao", "lead", "resumoIndice", "categoria", "atualizado", "ferramenta", "relacionadas", "fontes", "rotulo"]) if (!g[k]) throw new Error(`${onde}: falta "${k}"`);
+    if (!g.norma && !g.metaTexto) throw new Error(`${onde}: falta "norma" (ou "metaTexto", a linha de fonte das guias que não são de ABNT)`);
     if (!CATEGORIAS.includes(g.categoria)) throw new Error(`${onde}: categoria desconhecida "${g.categoria}"`);
     if (g.titulo.length > 64) throw new Error(`${onde}: título com ${g.titulo.length} caracteres (máximo 64, ideal até 60)`);
     if (g.descricao.length > 158 || g.descricao.length < 100) throw new Error(`${onde}: descrição com ${g.descricao.length} caracteres (entre 100 e 158)`);
@@ -51,7 +53,7 @@ export function preparaGuias(config, guias, parceiroDaGuia = () => "", afiliados
       "@context": "https://schema.org", "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: config.siteName, item: `${siteUrl}/` },
-        { "@type": "ListItem", position: 2, name: "Guias ABNT", item: `${siteUrl}/guias/` },
+        { "@type": "ListItem", position: 2, name: "Guias", item: `${siteUrl}/guias/` },
         { "@type": "ListItem", position: 3, name: g.rotulo, item: url(slug) },
       ],
     };
@@ -77,12 +79,12 @@ export function preparaGuias(config, guias, parceiroDaGuia = () => "", afiliados
   {{include:header}}
   <div class="container hero-conteudo">
     <nav class="migalhas" aria-label="Você está em">
-      <ol><li><a href="/">Início</a></li><li><a href="/guias/">Guias ABNT</a></li><li aria-current="page">${esc(g.rotulo)}</li></ol>
+      <ol><li><a href="/">Início</a></li><li><a href="/guias/">Guias</a></li><li aria-current="page">${esc(g.rotulo)}</li></ol>
     </nav>
-    <span class="etiqueta">Guia ABNT</span>
+    <span class="etiqueta">${g.categoria === CATEGORIA_ENEM ? "Guia ENEM e escola" : "Guia ABNT"}</span>
     <h1>${esc(g.h1)}</h1>
     <p class="lead">${esc(g.lead)}</p>
-    <p class="guia-meta">Atualizado em <time datetime="${g.atualizado}">${dataLonga(g.atualizado)}</time> · Segundo a ${esc(g.norma)}</p>
+    <p class="guia-meta">Atualizado em <time datetime="${g.atualizado}">${dataLonga(g.atualizado)}</time> · ${esc(g.metaTexto || "Segundo a " + g.norma)}</p>
   </div>
 </div>`;
   };
@@ -122,7 +124,9 @@ export function preparaGuias(config, guias, parceiroDaGuia = () => "", afiliados
         <ul>
           ${itens}
         </ul>
-        <p class="padrao">As explicações são feitas com palavras próprias. O {{SITE_NAME}} não tem ligação com a ABNT: se a sua faculdade tem manual próprio, é ele que vale.</p>
+        <p class="padrao">${g.categoria === CATEGORIA_ENEM
+          ? "As explicações são feitas com palavras próprias. O {{SITE_NAME}} não tem ligação com o Inep, com o MEC nem com nenhuma escola: confira sempre o edital do ENEM do ano da sua prova e o regimento da sua escola."
+          : "As explicações são feitas com palavras próprias. O {{SITE_NAME}} não tem ligação com a ABNT: se a sua faculdade tem manual próprio, é ele que vale."}</p>
       </section>`;
   };
 
@@ -162,8 +166,8 @@ export function preparaGuias(config, guias, parceiroDaGuia = () => "", afiliados
   }).join("\n    ");
 
   const indiceJson = () => jsonSeguro({
-    "@context": "https://schema.org", "@type": "CollectionPage", name: "Guias ABNT para trabalhos acadêmicos", url: `${siteUrl}/guias/`, inLanguage: "pt-BR",
-    description: "Guias práticas das normas ABNT: margens, referências, citações, capa, sumário, resumo e estrutura do TCC.",
+    "@context": "https://schema.org", "@type": "CollectionPage", name: "Guias ABNT, ENEM e escola", url: `${siteUrl}/guias/`, inLanguage: "pt-BR",
+    description: "Guias práticas das normas ABNT (margens, referências, citações, capa, sumário, resumo e TCC) e do ENEM e da escola (linhas da redação, média e cronograma de estudos).",
     mainEntity: { "@type": "ItemList", itemListElement: guias.map((g, i) => ({ "@type": "ListItem", position: i + 1, name: g.rotulo, url: url(g.slug) })) },
   });
 

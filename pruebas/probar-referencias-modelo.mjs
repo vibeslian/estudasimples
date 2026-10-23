@@ -88,5 +88,30 @@ l = montaLista([item(1, "Silva", "Maria", "Alfa", 2020), item(2, "Silva", "Maria
 marca(l.every((x) => !/\d[ab]\./.test(x.ref.texto)), "anos diferentes: sem letras");
 marca(montaLista([{ id: 1, dados: base({ titulo: "" }) }]).length === 0, "referência incompleta não entra na lista");
 
+console.log("\n== Z) Siglas na citação (vindas da avaliação com visitantes)");
+{
+  const sem = { modo: "nenhum", pessoas: [] };
+  const n1 = formataReferencia({ tipo: "noticia", autoria: sem, titulo: "STF decide sobre marco temporal", jornal: "Folha", local: "São Paulo", pub: { ano: "2023", dia: "21", mes: "9" } });
+  marca(/^\(STF /.test(n1.citacao.par), "notícia sem autor: título que começa com STF cita (STF [...]) — " + n1.citacao.par);
+  const n2 = formataReferencia({ tipo: "noticia", autoria: sem, titulo: "NOBEL alternativo de literatura: muitas mulheres", jornal: "El País", local: "Madri", pub: { ano: "2018" } });
+  marca(/^\(Nobel /.test(n2.citacao.par), "primeira palavra em maiúsculas (NOBEL) continua virando «Nobel» — " + n2.citacao.par);
+  const e1 = formataReferencia(base({ autoria: { modo: "entidade", entidade: "IBGE", orgao: "" } }));
+  marca(e1.citacao.par.startsWith("(IBGE,"), "entidade IBGE cita (IBGE, 2020) — " + e1.citacao.par);
+  const e2 = formataReferencia(base({ autoria: { modo: "entidade", entidade: "BRASIL", orgao: "" } }));
+  marca(e2.citacao.par.startsWith("(Brasil,"), "entidade BRASIL cita (Brasil, 2020) — " + e2.citacao.par);
+  const e3 = formataReferencia(base({ autoria: { modo: "entidade", entidade: "PERU", orgao: "" } }));
+  marca(e3.citacao.par.startsWith("(Peru,"), "PERU não é sigla: (Peru, 2020) — " + e3.citacao.par);
+  const cf = formataReferencia({ tipo: "lei", jurisdicao: "BRASIL", orgao: "", tipoNorma: "Constituição Federal", numero: "", dataNorma: "1988-10-05", ementa: "", local: "Brasília, DF", publicador: "Presidência da República", pub: { ano: "2016" }, online: { link: "", acesso: "", doi: "" } });
+  marca(cf.citacao.par === "(Brasil, 1988)" && /^BRASIL\. \[Constituição \(1988\)\]\. Constituição da República Federativa do Brasil de 1988\. Brasília, DF: Presidência da República, \[2016\]/.test(cf.texto), "Constituição: título automático, ano da versão entre colchetes e citação (Brasil, 1988) — " + cf.citacao.par + " | " + cf.texto.slice(0, 140));
+  for (const [jur, esperado] of [["BAHIA (Estado)", "Bahia"], ["RIO", "Rio"], ["CEARÁ", "Ceará"], ["ACRE", "Acre"], ["SÃO PAULO (Estado)", "São Paulo"], ["BRASIL", "Brasil"]]) {
+    const lj = formataReferencia({ tipo: "lei", jurisdicao: jur, orgao: "", tipoNorma: "Lei", numero: "1", dataNorma: "2023-01-02", ementa: "Teste.", local: "Salvador", publicador: "Governo", pub: { ano: "2023" }, online: { link: "", acesso: "", doi: "" } });
+    marca(lj.citacao.par.startsWith(`(${esperado},`), `jurisdição ${jur} cita (${esperado}, 2023), não vira sigla — ${lj.citacao.par}`);
+  }
+  const cf2 = { tipo: "lei", jurisdicao: "BRASIL", orgao: "", tipoNorma: "Constituição Federal", numero: "", dataNorma: "1988-10-05", ementa: "", local: "Brasília, DF", publicador: "Presidência da República", pub: { ano: "2016" }, online: { link: "", acesso: "", doi: "" } };
+  marca(formataReferencia(cf2).completa === true || formataReferencia(cf2).faltando.length === 0, "Constituição: com a ementa vazia a referência fica completa (o título sai sozinho)", JSON.stringify(formataReferencia(cf2).faltando.map((f) => f.rotulo)));
+  const e4 = formataReferencia(base({ autoria: { modo: "entidade", entidade: "UNIVERSIDADE FEDERAL DE MINAS GERAIS", orgao: "" } }));
+  marca(e4.citacao.par.startsWith("(Universidade Federal de Minas Gerais,"), "nome longo em maiúsculas vira Capitalizado — " + e4.citacao.par);
+}
+
 console.log(falhas ? `\n${falhas} falha(s)` : "\nTodo OK");
 process.exit(falhas ? 1 : 0);

@@ -46,7 +46,7 @@ export function estimaLinhas(texto, caracteresPorLinha) {
   const todas = [];
   for (const p of paragrafos) todas.push(...quebraParagrafo(p, largura, Math.min(RECUO_PARAGRAFO, largura - 1)));
   const palavras = (limpo.match(/\S+/g) || []).length;
-  const caracteres = limpo.replace(/\s/g, "").length;
+  const caracteres = limpo.replace(/\n/g, "").length; // com os espaços entre as palavras, como no Word
   return { linhas: todas.length, palavras, caracteres, largura, preenchimento: todas.map((u) => Math.min(1, u / largura)) };
 }
 
@@ -108,11 +108,11 @@ export function mediaFinal(notas, pesos, ultima) {
 // ---------- Cronograma ----------
 
 export const AREAS = [
-  { id: "lin", nome: "Linguagens" },
-  { id: "hum", nome: "Humanas" },
-  { id: "nat", nome: "Natureza" },
-  { id: "mat", nome: "Matemática" },
-  { id: "red", nome: "Redação" },
+  { id: "lin", nome: "Linguagens", nomeLongo: "Linguagens" },
+  { id: "hum", nome: "Humanas", nomeLongo: "Ciências Humanas" },
+  { id: "nat", nome: "Natureza", nomeLongo: "Ciências da Natureza" },
+  { id: "mat", nome: "Matemática", nomeLongo: "Matemática" },
+  { id: "red", nome: "Redação", nomeLongo: "Redação" },
 ];
 export const DIAS_CURTOS = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"];
 const DIA_MS = 86400000;
@@ -169,6 +169,7 @@ export function montaCronograma(opcoes) {
   const diasDeEstudo = dias.length === 7 ? dias.slice(0, 6) : dias;
   const escolhe = criaSorteador(areas, reforco);
   const nomeDe = Object.fromEntries(AREAS.map((a) => [a.id, a.nome]));
+  const nomeLongoDe = Object.fromEntries(AREAS.map((a) => [a.id, a.nomeLongo]));
   const semanas = [];
   let segunda = addDias(hoje, -diaSemanaSegunda0(hoje));
   let n = 1;
@@ -188,7 +189,7 @@ export function montaCronograma(opcoes) {
         for (let h = 0; h < horas; h++) {
           const area = escolhe(usadasHoje);
           usadasHoje.add(area);
-          blocos.push({ area, nome: nomeDe[area], horas: 1 });
+          blocos.push({ area, nome: nomeDe[area], nomeLongo: nomeLongoDe[area], horas: 1 });
         }
         dia = { tipo: "estudo", blocos };
         diasEstudados++;

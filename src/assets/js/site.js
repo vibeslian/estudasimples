@@ -4,6 +4,81 @@
   var reduzir = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var itens = document.querySelectorAll(".revelar");
 
+  // Menu: no computador "Ferramentas" abre um painel; no celular o botão abre a lista. Sem JavaScript os links continuam normais.
+  try {
+    var botao = document.getElementById("menuBotao");
+    var menu = document.getElementById("menuPrincipal");
+    var grupo = document.querySelector(".nav-grupo");
+    var gatilho = document.querySelector(".nav-ferramentas");
+    var movel = window.matchMedia("(max-width: 899px)");
+    var fechaPainel = function (devolveFoco) {
+      if (!grupo) return;
+      grupo.classList.remove("aberto");
+      if (gatilho) { gatilho.setAttribute("aria-expanded", "false"); if (devolveFoco) gatilho.focus(); }
+    };
+    var fechaMenu = function (devolveFoco) {
+      if (!menu) return;
+      menu.classList.remove("aberto");
+      if (botao) { botao.setAttribute("aria-expanded", "false"); botao.setAttribute("aria-label", "Abrir o menu"); if (devolveFoco) botao.focus(); }
+    };
+    if (gatilho && grupo) {
+      gatilho.setAttribute("role", "button");
+      gatilho.setAttribute("aria-controls", "menuFerramentas");
+      gatilho.setAttribute("aria-expanded", "false"); // no computador é um botão que abre o painel (sem JavaScript continua sendo o link para as ferramentas)
+      var alterna = function (e) {
+        if (movel.matches) return; // no celular as ferramentas já aparecem na lista do menu
+        e.preventDefault();
+        var abrir = !grupo.classList.contains("aberto");
+        grupo.classList.toggle("aberto", abrir);
+        gatilho.setAttribute("aria-expanded", String(abrir));
+      };
+      gatilho.addEventListener("click", alterna);
+      gatilho.addEventListener("keydown", function (e) { if (e.key === " ") alterna(e); });
+    }
+    // página atual marcada no menu (aria-current)
+    var atual = location.pathname.replace(/index\.html$/, "");
+    document.querySelectorAll(".nav > a:not(.btn), .mega a").forEach(function (a) {
+      var h = a.getAttribute("href") || "";
+      if (h.split("?")[0].split("#")[0] === atual && h.indexOf("#") === -1) a.setAttribute("aria-current", "page");
+    });
+    // 6) um link do menu que leva para a mesma página (ex.: /#escolha) fecha o menu do celular
+    if (menu) menu.addEventListener("click", function (e) {
+      var a = e.target.closest ? e.target.closest("a") : null;
+      if (a && menu.classList.contains("aberto")) fechaMenu(false);
+    });
+    if (botao && menu) {
+      botao.addEventListener("click", function () {
+        var abrir = !menu.classList.contains("aberto");
+        menu.classList.toggle("aberto", abrir);
+        botao.setAttribute("aria-expanded", String(abrir));
+        botao.setAttribute("aria-label", abrir ? "Fechar o menu" : "Abrir o menu");
+      });
+    }
+    document.addEventListener("keydown", function (e) {
+      if (e.key !== "Escape") return;
+      if (grupo && grupo.classList.contains("aberto")) { fechaPainel(true); return; }
+      if (menu && menu.classList.contains("aberto")) fechaMenu(true);
+    });
+    document.addEventListener("click", function (e) {
+      if (grupo && grupo.classList.contains("aberto") && !grupo.contains(e.target)) fechaPainel(false);
+      if (menu && menu.classList.contains("aberto") && !menu.contains(e.target) && botao && !botao.contains(e.target)) fechaMenu(false);
+    });
+    document.addEventListener("focusin", function (e) {
+      if (grupo && grupo.classList.contains("aberto") && !grupo.contains(e.target)) fechaPainel(false); // o foco saiu do painel
+    });
+    var aoMudarTela = function () { fechaPainel(false); fechaMenu(false); };
+    if (movel.addEventListener) movel.addEventListener("change", aoMudarTela);
+  } catch (e) { /* os links do menu continuam funcionando sem isto */ }
+
+  // «Pular para o conteúdo»: depois do clique o foco passa para o conteúdo (senão o foco do teclado fica «perdido» no topo)
+  try {
+    var pular = document.querySelector("a.skip");
+    if (pular) pular.addEventListener("click", function () {
+      var alvo = document.getElementById((pular.getAttribute("href") || "").slice(1));
+      if (alvo) { alvo.setAttribute("tabindex", "-1"); alvo.focus(); }
+    });
+  } catch (e) { /* o link continua funcionando sem isto */ }
+
   window.__siteJs = true; // avisa ao head-common.html que este arquivo carregou (ele revela as seções se não carregar)
 
   // Capa de exemplo da portada: "se escreve sozinha" uma vez (só no computador, onde ela aparece; com movimento reduzido já vem pronta).

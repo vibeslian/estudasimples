@@ -30,10 +30,11 @@ function atualiza() {
   const estado = estadoDasLinhas(r.linhas);
 
   $("numLinhas").textContent = String(r.linhas);
-  $("contagens").textContent = `${nf.format(r.palavras)} ${r.palavras === 1 ? "palavra" : "palavras"} · ${nf.format(r.caracteres)} ${r.caracteres === 1 ? "caractere" : "caracteres"}`;
+  $("contagens").textContent = `${nf.format(r.palavras)} ${r.palavras === 1 ? "palavra" : "palavras"} · ${nf.format(r.caracteres)} ${r.caracteres === 1 ? "caractere" : "caracteres"} (com espaços)`;
   $("rotuloEstado").textContent = estado.rotulo;
   $("explicaEstado").textContent = estado.explica;
-  $("resultado").dataset.estado = estado.id === "ok" ? "ok" : estado.id === "vazio" ? "neutro" : "erro";
+  $("resultado").dataset.estado = estado.id === "ok" ? "ok" : estado.id === "vazio" ? "neutro" : estado.id === "insuficiente" ? "aviso" : "erro";
+  $("explicaMovel").textContent = estado.explica;
 
   const passou = r.linhas > LIMITE_LINHAS;
   const usadas = Math.min(r.linhas, LIMITE_LINHAS);
@@ -67,11 +68,32 @@ function atualiza() {
 }
 
 texto.addEventListener("input", atualiza);
-car.addEventListener("input", () => { if (/\d/.test(car.value)) atualiza(); });
-car.addEventListener("change", () => { const n = lerCar(); car.value = String(n); guardaCar(n); atualiza(); });
-$("menos").addEventListener("click", () => { const n = Math.max(CAR_MIN, lerCar() - 5); car.value = String(n); guardaCar(n); atualiza(); });
-$("mais").addEventListener("click", () => { const n = Math.min(CAR_MAX, lerCar() + 5); car.value = String(n); guardaCar(n); atualiza(); });
-$("padrao").addEventListener("click", () => { car.value = String(CARACTERES_PADRAO); guardaCar(CARACTERES_PADRAO); atualiza(); });
+function avisaCar(msg) { $("carAviso").textContent = msg; car.setAttribute("aria-invalid", msg ? "true" : "false"); }
+car.addEventListener("input", () => {
+  const bruto = car.value.trim();
+  if (bruto !== "" && !/^\d+$/.test(bruto)) avisaCar("Digite só números, por exemplo 70.");
+  else if (/^\d{2,}$/.test(bruto) && (Number(bruto) < CAR_MIN || Number(bruto) > CAR_MAX)) avisaCar(`Use um número entre ${CAR_MIN} e ${CAR_MAX}.`);
+  else avisaCar("");
+  if (/\d/.test(bruto)) atualiza();
+});
+car.addEventListener("change", () => {
+  const bruto = car.value.trim();
+  const n = lerCar();
+  const mudou = !/^\d+$/.test(bruto) || Number(bruto) !== n;
+  car.value = String(n);
+  guardaCar(n);
+  avisaCar(mudou ? `Ajustei para ${n} (o valor vai de ${CAR_MIN} a ${CAR_MAX}).` : "");
+  atualiza();
+});
+car.addEventListener("keydown", (e) => {
+  if (e.key !== "ArrowUp" && e.key !== "ArrowDown") return;
+  e.preventDefault();
+  const n = Math.min(CAR_MAX, Math.max(CAR_MIN, lerCar() + (e.key === "ArrowUp" ? 5 : -5)));
+  car.value = String(n); guardaCar(n); avisaCar(""); atualiza();
+});
+$("menos").addEventListener("click", () => { avisaCar(""); const n = Math.max(CAR_MIN, lerCar() - 5); car.value = String(n); guardaCar(n); atualiza(); });
+$("mais").addEventListener("click", () => { avisaCar(""); const n = Math.min(CAR_MAX, lerCar() + 5); car.value = String(n); guardaCar(n); atualiza(); });
+$("padrao").addEventListener("click", () => { avisaCar(""); car.value = String(CARACTERES_PADRAO); guardaCar(CARACTERES_PADRAO); atualiza(); });
 $("limpar").addEventListener("click", () => { texto.value = ""; atualiza(); texto.focus(); });
 
 atualiza();

@@ -93,3 +93,14 @@
   .com-barra .site-footer { padding-bottom: calc(86px + env(safe-area-inset-bottom) + 24px); }
 }
 @media (prefers-reduced-motion: reduce) { .barra-whatsapp, .barra-whatsapp.visivel { transition: none; } }
+
+/* Quem presta o serviço: foto, nome e CNPJ para dar confiança a quem vai pagar */
+.quem-faz { display: grid; gap: 24px; align-items: center; padding: clamp(22px, 4vw, 36px); background: var(--superficie); border: 1px solid var(--salvia-200); border-radius: var(--raio); box-shadow: var(--sombra); }
+@media (min-width: 760px) { .quem-faz { grid-template-columns: 180px minmax(0, 1fr); gap: 36px; } }
+.quem-faz img { display: block; width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 4px solid var(--salvia-100); box-shadow: 0 10px 24px rgba(34, 54, 43, .16); }
+@media (min-width: 760px) { .quem-faz img { width: 180px; height: 180px; } }
+.quem-faz h2 { margin-bottom: .3em; }
+.quem-faz p { margin: 0 0 14px; max-width: 62ch; }
+.quem-faz-fatos { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; font-size: .95rem; line-height: 1.5; color: var(--texto-suave); }
+.quem-faz-fatos li::before { content: ""; display: inline-block; width: 9px; height: 9px; margin-right: 8px; border-radius: 50%; background: var(--acento); }
+

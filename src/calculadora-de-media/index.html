@@ -27,7 +27,7 @@
 </div>
 
 <main class="container enem" id="conteudo">
-  <div class="enem-grid">
+  <div class="enem-grid enem-grid--media">
 
     <form class="cartao enem-form" id="form" autocomplete="off" novalidate>
       <div class="campo">
@@ -68,14 +68,24 @@
       </details>
     </form>
 
-    <div class="enem-col">
-      <div class="resultado cartao" id="resultado" data-estado="neutro">
-        <p class="resultado-explica" id="pergunta" style="margin: 0 0 6px; font-weight: 700; color: var(--texto-suave)">Preencha a média da escola e as notas que você já tem.</p>
-        <div class="resultado-linha" aria-hidden="true"><span class="resultado-num" id="numNota">&ndash;</span></div>
-        <div class="barra-media" aria-hidden="true"><i id="barra"></i></div>
-        <div class="barra-escala" aria-hidden="true"><span>0</span><span id="escalaMax">10</span></div>
-        <p class="conta" id="conta"></p>
-        <p class="sr-only" id="vivo" role="status" aria-live="polite" aria-atomic="true"></p>
+    <div class="resultado cartao" id="resultado" data-estado="neutro">
+      <p class="resultado-explica" id="pergunta" style="margin: 0 0 6px; font-weight: 700; color: var(--texto-suave)">Preencha a média da escola e as notas que você já tem.</p>
+      <div class="resultado-linha" aria-hidden="true"><span class="resultado-num" id="numNota">&ndash;</span></div>
+      <div class="barra-media" aria-hidden="true"><i id="barra"></i></div>
+      <div class="barra-escala" aria-hidden="true"><span>0</span><span id="escalaMax">10</span></div>
+      <p class="conta" id="conta"></p>
+      <p class="sr-only" id="vivo" role="status" aria-live="polite" aria-atomic="true"></p>
+    </div>
+
+    <div class="enem-col enem-col-media">
+      <p class="dica-minimo resultado-movel" id="contaMovel"></p>
+      <div class="cartao" id="passos" hidden style="background: #fff4ec; border-color: #e8c9b8">
+        <h2>O que fazer agora</h2>
+        <ol class="enem-passos" style="grid-template-columns: 1fr; margin-top: 8px">
+          <li><span class="n" aria-hidden="true">1</span><p><strong>Pergunte pela recuperação.</strong> Veja no regimento ou na secretaria se a escola tem recuperação final e como ela funciona.</p></li>
+          <li><span class="n" aria-hidden="true">2</span><p><strong>Converse com o professor.</strong> Peça para ver as provas e os trabalhos que ainda podem valer nota.</p></li>
+          <li><span class="n" aria-hidden="true">3</span><p><strong>Monte um plano de estudos.</strong> O <a href="/cronograma-de-estudos-enem/">cronograma</a> ajuda a organizar o que falta, com um dia livre por semana.</p></li>
+        </ol>
       </div>
       <p class="dica-campo">As notas não saem do seu aparelho. Ferramenta de estudo: vale sempre o regimento da sua escola.</p>
     </div>
@@ -84,6 +94,7 @@
 
 <div class="container">
   <article class="artigo" style="padding-block: 24px 48px">
+    {{include:veja-tambem-media}}
     <section id="como">
       <h2 class="revelar">Como a conta é feita</h2>
       <p class="revelar">A calculadora usa a <strong>média aritmética</strong>: soma as notas e divide pelo número de etapas. Se a sua escola dá pesos, ela usa a <strong>média ponderada</strong>: multiplica cada nota pelo seu peso, soma tudo e divide pela soma dos pesos. A nota que falta na última etapa é a que fecha a conta na média que você informou.</p>
@@ -95,6 +106,8 @@
       <h2 class="revelar">Perguntas frequentes sobre a média</h2>
       {{FAQ_HTML:media}}
     </section>
+
+    {{GUIAS_DA_FERRAMENTA:media}}
 
     <section id="fontes" class="artigo-meta">
       <p>Atualizado em 22 de outubro de 2026. Esta é uma conta de matemática simples, e cada escola pode ter regras próprias de aprovação, de arredondamento e de recuperação: o regimento da sua escola é a palavra final. O Estuda Simples não tem ligação com nenhuma escola nem com o MEC.</p>

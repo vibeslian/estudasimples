@@ -53,11 +53,20 @@ function anuncia(texto) {
   timerVivo = setTimeout(() => { $("vivo").textContent = texto; }, 700);
 }
 
-function mostra(estado, pergunta, numero, conta, barra, vivo) {
+// marca o campo com problema (borda e fundo de aviso + aria-invalid) e tira a marca dos outros
+function marca(ids) {
+  document.querySelectorAll(".enem input").forEach((i) => i.removeAttribute("aria-invalid"));
+  ids.forEach((id) => { if ($(id)) $(id).setAttribute("aria-invalid", "true"); });
+}
+
+function mostra(estado, pergunta, numero, conta, barra, vivo, passos = false) {
   $("resultado").dataset.estado = estado;
   $("pergunta").textContent = pergunta;
   $("numNota").textContent = numero;
   $("conta").textContent = conta;
+  $("contaMovel").textContent = conta;
+  $("contaMovel").hidden = !conta;
+  $("passos").hidden = !passos;
   $("barra").style.width = barra + "%";
   anuncia(vivo || [pergunta, numero, conta].filter(Boolean).join(" "));
 }
@@ -77,8 +86,10 @@ function calcula() {
   const notas = notasTexto.map(lerNota);
   const pesos = [...document.querySelectorAll("#pesos input")].map((i) => lerNota(i.value));
   const nome = NOMES[n];
+  marca([]);
 
   if ($("media").value.trim() !== "" && media === null) {
+    marca(["media"]);
     mostra("erro", "Não entendi a média da escola: use um número como 6 ou 6,5.", "–", "", 0);
     return;
   }
@@ -86,21 +97,26 @@ function calcula() {
     mostra("neutro", "Preencha a média da escola e as notas que você já tem.", "–", "", 0);
     return;
   }
+  // primeiro o que foi digitado errado (mesmo que ainda falte outra nota), depois o que falta
+  const invalida = notas.findIndex((x, i) => notasTexto[i] !== "" && (x === null || x > maxima));
+  if (invalida !== -1) {
+    marca(["nota" + (invalida + 1)]);
+    mostra("erro", `A nota do ${invalida + 1}º ${nome} não está certa: use um número de 0 a ${String(maxima).replace(".", ",")}, como 7,5.`, "–", "", 0);
+    return;
+  }
   const faltando = notasTexto.findIndex((t) => t === "");
   if (faltando !== -1) {
     mostra("neutro", `Falta a nota do ${faltando + 1}º ${nome}.`, "–", "", 0);
     return;
   }
-  const invalida = notas.findIndex((x) => x === null || x > maxima);
-  if (invalida !== -1) {
-    mostra("erro", `A nota do ${invalida + 1}º ${nome} não está certa: use um número de 0 a ${String(maxima).replace(".", ",")}, como 7,5.`, "–", "", 0);
-    return;
-  }
-  if (pesos.some((p) => p === null || p <= 0)) {
+  const pesoRuim = pesos.findIndex((p) => p === null || p <= 0);
+  if (pesoRuim !== -1) {
+    marca(["peso" + (pesoRuim + 1)]);
     mostra("erro", "Os pesos precisam ser números maiores que zero (use 1 se todas as etapas valem igual).", "–", "", 0);
     return;
   }
   if (!(media > 0) || media > maxima) {
+    marca(["media"]);
     mostra("erro", `A média precisa ser maior que 0 e no máximo ${String(maxima).replace(".", ",")}.`, "–", "", 0);
     return;
   }
@@ -112,7 +128,7 @@ function calcula() {
   if (r.estado === "ja-passou") {
     mostra("ok", `Com média ${mediaTxt}, você já garantiu essa média: mesmo tirando 0 no ${n}º ${nome}, ela não cai abaixo disso (confira também as outras regras da sua escola).`, "0,0", detalhe, 0);
   } else if (r.estado === "impossivel") {
-    mostra("erro", `Para fechar com média ${mediaTxt} você precisaria de ${fmt.format(r.precisa)} no ${n}º ${nome}, mas a nota máxima é ${String(maxima).replace(".", ",")}.`, fmt.format(r.precisa), `Só com a última etapa não dá. Veja no regimento da escola se existe recuperação. ${detalhe}`, 100);
+    mostra("aviso", `Para fechar com média ${mediaTxt}, o ${n}º ${nome} teria que valer`, fmt.format(r.precisa), `A nota máxima é ${String(maxima).replace(".", ",")}, então só com a última etapa não dá. Isso não quer dizer que o ano está perdido: muitas escolas têm outras formas de recuperar. ${detalhe}`, 100, "", true);
   } else {
     const numeros = notas.map((x) => fmtNota.format(x));
     const somaPesos = Math.round(pesos.reduce((a, b) => a + b, 0) * 100) / 100;

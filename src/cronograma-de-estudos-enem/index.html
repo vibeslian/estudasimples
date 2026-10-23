@@ -33,7 +33,7 @@
       <div class="campo">
         <label for="data">1. Data da prova</label>
         <input id="data" type="date" aria-describedby="dataDica">
-        <p class="dica-campo" id="dataDica">Confira a data no site oficial do Inep: ela muda de um ano para outro.</p>
+        <p class="dica-campo" id="dataDica">Escolha o dia, o mês e o ano. Confira a data no site oficial do Inep: ela muda de um ano para outro.</p>
       </div>
 
       <fieldset class="campo grupo-opcoes opcoes-horas">
@@ -93,6 +93,11 @@
             <button type="button" class="btn" id="proxima" aria-label="Próxima semana">&rsaquo;</button>
           </div>
           <div id="semanas"></div>
+          <div class="plano-nav plano-nav--fim">
+            <button type="button" class="btn" id="anterior2" aria-label="Semana anterior">&lsaquo;</button>
+            <span class="plano-nav-texto" aria-hidden="true">Trocar de semana</span>
+            <button type="button" class="btn" id="proxima2" aria-label="Próxima semana">&rsaquo;</button>
+          </div>
           <div class="legenda-areas" aria-label="Legenda das áreas">
             <span><i style="background: #e3eaf0; border-color: #9fb3c4"></i>Linguagens</span>
             <span><i style="background: var(--acento-claro); border-color: #e8a592"></i>Humanas</span>
@@ -109,6 +114,7 @@
 
 <div class="container">
   <article class="artigo" style="padding-block: 24px 48px">
+    {{include:veja-tambem-cronograma}}
     <section id="como">
       <h2 class="revelar">Como o plano é montado</h2>
       <ol class="enem-passos revelar">
@@ -123,8 +129,10 @@
       {{FAQ_HTML:cronograma-enem}}
     </section>
 
+    {{GUIAS_DA_FERRAMENTA:cronograma}}
+
     <section id="fontes" class="artigo-meta">
-      <p>Atualizado em 22 de outubro de 2026. A distribuição dos blocos é uma regra simples nossa (rodízio entre as cinco áreas do ENEM, com mais blocos para as que você marca), não um método pedagógico validado nem uma recomendação do Inep. A data da prova deve ser conferida no site do Inep. O Estuda Simples não tem ligação com o Inep nem com o MEC.</p>
+      <p>Atualizado em 22 de outubro de 2026. A distribuição dos blocos é uma regra simples minha (rodízio entre as cinco áreas do ENEM, com mais blocos para as que você marca), não um método pedagógico validado nem uma recomendação do Inep. A data da prova deve ser conferida no site do Inep. O Estuda Simples não tem ligação com o Inep nem com o MEC.</p>
     </section>
   </article>
 </div>
