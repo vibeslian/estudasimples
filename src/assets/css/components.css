@@ -198,3 +198,10 @@ a.percurso-item:hover { background: var(--salvia-50); border-color: var(--salvia
 .ms-lista .ms-t { font-weight: 400; }
 .ms-lista .ms-titulo { margin-top: 0; }
 .ms-lista .ms-sep { height: .8em; }
+
+/* cartões da portada */
+.enem-cartao { display: flex; flex-direction: column; gap: 10px; text-decoration: none; color: var(--texto); }
+.enem-cartao h3 { margin: 0; font-size: 1.35rem; }
+.enem-cartao p { margin: 0; color: var(--texto-suave); }
+.enem-icone { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 16px; background: var(--acento-claro); color: var(--erro-texto); }
+.enem-abrir { margin-top: auto; padding-top: 6px; font-weight: 700; color: var(--principal); }

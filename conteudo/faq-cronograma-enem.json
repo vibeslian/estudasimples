@@ -1,0 +1,34 @@
+[
+  {
+    "p": "Como fazer um cronograma de estudos para o ENEM?",
+    "r": [
+      "Comece pela data da prova e conte quantas semanas faltam. Depois decida quantas horas por dia e em quais dias da semana você consegue estudar de verdade, sem exagerar, e divida esse tempo entre as áreas da prova: Linguagens, Ciências Humanas, Ciências da Natureza, Matemática e Redação. Reserve ao menos um dia livre por semana.",
+      "A ferramenta desta página faz essa divisão para você: você responde as quatro perguntas e ela monta o plano semana a semana."
+    ]
+  },
+  {
+    "p": "Qual é a data do ENEM?",
+    "r": [
+      "A data muda de um ano para outro e é divulgada pelo Inep no edital da prova. Por isso a ferramenta não traz uma data pronta: você escolhe a data que está no site oficial do Inep.",
+      "O ENEM costuma ser aplicado em dois domingos. A ferramenta usa uma data só: escolha a do primeiro dia para planejar até ele, ou a do último dia se quiser estudar até o fim."
+    ]
+  },
+  {
+    "p": "Por que o plano deixa um dia livre por semana?",
+    "r": [
+      "Porque descansar faz parte de estudar e ajuda a manter o ritmo. Por isso a ferramenta sempre guarda um dia livre por semana: se você marcar os sete dias, o domingo fica livre."
+    ]
+  },
+  {
+    "p": "O que significa «reforçar» uma área?",
+    "r": [
+      "As áreas que você marca como reforço ganham mais blocos no plano do que as outras. Com 1 ou 2 horas por dia elas aparecem cerca de duas vezes mais; com 3 ou 4 horas por dia o aumento é menor, porque uma mesma área só aparece uma vez por dia. Todas as cinco áreas continuam presentes."
+    ]
+  },
+  {
+    "p": "O plano fica guardado em algum lugar?",
+    "r": [
+      "As suas respostas ficam guardadas só no seu aparelho, para você não precisar preencher de novo. Nada é enviado a nenhum servidor. Para guardar o plano, use o botão de imprimir e escolha «Salvar como PDF»."
+    ]
+  }
+]

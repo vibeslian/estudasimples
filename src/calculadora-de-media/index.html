@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  {{include:head-common}}
+  <title>Calculadora de média: quanto tirar para passar de ano | {{SITE_NAME}}</title>
+  <meta name="description" content="Coloque as notas que você já tem e a média da escola e descubra quanto precisa tirar na última etapa. Grátis, com pesos opcionais.">
+  <link rel="canonical" href="{{SITE_URL}}/calculadora-de-media/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="{{SITE_NAME}}">
+  <meta property="og:title" content="Calculadora de média: quanto preciso tirar para passar de ano">
+  <meta property="og:description" content="Descubra quanto falta tirar na última etapa para atingir a média da sua escola. As notas não saem do seu aparelho.">
+  <meta property="og:url" content="{{SITE_URL}}/calculadora-de-media/">
+  <link rel="stylesheet" href="/assets/css/enem.css?v={{BUILD}}">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculadora de média – {{SITE_NAME}}","url":"{{SITE_URL}}/calculadora-de-media/","applicationCategory":"EducationalApplication","operatingSystem":"Qualquer navegador","inLanguage":"pt-BR","offers":{"@type":"Offer","price":"0","priceCurrency":"BRL"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"{{SITE_NAME}}","item":"{{SITE_URL}}/"},{"@type":"ListItem","position":2,"name":"Calculadora de média","item":"{{SITE_URL}}/calculadora-de-media/"}]}</script>
+  {{FAQ_JSONLD:media}}
+</head>
+<body data-modo="enem-media">
+<div class="hero hero--compacto">
+  {{include:manchas}}
+  {{include:header}}
+  <div class="container hero-conteudo">
+    <h1>Calculadora de média</h1>
+    <p class="lead">Coloque as notas que você já tem e descubra quanto precisa tirar na última etapa para passar de ano. Grátis, sem cadastro, e as notas não saem do seu aparelho.</p>
+  </div>
+</div>
+
+<main class="container enem" id="conteudo">
+  <div class="enem-grid">
+
+    <form class="cartao enem-form" id="form" autocomplete="off" novalidate>
+      <div class="campo">
+        <label for="media">Média para passar na sua escola</label>
+        <input id="media" type="text" inputmode="decimal" placeholder="Ex.: 6,0" aria-describedby="mediaDica">
+        <p class="dica-campo" id="mediaDica">Cada escola define a sua. Confira no regimento ou pergunte na secretaria.</p>
+      </div>
+
+      <div class="campo">
+        <label for="etapas">Como o ano é dividido</label>
+        <select id="etapas">
+          <option value="4" selected>4 bimestres</option>
+          <option value="3">3 trimestres</option>
+          <option value="2">2 semestres</option>
+        </select>
+      </div>
+
+      <div class="campo">
+        <span class="rotulo" id="notasRotulo">Notas que você já tem</span>
+        <div id="notas" role="group" aria-labelledby="notasRotulo">
+          <div class="linha-nota"><label for="nota1">1º bimestre</label><input id="nota1" type="text" inputmode="decimal" placeholder="0 a 10"></div>
+          <div class="linha-nota"><label for="nota2">2º bimestre</label><input id="nota2" type="text" inputmode="decimal" placeholder="0 a 10"></div>
+          <div class="linha-nota"><label for="nota3">3º bimestre</label><input id="nota3" type="text" inputmode="decimal" placeholder="0 a 10"></div>
+          <div class="linha-nota"><span class="rotulo" style="margin: 0; flex: 1 1 auto; color: var(--texto-suave)">4º bimestre</span><span class="a-calcular">a calcular</span></div>
+        </div>
+      </div>
+
+      <details class="mais" id="mais">
+        <summary>Minha escola usa pesos ou outra nota máxima</summary>
+        <div>
+          <p class="dica-campo" style="margin: 0 0 14px">Se algumas etapas valem mais que outras, coloque o peso de cada uma (1 para todas, se valem igual). Sem pesos, a conta é a média aritmética simples.</p>
+          <div id="pesos"></div>
+          <div class="campo" style="margin-top: 14px">
+            <label for="maxima">Nota máxima</label>
+            <input id="maxima" type="text" inputmode="decimal" value="10">
+          </div>
+        </div>
+      </details>
+    </form>
+
+    <div class="enem-col">
+      <div class="resultado cartao" id="resultado" data-estado="neutro">
+        <p class="resultado-explica" id="pergunta" style="margin: 0 0 6px; font-weight: 700; color: var(--texto-suave)">Preencha a média da escola e as notas que você já tem.</p>
+        <div class="resultado-linha" aria-hidden="true"><span class="resultado-num" id="numNota">&ndash;</span></div>
+        <div class="barra-media" aria-hidden="true"><i id="barra"></i></div>
+        <div class="barra-escala" aria-hidden="true"><span>0</span><span id="escalaMax">10</span></div>
+        <p class="conta" id="conta"></p>
+        <p class="sr-only" id="vivo" role="status" aria-live="polite" aria-atomic="true"></p>
+      </div>
+      <p class="dica-campo">As notas não saem do seu aparelho. Ferramenta de estudo: vale sempre o regimento da sua escola.</p>
+    </div>
+  </div>
+</main>
+
+<div class="container">
+  <article class="artigo" style="padding-block: 24px 48px">
+    <section id="como">
+      <h2 class="revelar">Como a conta é feita</h2>
+      <p class="revelar">A calculadora usa a <strong>média aritmética</strong>: soma as notas e divide pelo número de etapas. Se a sua escola dá pesos, ela usa a <strong>média ponderada</strong>: multiplica cada nota pelo seu peso, soma tudo e divide pela soma dos pesos. A nota que falta na última etapa é a que fecha a conta na média que você informou.</p>
+      <p class="revelar">O resultado sobe para a primeira casa decimal, para você não ficar com um décimo a menos do que precisa.</p>
+      <aside class="dica revelar"><strong class="dica-titulo">E se a nota necessária for maior que 10?</strong><p>Então não dá para atingir a média só na última etapa. A calculadora avisa e mostra quanto faltaria. O que acontece depois (recuperação, por exemplo) depende das regras da sua escola.</p></aside>
+    </section>
+
+    <section id="perguntas-frequentes">
+      <h2 class="revelar">Perguntas frequentes sobre a média</h2>
+      {{FAQ_HTML:media}}
+    </section>
+
+    <section id="fontes" class="artigo-meta">
+      <p>Atualizado em 22 de outubro de 2026. Esta é uma conta de matemática simples, e cada escola pode ter regras próprias de aprovação, de arredondamento e de recuperação: o regimento da sua escola é a palavra final. O Estuda Simples não tem ligação com nenhuma escola nem com o MEC.</p>
+    </section>
+  </article>
+</div>
+<script type="application/json" id="percurso-dados">{{PERCURSO_DADOS}}</script>
+<script type="module" src="/assets/js/progresso.js"></script>
+{{include:footer}}
+<script type="module" src="/assets/js/enem/media.js?v={{BUILD}}"></script>
+</body>
+</html>

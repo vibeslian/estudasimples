@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  {{include:head-common}}
+  <title>Contador de linhas da redação do ENEM: grátis | {{SITE_NAME}}</title>
+  <meta name="description" content="Cole a redação e veja quantas linhas ela deve ocupar na folha do ENEM (30 linhas). Estimativa grátis; o texto não sai do seu aparelho.">
+  <link rel="canonical" href="{{SITE_URL}}/contador-de-linhas-enem/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="{{SITE_NAME}}">
+  <meta property="og:title" content="Contador de linhas da redação do ENEM, grátis">
+  <meta property="og:description" content="Veja quantas linhas o seu texto ocupa na folha de 30 linhas do ENEM. O texto não sai do seu aparelho.">
+  <meta property="og:url" content="{{SITE_URL}}/contador-de-linhas-enem/">
+  <link rel="stylesheet" href="/assets/css/enem.css?v={{BUILD}}">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Contador de linhas da redação do ENEM – {{SITE_NAME}}","url":"{{SITE_URL}}/contador-de-linhas-enem/","applicationCategory":"EducationalApplication","operatingSystem":"Qualquer navegador","inLanguage":"pt-BR","offers":{"@type":"Offer","price":"0","priceCurrency":"BRL"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"{{SITE_NAME}}","item":"{{SITE_URL}}/"},{"@type":"ListItem","position":2,"name":"Contador de linhas do ENEM","item":"{{SITE_URL}}/contador-de-linhas-enem/"}]}</script>
+  {{FAQ_JSONLD:contador-enem}}
+</head>
+<body data-modo="enem-contador">
+<div class="hero hero--compacto">
+  {{include:manchas}}
+  {{include:header}}
+  <div class="container hero-conteudo">
+    <h1>Contador de linhas da redação do ENEM</h1>
+    <p class="lead">Cole o texto e veja quantas linhas ele deve ocupar na folha de 30 linhas. É uma estimativa: o que vale é a sua letra no papel. Grátis, sem cadastro, e o texto não sai do seu aparelho.</p>
+  </div>
+</div>
+
+<main class="container enem" id="conteudo">
+  <div class="enem-grid enem-grid--contador">
+
+    <div class="resultado cartao" id="resultado" data-estado="neutro">
+      <div class="resultado-linha" aria-hidden="true">
+        <span class="resultado-num" id="numLinhas">0</span>
+        <span class="resultado-de">de 30 linhas</span>
+      </div>
+      <div class="faixa" id="faixa" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <span class="etiqueta-estado" id="rotuloEstado">Escreva ou cole o texto</span>
+      <p class="resultado-explica resultado-reserva" id="explicaEstado">A contagem aparece enquanto você escreve.</p>
+      <p class="resultado-explica resultado-reserva" id="amplitude"></p>
+      <p class="sr-only" id="vivo" role="status" aria-live="polite" aria-atomic="true"></p>
+    </div>
+
+    <div class="enem-col enem-form">
+      <div class="cartao">
+        <div class="campo">
+          <label for="texto">Texto da redação</label>
+          <textarea id="texto" rows="11" placeholder="Cole ou escreva aqui o texto da sua redação." spellcheck="true" autocomplete="off"></textarea>
+          <div class="enem-rodape-campo">
+            <span id="contagens">0 palavras · 0 caracteres</span>
+            <span class="enem-privado">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2f5242" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>
+              O texto fica só no seu aparelho
+            </span>
+          </div>
+        </div>
+        <div class="botoes">
+          <button type="button" class="btn btn-pequeno" id="limpar">Limpar o texto</button>
+        </div>
+      </div>
+
+      <div class="cartao" style="background: var(--salvia-50)">
+        <h2>Ajuste para a sua letra</h2>
+        <p class="dica-campo" style="margin: 0 0 16px">Letra grande ocupa mais linhas, letra pequena ocupa menos. Escreva um parágrafo na folha de treino, conte quantos caracteres cabem em uma linha (contando os espaços entre as palavras) e coloque o número aqui.</p>
+        <div class="campo">
+          <label for="car">Caracteres por linha</label>
+          <div class="passo">
+            <button type="button" class="btn btn-redondo" id="menos" aria-label="Diminuir caracteres por linha">&minus;</button>
+            <input id="car" type="text" inputmode="numeric" autocomplete="off" value="70" aria-describedby="carDica">
+            <button type="button" class="btn btn-redondo" id="mais" aria-label="Aumentar caracteres por linha">+</button>
+            <button type="button" class="btn btn-pequeno" id="padrao">Voltar ao 70</button>
+          </div>
+          <p class="dica-campo" id="carDica">O 70 é só um ponto de partida: <strong>não é regra do Inep</strong>. Cada letra é diferente, então ajuste o número para a sua.</p>
+        </div>
+      </div>
+    </div>
+
+    <figure class="folha-redacao" aria-label="Representação da folha de redação com 30 linhas">
+      <figcaption><span>Folha de redação (30 linhas)</span><small>Representação, não é a folha oficial</small></figcaption>
+      <div class="folha-papel" id="folha" aria-hidden="true"><div class="folha-linha"><b>1</b><i></i></div><div class="folha-linha"><b>2</b><i></i></div><div class="folha-linha"><b>3</b><i></i></div><div class="folha-linha"><b>4</b><i></i></div><div class="folha-linha"><b>5</b><i></i></div><div class="folha-linha"><b>6</b><i></i></div><div class="folha-linha"><b>7</b><i></i></div><div class="folha-linha"><b>8</b><i></i></div><div class="folha-linha"><b>9</b><i></i></div><div class="folha-linha"><b>10</b><i></i></div><div class="folha-linha"><b>11</b><i></i></div><div class="folha-linha"><b>12</b><i></i></div><div class="folha-linha"><b>13</b><i></i></div><div class="folha-linha"><b>14</b><i></i></div><div class="folha-linha"><b>15</b><i></i></div><div class="folha-linha"><b>16</b><i></i></div><div class="folha-linha"><b>17</b><i></i></div><div class="folha-linha"><b>18</b><i></i></div><div class="folha-linha"><b>19</b><i></i></div><div class="folha-linha"><b>20</b><i></i></div><div class="folha-linha"><b>21</b><i></i></div><div class="folha-linha"><b>22</b><i></i></div><div class="folha-linha"><b>23</b><i></i></div><div class="folha-linha"><b>24</b><i></i></div><div class="folha-linha"><b>25</b><i></i></div><div class="folha-linha"><b>26</b><i></i></div><div class="folha-linha"><b>27</b><i></i></div><div class="folha-linha"><b>28</b><i></i></div><div class="folha-linha"><b>29</b><i></i></div><div class="folha-linha"><b>30</b><i></i></div></div>
+      <p class="resultado-explica" id="excesso" style="min-height: 1.5em; margin: 10px 4px 0" aria-hidden="true"></p>
+      <div class="legenda" aria-hidden="true">
+        <span><i style="background: var(--principal)"></i>linhas usadas</span>
+        <span><i style="background: #fff; border: 1px solid var(--salvia-200)"></i>linhas livres</span>
+      </div>
+    </figure>
+  </div>
+</main>
+
+<div class="container">
+  <article class="artigo" style="padding-block: 24px 48px">
+    <section id="como">
+      <h2 class="revelar">Como a contagem é feita</h2>
+      <ol class="enem-passos revelar">
+        <li><span class="n" aria-hidden="true">1</span><p><strong>Você cola o texto.</strong> A conta é feita no seu navegador: o texto não vai para nenhum servidor e não fica guardado.</p></li>
+        <li><span class="n" aria-hidden="true">2</span><p><strong>Escolhe a sua letra.</strong> Dizendo quantos caracteres cabem em uma linha, a estimativa chega mais perto da sua folha.</p></li>
+        <li><span class="n" aria-hidden="true">3</span><p><strong>Os parágrafos contam.</strong> Cada parágrafo começa em uma linha nova, com um pequeno recuo, e a linha em que ele termina conta inteira. Linhas em branco não são contadas.</p></li>
+      </ol>
+    </section>
+
+    <section id="regras">
+      <h2 class="revelar">O que diz a regra do ENEM sobre as linhas</h2>
+      <p class="revelar">Pela Cartilha do Participante do Inep, a redação é escrita na folha própria, com no máximo 30 linhas. A mesma cartilha manda dar <strong>nota zero</strong> à redação que tiver <strong>até 7 linhas escritas</strong>, considerada «texto insuficiente». Por isso o contador avisa quando o texto fica abaixo de 8 linhas.</p>
+      <p class="revelar">Trechos copiados dos textos da prova (os textos motivadores) não entram na contagem do mínimo de linhas: só valem as linhas que você mesmo escreveu.</p>
+      <aside class="dica revelar"><strong class="dica-titulo">Antes da prova</strong><p>Confira a cartilha do ano em que você vai fazer o ENEM, porque o Inep pode mudar as regras. Esta ferramenta é uma ajuda de estudo e não substitui as instruções da prova.</p></aside>
+    </section>
+
+    <section id="perguntas-frequentes">
+      <h2 class="revelar">Perguntas frequentes sobre as linhas da redação</h2>
+      {{FAQ_HTML:contador-enem}}
+    </section>
+
+    <section id="fontes" class="artigo-meta">
+      <p>Atualizado em 22 de outubro de 2026. Para escrever esta página, li a <a href="https://download.inep.gov.br/publicacoes/institucionais/avaliacoes_e_exames_da_educacao_basica/a_redacao_no_enem_2025_cartilha_do_participante.pdf" target="_blank" rel="noopener noreferrer">Cartilha do Participante «A redação no Enem 2025»<span class="sr-only"> (abre em outra aba)</span></a>, do Inep. A estimativa de caracteres por linha é uma conta nossa, não um dado oficial. O Estuda Simples não tem ligação com o Inep nem com o MEC.</p>
+    </section>
+  </article>
+</div>
+<script type="application/json" id="percurso-dados">{{PERCURSO_DADOS}}</script>
+<script type="module" src="/assets/js/progresso.js"></script>
+{{include:footer}}
+<script type="module" src="/assets/js/enem/contador.js?v={{BUILD}}"></script>
+</body>
+</html>

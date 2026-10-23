@@ -1,0 +1,34 @@
+[
+  {
+    "p": "Quantas linhas deve ter a redação do ENEM?",
+    "r": [
+      "A folha de redação do ENEM tem 30 linhas, e o texto definitivo deve caber nelas. Pela Cartilha do Participante do Inep, a redação que tiver até 7 linhas escritas recebe nota zero («texto insuficiente»). Na prática, o texto precisa ter pelo menos 8 linhas escritas por você e no máximo 30.",
+      "Confira sempre a cartilha do ano da sua prova, porque o Inep pode mudar as regras."
+    ]
+  },
+  {
+    "p": "O contador mostra o número exato de linhas?",
+    "r": [
+      "Não. O que ele mostra é uma estimativa. O número real depende do tamanho da sua letra, e o contador não vê a sua letra: ele usa a quantidade de caracteres que você diz caber em uma linha. Por isso a página também mostra a faixa de linhas com a letra um pouco maior e um pouco menor.",
+      "Para chegar mais perto, escreva um parágrafo à mão na folha de treino, conte quantos caracteres cabem em uma linha e coloque esse número no campo de ajuste."
+    ]
+  },
+  {
+    "p": "O título da redação conta como linha?",
+    "r": [
+      "Esta ferramenta não conta o título como linha. Como a regra pode ser lida de mais de um jeito, se você usar título, some uma linha na sua conta e confira a cartilha do ano da prova."
+    ]
+  },
+  {
+    "p": "O texto que eu colo no contador fica guardado ou é enviado?",
+    "r": [
+      "Não. A contagem é feita no seu navegador, e o texto não é enviado nem salvo. Só o número de caracteres por linha que você escolhe fica guardado no seu aparelho, para não precisar digitar de novo."
+    ]
+  },
+  {
+    "p": "Trechos copiados dos textos da prova contam como linhas?",
+    "r": [
+      "Não. A Cartilha do Participante diz que as linhas com trechos copiados dos textos da prova são desconsideradas na contagem do mínimo de linhas: só valem as linhas escritas por você. O contador não sabe o que é cópia, então cabe a você conferir."
+    ]
+  }
+]

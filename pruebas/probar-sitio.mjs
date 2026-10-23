@@ -2,7 +2,7 @@
 // sin imágenes sin texto alternativo, objetivos táctiles razonables. Requiere el sitio en http://localhost:3000.
 const BASE = process.env.BASE_URL || "http://localhost:3000";
 import puppeteer from "puppeteer-core";
-const PAGINAS = ["/", "/gerador-de-capa-abnt/", "/gerador-de-folha-de-rosto-abnt/", "/gerador-de-sumario-abnt/", "/gerador-de-referencias-abnt/", "/formatacao-abnt-tcc/", "/sobre/", "/contato/", "/politica-de-privacidade/", "/termos-de-uso/", "/pagina-que-no-existe/"];
+const PAGINAS = ["/", "/gerador-de-capa-abnt/", "/gerador-de-folha-de-rosto-abnt/", "/gerador-de-sumario-abnt/", "/gerador-de-referencias-abnt/", "/contador-de-linhas-enem/", "/cronograma-de-estudos-enem/", "/calculadora-de-media/", "/formatacao-abnt-tcc/", "/sobre/", "/contato/", "/politica-de-privacidade/", "/termos-de-uso/", "/pagina-que-no-existe/"];
 const ANCHOS = [320, 375, 414, 768, 1024, 1280, 1920];
 const b = await puppeteer.launch({ executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe", headless: "new" });
 let falhas = 0;

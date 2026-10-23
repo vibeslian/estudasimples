@@ -53,7 +53,7 @@ ok(polOff.includes("O site não exibe anúncios de terceiros hoje") && polOff.in
 ok(polOff.includes("Antes de exibir anúncios personalizados, o site vai mostrar um aviso sobre cookies"), "la Política mantiene la promesa del aviso de cookies");
 ok(polOff.includes('<h2 id="anuncios">4. Anúncios e Google AdSense</h2>'), "la sección 4 de la Política tiene el ancla #anuncios");
 ok(terOff.includes("No futuro, o site poderá exibir anúncios de terceiros"), "los Termos siguen en futuro");
-ok(!polOff.includes("localStorage"), "la Política no habla de localStorage mientras no se use");
+ok(!polOff.includes("es-anuncios") && !polOff.includes("Preferências de anúncios"), "apagado: la Política no habla del localStorage de los anuncios (las herramientas del ENEM sí usan localStorage y lo declaran en la sección 2.1)");
 const espOff = paginas.map((p) => (leer(off.dir, p).match(/class="anuncio[^"]*anuncio--desligado/g) || []).length).reduce((a, b) => a + b, 0);
 ok(espOff > 0, `los espacios de anuncio siguen presentes pero apagados (${espOff})`);
 

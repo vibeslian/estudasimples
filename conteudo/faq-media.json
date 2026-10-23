@@ -1,0 +1,32 @@
+[
+  {
+    "p": "Como calcular quanto preciso tirar no último bimestre?",
+    "r": [
+      "Some as notas que você já tem, veja quanto falta para chegar ao total da média e divida pelo peso da última etapa. Sem pesos, a conta é: (média × número de etapas) − (soma das notas que você já tem). Por exemplo, com média 6,0 em 4 bimestres e notas 7,5, 6,0 e 5,5: 6,0 × 4 = 24; 24 − 19 = 5,0. Você precisa de 5,0 no último bimestre."
+    ]
+  },
+  {
+    "p": "Qual é a média para passar de ano?",
+    "r": [
+      "Depende da escola: ela é definida pelo regimento de cada uma e não existe um número único para todo o país. Por isso a calculadora não traz uma média pronta: você coloca a da sua escola."
+    ]
+  },
+  {
+    "p": "O que fazer se a nota necessária for maior que 10?",
+    "r": [
+      "Significa que só com a última etapa não dá para chegar à média. Veja no regimento da sua escola se existe recuperação ou outra forma de compensar, e converse com o professor ou com a coordenação."
+    ]
+  },
+  {
+    "p": "Minha escola dá pesos diferentes às notas. A calculadora serve?",
+    "r": [
+      "Sim. Abra a opção «Minha escola usa pesos ou outra nota máxima» e coloque o peso de cada etapa. A conta passa a ser a média ponderada."
+    ]
+  },
+  {
+    "p": "As minhas notas ficam guardadas?",
+    "r": [
+      "Não. A conta é feita no seu navegador e nada é enviado nem guardado."
+    ]
+  }
+]

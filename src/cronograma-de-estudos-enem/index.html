@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  {{include:head-common}}
+  <title>Cronograma de estudos para o ENEM: monte o seu grátis | {{SITE_NAME}}</title>
+  <meta name="description" content="Escolha a data da prova, as horas por dia e os dias de estudo e receba um cronograma do ENEM semana a semana, com um dia livre. Grátis, em PDF.">
+  <link rel="canonical" href="{{SITE_URL}}/cronograma-de-estudos-enem/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="{{SITE_NAME}}">
+  <meta property="og:title" content="Cronograma de estudos para o ENEM, grátis">
+  <meta property="og:description" content="Responda 4 perguntas e receba o plano semana a semana até a prova, com um dia livre. Salve em PDF ou imprima.">
+  <meta property="og:url" content="{{SITE_URL}}/cronograma-de-estudos-enem/">
+  <link rel="stylesheet" href="/assets/css/enem.css?v={{BUILD}}">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Cronograma de estudos para o ENEM – {{SITE_NAME}}","url":"{{SITE_URL}}/cronograma-de-estudos-enem/","applicationCategory":"EducationalApplication","operatingSystem":"Qualquer navegador","inLanguage":"pt-BR","offers":{"@type":"Offer","price":"0","priceCurrency":"BRL"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"{{SITE_NAME}}","item":"{{SITE_URL}}/"},{"@type":"ListItem","position":2,"name":"Cronograma de estudos do ENEM","item":"{{SITE_URL}}/cronograma-de-estudos-enem/"}]}</script>
+  {{FAQ_JSONLD:cronograma-enem}}
+</head>
+<body data-modo="enem-cronograma">
+<div class="hero hero--compacto">
+  {{include:manchas}}
+  {{include:header}}
+  <div class="container hero-conteudo">
+    <h1>Cronograma de estudos para o ENEM</h1>
+    <p class="lead">Responda 4 perguntas e receba um plano semana a semana até a prova, com um dia livre para descansar. Salve em PDF ou imprima. Grátis, sem cadastro, e nada sai do seu aparelho.</p>
+  </div>
+</div>
+
+<main class="container enem" id="conteudo">
+  <div class="enem-grid enem-grid--cron">
+
+    <form class="cartao enem-form" id="form" autocomplete="off" novalidate>
+      <div class="campo">
+        <label for="data">1. Data da prova</label>
+        <input id="data" type="date" aria-describedby="dataDica">
+        <p class="dica-campo" id="dataDica">Confira a data no site oficial do Inep: ela muda de um ano para outro.</p>
+      </div>
+
+      <fieldset class="campo grupo-opcoes opcoes-horas">
+        <legend>2. Horas de estudo por dia</legend>
+        <label class="opcao"><input type="radio" name="horas" value="1"><span>1 h</span></label>
+        <label class="opcao"><input type="radio" name="horas" value="2" checked><span>2 h</span></label>
+        <label class="opcao"><input type="radio" name="horas" value="3"><span>3 h</span></label>
+        <label class="opcao"><input type="radio" name="horas" value="4"><span>4 h</span></label>
+      </fieldset>
+
+      <fieldset class="campo grupo-opcoes opcoes-dias">
+        <legend>3. Dias em que você estuda</legend>
+        <label class="opcao"><input type="checkbox" name="dias" value="0" checked><span>Seg</span></label>
+        <label class="opcao"><input type="checkbox" name="dias" value="1" checked><span>Ter</span></label>
+        <label class="opcao"><input type="checkbox" name="dias" value="2" checked><span>Qua</span></label>
+        <label class="opcao"><input type="checkbox" name="dias" value="3" checked><span>Qui</span></label>
+        <label class="opcao"><input type="checkbox" name="dias" value="4" checked><span>Sex</span></label>
+        <label class="opcao"><input type="checkbox" name="dias" value="5" checked><span>Sáb</span></label>
+        <label class="opcao"><input type="checkbox" name="dias" value="6"><span>Dom</span></label>
+      </fieldset>
+      <p class="dica-campo" style="margin: -8px 0 18px">O plano sempre deixa um dia livre por semana: se você marcar os sete dias, o domingo fica livre.</p>
+
+      <fieldset class="campo grupo-opcoes opcoes-areas">
+        <legend>4. Onde você quer reforçar</legend>
+        <label class="opcao"><input type="checkbox" name="reforco" value="lin"><span>Linguagens</span></label>
+        <label class="opcao"><input type="checkbox" name="reforco" value="hum"><span>Ciências Humanas</span></label>
+        <label class="opcao"><input type="checkbox" name="reforco" value="nat"><span>Ciências da Natureza</span></label>
+        <label class="opcao"><input type="checkbox" name="reforco" value="mat"><span>Matemática</span></label>
+        <label class="opcao"><input type="checkbox" name="reforco" value="red"><span>Redação</span></label>
+      </fieldset>
+      <p class="dica-campo" style="margin: -8px 0 18px">As cinco áreas entram no plano. As que você marcar ganham mais blocos.</p>
+
+      <p class="erro-campo" id="erro" role="alert" hidden></p>
+      <button type="submit" class="btn btn-acento" id="montar" style="width: 100%; min-height: 54px">Montar meu cronograma</button>
+    </form>
+
+    <div class="enem-col" id="saida">
+      <div class="cartao" id="vazio">
+        <h2>Seu plano aparece aqui</h2>
+        <p class="dica-campo" style="margin: 0">Escolha a data da prova e clique em «Montar meu cronograma». Depois é só mudar as respostas: o plano se refaz sozinho.</p>
+      </div>
+
+      <div id="plano" hidden>
+        <div class="plano-topo">
+          <div>
+            <h2 id="planoTitulo" tabindex="-1">Plano de estudos</h2>
+            <p id="planoResumo"></p>
+          </div>
+          <div class="plano-acoes botoes">
+            <button type="button" class="btn btn-acento btn-pequeno" id="imprimir">Imprimir ou salvar em PDF</button>
+          </div>
+        </div>
+        <div class="plano-corpo" style="margin-top: 20px">
+          <div class="plano-nav">
+            <button type="button" class="btn" id="anterior" aria-label="Semana anterior">&lsaquo;</button>
+            <h3 id="semanaTitulo" aria-live="polite">Semana 1</h3>
+            <button type="button" class="btn" id="proxima" aria-label="Próxima semana">&rsaquo;</button>
+          </div>
+          <div id="semanas"></div>
+          <div class="legenda-areas" aria-label="Legenda das áreas">
+            <span><i style="background: #e3eaf0; border-color: #9fb3c4"></i>Linguagens</span>
+            <span><i style="background: var(--acento-claro); border-color: #e8a592"></i>Humanas</span>
+            <span><i style="background: var(--salvia-100); border-color: #9db8a1"></i>Natureza</span>
+            <span><i style="background: var(--principal); border-color: var(--principal)"></i>Matemática</span>
+            <span><i style="background: var(--principal-escuro); border-color: var(--principal-escuro)"></i>Redação</span>
+          </div>
+        </div>
+        <p class="dica-campo" style="margin-top: 14px">Este plano é uma sugestão de organização, não uma promessa de nota. Ele divide o seu tempo entre as cinco áreas; o que estudar em cada bloco você escolhe.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div class="container">
+  <article class="artigo" style="padding-block: 24px 48px">
+    <section id="como">
+      <h2 class="revelar">Como o plano é montado</h2>
+      <ol class="enem-passos revelar">
+        <li><span class="n" aria-hidden="true">1</span><p><strong>Conta os dias.</strong> Do dia de hoje até a data da prova, em semanas de segunda a domingo.</p></li>
+        <li><span class="n" aria-hidden="true">2</span><p><strong>Divide as horas.</strong> Cada hora de estudo vira um bloco de uma área. As áreas marcadas para reforço ganham mais blocos, e a mesma área não repete no mesmo dia.</p></li>
+        <li><span class="n" aria-hidden="true">3</span><p><strong>Guarda um dia livre.</strong> Descansar também faz parte do plano. Você pode imprimir ou salvar em PDF e colar na parede.</p></li>
+      </ol>
+    </section>
+
+    <section id="perguntas-frequentes">
+      <h2 class="revelar">Perguntas frequentes sobre o cronograma</h2>
+      {{FAQ_HTML:cronograma-enem}}
+    </section>
+
+    <section id="fontes" class="artigo-meta">
+      <p>Atualizado em 22 de outubro de 2026. A distribuição dos blocos é uma regra simples nossa (rodízio entre as cinco áreas do ENEM, com mais blocos para as que você marca), não um método pedagógico validado nem uma recomendação do Inep. A data da prova deve ser conferida no site do Inep. O Estuda Simples não tem ligação com o Inep nem com o MEC.</p>
+    </section>
+  </article>
+</div>
+<script type="application/json" id="percurso-dados">{{PERCURSO_DADOS}}</script>
+<script type="module" src="/assets/js/progresso.js"></script>
+{{include:footer}}
+<script type="module" src="/assets/js/enem/cronograma.js?v={{BUILD}}"></script>
+</body>
+</html>
