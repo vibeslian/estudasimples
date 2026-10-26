@@ -29,7 +29,7 @@
   },
   {
     "p": "O relatório precisa de sumário?",
-    "r": ["Pela NBR 10719, o sumário é obrigatório. Se o professor dispensar o sumário em relatórios curtos, siga o professor. Para montar, use o <a href=\"/gerador-de-sumario-abnt/?origem=guia-relatorio-abnt\">gerador de sumário</a>."]
+    "r": ["Pela NBR 10719, o sumário é obrigatório. Se o professor dispensar o sumário em relatórios curtos, siga o professor. Para montar, use o <a href=\"/gerador-de-sumario-abnt/#origem=guia-relatorio-abnt\">gerador de sumário</a>."]
   },
   {
     "p": "Qual a diferença entre relatório e TCC?",
@@ -37,6 +37,6 @@
   },
   {
     "p": "Posso fazer a capa e a folha de rosto do relatório neste site?",
-    "r": ["Pode. O <a href=\"/gerador-de-capa-abnt/?origem=guia-relatorio-abnt\">gerador de capa</a> e o <a href=\"/gerador-de-folha-de-rosto-abnt/?origem=guia-relatorio-abnt\">gerador de folha de rosto</a> são gratuitos e fazem PDF e Word. Confira o modelo do seu curso."]
+    "r": ["Pode. O <a href=\"/gerador-de-capa-abnt/#origem=guia-relatorio-abnt\">gerador de capa</a> e o <a href=\"/gerador-de-folha-de-rosto-abnt/#origem=guia-relatorio-abnt\">gerador de folha de rosto</a> são gratuitos e fazem PDF e Word. Confira o modelo do seu curso."]
   }
 ]

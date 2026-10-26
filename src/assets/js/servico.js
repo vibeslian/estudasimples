@@ -1,4 +1,4 @@
-// Página do serviço de formatação: se o visitante veio de uma ferramenta (?origem=capa), o botão do WhatsApp
+// Página do serviço de formatação: se o visitante veio de uma ferramenta (#origem=capa; ?origem=capa também vale, para links de fora), o botão do WhatsApp
 // leva a mensagem daquela página, para eu saber de onde veio o pedido. Sem JavaScript, vale a mensagem padrão.
 // Só usa links que já estão na página (nada vem do endereço, a não ser o nome da origem, que tem de existir na lista).
 (function () {
@@ -6,7 +6,7 @@
   if (!lista) return;
   var links;
   try { links = JSON.parse(lista.textContent); } catch (e) { return; }
-  var origem = new URLSearchParams(location.search).get("origem");
+  var origem = new URLSearchParams(location.hash.replace(/^#/, "")).get("origem") || new URLSearchParams(location.search).get("origem");
   if (!origem || !Object.prototype.hasOwnProperty.call(links, origem)) return;
   document.querySelectorAll("a[data-whatsapp]").forEach(function (a) { a.href = links[origem]; });
 })();

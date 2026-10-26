@@ -33,6 +33,6 @@
   },
   {
     "p": "Dá para fazer o sumário sem usar os estilos do Word?",
-    "r": ["Dá. No <a href=\"/gerador-de-sumario-abnt/?origem=guia-sumario-automatico-word\">gerador de sumário ABNT</a> você digita os títulos e as páginas, a numeração sai sozinha, e o arquivo em Word já vem com a linha de pontos. Você confere as páginas no fim."]
+    "r": ["Dá. No <a href=\"/gerador-de-sumario-abnt/#origem=guia-sumario-automatico-word\">gerador de sumário ABNT</a> você digita os títulos e as páginas, a numeração sai sozinha, e o arquivo em Word já vem com a linha de pontos. Você confere as páginas no fim."]
   }
 ]

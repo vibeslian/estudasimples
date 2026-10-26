@@ -19,8 +19,8 @@ Todo en `site.config.json`, bloque `servico`, y luego `npm run build`:
 `build.mjs` convierte la configuración en marcadores `{{WHATSAPP_URL}}`, `{{WHATSAPP_EXIBICAO}}`, `{{PRAZO}}`, `{{PRECO_ATE30}}`, `{{PRECO_31A60}}` y las versiones numéricas `{{PRECO_ATE30_NUM}}` / `{{PRECO_31A60_NUM}}` (para el JSON-LD). Ningún precio, plazo ni número está escrito a mano en el código fuente (lo comprueba `pruebas/probar-servico.mjs`). El "R$ 80" lleva espacio sin quebra para no partirse en dos líneas.
 
 ## De dónde viene cada cliente
-Las herramientas y la portada enlazan a la página del servicio con `?origem=capa` (o `folha`, `sumario`, `inicio`). `assets/js/servico.js` lee ese parámetro y cambia el enlace de todos los botones de WhatsApp (los que llevan `data-whatsapp`) por el mensaje de esa página; el build deja los enlaces en `<script type="application/json" id="whatsapp-origens">`. Reglas:
-- Sin `?origem`, con un valor desconocido o sin JavaScript, vale el mensaje de la página del servicio (`servico`).
+Las herramientas y la portada enlazan a la página del servicio con `#origem=capa` (o `folha`, `sumario`, `inicio`). `assets/js/servico.js` lee ese valor del hash (y también `?origem=`, que usan Pinterest y el botón de compartir) y cambia el enlace de todos los botones de WhatsApp (los que llevan `data-whatsapp`) por el mensaje de esa página; el build deja los enlaces en `<script type="application/json" id="whatsapp-origens">`. Reglas:
+- Sin `#origem`, con un valor desconocido o sin JavaScript, vale el mensaje de la página del servicio (`servico`).
 - Desde el menú y el pie (sin origen) llega el mensaje `servico`.
 - La página de origen de cada bloque sale de `ORIGEM_POR_PAGINA` en `build.mjs` (`{{ORIGEM}}` en el partial). Para una herramienta nueva: agregar su carpeta ahí y su mensaje en `site.config.json`.
 - No se guarda nada: la información viaja solo en el texto del mensaje, que el visitante puede editar (la Política de Privacidade lo explica).

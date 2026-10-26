@@ -45,7 +45,7 @@ await p.evaluate(() => { const st = document.querySelector("style:last-of-type")
 await p.screenshot({ path: `${OUT}/servico-7-celular-portada.png` });
 await seccion(p, "#antes-e-depois", "servico-8-celular-antes-e-depois");
 await p.close();
-p = await abre("/formatacao-abnt-tcc/?origem=capa", CEL);
+p = await abre("/formatacao-abnt-tcc/#origem=capa", CEL);
 await p.evaluate(() => { document.documentElement.style.scrollBehavior = "auto"; });
 for (const [sel, desp, nombre] of [["body", 0, "barra-1-arriba-oculta"], ["#incluido", 0, "barra-2-visible-en-incluido"], ["#antes-e-depois", -20, "barra-3-visible-en-antes-depois"], ["#prazo-e-precos .preco-rodape a", 400, "barra-4-oculta-con-boton-de-precos"], ["footer", 300, "barra-5-visible-sobre-el-pie"]]) {
   await p.evaluate((sel, d) => { window.scrollTo({ top: sel === "body" ? 0 : document.querySelector(sel).getBoundingClientRect().top + scrollY - d, behavior: "instant" }); }, sel, desp);

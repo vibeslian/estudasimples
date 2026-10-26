@@ -45,17 +45,23 @@ marca(!/\b\d+\s*a\s*\d+\s*horas/.test(fuenteTexto) && !fuenteTexto.includes("wa.
   marca(Object.keys(cfg.mensagens).sort().join() === "capa,folha,inicio,referencias,servico,sumario" && Object.entries(cfg.mensagens).every(([id, m]) => m === `Olá! Vim pelo site Estuda Simples (${ORIGENES[id]}) e quero formatar meu trabalho nas normas ABNT.`), "los 6 mensajes (servicio, inicio, capa, folha, sumario, referencias) están en site.config.json e identifican el sitio y la página de origen");
   marca(d.ctas.every((c) => c.target === "_blank" && /noopener/.test(c.rel)), "los enlaces de WhatsApp abren en otra pestaña con rel=noopener");
   marca(d.ctas.every((c) => c.h >= 44), `los botones de WhatsApp miden ≥ 44 px de alto (${d.ctas.map((c) => c.h).join(", ")})`);
-  // origen: el mismo botón cambia de mensaje según la página de donde viene el visitante (?origem=)
+  // origen: el mismo botón cambia de mensaje según la página de donde viene el visitante (#origem=)
   for (const [id, nombre] of Object.entries(ORIGENES)) {
-    const q = await abre(SERVICO + "?origem=" + id);
+    const q = await abre(SERVICO + "#origem=" + id);
     const hrefs = await q.evaluate(() => [...document.querySelectorAll("a[data-whatsapp]")].map((a) => a.getAttribute("href")));
-    marca(hrefs.length >= 3 && hrefs.every((h) => h === urlDe(id)) && decodeURIComponent(hrefs[0]).includes("(" + nombre + ")"), `?origem=${id}: los ${hrefs.length} botones llevan el mensaje "(${nombre})"`);
+    marca(hrefs.length >= 3 && hrefs.every((h) => h === urlDe(id)) && decodeURIComponent(hrefs[0]).includes("(" + nombre + ")"), `#origem=${id}: los ${hrefs.length} botones llevan el mensaje "(${nombre})"`);
+    await q.close();
+  }
+  { // compatibilidad: los enlaces de fuera (Pinterest, compartir) siguen usando ?origem=
+    const q = await abre(SERVICO + "?origem=capa");
+    const hrefs = await q.evaluate(() => [...document.querySelectorAll("a[data-whatsapp]")].map((a) => a.getAttribute("href")));
+    marca(hrefs.length >= 3 && hrefs.every((h) => h === urlDe("capa")), "?origem=capa (enlaces de fuera) sigue cambiando el mensaje de WhatsApp");
     await q.close();
   }
   for (const raro of ["xyz", "__proto__", "<script>", ""]) {
-    const q = await abre(SERVICO + "?origem=" + encodeURIComponent(raro));
+    const q = await abre(SERVICO + "#origem=" + encodeURIComponent(raro));
     const hrefs = await q.evaluate(() => [...document.querySelectorAll("a[data-whatsapp]")].map((a) => a.getAttribute("href")));
-    marca(hrefs.every((h) => h === esperadoUrl), `?origem=${raro || "(vacío)"}: origen desconocido → mensaje de la página del servicio`);
+    marca(hrefs.every((h) => h === esperadoUrl), `#origem=${raro || "(vacío)"}: origen desconocido → mensaje de la página del servicio`);
     await q.close();
   }
   const t = norm(d.texto);
@@ -134,7 +140,7 @@ for (const [nombre, vp] of [["computador 1280", { width: 1280, height: 900 }], [
   });
   marca(!!r, `${url} ${nombre}: existe el bloque`);
   if (!r) { await p.close(); continue; }
-  marca(r.texto === "Prefere receber o trabalho inteiro formatado? Conheça meu serviço." && r.href === SERVICO + "?origem=" + slotAbajo, `texto: "${r.texto}" → ${r.href}`);
+  marca(r.texto === "Prefere receber o trabalho inteiro formatado? Conheça meu serviço." && r.href === SERVICO + "#origem=" + slotAbajo, `texto: "${r.texto}" → ${r.href}`);
   marca(r.dentroForm && !r.dentroAcoes && r.cTop >= r.botones + 12, `queda después de los botones de descarga (${Math.round(r.cTop - r.botones)} px por debajo), fuera del grupo de botones`);
   const visibles = r.anuncios.filter((x) => x.display !== "none");
   const cerca = Math.min(...visibles.map((x) => Math.abs(x.top - r.cBottom)));
@@ -178,7 +184,7 @@ console.log("\n== 5b) Aviso discreto en la portada ==");
 for (const [nombre, vp] of [["computador 1280", { width: 1280, height: 900 }], ["celular 390", { width: 390, height: 844, isMobile: true, hasTouch: true, deviceScaleFactor: 2 }]]) {
   const p = await abre("/", vp);
   const r = await p.evaluate(() => { const a = document.querySelector(".hero-aviso"); if (!a) return null; const l = a.querySelector("a"); const hero = document.querySelector(".hero").getBoundingClientRect(); const bb = a.getBoundingClientRect(); return { texto: a.textContent.trim(), href: l.getAttribute("href"), dentroHero: bb.bottom <= hero.bottom + 1 && !!a.closest(".hero"), size: parseFloat(getComputedStyle(a).fontSize), ov: document.documentElement.scrollWidth - innerWidth, h: document.querySelector(".escolha-cartao").getBoundingClientRect().top < bb.top }; });
-  marca(!!r && r.texto === "Prefere receber o trabalho inteiro formatado? Conheça meu serviço de formatação de TCC." && r.href === SERVICO + "?origem=inicio", `${nombre}: aviso en la portada → ${r?.href}`);
+  marca(!!r && r.texto === "Prefere receber o trabalho inteiro formatado? Conheça meu serviço de formatação de TCC." && r.href === SERVICO + "#origem=inicio", `${nombre}: aviso en la portada → ${r?.href}`);
   marca(!!r && r.dentroHero && r.size <= 16 && r.h && r.ov <= 0, `${nombre}: dentro de la portada, debajo de los botones principales, discreto (${r?.size}px) y sin scroll horizontal`);
   await p.close();
 }
@@ -227,7 +233,7 @@ console.log("\n== 7a) Barra fija del WhatsApp (solo celular) ==");
   const estado = (p) => p.evaluate(() => { const b = document.getElementById("barraWhatsapp"); const s = getComputedStyle(b); const r = b.getBoundingClientRect(); return { visible: s.visibility === "visible" && r.top < innerHeight - 1 && s.display !== "none", display: s.display, alto: Math.round(r.height), top: Math.round(r.top), pos: s.position, href: b.querySelector("a").getAttribute("href"), tab: s.visibility !== "hidden" }; });
   const irA = async (p, sel, desplaza = 0) => { await p.evaluate((sel, d) => { const e = document.querySelector(sel); window.scrollTo({ top: e.getBoundingClientRect().top + scrollY - d, behavior: "instant" }); }, sel, desplaza); await new Promise((r) => setTimeout(r, 450)); };
   const CEL = { width: 390, height: 844, isMobile: true, hasTouch: true, deviceScaleFactor: 2 };
-  let p = await abre(SERVICO + "?origem=capa", CEL);
+  let p = await abre(SERVICO + "#origem=capa", CEL);
   await p.evaluate(() => { document.documentElement.style.scrollBehavior = "auto"; });
   await new Promise((r) => setTimeout(r, 400));
   let e = await estado(p);
@@ -235,7 +241,7 @@ console.log("\n== 7a) Barra fija del WhatsApp (solo celular) ==");
   await irA(p, "#incluido", 0);
   e = await estado(p);
   marca(e.visible && e.alto >= 60 && e.alto <= 100, "al bajar y no verse ningún otro botón de WhatsApp → aparece la barra (" + e.alto + "px de alto)");
-  marca(decodeURIComponent(e.href) === decodeURIComponent(urlDe("capa")), "la barra usa el mensaje según el origen (?origem=capa → \"(gerador de capa)\")");
+  marca(decodeURIComponent(e.href) === decodeURIComponent(urlDe("capa")), "la barra usa el mensaje según el origen (#origem=capa → \"(gerador de capa)\")");
   const btn = await p.evaluate(() => { const a = document.querySelector("#barraWhatsapp a"); const r = a.getBoundingClientRect(); return { h: Math.round(r.height), w: Math.round(r.width), izq: Math.round(r.left), der: Math.round(innerWidth - r.right), target: a.target, rel: a.rel, texto: a.textContent.trim() }; });
   marca(btn.h >= 48 && btn.izq >= 8 && btn.der >= 8 && btn.target === "_blank" && /noopener/.test(btn.rel) && btn.texto === "Pedir orçamento no WhatsApp", `botón de la barra: "${btn.texto}", ${btn.h}px de alto, margen ${btn.izq}px, abre en otra pestaña`);
   await irA(p, "#prazo-e-precos .preco-rodape a", 300);

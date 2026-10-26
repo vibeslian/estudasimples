@@ -32,7 +32,7 @@
   {
     "p": "O contador de linhas do site mostra o número exato?",
     "r": [
-      "Não, ele faz uma estimativa. Você informa quantos caracteres cabem em uma linha com a sua letra e o <a href=\"/contador-de-linhas-enem/?origem=guia-quantas-linhas-tem-a-redacao-do-enem\">contador</a> calcula as linhas a partir daí. Para saber o número real, a referência é a sua própria folha de treino."
+      "Não, ele faz uma estimativa. Você informa quantos caracteres cabem em uma linha com a sua letra e o <a href=\"/contador-de-linhas-enem/#origem=guia-quantas-linhas-tem-a-redacao-do-enem\">contador</a> calcula as linhas a partir daí. Para saber o número real, a referência é a sua própria folha de treino."
     ]
   },
   {

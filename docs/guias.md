@@ -11,7 +11,7 @@ Orden de prioridad (campo `prioridad`): normas-abnt, margens-abnt, como-fazer-re
 3. Preguntas en `conteudo/faq-guia-<slug>.json` (el FAQPage sale de ahí y se muestra igual en la página: `{{FAQ_JSONLD:…}}` y `{{FAQ_HTML:…}}`).
 4. `node build.mjs`: el sitemap se actualiza solo. Después, `node probar-guias.mjs` (en `pruebas/`).
 - Las herramientas muestran sus guías con `{{GUIAS_DA_FERRAMENTA:capa|folha|sumario|referencias|contador|cronograma|media}}` (según el campo `ferramentas` de cada guía). La portada usa `{{GUIAS_DESTAQUE:n}}`.
-- Los botones hacia las herramientas llevan `?origem=guia-<slug>`, y el servicio usa el mensaje de WhatsApp `guia-<slug>`.
+- Los botones hacia las herramientas llevan `#origem=guia-<slug>`, y el servicio usa el mensaje de WhatsApp `guia-<slug>`.
 
 ## Reglas de contenido
 - Respuesta directa al comienzo, dibujo de la hoja (SVG o HTML), pasos, errores comunes y FAQ real. Sin textos repetidos entre guías (la prueba lo revisa).

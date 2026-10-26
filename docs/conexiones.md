@@ -28,16 +28,19 @@ Después de descargar la parte X, sugiere **la primera parte posterior a X que t
 4. Para el seguimiento: agregar el id de página en `ORIGEM_POR_PAGINA` (`build.mjs`) y en `site.config.json` → `servico.origens.paginas`; los mensajes de WhatsApp de esa página salen del modelo.
 5. Si quiere un espacio de anuncio u oferta: poner los 4 espacios (`<pagina>-abaixo-da-ferramenta`, `-meio-1`, `-meio-2`, `-lateral`) con `{{ESPACO:<slot>}}` en el HTML y agregarlos a `anuncios.espacos`.
 
-## Medición: parámetro ?origem
-Todo enlace nuevo lleva `?origem=<página>-<componente>`:
+## Medición: parámetro #origem (desde 26/10/2026; antes era ?origem)
+Todo enlace nuevo lleva `#origem=<página>-<componente>`:
 | Componente | Ejemplo | Quién lo pone |
 |---|---|---|
-| `percurso` (indicador) | `/gerador-de-folha-de-rosto-abnt/?origem=capa-percurso` | build |
-| `proximo` (panel) | `/formatacao-abnt-tcc/?origem=sumario-proximo` | `progresso.js` |
-| `oferta` (oferta propia) | `/formatacao-abnt-tcc/?origem=capa-oferta` | build |
-| (bloque "Conheça meu serviço", aviso de la portada) | `...?origem=capa`, `...?origem=inicio` | HTML |
+| `percurso` (indicador) | `/gerador-de-folha-de-rosto-abnt/#origem=capa-percurso` | build |
+| `proximo` (panel) | `/formatacao-abnt-tcc/#origem=sumario-proximo` | `progresso.js` |
+| `oferta` (oferta propia) | `/formatacao-abnt-tcc/#origem=capa-oferta` | build |
+| (bloque "Conheça meu serviço", aviso de la portada) | `...#origem=capa`, `...#origem=inicio` | HTML |
 
-Páginas: `inicio`, `capa`, `folha`, `sumario`. La página del servicio lee `?origem=` y cambia el mensaje de WhatsApp ("Olá! Vim pelo site Estuda Simples (gerador de capa · próximo passo) e quero formatar…"), así que **cada pedido por WhatsApp dice de qué página y de qué componente vino**. Los mensajes salen de `servico.modeloMensagem` (se pueden sobrescribir uno por uno en `servico.mensagens`); las etiquetas, de `servico.origens`. Los clics entre herramientas (por ejemplo capa → folha) también llevan el parámetro, pero **no hay una cuenta propia**: solo se verá en lo que muestre el panel de estadísticas de Cloudflare (hay que comprobar en el panel si guarda la parte `?origem=` de la dirección). Lo que sí queda registrado con seguridad es el mensaje que llega por WhatsApp.
+Páginas: `inicio`, `capa`, `folha`, `sumario`. La página del servicio lee `#origem=` (y `?origem=`, para enlaces de fuera) y cambia el mensaje de WhatsApp ("Olá! Vim pelo site Estuda Simples (gerador de capa · próximo passo) e quero formatar…"), así que **cada pedido por WhatsApp dice de qué página y de qué componente vino**. Los mensajes salen de `servico.modeloMensagem` (se pueden sobrescribir uno por uno en `servico.mensagens`); las etiquetas, de `servico.origens`. Los clics entre herramientas (por ejemplo capa → folha) también llevan el parámetro, pero **no hay una cuenta propia**: solo se verá en lo que muestre el panel de estadísticas de Cloudflare (hay que comprobar en el panel si guarda la parte `#origem=` de la dirección). Lo que sí queda registrado con seguridad es el mensaje que llega por WhatsApp.
 
 ## Pruebas
 `node probar-conexiones.mjs` (en `pruebas/`): indicador, panel (PDF y Word, una sola pestaña, qué sugiere según lo descargado, cierre, almacenamiento bloqueado, "Limpar dados"), ofertas, configuraciones de prueba (oferta desactivada, dos ofertas en una página, oferta pegada a la herramienta, paso nuevo), medición ?origem y Política. Los archivos se "descargan" en memoria: no se abre nada ni queda nada en Descargas.
+
+### Por qué `#origem` y no `?origem` (26/10/2026)
+Search Console contaba 41 URLs «página alternativa con etiqueta canónica» por los enlaces internos con `?origem=...`: duplicados que gastaban rastreo. El fragmento (`#`) no viaja al servidor ni cuenta como página nueva. Siguen con `?origem=` los enlaces que se comparten fuera del sitio (botón de compartir y Pinterest), y `servico.js` entiende los dos formatos. Las URLs viejas ya rastreadas siguen respondiendo 200 y Google las irá retirando solo.

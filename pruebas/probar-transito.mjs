@@ -37,7 +37,7 @@ seccion("1) menú «Ferramentas» en el computador");
   ok(await p.$eval(".nav-ferramentas", (e) => e.getAttribute("aria-expanded") === "false" && e.getAttribute("role") === "button"), "«Ferramentas» es un botón con aria-expanded=false");
   await p.click(".nav-ferramentas");
   ok(await visible(p, ".mega") && await p.$eval(".nav-ferramentas", (e) => e.getAttribute("aria-expanded") === "true"), "un clic abre el panel y aria-expanded pasa a true");
-  const enlaces = await p.$$eval(".mega a", (l) => l.map((a) => a.getAttribute("href").split("?")[0]));
+  const enlaces = await p.$$eval(".mega a", (l) => l.map((a) => a.getAttribute("href").split(/[?#]/)[0]));
   const esperados = ["/gerador-de-capa-abnt/", "/gerador-de-folha-de-rosto-abnt/", "/gerador-de-sumario-abnt/", "/gerador-de-referencias-abnt/", "/contador-de-linhas-enem/", "/cronograma-de-estudos-enem/", "/calculadora-de-media/", "/formatacao-abnt-tcc/"];
   ok(esperados.every((h) => enlaces.includes(h)), "el panel enlaza a las 7 herramientas y al servicio", enlaces.join(","));
   const caja = await p.$eval(".mega", (e) => { const r = e.getBoundingClientRect(); return { l: r.left, r: r.right, b: r.bottom, w: innerWidth }; });

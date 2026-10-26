@@ -96,7 +96,7 @@ export function preparaGuias(config, guias, parceiroDaGuia = () => "", afiliados
         <p class="guia-ferramenta-selo">${esc(f.selo || "Ferramenta relacionada")}</p>
         <p class="guia-ferramenta-titulo">${esc(f.nome)}</p>
         <p class="guia-ferramenta-texto">${esc(f.texto)}</p>
-        <a class="btn btn-acento" href="${f.url}?origem=guia-${slug}">${esc(f.botao)}</a>
+        <a class="btn btn-acento" href="${f.url}#origem=guia-${slug}">${esc(f.botao)}</a>
       </aside>`;
   };
 
@@ -171,7 +171,7 @@ export function preparaGuias(config, guias, parceiroDaGuia = () => "", afiliados
     mainEntity: { "@type": "ItemList", itemListElement: guias.map((g, i) => ({ "@type": "ListItem", position: i + 1, name: g.rotulo, url: url(g.slug) })) },
   });
 
-  // mensagens de WhatsApp: uma por guia (?origem=guia-<slug>)
+  // mensagens de WhatsApp: uma por guia (#origem=guia-<slug>)
   const mensagens = (modelo) => Object.fromEntries(guias.map((g) => [`guia-${g.slug}`, modelo.replace("{pagina}", `guia: ${g.rotulo}`).replace(" · {componente}", "")]));
 
   return { head, hero, ferramenta, relacionadas, fontes, lista, indiceJson, mensagens, daFerramenta, destaque, get };

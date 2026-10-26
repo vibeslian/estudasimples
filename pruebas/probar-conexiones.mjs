@@ -1,5 +1,5 @@
 // Etapa 8.5: conectar las herramientas. Panel "Próximo passo", indicador "Monte seu TCC passo a passo", ofertas propias en los
-// espacios de anuncio, parámetro ?origem en todos los enlaces nuevos y Política de Privacidade.
+// espacios de anuncio, parámetro #origem en todos los enlaces nuevos y Política de Privacidade.
 // Requiere el sitio en http://localhost:3000 (o BASE_URL). Los archivos se "descargan" en memoria: nada se abre ni queda en Descargas.
 import fs from "node:fs";
 import os from "node:os";
@@ -46,8 +46,8 @@ for (const [id, url] of Object.entries(PAGINAS)) {
   });
   const esperados = [...PASOS, cfg.percurso.final.id];
   marca(!!r && r.titulo === cfg.percurso.titulo && r.ids.join() === esperados.join() && r.nombres.join("|") === [...cfg.percurso.passos, cfg.percurso.final].map((x) => x.nome).join("|"), `${id}: el indicador muestra ${r?.ids.join(" → ")} en el orden y con los nombres de la configuración`);
-  const origenOk = (r?.hrefs || []).every((h, i) => (r.ids[i] === id ? h === null : h === `${[...cfg.percurso.passos, cfg.percurso.final][i].url}?origem=${id}-percurso`));
-  marca(!!r && origenOk, `${id}: los enlaces del indicador llevan ?origem=${id}-percurso y la página actual no es enlace (${r?.actual.join() || "ninguna"} marcada como "Você está aqui")`);
+  const origenOk = (r?.hrefs || []).every((h, i) => (r.ids[i] === id ? h === null : h === `${[...cfg.percurso.passos, cfg.percurso.final][i].url}#origem=${id}-percurso`));
+  marca(!!r && origenOk, `${id}: los enlaces del indicador llevan #origem=${id}-percurso y la página actual no es enlace (${r?.actual.join() || "ninguna"} marcada como "Você está aqui")`);
   marca(!!r && r.feitos === 0 && r.altos.every((h) => h >= 44) && r.ov <= 0 && /só no seu navegador/.test(r.nota), `${id}: sin pasos marcados al empezar, botones de ≥ 44 px, sin scroll horizontal y con la aclaración de que queda solo en el navegador`);
   await p.close();
 }
@@ -84,7 +84,7 @@ const p = await abre(browser, PAGINAS.capa);
   await descarga(p, "pdf");
   const s = await estadoPanel(p);
   marca(s.visible && /Folha de rosto/.test(s.titulo) && /Seus dados já estão preenchidos/.test(s.texto), `capa → sugiere la folha de rosto: "${s.titulo}" / "${s.texto}"`);
-  marca(s.href === "/gerador-de-folha-de-rosto-abnt/?origem=capa-proximo" && s.botonTxt === "Abrir a folha de rosto", `el botón lleva ${s.href}`);
+  marca(s.href === "/gerador-de-folha-de-rosto-abnt/#origem=capa-proximo" && s.botonTxt === "Abrir a folha de rosto", `el botón lleva ${s.href}`);
   marca(s.debajo && s.sinTapar && s.ov <= 0, "el panel queda debajo de los botones de descarga (en la página, sin ventana emergente) y no los tapa");
   marca(s.cerrar >= 44, `el botón de cerrar mide ${s.cerrar}px de alto (fácil de tocar)`);
   marca(JSON.stringify(await progreso(p)) && (await progreso(p)).baixados.capa === 1, "se guardó en la pestaña que la capa se descargó: " + JSON.stringify(await progreso(p)));
@@ -110,7 +110,7 @@ const p = await abre(browser, PAGINAS.capa);
   await preenche(p, DADOS);
   await descarga(p, "docx");
   const f = await estadoPanel(p);
-  marca(f.visible && /Sumário/.test(f.titulo) && f.href === "/gerador-de-sumario-abnt/?origem=folha-proximo", `folha de rosto → sugiere el sumário: "${f.titulo}" (${f.href})`);
+  marca(f.visible && /Sumário/.test(f.titulo) && f.href === "/gerador-de-sumario-abnt/#origem=folha-proximo", `folha de rosto → sugiere el sumário: "${f.titulo}" (${f.href})`);
   marca(JSON.stringify(await feitos(p)) === '["capa","folha"]', "indicador: capa y folha de rosto marcadas");
 
   // sumário → referências
@@ -118,7 +118,7 @@ const p = await abre(browser, PAGINAS.capa);
   await preenche(p, { ...DADOS, colar: "1 Introdução ..... 7\n2 Conclusão ..... 20" });
   await descarga(p, "pdf");
   const sr = await estadoPanel(p);
-  marca(sr.visible && /Escolha o tipo de fonte/.test(sr.texto) && sr.href === "/gerador-de-referencias-abnt/?origem=sumario-proximo" && sr.botonTxt === "Abrir as referências", `sumário → sugiere las referências: "${sr.texto}" (${sr.href})`);
+  marca(sr.visible && /Escolha o tipo de fonte/.test(sr.texto) && sr.href === "/gerador-de-referencias-abnt/#origem=sumario-proximo" && sr.botonTxt === "Abrir as referências", `sumário → sugiere las referências: "${sr.texto}" (${sr.href})`);
   const su = sr;
   marca(su.debajo && su.sinTapar, "en el sumário el panel no tapa los botones de descarga ni la lista");
   const lista = await p.evaluate(() => { const l = document.getElementById("listaSumario").getBoundingClientRect(), pn = document.getElementById("proximoPasso").getBoundingClientRect(); return { sinSolape: pn.top >= l.bottom }; });
@@ -130,7 +130,7 @@ const p = await abre(browser, PAGINAS.capa);
   await p.$eval("#btnAdicionar", (e) => e.click());
   await descarga(p, "pdf");
   const rf = await estadoPanel(p);
-  marca(rf.visible && /Prefere que eu formate o trabalho inteiro\?/.test(rf.texto) && rf.href === "/formatacao-abnt-tcc/?origem=referencias-proximo" && rf.botonTxt === "Conhecer o serviço", `referências → sugiere el servicio: "${rf.texto}" (${rf.href})`);
+  marca(rf.visible && /Prefere que eu formate o trabalho inteiro\?/.test(rf.texto) && rf.href === "/formatacao-abnt-tcc/#origem=referencias-proximo" && rf.botonTxt === "Conhecer o serviço", `referências → sugiere el servicio: "${rf.texto}" (${rf.href})`);
   marca(JSON.stringify(await feitos(p)) === '["capa","folha","sumario","referencias"]', "indicador: las cuatro partes marcadas");
   // el servicio recibe el origen y cambia el mensaje de WhatsApp
   await ir(p, rf.href);
@@ -161,7 +161,7 @@ for (const [baixados, pagina, espera, etiqueta] of [
   [[], PAGINAS.referencias, "/formatacao-abnt-tcc/", "referências (aunque falten las otras) → servicio"],
 ]) {
   const s = await sugiere(baixados, pagina);
-  marca(s.visible && s.href.startsWith(espera + "?origem="), `${etiqueta}: ${s.href}`);
+  marca(s.visible && s.href.startsWith(espera + "#origem="), `${etiqueta}: ${s.href}`);
 }
 { // archivo con varias piezas: marca todas las que iban dentro
   const q = await abre(browser, PAGINAS.sumario);
@@ -212,7 +212,7 @@ for (const [id, url] of Object.entries(PAGINAS)) {
       marca(r.n === 0 && r.anuncios.length >= 1, `${id} ${nombre}: sin oferta propia (el espacio queda libre para el AdSense: ${r.anuncios.join(", ")})`);
     } else {
       marca(r.n === 1 && r.slots[0] === esperado[0] && !r.anuncios.includes(esperado[0]), `${id} ${nombre}: una sola oferta propia, en el espacio ${r.slots[0]} (ya no es un espacio de anuncio vacío)`);
-      marca(r.href === `${cfg.anuncios.ofertas.formatacao.url}?origem=${id}-oferta` && r.selo === cfg.anuncios.ofertas.formatacao.selo && !r.claseAd && r.bg, `${id} ${nombre}: enlace ${r.href}, sello "${r.selo}", con el estilo del sitio (no la clase de anuncio)`);
+      marca(r.href === `${cfg.anuncios.ofertas.formatacao.url}#origem=${id}-oferta` && r.selo === cfg.anuncios.ofertas.formatacao.selo && !r.claseAd && r.bg, `${id} ${nombre}: enlace ${r.href}, sello "${r.selo}", con el estilo del sitio (no la clase de anuncio)`);
       marca(r.texto.includes("R$") && r.botH >= 44 && r.ov <= 0, `${id} ${nombre}: texto "${r.titulo}" con el precio de la configuración, botón de ${r.botH}px, sin scroll horizontal`);
       marca(r.top > (r.aviso || 0) + 150 && r.top > (r.acoes || 0) + 300 && (!r.lista || r.top > r.lista + 300), `${id} ${nombre}: lejos de los botones de descarga (${Math.round(r.top - r.acoes)}px) y de la lista del sumário`);
       marca(r.anuncios.length === Object.keys(cfg.anuncios.espacos).filter((s) => s.startsWith(id + "-")).length - 1, `${id} ${nombre}: los demás espacios (${r.anuncios.join(", ")}) siguen libres para el AdSense`);
@@ -261,7 +261,7 @@ function construye(cambia, nombre) {
 }
 fs.rmSync(tmp, { recursive: true, force: true });
 
-console.log("\n== 6) Medición: parámetro ?origem en todos los enlaces nuevos y mensajes de WhatsApp ==");
+console.log("\n== 6) Medición: parámetro #origem en todos los enlaces nuevos y mensajes de WhatsApp ==");
 {
   const q = await abre(browser, SERVICO);
   const claves = await q.evaluate(() => Object.keys(JSON.parse(document.getElementById("whatsapp-origens").textContent)));
@@ -270,9 +270,9 @@ console.log("\n== 6) Medición: parámetro ?origem en todos los enlaces nuevos y
   await q.close();
   for (const [id] of Object.entries(PAGINAS)) {
     for (const comp of ["percurso", "oferta"]) {
-      const z = await abre(browser, SERVICO + `?origem=${id}-${comp}`);
+      const z = await abre(browser, SERVICO + `#origem=${id}-${comp}`);
       const txt = await z.evaluate(() => decodeURIComponent(document.querySelector("a[data-whatsapp]").getAttribute("href")));
-      marca(txt.includes(`(${cfg.servico.origens.paginas[id]} · ${cfg.servico.origens.componentes[comp]})`), `?origem=${id}-${comp} → WhatsApp: "...(${cfg.servico.origens.paginas[id]} · ${cfg.servico.origens.componentes[comp]})..."`);
+      marca(txt.includes(`(${cfg.servico.origens.paginas[id]} · ${cfg.servico.origens.componentes[comp]})`), `#origem=${id}-${comp} → WhatsApp: "...(${cfg.servico.origens.paginas[id]} · ${cfg.servico.origens.componentes[comp]})..."`);
       await z.close();
     }
   }
@@ -280,7 +280,7 @@ console.log("\n== 6) Medición: parámetro ?origem en todos los enlaces nuevos y
   for (const [id, url] of Object.entries(PAGINAS)) {
     const z = await abre(browser, url);
     const links = await z.evaluate(() => [...document.querySelectorAll(".percurso a, .oferta a, .hero-aviso a, .convite-servico a")].map((a) => a.getAttribute("href")));
-    marca(links.length >= 3 && links.every((h) => /[?]origem=[a-z]+(-[a-z]+)?$/.test(h)), `${id}: todos los enlaces nuevos (${links.length}) llevan ?origem=... → ${[...new Set(links.map((h) => h.split("?")[1]))].join(", ")}`);
+    marca(links.length >= 3 && links.every((h) => /[#]origem=[a-z]+(-[a-z]+)?$/.test(h)), `${id}: todos los enlaces nuevos (${links.length}) llevan #origem=... → ${[...new Set(links.map((h) => h.split("#")[1]))].join(", ")}`);
     await z.close();
   }
 }

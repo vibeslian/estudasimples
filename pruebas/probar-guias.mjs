@@ -106,7 +106,7 @@ marca(malos.length === 0, `todos los enlaces internos y anclas funcionan${malos.
 console.log("\n== A5) Guía ↔ herramienta, relacionadas y fuentes ==");
 for (const g of guias) {
   const h = html[`/guias/${g.slug}/`] || "";
-  marca(h.includes(`href="${g.ferramenta.url}?origem=guia-${g.slug}"`), `${g.slug}: el botón lleva a ${g.ferramenta.url} con ?origem=guia-${g.slug}`);
+  marca(h.includes(`href="${g.ferramenta.url}#origem=guia-${g.slug}"`), `${g.slug}: el botón lleva a ${g.ferramenta.url} con #origem=guia-${g.slug}`);
   const rel = g.relacionadas;
   marca(rel.length >= 2 && rel.length <= 3 && rel.every((r) => r !== g.slug && guias.some((x) => x.slug === r) && h.includes(`href="/guias/${r}/"`)), `${g.slug}: ${rel.length} guías relacionadas, todas existen y están enlazadas`);
   const fuentes = [...h.matchAll(/<a [^>]*href="(https?:\/\/[^"]+)"[^>]*>/g)].filter((m) => !m[0].includes("estudasimples") && !/wa\.me/.test(m[1]));

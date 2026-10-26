@@ -12,3 +12,6 @@ pruebas/*.log
 .DS_Store
 Thumbs.db
 .claude/
+
+# Kit TCC: archivos generados (producto de pago, nunca se publican con el sitio)
+kit-tcc/salida/

@@ -59,7 +59,7 @@ export function mostraProximo(atualId) {
   painel.querySelector(".proximo-texto").textContent = alvo.convite;
   const botao = painel.querySelector(".proximo-botao");
   botao.textContent = alvo.botao;
-  botao.href = `${alvo.url}?origem=${atualId}-proximo`;
+  botao.href = `${alvo.url}#origem=${atualId}-proximo`;
   painel.hidden = false;
 }
 

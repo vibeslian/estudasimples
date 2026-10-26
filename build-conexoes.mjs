@@ -60,7 +60,7 @@ export function preparaConexoes(config, adsense) {
         <p class="oferta-selo">${esc(o.selo)}</p>
         <p class="oferta-titulo">${esc(t.titulo)}</p>
         <p class="oferta-texto">${esc(t.texto)}</p>
-        <a class="btn btn-acento oferta-botao" href="${o.url}?origem=${pagina}-oferta">${esc(o.botao)}</a>
+        <a class="btn btn-acento oferta-botao" href="${o.url}#origem=${pagina}-oferta">${esc(o.botao)}</a>
       </aside>`;
     }
     const extra = slot.endsWith("abaixo-da-ferramenta") ? " anuncio--separado" : slot.endsWith("lateral") ? " anuncio--lateral" : "";
@@ -79,7 +79,7 @@ export function preparaConexoes(config, adsense) {
       const etiqueta = it.etiqueta ? `<span class="percurso-etiqueta">${esc(it.etiqueta)}</span><span class="sr-only"> (serviço pago, não é obrigatório)</span>` : "";
       const miolo = `<span class="percurso-num" data-n="${i + 1}" aria-hidden="true">${i + 1}</span><span class="percurso-texto"><span class="percurso-nome">${esc(it.nome)}</span>${etiqueta}</span><span class="sr-only percurso-estado"></span>`;
       if (it.id === pagina) return `<li class="${classe}" data-passo="${it.id}"><span class="percurso-item" aria-current="step">${miolo}<span class="percurso-dica">Você está aqui</span></span></li>`;
-      return `<li class="${classe}" data-passo="${it.id}"><a class="percurso-item" href="${it.url}?origem=${pagina || "servico"}-percurso">${miolo}</a></li>`;
+      return `<li class="${classe}" data-passo="${it.id}"><a class="percurso-item" href="${it.url}#origem=${pagina || "servico"}-percurso">${miolo}</a></li>`;
     }).join("\n        ");
     return `<nav class="percurso" aria-label="${esc(per.titulo)}">
       <p class="percurso-titulo">${esc(per.titulo)}</p>
