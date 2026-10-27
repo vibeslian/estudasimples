@@ -33,7 +33,7 @@ Para refazer os arquivos: `powershell -ExecutionPolicy Bypass -File kit-tccgener
 
 ## Pendências antes de ligar (não dependem de código)
 - Contador: se o MEI pode vender produto digital (CNAE) e como emitir nota. Lian conversa com o contador.
-- Criar o produto na Hotmart (categoria, arquivo, preço R$ 29,90, garantia) e pegar o link de compra. Confirmar se a Hotmart aceita o ZIP (se não, subir os 4 arquivos soltos) e como é o e-mail de entrega: a FAQ diz que a Hotmart libera o acesso depois do pagamento aprovado.
+- **Hotmart (28/10/2026):** o produto está criado e aprovado (Curso Online, ID 8821443, R$ 29,90, garantia de 7 dias). O formato «eBook» da Hotmart só aceita PDF, ePub e planilhas (nem .docx nem .zip), por isso o kit é um «Curso Online» com os 4 arquivos como material extra de uma aula (a Hotmart Club aceita docx e zip). O link de compra já está em `kit.urlCompra`. **As vendas na Hotmart estão PAUSADAS** (interruptor «Ativar vendas» no cabeçalho do produto): para lançar, ligue o kit no site e ative as vendas na Hotmart, as duas coisas juntas. Falta confirmar na primeira compra como a Hotmart entrega (a FAQ diz que o comprador recebe o acesso pela Hotmart depois do pagamento aprovado).
 - Revisão jurídica dos textos (um advogado amigo de Lian; fica para depois).
 
 ## Provas
