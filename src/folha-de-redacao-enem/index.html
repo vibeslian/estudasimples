@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  {{include:head-common}}
+  <title>Folha de redação do ENEM para imprimir, PDF grátis | {{SITE_NAME}}</title>
+  <meta name="description" content="Imprima uma folha de treino com 30 linhas para praticar a redação do ENEM à mão. Escolha quantas folhas, baixe o PDF ou imprima. Grátis e sem cadastro.">
+  <link rel="canonical" href="{{SITE_URL}}/folha-de-redacao-enem/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="{{SITE_NAME}}">
+  <meta property="og:title" content="Folha de redação do ENEM para imprimir, grátis">
+  <meta property="og:description" content="Folha de treino com 30 linhas para escrever à mão. Baixe o PDF ou imprima, sem cadastro.">
+  <meta property="og:url" content="{{SITE_URL}}/folha-de-redacao-enem/">
+  <link rel="stylesheet" href="/assets/css/enem.css?v={{BUILD}}">
+  <link rel="stylesheet" href="/assets/css/folha.css?v={{BUILD}}">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Folha de redação do ENEM para imprimir – {{SITE_NAME}}","url":"{{SITE_URL}}/folha-de-redacao-enem/","applicationCategory":"EducationalApplication","operatingSystem":"Qualquer navegador","inLanguage":"pt-BR","offers":{"@type":"Offer","price":"0","priceCurrency":"BRL"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"{{SITE_NAME}}","item":"{{SITE_URL}}/"},{"@type":"ListItem","position":2,"name":"Folha de redação do ENEM","item":"{{SITE_URL}}/folha-de-redacao-enem/"}]}</script>
+  {{FAQ_JSONLD:folha-enem}}
+</head>
+<body data-modo="enem-folha">
+<div class="hero hero--compacto">
+  {{include:manchas}}
+  {{include:header}}
+  <div class="container hero-conteudo">
+    <h1>Folha de redação do ENEM para imprimir</h1>
+    <p class="lead">Uma folha de treino com 30 linhas para você escrever à mão e ter uma ideia do tamanho do seu texto. Grátis, sem cadastro, e nada é enviado: o PDF é feito no seu navegador.</p>
+  </div>
+</div>
+
+<main class="container enem" id="conteudo">
+  <div class="enem-grid enem-grid--folha">
+
+    <form class="cartao enem-form" id="form" autocomplete="off" novalidate>
+      <h2>Monte a sua folha</h2>
+
+      <fieldset class="campo grupo-opcoes opcoes-folhas">
+        <legend>Quantas folhas?</legend>
+        <label class="opcao"><input type="radio" name="qtd" value="1" checked><span>1</span></label>
+        <label class="opcao"><input type="radio" name="qtd" value="3"><span>3</span></label>
+        <label class="opcao"><input type="radio" name="qtd" value="5"><span>5</span></label>
+        <label class="opcao"><input type="radio" name="qtd" value="10"><span>10</span></label>
+      </fieldset>
+
+      <fieldset class="campo grupo-opcoes opcoes-areas">
+        <legend>O que entra na folha</legend>
+        <label class="opcao"><input type="checkbox" id="optNumeros" checked><span>Numerar as linhas de 1 a 30</span></label>
+        <label class="opcao"><input type="checkbox" id="optCabecalho" checked><span>Campos de nome e tema no alto</span></label>
+        <label class="opcao"><input type="checkbox" id="optClara"><span>Linhas mais claras (gasta menos tinta)</span></label>
+      </fieldset>
+
+      <div class="botoes folha-botoes so-js">
+        <button type="button" class="btn btn-acento" id="baixar" style="min-height: 56px">Baixar PDF</button>
+        <button type="button" class="btn" id="imprimir" style="min-height: 56px">Imprimir</button>
+      </div>
+      <p class="dica-campo folha-status" id="status" role="status" aria-live="polite"></p>
+      <noscript><p class="erro-campo">Esta ferramenta precisa de JavaScript para gerar o PDF. Ative o JavaScript no navegador e recarregue a página.</p></noscript>
+
+      <p class="dica-minimo" style="margin-top: 16px"><strong>É uma folha de treino.</strong> Não é a folha oficial do Inep: a oficial você recebe no dia da prova. Aqui o objetivo é praticar o tamanho do texto.</p>
+      <p class="enem-privado"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>O PDF é feito no seu aparelho. Nada é enviado nem guardado.</p>
+    </form>
+
+    <figure class="folha-previa" aria-label="Pré-visualização da folha de treino">
+      <div class="folha-previa-sombra"><div class="folha-previa-caixa">
+        <div class="fo" id="folha" aria-hidden="true">
+          <div class="fo-topo"><span class="fo-tit">Folha de treino · Redação ENEM</span><span class="fo-num"></span></div>
+          <div class="fo-ident"><span>Nome:</span><span>Tema:</span></div>
+          <div class="fo-linhas"><i><b>1</b></i><i><b>2</b></i><i><b>3</b></i><i><b>4</b></i><i><b>5</b></i><i><b>6</b></i><i><b>7</b></i><i><b>8</b></i><i><b>9</b></i><i><b>10</b></i><i><b>11</b></i><i><b>12</b></i><i><b>13</b></i><i><b>14</b></i><i><b>15</b></i><i><b>16</b></i><i><b>17</b></i><i><b>18</b></i><i><b>19</b></i><i><b>20</b></i><i><b>21</b></i><i><b>22</b></i><i><b>23</b></i><i><b>24</b></i><i><b>25</b></i><i><b>26</b></i><i><b>27</b></i><i><b>28</b></i><i><b>29</b></i><i><b>30</b></i></div>
+          <div class="fo-rodape"><span>estudasimples.com.br · folha de treino</span><span>Não é a folha oficial do Inep</span></div>
+        </div>
+      </div></div>
+      <figcaption>Pré-visualização da folha, em tamanho reduzido.</figcaption>
+    </figure>
+  </div>
+</main>
+
+<div class="container">
+  <article class="artigo" style="padding-block: 24px 48px">
+    {{include:veja-tambem-folha}}
+    <section id="como">
+      <h2 class="revelar">Como usar em 3 passos</h2>
+      <ol class="enem-passos revelar">
+        <li><span class="n" aria-hidden="true">1</span><p><strong>Imprima em A4.</strong> Baixe o PDF e imprima em tamanho real (100 %), sem «ajustar à página», para as linhas saírem do tamanho certo.</p></li>
+        <li><span class="n" aria-hidden="true">2</span><p><strong>Escreva à mão.</strong> A redação do ENEM tem no máximo 30 linhas. Treinar com a sua letra dá uma ideia do tamanho do seu texto, mesmo que a folha oficial tenha medidas diferentes.</p></li>
+        <li><span class="n" aria-hidden="true">3</span><p><strong>Confira no contador.</strong> Digitou o texto? Cole no <a href="/contador-de-linhas-enem/#origem=folha-passos">contador de linhas</a> e veja a estimativa para a folha de 30 linhas.</p></li>
+      </ol>
+    </section>
+
+    <section id="perguntas-frequentes">
+      <h2 class="revelar">Perguntas frequentes sobre a folha</h2>
+      {{FAQ_HTML:folha-enem}}
+    </section>
+
+    {{GUIAS_DA_FERRAMENTA:folha-treino}}
+
+    <section id="fontes" class="artigo-meta">
+      <p>Atualizado em 26 de outubro de 2026. Esta é uma folha de treino feita pelo Estuda Simples: o tamanho das linhas e da letra da folha oficial do ENEM não é copiado aqui. O limite de 30 linhas e as regras de tamanho vêm da Cartilha do Participante do Inep, que deve ser conferida no ano da sua prova. O Estuda Simples não tem ligação com o Inep nem com o MEC.</p>
+    </section>
+  </article>
+</div>
+<div id="folhasImpressas" aria-hidden="true"></div>
+<script type="application/json" id="percurso-dados">{{PERCURSO_DADOS}}</script>
+<script type="module" src="/assets/js/progresso.js"></script>
+{{include:footer}}
+<script type="module" src="/assets/js/enem/folha.js?v={{BUILD}}"></script>
+</body>
+</html>

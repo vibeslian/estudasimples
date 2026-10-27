@@ -1284,7 +1284,8 @@
     "lead": "O limite da folha, o piso de 8 linhas para não zerar por tamanho, as linhas que não contam e se o título conta.",
     "resumoIndice": "Até 30 linhas na folha, mínimo de 8 para não zerar por tamanho, trechos copiados e o título, que conta como linha.",
     "ferramentas": [
-      "contador"
+      "contador",
+      "folha-treino"
     ],
     "ferramenta": {
       "nome": "Contador de linhas da redação",

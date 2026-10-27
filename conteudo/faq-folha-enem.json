@@ -1,0 +1,32 @@
+[
+  {
+    "p": "Esta é a folha oficial do ENEM?",
+    "r": [
+      "Não. É uma folha de treino com 30 linhas, feita para você praticar o tamanho do texto. A folha oficial é entregue pelo Inep no dia da prova."
+    ]
+  },
+  {
+    "p": "Como imprimir para as linhas saírem do tamanho certo?",
+    "r": [
+      "Imprima em papel A4, em tamanho real (100 %), e não use «ajustar à página» nem «reduzir para caber». Se a impressora encolher a folha, as linhas ficam menores do que no PDF."
+    ]
+  },
+  {
+    "p": "Quantas linhas pode ter a redação do ENEM?",
+    "r": [
+      "A folha da prova tem 30 linhas e o texto precisa caber nelas. Pela Cartilha do Participante do Inep, texto com até 7 linhas escritas é considerado insuficiente e recebe nota zero. Veja o guia <a href=\"/guias/quantas-linhas-tem-a-redacao-do-enem/#origem=faq-folha\">quantas linhas tem a redação do ENEM</a>. Confira sempre a cartilha do ano da sua prova."
+    ]
+  },
+  {
+    "p": "Posso usar inteligência artificial para escrever a redação?",
+    "r": [
+      "Na prova, o texto da redação é seu e é feito no local de aplicação. As regras sobre aparelhos e ajuda estão no edital do ano, que você deve conferir. Por isso vale treinar escrevendo à mão nesta folha, com o seu ritmo e a sua letra. Usar uma ferramenta de IA para pedir sugestões depois de escrever pode ajudar a estudar, mas o texto que você entrega tem de ser o seu."
+    ]
+  },
+  {
+    "p": "Meus dados são enviados para algum lugar?",
+    "r": [
+      "Não. O PDF é feito no seu aparelho, e a página não envia nem guarda nada do que você escolhe."
+    ]
+  }
+]

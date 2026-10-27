@@ -1,0 +1,51 @@
+/* Folha de redação do ENEM para imprimir. Só esta página carrega este arquivo (o @page abaixo não afeta as outras impressões do site).
+   A folha (.fo) é desenhada em milímetros: 1em = --mm. Na tela --mm encolhe a folha para caber; na impressão --mm vale 1mm de verdade. */
+
+.enem-grid--folha { gap: 28px; }
+@media (min-width: 900px) { .enem-grid--folha { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; } }
+
+.opcoes-folhas { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.opcoes-folhas .opcao span { font-size: 1.1rem; }
+.opcoes-folhas .opcao input:checked + span::before { content: "\2713\00a0"; font-weight: 800; }
+.enem-grid--folha .enem-form h2 { margin-bottom: 14px; }
+.enem-grid--folha .grupo-opcoes { margin-bottom: 20px; }
+.folha-botoes { margin-top: 4px; }
+.so-js { display: none !important; }
+.js .so-js { display: flex !important; }
+.folha-status { min-height: 1.5em; margin: 10px 0 0; font-weight: 600; color: var(--principal-escuro); }
+.folha-status[data-estado="erro"] { color: var(--erro-texto); }
+
+/* pré-visualização: a folha A4 encolhida (proporção 210 x 297, altura reservada para a página não dar saltos) */
+.folha-previa { margin: 0; display: grid; justify-items: center; gap: 12px; min-width: 0; }
+.folha-previa-sombra { position: relative; width: min(100%, 440px); }
+.folha-previa-sombra::before { content: ""; position: absolute; inset: 10px -10px -10px 10px; background: var(--salvia-100); border: 1px solid var(--salvia-200); border-radius: 6px; }
+.folha-previa-caixa { position: relative; width: 100%; aspect-ratio: 210 / 297; container-type: inline-size; background: #fdfcf9; border: 1px solid var(--salvia-200); border-radius: 6px; box-shadow: var(--sombra-forte); overflow: hidden; }
+.folha-previa figcaption { font-size: .9rem; color: var(--texto-suave); text-align: center; }
+
+.fo { --mm: 1.9px; --linha: #9db5a3; --margem: #f0a08c; font-size: var(--mm); line-height: 1; width: 210em; height: 297em; box-sizing: border-box; padding: 15em 15em 12em 19em; display: flex; flex-direction: column; background: #fdfcf9; color: var(--texto); font-family: var(--fonte-texto, Arial, Helvetica, sans-serif); }
+@supports (width: 1cqw) { .folha-previa-caixa .fo { --mm: calc(100cqw / 210); } }
+.fo-topo { height: 8em; display: flex; align-items: flex-start; justify-content: space-between; margin-left: -1em; }
+.fo-tit { font-family: var(--fonte-titulo, inherit); font-weight: 800; font-size: calc(4.2 * var(--mm)); color: var(--principal); }
+.fo-num { font-size: calc(3 * var(--mm)); color: var(--texto-suave); padding-top: calc(.6 * var(--mm)); }
+/* nesta linha o font-size muda (3,2 mm): por isso as medidas usam var(--mm) e não em */
+.fo-ident { height: calc(12 * var(--mm)); box-sizing: border-box; padding-bottom: calc(3 * var(--mm)); display: flex; gap: calc(6 * var(--mm)); align-items: flex-end; font-size: calc(3.2 * var(--mm)); color: var(--texto-suave); }
+.fo-ident span { flex: 1; padding-bottom: calc(.8 * var(--mm)); border-bottom: calc(.25 * var(--mm)) solid #6f8277; }
+.fo-ident span:last-child { flex: 1.5; }
+.fo-linhas { flex: none; position: relative; border-left: .6em solid var(--margem); }
+.fo-linhas i { display: block; font-style: normal; position: relative; height: 8em; box-sizing: border-box; border-bottom: .25em solid var(--linha); }
+.fo-linhas b { position: absolute; right: 100%; bottom: var(--mm); margin-right: calc(2 * var(--mm)); font-size: calc(2.8 * var(--mm)); font-weight: 600; color: #66736b; }
+.fo-rodape { margin-top: auto; display: flex; justify-content: space-between; font-size: calc(2.6 * var(--mm)); color: #66736b; }
+.fo--sem-numeros .fo-linhas b { display: none; }
+.fo--sem-cabecalho .fo-ident { visibility: hidden; }
+.fo--clara { --linha: #cdd9cf; --margem: #f5c4b6; }
+
+/* impressão: só as folhas, uma por página A4, em tamanho real */
+#folhasImpressas { display: none; }
+@media print {
+  @page { size: A4; margin: 0; }
+  body > *:not(#folhasImpressas) { display: none !important; }
+  html, body { margin: 0 !important; padding: 0 !important; background: #fff !important; }
+  #folhasImpressas { display: block !important; }
+  #folhasImpressas .fo { --mm: 1mm; width: 210mm; height: 296mm; overflow: hidden; background: #fff; break-after: page; page-break-after: always; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  #folhasImpressas .fo:last-child { break-after: auto; page-break-after: auto; }
+}

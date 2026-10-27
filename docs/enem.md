@@ -1,12 +1,13 @@
 # Ferramentas do ENEM e da escola (Fase 3)
 
-Três ferramentas gratuitas, sem cadastro e sem enviar nada: tudo roda no navegador.
+Quatro ferramentas gratuitas, sem cadastro e sem enviar nada: tudo roda no navegador.
 
 | Ferramenta | URL | Arquivos |
 |---|---|---|
 | Contador de linhas da redação | `/contador-de-linhas-enem/` | `src/contador-de-linhas-enem/index.html`, `src/assets/js/enem/contador.js`, `conteudo/faq-contador-enem.json` |
 | Cronograma de estudos | `/cronograma-de-estudos-enem/` | `src/cronograma-de-estudos-enem/index.html`, `src/assets/js/enem/cronograma.js`, `conteudo/faq-cronograma-enem.json` |
 | Calculadora de média | `/calculadora-de-media/` | `src/calculadora-de-media/index.html`, `src/assets/js/enem/media.js`, `conteudo/faq-media.json` |
+| Folha de redação para imprimir (26/10/2026) | `/folha-de-redacao-enem/` | `src/folha-de-redacao-enem/index.html`, `src/assets/js/enem/folha.js`, `src/assets/css/folha.css`, `conteudo/faq-folha-enem.json`, `src/partials/veja-tambem-folha.html` |
 
 Comum: `src/assets/css/enem.css` (só estas páginas), `src/assets/js/enem/calculos.js` (todas as contas, sem DOM, testável no Node). Os cartões da portada (`.enem-cartao`) estão em `components.css`. O desenho veio do lienzo de Design aprovado por Lian em 22/10/2026 («caderno pautado»: folha com linhas e margem coral).
 
@@ -31,3 +32,11 @@ Nada é enviado. O texto da redação e as notas **não são guardados**. Só fi
 - `node pruebas/probar-enem-calculos.mjs`: contas (74 comprobaciones, sem navegador).
 - `node pruebas/probar-enem.mjs`: as 3 páginas no navegador (funções, privacidade/rede, impressão, axe, CLS, 320/375/768/1366 px, alvos de 44 px).
 - `node pruebas/capturas-enem.mjs`: capturas em `capturas/auditoria/enem-*.png`.
+
+## Folha de redação para imprimir (26/10/2026)
+- Desenho aprovado por Lian em 26/10/2026 (lienzo de Design: computador, celular e a folha A4). Folha de **treino**: não é a folha oficial do Inep e não copia o tamanho das linhas da oficial (o texto diz isso na página e no rodapé do PDF).
+- Opções: 1, 3, 5 ou 10 folhas; numerar de 1 a 30; campos de nome e tema; linhas mais claras. **Nada é guardado** (nem no navegador) nem enviado.
+- Medidas em milímetros, em dois lugares que precisam ficar iguais: `MEDIDAS` em `folha.js` (PDF com jsPDF, carregado de `/assets/js/vendor/`) e as `em` de `folha.css` (1em = 1 mm na impressão). Margens 19/15/15/12 mm, 30 linhas de 8 mm.
+- Imprimir: o JS clona a folha N vezes em `#folhasImpressas`; `folha.css` (só esta página) tem o `@page { size: A4; margin: 0 }` e esconde o resto do site na impressão.
+- A FAQ responde também «posso usar IA para escrever a redação?» (no dia da prova não; treinar à mão; confira o edital do ano).
+- Teste: `node probar-folha-enem.mjs` (117 comprobaciones, incluida la comparação em mm entre PDF e impressão: PDF baixado e lido com pdf.js, impressão com `page.pdf`, medidas em mm, privacidade, 320/375/768/1366 px, axe, CLS, teclado, sem JavaScript). Capturas: `node capturas-folha-enem.mjs`.
