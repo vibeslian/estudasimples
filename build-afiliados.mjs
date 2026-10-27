@@ -14,7 +14,8 @@ const ehAmazon = (host) => /(^|\.)amazon\.[a-z.]+$/.test(host) || /^amzn\./.test
 const ehHotmart = (host) => /(^|\.)hotmart\.com$/.test(host) || host === "hotm.art";
 const amazonCompleta = (host) => /(^|\.)amazon\.[a-z.]+$/.test(host); // só estes aceitam ?tag=
 
-export function preparaAfiliados(config, guias) {
+// numTermos: número da seção «Links de afiliado» nos Termos de Uso (12; passa a 13 quando o Kit TCC ganha a seção 11 e a «Lei aplicável» vai para 12)
+export function preparaAfiliados(config, guias, { numTermos = 12 } = {}) {
   const a = config.afiliados;
   if (!a) throw new Error("site.config.json: falta o bloco afiliados");
   const ativo = a.ativo === true;
@@ -91,7 +92,7 @@ export function preparaAfiliados(config, guias) {
   const frase = algumAmazon ? `\n    <p>${FRASE_AMAZON}</p>` : "";
   const termos = !algumVisivel ? "" : `
 
-    <h2 id="links-de-afiliado">12. Links de afiliado</h2>
+    <h2 id="links-de-afiliado">${numTermos}. Links de afiliado</h2>
     <p>Algumas guias têm a seção "Recomendado para o seu trabalho", com livros e cursos que podem ajudar na hora de fazer o trabalho. Os links dessa seção são <strong>links de afiliado</strong>: se você comprar depois de clicar neles, o ${nome} pode receber uma pequena comissão, e o preço para você não muda. Esses links aparecem sempre com a etiqueta "Link de afiliado".</p>
     <p>Escolho os livros e os cursos por tratarem do assunto de cada guia, e não pelo valor da comissão. Mesmo assim, não controlo as lojas: preço, estoque, entrega e atendimento são com quem vende. Confira os dados do produto na loja antes de comprar.</p>${frase}`;
   const privacidade = !algumVisivel ? "" : `
@@ -107,7 +108,7 @@ export function preparaAfiliados(config, guias) {
   const promessaHome = !algumVisivel ? "" : `<li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Links de afiliado vêm sempre marcados com «Link de afiliado».</span></li>`;
   const sobre = !algumVisivel ? "" : `
     <p>Algumas guias trazem links de afiliado (livros e cursos). Se você comprar por eles, o site pode receber uma pequena comissão, sem custo extra para você, e esses links vêm sempre marcados com «Link de afiliado».</p>`;
-  const termos9 = !algumVisivel ? "" : `\n    <p>Hoje, algumas guias já têm links de afiliado para livros e cursos: eles rendem uma comissão ao site, sem custo a mais para você, e vêm sempre com a etiqueta "Link de afiliado". Veja a seção 12.</p>`;
+  const termos9 = !algumVisivel ? "" : `\n    <p>Hoje, algumas guias já têm links de afiliado para livros e cursos: eles rendem uma comissão ao site, sem custo a mais para você, e vêm sempre com a etiqueta "Link de afiliado". Veja a seção ${numTermos}.</p>`;
 
   return {
     ativo,

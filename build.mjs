@@ -9,6 +9,7 @@ import { preparaConexoes, mensagensWhatsapp } from "./build-conexoes.mjs";
 import { carregaGuias, preparaGuias, dataLonga } from "./build-guias.mjs";
 import { montaFormulariosReferencias } from "./build-referencias.mjs";
 import { preparaAnuncie, URL_ANUNCIE } from "./build-anuncie.mjs";
+import { preparaKit } from "./build-kit.mjs";
 import { preparaAfiliados } from "./build-afiliados.mjs";
 import { preparaAdsense } from "./build-adsense.mjs";
 
@@ -39,7 +40,8 @@ const cssGlobal = CSS_GLOBAL.map((n) => readFileSync(join(cssDir, n + ".css"), "
 const sv = config.servico;
 const guiasLista = carregaGuias(); // conteudo/guias.json (Etapa 10)
 const anuncie = preparaAnuncie(config, guiasLista); // página /anuncie/ (escondida enquanto anuncie.ativo for false) e cartão "Parceiro recomendado"
-const afiliados = preparaAfiliados(config, guiasLista); // "Recomendado para o seu trabalho" (apagado enquanto afiliados.ativo for false)
+const kit = preparaKit(config); // Kit TCC, produto pago na Hotmart (a página /kit-tcc/ nem existe enquanto kit.ativo for false)
+const afiliados = preparaAfiliados(config, guiasLista, { numTermos: kit.ativo ? 13 : 12 }); // "Recomendado para o seu trabalho" (apagado enquanto afiliados.ativo for false)
 const gb = preparaGuias(config, guiasLista, anuncie.parceiroDaGuia, afiliados.daGuia);
 const mensagens = { ...gb.mensagens(sv.modeloMensagem), ...mensagensWhatsapp(sv) }; // guia-<slug>, as de site.config.json e as de página-componente (capa-proximo...)
 const adsense = preparaAdsense(config); // Google AdSense (apagado enquanto anuncios.adsenseAtivo for false; o ads.txt e a etiqueta de verificação existem sempre)
@@ -77,9 +79,10 @@ const values = {
   ...anuncie.valores,
   ...afiliados.valores,
   ...adsense.valores,
+  ...kit.valores,
 };
-// "Última atualização" dos Termos e da Política: a mais recente entre os links de afiliado (se há produtos à mostra) e o AdSense (se ligado)
-const datasLegais = [afiliados.visiveis > 0 ? config.afiliados.legalAtualizadoEm : null, adsense.legalAtualizadoEm].filter(Boolean).sort();
+// "Última atualização" dos Termos e da Política: a mais recente entre os links de afiliado (se há produtos à mostra), o AdSense (se ligado) e o Kit TCC (se ligado)
+const datasLegais = [afiliados.visiveis > 0 ? config.afiliados.legalAtualizadoEm : null, adsense.legalAtualizadoEm, kit.legalAtualizadoEm].filter(Boolean).sort();
 if (datasLegais.length) values["{{LEGAL_ATUALIZADO}}"] = dataLonga(datasLegais[datasLegais.length - 1]);
 
 const TEXT_EXT = new Set([".html", ".css", ".js", ".json", ".xml", ".txt", ".svg", ".webmanifest"]);
@@ -125,6 +128,7 @@ function render(text, origem = "servico", rel = "") {
   // fragmentos compartilhados: {{include:header}} -> src/partials/header.html (duas passadas: eles podem incluir outros)
   for (let i = 0; i < 2; i++) text = text.replace(/\{\{include:([\w-]+)\}\}/g, (_, name) => readFileSync(join(SRC, "partials", name + ".html"), "utf8"));
   text = adsense.marcas(text); // <!--ADS:OFF--> / <!--ADS:ON-->: textos que mudam quando o AdSense é ligado
+  text = kit.marcas(text); // <!--KIT:OFF--> / <!--KIT:ON-->: textos que mudam quando o Kit TCC é ligado
   for (const [key, val] of Object.entries({ ...values, "{{ORIGEM}}": origem })) text = text.split(key).join(val);
   // nos dados estruturados o "R$ 80" leva espaço comum (na página fica o espaço sem quebra)
   text = text.replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/g, (m) => m.replace(/\u00a0/g, " "));
@@ -141,6 +145,7 @@ for (const file of walk(SRC)) {
   const privada = partes.some((p, i) => i < partes.length - 1 && p.startsWith("_")); // pastas _algo = só desenvolvimento
   if (privada && !DEV) continue;
   if (rel === join("assets", "js", "anuncios.js") && !adsense.ativo) continue; // aviso de cookies: só existe com o AdSense ligado
+  if (!kit.ativo && (partes[0] === "kit-tcc" || rel === join("assets", "css", "kit.css") || (partes[0] === "assets" && partes[1] === "img" && partes[2] === "kit"))) continue; // Kit TCC apagado: nada dele vai para o site
   if (partes[0] === "assets" && partes[1] === "css" && CSS_GLOBAL.includes(partes[2].replace(".css", ""))) continue; // já vão no site.css
 
   const dest = join(OUT, rel);

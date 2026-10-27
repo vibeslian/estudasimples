@@ -1,0 +1,38 @@
+[
+  {
+    "p": "Preciso do Word?",
+    "r": [
+      "Sim. O modelo foi feito e conferido no Word, e deve funcionar no Word 2016 ou mais novo. Em outros programas, como o Google Docs, o sumário automático e a numeração por seções podem se comportar de outro jeito, e o modelo não foi testado no Google Docs."
+    ]
+  },
+  {
+    "p": "O modelo serve para a minha faculdade?",
+    "r": [
+      "O modelo segue a ABNT NBR 14724:2024. Cada instituição pode ter um manual próprio (capa, resumo, ficha catalográfica). Se o seu pedir outra coisa, você altera o estilo correspondente e o documento todo muda junto. Quando houver diferença, siga o manual da sua instituição."
+    ]
+  },
+  {
+    "p": "Como eu recebo o kit?",
+    "r": [
+      "A compra e o pagamento são feitos na Hotmart. Depois que o pagamento é aprovado, você recebe pela Hotmart o acesso para baixar os arquivos: o modelo em Word, o guia rápido, o checklist e o exemplo em PDF."
+    ]
+  },
+  {
+    "p": "E se eu não gostar do kit?",
+    "r": [
+      "Você tem {{KIT_GARANTIA}} dias, a contar da compra, para pedir o reembolso pela Hotmart. Isso não afasta os direitos que o Código de Defesa do Consumidor garante a você. Os detalhes estão nos <a href=\"/termos-de-uso/#kit-tcc\">Termos de Uso</a>."
+    ]
+  },
+  {
+    "p": "O kit detecta ou esconde texto de inteligência artificial?",
+    "r": [
+      "Não. O kit cuida da formatação e traz um checklist para conferir fontes, citações e o seu próprio texto. Ele não detecta texto de IA, não esconde que um texto foi feito com IA e não garante nota ou aprovação. Se você usou IA, confira a regra da sua instituição."
+    ]
+  },
+  {
+    "p": "Posso usar o modelo em mais de um trabalho? E revender?",
+    "r": [
+      "Você pode usar o modelo nos seus trabalhos. Não é permitido revender, distribuir ou publicar os arquivos do kit."
+    ]
+  }
+]

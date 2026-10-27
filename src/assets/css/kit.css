@@ -1,0 +1,80 @@
+/* Página do Kit TCC (/kit-tcc/). Cores e fontes vêm de tokens.css. Só é publicada com kit.ativo = true (ver build-kit.mjs). */
+
+/* colagem de páginas no herói (aparece também no celular) */
+.hero .kit-colagem { display: block; position: relative; width: min(100%, 300px); height: 350px; margin: 8px auto 0; }
+@media (min-width: 900px) { .hero .kit-colagem { width: 320px; height: 400px; margin: 0; } }
+.kit-pg { position: absolute; width: 56%; height: auto; border: 1px solid var(--salvia-200); border-radius: 6px; background: #fff; box-shadow: var(--sombra-forte); }
+.kit-pg--a { left: 0; top: 14%; transform: rotate(-4deg); }
+.kit-pg--b { right: 0; top: 0; width: 58%; transform: rotate(3deg); }
+.kit-pg--c { left: 22%; top: 40%; width: 54%; transform: rotate(-1deg); box-shadow: 0 20px 44px rgba(34, 54, 43, .22); }
+
+/* o que vem no kit */
+.kit-itens { display: grid; gap: 16px; margin: 0; padding: 0; list-style: none; }
+@media (min-width: 640px) { .kit-itens { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1060px) { .kit-itens { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; } }
+.kit-itens .cartao { padding: 24px; }
+.kit-itens h3 { margin: 14px 0 6px; font-size: 1.2rem; }
+.kit-itens p { margin: 0; line-height: 1.55; color: var(--texto-suave); }
+.kit-icone { display: inline-grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; background: var(--salvia-100); color: var(--principal); }
+
+/* tabela gratuito x kit */
+.kit-tabela-caixa { overflow-x: auto; background: var(--superficie); border: 1px solid var(--salvia-200); border-radius: var(--raio); }
+.kit-tabela-caixa:focus-visible { outline: 3px solid var(--principal); outline-offset: 2px; }
+.kit-tabela { width: 100%; min-width: 560px; border-collapse: collapse; font-size: 1rem; line-height: 1.45; }
+.kit-tabela th, .kit-tabela td { padding: 15px 20px; text-align: left; vertical-align: top; border-top: 1px solid var(--salvia-200); }
+.kit-tabela thead th { border-top: 0; background: var(--salvia-100); font-weight: 700; color: var(--principal-escuro); }
+.kit-tabela thead th.kit-col { background: var(--principal-escuro); color: #fff; }
+.kit-tabela tbody th { font-weight: 700; width: 34%; }
+.kit-tabela td { color: var(--texto-suave); }
+.kit-tabela td.kit-col { background: var(--salvia-50); color: var(--texto); }
+.kit-nota { margin: 16px 0 0; color: var(--texto-suave); }
+
+/* por dentro */
+.kit-dentro { display: grid; gap: 28px; align-items: center; margin-bottom: clamp(40px, 7vw, 72px); }
+.kit-dentro:last-child { margin-bottom: 0; }
+@media (min-width: 860px) { .kit-dentro { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; } .kit-dentro--inverso .kit-dentro-texto { order: 2; } }
+.kit-dentro h2 { margin: 0 0 14px; }
+.kit-dentro p { margin: 0 0 14px; font-size: 1.1rem; line-height: 1.6; color: var(--texto-suave); }
+.kit-dentro-imgs { display: flex; gap: 16px; justify-content: center; }
+.kit-dentro-imgs img { width: min(46%, 250px); height: auto; border: 1px solid var(--salvia-200); border-radius: 6px; background: #fff; box-shadow: var(--sombra); }
+.kit-dentro-imgs img:last-child { margin-top: 36px; }
+
+/* bloco da inteligência artificial */
+.kit-ia { display: grid; gap: 24px; padding: clamp(24px, 4vw, 40px); background: var(--acento-claro); border: 1px solid #e8a592; border-radius: var(--raio); }
+@media (min-width: 860px) { .kit-ia { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; } }
+.kit-ia h2 { margin: 0 0 12px; color: var(--erro-texto); }
+.kit-ia p { margin: 0; font-size: 1.1rem; line-height: 1.6; }
+.kit-ia ul { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; align-content: start; }
+.kit-ia li { position: relative; padding-left: 36px; line-height: 1.5; }
+.kit-ia li::before { content: ""; position: absolute; left: 0; top: 1px; width: 24px; height: 24px; border-radius: 50%; background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238a3420' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center / 14px no-repeat; }
+
+/* para quem */
+.kit-duas { display: grid; gap: 20px; }
+@media (min-width: 760px) { .kit-duas { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; } }
+.kit-duas h3 { margin: 0 0 12px; font-size: 1.3rem; color: var(--principal); }
+.kit-duas .cartao:last-child h3 { color: var(--erro-texto); }
+.kit-duas ul { margin: 0; padding-left: 22px; line-height: 1.7; }
+
+/* quem faz */
+.quem-faz-kit { display: grid; gap: 24px; align-items: center; padding: clamp(22px, 4vw, 32px); background: var(--salvia-100); border-radius: var(--raio); }
+@media (min-width: 700px) { .quem-faz-kit { grid-template-columns: 180px minmax(0, 1fr); gap: 36px; } }
+.quem-faz-kit img { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; justify-self: center; }
+.quem-faz-kit h2 { margin: 0 0 8px; }
+.quem-faz-kit p { margin: 0 0 10px; line-height: 1.6; color: var(--texto-suave); }
+.kit-fatos strong { color: var(--texto); }
+
+/* chamada final */
+.kit-final { display: flex; flex-wrap: wrap; align-items: center; gap: 20px 32px; padding: clamp(26px, 4vw, 44px); background: var(--principal-escuro); border-radius: var(--raio); color: #fff; }
+.kit-final > div { flex: 1 1 340px; }
+.kit-final h2 { margin: 0 0 8px; color: #fff; }
+.kit-final p { margin: 0; color: var(--salvia-200); font-size: 1.1rem; }
+
+/* barra de compra fixa no celular */
+.barra-kit { display: none; }
+@media (max-width: 899px) {
+  .barra-kit { display: flex; align-items: center; gap: 14px; position: fixed; inset: auto 0 0 0; z-index: 40; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: rgba(250, 248, 243, .97); border-top: 1px solid var(--salvia-200); box-shadow: 0 -6px 20px rgba(34, 54, 43, .1); }
+  .barra-kit-preco { font-family: var(--fonte-titulo); font-weight: 800; font-size: 1.35rem; color: var(--principal-escuro); white-space: nowrap; }
+  .barra-kit .btn { flex: 1; min-height: 52px; padding: 10px 16px; font-size: 1.05rem; }
+  .com-barra-kit .site-footer { padding-bottom: calc(86px + env(safe-area-inset-bottom) + 24px); }
+  html:has(.com-barra-kit) { scroll-padding-bottom: 96px; } /* o foco do teclado nunca fica escondido atrás da barra */
+}

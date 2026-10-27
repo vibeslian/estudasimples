@@ -13,5 +13,5 @@ pruebas/*.log
 Thumbs.db
 .claude/
 
-# Kit TCC: archivos generados (producto de pago, nunca se publican con el sitio)
-kit-tcc/salida/
+# Kit TCC: carpeta entera fuera de git (el repositorio es PÚBLICO: aquí están las fuentes del producto de pago)
+/kit-tcc/
