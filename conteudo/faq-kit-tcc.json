@@ -32,7 +32,7 @@
   {
     "p": "Como eu recebo o kit?",
     "r": [
-      "A compra e o pagamento são feitos na Hotmart. Depois que o pagamento é aprovado, você recebe pela Hotmart, por e-mail, o acesso para baixar os arquivos: o modelo em Word, o guia rápido, o checklist e o exemplo em PDF.",
+      "A compra e o pagamento são feitos na Hotmart, uma plataforma brasileira de venda de produtos digitais. A página de compra mostra as formas de pagamento cartão de crédito, Pix, boleto e PayPal, e o pagamento acontece lá: o Estuda Simples não vê os dados do seu cartão. Depois que o pagamento é aprovado, você recebe pela Hotmart, por e-mail, o acesso para baixar os arquivos: o modelo em Word, o guia rápido, o checklist e o exemplo em PDF.",
       "Se o e-mail não chegar em algumas horas, olhe a caixa de spam e escreva para <a href=\"mailto:{{CONTACT_EMAIL}}\">{{CONTACT_EMAIL}}</a> ou procure o suporte da Hotmart."
     ]
   },
