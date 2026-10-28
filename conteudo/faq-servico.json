@@ -30,6 +30,13 @@
     ]
   },
   {
+    "p": "O serviço faz análise de plágio ou detecta texto de inteligência artificial?",
+    "r": [
+      "Não. O serviço não mede plágio e não diz se um texto foi escrito com ajuda de inteligência artificial. Também não consigo prometer como um detector vai classificar o seu trabalho: cada faculdade usa o seu programa, e esses programas podem errar. A formatação não muda o texto, então não deve alterar o resultado de uma análise.",
+      "O que ajuda de verdade é conferir as fontes: cite quem você usou, com a referência completa, e confira se cada citação existe mesmo. Se a sua faculdade pedir uma análise, é ela quem faz, e se você usou inteligência artificial, confira a regra da sua instituição."
+    ]
+  },
+  {
     "p": "O que acontece se faltar algum dado nas referências?",
     "r": [
       "Para montar a referência no formato ABNT é preciso ter os dados da obra, como autor, título, ano, editora, cidade e páginas. Se algum faltar, você precisa me enviar, e o prazo só começa a contar quando eu tiver tudo. Eu não invento dados, porque isso mudaria o conteúdo do seu trabalho."
