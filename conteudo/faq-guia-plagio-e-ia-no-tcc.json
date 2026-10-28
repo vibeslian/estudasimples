@@ -1,0 +1,34 @@
+[
+  {
+    "p": "Pode usar IA no TCC?",
+    "r": ["Depende da instituição, da unidade e, muitas vezes, do orientador. Não há uma regra nacional única. Nos documentos oficiais citados neste guia, o padrão é permitir a IA como apoio quando o uso é declarado, sem tratá-la como autora, e vetar o uso para inventar dados, citações ou referências. Pergunte ao orientador e leia o regulamento do seu curso antes de usar."]
+  },
+  {
+    "p": "Usar o ChatGPT no TCC é plágio?",
+    "r": ["Copiar um texto gerado por IA e apresentá-lo como seu, ou deixar de declarar o uso quando a instituição exige, é tratado por várias instituições como falta de integridade acadêmica. A UCPel chama de \"plágio assistido por IA\" o ato de se apropriar de conteúdo de IA sem revisão, sem referência ou simulando autoria própria. Já usar a IA como apoio permitido, declarado e revisado por você costuma ser aceito. Confirme a regra da sua instituição."]
+  },
+  {
+    "p": "Como declarar o uso de IA no TCC?",
+    "r": ["Escreva qual ferramenta você usou, quando e para quê, e confirme que revisou o resultado e que o conteúdo final é seu. Uma nota de rodapé serve para um uso pontual; para um uso recorrente, use a introdução, a metodologia ou uma seção própria. Alguns documentos pedem os prompts e os conteúdos gerados em apêndice, com a data. Se a sua instituição tiver um formulário ou um modelo, use o dela."]
+  },
+  {
+    "p": "Como citar o ChatGPT nas normas ABNT?",
+    "r": ["Até onde consegui conferir, a ABNT não tem uma regra própria para citar IA generativa, e as instituições pedem sobretudo a declaração do uso. Além disso, a IA não deve ser usada como fonte: procure a fonte original que sustenta a afirmação e cite essa fonte. Se a sua instituição tiver um modelo para IA, siga o dela."]
+  },
+  {
+    "p": "A IA inventa referências?",
+    "r": ["Pode inventar. Um estudo de 2023 com o ChatGPT-3.5, em temas de medicina, encontrou cerca de 47% de referências inventadas e 46% com erros. É um modelo antigo e uma área específica, mas as instituições mandam conferir cada referência na obra original. Procure o título, abra a obra, confira autor, ano e página, e só então monte a referência."]
+  },
+  {
+    "p": "Os detectores de IA funcionam? O orientador descobre?",
+    "r": ["Não dá para garantir nem uma coisa nem outra. Os detectores erram, e instituições como a UCPel dizem que eles devem servir só como apoio, nunca como prova exclusiva, com direito de defesa. O caminho mais seguro é escrever você mesmo, citar as fontes, declarar o que usou e guardar os rascunhos e o histórico de versões."]
+  },
+  {
+    "p": "Qual é a consequência de plágio no TCC?",
+    "r": ["Depende do regulamento da instituição. Na UCPel, por exemplo, omitir a declaração exigida ou declarar em falso é infração sujeita às penas do Regimento Geral. A lei de direitos autorais e o Código Penal também preveem consequências civis e penais para a violação de direitos de autor. Para um caso concreto, procure a coordenação do curso."]
+  },
+  {
+    "p": "O Estuda Simples ou o serviço de formatação faz análise de plágio ou de IA?",
+    "r": ["Não. O site não mede plágio nem detecta texto de IA, e o <a href=\"/formatacao-abnt-tcc/\">serviço de formatação</a> cuida só da forma do trabalho. O que o site oferece é ajuda para citar e montar as referências no formato da ABNT, com o <a href=\"/gerador-de-referencias-abnt/\">gerador de referências</a> gratuito, e os <a href=\"/guias/citacao-abnt/\">guias de citação</a> e de <a href=\"/guias/como-fazer-referencia-abnt/\">referência</a>."]
+  }
+]

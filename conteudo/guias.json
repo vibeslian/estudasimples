@@ -1393,5 +1393,87 @@
         "nota": "Edição de 2025: confira a cartilha do ano da sua prova."
       }
     ]
+  },
+  {
+    "categoria": "Referências e citações",
+    "atualizado": "2026-10-28",
+    "slug": "plagio-e-ia-no-tcc",
+    "prioridade": 4.5,
+    "rotulo": "Plágio e IA no TCC",
+    "norma": "Lei nº 9.610/1998 e ABNT NBR 10520",
+    "ferramentas": [
+      "referencias"
+    ],
+    "titulo": "Plágio e IA no TCC: o que pode e como evitar problemas",
+    "h1": "Plágio e inteligência artificial no TCC: o que pode, o que não pode e como se proteger",
+    "descricao": "Pode usar IA no TCC? O que é plágio, o que dizem a lei e as instituições, como declarar o uso de IA e como conferir as fontes antes de entregar.",
+    "lead": "O que é plágio, o que as instituições dizem sobre IA, como declarar o uso e como conferir as fontes antes de entregar.",
+    "resumoIndice": "O que é plágio, o que as instituições dizem sobre IA, como declarar o uso e conferir as fontes.",
+    "ferramenta": {
+      "nome": "Formatação ABNT de TCC",
+      "selo": "Serviço do Estuda Simples",
+      "texto": "Fontes conferidas e trabalho pronto? Eu posso conferir se as citações e as referências estão no formato da ABNT e formatar o trabalho inteiro. Não faço análise de plágio nem de IA: cuido só da forma. Orçamento pelo WhatsApp.",
+      "botao": "Pedir orçamento",
+      "url": "/formatacao-abnt-tcc/"
+    },
+    "relacionadas": [
+      "citacao-abnt",
+      "como-fazer-referencia-abnt",
+      "como-fazer-tcc"
+    ],
+    "fontes": [
+      {
+        "titulo": "Planalto, Lei nº 9.610/1998 (Lei de Direitos Autorais), arts. 24, 46 e 102",
+        "url": "https://www.planalto.gov.br/ccivil_03/leis/l9610.htm"
+      },
+      {
+        "titulo": "Planalto, Código Penal (Decreto-Lei nº 2.848/1940), art. 184",
+        "url": "https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm"
+      },
+      {
+        "titulo": "CNPq, Política de Integridade na Atividade Científica (Portaria nº 2.664, de 06/03/2026)",
+        "url": "https://abmes.org.br/arquivos/legislacoes/Portaria-cnpq-2664-2026-03-06.pdf",
+        "nota": "Cópia da portaria publicada no DOU de 11/03/2026. Vale para a pesquisa apoiada pelo CNPq."
+      },
+      {
+        "titulo": "UFC, Portaria nº 36/PRPPG/UFC, de 30/09/2025 (uso de IA)",
+        "url": "https://prppg.ufc.br/wp-content/uploads/2025/09/sei-23067.053369-2025-11.pdf",
+        "nota": "Vale para a pós-graduação stricto sensu da UFC."
+      },
+      {
+        "titulo": "Unicamp, Pró-Reitoria de Graduação, Orientações para uso responsável de IA",
+        "url": "https://prg.unicamp.br/arquivo/uploads/orientacoes-para-uso-responsavel-de-ia",
+        "nota": "O documento diz que não é normativo."
+      },
+      {
+        "titulo": "UCPel, Diretrizes sobre o uso de IA no âmbito acadêmico (Ordem de Serviço nº 035/2025-PRAC)",
+        "url": "https://biblioteca.ucpel.edu.br/wp-content/uploads/2025/10/Diretrizes-de-Uso-da-IA-12.pdf"
+      },
+      {
+        "titulo": "CEFET/RJ (Unidade Petrópolis), Regulamento sobre o uso ético, pedagógico e responsável de IA (Ato nº 11)",
+        "url": "https://intranet.cefet-rj.br/attachments/article/2480/Ato%2011_Aprova%20regulamento%20que%20disp%C3%B5e%20sobre%20diretrizes%20para%20uso%20de%20IA%20em%20trabalhos%20acad%C3%AAmicos%20da%20Unid%20Petr%C3%B3polis.pdf",
+        "nota": "Vale para uma unidade."
+      },
+      {
+        "titulo": "Senado Federal, Instituto Legislativo Brasileiro, Manual de Trabalho de Conclusão de Curso (2026)",
+        "url": "https://www12.senado.leg.br/institucional/escoladegoverno/manual-tcc-final.pdf",
+        "nota": "Manual de uma escola de governo, usado como exemplo."
+      },
+      {
+        "titulo": "UnB (PPG em Linguística Aplicada), Orientações objetivas para uso de IA na pesquisa científica",
+        "url": "https://pgla.unb.br/wp-content/uploads/2026/05/Orientacoes-objetivas-para-uso-de-IA-na-pesquisa-cientifica.pdf",
+        "nota": "Vale para um programa de pós-graduação."
+      },
+      {
+        "titulo": "Bhattacharyya et al., High Rates of Fabricated and Inaccurate References in ChatGPT-Generated Medical Content (Cureus, 2023)",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10277170/",
+        "nota": "Estudo de 2023 com o ChatGPT-3.5 em temas de medicina."
+      },
+      {
+        "titulo": "Liang et al., GPT detectors are biased against non-native English writers (2023)",
+        "url": "https://arxiv.org/abs/2304.02819",
+        "nota": "Estudo em inglês."
+      }
+    ]
   }
 ]

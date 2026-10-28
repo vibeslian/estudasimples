@@ -35,13 +35,13 @@ const todas = ["/", "/guias/", "/gerador-de-capa-abnt/", "/gerador-de-folha-de-r
 const html = {};
 for (const u of todas) html[u] = await leePagina(u);
 
-console.log("== A1) Las 32 guías (29 de ABNT + 3 de ENEM e escola) y el índice existen y están completos ==");
-marca(guias.length === 32 && ABNT.length === 29 && ENEM.length === 3, `guias.json tiene 32 guías: 29 de ABNT + 3 de «ENEM e escola» (${guias.length}: ${ABNT.length} + ${ENEM.length})`);
+console.log("== A1) Las 33 guías (30 de ABNT + 3 de ENEM e escola) y el índice existen y están completos ==");
+marca(guias.length === 33 && ABNT.length === 30 && ENEM.length === 3, `guias.json tiene 33 guías: 30 de ABNT + 3 de «ENEM e escola» (${guias.length}: ${ABNT.length} + ${ENEM.length})`);
 for (const g of guias) {
   const h = html[`/guias/${g.slug}/`];
   marca(!!h && !/\{\{[A-Za-z_:]/.test(h), `/guias/${g.slug}/ existe y no tiene marcas sin resolver`);
 }
-marca(!!html["/guias/"] && guias.every((g) => html["/guias/"].includes(`href="/guias/${g.slug}/"`)), "el índice /guias/ enlaza las 32 guías");
+marca(!!html["/guias/"] && guias.every((g) => html["/guias/"].includes(`href="/guias/${g.slug}/"`)), "el índice /guias/ enlaza las 33 guías");
 
 console.log("\n== A2) Títulos y descripciones únicos, de buen tamaño ==");
 const titulos = new Map(), descs = new Map();
@@ -177,7 +177,7 @@ console.log("\n== A8) Sitemap ==");
   const urls = [...sm.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
   const esperadas = ["/guias/", ...guias.map((g) => `/guias/${g.slug}/`)];
   const faltan = esperadas.filter((e) => !urls.some((u) => u.endsWith(e)));
-  marca(faltan.length === 0, `el sitemap incluye /guias/ y las 32 guías${faltan.length ? " (faltan: " + faltan.join(", ") + ")" : ""}`);
+  marca(faltan.length === 0, `el sitemap incluye /guias/ y las 33 guías${faltan.length ? " (faltan: " + faltan.join(", ") + ")" : ""}`);
   marca(new Set(urls).size === urls.length, `el sitemap no repite URLs (${urls.length})`);
 }
 
