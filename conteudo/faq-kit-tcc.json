@@ -6,15 +6,28 @@
     ]
   },
   {
+    "p": "Funciona no Mac, no celular ou no LibreOffice?",
+    "r": [
+      "O modelo foi feito e conferido no Word para Windows. No Word para Mac, no Word online, no LibreOffice e no celular ele não foi testado, e o sumário automático e a numeração podem se comportar de outro jeito. O jeito mais seguro é usar o Word instalado no computador."
+    ]
+  },
+  {
     "p": "O modelo serve para a minha faculdade?",
     "r": [
       "O modelo segue a ABNT NBR 14724:2024. Cada instituição pode ter um manual próprio (capa, resumo, ficha catalográfica). Se o seu pedir outra coisa, você altera o estilo correspondente e o documento todo muda junto. Quando houver diferença, siga o manual da sua instituição."
     ]
   },
   {
+    "p": "A minha faculdade já tem um modelo. Preciso do kit?",
+    "r": [
+      "Se a sua instituição exige um modelo próprio, use o dela: ele vale mais do que qualquer outro. O kit ajuda quem não tem um modelo pronto, ou quem quer um ponto de partida organizado e o checklist para conferir antes de entregar. Antes de comprar, vale perguntar na biblioteca ou ao orientador se existe um modelo oficial."
+    ]
+  },
+  {
     "p": "Como eu recebo o kit?",
     "r": [
-      "A compra e o pagamento são feitos na Hotmart. Depois que o pagamento é aprovado, você recebe pela Hotmart o acesso para baixar os arquivos: o modelo em Word, o guia rápido, o checklist e o exemplo em PDF."
+      "A compra e o pagamento são feitos na Hotmart. Depois que o pagamento é aprovado, você recebe pela Hotmart, por e-mail, o acesso para baixar os arquivos: o modelo em Word, o guia rápido, o checklist e o exemplo em PDF.",
+      "Se o e-mail não chegar em algumas horas, olhe a caixa de spam e escreva para <a href=\"mailto:{{CONTACT_EMAIL}}\">{{CONTACT_EMAIL}}</a> ou procure o suporte da Hotmart."
     ]
   },
   {

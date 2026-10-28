@@ -69,7 +69,7 @@
   {
     "p": "O que acontece com o meu arquivo?",
     "r": [
-      "Ele é usado só para o serviço. Para formatar, uso ferramentas de inteligência artificial, e o arquivo passa por elas. Eu apago os arquivos 15 dias depois da entrega. Os detalhes estão na <a href=\"/politica-de-privacidade/#servico-formatacao\">Política de Privacidade</a>."
+      "Ele é usado só para o serviço. Para formatar, uso o Claude, uma ferramenta de inteligência artificial da empresa Anthropic, e o arquivo passa por ele. Eu apago os arquivos 15 dias depois da entrega. Os detalhes estão na <a href=\"/politica-de-privacidade/#servico-formatacao\">Política de Privacidade</a>."
     ]
   },
   {

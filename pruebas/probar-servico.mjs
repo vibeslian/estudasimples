@@ -211,9 +211,9 @@ console.log("\n== 6) Política de Privacidade y Termos ==");
   });
   marca(r.h === "2.4. Serviço pago de formatação de trabalhos", `sección nueva con ancla: "${r.h}"`);
   marca(/WhatsApp/.test(r.txt) && /inteligência artificial/.test(r.txt) && /apago os arquivos/i.test(r.txt) && /só para prestar o serviço/i.test(r.txt) && /Pix/.test(r.txt) && /art\. 7º, V/.test(r.txt), "explica: WhatsApp, IA, uso solo para el servicio, borrado, Pix y base legal");
-  marca(/WhatsApp \(Meta\)/.test(r.txt) && /provedores das ferramentas de inteligência artificial/.test(r.txt), "sección 5 (con quién se comparte) menciona WhatsApp, proveedores de IA y el banco");
+  marca(/WhatsApp \(Meta\)/.test(r.txt) && /Anthropic/.test(r.txt), "sección 5 (con quién se comparte) menciona WhatsApp, proveedores de IA y el banco");
   // la fecha es 14 de outubro (como siempre) o, desde que los links de afiliado están encendidos, la de afiliados.legalAtualizadoEm (21 de outubro de 2026, el curso de Hotmart)
-  marca(/14 de outubro de 2026|20 de outubro de 2026|21 de outubro de 2026|27 de outubro de 2026/.test(r.fecha), `fecha actualizada: ${r.fecha}`);
+  marca(/14 de outubro de 2026|20 de outubro de 2026|21 de outubro de 2026|27 de outubro de 2026|28 de outubro de 2026/.test(r.fecha), `fecha actualizada: ${r.fecha}`);
   marca(/15 dias depois da entrega/.test(r.txt) && !/Quando o serviço termina, apago/.test(r.txt), "Política: los archivos se borran 15 días después de la entrega (resumen, 2.4 y 6)");
   marca(/De qual página você veio/.test(r.txt) && /mensagem já escrita/.test(r.txt), "Política: explica que el mensaje de WhatsApp dice de qué página viene el visitante");
   const ancla = new URL("/politica-de-privacidade/#servico-formatacao", BASE).href;

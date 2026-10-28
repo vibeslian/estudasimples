@@ -113,6 +113,7 @@
 
 @media print { .hero-foto, .garantias { display: none; } }
 .quem-cartao p { margin: 0; }
+.hero-glossario { margin: 14px 0 0; font-size: .95rem; color: var(--texto-suave); }
 .hero-exemplo { margin: 14px 0 0; font-size: .98rem; color: var(--texto-suave); }
 .hero-exemplo a { font-weight: 700; }
 .faixa-servico a:focus-visible { outline: 3px solid var(--fundo); outline-offset: 3px; }

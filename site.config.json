@@ -146,7 +146,7 @@
     "preco": "29,90",
     "urlCompra": "https://pay.hotmart.com/Y108216341P",
     "garantiaDias": 7,
-    "legalAtualizadoEm": "2026-10-27"
+    "legalAtualizadoEm": "2026-10-28"
   },
   "anuncie": {
     "_ajuda": "Página /anuncie/ (para empresas de educação anunciarem). Fica ESCONDIDA enquanto 'ativo' for false: a página existe, mas tem noindex, não entra no sitemap e nenhuma página tem link para ela. Para ligar: preencha os 'numeros' com dados reais, ponha 'ativo': true e rode o build (entra no sitemap, sai o noindex e aparece o link 'Anuncie' no rodapé). O build recusa ligar com números em branco. Preços, textos dos níveis e mensagem do WhatsApp também se mudam só aqui.",

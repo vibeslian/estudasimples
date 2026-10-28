@@ -202,7 +202,7 @@ for (const [id, url] of Object.entries(PAGINAS)) {
     const q = await abre(browser, url, vp);
     const r = await q.evaluate(() => {
       const bb = (e) => { const x = e.getBoundingClientRect(); return { top: x.top + scrollY, bottom: x.bottom + scrollY }; };
-      const of = [...document.querySelectorAll(".oferta")];
+      const of = [...document.querySelectorAll(".oferta[data-oferta]")];
       const a = document.querySelector(".acoes"), l = document.getElementById("listaSumario"), ab = document.querySelector(".aviso-norma");
       const o = of[0];
       return { n: of.length, slots: of.map((x) => x.dataset.slot), anuncios: [...document.querySelectorAll(".anuncio")].map((x) => x.dataset.slot), href: o && o.querySelector("a").getAttribute("href"), selo: o && o.querySelector(".oferta-selo").textContent, titulo: o && o.querySelector(".oferta-titulo").textContent, texto: o && o.querySelector(".oferta-texto").textContent, claseAd: o && /anuncio/.test(o.className), bg: o && getComputedStyle(o).backgroundImage !== "none", top: o && bb(o).top, acoes: a && bb(a).bottom, lista: l && bb(l).bottom, aviso: ab && bb(ab).bottom, ov: document.documentElement.scrollWidth - innerWidth, botH: o && Math.round(o.querySelector("a").getBoundingClientRect().height) };

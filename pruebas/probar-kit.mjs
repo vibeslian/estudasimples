@@ -65,7 +65,7 @@ const prod = ld.find((x) => x && x["@type"] === "Product");
 ok(prod && prod.offers.price === "29.90" && prod.offers.priceCurrency === "BRL" && prod.offers.url === "https://estudasimples.com.br/kit-tcc/", "Product: precio 29.90 BRL y url de la propia página", JSON.stringify(prod && prod.offers));
 ok(prod && !("aggregateRating" in prod) && !("review" in prod), "Product: sin reseñas ni calificaciones inventadas");
 const faq = ld.find((x) => x && x["@type"] === "FAQPage");
-ok(faq && faq.mainEntity.length === 6 && (pagina.match(/<details>/g) || []).length === 6, "6 preguntas, visibles y en los datos estructurados");
+ok(faq && faq.mainEntity.length === 8 && (pagina.match(/<details>/g) || []).length === 8, "8 preguntas, visibles y en los datos estructurados");
 ok(faq && /7 dias/.test(JSON.stringify(faq)) && !/\{\{/.test(JSON.stringify(faq)), "la FAQ muestra la garantía real y ninguna {{marca}}");
 ok(!/\{\{|<!--\/?KIT:/.test(pagina), "la página no tiene marcas sin resolver");
 const tabla = pagina.match(/<table class="kit-tabela">[\s\S]*?<\/table>/);
@@ -75,8 +75,14 @@ const htmls = paginasHtml(on.dir).filter((p) => p !== "kit-tcc/index.html" && p 
 const sinPie = htmls.filter((p) => !leer(on.dir, p).includes('<a href="/kit-tcc/">Kit TCC (modelo em Word)</a>'));
 ok(sinPie.length === 0, "encendido: el pie de TODAS las páginas enlaza el kit", sinPie.slice(0, 5).join(", "));
 ok(leer(on.dir, "formatacao-abnt-tcc/index.html").includes('href="/kit-tcc/#origem=servico">Kit TCC</a>, o modelo completo em Word, por R$\u00a029,90'), "encendido: la página del servicio menciona el kit con su precio");
-const otrosConKit = htmls.filter((p) => !["formatacao-abnt-tcc/index.html"].includes(p) && /href="\/kit-tcc\/#/.test(leer(on.dir, p)));
-ok(otrosConKit.length === 0, "encendido: solo el pie y la página del servicio enlazan el kit (ningún enlace extra)", otrosConKit.join(", "));
+const GUIAS_KIT = ["sumario-automatico-word", "numeracao-de-paginas-abnt", "normas-abnt-no-word", "margens-abnt", "fonte-e-espacamento-abnt", "titulos-e-subtitulos-abnt", "normas-abnt-tcc", "normas-abnt", "como-fazer-tcc", "lista-de-ilustracoes-e-tabelas-abnt", "modelos-de-capa-abnt"].map((g) => `guias/${g}/index.html`);
+const CON_KIT = ["formatacao-abnt-tcc/index.html", "index.html", "gerador-de-sumario-abnt/index.html", ...GUIAS_KIT];
+const sinTarjeta = GUIAS_KIT.filter((p) => !/<aside class="oferta" aria-label="Kit TCC">[\s\S]*href="\/kit-tcc\/#origem=guia-oferta"/.test(leer(on.dir, p)));
+ok(sinTarjeta.length === 0, "encendido: las 11 guías de formato llevan la tarjeta del Kit TCC", sinTarjeta.join(", "));
+ok(/id="kit-tcc-faixa"/.test(leer(on.dir, "index.html")) && /href="\/kit-tcc\/#origem=inicio-oferta"/.test(leer(on.dir, "index.html")), "encendido: la portada tiene la franja del Kit TCC");
+ok(/não se atualiza sozinho/.test(leer(on.dir, "gerador-de-sumario-abnt/index.html")) && /href="\/kit-tcc\/#origem=sumario-aviso"/.test(leer(on.dir, "gerador-de-sumario-abnt/index.html")), "encendido: el generador de sumario avisa que su Word no se actualiza solo y menciona el kit");
+const otrosConKit = htmls.filter((p) => !CON_KIT.includes(p) && /href="\/kit-tcc\/#/.test(leer(on.dir, p)));
+ok(otrosConKit.length === 0, "encendido: solo el pie, la portada, el servicio, el generador de sumario y las 11 guías de formato enlazan el kit (ningún enlace extra)", otrosConKit.join(", "));
 // textos legales
 const t = textoLegal(on.dir, "termos-de-uso/index.html"), p = textoLegal(on.dir, "politica-de-privacidade/index.html");
 const tHtml = leer(on.dir, "termos-de-uso/index.html"), pHtml = leer(on.dir, "politica-de-privacidade/index.html");
@@ -100,7 +106,7 @@ const tOffHtml = leer(off.dir, "termos-de-uso/index.html"), pOffHtml = leer(off.
 ok(consecutivos(numeros(tOffHtml, /<h2[^>]*>(\d+)\./g), 12) && /<h2 id="links-de-afiliado">12\. Links de afiliado<\/h2>/.test(tOffHtml) && /Veja a seção 12\./.test(tOffHtml), "Términos sin el kit: 12 secciones y afiliados en la 12");
 ok(consecutivos(numeros(pOffHtml, /<h2[^>]*>(\d+)\./g), 12) && consecutivos(numeros(pOffHtml, /<h3[^>]*>2\.(\d+)\./g), 5), "Política sin el kit: 12 secciones y subsecciones 2.1 a 2.5");
 // ninguna otra página cambia de contenido salvo pie y servicio, Términos y Política
-const cambian = htmls.filter((x) => !["formatacao-abnt-tcc/index.html", "termos-de-uso/index.html", "politica-de-privacidade/index.html"].includes(x) && leer(on.dir, x).replace(/<footer[\s\S]*?<\/footer>/, "") !== leer(off.dir, x).replace(/<footer[\s\S]*?<\/footer>/, "").replace(/\?v=[a-z0-9]+/g, (m) => m));
+const cambian = htmls.filter((x) => !["formatacao-abnt-tcc/index.html", "termos-de-uso/index.html", "politica-de-privacidade/index.html", ...CON_KIT].includes(x) && leer(on.dir, x).replace(/<footer[\s\S]*?<\/footer>/, "") !== leer(off.dir, x).replace(/<footer[\s\S]*?<\/footer>/, "").replace(/\?v=[a-z0-9]+/g, (m) => m));
 const cambianReal = cambian.filter((x) => leer(on.dir, x).replace(/<footer[\s\S]*?<\/footer>/, "").replace(/\?v=[a-z0-9]+/g, "") !== leer(off.dir, x).replace(/<footer[\s\S]*?<\/footer>/, "").replace(/\?v=[a-z0-9]+/g, ""));
 ok(cambianReal.length === 0, "las demás páginas solo cambian en el pie (comparado con el kit apagado)", cambianReal.slice(0, 4).join(", "));
 
