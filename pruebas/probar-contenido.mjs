@@ -23,7 +23,7 @@ async function abre(url, vp = { width: 1280, height: 900 }) {
 }
 
 console.log("== 1) Estructura de cada página ==");
-const existentes = new Set(PAGINAS);
+const existentes = new Set([...PAGINAS, "/kit-tcc/"]); // el Kit TCC está encendido: es una página real que el pie enlaza
 for (const url of PAGINAS) {
   const p = await abre(url);
   const d = await p.evaluate(() => ({

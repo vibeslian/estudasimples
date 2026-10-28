@@ -18,7 +18,7 @@ let fallos = 0, total = 0;
 const ok = (cond, msg, extra = "") => { total++; if (!cond) { fallos++; console.log(`  FALLA: ${msg}${extra ? " -> " + extra : ""}`); } };
 const seccion = (t) => console.log(`\n== ${t}`);
 const limpiables = [];
-const constr = (mod, nombre) => { const r = construye(mod, nombre); limpiables.push(r.dir); return r; };
+const constr = (mod, nombre) => { const r = construye({ kit: { ativo: false }, ...mod }, nombre); limpiables.push(r.dir); return r; };
 const CLIENTE = "ca-pub-3212984323046188";
 const ON = (extra = {}) => ({ anuncios: { adsenseAtivo: true, adsense: { blocos: { conteudo: "1234567890", lateral: "0987654321" }, legalAtualizadoEm: "2026-10-22", ...extra } } });
 

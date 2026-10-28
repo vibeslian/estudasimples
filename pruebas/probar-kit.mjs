@@ -23,10 +23,11 @@ const todosLosArchivos = (dir) => { const out = []; const rec = (d) => { for (co
 const textoLegal = (dir, rel) => leer(dir, rel).replace(/<[^>]+>/g, " ");
 
 // ---------- A) apagado ----------
-seccion("A) kit apagado (configuración real)");
-ok(CONFIG_REAL.kit && CONFIG_REAL.kit.ativo === false, "en site.config.json, kit.ativo debe estar en false hasta tener el producto en Hotmart y el link real");
+seccion("A) kit apagado (se fuerza ativo:false sobre la configuración real)");
+ok(CONFIG_REAL.kit && typeof CONFIG_REAL.kit.ativo === "boolean", "site.config.json tiene el interruptor kit.ativo");
+ok(!CONFIG_REAL.kit.ativo || (/^https:\/\/(pay|go)\.hotmart\.com\//.test(CONFIG_REAL.kit.urlCompra) && /^\d{4}-\d{2}-\d{2}$/.test(CONFIG_REAL.kit.legalAtualizadoEm)), "si el kit está encendido en la configuración real, tiene link de Hotmart y fecha legal");
 ok(CONFIG_REAL.kit.preco === "29,90", "el precio decidido es 29,90", CONFIG_REAL.kit.preco);
-const off = constr({}, "kitoff");
+const off = constr({ kit: { ativo: false } }, "kitoff");
 ok(off.ok, "el build con el kit apagado funciona", off.salida.slice(-300));
 ok(!existe(off.dir, "kit-tcc/index.html"), "apagado: la página /kit-tcc/ no existe");
 ok(!existe(off.dir, "assets/css/kit.css"), "apagado: kit.css no se publica");

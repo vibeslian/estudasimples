@@ -19,7 +19,7 @@ let fallos = 0, total = 0;
 const ok = (cond, msg, extra = "") => { total++; if (!cond) { fallos++; console.log(`  FALLA: ${msg}${extra ? " -> " + extra : ""}`); } };
 const seccion = (t) => console.log(`\n== ${t}`);
 const limpiables = [];
-const constr = (mod, nombre) => { const r = construye(mod, nombre); limpiables.push(r.dir); return r; };
+const constr = (mod, nombre) => { const r = construye({ kit: { ativo: false }, ...mod }, nombre); limpiables.push(r.dir); return r; };
 const AF = CONFIG_REAL.afiliados;
 const FRASE = "Como Associado da Amazon, ganho com compras qualificadas.";
 const sitemapUrls = (dir) => [...leer(dir, "sitemap.xml").matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
@@ -31,7 +31,7 @@ const ON = (extra = {}) => ({ afiliados: { ativo: true, amazonTag: "exemplo-20",
 const GUIAS_CON = [...new Set(AF.produtos.flatMap((p) => p.guias))]; // guías que deben mostrar el bloque
 
 const SIN_URL = AF.produtos.map((p) => ({ ...p, url: "" }));
-const OFF = { afiliados: { ativo: false } }; // la configuración real con el interruptor apagado
+const OFF = { afiliados: { ativo: false }, kit: { ativo: false } }; // la configuración real con el interruptor apagado
 
 // ---------- R) configuración real (la que se publica) ----------
 seccion("R) configuración real");
@@ -43,7 +43,7 @@ const hostOk = (u) => { try { const x = new URL(u); return x.protocol === "https
 ok(LIBROS.every((p) => hostOk(p.url)), "los 10 enlaces de libros son https://www.amazon.com.br/dp/<ISBN>?tag=estudasimples-20", LIBROS.filter((p) => !hostOk(p.url)).map((p) => p.id).join(", "));
 const isbnOk = (a) => [...a].reduce((t, c, i) => t + (c === "X" ? 10 : +c) * (10 - i), 0) % 11 === 0;
 ok(LIBROS.every((p) => isbnOk(new URL(p.url).pathname.slice(4))), "los 10 códigos son ISBN-10 válidos (dígito de control)");
-const real = constr({}, "af-real");
+const real = constr({ kit: { ativo: false } }, "af-real");
 ok(real.ok, "el build con la configuración real funciona", real.salida.slice(-300));
 const guiasReal = paginasHtml(real.dir).filter((p) => /^guias\/[^/]+\/index\.html$/.test(p));
 const conReal = guiasReal.filter((p) => /class="afiliados"/.test(leer(real.dir, p))).map((p) => p.split("/")[1]).sort();
