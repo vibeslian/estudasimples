@@ -24,6 +24,12 @@
     ]
   },
   {
+    "p": "Kit ou serviço de formatação: qual escolher?",
+    "r": [
+      "O kit é para quem quer formatar o trabalho sozinho, no Word, por {{KIT_PRECO}}: você escreve dentro do modelo e usa o checklist para conferir. O <a href=\"/formatacao-abnt-tcc/\">serviço de formatação</a> é para quem prefere me mandar o trabalho pronto e receber ele formatado, sem mexer nos estilos do Word; o valor começa em {{PRECO_ATE30}} e é confirmado no orçamento. Se você já tem o texto escrito e pouco tempo, o serviço costuma ser o caminho; se está começando o trabalho, o kit ajuda a escrever já no formato certo."
+    ]
+  },
+  {
     "p": "Como eu recebo o kit?",
     "r": [
       "A compra e o pagamento são feitos na Hotmart. Depois que o pagamento é aprovado, você recebe pela Hotmart, por e-mail, o acesso para baixar os arquivos: o modelo em Word, o guia rápido, o checklist e o exemplo em PDF.",

@@ -65,7 +65,7 @@ const prod = ld.find((x) => x && x["@type"] === "Product");
 ok(prod && prod.offers.price === "29.90" && prod.offers.priceCurrency === "BRL" && prod.offers.url === "https://estudasimples.com.br/kit-tcc/", "Product: precio 29.90 BRL y url de la propia página", JSON.stringify(prod && prod.offers));
 ok(prod && !("aggregateRating" in prod) && !("review" in prod), "Product: sin reseñas ni calificaciones inventadas");
 const faq = ld.find((x) => x && x["@type"] === "FAQPage");
-ok(faq && faq.mainEntity.length === 8 && (pagina.match(/<details>/g) || []).length === 8, "8 preguntas, visibles y en los datos estructurados");
+ok(faq && faq.mainEntity.length === 9 && (pagina.match(/<details>/g) || []).length === 9, "9 preguntas, visibles y en los datos estructurados");
 ok(faq && /7 dias/.test(JSON.stringify(faq)) && !/\{\{/.test(JSON.stringify(faq)), "la FAQ muestra la garantía real y ninguna {{marca}}");
 ok(!/\{\{|<!--\/?KIT:/.test(pagina), "la página no tiene marcas sin resolver");
 const tabla = pagina.match(/<table class="kit-tabela">[\s\S]*?<\/table>/);
