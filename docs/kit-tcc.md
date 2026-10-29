@@ -37,5 +37,10 @@ Para refazer os arquivos: `powershell -ExecutionPolicy Bypass -File kit-tcc/gene
 - **Hotmart (27/10/2026):** o produto está criado e aprovado (Curso Online, ID 8821443, R$ 29,90, garantia de 7 dias). O formato «eBook» da Hotmart só aceita PDF, ePub e planilhas (nem .docx nem .zip), por isso o kit é um «Curso Online» com os 4 arquivos como material extra de uma aula (a Hotmart Club aceita docx e zip). O link de compra já está em `kit.urlCompra`. **As vendas na Hotmart estão ATIVAS desde 27/10/2026** (interruptor «Ativar vendas» no cabeçalho do produto; para pausar, desligue-o e ponha `kit.ativo: false`, as duas coisas juntas). Falta confirmar na primeira compra como a Hotmart entrega (a FAQ diz que o comprador recebe o acesso pela Hotmart depois do pagamento aprovado).
 - Revisão jurídica dos textos (um advogado amigo de Lian; fica para depois).
 
+## Hotmart Club (29/10/2026)
+- La zona de miembros es UNA sola para los 6 productos de Lian (incluye FériasClaras): no usar el mensaje de bienvenida del área, afectaría a todos. El texto de entrega y la invitación a opinar están en el campo «Texto» de la lección «Baixe os arquivos do Kit TCC» (módulo «Arquivos do Kit TCC»), que además tiene valoración (estrella) y comentarios nativos de Hotmart.
+- El Material extra de esa lección tiene los 4 archivos; la guía rápida se reemplazó por la versión con NBR 6023:2025 (521 KB).
+- Las opiniones del sitio: ver `conteudo/avaliacoes.json` y `build-avaliacoes.mjs` (solo reales y autorizadas).
+
 ## Provas
 `node pruebas/probar-kit.mjs` (92 comprobaciones): apagado (nada existe, nada o nombra), encendido (página, sitemap, pie de todas las páginas, servicio, Términos, Política, datos estructurados, tabla), errores del build, 320/390/768/1280 px, axe, CLS, imágenes perezosas, sin pedidos a terceros. Constrói cópias em pasta temporária (não toca em `dist/`). Capturas: `node pruebas/capturas-kit.mjs` (link de PRUEBA, só numa cópia).
