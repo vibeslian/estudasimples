@@ -6,6 +6,7 @@
 //   D) diseño en 320, 390, 768 y 1280 px: sin desborde, CLS ~0, objetivos táctiles, axe, barra fija solo en el celular, sin pedidos a terceros.
 // Uso: node probar-kit.mjs   (desde pruebas/)
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import puppeteer from "puppeteer-core";
 import { CONFIG_REAL, construye, leer, existe, paginasHtml, sirve, limpia } from "./lib-anuncie.mjs";
@@ -109,6 +110,40 @@ ok(consecutivos(numeros(pOffHtml, /<h2[^>]*>(\d+)\./g), 12) && consecutivos(nume
 const cambian = htmls.filter((x) => !["formatacao-abnt-tcc/index.html", "termos-de-uso/index.html", "politica-de-privacidade/index.html", ...CON_KIT].includes(x) && leer(on.dir, x).replace(/<footer[\s\S]*?<\/footer>/, "") !== leer(off.dir, x).replace(/<footer[\s\S]*?<\/footer>/, "").replace(/\?v=[a-z0-9]+/g, (m) => m));
 const cambianReal = cambian.filter((x) => leer(on.dir, x).replace(/<footer[\s\S]*?<\/footer>/, "").replace(/\?v=[a-z0-9]+/g, "") !== leer(off.dir, x).replace(/<footer[\s\S]*?<\/footer>/, "").replace(/\?v=[a-z0-9]+/g, ""));
 ok(cambianReal.length === 0, "las demás páginas solo cambian en el pie (comparado con el kit apagado)", cambianReal.slice(0, 4).join(", "));
+
+// ---------- B2) opiniones reales ----------
+seccion("B2) opiniones: convite honesto sin opiniones, tarjetas y datos estructurados solo con opiniones reales");
+const tmpOp = path.join(os.tmpdir(), "opiniones-prueba-" + process.pid + ".json");
+const base = { id: "prueba-uno", nome: "Pessoa de Teste A.", texto: "Texto de prueba, inventado solo para esta comprobación, con más de quince letras.", nota: 5, produto: "kit", fonte: "hotmart", compraVerificada: true, autorizouPublicar: true, data: "2026-10-20" };
+const escribeOp = (itens) => fs.writeFileSync(tmpOp, JSON.stringify({ itens }));
+const conOp = (itens, nombre, extra = {}) => { escribeOp(itens); process.env.AVALIACOES = tmpOp; try { return constr(kitOn(extra), nombre); } finally { delete process.env.AVALIACOES; } };
+const vacio = conOp([], "opiniones-vacio");
+const kitPag = leer(vacio.dir, "kit-tcc/index.html");
+ok(/class="opinioes-vazio"/.test(kitPag) && /Eu só publico a opinião com a sua autorização/.test(kitPag), "sin opiniones: la página del kit muestra un convite honesto");
+ok(!/aggregateRating|"@type":"Review"/.test(kitPag) && !/id="opinioes-inicio"/.test(leer(vacio.dir, "index.html")), "sin opiniones: ni datos estructurados de avaliação en el kit ni sección en la portada");
+const verif = conOp([{ ...base, nota: 5, compraVerificada: false }], "opiniones-hotmart-no-verificada");
+ok(/Opinião pela Hotmart/.test(leer(verif.dir, "kit-tcc/index.html")) && !/Compra verificada/.test(leer(verif.dir, "kit-tcc/index.html")), "una opinión de la Hotmart con compraVerificada:false NO dice «Compra verificada»");
+const geral = conOp([{ ...base, id: "geral-con-nota", produto: "geral", nota: 1, fonte: "email", compraVerificada: false }], "opiniones-geral");
+ok(!/aggregateRating/.test(leer(geral.dir, "kit-tcc/index.html")) && /id="opinioes-inicio"/.test(leer(geral.dir, "index.html")), "una opinión «geral» con nota no entra en el Product del kit y sí en la portada");
+const apagado = (() => { escribeOp([base]); process.env.AVALIACOES = tmpOp; try { return constr({ kit: { ativo: false } }, "opiniones-kit-apagado"); } finally { delete process.env.AVALIACOES; } })();
+ok(apagado.ok && !/id="opinioes-inicio"|class="opiniao"/.test(leer(apagado.dir, "index.html")), "con el kit apagado, las opiniones del kit no aparecen en la portada");
+const op = conOp([base, { ...base, id: "prueba-dos", nome: "Pessoa de Teste B.", texto: "Otro texto <script>alert(1)</script> de prueba, también inventado.", nota: 4, fonte: "email", compraVerificada: false, data: "2026-10-22" }, { ...base, id: "prueba-tres", nome: "Pessoa C.", nota: undefined, produto: "geral", fonte: "whatsapp", compraVerificada: false, texto: "Opinión general de prueba sobre las herramientas gratuitas del sitio.", data: "2026-10-25" }], "opiniones-on");
+ok(op.ok, "el build con opiniones de prueba funciona", op.salida.slice(-300));
+const kOp = leer(op.dir, "kit-tcc/index.html"), hOp = leer(op.dir, "index.html");
+ok((kOp.match(/class="opiniao"/g) || []).length === 2 && !/opinioes-vazio/.test(kOp), "kit: 2 tarjetas (solo las del kit) y ya no el convite");
+ok((kOp.match(/Compra verificada na Hotmart/g) || []).length === 1 && /Opinião enviada por e-mail/.test(kOp), "kit: solo la opinión de la Hotmart lleva «Compra verificada»");
+ok(!/<script>alert/.test(kOp) && /&lt;script&gt;alert/.test(kOp), "el texto de las opiniones se escapa (sin HTML ni scripts)");
+const ldOp = [...kOp.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => JSON.parse(m[1]));
+const prodOp = ldOp.find((x) => x["@type"] === "Product");
+ok(prodOp && prodOp.aggregateRating && prodOp.aggregateRating.ratingValue === "4.5" && prodOp.aggregateRating.reviewCount === "2" && prodOp.review.length === 2, "Product: aggregateRating 4.5 con 2 opiniones reales y su lista de review");
+ok((hOp.match(/class="opiniao"/g) || []).length === 3 && /id="opinioes-inicio"/.test(hOp), "portada: sección con las 3 opiniones más nuevas");
+const errOp = (item, texto, nombre) => { const r = conOp([item], nombre); ok(!r.ok && r.salida.includes(texto), nombre + ": el build se niega («" + texto + "»)", r.salida.slice(-200)); };
+errOp({ ...base, autorizouPublicar: false }, "autorizou", "opinion-sin-permiso");
+errOp({ ...base, data: "2999-01-01" }, "futuro", "opinion-futura");
+errOp({ ...base, fonte: "email", compraVerificada: true }, "compraVerificada", "opinion-verificada-falsa");
+errOp({ ...base, nota: 6 }, "nota", "opinion-nota-6");
+errOp({ ...base, texto: "corto" }, "texto", "opinion-texto-corto");
+try { fs.rmSync(tmpOp, { force: true }); } catch (e) { /* nada */ }
 
 // ---------- C) errores del build ----------
 seccion("C) errores que el build debe dar");

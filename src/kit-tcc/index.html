@@ -12,7 +12,7 @@
   <meta property="og:description" content="Modelo em Word com sumário automático, checklist e guia rápido. Pagamento único de {{KIT_PRECO}}.">
   <meta property="og:url" content="{{SITE_URL}}/kit-tcc/">
   <link rel="stylesheet" href="/assets/css/kit.css?v={{BUILD}}">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Kit TCC: modelo em Word nas normas ABNT","description":"Modelo de TCC em Word com sumário automático, títulos numerados e numeração de páginas prontos, mais checklist e guia rápido em PDF.","url":"{{SITE_URL}}/kit-tcc/","image":"{{SITE_URL}}/assets/img/kit/modelo-sumario.webp","brand":{"@type":"Brand","name":"{{SITE_NAME}}"},"offers":{"@type":"Offer","url":"{{SITE_URL}}/kit-tcc/","price":"{{KIT_PRECO_NUM}}","priceCurrency":"BRL","availability":"https://schema.org/InStock","seller":{"@type":"Organization","name":"{{SITE_NAME}}"}}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Kit TCC: modelo em Word nas normas ABNT","description":"Modelo de TCC em Word com sumário automático, títulos numerados e numeração de páginas prontos, mais checklist e guia rápido em PDF.","url":"{{SITE_URL}}/kit-tcc/","image":"{{SITE_URL}}/assets/img/kit/modelo-sumario.webp","brand":{"@type":"Brand","name":"{{SITE_NAME}}"},"offers":{"@type":"Offer","url":"{{SITE_URL}}/kit-tcc/","price":"{{KIT_PRECO_NUM}}","priceCurrency":"BRL","availability":"https://schema.org/InStock","seller":{"@type":"Organization","name":"{{SITE_NAME}}"}}{{KIT_REVIEWS_LD}}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"{{SITE_NAME}}","item":"{{SITE_URL}}/"},{"@type":"ListItem","position":2,"name":"Kit TCC","item":"{{SITE_URL}}/kit-tcc/"}]}</script>
   {{FAQ_JSONLD:kit-tcc}}
 </head>
@@ -185,6 +185,18 @@
           <p>Sou o Lian e criei o {{SITE_NAME}}. O kit é de minha autoria e eu respondo por ele. A compra e o pagamento são feitos na Hotmart, que cuida da entrega e do reembolso.</p>
           <p class="kit-fatos"><strong>Empresa registrada:</strong> Lian Marcos Martinez Navarro, MEI, CNPJ 67.704.102/0001-69. Não tenho ligação com a ABNT nem com instituições de ensino.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao" id="opinioes" aria-labelledby="opinioes-titulo">
+    <div class="container">
+      <div class="secao-topo revelar">
+        <span class="etiqueta">Opiniões</span>
+        <h2 id="opinioes-titulo">O que dizem as pessoas que usaram o kit</h2>
+      </div>
+      <div class="revelar">
+        {{AVALIACOES_KIT}}
       </div>
     </div>
   </section>

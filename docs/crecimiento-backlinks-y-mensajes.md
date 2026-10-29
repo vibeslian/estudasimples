@@ -299,4 +299,5 @@ Registro de envíos: anota aquí fecha, lugar y respuesta, para no repetir mensa
 |---|---|---|---|
 | 28/10/2026 | JivoChat (contato@jivochat.com.br) | Mensaje B1 variante 1, enviado por Lian desde Gmail | Sin respuesta aún (recordatorio amable no antes del 11/11/2026) |
 | 29/10/2026 | Biblioteca Central UFRGS (formulario ufrgs.br/bibliotecas/contato) | Mensaje B1 variante 2 + guía de plagio e IA, enviado por Claude con la sesión de Lian y su permiso | Confirmación de recepción; sin respuesta aún (no insistir antes de 3 semanas) |
+| 29/10/2026 | Toda Matéria (formulario todamateria.com.br/contato) | Mensaje B1 variante 1 sobre su guía «Como fazer capa de trabalho ABNT»; Claude llenó el formulario y Lian marcó el captcha y lo envió | Confirmación «Mensagem enviada!»; sin respuesta aún (no insistir antes del 19/11/2026) |
 | | | | |

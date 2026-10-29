@@ -12,6 +12,7 @@ import { preparaAnuncie, URL_ANUNCIE } from "./build-anuncie.mjs";
 import { preparaKit } from "./build-kit.mjs";
 import { preparaAfiliados } from "./build-afiliados.mjs";
 import { preparaAdsense } from "./build-adsense.mjs";
+import { preparaAvaliacoes } from "./build-avaliacoes.mjs";
 
 const SRC = "src";
 const OUT = process.env.BUILD_OUT || "dist"; // BUILD_OUT e SITE_CONFIG só servem para as provas montarem uma versão de teste
@@ -40,7 +41,8 @@ const cssGlobal = CSS_GLOBAL.map((n) => readFileSync(join(cssDir, n + ".css"), "
 const sv = config.servico;
 const guiasLista = carregaGuias(); // conteudo/guias.json (Etapa 10)
 const anuncie = preparaAnuncie(config, guiasLista); // página /anuncie/ (escondida enquanto anuncie.ativo for false) e cartão "Parceiro recomendado"
-const kit = preparaKit(config); // Kit TCC, produto pago na Hotmart (a página /kit-tcc/ nem existe enquanto kit.ativo for false)
+const kit = preparaKit(config);
+const avaliacoes = preparaAvaliacoes(kit.ativo); // opiniões reais e autorizadas (conteudo/avaliacoes.json) // Kit TCC, produto pago na Hotmart (a página /kit-tcc/ nem existe enquanto kit.ativo for false)
 const afiliados = preparaAfiliados(config, guiasLista, { numTermos: kit.ativo ? 13 : 12 }); // "Recomendado para o seu trabalho" (apagado enquanto afiliados.ativo for false)
 const gb = preparaGuias(config, guiasLista, anuncie.parceiroDaGuia, afiliados.daGuia);
 const mensagens = { ...gb.mensagens(sv.modeloMensagem), ...mensagensWhatsapp(sv) }; // guia-<slug>, as de site.config.json e as de página-componente (capa-proximo...)
@@ -123,6 +125,9 @@ function render(text, origem = "servico", rel = "") {
     .split("{{GUIAS_LISTA}}").join(gb.lista())
     .replace(/[{][{]GUIAS_DESTAQUE:([0-9]+)[}][}]/g, (_, n) => gb.destaque(Number(n)))
     .split("{{GUIAS_JSONLD}}").join(gb.indiceJson())
+    .split("{{AVALIACOES_KIT}}").join(avaliacoes.kitHtml)
+    .split("{{AVALIACOES_HOME}}").join(avaliacoes.homeHtml)
+    .split("{{KIT_REVIEWS_LD}}").join(avaliacoes.reviewsLd)
     .split("{{PERCURSO_HTML}}").join(conexoes.percursoHtml(origem === "servico" ? undefined : origem))
     .split("{{PERCURSO_DADOS}}").join(conexoes.percursoJson(origem === "servico" ? undefined : origem));
   // fragmentos compartilhados: {{include:header}} -> src/partials/header.html (duas passadas: eles podem incluir outros)
