@@ -1,4 +1,4 @@
-// Campos do gerador de referências ABNT (NBR 6023:2018): o que se pergunta para cada tipo de fonte.
+// Campos do gerador de referências ABNT (NBR 6023:2025): o que se pergunta para cada tipo de fonte.
 // Este arquivo é a ÚNICA fonte: o build.mjs o usa para escrever o HTML dos formulários (assim a página já chega pronta, sem salto de layout)
 // e o referencias.js o usa para ler os campos. Sem DOM: pode ser importado no Node.
 //
@@ -96,7 +96,7 @@ export const TIPOS = [
       { k: "texto", id: "titulo", rotulo: "Título do artigo", obrig: true, placeholder: "Ex.: Redes sociais e aprendizagem" },
       { k: "texto", id: "subtitulo", rotulo: "Subtítulo do artigo", opcional: true },
       { k: "texto", id: "periodico", rotulo: "Nome da revista ou periódico", obrig: true, placeholder: "Ex.: Revista Exemplo de Educação" },
-      { k: "texto", id: "local", rotulo: "Cidade da revista", ajuda: "Se não constar, deixe em branco (sai [s. l.]).", placeholder: "Ex.: São Paulo" },
+      { k: "texto", id: "local", rotulo: "Cidade da revista", ajuda: "Se não constar, deixe em branco. Com link (artigo da internet) o local pode ser omitido; sem link, sai [s. l.].", placeholder: "Ex.: São Paulo" },
       { k: "linha", campos: [
         { k: "texto", id: "volume", rotulo: "Volume (v.)", opcional: true, placeholder: "Ex.: 12" },
         { k: "texto", id: "numero", rotulo: "Número (n.)", opcional: true, placeholder: "Ex.: 2" },
@@ -119,7 +119,7 @@ export const TIPOS = [
       { k: "autoria", id: "autoria", sem: true, entidade: true },
       { k: "texto", id: "titulo", rotulo: "Título da página", obrig: true, placeholder: "Ex.: Como planejar a semana de provas" },
       { k: "texto", id: "nomeSite", rotulo: "Nome do site", opcional: true, ajuda: "Ex.: o nome do portal ou do blog.", placeholder: "Ex.: Exemplo Escola" },
-      { k: "texto", id: "local", rotulo: "Cidade", ajuda: "Só se aparecer na página. Se não, deixe em branco (sai [S. l.]).", placeholder: "Ex.: Recife" },
+      { k: "texto", id: "local", rotulo: "Cidade", ajuda: "Só se aparecer na página. Se não, deixe em branco: a NBR 6023:2025 permite omitir o local em documentos da internet.", placeholder: "Ex.: Recife" },
       { k: "data", id: "pub", rotulo: "Data da publicação", partes: ["dia", "mes", "ano"], obrig: true },
       { k: "mais", rotulo: "Mais opções (a página não tem ano)", campos: [anoTipo] },
       online(),
@@ -131,7 +131,7 @@ export const TIPOS = [
       { k: "autoria", id: "autoria", sem: true, entidade: true },
       { k: "texto", id: "titulo", rotulo: "Título da notícia", obrig: true, placeholder: "Ex.: Ritmo de vacinação cai na semana" },
       { k: "texto", id: "jornal", rotulo: "Nome do jornal ou portal", obrig: true, placeholder: "Ex.: Folha de S.Paulo" },
-      { k: "texto", id: "local", rotulo: "Cidade do jornal", ajuda: "Se não constar, deixe em branco (sai [s. l.]).", placeholder: "Ex.: São Paulo" },
+      { k: "texto", id: "local", rotulo: "Cidade do jornal", ajuda: "Se não constar, deixe em branco. Com link (notícia da internet) o local pode ser omitido; sem link, sai [s. l.].", placeholder: "Ex.: São Paulo" },
       { k: "data", id: "pub", rotulo: "Data da publicação", partes: ["dia", "mes", "ano"], obrig: true },
       { k: "linha", campos: [
         { k: "texto", id: "secao", rotulo: "Seção ou caderno", opcional: true, placeholder: "Ex.: Cultura" },

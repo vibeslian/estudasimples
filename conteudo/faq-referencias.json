@@ -2,7 +2,7 @@
   {
     "p": "Como fazer uma referência ABNT?",
     "r": [
-      "Escolha o tipo de fonte no gerador (livro, artigo, site...) e preencha os dados que estão no documento: autor, título, edição, cidade, editora e ano. A referência sai na ordem e com a pontuação da NBR 6023:2018, e você copia ou baixa em Word e PDF."
+      "Escolha o tipo de fonte no gerador (livro, artigo, site...) e preencha os dados que estão no documento: autor, título, edição, cidade, editora e ano. A referência sai na ordem e com a pontuação da NBR 6023:2025, e você copia ou baixa em Word e PDF."
     ]
   },
   {
@@ -38,7 +38,7 @@
   {
     "p": "O que significam [S. l.] e [s. n.]?",
     "r": [
-      "São abreviaturas em latim para o que não consta no documento: [S. l.] (sine loco) é \"sem local\", e [s. n.] (sine nomine) é \"sem editora\". Sem os dois, escreve-se [S. l.: s. n.]. O gerador usa essas formas quando você deixa a cidade ou a editora em branco."
+      "São abreviaturas em latim para o que não consta no documento: [S. l.] (sine loco) é \"sem local\", e [s. n.] (sine nomine) é \"sem editora\". Sem os dois, escreve-se [S. l.: s. n.]. O gerador usa essas formas em livros e outras obras quando você deixa a cidade ou a editora em branco. Em sites, notícias e artigos da internet, a NBR 6023:2025 deixa o local opcional, e o gerador o omite quando você não informa a cidade."
     ]
   },
   {
@@ -68,7 +68,7 @@
   {
     "p": "Meu manual escreve diferente. Qual vale?",
     "r": [
-      "O manual da sua faculdade vale mais do que qualquer gerador. Os manuais seguem a mesma norma, mas escolhem formas diferentes em alguns pontos (como nº ou n. nas leis, ou o destaque do subtítulo). Nesses casos, o gerador fica com o que diz a NBR 6023:2018 ou com a forma mais comum, e a tabela \"Onde os manuais divergem\" desta página mostra cada escolha."
+      "O manual da sua faculdade vale mais do que qualquer gerador. Os manuais seguem a mesma norma, mas escolhem formas diferentes em alguns pontos (como nº ou n. nas leis, ou o destaque do subtítulo). Nesses casos, o gerador fica com o que diz a NBR 6023:2025 ou com a forma mais comum, e a tabela \"Onde os manuais divergem\" desta página mostra cada escolha."
     ]
   },
   {

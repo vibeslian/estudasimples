@@ -57,7 +57,7 @@ export async function geraPdfReferencias(refs, fonte = "Arial") {
       });
     }
   });
-  doc.setProperties({ title: "Referências ABNT", subject: "Lista de referências (ABNT NBR 6023:2018)", author: "", creator: "Estuda Simples" });
+  doc.setProperties({ title: "Referências ABNT", subject: "Lista de referências (ABNT NBR 6023:2025)", author: "", creator: "Estuda Simples" });
   try { doc.setLanguage("pt-BR"); } catch (e) { /* versões antigas não têm */ }
   return { blob: doc.output("blob"), nome: NOME_ARQUIVO + ".pdf" };
 }
@@ -88,7 +88,7 @@ export async function geraDocxReferencias(refs, fonte = "Arial") {
   const documento = new Document({
     creator: "Estuda Simples",
     title: "Referências ABNT",
-    description: "Lista de referências (ABNT NBR 6023:2018)",
+    description: "Lista de referências (ABNT NBR 6023:2025)",
     styles: { default: { document: { run: { font: fonte, size: 24, color: "000000", language: { value: "pt-BR" } }, paragraph: { alignment: AlignmentType.LEFT, spacing: { before: 0, after: 0, line: 240, lineRule: LineRuleType.AUTO } } } } },
     sections: [{
       properties: { page: { size: { width: 11906, height: 16838 }, margin: { top: cmTw(3), left: cmTw(3), right: cmTw(2), bottom: cmTw(2), header: 709, footer: 709, gutter: 0 } } },

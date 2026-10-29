@@ -296,4 +296,5 @@ Registro de envíos: anota aquí fecha, lugar y respuesta, para no repetir mensa
 
 | Fecha | Lugar | Qué se envió | Respuesta |
 |---|---|---|---|
+| 28/10/2026 | JivoChat (contato@jivochat.com.br) | Mensaje B1 variante 1, enviado por Lian desde Gmail | Sin respuesta aún (recordatorio amable no antes del 11/11/2026) |
 | | | | |

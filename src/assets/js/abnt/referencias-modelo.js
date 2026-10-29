@@ -1,4 +1,4 @@
-// Motor das referências ABNT (NBR 6023:2018) e das citações no texto (NBR 10520:2023).
+// Motor das referências ABNT (NBR 6023:2025) e das citações no texto (NBR 10520:2023).
 // Recebe os dados do formulário e devolve a referência em "trechos" ({ text, bold }), já com a pontuação, as maiúsculas, o negrito,
 // [S. l.] / [s. n.], mês abreviado e "Disponível em / Acesso em". A prévia, o PDF e o Word usam ESTES mesmos trechos.
 // Sem DOM: dá para testar em Node (pruebas/probar-referencias.mjs).
@@ -211,10 +211,10 @@ function montaArtigo(d, ctx) {
   if (ent) segs.push([r(titulo)]);
   else { const t = tituloSemAutor(titulo); segs.push([r(t.texto)]); ctx.semAutor = { ...t, completo: limpa(d.titulo) }; }
   const ano = anoTexto(d.pub && d.pub.ano, d.anoTipo, ctx.sufixo);
-  const partes = [limpa(d.local) || "[s. l.]", limpa(d.volume) && "v. " + limpa(d.volume), limpa(d.numero) && "n. " + limpa(d.numero), limpa(d.eloc), paginas(d.pagIni, d.pagFim), dataCompleta({ ...(d.pub || {}), ano: d.pub && d.pub.ano }, d.anoTipo, ctx.sufixo)].filter(Boolean);
+  const partes = [limpa(d.local) || (limpa(d.online && d.online.link) ? "" : "[s. l.]"), limpa(d.volume) && "v. " + limpa(d.volume), limpa(d.numero) && "n. " + limpa(d.numero), limpa(d.eloc), paginas(d.pagIni, d.pagFim), dataCompleta({ ...(d.pub || {}), ano: d.pub && d.pub.ano }, d.anoTipo, ctx.sufixo)].filter(Boolean);
   segs.push([r(limpa(d.periodico), true), r(", " + partes.join(", "))]);
   segs.push(...onlineSeg(d.online, { doi: true }));
-  if (!limpa(d.local)) ctx.avisos.push("Sem cidade da revista: usei [s. l.].");
+  if (!limpa(d.local) && !limpa(d.online && d.online.link)) ctx.avisos.push("Sem cidade da revista: usei [s. l.].");
   return { segs, ent, ano };
 }
 
@@ -224,10 +224,9 @@ function montaSite(d, ctx) {
   if (ent) { segs.push([r(ent.texto)]); segs.push(tituloComSub(d.titulo, "")); }
   else { const t = tituloSemAutor(d.titulo); segs.push([r(t.texto)]); ctx.semAutor = { ...t, completo: limpa(d.titulo) }; }
   const data = dataCompleta(d.pub, d.anoTipo, ctx.sufixo);
-  segs.push([r(`${limpa(d.local) || "[S. l.]"}, ${data}`)]);
+  segs.push([r(limpa(d.local) ? `${limpa(d.local)}, ${data}` : data)]);
   if (limpa(d.nomeSite)) segs.push([r("Portal: " + limpa(d.nomeSite))]);
   segs.push(...onlineSeg(d.online));
-  if (!limpa(d.local)) ctx.avisos.push("Sem cidade: usei [S. l.].");
   return { segs, ent, ano: anoTexto(d.pub && d.pub.ano, d.anoTipo, ctx.sufixo) };
 }
 
@@ -238,11 +237,11 @@ function montaNoticia(d, ctx) {
   else { const t = tituloSemAutor(d.titulo); segs.push([r(t.texto)]); ctx.semAutor = { ...t, completo: limpa(d.titulo) }; }
   const data = dataCompleta(d.pub, d.anoTipo, ctx.sufixo);
   const semSecao = !limpa(d.secao);
-  const partes = [limpa(d.local) || "[s. l.]", limpa(d.edicao) && "ed. " + limpa(d.edicao), semSecao && paginas(d.pagina, ""), data].filter(Boolean);
+  const partes = [limpa(d.local) || (limpa(d.online && d.online.link) ? "" : "[s. l.]"), limpa(d.edicao) && "ed. " + limpa(d.edicao), semSecao && paginas(d.pagina, ""), data].filter(Boolean);
   segs.push([r(limpa(d.jornal), true), r(", " + partes.join(", "))]);
   if (!semSecao) segs.push([r([limpa(d.secao), paginas(d.pagina, "")].filter(Boolean).join(", "))]);
   segs.push(...onlineSeg(d.online));
-  if (!limpa(d.local)) ctx.avisos.push("Sem cidade do jornal: usei [s. l.].");
+  if (!limpa(d.local) && !limpa(d.online && d.online.link)) ctx.avisos.push("Sem cidade do jornal: usei [s. l.].");
   return { segs, ent, ano: anoTexto(d.pub && d.pub.ano, d.anoTipo, ctx.sufixo) };
 }
 

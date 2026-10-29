@@ -1,4 +1,4 @@
-// Posição de cada linha da página REFERÊNCIAS (NBR 6023:2018 e NBR 14724:2024), em pontos, em uma ou mais páginas A4.
+// Posição de cada linha da página REFERÊNCIAS (NBR 6023:2025 e NBR 14724:2024), em pontos, em uma ou mais páginas A4.
 // Usado pela prévia, pelo PDF e pelo Word (que usa os mesmos espaços). Regras da página:
 //   - o título REFERÊNCIAS, centralizado e em negrito, sem número, com uma linha em branco (espaçamento 1,5) depois;
 //   - cada referência em ESPAÇO SIMPLES, alinhada à margem esquerda (sem recuo), separada da próxima por uma linha em branco simples;

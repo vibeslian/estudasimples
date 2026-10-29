@@ -1,6 +1,6 @@
 # Gerador de referências ABNT (Etapa 14)
 
-Página: `/gerador-de-referencias-abnt/`. Faz a referência (NBR 6023:2018) e a citação no texto (NBR 10520:2023) de 8 tipos de fonte, guarda uma lista em ordem alfabética e baixa a página REFERÊNCIAS em Word e PDF. Não usa serviços externos nem procura nada na internet: só organiza o que o estudante digita.
+Página: `/gerador-de-referencias-abnt/`. Faz a referência (NBR 6023:2025) e a citação no texto (NBR 10520:2023) de 8 tipos de fonte, guarda uma lista em ordem alfabética e baixa a página REFERÊNCIAS em Word e PDF. Não usa serviços externos nem procura nada na internet: só organiza o que o estudante digita.
 
 ## Onde está cada coisa
 | Arquivo | O que faz |
@@ -17,7 +17,7 @@ Página: `/gerador-de-referencias-abnt/`. Faz a referência (NBR 6023:2018) e a 
 - Autor: SOBRENOME em maiúsculas, vírgula, nome. Até 3 autores, todos; 4 ou mais: todos ou só o primeiro + et al. (opção do estudante, padrão "todos"). Papel (org.), (coord.), (ed.), (comp.) só no livro.
 - Instituição: nome em maiúsculas (BRASIL, órgão depois do ponto). Sem autor: entrada pelo título, primeira palavra em maiúsculas (e a seguinte, se a primeira for artigo, monossílabo ou número); o título sem negrito.
 - Negrito **só no título**: os dois-pontos e o subtítulo ficam sem negrito. Conferido nos exemplos de 4 manuais (UFU, Unifesp, Unisa, Unilab): mais de 100 casos de negrito que termina antes dos dois-pontos; os dois-pontos dentro do negrito só aparecem em rótulos como "Palavras-chave:", nunca em exemplos de referência; no artigo e na notícia, o negrito vai no nome da revista/jornal; no capítulo, no título do livro.
-- Faltou dado: `[S. l.]` (depois de ponto), `[s. l.]` (depois de vírgula, nos periódicos), `[s. n.]`, `[S. l.: s. n.]`; ano `[2018?]`, `[2017]`, `[ca. 2015]`, `[200-]`, `[201-?]`.
+- Faltou dado: `[S. l.]` (depois de ponto), `[s. l.]` (depois de vírgula, nos periódicos e jornais sem link; com link, em artigos, notícias e sites, o local é opcional e se omite, NBR 6023:2025, 7.20), `[s. n.]`, `[S. l.: s. n.]`; ano `[2018?]`, `[2017]`, `[ca. 2015]`, `[200-]`, `[201-?]`.
 - Meses abreviados em português: jan., fev., mar., abr., maio, jun., jul., ago., set., out., nov., dez. Dia sem zero. "Disponível em:" e "Acesso em:" só com link; a data de acesso já vem com a de hoje.
 - Editora: tira Ltda., S.A. etc. Lei: "nº" e número com ponto de milhar (9610 → 9.610).
 - Citação: padrão da NBR 10520:2023, `(Silva, 2020)` e `Silva (2020)`; 4 ou mais autores `Alves et al.`; sem autor `(Anteprojeto [...], 1987)`; mesmo autor e mesmo ano → 2020a e 2020b (na referência e na citação). Opção "modelo antigo" `(SILVA, 2020)`.
