@@ -1273,12 +1273,12 @@
   },
   {
     "categoria": "ENEM e escola",
-    "atualizado": "2026-10-22",
-    "norma": "Cartilha do Participante do Inep (redação no Enem 2025)",
+    "atualizado": "2026-10-29",
+    "norma": "Cartilha do Participante do Inep (redação no Enem 2026)",
     "slug": "quantas-linhas-tem-a-redacao-do-enem",
     "prioridade": 30,
     "rotulo": "Linhas da redação do ENEM",
-    "titulo": "Quantas linhas tem a redação do ENEM? Mínimo e máximo",
+    "titulo": "Quantas linhas tem a redação do ENEM 2026? Mínimo e máximo",
     "h1": "Quantas linhas tem a redação do ENEM? Mínimo, máximo e o que não conta",
     "descricao": "A redação do ENEM cabe em até 30 linhas, e com até 7 linhas escritas a nota é zero. Veja o mínimo, o que não conta e como conferir o seu texto.",
     "lead": "O limite da folha, o piso de 8 linhas para não zerar por tamanho, as linhas que não contam e se o título conta.",
@@ -1299,9 +1299,14 @@
     ],
     "fontes": [
       {
+        "titulo": "Inep, Cartilha do Participante «A redação do Enem 2026»",
+        "url": "https://download.inep.gov.br/publicacoes/institucionais/avaliacoes_e_exames_da_educacao_basica/cartilha_enem_2026.pdf",
+        "nota": "Edição de 2026. Confira a cartilha do ano da sua prova."
+      },
+      {
         "titulo": "Inep, Cartilha do Participante «A redação no Enem 2025»",
         "url": "https://download.inep.gov.br/publicacoes/institucionais/avaliacoes_e_exames_da_educacao_basica/a_redacao_no_enem_2025_cartilha_do_participante.pdf",
-        "nota": "Edição de 2025: confira a cartilha do ano da sua prova."
+        "nota": "Edição de 2025, usada para o limite de 30 linhas da folha e para comparar as regras."
       },
       {
         "titulo": "Inep, página do Enem (áreas de conhecimento, dois dias de prova, legislação e editais)",
