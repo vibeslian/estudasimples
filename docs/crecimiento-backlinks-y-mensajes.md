@@ -33,7 +33,8 @@ Resumen rápido:
 | 14 | Tecnoblog (guías "Responde" de capa ABNT) | Baja | Bajo | Canal NO confirmado |
 | 15 | Product Hunt | Baja | Medio | Cuenta con invitación (según terceros) |
 
-### 1. AlternativeTo
+### 1. AlternativeTo (DESCARTADO el 29/10/2026)
+- **No intentar:** su FAQ oficial dice que toda app debe soportar inglés y que rechaza herramientas web de una sola función aunque se agrupen varias en un sitio. Estuda Simples es solo en portugués y son herramientas simples, así que sería rechazado. (La ficha de abajo quedó de la investigación del 21/10, antes de leer esas reglas.)
 - URL: https://alternativeto.net/
 - Por qué encaja: es un directorio mundial donde la gente busca "alternativa a X". Permite que el propio autor añada su programa. Estuda Simples se puede registrar como alternativa a otros generadores/formateadores ABNT.
 - Cómo contactar: no hay contacto; se hace desde la cuenta (menú de usuario, "Suggest new application"). Hay que crear cuenta y verificar el e-mail (lo hace Lian, no yo).
@@ -297,4 +298,5 @@ Registro de envíos: anota aquí fecha, lugar y respuesta, para no repetir mensa
 | Fecha | Lugar | Qué se envió | Respuesta |
 |---|---|---|---|
 | 28/10/2026 | JivoChat (contato@jivochat.com.br) | Mensaje B1 variante 1, enviado por Lian desde Gmail | Sin respuesta aún (recordatorio amable no antes del 11/11/2026) |
+| 29/10/2026 | Biblioteca Central UFRGS (formulario ufrgs.br/bibliotecas/contato) | Mensaje B1 variante 2 + guía de plagio e IA, enviado por Claude con la sesión de Lian y su permiso | Confirmación de recepción; sin respuesta aún (no insistir antes de 3 semanas) |
 | | | | |
