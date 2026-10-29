@@ -1475,5 +1475,56 @@
         "nota": "Estudo em inglês."
       }
     ]
+  },
+  {
+    "categoria": "ENEM e escola",
+    "atualizado": "2026-10-29",
+    "slug": "enem-2026-horarios-e-o-que-levar",
+    "prioridade": 30.5,
+    "rotulo": "ENEM 2026: horários e o que levar",
+    "norma": "Orientações do Inep para o Enem 2026",
+    "ferramentas": [
+      "contador",
+      "folha-treino",
+      "cronograma"
+    ],
+    "titulo": "ENEM 2026: horários, o que levar e o que é proibido",
+    "h1": "ENEM 2026: datas, horários, o que levar e o que não pode entrar na sala",
+    "descricao": "Datas, horários dos portões, documento aceito, o que levar e o que é proibido no ENEM 2026, conforme as orientações oficiais do Inep.",
+    "lead": "As datas, os horários, o documento, a caneta e os itens proibidos, conforme as orientações oficiais do Inep.",
+    "resumoIndice": "Provas em 8 e 15 de novembro, horários dos portões, documento, caneta e o que não pode ficar com você.",
+    "ferramenta": {
+      "nome": "Contador de linhas da redação",
+      "texto": "Treine o tamanho da redação: cole o seu texto, diga quantos caracteres cabem em uma linha da sua letra e veja uma estimativa das linhas. Grátis, sem cadastro, e o texto não sai do seu aparelho.",
+      "botao": "Contar as linhas",
+      "url": "/contador-de-linhas-enem/"
+    },
+    "relacionadas": [
+      "quantas-linhas-tem-a-redacao-do-enem",
+      "como-montar-um-cronograma-de-estudos-para-o-enem",
+      "como-calcular-a-media-para-passar-de-ano"
+    ],
+    "fontes": [
+      {
+        "titulo": "Inep, Legislação do Enem 2026 (edital nº 64/2026 e retificações)",
+        "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/legislacao/enem/2026",
+        "nota": "O edital manda sobre as regras do dia da prova. A retificação de 7/10/2026 não mudou datas nem horários."
+      },
+      {
+        "titulo": "Inep, Enem: Orientações (cronograma, o que levar, horários e obrigações no dia do exame)",
+        "url": "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/orientacoes",
+        "nota": "Página do Inep consultada em 29/10/2026. Confira o edital do Enem 2026 e o seu Cartão de Confirmação de Inscrição: se houver mudança, vale o que o Inep publicar."
+      },
+      {
+        "titulo": "Inep, Enem (página geral do exame, com acesso às orientações e à legislação)",
+        "url": "https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem",
+        "nota": "O edital do Enem 2026 está na seção de legislação do Inep. Consulte-o para os detalhes."
+      },
+      {
+        "titulo": "Ministério da Educação, O que levar no dia da prova do Enem: itens permitidos e proibidos",
+        "url": "https://www.gov.br/mec/pt-br/enem/fique-por-dentro/documento-caneta-lanche-celular-e-envelope-porta-objetos-prepare-se-para-a-prova-sem-correr-risco-de-eliminacao",
+        "nota": "Página do MEC atualizada em 30/09/2026. Não traz os horários: eles vêm das orientações do Inep."
+      }
+    ]
   }
 ]
