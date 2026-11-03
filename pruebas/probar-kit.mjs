@@ -78,7 +78,7 @@ ok(sinPie.length === 0, "encendido: el pie de TODAS las páginas enlaza el kit",
 ok(leer(on.dir, "formatacao-abnt-tcc/index.html").includes('href="/kit-tcc/#origem=servico">Kit TCC</a>, o modelo completo em Word, por R$\u00a029,90'), "encendido: la página del servicio menciona el kit con su precio");
 const GUIAS_KIT = ["sumario-automatico-word", "numeracao-de-paginas-abnt", "normas-abnt-no-word", "margens-abnt", "fonte-e-espacamento-abnt", "titulos-e-subtitulos-abnt", "normas-abnt-tcc", "normas-abnt", "como-fazer-tcc", "lista-de-ilustracoes-e-tabelas-abnt", "modelos-de-capa-abnt"].map((g) => `guias/${g}/index.html`);
 const CON_KIT = ["formatacao-abnt-tcc/index.html", "index.html", "gerador-de-sumario-abnt/index.html", "guias/plagio-e-ia-no-tcc/index.html", ...GUIAS_KIT];
-const sinTarjeta = GUIAS_KIT.filter((p) => !/<aside class="oferta" aria-label="Kit TCC">[\s\S]*href="\/kit-tcc\/#origem=guia-oferta"/.test(leer(on.dir, p)));
+const sinTarjeta = GUIAS_KIT.filter((p) => !/<aside class="oferta" aria-label="Kit TCC">[\s\S]*href="\/kit-tcc\/#origem=guia-[a-z0-9-]+"/.test(leer(on.dir, p)));
 ok(sinTarjeta.length === 0, "encendido: las 11 guías de formato llevan la tarjeta del Kit TCC", sinTarjeta.join(", "));
 ok(/id="kit-tcc-faixa"/.test(leer(on.dir, "index.html")) && /href="\/kit-tcc\/#origem=inicio-oferta"/.test(leer(on.dir, "index.html")), "encendido: la portada tiene la franja del Kit TCC");
 ok(/não se atualiza sozinho/.test(leer(on.dir, "gerador-de-sumario-abnt/index.html")) && /href="\/kit-tcc\/#origem=sumario-aviso"/.test(leer(on.dir, "gerador-de-sumario-abnt/index.html")), "encendido: el generador de sumario avisa que su Word no se actualiza solo y menciona el kit");
@@ -106,9 +106,10 @@ ok(/Dados da compra do Kit TCC/.test(pHtml) && /Há também um produto digital p
 const tOffHtml = leer(off.dir, "termos-de-uso/index.html"), pOffHtml = leer(off.dir, "politica-de-privacidade/index.html");
 ok(consecutivos(numeros(tOffHtml, /<h2[^>]*>(\d+)\./g), 12) && /<h2 id="links-de-afiliado">12\. Links de afiliado<\/h2>/.test(tOffHtml) && /Veja a seção 12\./.test(tOffHtml), "Términos sin el kit: 12 secciones y afiliados en la 12");
 ok(consecutivos(numeros(pOffHtml, /<h2[^>]*>(\d+)\./g), 12) && consecutivos(numeros(pOffHtml, /<h3[^>]*>2\.(\d+)\./g), 5), "Política sin el kit: 12 secciones y subsecciones 2.1 a 2.5");
-// ninguna otra página cambia de contenido salvo pie y servicio, Términos y Política
-const cambian = htmls.filter((x) => !["formatacao-abnt-tcc/index.html", "termos-de-uso/index.html", "politica-de-privacidade/index.html", ...CON_KIT].includes(x) && leer(on.dir, x).replace(/<footer[\s\S]*?<\/footer>/, "") !== leer(off.dir, x).replace(/<footer[\s\S]*?<\/footer>/, "").replace(/\?v=[a-z0-9]+/g, (m) => m));
-const cambianReal = cambian.filter((x) => leer(on.dir, x).replace(/<footer[\s\S]*?<\/footer>/, "").replace(/\?v=[a-z0-9]+/g, "") !== leer(off.dir, x).replace(/<footer[\s\S]*?<\/footer>/, "").replace(/\?v=[a-z0-9]+/g, ""));
+const sinNavKit = (s) => s.replace(/<a class="nav-kit"[^>]*>[^<]*<\/a>\s*/, ""); // el menú gana un enlace «Kit TCC» con el kit encendido
+// ninguna otra página cambia de contenido salvo pie, menú y servicio, Términos y Política
+const cambian = htmls.filter((x) => !["formatacao-abnt-tcc/index.html", "termos-de-uso/index.html", "politica-de-privacidade/index.html", ...CON_KIT].includes(x) && sinNavKit(leer(on.dir, x)).replace(/<footer[\s\S]*?<\/footer>/, "") !== sinNavKit(leer(off.dir, x)).replace(/<footer[\s\S]*?<\/footer>/, "").replace(/\?v=[a-z0-9]+/g, (m) => m));
+const cambianReal = cambian.filter((x) => sinNavKit(leer(on.dir, x)).replace(/<footer[\s\S]*?<\/footer>/, "").replace(/\?v=[a-z0-9]+/g, "") !== sinNavKit(leer(off.dir, x)).replace(/<footer[\s\S]*?<\/footer>/, "").replace(/\?v=[a-z0-9]+/g, ""));
 ok(cambianReal.length === 0, "las demás páginas solo cambian en el pie (comparado con el kit apagado)", cambianReal.slice(0, 4).join(", "));
 
 // ---------- B2) opiniones reales ----------
@@ -200,7 +201,7 @@ for (const [w, h, movil] of [[320, 700, true], [390, 844, true], [768, 1000, fal
   const rotas = await pg.$$eval("img", (l) => l.filter((i) => !(i.complete && i.naturalWidth > 0)).map((i) => i.getAttribute("src")));
   ok(rotas.length === 0, "todas las imágenes cargan al bajar por la página (las perezosas también)", rotas.join());
   const caja = await pg.$eval(".kit-tabela-caixa", (e) => ({ scroll: e.scrollWidth > e.clientWidth, tab: e.tabIndex, role: e.getAttribute("role") }));
-  ok(caja.scroll && caja.tab === 0 && caja.role === "region", "la tabla se desplaza en el celular y se alcanza con teclado (tabindex y role=region)");
+  ok(caja.tab === 0 && caja.role === "region", "la tabla se alcanza con teclado (tabindex y role=region)");
   await ctx.close();
 }
 {

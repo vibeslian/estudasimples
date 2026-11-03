@@ -87,7 +87,7 @@ marca(!/\b\d+\s*a\s*\d+\s*horas/.test(fuenteTexto) && !fuenteTexto.includes("wa.
   marca(!(await p.$(".anuncio")), "la página del servicio no tiene espacios de anuncio");
   marca(/Word e PDF/.test(await p.evaluate(() => document.body.innerText)) && /em Word e em PDF/.test(sec["como-funciona"]), "entrega en Word y PDF");
   marca(/quando eu confirmo o pagamento por Pix e recebo todos os arquivos necessários/.test(sec["prazo-e-precos"]) && /só começa a contar quando eu confirmo o pagamento e recebo todos os arquivos necessários/.test(sec["como-funciona"]), "el plazo empieza al confirmar el pago por Pix y recibir todos los archivos");
-  marca(/Se o erro de formatação for meu, eu corrijo de graça, sempre/.test(sec["como-funciona"]) && /Se você mudar o conteúdo depois da entrega, é um novo orçamento/.test(sec["nao-inclui"]) && /novo orçamento/.test(sec.reembolso), "ajustes: 1 ronda, error de formatación mío siempre gratis, cambio de contenido = nuevo presupuesto");
+  marca(/Se o erro for meu, eu corrijo sem custo/.test(sec["como-funciona"]) && /Se você mudar o conteúdo depois da entrega, é um novo orçamento/.test(sec["nao-inclui"]) && /novo orçamento/.test(sec.reembolso), "ajustes: 1 ronda, error de formatación mío sin costo, cambio de contenido = nuevo presupuesto");
   marca(/Reembolso integral/.test(sec.reembolso) && /pelo Pix, em até 7 dias/.test(sec.reembolso) && /antes de eu começar/.test(sec.reembolso) && /não cumprir o prazo/.test(sec.reembolso) && /Depois da entrega/.test(sec.reembolso) && /não é devolvido/.test(sec.reembolso) && /Código de Defesa do Consumidor/.test(sec.reembolso), "reembolso: integral si cancela antes de empezar o si no cumplo el plazo; después de la entrega no, con ajustes; sin quitar derechos del CDC");
   marca(/15 dias depois da entrega/.test(sec.privacidade), "privacidad: archivos borrados 15 días después de la entrega");
 
@@ -210,10 +210,10 @@ console.log("\n== 6) Política de Privacidade y Termos ==");
     return { h: h?.textContent.trim(), txt, fecha: document.querySelector(".artigo-meta").textContent.trim() };
   });
   marca(r.h === "2.4. Serviço pago de formatação de trabalhos", `sección nueva con ancla: "${r.h}"`);
-  marca(/WhatsApp/.test(r.txt) && /inteligência artificial/.test(r.txt) && /apago os arquivos/i.test(r.txt) && /só para prestar o serviço/i.test(r.txt) && /Pix/.test(r.txt) && /art\. 7º, V/.test(r.txt), "explica: WhatsApp, IA, uso solo para el servicio, borrado, Pix y base legal");
+  marca(/WhatsApp/.test(r.txt) && /inteligência artificial/.test(r.txt) && /apago do meu computador os arquivos/i.test(r.txt) && /só para prestar o serviço/i.test(r.txt) && /Pix/.test(r.txt) && /art\. 7º, V/.test(r.txt), "explica: WhatsApp, IA, uso solo para el servicio, borrado, Pix y base legal");
   marca(/WhatsApp \(Meta\)/.test(r.txt) && /Anthropic/.test(r.txt), "sección 5 (con quién se comparte) menciona WhatsApp, proveedores de IA y el banco");
   // la fecha es 14 de outubro (como siempre) o, desde que los links de afiliado están encendidos, la de afiliados.legalAtualizadoEm (21 de outubro de 2026, el curso de Hotmart)
-  marca(/14 de outubro de 2026|20 de outubro de 2026|21 de outubro de 2026|27 de outubro de 2026|28 de outubro de 2026/.test(r.fecha), `fecha actualizada: ${r.fecha}`);
+  marca(/14 de outubro de 2026|20 de outubro de 2026|21 de outubro de 2026|27 de outubro de 2026|28 de outubro de 2026|2 de novembro de 2026/.test(r.fecha), `fecha actualizada: ${r.fecha}`);
   marca(/15 dias depois da entrega/.test(r.txt) && !/Quando o serviço termina, apago/.test(r.txt), "Política: los archivos se borran 15 días después de la entrega (resumen, 2.4 y 6)");
   marca(/De qual página você veio/.test(r.txt) && /mensagem já escrita/.test(r.txt), "Política: explica que el mensaje de WhatsApp dice de qué página viene el visitante");
   const ancla = new URL("/politica-de-privacidade/#servico-formatacao", BASE).href;
@@ -223,8 +223,8 @@ console.log("\n== 6) Política de Privacidade y Termos ==");
   const t = await abre("/termos-de-uso/");
   const tt = await t.evaluate(() => ({ txt: document.querySelector("main").innerText.replace(/\s+/g, " "), ancla: !!document.getElementById("servico-formatacao"), subs: [...document.querySelectorAll("main h3")].map((h) => h.textContent.trim()) }));
   marca(tt.ancla && /Serviço pago de formatação/.test(tt.txt) && tt.subs.length >= 5, "los Termos de Uso describen el servicio pago (con ancla #servico-formatacao): " + tt.subs.join(" | "));
-  marca(/Word e em PDF/.test(tt.txt) && /confirmo o pagamento por Pix e recebo todos os arquivos necessários/.test(tt.txt) && /corrijo de graça, sempre/.test(tt.txt) && /novo orçamento/.test(tt.txt) && /15 dias depois da entrega/.test(tt.txt), "Termos: entrega Word y PDF, plazo desde el pago y los archivos, ajustes, nuevo presupuesto y borrado a los 15 días");
-  marca(/Devolvo o valor integral, pelo Pix, em até 7 dias/.test(tt.txt) && /antes de eu começar/.test(tt.txt) && /não cumprir o prazo/.test(tt.txt) && /Depois da entrega, o valor não é devolvido/.test(tt.txt) && /Código de Defesa do Consumidor/.test(tt.txt) && /art\. 49/.test(tt.txt) && /art\. 20/.test(tt.txt), "Termos: reembolso integral (antes de empezar / plazo incumplido), sin reembolso tras la entrega, y derechos del CDC (arts. 49 y 20) intactos");
+  marca(/Word e em PDF/.test(tt.txt) && /confirmo o pagamento por Pix e recebo todos os arquivos necessários/.test(tt.txt) && /corrijo sem custo, mesmo depois dessa rodada/.test(tt.txt) && /novo orçamento/.test(tt.txt) && /(15|Quinze) dias depois da entrega/.test(tt.txt), "Termos: entrega Word y PDF, plazo desde el pago y los archivos, ajustes, nuevo presupuesto y borrado a los 15 días");
+  marca(/Devolvo o valor integral, pelo Pix, em até 7 dias/.test(tt.txt) && /antes de eu começar/.test(tt.txt) && /não cumprir o prazo/.test(tt.txt) && /depois da entrega, o valor não é devolvido/.test(tt.txt) && /Arrependimento em 7 dias/.test(tt.txt) && /Código de Defesa do Consumidor/.test(tt.txt) && /art\. 49/.test(tt.txt) && /art\. 20/.test(tt.txt), "Termos: reembolso integral (antes de empezar / plazo incumplido), sin reembolso tras la entrega, y derechos del CDC (arts. 49 y 20) intactos");
   await t.close();
 }
 

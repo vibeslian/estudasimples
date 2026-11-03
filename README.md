@@ -41,3 +41,6 @@ El sitio se publica con Cloudflare (Workers con archivos estáticos). Cada vez q
 - Nombre del Worker: `estudasimples` (debe coincidir con `wrangler.jsonc`)
 
 Guía completa (GitHub, Cloudflare, dominio, www, HTTPS, Search Console y correo): `docs/publicar.md`.
+
+## Prueba rápida antes de publicar
+`npm test` arma el sitio en una carpeta temporal y revisa lo mínimo que no puede romperse (build, enlaces internos, sitemap, títulos, H1, datos estructurados, JS). La corre GitHub Actions en cada push (`.github/workflows/prueba-rapida.yml`) y se puede correr a mano antes de subir cambios. Las pruebas completas con Chrome siguen en `pruebas/`.

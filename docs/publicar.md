@@ -142,3 +142,11 @@ Reenvía lo que llegue a `contato@estudasimples.com.br` a tu Gmail (gratis).
 3. **Routing rules** > **Create routing rule**: *Email pattern* = `contato`, *Action* = **Send to an email**, *Destination* = tu Gmail > **Save**.
 4. Prueba desde **otra** cuenta de correo (y revisa spam).
 Limitación: Email Routing solo **recibe**. Si respondes desde Gmail, sale tu dirección de Gmail y no `contato@`; se puede hacer que salga como `contato@` con "Enviar como" de Gmail, pero no es necesario para empezar.
+
+## robots.txt y los robots de IA (2/11/2026)
+El archivo `robots.txt` lo arma `build.mjs`: deja entrar a todos (Google, Bing, buscadores de IA y los asistentes que leen la página cuando una persona pregunta: ChatGPT-User, Claude-User, Perplexity-User) y bloquea solo los robots que recogen textos para ENTRENAR modelos (GPTBot, ClaudeBot, CCBot, Google-Extended, Applebot-Extended, etc.; lista `ROBOS_DE_TREINO`).
+
+Cloudflare tiene además una función «robots.txt administrado» (Security > Settings > Bot traffic / AI Crawl Control) que agrega **por delante** su propia lista, y esa lista también bloquea a ChatGPT-User, Claude-User y Perplexity-User. Mientras esa función esté encendida, el robots.txt en vivo seguirá bloqueándolos. Para que valga solo el del repositorio: apagar el robots.txt administrado en el panel de Cloudflare (lo hace Lian con su sesión iniciada; después comprobar con `curl https://estudasimples.com.br/robots.txt`).
+
+## HSTS
+Cloudflare > SSL/TLS > Edge Certificates > HTTP Strict Transport Security (HSTS): activar con 6 meses, sin «include subdomains» y sin «preload» (así se puede deshacer). Evita el salto http→https en redes públicas. Lo activa Lian en el panel.
