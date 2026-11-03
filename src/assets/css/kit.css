@@ -18,10 +18,10 @@
 .kit-icone { display: inline-grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; background: var(--salvia-100); color: var(--principal); }
 
 /* tabela gratuito x kit */
-.kit-tabela-caixa { overflow-x: auto; background: var(--superficie); border: 1px solid var(--salvia-200); border-radius: var(--raio); }
+.kit-tabela-caixa { overflow-x: auto;  background-color: var(--superficie); border: 1px solid var(--salvia-200); border-radius: var(--raio); }
 .kit-tabela-caixa:focus-visible { outline: 3px solid var(--principal); outline-offset: 2px; }
-.kit-tabela { width: 100%; min-width: 560px; border-collapse: collapse; font-size: 1rem; line-height: 1.45; }
-.kit-tabela th, .kit-tabela td { padding: 15px 20px; text-align: left; vertical-align: top; border-top: 1px solid var(--salvia-200); }
+.kit-tabela { width: 100%; min-width: 0; border-collapse: collapse; font-size: 1rem; line-height: 1.45; }
+.kit-tabela th, .kit-tabela td { padding: 15px clamp(10px, 3vw, 20px); text-align: left; vertical-align: top; border-top: 1px solid var(--salvia-200); }
 .kit-tabela thead th { border-top: 0; background: var(--salvia-100); font-weight: 700; color: var(--principal-escuro); }
 .kit-tabela thead th.kit-col { background: var(--principal-escuro); color: #fff; }
 .kit-tabela tbody th { font-weight: 700; width: 34%; }
@@ -71,10 +71,15 @@
 
 /* barra de compra fixa no celular */
 .barra-kit { display: none; }
+.compra-nota { margin: 14px 0 0; font-size: 1rem; line-height: 1.5; color: var(--texto-suave); max-width: 46ch; }
+.com-barra-kit .artigo-meta { margin-top: 24px; }
+.com-barra-kit .nav-cta, .com-barra .nav-cta { display: none; } /* nas páginas de produto pago, o botão «Começar grátis» do menu só confunde */
 @media (max-width: 899px) {
-  .barra-kit { display: flex; align-items: center; gap: 14px; position: fixed; inset: auto 0 0 0; z-index: 40; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: rgba(250, 248, 243, .97); border-top: 1px solid var(--salvia-200); box-shadow: 0 -6px 20px rgba(34, 54, 43, .1); }
+  .barra-kit { display: flex; align-items: center; gap: 14px; position: fixed; inset: auto 0 0 0; z-index: 40; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: rgba(250, 248, 243, .97); border-top: 1px solid var(--salvia-200); box-shadow: 0 -6px 20px rgba(34, 54, 43, .1); transform: translateY(100%); visibility: hidden; transition: transform .25s ease, visibility 0s linear .25s; }
+  .barra-kit.visivel { transform: none; visibility: visible; transition: transform .25s ease; }
   .barra-kit-preco { font-family: var(--fonte-titulo); font-weight: 800; font-size: 1.35rem; color: var(--principal-escuro); white-space: nowrap; }
   .barra-kit .btn { flex: 1; min-height: 52px; padding: 10px 16px; font-size: 1.05rem; }
   .com-barra-kit .site-footer { padding-bottom: calc(86px + env(safe-area-inset-bottom) + 24px); }
   html:has(.com-barra-kit) { scroll-padding-bottom: 96px; } /* o foco do teclado nunca fica escondido atrás da barra */
 }
+@media (prefers-reduced-motion: reduce) { .barra-kit, .barra-kit.visivel { transition: none; } }

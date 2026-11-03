@@ -79,6 +79,38 @@
     });
   } catch (e) { /* o link continua funcionando sem isto */ }
 
+  // Tabelas largas no celular: se passam da tela, uma linha avisa que dá para deslizar (sem isso a coluna da direita fica escondida sem pista).
+  try {
+    var dicaRolar = function () {
+      document.querySelectorAll(".rolavel, .kit-tabela-caixa, .ref-rolavel").forEach(function (c) {
+        var dica = c.nextElementSibling && c.nextElementSibling.classList.contains("dica-rolar") ? c.nextElementSibling : null;
+        var larga = c.scrollWidth > c.clientWidth + 2;
+        if (larga && !dica) {
+          dica = document.createElement("p");
+          dica.className = "dica-rolar";
+          dica.textContent = "Deslize a tabela para o lado para ver tudo →";
+          c.parentNode.insertBefore(dica, c.nextSibling);
+        } else if (!larga && dica) dica.remove();
+      });
+    };
+    dicaRolar();
+    window.addEventListener("resize", dicaRolar);
+  } catch (e) { /* a tabela continua rolando sem a dica */ }
+
+  // Botão «Imprimir» de um bloco (data-imprimir="id"): marca o corpo da página para o CSS de impressão mostrar só aquele bloco.
+  try {
+    document.querySelectorAll("[data-imprimir]").forEach(function (b) {
+      b.hidden = false;
+      b.addEventListener("click", function () {
+        document.body.classList.add("imprimindo-" + b.getAttribute("data-imprimir"));
+        window.print();
+      });
+    });
+    window.addEventListener("afterprint", function () {
+      Array.prototype.slice.call(document.body.classList).forEach(function (c) { if (c.indexOf("imprimindo-") === 0) document.body.classList.remove(c); });
+    });
+  } catch (e) { /* sem JavaScript o botão não faz nada; o navegador ainda imprime a página */ }
+
   window.__siteJs = true; // avisa ao head-common.html que este arquivo carregou (ele revela as seções se não carregar)
 
   // Capa de exemplo da portada: "se escreve sozinha" uma vez (só no computador, onde ela aparece; com movimento reduzido já vem pronta).

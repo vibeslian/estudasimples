@@ -43,7 +43,8 @@
         "titulo": "UFRGS (BIBBIO), Formatação de trabalhos acadêmicos no Word",
         "url": "https://www.ufrgs.br/bibbio/formatacao-de-trabalhos-academicos-no-word/"
       }
-    ]
+    ],
+    "publicado": "2026-10-15"
   },
   {
     "slug": "margens-abnt",
@@ -88,7 +89,8 @@
         "titulo": "UFRGS (BIBBIO), Formatação de trabalhos acadêmicos no Word",
         "url": "https://www.ufrgs.br/bibbio/formatacao-de-trabalhos-academicos-no-word/"
       }
-    ]
+    ],
+    "publicado": "2026-10-15"
   },
   {
     "slug": "como-fazer-referencia-abnt",
@@ -133,7 +135,8 @@
     ],
     "ferramentas": [
       "referencias"
-    ]
+    ],
+    "publicado": "2026-10-15"
   },
   {
     "slug": "referencia-de-site-abnt",
@@ -178,7 +181,8 @@
     ],
     "ferramentas": [
       "referencias"
-    ]
+    ],
+    "publicado": "2026-10-15"
   },
   {
     "slug": "citacao-abnt",
@@ -223,7 +227,8 @@
     ],
     "ferramentas": [
       "referencias"
-    ]
+    ],
+    "publicado": "2026-10-15"
   },
   {
     "slug": "normas-abnt-no-word",
@@ -266,7 +271,8 @@
         "titulo": "UNISA, Manual de normatização ABNT (2025)",
         "url": "https://www.unisa.br/wp-content/uploads/2025/04/2025_Manual-de-Normatizacao_ABNT.pdf"
       }
-    ]
+    ],
+    "publicado": "2026-10-15"
   },
   {
     "slug": "modelos-de-capa-abnt",
@@ -312,7 +318,8 @@
         "titulo": "Unifesp, Manual de normalização (atualização 2024)",
         "url": "https://unifesp.br/campus/gua/images/Biblioteca/tutoriais/Manual_de_normalizacao._Atualizacao_2024.pdf"
       }
-    ]
+    ],
+    "publicado": "2026-10-15"
   },
   {
     "slug": "sumario-automatico-word",
@@ -353,7 +360,8 @@
         "titulo": "UERN, Manual de normalização do SIB (2025)",
         "url": "https://portal.uern.br/dsib/wp-content/uploads/sites/2/2025/02/MANUAL-DE-NORMALIZACAO-SIBUERN-2025.pdf"
       }
-    ]
+    ],
+    "publicado": "2026-10-15"
   },
   {
     "slug": "resumo-abnt",
@@ -392,7 +400,8 @@
         "titulo": "UERN, Manual de normalização do SIB (2025)",
         "url": "https://portal.uern.br/dsib/wp-content/uploads/sites/2/2025/02/MANUAL-DE-NORMALIZACAO-SIBUERN-2025.pdf"
       }
-    ]
+    ],
+    "publicado": "2026-10-15"
   },
   {
     "slug": "normas-abnt-tcc",
@@ -440,7 +449,8 @@
         "titulo": "UNISA, Manual de normatização ABNT (2025)",
         "url": "https://www.unisa.br/wp-content/uploads/2025/04/2025_Manual-de-Normatizacao_ABNT.pdf"
       }
-    ]
+    ],
+    "publicado": "2026-10-15"
   },
   {
     "slug": "titulos-e-subtitulos-abnt",
@@ -485,7 +495,8 @@
         "titulo": "UFRGS (BIBBIO), Formatação de trabalhos acadêmicos no Word",
         "url": "https://www.ufrgs.br/bibbio/formatacao-de-trabalhos-academicos-no-word/"
       }
-    ]
+    ],
+    "publicado": "2026-10-15"
   },
   {
     "slug": "numeracao-de-paginas-abnt",
@@ -530,7 +541,8 @@
         "titulo": "UERN, Manual de normalização do SIB (2025)",
         "url": "https://portal.uern.br/dsib/wp-content/uploads/sites/2/2025/02/MANUAL-DE-NORMALIZACAO-SIBUERN-2025.pdf"
       }
-    ]
+    ],
+    "publicado": "2026-10-15"
   },
   {
     "slug": "fonte-e-espacamento-abnt",
@@ -572,7 +584,8 @@
         "titulo": "UNISA, Manual de normatização ABNT (2025)",
         "url": "https://www.unisa.br/wp-content/uploads/2025/04/2025_Manual-de-Normatizacao_ABNT.pdf"
       }
-    ]
+    ],
+    "publicado": "2026-10-15"
   },
   {
     "categoria": "TCC passo a passo",
@@ -620,7 +633,8 @@
         "titulo": "Unifesp, Manual de normalização (atualização 2024)",
         "url": "https://unifesp.br/campus/gua/images/Biblioteca/tutoriais/Manual_de_normalizacao._Atualizacao_2024.pdf"
       }
-    ]
+    ],
+    "publicado": "2026-10-15"
   },
   {
     "categoria": "TCC passo a passo",
@@ -659,7 +673,8 @@
         "titulo": "UNISA, Manual de normatização ABNT (2025)",
         "url": "https://www.unisa.br/wp-content/uploads/2025/04/2025_Manual-de-Normatizacao_ABNT.pdf"
       }
-    ]
+    ],
+    "publicado": "2026-10-15"
   },
   {
     "categoria": "TCC passo a passo",
@@ -702,7 +717,8 @@
         "titulo": "UNISA, Manual de normatização ABNT (2025)",
         "url": "https://www.unisa.br/wp-content/uploads/2025/04/2025_Manual-de-Normatizacao_ABNT.pdf"
       }
-    ]
+    ],
+    "publicado": "2026-10-15"
   },
   {
     "categoria": "TCC passo a passo",
@@ -749,16 +765,17 @@
         "titulo": "UFV, Normalização de trabalhos acadêmicos (2025), com a NBR 14724:2024",
         "url": "https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf"
       }
-    ]
+    ],
+    "publicado": "2026-10-15"
   },
   {
     "categoria": "TCC passo a passo",
-    "atualizado": "2026-10-15",
+    "atualizado": "2026-11-02",
     "norma": "ABNT NBR 14724:2024",
     "slug": "consideracoes-finais-tcc",
     "prioridade": 18,
     "rotulo": "Considerações finais do TCC",
-    "titulo": "Considerações finais do TCC: como escrever, com exemplo",
+    "titulo": "Conclusão do TCC (considerações finais): como escrever",
     "h1": "Considerações finais (conclusão) do TCC: como escrever, com exemplo",
     "descricao": "Como escrever as considerações finais ou a conclusão do TCC: retomar o problema, responder aos objetivos, limites e sugestões, com um exemplo.",
     "lead": "O que a conclusão precisa trazer, o que ela não deve fazer e um exemplo com cada parte marcada.",
@@ -792,7 +809,8 @@
         "titulo": "Gerhardt e Silveira (orgs.), Métodos de pesquisa, Editora da UFRGS (2009)",
         "url": "https://www.ufrgs.br/cursopgdr/downloadsSerie/derad005.pdf"
       }
-    ]
+    ],
+    "publicado": "2026-10-15"
   },
   {
     "categoria": "TCC passo a passo",
@@ -830,7 +848,8 @@
         "titulo": "UNISA, Manual de normatização ABNT (2025)",
         "url": "https://www.unisa.br/wp-content/uploads/2025/04/2025_Manual-de-Normatizacao_ABNT.pdf"
       }
-    ]
+    ],
+    "publicado": "2026-10-15"
   },
   {
     "categoria": "TCC passo a passo",
@@ -876,7 +895,8 @@
         "titulo": "UNISA, Manual de normatização ABNT (2025)",
         "url": "https://www.unisa.br/wp-content/uploads/2025/04/2025_Manual-de-Normatizacao_ABNT.pdf"
       }
-    ]
+    ],
+    "publicado": "2026-10-15"
   },
   {
     "categoria": "TCC passo a passo",
@@ -917,7 +937,8 @@
         "titulo": "Unifesp, Manual de normalização (atualização 2024)",
         "url": "https://unifesp.br/campus/gua/images/Biblioteca/tutoriais/Manual_de_normalizacao._Atualizacao_2024.pdf"
       }
-    ]
+    ],
+    "publicado": "2026-10-15"
   },
   {
     "categoria": "TCC passo a passo",
@@ -962,7 +983,8 @@
         "titulo": "UFV, Normalização de trabalhos acadêmicos (2025), com a NBR 14724:2024",
         "url": "https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf"
       }
-    ]
+    ],
+    "publicado": "2026-10-15"
   },
   {
     "categoria": "TCC passo a passo",
@@ -1001,7 +1023,8 @@
         "titulo": "UFV, Normalização de trabalhos acadêmicos (2025), com a NBR 14724:2024",
         "url": "https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf"
       }
-    ]
+    ],
+    "publicado": "2026-10-15"
   },
   {
     "categoria": "Trabalhos do semestre",
@@ -1049,7 +1072,8 @@
         "titulo": "UFV, Normalização de trabalhos acadêmicos (2025), com a NBR 14724:2024",
         "url": "https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf"
       }
-    ]
+    ],
+    "publicado": "2026-10-15"
   },
   {
     "categoria": "Trabalhos do semestre",
@@ -1093,7 +1117,8 @@
         "titulo": "UFV, Normalização de trabalhos acadêmicos (2025), com a NBR 14724:2024",
         "url": "https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf"
       }
-    ]
+    ],
+    "publicado": "2026-10-15"
   },
   {
     "categoria": "Trabalhos do semestre",
@@ -1141,7 +1166,8 @@
         "titulo": "UFV, Normalização de trabalhos acadêmicos (2025), com a NBR 14724:2024",
         "url": "https://www.bbt.ufv.br/wp-content/uploads/2025/02/Normalizacao-de-trabalhos-academicos-2025-UFV.pdf"
       }
-    ]
+    ],
+    "publicado": "2026-10-15"
   },
   {
     "categoria": "Trabalhos do semestre",
@@ -1184,7 +1210,8 @@
         "titulo": "UERN, Manual de normalização do SIB (2025)",
         "url": "https://portal.uern.br/dsib/wp-content/uploads/sites/2/2025/02/MANUAL-DE-NORMALIZACAO-SIBUERN-2025.pdf"
       }
-    ]
+    ],
+    "publicado": "2026-10-15"
   },
   {
     "categoria": "Trabalhos do semestre",
@@ -1227,7 +1254,8 @@
         "titulo": "UERN, Manual de normalização do SIB (2025)",
         "url": "https://portal.uern.br/dsib/wp-content/uploads/sites/2/2025/02/MANUAL-DE-NORMALIZACAO-SIBUERN-2025.pdf"
       }
-    ]
+    ],
+    "publicado": "2026-10-15"
   },
   {
     "categoria": "Trabalhos do semestre",
@@ -1269,16 +1297,17 @@
         "titulo": "UERN, Manual de normalização do SIB (2025)",
         "url": "https://portal.uern.br/dsib/wp-content/uploads/sites/2/2025/02/MANUAL-DE-NORMALIZACAO-SIBUERN-2025.pdf"
       }
-    ]
+    ],
+    "publicado": "2026-10-16"
   },
   {
     "categoria": "ENEM e escola",
-    "atualizado": "2026-10-29",
+    "atualizado": "2026-11-02",
     "norma": "Cartilha do Participante do Inep (redação no Enem 2026)",
     "slug": "quantas-linhas-tem-a-redacao-do-enem",
     "prioridade": 30,
     "rotulo": "Linhas da redação do ENEM",
-    "titulo": "Quantas linhas tem a redação do ENEM 2026? Mínimo e máximo",
+    "titulo": "Redação do ENEM: 30 linhas no máximo e 8 no mínimo (2026)",
     "h1": "Quantas linhas tem a redação do ENEM? Mínimo, máximo e o que não conta",
     "descricao": "A redação do ENEM cabe em até 30 linhas, e com até 7 linhas escritas a nota é zero. Veja o mínimo, o que não conta e como conferir o seu texto.",
     "lead": "O limite da folha, o piso de 8 linhas para não zerar por tamanho, as linhas que não contam e se o título conta.",
@@ -1294,6 +1323,7 @@
       "url": "/contador-de-linhas-enem/"
     },
     "relacionadas": [
+      "enem-2026-horarios-e-o-que-levar",
       "como-montar-um-cronograma-de-estudos-para-o-enem",
       "como-calcular-a-media-para-passar-de-ano"
     ],
@@ -1316,7 +1346,8 @@
         "titulo": "Inep, notícias do Enem (onde saem as datas e as orientações de cada edição)",
         "url": "https://www.gov.br/inep/pt-br/centrais-de-conteudo/noticias/enem"
       }
-    ]
+    ],
+    "publicado": "2026-10-23"
   },
   {
     "categoria": "ENEM e escola",
@@ -1356,7 +1387,8 @@
         "titulo": "Khan Academy, Entendendo e aplicando a média ponderada",
         "url": "https://pt.khanacademy.org/math/9-ano-mat-pr-conhecimentos-previos/x307af68e27461e8f:3-trimestre/x307af68e27461e8f:media-estatistica/a/entendendo-e-aplicando-a-media-ponderada"
       }
-    ]
+    ],
+    "publicado": "2026-10-22"
   },
   {
     "categoria": "ENEM e escola",
@@ -1397,7 +1429,8 @@
         "url": "https://download.inep.gov.br/publicacoes/institucionais/avaliacoes_e_exames_da_educacao_basica/a_redacao_no_enem_2025_cartilha_do_participante.pdf",
         "nota": "Edição de 2025: confira a cartilha do ano da sua prova."
       }
-    ]
+    ],
+    "publicado": "2026-10-22"
   },
   {
     "categoria": "Referências e citações",
@@ -1479,11 +1512,12 @@
         "url": "https://arxiv.org/abs/2304.02819",
         "nota": "Estudo em inglês."
       }
-    ]
+    ],
+    "publicado": "2026-10-28"
   },
   {
     "categoria": "ENEM e escola",
-    "atualizado": "2026-10-29",
+    "atualizado": "2026-11-02",
     "slug": "enem-2026-horarios-e-o-que-levar",
     "prioridade": 30.5,
     "rotulo": "ENEM 2026: horários e o que levar",
@@ -1530,6 +1564,7 @@
         "url": "https://www.gov.br/mec/pt-br/enem/fique-por-dentro/documento-caneta-lanche-celular-e-envelope-porta-objetos-prepare-se-para-a-prova-sem-correr-risco-de-eliminacao",
         "nota": "Página do MEC atualizada em 30/09/2026. Não traz os horários: eles vêm das orientações do Inep."
       }
-    ]
+    ],
+    "publicado": "2026-10-29"
   }
 ]

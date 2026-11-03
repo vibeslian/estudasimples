@@ -2,8 +2,8 @@
    Regra: textos curtos, um assunto por bloco. */
 
 /* ---------- 1) Passos numerados ---------- */
-.passos { list-style: none; counter-reset: passo; margin: 0 0 1.5em; padding: 0; display: grid; gap: 14px; max-width: var(--largura-texto); }
-.passos li { counter-increment: passo; display: grid; grid-template-columns: 52px 1fr; gap: 16px; align-items: start; background: var(--superficie); border: 1px solid var(--salvia-200); border-radius: var(--raio); padding: 18px 20px; }
+.passos { list-style: none; counter-reset: passo; margin: 0 0 1.5em; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; max-width: var(--largura-texto); }
+.passos li { counter-increment: passo; display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 16px; align-items: start; background: var(--superficie); border: 1px solid var(--salvia-200); border-radius: var(--raio); padding: 18px 20px; }
 .passos li::before { content: counter(passo); display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--principal); color: #fff; font-family: var(--fonte-titulo); font-weight: 800; font-size: 1.5rem; }
 .passos h3 { margin: 2px 0 .15em; font-size: 1.15rem; }
 .passos p { margin: 0; color: var(--texto-suave); }

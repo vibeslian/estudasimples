@@ -13,6 +13,7 @@
   <meta property="og:url" content="{{SITE_URL}}/">
   <link rel="preload" as="image" href="/assets/img/fotos/hero-estudante.webp" type="image/webp" fetchpriority="high">
   <link rel="stylesheet" href="/assets/css/home.css?v={{BUILD}}">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"{{SITE_URL}}/#site","url":"{{SITE_URL}}/","name":"{{SITE_NAME}}","inLanguage":"pt-BR","publisher":{"@id":"{{SITE_URL}}/#organizacao"}},{"@type":"Organization","@id":"{{SITE_URL}}/#organizacao","name":"{{SITE_NAME}}","legalName":"Lian Marcos Martinez Navarro","url":"{{SITE_URL}}/","email":"{{CONTACT_EMAIL}}"}]}</script>
   {{FAQ_JSONLD:home}}
 </head>
 <body>
@@ -38,7 +39,8 @@
           <span class="escolha-seta"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </a>
       </div>
-      <p class="hero-exemplo">Quer ver funcionando antes? <a href="/gerador-de-capa-abnt/?exemplo=1">Ver um exemplo ao vivo</a></p>
+<!--ENEM:ON-->      <p class="hero-enem"><strong>ENEM nos dias 8 e 15 de novembro:</strong> <a href="/guias/enem-2026-horarios-e-o-que-levar/">horários e o que levar</a> · <a href="/guias/quantas-linhas-tem-a-redacao-do-enem/">quantas linhas tem a redação</a></p>
+<!--/ENEM:ON-->      <p class="hero-exemplo">Quer ver funcionando antes? <a href="/gerador-de-capa-abnt/?exemplo=1">Ver um exemplo ao vivo</a></p>
       <p class="hero-aviso">Prefere receber o trabalho inteiro formatado? <a href="/formatacao-abnt-tcc/#origem={{ORIGEM}}">Conheça meu serviço de formatação de TCC</a>.</p>
     </div>
     <div class="hero-foto">
@@ -179,7 +181,14 @@
           <h2 id="enem-titulo">Ajuda para o ENEM, sem enrolação</h2>
           <p class="lead">Sem cadastro e sem enviar o seu texto para ninguém. Tudo funciona no seu aparelho.</p>
         </div>
-        <div class="enem-itens">
+<!--ENEM:ON-->        <div class="enem-destaque revelar">
+          <strong>Semana da prova: ENEM 2026 em 8 e 15 de novembro</strong>
+          <ul>
+            <li><a href="/guias/enem-2026-horarios-e-o-que-levar/">Horários, documento e o que levar</a></li>
+            <li><a href="/guias/quantas-linhas-tem-a-redacao-do-enem/">Quantas linhas tem a redação</a></li>
+          </ul>
+        </div>
+<!--/ENEM:ON-->        <div class="enem-itens">
           <a class="enem-item revelar" href="/contador-de-linhas-enem/"><span class="escolha-icone escolha-icone--enem"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span><span><strong>Contador de linhas</strong><span class="texto">Cole a redação e veja quantas linhas ela ocupa na folha de 30. O mínimo, pela cartilha do Inep, é 8 linhas.</span></span><span class="abrir">Abrir &rarr;</span></a>
           <a class="enem-item revelar" href="/folha-de-redacao-enem/"><span class="escolha-icone escolha-icone--enem"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9V4h10v5M7 18H5v-8h14v8h-2M7 14h10v6H7z"/></svg></span><span><strong>Folha de redação</strong><span class="texto">Imprima uma folha de treino com 30 linhas e escreva à mão, para ter uma ideia do tamanho do texto.</span></span><span class="abrir">Abrir &rarr;</span></a>
           <a class="enem-item revelar" href="/cronograma-de-estudos-enem/"><span class="escolha-icone escolha-icone--enem"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v3M17 3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/></svg></span><span><strong>Cronograma de estudos</strong><span class="texto">Escolha a data da prova e receba as semanas de estudo, com um dia livre. Salve em PDF.</span></span><span class="abrir">Abrir &rarr;</span></a>

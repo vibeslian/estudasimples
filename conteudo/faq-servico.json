@@ -2,7 +2,7 @@
   {
     "p": "Quanto custa a formatação de um TCC?",
     "r": [
-      "Os preços de referência são: até 30 páginas, {{PRECO_ATE30}}; de 31 a 60 páginas, {{PRECO_31A60}}; acima de 60 páginas, o valor é combinado caso a caso. O valor final vem junto com o orçamento, depois que eu vejo o seu arquivo."
+      "Até 30 páginas, {{PRECO_ATE30}}; de 31 a 60 páginas, {{PRECO_31A60}}; acima de 60 páginas, o valor é combinado caso a caso. Você sabe o valor final no orçamento, antes de pagar: o valor da tabela vale para o tamanho combinado, e se o trabalho precisar de mais do que o combinado (mais páginas ou um manual muito diferente), eu aviso antes de você pagar."
     ]
   },
   {
@@ -57,19 +57,19 @@
   {
     "p": "Posso pedir ajustes depois de receber o trabalho?",
     "r": [
-      "Sim. Uma rodada de ajustes está incluída no valor. Ela serve para acertar a formatação que ficou diferente do combinado ou do manual da sua faculdade. Se o erro de formatação for meu, eu corrijo de graça, sempre, mesmo depois dessa rodada. Se você mudar o conteúdo do trabalho depois da entrega, é um novo orçamento."
+      "Sim. Uma rodada de ajustes está incluída no valor. Ela serve para acertar a formatação que ficou diferente do combinado ou do manual da sua faculdade. Se o erro de formatação for meu, eu corrijo sem custo, mesmo depois dessa rodada. Se você mudar o conteúdo do trabalho depois da entrega, é um novo orçamento."
     ]
   },
   {
     "p": "Posso cancelar ou pedir reembolso?",
     "r": [
-      "Devolvo o valor integral, pelo Pix, em até 7 dias, se você cancelar antes de eu começar a formatar o seu trabalho ou se eu não cumprir o prazo combinado no orçamento. Depois da entrega o valor não é devolvido, e você conta com a rodada de ajustes. Isso não tira os direitos que o Código de Defesa do Consumidor garante a você. Veja os detalhes nos <a href=\"/termos-de-uso/#servico-formatacao\">Termos de Uso</a>."
+      "Devolvo o valor integral, pelo Pix, em até 7 dias, se você cancelar antes de eu começar a formatar o seu trabalho ou se eu não cumprir o prazo combinado no orçamento. Você também tem o direito de arrependimento de 7 dias do Código de Defesa do Consumidor (art. 49): avise pelo mesmo WhatsApp e eu devolvo o valor pelo Pix, de imediato; se o trabalho já foi entregue, conversamos e resolvemos nos termos que a lei prevê. Fora desses casos, depois da entrega o valor não é devolvido, e você conta com a rodada de ajustes. Isso não tira os outros direitos que o Código de Defesa do Consumidor garante a você. Veja os detalhes nos <a href=\"/termos-de-uso/#servico-formatacao\">Termos de Uso</a>."
     ]
   },
   {
     "p": "O que acontece com o meu arquivo?",
     "r": [
-      "Ele é usado só para o serviço. Para formatar, uso o Claude, uma ferramenta de inteligência artificial da empresa Anthropic, e o arquivo passa por ele. Eu apago os arquivos 15 dias depois da entrega. Os detalhes estão na <a href=\"/politica-de-privacidade/#servico-formatacao\">Política de Privacidade</a>."
+      "Ele é usado só para o serviço. Para formatar, uso o Claude, uma ferramenta de inteligência artificial da empresa Anthropic, e o arquivo passa por ele. Eu apago do meu computador o arquivo, as mídias dele no WhatsApp e a conversa com o Claude em que ele foi usado 15 dias depois da entrega (cópias de segurança automáticas podem demorar um pouco mais). Se o seu trabalho tiver dados de outras pessoas, como entrevistados, tire-os antes de enviar. Os detalhes estão na <a href=\"/politica-de-privacidade/#servico-formatacao\">Política de Privacidade</a>."
     ]
   },
   {

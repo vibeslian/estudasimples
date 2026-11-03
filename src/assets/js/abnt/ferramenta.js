@@ -696,10 +696,16 @@ async function exporta(tipo) {
     mensagem(`Pronto! O arquivo ${nome} foi baixado.` + (semPagina ? " Atenção: há itens do sumário sem número de página; complete no arquivo." : "") + (ehExemplo ? " Atenção: ele tem os dados de EXEMPLO (Maria Silva). Troque pelos seus dados e baixe de novo." : ""), false, 30); // 30 s: o convite "Indicar a um colega" vai junto desta mensagem
     try { celebra(); } catch (e) { /* a festa e o convite para compartilhar também são extras */ }
   } catch (e) {
+    console.error("Erro ao gerar o arquivo:", e);
+    const texto = String((e && e.message) || e || "");
     mensagem(
       e && /^excede/.test(e.message || "")
         ? TEXTO_EXCEDE(e.message.split(":")[1])
-        : "Não foi possível gerar o arquivo. Verifique sua conexão com a internet e tente de novo.",
+        : /memory|memória|allocation|quota/i.test(texto)
+          ? "O aparelho ficou sem memória para gerar o arquivo. Feche outras abas ou aplicativos e tente de novo, ou use um computador."
+          : /fetch|network|load|import|Failed|conex/i.test(texto)
+            ? "Não foi possível carregar o gerador de arquivos. Verifique sua conexão com a internet e tente de novo."
+            : "Não foi possível gerar o arquivo neste aparelho. Tente de novo e, se continuar, abra o site no navegador do aparelho (Chrome ou Safari) em vez de dentro de outro aplicativo, como Instagram ou WhatsApp.",
       true,
       10
     );
@@ -969,6 +975,36 @@ $("abaDados").addEventListener("click", () => mostraAba("dados"));
 $("abaPrevia").addEventListener("click", () => mostraAba("previa"));
 $("btnPdf").addEventListener("click", () => exporta("pdf"));
 $("btnDocx").addEventListener("click", () => exporta("docx"));
+// Dentro de outros aplicativos (Instagram, Facebook, Pinterest, WhatsApp, TikTok), o navegador embutido às vezes não deixa baixar arquivos: avisa antes, para ninguém ficar sem saber.
+try {
+  if (/Instagram|FBAN|FBAV|FB_IAB|Pinterest|WhatsApp|TikTok|musical_ly|MicroMessenger|Line[/]/i.test(navigator.userAgent)) {
+    const acoes = document.querySelector(".acoes");
+    if (acoes) {
+      const aviso = document.createElement("p");
+      aviso.className = "dica-campo aviso-app";
+      aviso.textContent = "Você abriu o site dentro de outro aplicativo. Se o download não começar, abra esta página no Chrome ou no Safari (pelo menu ⋮ ou …, escolha «Abrir no navegador»).";
+      acoes.parentNode.insertBefore(aviso, acoes);
+    }
+  }
+} catch (e) { /* é só um aviso */ }
+// No celular a prévia é outra aba, e os botões de baixar ficam no fim do formulário: quem gostou da prévia teria de voltar e rolar.
+// Estes dois repetem os botões na própria aba da prévia (só passam o clique; no computador ficam escondidos, porque a prévia já aparece ao lado).
+try {
+  const previa = $("painelPrevia");
+  if (previa) {
+    const barra = document.createElement("div");
+    barra.className = "acoes-previa";
+    [["btnPdf", "Baixar PDF"], ["btnDocx", "Baixar Word (.docx)"]].forEach(([id, rotulo]) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "btn btn-acento";
+      b.textContent = rotulo;
+      b.addEventListener("click", () => $(id).click());
+      barra.appendChild(b);
+    });
+    previa.appendChild(barra);
+  }
+} catch (e) { /* os botões do formulário continuam funcionando */ }
 // começa a baixar a biblioteca assim que o usuário se aproxima do botão
 for (const [id, lib] of [["btnPdf", "jspdf"], ["btnDocx", "docx"]]) {
   for (const ev of ["pointerenter", "focus", "touchstart"]) $(id).addEventListener(ev, () => precarrega(lib), { once: true, passive: true });

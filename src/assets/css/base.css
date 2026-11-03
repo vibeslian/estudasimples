@@ -82,6 +82,11 @@ a:hover { color: var(--texto); }
   .mega-item { background: var(--superficie); border: 1px solid var(--salvia-200); }
   .mega-servico { display: none; }
   .js .nav > a:not(.btn) { min-height: 48px; padding: 10px 6px; border-radius: 10px; }
+  /* no celular os links principais (Guias, Formatação, Kit, Sobre) vêm primeiro; as 8 ferramentas ficam logo abaixo, sem as descrições, para o menu caber na tela */
+  .js .nav-grupo { order: 5; }
+  .js .nav > a.btn { order: 9; }
+  .mega-item small { display: none; }
+  .mega-item { min-height: 52px; }
   .js .nav > a.btn { margin: 8px 0 0; width: 100%; min-height: 48px; }
 }
 

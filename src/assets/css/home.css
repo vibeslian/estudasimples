@@ -118,3 +118,11 @@
 .hero-exemplo a { font-weight: 700; }
 .faixa-servico a:focus-visible { outline: 3px solid var(--fundo); outline-offset: 3px; }
 [tabindex="-1"]:focus { outline: none; }
+
+/* Semana do ENEM (bloco some sozinho depois de enem.ate, ver build.mjs) */
+.hero-enem { margin: 14px 0 0; padding: 12px 16px; font-size: 1rem; line-height: 1.5; background: var(--acento-claro); border: 1px solid #e8a592; border-radius: var(--raio-pequeno); color: var(--texto); }
+.hero-enem a { font-weight: 700; color: var(--erro-texto); }
+.enem-destaque { margin: 0 0 16px; padding: 16px 18px; background: var(--acento-claro); border: 1px solid #e8a592; border-radius: 20px; }
+.enem-destaque strong { display: block; margin-bottom: 8px; font-family: var(--fonte-titulo); font-weight: 800; font-size: 1.1rem; color: var(--erro-texto); }
+.enem-destaque ul { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 0; padding: 0; list-style: none; }
+.enem-destaque a { display: inline-block; padding: 6px 0; font-weight: 700; color: var(--erro-texto); }
