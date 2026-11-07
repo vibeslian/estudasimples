@@ -103,12 +103,11 @@ export function preparaGuias(config, guias, parceiroDaGuia = () => "", afiliados
   const relacionadas = (slug) => {
     const g = get(slug);
     const parceiro = parceiroDaGuia(slug); // cartão "Parceiro recomendado" (vazio enquanto não houver anúncio)
-    const afiliados = afiliadosDaGuia(slug); // "Recomendado para o seu trabalho" (vazio enquanto estiver desligado)
     const cartoes = g.relacionadas.map((r) => {
       const x = get(r);
       return `<li><a class="guia-cartao" href="/guias/${r}/"><span class="guia-cartao-titulo">${esc(x.rotulo)}</span><span class="guia-cartao-texto">${esc(x.resumoIndice)}</span></a></li>`;
     }).join("\n          ");
-    return `${afiliados ? afiliados + "\n      " : ""}<section class="guia-relacionadas" aria-labelledby="relacionadas">
+    return `<section class="guia-relacionadas" aria-labelledby="relacionadas">
         <h2 id="relacionadas">Guias relacionadas</h2>
         <ul class="guia-cartoes">
           ${cartoes}
@@ -174,5 +173,5 @@ export function preparaGuias(config, guias, parceiroDaGuia = () => "", afiliados
   // mensagens de WhatsApp: uma por guia (#origem=guia-<slug>)
   const mensagens = (modelo) => Object.fromEntries(guias.map((g) => [`guia-${g.slug}`, modelo.replace("{pagina}", `guia: ${g.rotulo}`).replace(" · {componente}", "")]));
 
-  return { head, hero, ferramenta, relacionadas, fontes, lista, indiceJson, mensagens, daFerramenta, destaque, get };
+  return { head, hero, ferramenta, afiliados: (slug) => afiliadosDaGuia(slug), relacionadas, fontes, lista, indiceJson, mensagens, daFerramenta, destaque, get };
 }

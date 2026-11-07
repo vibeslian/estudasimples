@@ -76,14 +76,14 @@ const htmls = paginasHtml(on.dir).filter((p) => p !== "kit-tcc/index.html" && p 
 const sinPie = htmls.filter((p) => !leer(on.dir, p).includes('<a href="/kit-tcc/">Kit TCC (modelo em Word)</a>'));
 ok(sinPie.length === 0, "encendido: el pie de TODAS las páginas enlaza el kit", sinPie.slice(0, 5).join(", "));
 ok(leer(on.dir, "formatacao-abnt-tcc/index.html").includes('href="/kit-tcc/#origem=servico">Kit TCC</a>, o modelo completo em Word, por R$\u00a029,90'), "encendido: la página del servicio menciona el kit con su precio");
-const GUIAS_KIT = ["sumario-automatico-word", "numeracao-de-paginas-abnt", "normas-abnt-no-word", "margens-abnt", "fonte-e-espacamento-abnt", "titulos-e-subtitulos-abnt", "normas-abnt-tcc", "normas-abnt", "como-fazer-tcc", "lista-de-ilustracoes-e-tabelas-abnt", "modelos-de-capa-abnt"].map((g) => `guias/${g}/index.html`);
+const GUIAS_KIT = ["sumario-automatico-word", "numeracao-de-paginas-abnt", "normas-abnt-no-word", "margens-abnt", "fonte-e-espacamento-abnt", "titulos-e-subtitulos-abnt", "normas-abnt-tcc", "normas-abnt", "como-fazer-tcc", "lista-de-ilustracoes-e-tabelas-abnt", "modelos-de-capa-abnt", "consideracoes-finais-tcc", "folha-de-aprovacao-abnt", "apendice-e-anexo-abnt", "agradecimentos-tcc", "dedicatoria-e-epigrafe-abnt"].map((g) => `guias/${g}/index.html`);
 const CON_KIT = ["formatacao-abnt-tcc/index.html", "index.html", "gerador-de-sumario-abnt/index.html", "guias/plagio-e-ia-no-tcc/index.html", ...GUIAS_KIT];
 const sinTarjeta = GUIAS_KIT.filter((p) => !/<aside class="oferta" aria-label="Kit TCC">[\s\S]*href="\/kit-tcc\/#origem=guia-[a-z0-9-]+"/.test(leer(on.dir, p)));
-ok(sinTarjeta.length === 0, "encendido: las 11 guías de formato llevan la tarjeta del Kit TCC", sinTarjeta.join(", "));
+ok(sinTarjeta.length === 0, "encendido: las 16 guías de formato y de entrega llevan la tarjeta del Kit TCC", sinTarjeta.join(", "));
 ok(/id="kit-tcc-faixa"/.test(leer(on.dir, "index.html")) && /href="\/kit-tcc\/#origem=inicio-oferta"/.test(leer(on.dir, "index.html")), "encendido: la portada tiene la franja del Kit TCC");
 ok(/não se atualiza sozinho/.test(leer(on.dir, "gerador-de-sumario-abnt/index.html")) && /href="\/kit-tcc\/#origem=sumario-aviso"/.test(leer(on.dir, "gerador-de-sumario-abnt/index.html")), "encendido: el generador de sumario avisa que su Word no se actualiza solo y menciona el kit");
 const otrosConKit = htmls.filter((p) => !CON_KIT.includes(p) && /href="\/kit-tcc\/#/.test(leer(on.dir, p)));
-ok(otrosConKit.length === 0, "encendido: solo el pie, la portada, el servicio, el generador de sumario y las 11 guías de formato enlazan el kit (ningún enlace extra)", otrosConKit.join(", "));
+ok(otrosConKit.length === 0, "encendido: solo el pie, la portada, el servicio, el generador de sumario y las 16 guías de formato y de entrega enlazan el kit (ningún enlace extra)", otrosConKit.join(", "));
 // textos legales
 const t = textoLegal(on.dir, "termos-de-uso/index.html"), p = textoLegal(on.dir, "politica-de-privacidade/index.html");
 const tHtml = leer(on.dir, "termos-de-uso/index.html"), pHtml = leer(on.dir, "politica-de-privacidade/index.html");
@@ -93,7 +93,7 @@ ok(/em até 7 dias, contados da compra/.test(t) && /art\. 49/.test(t), "Término
 ok(/não detecta texto de inteligência artificial/.test(t) && /Google Docs/.test(t), "Términos: dice que no detecta IA y que no se probó en Google Docs");
 ok(/<h3 id="kit-tcc">2\.5\. Compra do Kit TCC<\/h3>/.test(pHtml) && /<h3>2\.6\. Publicidade/.test(pHtml), "Política: nueva sección 2.5 y Publicidade pasa a 2.6");
 ok(/<strong>a Hotmart<\/strong>/.test(pHtml) && /LGPD/.test(p), "Política: la Hotmart entra en la lista de quien recibe datos, con base legal");
-ok(/28 de outubro de 2026/.test(t) && /28 de outubro de 2026/.test(p), "«Última atualização» de Términos y Política pasa a la fecha legal del kit");
+ok(/7 de novembro de 2026/.test(t) && /7 de novembro de 2026/.test(p), "«Última atualização» de Términos y Política = la fecha legal más reciente (afiliados 2026-11-07, que es posterior a la del kit de prueba)");
 // numeración: sin repetidos, consecutiva, y referencias cruzadas coherentes (con afiliados visibles, como en la configuración real)
 const numeros = (html, re) => [...html.matchAll(re)].map((m) => m[1]);
 const consecutivos = (l, n) => l.length === n && l.every((x, i) => x === String(i + 1));

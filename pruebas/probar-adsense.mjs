@@ -89,12 +89,12 @@ const terOn = leer(on.dir, "termos-de-uso/index.html");
 ok(!polOn.includes("não exibe anúncios de terceiros hoje") && !polOn.includes("No futuro, o site poderá exibir") && !/quando os anúncios forem ativados/i.test(polOn) && !/será o seu consentimento/.test(polOn) && !polOn.includes("uso futuro"), "la Política ya no habla en futuro");
 ok(polOn.includes("O site exibe anúncios do Google AdSense") && polOn.includes("Nenhum anúncio, e nenhum script do Google, é carregado antes de você escolher"), "la Política describe el aviso y que nada se carga antes de elegir");
 ok(polOn.includes("localStorage") && polOn.includes("es-anuncios") && polOn.includes("Preferências de anúncios"), "la Política declara el localStorage del aviso y cómo cambiar la elección");
-ok(polOn.includes("22 de outubro de 2026"), "la Política muestra la fecha de actualización de AdSense", (/Última atualização: [^<]+/.exec(polOn) || [""])[0]);
+ok(polOn.includes("7 de novembro de 2026"), "la Política muestra la fecha legal más reciente (la de afiliados, 2026-11-07, posterior a la de AdSense de prueba)", (/Última atualização: [^<]+/.exec(polOn) || [""])[0]);
 ok(polOn.includes("A sua escolha sobre anúncios personalizados: fica guardada no seu navegador") && polOn.includes("Para a personalização dos anúncios, a base legal é o seu consentimento"), "la Política declara el plazo de guardado de la elección (sección 6) y ajusta la base legal a la personalización");
 ok(!/será o seu consentimento|uso futuro/.test(polOn) && !/forem ativados/i.test(polOn), "la Política encendida no conserva ningún 'será'/'forem ativados' del texto de futuro");
 ok(!polOff.includes("A sua escolha sobre anúncios personalizados") && !polOff.includes("Para a personalização dos anúncios"), "la Política apagada no menciona la elección ni la base legal nueva");
 ok(capaOn.includes("Nada do Google é carregado antes da sua escolha") && capaOn.includes("ainda pode usar cookies para medir anúncios") && capaOn.includes('role="dialog"'), "el aviso dice la verdad sobre lo que se carga, avisa de las cookies de medición y es un diálogo no modal");
-ok(terOn.includes("O site exibe anúncios de terceiros") && terOn.includes("22 de outubro de 2026"), "los Termos hablan en presente y llevan la misma fecha");
+ok(terOn.includes("O site exibe anúncios de terceiros") && terOn.includes("7 de novembro de 2026"), "los Termos hablan en presente y llevan la misma fecha");
 ok(on.config && leer(on.dir, "ads.txt") === leer(off.dir, "ads.txt"), "ads.txt es igual encendido y apagado");
 // fecha: gana la más reciente entre afiliados y AdSense
 const AF = CONFIG_REAL.afiliados;

@@ -163,11 +163,16 @@ function ogDaPagina(rel) {
 
 function render(text, origem = "servico", rel = "") {
   const guia = (/^guias[\\/]([a-z0-9-]+)[\\/]index\.html$/.exec(rel) || [])[1];
+  if (guia) {
+    const marcas = (text.match(/\{\{GUIA_AFILIADOS\}\}/g) || []).length;
+    if (marcas > 1) throw new Error(`src/guias/${guia}: o marcador {{GUIA_AFILIADOS}} aparece ${marcas} vezes (deve ser 1)`);
+    if (marcas === 0 && gb.afiliados(guia)) throw new Error(`src/guias/${guia}: a guia tem produtos de afiliado em site.config.json, mas falta o marcador {{GUIA_AFILIADOS}} no HTML (sem ele o bloco não aparece)`);
+  }
   text = text
     .replace(/\{\{FAQ_HTML:([\w-]+)\}\}/g, (_, n) => faq(n).html)
     .replace(/\{\{FAQ_JSONLD:([\w-]+)\}\}/g, (_, n) => faq(n).jsonld)
     .replace(/[{][{]ESPACO:([a-z0-9-]+)[}][}]/g, (_, slot) => conexoes.espaco(slot))
-    .replace(/[{][{]GUIA_(HEAD|HERO|FERRAMENTA|RELACIONADAS|FONTES)[}][}]/g, (_, k) => { if (!guia) throw new Error(`{{GUIA_${k}}} só vale dentro de src/guias/<guia>/index.html (${rel})`); return gb[{ HEAD: "head", HERO: "hero", FERRAMENTA: "ferramenta", RELACIONADAS: "relacionadas", FONTES: "fontes" }[k]](guia); })
+    .replace(/[{][{]GUIA_(HEAD|HERO|FERRAMENTA|RELACIONADAS|FONTES|AFILIADOS)[}][}]/g, (_, k) => { if (!guia) throw new Error(`{{GUIA_${k}}} só vale dentro de src/guias/<guia>/index.html (${rel})`); return gb[{ HEAD: "head", HERO: "hero", FERRAMENTA: "ferramenta", RELACIONADAS: "relacionadas", FONTES: "fontes", AFILIADOS: "afiliados" }[k]](guia); })
     .replace(/[{][{]GUIAS_DA_FERRAMENTA:([a-z0-9-]+)[}][}]/g, (_, id) => gb.daFerramenta(id))
     .split("{{GUIAS_LISTA}}").join(gb.lista())
     .replace(/[{][{]GUIAS_DESTAQUE:([0-9]+)[}][}]/g, (_, n) => gb.destaque(Number(n)))
@@ -203,6 +208,7 @@ for (const file of walk(SRC)) {
   if (partes[0] === "partials") continue; // fragmentos não são publicados sozinhos
   const privada = partes.some((p, i) => i < partes.length - 1 && p.startsWith("_")); // pastas _algo = só desenvolvimento
   if (privada && !DEV) continue;
+  if (partes[0] === "assets" && partes[1] === "downloads" && !kit.ativo) continue; // a amostra do kit só existe com o kit ligado
   if (rel === join("assets", "js", "kit.js") && !kit.ativo) continue; // barra de compra do kit: só existe com o kit ligado
   if (rel === join("assets", "js", "anuncios.js") && !adsense.ativo) continue; // aviso de cookies: só existe com o AdSense ligado
   if (!kit.ativo && (partes[0] === "kit-tcc" || rel === join("assets", "css", "kit.css") || (partes[0] === "assets" && partes[1] === "img" && partes[2] === "kit"))) continue; // Kit TCC apagado: nada dele vai para o site

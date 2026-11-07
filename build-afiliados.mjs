@@ -1,12 +1,12 @@
-// Etapa 17: "Recomendado para o seu trabalho": livros e cursos com link de afiliado, no fim das guias (antes de "Guias relacionadas").
+// Etapa 17: "Recomendado para o seu trabalho": livros e cursos com link de afiliado, no meio das guias (onde fica o marcador {{GUIA_AFILIADOS}}).
 // Tudo vem do bloco "afiliados" de site.config.json. Enquanto afiliados.ativo for false (ou um produto não tiver link), nada aparece:
 // as páginas ficam idênticas às de antes. O build.mjs e o build-guias.mjs chamam estas funções.
 import { dataLonga } from "./build-guias.mjs";
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const TIPOS = { livro: "Livro", curso: "Curso" };
-export const MAX_POR_GUIA = 3;
-export const FRASE_AMAZON = "Como Associado da Amazon, ganho com compras qualificadas.";
+export const MAX_POR_GUIA = 2;
+export const FRASE_AMAZON = "Como participante do Programa de Associados da Amazon, sou remunerado pelas compras qualificadas efetuadas."; // texto exato que o Contrato Operacional da Amazon Brasil (seção 5) pede que apareça de forma clara e destacada
 const DATA_LEGAL_ORIGINAL = "14 de outubro de 2026"; // "Última atualização" dos Termos e da Política enquanto não houver afiliados
 
 // lojas da Amazon (amazon.com.br, amzn.to, a.co...): levam a frase obrigatória e o ID de afiliado
@@ -34,6 +34,13 @@ export function preparaAfiliados(config, guias, { numTermos = 12 } = {}) {
     for (const [k, max, obrig] of [["titulo", 90, true], ["autor", 90, p.tipo === "livro"], ["frase", 150, true], ["botao", 24, false]]) {
       if (p[k] == null || p[k] === "") { if (obrig) throw new Error(`${id}: falta "${k}"`); continue; }
       if (typeof p[k] !== "string" || p[k].length > max) throw new Error(`${id}: "${k}" deve ser um texto de até ${max} letras`);
+    }
+    if (p.frases !== undefined) {
+      if (!p.frases || typeof p.frases !== "object" || Array.isArray(p.frases)) throw new Error(`${id}: "frases" deve ser um objeto {guia: frase}`);
+      for (const [g, f] of Object.entries(p.frases)) {
+        if (!slugs.has(g)) throw new Error(`${id}: "frases" cita a guia "${g}", que não existe`);
+        if (typeof f !== "string" || !f || f.length > 150) throw new Error(`${id}: a frase da guia "${g}" deve ter até 150 letras`);
+      }
     }
     if (!Array.isArray(p.guias) || !p.guias.length) throw new Error(`${id}: "guias" deve ser uma lista (nomes de pastas de guias, ou ["todas"])`);
     for (const g of p.guias) if (g !== "todas" && !slugs.has(g)) throw new Error(`${id}: a guia "${g}" não existe`);
@@ -64,25 +71,30 @@ export function preparaAfiliados(config, guias, { numTermos = 12 } = {}) {
   const porExemplo = lojas.length ? ` (por exemplo, ${lojas.join(" e ")})` : "";
   if (algumVisivel && !a.legalAtualizadoEm) throw new Error(`${onde}: para mostrar produtos, preencha legalAtualizadoEm (a data, como "2026-11-05", em que os Termos e a Política passam a falar de links de afiliado)`);
 
-  const cartao = (p, i) => {
+  const cartao = (p, i, slug) => {
+    const frase = (p.frases && p.frases[slug]) || p.frase; // a frase pode mudar de guia para guia: diz para que serve o livro NESTA guia
     const botao = p.botao || (p.tipo === "curso" ? "Ver o curso" : p.amazon ? "Ver na Amazon" : "Ver o livro");
     return `<li class="afiliado afiliado--${p.tipo} revelar" style="--i:${i}">
             <p class="afiliado-topo"><span class="afiliado-tipo">${TIPOS[p.tipo]}</span><span class="afiliado-selo">Link de afiliado</span></p>
-            <p class="afiliado-titulo">${esc(p.titulo)}</p>${p.autor ? `\n            <p class="afiliado-autor">${esc(p.autor)}</p>` : ""}
-            <p class="afiliado-frase">${esc(p.frase)}</p>
-            <a class="btn afiliado-botao" href="${esc(p.urlFinal)}" target="_blank" rel="sponsored nofollow noopener noreferrer">${esc(botao)}<span class="sr-only">: ${esc(p.titulo)} (link de afiliado, abre em outra aba)</span></a>
+            ${p.autor ? `<p class="afiliado-autor">${esc(p.autor)}</p>\n            ` : ""}<p class="afiliado-titulo">${esc(p.titulo)}</p>
+            <p class="afiliado-frase">${esc(frase)}</p>
+            <a class="btn afiliado-botao" href="${esc(p.urlFinal)}" target="_blank" rel="sponsored nofollow noopener noreferrer">${esc(botao)}<span class="afiliado-seta" aria-hidden="true">↗</span><span class="sr-only">: ${esc(p.titulo)} (link de afiliado, abre em outra aba)</span></a>
           </li>`;
   };
 
   const daGuia = (slug) => {
     const itens = daGuiaLista(slug);
     if (!itens.length) return "";
-    const nota = `Links de afiliado: se você comprar por eles, o ${nome} pode receber uma pequena comissão, sem custo a mais para você.${itens.some((p) => p.amazon) ? " " + FRASE_AMAZON : ""}${itens.some((p) => p.tipo === "livro") ? " Livros podem trazer versões antigas das normas da ABNT: confira sempre a norma atual e o manual da sua instituição." : ""} <a href="/termos-de-uso/#links-de-afiliado">Saiba mais</a>`;
+    const algumLivro = itens.some((p) => p.tipo === "livro");
+    const nota = `Links de afiliado: se você comprar por eles, o ${nome} pode receber uma pequena comissão, sem custo a mais para você.${algumLivro ? " Se a sua faculdade já indicou a bibliografia, ou se a biblioteca tem o livro, você não precisa comprar: peça emprestado. Livros podem trazer versões antigas das normas da ABNT: confira sempre a norma atual e o manual da sua instituição." : ""} <a href="/termos-de-uso/#links-de-afiliado">Saiba mais</a>`;
+    const nLivros = itens.filter((p) => p.tipo === "livro").length, nCursos = itens.length - nLivros;
+    const intro = nLivros && nCursos ? "Livros e cursos que combinam" : nCursos ? (nCursos === 1 ? "Um curso que combina" : "Cursos que combinam") : (nLivros === 1 ? "Um livro que combina" : "Livros que combinam");
+    const aviso = itens.some((p) => p.amazon) ? ` <span class="afiliados-amazon">${FRASE_AMAZON}</span>` : "";
     return `<section class="afiliados" aria-labelledby="recomendados">
         <h2 id="recomendados">Recomendado para o seu trabalho</h2>
-        <p class="afiliados-sub">${itens.some((p) => p.tipo === "curso") ? "Livros e cursos" : "Livros"} que combinam com esta guia. Os links abaixo são <strong>links de afiliado</strong>: se você comprar por eles, o ${nome} pode ganhar uma pequena comissão e o preço não muda para você.</p>
+        <p class="afiliados-sub">${intro} com esta guia. Os links abaixo são <strong>links de afiliado</strong>: se você comprar por eles, o ${nome} pode ganhar uma pequena comissão e o preço não muda para você.${aviso}</p>
         <ul class="afiliados-lista">
-          ${itens.map(cartao).join("\n          ")}
+          ${itens.map((p, i) => cartao(p, i, slug)).join("\n          ")}
         </ul>
         <p class="afiliados-nota">${nota}</p>
       </section>`;

@@ -21,7 +21,7 @@ const seccion = (t) => console.log(`\n== ${t}`);
 const limpiables = [];
 const constr = (mod, nombre) => { const r = construye({ kit: { ativo: false }, ...mod }, nombre); limpiables.push(r.dir); return r; };
 const AF = CONFIG_REAL.afiliados;
-const FRASE = "Como Associado da Amazon, ganho com compras qualificadas.";
+const FRASE = "Como participante do Programa de Associados da Amazon, sou remunerado pelas compras qualificadas efetuadas."; // texto exacto que pide el Contrato Operacional de Amazon Brasil
 const sitemapUrls = (dir) => [...leer(dir, "sitemap.xml").matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
 
 // productos de EJEMPLO: los 10 de la lista real, con enlaces inventados (solo para probar y fotografiar; nunca van al sitio)
@@ -35,27 +35,27 @@ const OFF = { afiliados: { ativo: false }, kit: { ativo: false } }; // la config
 
 // ---------- R) configuración real (la que se publica) ----------
 seccion("R) configuración real");
-ok(AF && AF.ativo === true && AF.amazonTag === "estudasimples-20" && AF.legalAtualizadoEm === "2026-10-21", "afiliados encendido, con el ID estudasimples-20 y la fecha legal 2026-10-21");
+ok(AF && AF.ativo === true && AF.amazonTag === "estudasimples-20" && AF.legalAtualizadoEm === "2026-11-07", "afiliados encendido, con el ID estudasimples-20 y la fecha legal 2026-11-07");
 const LIBROS = AF.produtos.filter((p) => p.tipo === "livro"), CURSOS = AF.produtos.filter((p) => p.tipo === "curso");
-ok(AF.produtos.length === 11 && LIBROS.length === 10 && CURSOS.length === 1, "11 productos: 10 libros y 1 curso (ABNT Descomplicada, de Hotmart)");
-ok(CURSOS[0].url === "https://go.hotmart.com/G108129335U" && JSON.stringify(CURSOS[0].guias) === JSON.stringify(["normas-abnt", "citacao-abnt", "como-fazer-referencia-abnt", "modelo-de-artigo-cientifico-abnt"]), "el curso usa su hotlink de Hotmart y solo 4 guías de contenido (nunca las de puro formato)");
+ok(AF.produtos.length === 5 && LIBROS.length === 4 && CURSOS.length === 1, "5 productos: 4 libros y 1 curso (ABNT Descomplicada, de Hotmart)");
+ok(CURSOS[0].url === "https://go.hotmart.com/G108129335U" && JSON.stringify(CURSOS[0].guias) === JSON.stringify(["normas-abnt", "citacao-abnt", "como-fazer-referencia-abnt", "referencia-de-site-abnt", "modelo-de-artigo-cientifico-abnt"]), "el curso usa su hotlink de Hotmart y solo 5 guías de normas y citas (nunca las de puro formato)");
 const hostOk = (u) => { try { const x = new URL(u); return x.protocol === "https:" && x.hostname === "www.amazon.com.br" && /^\/dp\/[0-9]{9}[0-9X]$/.test(x.pathname) && x.searchParams.get("tag") === "estudasimples-20" && [...x.searchParams.keys()].length === 1; } catch { return false; } };
-ok(LIBROS.every((p) => hostOk(p.url)), "los 10 enlaces de libros son https://www.amazon.com.br/dp/<ISBN>?tag=estudasimples-20", LIBROS.filter((p) => !hostOk(p.url)).map((p) => p.id).join(", "));
+ok(LIBROS.every((p) => hostOk(p.url)), "los 4 enlaces de libros son https://www.amazon.com.br/dp/<ISBN>?tag=estudasimples-20", LIBROS.filter((p) => !hostOk(p.url)).map((p) => p.id).join(", "));
 const isbnOk = (a) => [...a].reduce((t, c, i) => t + (c === "X" ? 10 : +c) * (10 - i), 0) % 11 === 0;
-ok(LIBROS.every((p) => isbnOk(new URL(p.url).pathname.slice(4))), "los 10 códigos son ISBN-10 válidos (dígito de control)");
+ok(LIBROS.every((p) => isbnOk(new URL(p.url).pathname.slice(4))), "los 4 códigos son ISBN-10 válidos (dígito de control)");
 const real = constr({ kit: { ativo: false } }, "af-real");
 ok(real.ok, "el build con la configuración real funciona", real.salida.slice(-300));
 const guiasReal = paginasHtml(real.dir).filter((p) => /^guias\/[^/]+\/index\.html$/.test(p));
 const conReal = guiasReal.filter((p) => /class="afiliados"/.test(leer(real.dir, p))).map((p) => p.split("/")[1]).sort();
 const GUIAS_REAL = [...new Set(AF.produtos.flatMap((p) => p.guias))].sort();
-ok(conReal.length === 14 && JSON.stringify(conReal) === JSON.stringify(GUIAS_REAL), "el bloque sale en las 14 guías elegidas", conReal.join(","));
+ok(conReal.length === 12 && JSON.stringify(conReal) === JSON.stringify(GUIAS_REAL), "el bloque sale en las 12 guías elegidas", conReal.join(","));
 let botonesBien = true;
 for (const g of conReal) {
   const b = (/<section class="afiliados"[\s\S]*?<\/section>/.exec(leer(real.dir, `guias/${g}/index.html`)) || [""])[0];
   const esp = AF.produtos.filter((p) => p.guias.includes(g)).map((p) => p.url);
   const hall = [...b.matchAll(/class="btn afiliado-botao" href="([^"]+)"/g)].map((m) => m[1].replace(/&amp;/g, "&"));
   if (JSON.stringify(hall) !== JSON.stringify(esp)) { botonesBien = false; console.log("  ", g, hall, esp); }
-  ok(b.includes("Como Associado da Amazon, ganho com compras qualificadas."), `${g}: la frase de Amazon se ve`);
+  ok(b.includes(FRASE) || !/amazon\.com\.br/.test(b), `${g}: la frase exacta de Amazon se ve (si hay un libro de Amazon)`);
 }
 ok(botonesBien, "cada botón apunta exactamente al libro y enlace correctos, con tag=estudasimples-20");
 ok(leer(real.dir, "termos-de-uso/index.html").includes("12. Links de afiliado") && leer(real.dir, "politica-de-privacidade/index.html").includes("12. Links de afiliado"), "Termos y Política tienen la sección 12");
@@ -65,7 +65,7 @@ seccion("A) apagado");
 ok(AF.produtos.every((p) => ["livro", "curso"].includes(p.tipo) && p.autor && p.titulo && p.frase && p.guias.length), "cada producto tiene tipo, título, autor, frase y guías");
 const cuenta = {};
 for (const p of AF.produtos) for (const g of p.guias) cuenta[g] = (cuenta[g] || 0) + 1;
-ok(Object.values(cuenta).every((n) => n <= 3), "ninguna guía recibe más de 3 productos", JSON.stringify(Object.entries(cuenta).filter(([, n]) => n > 3)));
+ok(Object.values(cuenta).every((n) => n <= 2), "ninguna guía recibe más de 2 productos", JSON.stringify(Object.entries(cuenta).filter(([, n]) => n > 2)));
 const off = constr(OFF, "af-off");
 ok(off.ok, "el build apagado funciona", off.salida.slice(-300));
 const pagOff = paginasHtml(off.dir);
@@ -122,14 +122,14 @@ for (const g of GUIAS_CON) {
   const cartones = (b.match(/<li class="afiliado[ "][^>]*>/g) || []).length;
   ok((b.match(/Link de afiliado<\/span>/g) || []).length === cartones, `${g}: cada tarjeta lleva la etiqueta visible "Link de afiliado"`);
   ok((b.match(/rel="sponsored nofollow noopener noreferrer"/g) || []).length === cartones && (b.match(/target="_blank"/g) || []).length === cartones, `${g}: todos los enlaces llevan rel="sponsored nofollow noopener noreferrer" y abren en otra pestaña`);
-  ok(html.indexOf('class="afiliados"') < html.indexOf('class="guia-relacionadas"') && html.indexOf('class="guia-ferramenta"') < html.indexOf('class="afiliados"') && html.indexOf('class="afiliados"') < html.indexOf('id="fontes"'), `${g}: queda después de la caja de la herramienta y justo antes de "Guias relacionadas"`);
-  ok(/<\/section>\s*<section class="guia-relacionadas"/.test(html), `${g}: sin nada entre el bloque y "Guias relacionadas"`);
+  ok(html.indexOf('class="afiliados"') < html.indexOf('id="perguntas-frequentes"') && html.indexOf('class="afiliados"') < html.indexOf('class="guia-relacionadas"') && html.indexOf('class="afiliados"') > html.indexOf('class="resposta"'), `${g}: queda a mitad de la guía (después de la respuesta directa, antes de las preguntas frecuentes y de "Guias relacionadas")`);
+  ok(!/<\/section>\s*<section class="guia-relacionadas"/.test(html) || !/class="afiliados"[\s\S]{0,4000}<section class="guia-relacionadas"/.test(html), `${g}: ya no va pegado a "Guias relacionadas"`);
   ok(/<h2 id="recomendados">Recomendado para o seu trabalho<\/h2>/.test(b), `${g}: título "Recomendado para o seu trabalho" (h2)`);
 }
 const bTcc = bloqueDe("como-fazer-tcc");
 ok(/href="https:\/\/www\.amazon\.com\.br\/dp\/B00EJEMPLO\d+\?tag=exemplo-20"/.test(bTcc), "los enlaces de Amazon reciben el ID de afiliado (tag=exemplo-20)");
-ok((bTcc.match(/>Ver na Amazon</g) || []).length === 3 && /class="afiliado-tipo">Livro</.test(bTcc), "botón 'Ver na Amazon' y tipo 'Livro'");
-ok(bTcc.includes(FRASE) && /<p class="afiliados-nota">/.test(bTcc), "la frase de Amazon está debajo del bloque (letra pequeña)");
+ok((bTcc.match(/>Ver na Amazon</g) || []).length === 1 && /class="afiliado-tipo">Livro</.test(bTcc), "botón 'Ver na Amazon' y tipo 'Livro'");
+ok(bTcc.includes(FRASE) && /class="afiliados-amazon"/.test(bTcc) && /<p class="afiliados-nota">/.test(bTcc), "la frase exacta de Amazon se ve en el subtítulo del bloque, y la nota con la comisión va debajo");
 const bCurso = bloqueDe("resumo-abnt");
 ok(bCurso.includes(">Ver o curso<") && bCurso.includes("utm_source=estudasimples") && !/tag=exemplo-20[^"]*curso/.test(bCurso), "el curso dice 'Ver o curso' y conserva su enlace tal cual (sin ID de Amazon)");
 ok(!/class="afiliado-autor"/.test((/<li class="afiliado[ "][^>]*>(?:(?!<\/li>)[\s\S])*Curso de exemplo[\s\S]*?<\/li>/.exec(bCurso) || [""])[0]), "un curso sin autor no deja una línea vacía");
@@ -137,7 +137,7 @@ const soloCurso = constr({ afiliados: { ativo: true, legalAtualizadoEm: "2026-10
 ok(soloCurso.ok && !/Associado da Amazon/.test(leer(soloCurso.dir, "guias/resumo-abnt/index.html") + leer(soloCurso.dir, "termos-de-uso/index.html")), "con solo un curso (no Amazon) no sale la frase de Amazon");
 const algunos = constr({ afiliados: { ativo: true, amazonTag: "exemplo-20", legalAtualizadoEm: "2026-10-21", produtos: conEnlaces(2) } }, "af-2");
 const nTarjetas = (g) => (leer(algunos.dir, `guias/${g}/index.html`).match(/<li class="afiliado[ "][^>]*>/g) || []).length;
-ok(nTarjetas("como-fazer-tcc") === 1 && nTarjetas("metodologia-do-tcc") === 1 && nTarjetas("referencial-teorico-do-tcc") === 0, "con solo 2 productos con enlace (los otros 8 sin enlace), solo esos 2 aparecen");
+ok(nTarjetas("como-fazer-tcc") === 1 && nTarjetas("metodologia-do-tcc") === 2 && nTarjetas("referencial-teorico-do-tcc") === 0, "con solo 2 productos con enlace (los otros 3 sin enlace), solo esos 2 aparecen");
 // páginas legales
 for (const [pag, clave] of [["termos-de-uso", "Termos"], ["politica-de-privacidade", "Política"]]) {
   const h = leer(on.dir, `${pag}/index.html`);
@@ -159,16 +159,16 @@ ok(/Ao clicar em um link de afiliado, a loja pode definir cookies/.test(soloCurs
 const resto = pagOn.filter((p) => /\{\{[A-Za-z0-9_:-]+\}\}/.test(leer(on.dir, p)));
 ok(resto.length === 0, "encendido: ninguna página con marcas {{...}} sin reemplazar", resto.join(", "));
 ok(sitemapUrls(on.dir).length === sitemapUrls(off.dir).length, "el sitemap no cambia");
-const xss = constr(ON({ produtos: [{ ...conEnlaces()[0], titulo: '<img src=x onerror=alert(1)>', autor: 'A "B" & C', frase: '<b onmouseover=1>hola</b>', botao: '<i>ver</i>' }] }), "af-xss");
+const xss = constr(ON({ produtos: [{ ...conEnlaces()[0], frases: undefined, titulo: '<img src=x onerror=alert(1)>', autor: 'A "B" & C', frase: '<b onmouseover=1>hola</b>', botao: '<i>ver</i>' }] }), "af-xss");
 const hx = leer(xss.dir, "guias/como-fazer-tcc/index.html");
 ok(!hx.includes("<img src=x") && hx.includes("&lt;img src=x onerror=alert(1)&gt;") && hx.includes("A &quot;B&quot; &amp; C"), "título y autor se escapan (no entra HTML)");
 ok(!hx.includes("<b onmouseover") && !hx.includes("<i>ver</i>") && hx.includes("&lt;b onmouseover=1&gt;hola&lt;/b&gt;") && hx.includes("&lt;i&gt;ver&lt;/i&gt;"), "frase y botón también se escapan");
 
 // ---------- H) curso de Hotmart ----------
 seccion("H) curso de Hotmart (enlace intacto, texto legal y frase de Amazon según corresponda)");
-const HOT = { id: "curso-hotmart", tipo: "curso", titulo: "Curso de exemplo Hotmart", autor: "Autora Exemplo", frase: "Curso em vídeo de exemplo sobre normas da ABNT.", url: "https://go.hotmart.com/X123456789Y", guias: ["normas-abnt"] };
+const HOT = { id: "curso-hotmart", tipo: "curso", titulo: "Curso de exemplo Hotmart", autor: "Autora Exemplo", frase: "Curso em vídeo de exemplo sobre normas da ABNT.", url: "https://go.hotmart.com/X123456789Y", guias: ["como-fazer-tcc"] };
 const LIBROS_EJ = LIBROS.map((p, i) => ({ ...p, url: `https://www.amazon.com.br/dp/B00EJEMPLO${String(i + 1).padStart(2, "0")}` }));
-const bloqueNormas = (dir) => (/<section class="afiliados"[\s\S]*?<\/section>/.exec(leer(dir, "guias/normas-abnt/index.html")) || [""])[0];
+const bloqueNormas = (dir) => (/<section class="afiliados"[\s\S]*?<\/section>/.exec(leer(dir, "guias/como-fazer-tcc/index.html")) || [""])[0];
 const soHot = constr({ afiliados: { ativo: true, amazonTag: "exemplo-20", legalAtualizadoEm: "2026-10-21", produtos: [HOT] } }, "af-hot");
 ok(soHot.ok, "el build con solo un curso de Hotmart funciona", soHot.salida.slice(-300));
 const bH = bloqueNormas(soHot.dir), polH = leer(soHot.dir, "politica-de-privacidade/index.html");
@@ -193,7 +193,9 @@ falla(ON({ produtos: [{ ...conEnlaces()[0], guias: ["no-existe"] }] }), /não ex
 falla(ON({ produtos: [{ ...conEnlaces()[0], tipo: "pelicula" }] }), /livro.*curso/, "tipo inválido: se niega");
 falla(ON({ produtos: [{ ...conEnlaces()[0], autor: "" }] }), /falta "autor"/, "libro sin autor: se niega");
 falla(ON({ produtos: [conEnlaces()[0], { ...conEnlaces()[1], id: conEnlaces()[0].id }] }), /repetido/, "id repetido: se niega");
-falla(ON({ produtos: [0, 1, 2, 3].map((i) => ({ ...conEnlaces()[i], id: `x${i}`, guias: ["margens-abnt"] })) }), /máximo é 3/, "4 productos en una guía: se niega");
+falla(ON({ produtos: [0, 1, 2].map((i) => ({ ...conEnlaces()[i], id: `x${i}`, guias: ["margens-abnt"] })) }), /máximo é 2/, "3 productos en una guía: se niega (el máximo ahora es 2)");
+falla(ON({ produtos: [{ ...conEnlaces()[0], frases: { "no-existe": "hola" } }] }), /frases.*não existe/, "frase por guía para una guía inexistente: se niega");
+falla(ON({ produtos: [{ ...conEnlaces()[0], frases: { "margens-abnt": "x".repeat(151) } }] }), /até 150/, "frase por guía demasiado larga: se niega");
 falla(ON({ amazonTag: "con espacios!" }), /amazonTag/, "ID de afiliado mal escrito: se niega");
 falla(ON({ produtos: [{ ...conEnlaces()[0], frase: "x".repeat(151) }] }), /frase/, "frase demasiado larga: se niega");
 
@@ -232,7 +234,7 @@ const revisa = async (ruta, ancho, tieneBloque) => {
   await p.close();
 };
 for (const ancho of [320, 390, 1280]) {
-  for (const g of ["como-fazer-tcc", "resumo-abnt", "consideracoes-finais-tcc"]) await revisa(`/guias/${g}/`, ancho, true);
+  for (const g of ["como-fazer-tcc", "resumo-abnt", "metodologia-do-tcc"]) await revisa(`/guias/${g}/`, ancho, true);
   await revisa("/guias/margens-abnt/", ancho, false);
 }
 for (const ruta of ["/termos-de-uso/", "/politica-de-privacidade/"]) for (const ancho of [390, 1280]) await revisa(ruta, ancho, false);
