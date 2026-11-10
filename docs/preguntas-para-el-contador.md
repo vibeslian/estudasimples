@@ -28,7 +28,6 @@ Lian hablará con un contador esta semana sobre TODOS sus proyectos a la vez. Es
 - ¿Puedo cobrar por Pix a mi cuenta personal o debo usar una cuenta del MEI?
 - ¿Cuándo debo emitir nota fiscal? ¿A particulares también? ¿Cómo se emite (paso a paso, costo)?
 - Cobrar con Hotmart (producto digital) y con Amazon/AdSense: ¿a nombre de quién debe estar la cuenta (CPF o CNPJ) y cómo se declara?
-- Si hago un servicio gratis a cambio de una opinión (para mostrar el caso): ¿necesita algún cuidado?
 
 **4) Dinero del exterior y plataformas**
 - Fiverr y tiendas de juegos pagan en dólares: ¿cómo entra el dinero (cuenta en el exterior, Wise, Payoneer…), qué impuestos y qué documentos?

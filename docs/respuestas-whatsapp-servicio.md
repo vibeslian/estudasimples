@@ -53,7 +53,7 @@ Pergunta justa. O serviço é meu, de Lian Marcos Martinez Navarro, MEI, CNPJ 67
 ```
 Pronto! O trabalho está formatado. Se tiver algum ajuste, me avisa. Se quiser, escreva 2 ou 3 frases sinceras sobre como foi (pode ser crítica também) e me diga se posso publicar com o seu primeiro nome. Se preferir não publicar, tudo bem.
 ```
-Solo se publica con permiso escrito. Si el servicio fue gratis, la opinión lleva «formatado em troca de uma opinião sincera».
+Solo se publica con permiso escrito. (Por ahora el servicio no se regala: Lian descartó el «3 primeros gratis» el 9/11/2026.)
 
 ## 5) Si no contesta (un solo recordatorio, a los 2 días, sin presión)
 ```

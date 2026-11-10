@@ -35,6 +35,7 @@
         <li>Entrega em {{PRAZO}}</li>
         <li>1 rodada de ajustes incluída</li>
       </ul>
+      <p class="hero-quem"><a href="#quem-faz">Quem responde é o Lian, só pelo WhatsApp {{WHATSAPP_EXIBICAO}}</a></p>
     </div>
     <div class="hero-mini hero-resumo" aria-hidden="true">
       <div class="resumo-cartao">
@@ -111,17 +112,34 @@
 
   <section class="secao" id="quem-faz" aria-labelledby="quem-faz-titulo">
     <div class="container">
-      <div class="quem-faz revelar">
-        <img src="/assets/img/fotos/lian.webp" width="180" height="180" loading="lazy" decoding="async" alt="Lian Martínez, criador do Estuda Simples">
-        <div>
-          <span class="etiqueta">Quem presta o serviço</span>
-          <h2 id="quem-faz-titulo">Lian Martínez</h2>
+      <div class="quem-card revelar">
+        <div class="quem-card-lado">
+          <img src="/assets/img/fotos/lian.webp" width="180" height="180" loading="lazy" decoding="async" alt="Lian Martínez, criador do Estuda Simples">
+          <b class="quem-card-nome">Lian Martínez</b>
+          <span class="quem-card-cargo">Criador do {{SITE_NAME}}</span>
+          <span class="quem-card-selo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>MEI registrado</span>
+        </div>
+        <div class="quem-card-corpo">
+          <span class="etiqueta">Antes de me chamar</span>
+          <h2 id="quem-faz-titulo">Quem vai te escrever no WhatsApp</h2>
+          <div class="quem-card-numero">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg>
+            <div>
+              <b>{{WHATSAPP_EXIBICAO}}</b>
+              <span>Só escrevo deste número. Se outro número disser que é do {{SITE_NAME}}, não é.</span>
+            </div>
+          </div>
           <p>Sou o Lian e criei o {{SITE_NAME}}. Cada pedido de formatação é feito com a ajuda do Claude, uma ferramenta de inteligência artificial da empresa Anthropic, e eu respondo pelo resultado. As condições de reembolso estão escritas nesta página, antes de qualquer pagamento.</p>
-          <ul class="quem-faz-fatos">
-            <li><strong>Empresa registrada:</strong> Lian Marcos Martinez Navarro, MEI, CNPJ 67.704.102/0001-69.</li>
-            <li><strong>Seu arquivo é usado só para o serviço</strong> e eu o apago 15 dias depois da entrega.</li>
-            <li><strong>Eu não escrevo nem mudo o conteúdo</strong> do seu trabalho: só a formatação.</li>
+          <ul class="quem-card-lista">
+            <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg><span><strong>Você vê uma prévia antes de pagar:</strong> a capa e uma página do seu texto já formatadas.</span></li>
+            <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg><span><strong>Eu nunca peço senha nem código</strong> que chega por SMS ou WhatsApp.</span></li>
+            <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg><span><strong>O Pix aparece no meu nome:</strong> Lian Marcos Martinez Navarro, MEI, CNPJ 67.704.102/0001-69.</span></li>
+            <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg><span><strong>Seu arquivo é usado só para o serviço</strong> e eu o apago 15 dias depois da entrega. Eu não escrevo nem mudo o conteúdo do seu trabalho: só a formatação.</span></li>
           </ul>
+          <div class="quem-card-acoes">
+            <a class="btn btn-acento btn-grande" href="{{WHATSAPP_URL}}" data-whatsapp target="_blank" rel="noopener">Pedir orçamento no WhatsApp</a>
+            <span class="quem-card-links">Mais sobre mim em <a href="/sobre/">Sobre</a> e <a href="/contato/">Contato</a></span>
+          </div>
         </div>
       </div>
     </div>

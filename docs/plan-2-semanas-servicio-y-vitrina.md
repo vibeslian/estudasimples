@@ -12,7 +12,7 @@ Foco adoptado por Lian el 9/11/2026 (propuesto por los analistas, ver `docs/anal
 - SE HACE: pedidos del servicio (con tope de pedidos), muestra gratis del kit, primeras opiniones reales, medir 5 números, contestar bien el WhatsApp.
 - SE DEJA (hasta revisar el 31/1/2027): guías nuevas, Pinterest, campaña de backlinks, AdSense y /anuncie/, más libros o cursos de afiliado, más informes de estrategia.
 - Mantenimiento (Claude, ~2 h/semana): quitar el aviso del ENEM el 17/11, mirar títulos de las guías con más impresiones, fusionar guías que se pisan solo si Search Console lo confirma en 4 semanas.
-- Honestidad: nada de opiniones, cifras ni clientes inventados. Opiniones solo con permiso escrito, y marcadas si el servicio fue gratis.
+- Honestidad: nada de opiniones, cifras ni clientes inventados. Opiniones solo con permiso escrito. Por ahora sin servicio gratis (Lian descartó el «3 primeros gratis» el 9/11; no es una regla eterna, solo vale para esa propuesta).
 
 ## Los 5 números de cada lunes (Claude los junta, 10 minutos)
 1. Clics e impresiones de Google (Search Console) y CTR de las guías con más impresiones.
@@ -24,7 +24,7 @@ Línea de base del 9/11: Search Console 12/10–7/11: 43 clics, 5,75 mil impresi
 
 ## Cómo llegan los primeros clientes sin hablar con extraños
 1. **Ya existe:** las herramientas gratis traen visitas (sumário y capa) y cada una invita al servicio con un botón de WhatsApp. Lian solo contesta (ver respuestas listas).
-2. **Pendiente de aprobar (propuesta):** una frase en la página del servicio: «Estou começando: os 3 primeiros trabalhos de teste são de graça, em troca de uma opinião sincera.» Atrae a quien tiene un trabajo real, no exige que Lian hable con nadie y llena las primeras opiniones. Costo: 3 trabajos gratis.
+2. **DESCARTADO por Lian el 9/11/2026:** nada de servicio gratis, ni «3 primeros trabajos de prueba», ni descuento de lanzamiento. El servicio se cobra siempre: R$ 80 (hasta 30 páginas), R$ 140 (31 a 60), más de 60 a consultar. La confianza se gana con la prévia antes del Pix y con la tarjeta «quién te va a escribir» (ver propuesta de flujo en el sitio, abajo).
 3. **Claude puede preparar (propuesta):** buscar 3 o 4 lugares públicos donde estudiantes preguntan por ABNT (foros, comunidades), leer sus reglas, y escribir respuestas útiles y honestas que Lian copia y publica él mismo si quiere. Nada de publicar en su nombre sin su OK.
 
 ## Semana 1 (9 al 15/11)
@@ -33,8 +33,7 @@ Línea de base del 9/11: Search Console 12/10–7/11: 43 clics, 5,75 mil impresi
 
 ## Semana 2 (16 al 22/11)
 - Mar 17/11 (Claude): quitar el aviso del ENEM de la portada y avisar a buscadores.
-- Si Lian aprueba la frase de «3 trabajos gratis»: Claude la publica con pruebas y revisión.
-- Cada trabajo de prueba: Lian recibe el archivo, Claude prepara la prévia y el trabajo, Lian revisa y entrega; pedir la opinión con el texto listo.
+- Cada pedido: Lian recibe el archivo, Claude prepara la prévia y el trabajo, Lian revisa y entrega; después pedir la opinión con el texto listo (solo con permiso escrito).
 - 23/11: revisar los 5 números y qué pasó con el WhatsApp.
 
 ## Revisión
