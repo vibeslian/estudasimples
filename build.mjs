@@ -223,6 +223,7 @@ for (const file of walk(SRC)) {
 
   if (rel.endsWith("index.html") && !privada) {
     if ("/" + rel.slice(0, -"index.html".length).split(sep).join("/") === URL_ANUNCIE && !anuncie.ativo) continue; // página escondida: fora do sitemap
+    if (/<meta name="robots" content="noindex/.test(readFileSync(dest, "utf8"))) continue; // páginas com noindex (pedido, painel) não vão ao sitemap
     pages.push("/" + rel.slice(0, -"index.html".length).split(sep).join("/")); // "/" ou "/gerador-de-capa-abnt/"
   }
 }

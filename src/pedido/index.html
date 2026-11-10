@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  {{include:head-common}}
+  <title>O seu pedido de formatação | {{SITE_NAME}}</title>
+  <meta name="description" content="Acompanhe o seu pedido de formatação ABNT, veja a prévia e baixe o trabalho depois de pagar.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="{{SITE_URL}}/formatacao-abnt-tcc/">
+  <link rel="stylesheet" href="/assets/css/pedidos.css?v={{BUILD}}">
+  <script src="/assets/js/pedidos.js?v={{BUILD}}" defer></script>
+</head>
+<body>
+<div class="hero hero--compacto">
+  {{include:manchas}}
+  {{include:header}}
+  <div class="container hero-conteudo">
+    <span class="etiqueta">Formatação ABNT</span>
+    <h1>O seu pedido</h1>
+  </div>
+</div>
+<main class="secao" id="conteudo">
+  <div class="container pd-estreito">
+    <div id="pedidoApp" aria-live="polite"><p>Carregando o seu pedido…</p></div>
+    <noscript><p>Para ver o seu pedido, ative o JavaScript no navegador. Se precisar de ajuda, chame no WhatsApp {{WHATSAPP_EXIBICAO}}.</p></noscript>
+    <div class="pd-quem pd-quem--linha">
+      <img src="/assets/img/fotos/lian.webp" width="64" height="64" loading="lazy" decoding="async" alt="Lian Martínez, criador do Estuda Simples">
+      <p><strong>Lian Martínez</strong>, MEI, CNPJ 67.704.102/0001-69.<br>Dúvidas? WhatsApp {{WHATSAPP_EXIBICAO}}. Só escrevo deste número.</p>
+    </div>
+  </div>
+</main>
+{{include:footer}}
+</body>
+</html>

@@ -15,3 +15,6 @@ Thumbs.db
 
 # Kit TCC: carpeta entera fuera de git (el repositorio es PÚBLICO: aquí están las fuentes del producto de pago)
 /kit-tcc/
+
+# Archivos locales de Wrangler (pruebas del Worker)
+.wrangler/

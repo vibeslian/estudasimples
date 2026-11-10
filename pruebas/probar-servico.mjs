@@ -82,7 +82,7 @@ marca(!/\b\d+\s*a\s*\d+\s*horas/.test(fuenteTexto) && !fuenteTexto.includes("wa.
   const pasos = await p.evaluate(() => [...document.querySelectorAll("#como-funciona .passos li h3")].map((h) => h.textContent.trim()));
   marca(pasos.length === 5 && /arquivo/i.test(pasos[0]) && /orçamento/i.test(pasos[1]) && /Pix/.test(pasos[2]) && /formatado/.test(pasos[3]) && /ajustes/i.test(pasos[4]), `cómo funciona, en orden: ${pasos.join(" → ")}`);
   marca(/1 rodada de ajustes/.test((await p.evaluate(() => document.querySelector("main").innerText))), "1 ronda de ajustes incluida");
-  marca(/não recebe pagamentos/.test(sec["como-funciona"]), "aclara que el sitio no recibe pagos (el Pix es por fuera)");
+  marca(/Pelo WhatsApp, o Pix vai direto para mim/.test(sec["como-funciona"]) && /Mercado Pago/.test(sec["como-funciona"]), "aclara las dos formas de pagar el Pix: directo por WhatsApp o por Mercado Pago si se pide por el sitio");
   marca(/inteligência artificial/.test(sec.privacidade) && /Apagado 15 dias depois da entrega/.test(sec.privacidade) && /só para o serviço/i.test(sec.privacidade), "privacidad: solo para el servicio, con ayuda de IA, se borra al terminar");
   marca(!(await p.$(".anuncio")), "la página del servicio no tiene espacios de anuncio");
   marca(/Word e PDF/.test(await p.evaluate(() => document.body.innerText)) && /em Word e em PDF/.test(sec["como-funciona"]), "entrega en Word y PDF");

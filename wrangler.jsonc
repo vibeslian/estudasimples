@@ -1,13 +1,29 @@
 {
-  // Configuración del Worker de Cloudflare que publica el sitio (solo archivos estáticos, sin código).
+  // Configuración del Worker de Cloudflare que publica el sitio.
   // El nombre debe ser igual al del Worker en el panel de Cloudflare (Workers & Pages > estudasimples).
+  // Etapa 2 (pedidos): el mismo Worker sirve los archivos estáticos y, SOLO para /api/*, ejecuta pedidos/src/index.mjs.
   "name": "estudasimples",
+  "main": "pedidos/src/index.mjs",
   "compatibility_date": "2026-10-12",
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
+    // El código del Worker corre solo para las direcciones /api/*; todo lo demás sale directo de los archivos.
+    "run_worker_first": ["/api/*"],
     // Direcciones que no existen: responde con 404 y muestra dist/404.html
     "not_found_handling": "404-page",
     // /sobre/ -> sobre/index.html (con barra al final)
     "html_handling": "auto-trailing-slash"
+  },
+  "r2_buckets": [{ "binding": "ARQUIVOS", "bucket_name": "estudasimples-pedidos" }],
+  "d1_databases": [{ "binding": "DB", "database_name": "estudasimples-pedidos", "database_id": "REEMPLAZAR-CON-EL-ID-REAL" }],
+  // Limpieza diaria (06:17 UTC): borra archivos y datos personales vencidos.
+  "triggers": { "crons": ["17 6 * * *"] },
+  "vars": {
+    "PUBLIC_BASE": "https://estudasimples.com.br",
+    // Los completa Lian después de crear la aplicación en Cloudflare Access (ver docs/etapa-2-puesta-en-marcha.md).
+    "ACCESS_TEAM_DOMAIN": "",
+    "ACCESS_AUD": "",
+    "ADMIN_EMAIL": ""
   }
 }

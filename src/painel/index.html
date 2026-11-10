@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  {{include:head-common}}
+  <title>Painel dos pedidos | {{SITE_NAME}}</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="{{SITE_URL}}/formatacao-abnt-tcc/">
+  <link rel="stylesheet" href="/assets/css/pedidos.css?v={{BUILD}}">
+  <script src="/assets/js/painel.js?v={{BUILD}}" defer></script>
+</head>
+<body>
+<div class="hero hero--compacto">
+  {{include:manchas}}
+  {{include:header}}
+  <div class="container hero-conteudo">
+    <h1>Pedidos de formatação</h1>
+    <p class="lead">Só você vê esta página (o acesso é protegido pelo Cloudflare Access).</p>
+  </div>
+</div>
+<main class="secao" id="conteudo">
+  <div class="container">
+    <p id="pnErro" class="pd-erro" role="alert" hidden></p>
+    <div class="pn-grade">
+      <section aria-labelledby="pnListaTitulo"><h2 id="pnListaTitulo" class="pn-titulo">Pedidos</h2><div id="pnLista" class="pn-lista" aria-live="polite"><p>Carregando…</p></div></section>
+      <section aria-labelledby="pnDetalheTitulo"><h2 id="pnDetalheTitulo" class="pn-titulo">Detalhe</h2><div id="pnDetalhe" class="pn-detalhe" aria-live="polite"><p>Escolha um pedido na lista.</p></div></section>
+    </div>
+  </div>
+</main>
+{{include:footer}}
+</body>
+</html>
