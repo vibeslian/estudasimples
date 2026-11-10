@@ -16,14 +16,15 @@
     "html_handling": "auto-trailing-slash"
   },
   "r2_buckets": [{ "binding": "ARQUIVOS", "bucket_name": "estudasimples-pedidos" }],
-  "d1_databases": [{ "binding": "DB", "database_name": "estudasimples-pedidos", "database_id": "REEMPLAZAR-CON-EL-ID-REAL" }],
+  "d1_databases": [{ "binding": "DB", "database_name": "estudasimples-pedidos", "database_id": "237347e9-ac93-4492-b068-5b62ee6464be" }],
   // Limpieza diaria (06:17 UTC): borra archivos y datos personales vencidos.
   "triggers": { "crons": ["17 6 * * *"] },
   "vars": {
     "PUBLIC_BASE": "https://estudasimples.com.br",
     // Los completa Lian después de crear la aplicación en Cloudflare Access (ver docs/etapa-2-puesta-en-marcha.md).
     "ACCESS_TEAM_DOMAIN": "",
-    "ACCESS_AUD": "",
-    "ADMIN_EMAIL": ""
+    "ACCESS_AUD": ""
+    // ADMIN_EMAIL (el correo de Lian), MP_ACCESS_TOKEN (clave del Mercado Pago) e IP_SALT NO van aquí: el repositorio es público.
+    // Se guardan como secretos con «npx.cmd wrangler secret put NOMBRE» (los escribe Lian).
   }
 }

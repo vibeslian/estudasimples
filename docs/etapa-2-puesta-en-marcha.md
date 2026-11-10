@@ -15,13 +15,18 @@ Estado: TODO está programado y probado EN LOCAL, en la rama `etapa-2-pedidos` (
 - Que la ruta `/api/*` del Worker funcione en el dominio real junto con los archivos estáticos (debería, es la forma recomendada por Cloudflare).
 - El aviso (webhook) del Mercado Pago llegando de verdad. El sistema tiene una segunda vía: la página del cliente consulta al Mercado Pago al volver del pago.
 
+## HECHO el 10/11/2026 (con la sesión de Lian en Wrangler)
+- Base de datos D1 `estudasimples-pedidos` creada y con las tablas (id en `wrangler.jsonc`).
+- Almacén R2 `estudasimples-pedidos` creado.
+- Los secretos NO los puede poner Claude (el sistema lo bloquea): los escribe Lian.
+
 ## Pasos de Lian (los clave los escribe él; Claude nunca ve claves)
 1. En el PC, abrir una terminal en la carpeta del proyecto y entrar a Cloudflare: `npx.cmd wrangler login` (se abre el navegador; Lian acepta).
 2. Crear la base de datos: `npx.cmd wrangler d1 create estudasimples-pedidos` → copiar el `database_id` que muestra y pasárselo a Claude (no es secreto), o pegarlo en `wrangler.jsonc` en lugar de `REEMPLAZAR-CON-EL-ID-REAL`.
 3. Crear las tablas: `npx.cmd wrangler d1 execute estudasimples-pedidos --remote --file=pedidos/schema.sql`
 4. Crear el almacén de archivos: `npx.cmd wrangler r2 bucket create estudasimples-pedidos` (Cloudflare puede pedir una tarjeta para activar R2: la escribe Lian; hay un nivel gratis de 10 GB).
 5. Mercado Pago: en su cuenta, crear una aplicación (Tus integraciones) y copiar la CLAVE DE ACCESO de producción (Access Token). Guardarla en Cloudflare con: `npx.cmd wrangler secret put MP_ACCESS_TOKEN` (la escribe él cuando lo pida la terminal). Nunca en el chat ni en el repositorio.
-6. Cloudflare Access (protege el panel): en el panel de Cloudflare → Zero Trust → Access → Applications → Add → Self-hosted. Dominio `estudasimples.com.br`, rutas `/painel*` y `/api/admin*` (dos entradas). Política: permitir solo el correo de Lian (código por correo). Al terminar, copiar el «Application Audience (AUD) tag» y el nombre del equipo (`algo.cloudflareaccess.com`) y ponerlos en `wrangler.jsonc` (`ACCESS_AUD`, `ACCESS_TEAM_DOMAIN`, `ADMIN_EMAIL`). Sin esto el panel queda CERRADO (por diseño).
+6. Cloudflare Access (protege el panel): en el panel de Cloudflare → Zero Trust → Access → Applications → Add → Self-hosted. Dominio `estudasimples.com.br`, rutas `/painel*` y `/api/admin*` (dos entradas). Política: permitir solo el correo de Lian (código por correo). Al terminar, copiar el «Application Audience (AUD) tag» y el nombre del equipo (`algo.cloudflareaccess.com`) y ponerlos en `wrangler.jsonc` (`ACCESS_AUD`, `ACCESS_TEAM_DOMAIN`). El correo de Lian (`ADMIN_EMAIL`) NO va en el archivo (el repositorio es público): se guarda como secreto con `npx.cmd wrangler secret put ADMIN_EMAIL`. Sin esto el panel queda CERRADO (por diseño).
 6b. Secreto contra rastreo de IP: `npx.cmd wrangler secret put IP_SALT` (Lian escribe cualquier texto largo y al azar; sirve para que el código derivado de la IP y del WhatsApp no se pueda deshacer). Sin él funciona, pero con menos protección.
 6c. Regla de Cloudflare contra abuso (recomendada por el revisor de seguridad): en el panel del dominio → Seguridad → WAF → Reglas de límite de velocidad: limitar `/api/*` por IP (por ejemplo 60 peticiones por minuto). Gratis en el plan básico (1 regla).
 6d. Red de seguridad de privacidad: en R2 → el bucket `estudasimples-pedidos` → Configuración → Reglas de ciclo de vida → borrar objetos a los 31 días. Así, aunque algo fallara, nada se queda para siempre.
