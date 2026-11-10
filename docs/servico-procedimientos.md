@@ -17,6 +17,9 @@ Cómo se cumple, pedido por pedido:
 
 Lo que NO se puede verificar desde el sitio: cuánto tiempo guarda Anthropic los datos (depende del plan y de los ajustes de la cuenta de Lian; revisar en la configuración de privacidad de Claude y, si hay una opción de no usar las conversaciones para entrenar, activarla). Nunca decir en el sitio algo sobre eso que no se haya comprobado.
 
+## 1b. Prévia antes del Pix (desde el 9/11/2026, prometida en la página del servicio, FAQ y Termos 5.2)
+Antes de pedir el Pix: mandar por WhatsApp un PDF con la CAPA y UNA PÁGINA DEL TEXTO del trabajo ya formateadas (unos 10 minutos; es solo para ver, no se entrega el Word). Si el cliente no paga, esos archivos se borran como el resto (a los 15 días). Lo que Lian promete en público es exactamente eso: no más ni menos.
+
 ## 2. Resumen previo del pedido (Decreto 7.962/2013, art. 4º)
 Antes de que el cliente pague, mandar por WhatsApp este mensaje (copiar y completar los corchetes) y guardarlo en la conversación:
 
