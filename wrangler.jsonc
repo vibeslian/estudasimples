@@ -22,8 +22,8 @@
   "vars": {
     "PUBLIC_BASE": "https://estudasimples.com.br",
     // Los completa Lian después de crear la aplicación en Cloudflare Access (ver docs/etapa-2-puesta-en-marcha.md).
-    "ACCESS_TEAM_DOMAIN": "",
-    "ACCESS_AUD": ""
+    "ACCESS_TEAM_DOMAIN": "wandering-meadow-3bbd.cloudflareaccess.com",
+    "ACCESS_AUD": "69786fa8b8521239ab17d7e0a1ce51fb4366568602d4d878465132195451de0f"
     // ADMIN_EMAIL (el correo de Lian), MP_ACCESS_TOKEN (clave del Mercado Pago) e IP_SALT NO van aquí: el repositorio es público.
     // Se guardan como secretos con «npx.cmd wrangler secret put NOMBRE» (los escribe Lian).
   }
