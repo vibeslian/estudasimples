@@ -1,5 +1,30 @@
 // Parte privada (solo Lian, detrás de Cloudflare Access): ver pedidos, bajar el original, subir el trabajo y marcar «pronto».
-import { MAX_ARCHIVO, DIAS_APAGAR_ENTREGA, TIPOS, ID_RE, ahora, json, erro, arquivo, tipoReal, primeiroNome, temChave } from "./util.mjs";
+import {
+  MAX_ARCHIVO, DIAS_APAGAR_ENTREGA, DIAS_APAGAR_SIN_CONCLUIR, TIPOS, ID_RE, ahora, json, erro, arquivo, tipoReal, primeiroNome, temChave,
+  novoId, novoToken, normalizaWhatsapp, nomeLimpo, nomeArquivoSeguro,
+} from "./util.mjs";
+
+// Pedido criado pelo Lian quando o cliente mandou o arquivo pelo WhatsApp (o cliente aceitou as condições ao pedir pelo WhatsApp).
+export async function criarManual(request, env) {
+  let f;
+  try { f = await request.formData(); } catch { return erro(400, "Não foi possível ler o formulário."); }
+  const tamanho = String(f.get("tamanho") || "");
+  if (!["ate30", "de31a60", "mais60"].includes(tamanho)) return erro(400, "Escolha o tamanho do trabalho.");
+  const whatsapp = normalizaWhatsapp(f.get("whatsapp"));
+  if (!whatsapp) return erro(400, "Confira o WhatsApp do cliente (com DDD).");
+  const arq = f.get("arquivo");
+  if (!arq || typeof arq === "string" || !arq.size) return erro(400, "Escolha o arquivo que o cliente mandou.");
+  if (arq.size > MAX_ARCHIVO) return erro(413, "Arquivo grande demais (limite de 25 MB).");
+  const tipo = await tipoReal(arq);
+  if (!tipo) return erro(400, "O arquivo precisa ser Word (.docx) ou PDF.");
+  const id = novoId(), token = novoToken(), t = ahora();
+  await env.ARQUIVOS.put(`orig/${id}/original.${TIPOS[tipo].ext}`, await arq.arrayBuffer(), { httpMetadata: { contentType: TIPOS[tipo].mime } });
+  await env.DB.prepare(
+    "INSERT INTO pedidos (id, token, nome, whatsapp, tamanho, arquivo_nome, arquivo_tipo, arquivo_bytes, status, criado_em, apagar_em, consentimento_em, consentimento_versao) " +
+      "VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, 'recebido', ?9, ?10, ?9, 'manual-whatsapp')",
+  ).bind(id, token, nomeLimpo(f.get("nome")) || null, whatsapp, tamanho, nomeArquivoSeguro(arq.name), tipo, arq.size, t, t + DIAS_APAGAR_SIN_CONCLUIR * 86400).run();
+  return json({ ok: true, id });
+}
 
 const CAMPOS_LISTA = "id, nome, whatsapp, tamanho, arquivo_nome, arquivo_tipo, arquivo_bytes, status, valor_centavos, tem_previa, tem_docx, tem_pdf, aviso, criado_em, pronto_em, pago_em, apagar_em";
 

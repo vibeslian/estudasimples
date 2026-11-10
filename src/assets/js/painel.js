@@ -84,6 +84,26 @@
       detalhe.replaceChildren.apply(detalhe, corpo);
     }).catch(function (e) { erro(e.message); });
   }
+  // Novo pedido: o cliente mandou o arquivo pelo WhatsApp e o Lian o coloca aqui para gerar o link de pagamento.
+  (function formularioManual() {
+    var nome = el("input", { type: "text", id: "pnNovoNome", maxlength: "80", autocomplete: "off" }), tel = el("input", { type: "tel", id: "pnNovoTel", placeholder: "(63) 91234-5678", autocomplete: "off" });
+    var tam = el("select", { id: "pnNovoTam" }, [el("option", { value: "ate30", texto: "Até 30 páginas" }), el("option", { value: "de31a60", texto: "31 a 60 páginas" }), el("option", { value: "mais60", texto: "Mais de 60 páginas" })]);
+    var arq = el("input", { type: "file", id: "pnNovoArq", accept: ".docx,.pdf" }), msg = el("p", { class: "pn-ok", role: "status" });
+    var enviar = el("button", { type: "button", class: "btn btn-acento", texto: "Criar pedido", onclick: function () {
+      var f = new FormData(); f.set("nome", nome.value); f.set("whatsapp", tel.value); f.set("tamanho", tam.value);
+      if (arq.files[0]) f.set("arquivo", arq.files[0]);
+      enviar.disabled = true;
+      fetch("/api/admin/pedidos", { method: "POST", headers: { "X-Painel": "1" }, body: f }).then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.erro || "Erro " + r.status); return j; }); })
+        .then(function (j) { erro(""); msg.textContent = "Pedido criado."; nome.value = ""; tel.value = ""; arq.value = ""; atual = j.id; carregaLista(); abre(j.id); })
+        .catch(function (e) { erro(e.message); }).then(function () { enviar.disabled = false; });
+    } });
+    var caixa = el("details", { class: "pn-novo" }, [el("summary", { texto: "Novo pedido (o cliente mandou o arquivo pelo WhatsApp)" }),
+      el("div", { class: "pn-arq" }, [el("label", { for: "pnNovoNome", texto: "Nome do cliente (opcional)" }), nome]),
+      el("div", { class: "pn-arq" }, [el("label", { for: "pnNovoTel", texto: "WhatsApp do cliente (com DDD)" }), tel]),
+      el("div", { class: "pn-arq" }, [el("label", { for: "pnNovoTam", texto: "Tamanho" }), tam]),
+      el("div", { class: "pn-arq" }, [el("label", { for: "pnNovoArq", texto: "Arquivo que o cliente mandou (Word ou PDF)" }), arq]), enviar, msg]);
+    lista.parentNode.insertBefore(caixa, lista);
+  })();
   carregaLista();
   setInterval(carregaLista, 60000);
 })();

@@ -156,6 +156,18 @@ try {
   e = await (await post("/api/pedido/estado", { codigo: c2.codigo })).json(); ok(e.pedido.status === "pronto", "sin pedir verificación, el estado no cambia solo");
   e = await (await post("/api/pedido/estado", { codigo: c2.codigo, verificar: true })).json(); ok(e.pedido.status === "pago", "con «verificar»: consulta al Mercado Pago y libera si el pago es válido");
 
+  console.log("== 6b) Pedido creado a mano por Lian (el cliente mandó el archivo por WhatsApp) ==");
+  const manual = (campos, h = HA) => { const f = new FormData(); for (const [k, v] of Object.entries(campos)) { if (k === "arquivo") f.set(k, v, "do-cliente.docx"); else f.set(k, v); } return fetch(BASE + "/api/admin/pedidos", { method: "POST", headers: h, body: f }); };
+  r = await manual({ nome: "Cliente WhatsApp", whatsapp: "63991230000", tamanho: "de31a60", arquivo: docx() }, H); ok(r.status === 403, "crear pedido a mano sin la cabecera del panel: 403");
+  r = await manual({ nome: "X", whatsapp: "123", tamanho: "ate30", arquivo: docx() }); ok(r.status === 400, "pedido a mano con WhatsApp inválido: 400");
+  r = await manual({ nome: "X", whatsapp: "63991230000", tamanho: "ate30", arquivo: new Blob(["nada"]) }); ok(r.status === 400, "pedido a mano con un archivo que no es Word ni PDF: 400");
+  r = await manual({ nome: "Cliente WhatsApp", whatsapp: "63991230000", tamanho: "de31a60", arquivo: docx() }); const cm = await r.json();
+  ok(r.status === 200 && /^[A-Z0-9]{8}$/.test(cm.id), "Lian crea el pedido con el archivo que el cliente le mandó");
+  lista = await (await fetch(BASE + "/api/admin/pedidos")).json(); ok(lista.pedidos.some((p) => p.id === cm.id && p.status === "recebido" && p.tamanho === "de31a60"), "el pedido manual aparece en el panel como «recebido»");
+  const dm = await (await fetch(BASE + `/api/admin/pedidos/${cm.id}`)).json(); ok(dm.link && dm.link.startsWith(BASE + "/pedido/#"), "y ya tiene su enlace de cliente");
+  await sube(cm.id, "previa", pdf()); await sube(cm.id, "docx", docx()); await sube(cm.id, "pdf", pdf());
+  r = await fetch(BASE + `/api/admin/pedidos/${cm.id}/pronto`, { method: "POST", headers: { ...HA, "Content-Type": "application/json" }, body: JSON.stringify({ valor_reais: 140 }) }); ok(r.status === 200, "el pedido manual sigue el mismo camino: listo con valor R$ 140");
+
   console.log("== 7) Reembolso y borrado ==");
   r = await fetch(BASE + `/api/admin/pedidos/${c2.id}/reembolsado`, { method: "POST", headers: HA }); ok(r.status === 200, "Lian marca «reembolsado»");
   r = await post("/api/pedido/baixar/docx", { codigo: c2.codigo }); ok(r.status === 402, "reembolsado: ya no se puede descargar");

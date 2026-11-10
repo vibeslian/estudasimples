@@ -20,6 +20,7 @@ async function rotaAdmin(request, env, partes) {
   if (p[0] === "limpeza" && metodo === "POST") return json({ ok: true, apagados: await admin.limpezaDiaria(env) }); // o mesmo que a limpeza diária, sob demanda
   if (p[0] !== "pedidos") return erro(404, "Não encontrado.");
   if (p.length === 1 && metodo === "GET") return admin.listar(env);
+  if (p.length === 1 && metodo === "POST") return admin.criarManual(request, env);
   const pid = p[1];
   if (p.length === 2 && metodo === "GET") return admin.detalhe(env, pid);
   if (p[2] === "original" && metodo === "GET") return admin.baixarOriginal(env, pid);
