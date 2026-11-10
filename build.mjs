@@ -256,10 +256,15 @@ writeFileSync(join(OUT, "ads.txt"), adsense.adsTxt);
 const ROBOS_DE_TREINO = ["GPTBot", "ClaudeBot", "anthropic-ai", "CCBot", "Google-Extended", "Applebot-Extended", "Bytespider", "cohere-ai", "meta-externalagent", "omgili", "Diffbot", "PetalBot", "MistralAI-Training"];
 writeFileSync(join(OUT, "robots.txt"), `User-agent: *\nAllow: /\n\n` + ROBOS_DE_TREINO.map((r) => `User-agent: ${r}\nDisallow: /\n`).join("\n") + `\nSitemap: ${siteUrl}/sitemap.xml\n`);
 
+// Páginas de pedido e painel: política de segurança de conteúdo (só o próprio site; sem frames; o aviso de visitas da Cloudflare continua permitido)
+const CSP = "default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'";
+const CSP_PEDIDOS = ["/pedir-formatacao/", "/pedido/", "/painel/"].map((r) => `${r}\n  Content-Security-Policy: ${CSP}\n\n${r}*\n  Content-Security-Policy: ${CSP}\n\n`).join("");
+
 // Cloudflare Pages: cache longo para fontes e bibliotecas (têm a versão no nome do arquivo)
 writeFileSync(
   join(OUT, "_headers"),
   `/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n  X-Frame-Options: DENY\n  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()\n\n` +
+    CSP_PEDIDOS +
     `/assets/fonts/*\n  Cache-Control: public, max-age=31536000, immutable\n\n/assets/js/vendor/*\n  Cache-Control: public, max-age=31536000, immutable\n\n/assets/css/*\n  Cache-Control: public, max-age=31536000, immutable\n`
 );
 

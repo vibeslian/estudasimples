@@ -2,7 +2,7 @@
 import {
   MAX_ARCHIVO, DIAS_APAGAR_ENTREGA, DIAS_APAGAR_SIN_CONCLUIR, TIPOS, TOKEN_RE,
   ahora, json, erro, arquivo, novoId, novoToken, normalizaWhatsapp, nomeLimpo, primeiroNome,
-  nomeArquivoSeguro, tipoReal, limitar, ipHash, lerJson,
+  nomeArquivoSeguro, tipoReal, limitar, ipHash, hmacHex, lerJson, temChave,
 } from "./util.mjs";
 import { criaPreferencia, lePagamento, procuraPagamentos, pagamentoValeParaPedido } from "./mp.mjs";
 
@@ -30,6 +30,8 @@ export async function criaPedido(request, env) {
   if (tamanhoDoCorpo > MAX_ARCHIVO + 200 * 1024) return erro(413, "O arquivo é grande demais. O limite é de 25 MB.");
   const ip = await ipHash(request, env);
   if (!(await limitar(env, `ped-ip:${ip}`, 12, 3600))) return erro(429, "Muitas tentativas. Tente de novo mais tarde.");
+  const hoje = await env.DB.prepare("SELECT COUNT(*) AS n FROM pedidos WHERE criado_em > ?1").bind(ahora() - 86400).first();
+  if (hoje.n >= Number(env.MAX_PEDIDOS_DIA || 30)) return erro(429, "Recebi muitos pedidos hoje. Tente de novo amanhã ou chame no WhatsApp do site.");
   let f;
   try { f = await request.formData(); } catch { return erro(400, "Não foi possível ler o formulário."); }
 
@@ -46,7 +48,7 @@ export async function criaPedido(request, env) {
   if (arq.size > MAX_ARCHIVO) return erro(413, "O arquivo é grande demais. O limite é de 25 MB.");
   const tipo = await tipoReal(arq);
   if (!tipo) return erro(400, "O arquivo precisa ser Word (.docx) ou PDF. Se o seu for .doc, abra no Word e salve como .docx.");
-  if (!(await limitar(env, `ped-tel:${whatsapp}`, 3, 86400))) return erro(429, "Já recebi pedidos deste WhatsApp hoje. Se precisar de ajuda, chame no WhatsApp do site.");
+  if (!(await limitar(env, `ped-tel:${await hmacHex(env, whatsapp)}`, 3, 86400))) return erro(429, "Muitas tentativas. Tente de novo mais tarde ou chame no WhatsApp do site.");
 
   const id = novoId();
   const token = novoToken();
@@ -67,6 +69,7 @@ export async function criaPedido(request, env) {
 
 // ---------- ajudas do cliente ----------
 async function pedidoPorCodigo(request, env) {
+  if (!(await limitar(env, `api-ip:${await ipHash(request, env)}`, 240, 3600))) return { erroResp: erro(429, "Muitas tentativas. Tente de novo mais tarde.") };
   const corpo = await lerJson(request);
   const codigo = corpo && typeof corpo.codigo === "string" ? corpo.codigo : "";
   if (!TOKEN_RE.test(codigo)) return { erroResp: erro(404, "Pedido não encontrado.") };
@@ -86,11 +89,11 @@ const visao = (p) => ({
 });
 
 // Marca o pedido como pago, uma única vez (a condição status='pronto' impede repetir).
-async function liberaPagamento(env, p, pagamentoId) {
+async function liberaPagamento(env, p, pagamentoId) { // só libera se o valor do pedido continua o mesmo que foi pago
   const t = ahora();
   await env.DB.prepare(
-    "UPDATE pedidos SET status='pago', pago_em=?2, apagar_em=?3, mp_pagamento_id=?4 WHERE id=?1 AND status='pronto'",
-  ).bind(p.id, t, t + DIAS_APAGAR_ENTREGA * 86400, String(pagamentoId)).run();
+    "UPDATE pedidos SET status='pago', aviso=NULL, pago_em=?2, apagar_em=?3, mp_pagamento_id=?4 WHERE id=?1 AND status='pronto' AND valor_centavos=?5",
+  ).bind(p.id, t, t + DIAS_APAGAR_ENTREGA * 86400, String(pagamentoId), p.valor_centavos).run();
 }
 
 async function confereComMercadoPago(env, p) {
@@ -122,7 +125,7 @@ export async function previa(request, env) {
   if (!p.tem_previa || !["pronto", "pago"].includes(p.status)) return erro(404, "A prévia ainda não está disponível.");
   const o = await env.ARQUIVOS.get(`previa/${p.id}/previa.pdf`);
   if (!o) return erro(404, "A prévia não foi encontrada.");
-  return new Response(o.body, { headers: { "Content-Type": "application/pdf", "Content-Disposition": 'inline; filename="previa.pdf"', "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff" } });
+  return new Response(o.body, { headers: { "Content-Type": "application/pdf", "Content-Disposition": 'inline; filename="previa.pdf"', "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff", "Content-Security-Policy": "default-src 'none'; sandbox" } });
 }
 
 // ---------- 3) Pagar ----------
@@ -136,7 +139,12 @@ export async function pagar(request, env) {
   if (p.mp_url) return json({ ok: true, url: p.mp_url });
   try {
     const pref = await criaPreferencia(env, p);
-    await env.DB.prepare("UPDATE pedidos SET mp_preferencia_id=?2, mp_url=?3 WHERE id=?1 AND status='pronto'").bind(p.id, pref.id, pref.url).run();
+    const r = await env.DB.prepare("UPDATE pedidos SET mp_preferencia_id=?2, mp_url=?3 WHERE id=?1 AND status='pronto' AND valor_centavos=?4 AND mp_url IS NULL").bind(p.id, pref.id, pref.url, p.valor_centavos).run();
+    if (!r.meta.changes) { // outra aba abriu o pagamento ao mesmo tempo, ou o valor mudou agora
+      const atual = await env.DB.prepare("SELECT * FROM pedidos WHERE id=?1").bind(p.id).first();
+      if (atual && atual.status === "pronto" && atual.mp_url && atual.valor_centavos === p.valor_centavos) return json({ ok: true, url: atual.mp_url });
+      return erro(409, "O valor do pedido mudou agora. Abra o link de novo.");
+    }
     return json({ ok: true, url: pref.url });
   } catch {
     return erro(502, "Não consegui abrir o pagamento agora. Tente de novo em instantes.");
@@ -145,7 +153,7 @@ export async function pagar(request, env) {
 
 // ---------- 4) Baixar (só depois de o pagamento ser confirmado no servidor) ----------
 export async function baixar(request, env, tipo) {
-  if (!TIPOS[tipo]) return erro(404, "Arquivo não encontrado.");
+  if (!temChave(TIPOS, tipo)) return erro(404, "Arquivo não encontrado.");
   const { p, erroResp } = await pedidoPorCodigo(request, env);
   if (erroResp) return erroResp;
   if (p.status !== "pago") return erro(402, "O download só é liberado depois que o pagamento for confirmado.");
@@ -178,6 +186,7 @@ export async function webhookMp(request, env) {
   if (!p) return json({ ok: true });
   const v = pagamentoValeParaPedido(pagamento, p);
   if (v.ok && p.status === "pronto") await liberaPagamento(env, p, pagamento.id);
+  else if (v.ok && p.mp_pagamento_id !== String(pagamento.id)) await env.DB.prepare("UPDATE pedidos SET aviso=?2 WHERE id=?1").bind(p.id, `Pagamento ${pagamento.id} válido recebido, mas o pedido está "${p.status}". Confira e, se for o caso, reembolse no Mercado Pago.`).run();
   else if (pagamento.status === "approved" && !v.ok) await env.DB.prepare("UPDATE pedidos SET aviso=?2 WHERE id=?1").bind(p.id, `Pagamento ${pagamento.id} aprovado mas ${v.motivo}`).run();
   return json({ ok: true });
 }

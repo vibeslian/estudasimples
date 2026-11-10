@@ -30,6 +30,8 @@ export async function criaPreferencia(env, pedido) {
       installments: 1,
     },
     statement_descriptor: "ESTUDASIMPLES",
+    expires: true,
+    expiration_date_to: new Date(pedido.apagar_em * 1000).toISOString(), // o pagamento deixa de valer quando o pedido é apagado
   };
   const r = await mpFetch(env, "/checkout/preferences", { method: "POST", body: JSON.stringify(corpo) });
   if (!r || !r.id || !r.init_point) throw new Error("resposta inesperada do Mercado Pago");
@@ -47,7 +49,7 @@ export async function procuraPagamentos(env, pedidoId) {
 export function pagamentoValeParaPedido(pagamento, pedido) {
   if (!pagamento || pagamento.status !== "approved") return { ok: false, motivo: "não aprovado" };
   if (String(pagamento.external_reference) !== pedido.id) return { ok: false, motivo: "outro pedido" };
-  if (pagamento.currency_id && pagamento.currency_id !== "BRL") return { ok: false, motivo: "moeda diferente" };
+  if (pagamento.currency_id !== "BRL") return { ok: false, motivo: "moeda diferente" };
   const centavos = Math.round(Number(pagamento.transaction_amount) * 100);
   if (centavos !== pedido.valor_centavos) return { ok: false, motivo: "valor diferente" };
   return { ok: true };

@@ -8,6 +8,7 @@ const ALFABETO_ID = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // sin letras que se con
 export const ahora = () => Math.floor(Date.now() / 1000);
 
 const CABECERAS = {
+  "Content-Security-Policy": "default-src 'none'; sandbox", // nada do que vem do servidor pode executar scripts no navegador
   "Cache-Control": "no-store",
   "X-Content-Type-Options": "nosniff",
   "Referrer-Policy": "no-referrer",
@@ -79,9 +80,15 @@ export async function tipoReal(blob) {
   const b = new Uint8Array(await blob.slice(0, 8).arrayBuffer());
   const txt = String.fromCharCode(...b);
   if (txt.startsWith("%PDF-")) return "pdf";
-  if (b[0] === 0x50 && b[1] === 0x4b && b[2] === 0x03 && b[3] === 0x04) return "docx"; // zip (Word .docx)
+  if (b[0] === 0x50 && b[1] === 0x4b && b[2] === 0x03 && b[3] === 0x04) {
+    // zip: só vale como Word (.docx) se tiver o documento de Word dentro e NÃO tiver macros (os nomes dos arquivos do zip ficam em texto no final)
+    const fim = String.fromCharCode(...new Uint8Array(await blob.slice(Math.max(0, blob.size - 262144)).arrayBuffer()));
+    if (fim.includes("word/document.xml") && !/vbaProject\.bin/i.test(fim)) return "docx";
+  }
   return null;
 }
+
+export const temChave = (objeto, chave) => Object.prototype.hasOwnProperty.call(objeto, chave);
 
 export const TIPOS = {
   pdf: { mime: "application/pdf", ext: "pdf" },
@@ -99,12 +106,21 @@ export async function limitar(env, chave, max, segundos) {
   return r.n <= max;
 }
 
+// Código derivado de um dado pessoal (IP, WhatsApp), com um segredo (IP_SALT) para que não dê para desfazer por força bruta.
+// Sem o segredo configurado usa a base do site (menos seguro: o documento de colocação em funcionamento manda configurar o segredo).
+export async function hmacHex(env, texto) {
+  const chave = await crypto.subtle.importKey("raw", new TextEncoder().encode(env.IP_SALT || env.PUBLIC_BASE), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
+  const s = await crypto.subtle.sign("HMAC", chave, new TextEncoder().encode(texto));
+  return Array.from(new Uint8Array(s), (x) => x.toString(16).padStart(2, "0")).join("").slice(0, 32);
+}
+
 export async function ipHash(request, env) {
-  return (await sha256Hex((request.headers.get("CF-Connecting-IP") || "sem-ip") + "|" + env.PUBLIC_BASE)).slice(0, 24);
+  return hmacHex(env, "ip|" + (request.headers.get("CF-Connecting-IP") || "sem-ip"));
 }
 
 // Leitura de JSON pequeno (o corpo dos pedidos do cliente nunca passa de alguns bytes).
 export async function lerJson(request, limite = 4096) {
+  if (Number(request.headers.get("Content-Length") || 0) > limite) return null; // não lê corpos grandes
   const texto = await request.text();
   if (texto.length > limite) return null;
   try {

@@ -41,9 +41,9 @@ const parar = () => { try { execFileSync("taskkill", ["/pid", String(srv.pid), "
 
 // archivos de prueba
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "pedidos-arq-"));
-const fDocx = path.join(tmp, "meu-tcc.docx"); fs.writeFileSync(fDocx, Buffer.concat([Buffer.from([0x50, 0x4b, 0x03, 0x04]), Buffer.from("conteudo do trabalho")]));
+const fDocx = path.join(tmp, "meu-tcc.docx"); fs.writeFileSync(fDocx, Buffer.concat([Buffer.from([0x50, 0x4b, 0x03, 0x04]), Buffer.from("conteudo do trabalho word/document.xml")]));
 const fPdf = path.join(tmp, "previa.pdf"); fs.writeFileSync(fPdf, "%PDF-1.4\nprevia");
-const fDocx2 = path.join(tmp, "final.docx"); fs.writeFileSync(fDocx2, Buffer.concat([Buffer.from([0x50, 0x4b, 0x03, 0x04]), Buffer.from("trabalho formatado")]));
+const fDocx2 = path.join(tmp, "final.docx"); fs.writeFileSync(fDocx2, Buffer.concat([Buffer.from([0x50, 0x4b, 0x03, 0x04]), Buffer.from("trabalho formatado word/document.xml")]));
 const fPdf2 = path.join(tmp, "final.pdf"); fs.writeFileSync(fPdf2, "%PDF-1.4\nfinal");
 
 let browser;

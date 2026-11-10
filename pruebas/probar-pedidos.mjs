@@ -64,7 +64,9 @@ let comAdmin = arrancar(PUERTO, { PUBLIC_BASE: BASE, DEV_ADMIN_BYPASS: "sim-loca
 try {
   await esperar(PUERTO, comAdmin);
 
-  const docx = (extra = "") => new Blob([Uint8Array.from([0x50, 0x4b, 0x03, 0x04]), "contenido de prueba " + extra], { type: "application/octet-stream" });
+  // un .docx de mentira: empieza como zip y trae adentro el nombre «word/document.xml» (lo que mira el servidor)
+  const docx = (extra = "") => new Blob([Uint8Array.from([0x50, 0x4b, 0x03, 0x04]), "contenido de prueba " + extra + " word/document.xml"], { type: "application/octet-stream" });
+  const docxConMacros = () => new Blob([Uint8Array.from([0x50, 0x4b, 0x03, 0x04]), "word/document.xml word/vbaProject.bin"]);
   const pdf = (extra = "") => new Blob(["%PDF-1.4\n", "prueba " + extra], { type: "application/pdf" });
   const H = { Origin: BASE };
   const HA = { Origin: BASE, "X-Painel": "1" };
@@ -86,6 +88,8 @@ try {
   r = await pedir({ whatsapp: "123" }); ok(r.status === 400, "WhatsApp inválido: rechaza");
   r = await pedir({ sem_arquivo: true }); ok(r.status === 400, "sin archivo: rechaza");
   r = await pedir({ arquivo: new Blob(["MZ ejecutable disfrazado"]), nomeArq: "tcc.docx" }); ok(r.status === 400, "un archivo que dice ser .docx pero no lo es: rechaza (se mira el contenido, no el nombre)");
+  r = await pedir({ arquivo: new Blob([Uint8Array.from([0x50, 0x4b, 0x03, 0x04]), "zip cualquiera sin documento de Word"]), nomeArq: "x.docx" }); ok(r.status === 400, "un zip cualquiera (sin word/document.xml) no pasa por .docx");
+  r = await pedir({ arquivo: docxConMacros(), nomeArq: "macros.docx" }); ok(r.status === 400, "un Word con macros (vbaProject.bin) se rechaza");
   r = await pedir({ site: "http://spam" }); ok(r.status === 200 && !(await r.json()).codigo, "campo-trampa para robots: se ignora sin crear pedido");
   r = await fetch(BASE + "/api/pedidos", { method: "POST", headers: { Origin: "https://malo.example" }, body: new FormData() }); ok(r.status === 403, "pedido desde otro sitio (Origin ajeno): 403");
   r = await pedir(); const c1 = await r.json(); ok(r.status === 200 && c1.ok && c1.id && c1.codigo && c1.codigo.length === 43, "pedido válido: devuelve código corto y código secreto de 43 caracteres");
@@ -159,6 +163,11 @@ try {
   r = await post("/api/pedido/estado", { codigo: c2.codigo }); ok(r.status === 404, "pedido apagado: el enlace deja de existir");
   r = await fetch(BASE + "/api/admin/pedidos"); lista = await r.json(); ok(!lista.pedidos.some((p) => p.id === c2.id), "y desaparece de la lista del panel");
 
+  pagamentos.set("2002", { id: 2002, status: "approved", external_reference: c2.id, transaction_amount: 140, currency_id: "BRL" });
+  await avisar("2002"); lista = await (await fetch(BASE + "/api/admin/pedidos")).json(); const conAviso = lista.pedidos.find((p) => p.id === c2.id);
+  ok(conAviso && /válido recebido/.test(conAviso.aviso) && conAviso.status === "apagado", "un pago válido que llega DESPUÉS del borrado deja un aviso visible para Lian (para reembolsar)");
+  r = await post("/api/pedido/baixar/docx", { codigo: c2.codigo }); ok(r.status === 404, "y aun así el pedido borrado no entrega nada");
+
   console.log("== 8) Limpieza automática de los 15 días ==");
   const sqlVencer = path.join(persist, "vencer.sql");
   fs.writeFileSync(sqlVencer, `UPDATE pedidos SET apagar_em = 1 WHERE id = '${c1.id}';\n`);
@@ -187,13 +196,15 @@ try {
   const firma = async (cab, dados, chave = par.privateKey) => { const base = b64(cab) + '.' + b64(dados); const s = Buffer.from(await crypto.subtle.sign('RSASSA-PKCS1-v1_5', chave, new TextEncoder().encode(base))).toString('base64url'); return base + '.' + s; };
   const agora = Math.floor(Date.now() / 1000);
   const buenos = { aud: ['AUD123'], iss: 'https://lian.cloudflareaccess.com', exp: agora + 600, email: 'lian@example.com' };
-  const env = { ACCESS_TEAM_DOMAIN: 'lian.cloudflareaccess.com', ACCESS_AUD: 'AUD123' };
+  const env = { ACCESS_TEAM_DOMAIN: 'lian.cloudflareaccess.com', ACCESS_AUD: 'AUD123', ADMIN_EMAIL: 'lian@example.com' };
   const fetchReal = globalThis.fetch;
   globalThis.fetch = async (u) => String(u).includes('/cdn-cgi/access/certs') ? new Response(JSON.stringify({ keys: [jwk] })) : fetchReal(u);
   const pide = (jwt, e = env) => verificaAcesso(new Request('http://x/api/admin/pedidos', { headers: jwt ? { 'Cf-Access-Jwt-Assertion': jwt } : {} }), e);
   ok((await pide(null, {})).status === 503, 'sin Access configurado el panel queda CERRADO (503)');
   ok((await pide('a.b.c', {})).status === 503, 'sin Access configurado, un token inventado tampoco abre');
   ok((await pide(null)).status === 401, 'con Access configurado pero sin firma: 401');
+  ok((await pide(await firma({ alg: 'RS256', kid: 'k1' }, buenos), { ...env, ADMIN_EMAIL: '' })).status === 503, 'sin correo de administrador configurado el panel queda cerrado (503), aunque la firma sea buena');
+  ok((await verificaAcesso(new Request('https://estudasimples.com.br/api/admin/pedidos'), { DEV_ADMIN_BYPASS: 'sim-local' })).status === 503, 'el atajo de pruebas NO abre el panel en un dominio que no es local');
   ok((await pide('a.b.c')).status === 401, 'token inventado: 401');
   ok((await pide(await firma({ alg: 'RS256', kid: 'k1' }, buenos))).ok === true, 'firma válida de Cloudflare Access: entra');
   ok((await pide(await firma({ alg: 'RS256', kid: 'k1' }, buenos, otro.privateKey))).status === 401, 'firmado con otra llave (falsificado): 401');
