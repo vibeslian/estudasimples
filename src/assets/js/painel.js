@@ -115,6 +115,18 @@
       el("div", { class: "pn-arq" }, [el("label", { for: "pnNovoArq", texto: "Arquivo que o cliente mandou (Word ou PDF)" }), arq]), enviar, msg]);
     lista.parentNode.insertBefore(caixa, lista);
   })();
+  // Botão para testar o aviso do celular (ntfy)
+  (function testeAviso() {
+    var msg = el("span", { class: "pn-ok", role: "status" });
+    var b = el("button", { type: "button", class: "btn", texto: "Testar o aviso do celular", onclick: function () {
+      b.disabled = true; msg.textContent = "Enviando…";
+      fetch("/api/admin/teste-aviso", { method: "POST", headers: { "X-Painel": "1" } }).then(function (r) { return r.json(); }).then(function (j) {
+        var r = j.resultado || {};
+        msg.textContent = r.ok ? "Enviado ao ntfy (resposta " + r.status + "). Veja o celular: deve chegar «Teste de aviso»." : "Não funcionou: " + (r.motivo || ("o ntfy respondeu " + r.status)) + (r.topico_com_espacos ? " (o nome do tópico tinha espaços)" : "") + ".";
+      }).catch(function () { msg.textContent = "Não consegui chamar o servidor."; }).then(function () { b.disabled = false; });
+    } });
+    lista.parentNode.insertBefore(el("p", {}, [b, " ", msg]), lista.parentNode.firstChild);
+  })();
   carregaLista();
   setInterval(carregaLista, 60000);
 })();

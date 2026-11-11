@@ -17,6 +17,7 @@ async function rotaAdmin(request, env, partes) {
   if (metodo !== "GET" && request.headers.get("X-Painel") !== "1") return erro(403, "Pedido não permitido."); // contra CSRF
   // Rutas: /api/admin/pedidos[/:id[/acción[/tipo]]]; partes = ["", "api", "admin", "pedidos", id, acción, tipo]
   const p = partes.slice(3);
+  if (p[0] === "teste-aviso" && metodo === "POST") return admin.testarAviso(env);
   if (p[0] === "limpeza" && metodo === "POST") return json({ ok: true, apagados: await admin.limpezaDiaria(env) }); // o mesmo que a limpeza diária, sob demanda
   if (p[0] !== "pedidos") return erro(404, "Não encontrado.");
   if (p.length === 1 && metodo === "GET") return admin.listar(env);

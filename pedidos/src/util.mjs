@@ -123,16 +123,19 @@ export async function hmacHex(env, texto) {
 // Aviso para o celular do Lian (app ntfy). Só leva o código do pedido e o valor: nunca nome nem telefone do cliente.
 // Só funciona se o segredo NTFY_TOPIC existir; se falhar, não atrapalha o pedido.
 export async function avisarLian(env, titulo, texto) {
-  if (!env.NTFY_TOPIC) return;
+  if (!env.NTFY_TOPIC) return { ok: false, motivo: "o segredo NTFY_TOPIC não está configurado" };
   try {
-    await fetch(`${(env.NTFY_BASE || "https://ntfy.sh").replace(/\/$/, "")}/${encodeURIComponent(env.NTFY_TOPIC)}`, {
+    const r = await fetch(`${(env.NTFY_BASE || "https://ntfy.sh").replace(/\/$/, "")}/${encodeURIComponent(String(env.NTFY_TOPIC).trim())}`, {
       method: "POST",
       headers: { Title: titulo, Click: `${env.PUBLIC_BASE}/painel/`, Priority: "high", Tags: "bell" },
       body: texto,
-      signal: AbortSignal.timeout(1500),
+      signal: AbortSignal.timeout(4000),
     });
+    if (!r.ok) console.error("aviso ao Lian: o ntfy respondeu", r.status);
+    return { ok: r.ok, status: r.status, topico_com_espacos: env.NTFY_TOPIC !== env.NTFY_TOPIC.trim(), tamanho_topico: env.NTFY_TOPIC.length };
   } catch (e) {
     console.error("aviso ao Lian falhou", e && e.message);
+    return { ok: false, motivo: String((e && e.message) || e) };
   }
 }
 

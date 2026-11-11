@@ -111,6 +111,9 @@ try {
   r = await post("/api/pedido/pagar", { codigo: c1.codigo }); ok(r.status === 409, "pagar antes de estar listo: 409");
 
   console.log("== 3) Panel de Lian ==");
+  const antesTeste = avisos.length; r = await fetch(BASE + "/api/admin/teste-aviso", { method: "POST", headers: HA }); const te = await r.json();
+  ok(r.status === 200 && te.resultado.ok === true && te.resultado.status === 200 && avisos.length === antesTeste + 1 && /Teste de aviso/.test(avisos[avisos.length - 1].titulo) && !JSON.stringify(te).includes("topico-de-prueba"), "el botón «Testar o aviso do celular» manda un aviso de prueba y no muestra el nombre secreto del tópico");
+  ok((await fetch(BASE + "/api/admin/teste-aviso", { method: "POST", headers: H })).status === 403, "el aviso de prueba exige la cabecera del panel (anti-CSRF)");
   r = await fetch(BASE + "/api/admin/pedidos"); let lista = await r.json();
   ok(r.status === 200 && lista.pedidos.some((p) => p.id === c1.id), "el pedido aparece en el panel");
   r = await fetch(BASE + "/api/admin/pedidos/" + c1.id + "/andamento", { method: "POST", headers: H }); ok(r.status === 403, "acción del panel sin la cabecera anti-CSRF: 403");
