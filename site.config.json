@@ -7,6 +7,7 @@
     "_ajuda": "Serviço de formatação (página /formatacao-abnt-tcc/). Para mudar o WhatsApp, as mensagens, o prazo ou os preços, edite só aqui e rode o build: o site inteiro se atualiza. Cada mensagem diz de qual página o cliente veio (id = servico, inicio, capa, folha, sumario).",
     "whatsapp": "5563992167482",
     "whatsappExibicao": "(63) 99216-7482",
+    "legalAtualizadoEm": "2026-11-10",
     "mensagens": {
       "servico": "Olá! Vim pelo site Estuda Simples (página de formatação) e quero formatar meu trabalho nas normas ABNT.",
       "inicio": "Olá! Vim pelo site Estuda Simples (página inicial) e quero formatar meu trabalho nas normas ABNT.",

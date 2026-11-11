@@ -91,8 +91,7 @@
         el("p", { class: "pd-nota", texto: "Pedido " + p.id + ". Guarde este link." })])]);
     }
     if (p.status === "pronto") {
-      var abrir = el("a", { class: "btn", href: "#", target: "_blank", rel: "noopener", texto: "Abrir a prévia (PDF)" });
-      if (urlPrevia) abrir.href = urlPrevia; else abrir.setAttribute("aria-disabled", "true");
+      var abrir = urlPrevia ? el("a", { class: "btn", href: urlPrevia, target: "_blank", rel: "noopener", texto: "Abrir a prévia (PDF, abre em nova aba)" }) : el("span", { class: "pd-nota", texto: "A prévia não carregou. Recarregue a página ou chame no WhatsApp." });
       var pagar = el("button", { class: "btn btn-acento btn-grande", type: "button", texto: "Pagar com Pix" });
       var aviso = el("p", { class: "pd-erro", role: "alert", hidden: "" });
       pagar.addEventListener("click", function () {
@@ -108,7 +107,7 @@
         el("p", { texto: "A prévia mostra a capa e uma página do seu texto já formatadas." }), el("p", {}, [abrir]),
         el("p", { class: "pd-valor" }, [el("span", { texto: "Valor do serviço" }), el("b", { texto: reais(p.valor_centavos) })]),
         el("p", {}, [pagar]), aviso,
-        el("p", { class: "pd-nota", texto: "O pagamento é feito por Pix no site do Mercado Pago. Quando for aprovado, o download libera aqui, na hora. Você pode desistir em até 7 dias." })])]);
+        el("p", { class: "pd-nota", texto: "O pagamento é feito por Pix no site do Mercado Pago. Quando for aprovado, o download libera aqui, na hora. Você pode desistir em até 7 dias: é só avisar pelo WhatsApp (63) 99216-7482, e eu devolvo o valor pelo Pix." })])]);
     }
     if (p.status === "pago") {
       var w = el("button", { class: "btn btn-acento btn-grande", type: "button", texto: "Baixar em Word (.docx)" });

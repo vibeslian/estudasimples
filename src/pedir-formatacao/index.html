@@ -5,7 +5,6 @@
   <title>Pedir a formatação ABNT do seu trabalho | {{SITE_NAME}}</title>
   <meta name="description" content="Envie o seu trabalho e o seu WhatsApp para pedir a formatação ABNT. Você vê uma prévia antes de pagar.">
   <meta name="robots" content="noindex">
-  <link rel="canonical" href="{{SITE_URL}}/formatacao-abnt-tcc/">
   <link rel="stylesheet" href="/assets/css/pedidos.css?v={{BUILD}}">
   <script src="/assets/js/pedidos.js?v={{BUILD}}" defer></script>
 </head>
@@ -31,7 +30,7 @@
         </fieldset>
         <div class="pd-linha">
           <div><label for="pdNome">Seu nome (opcional)</label><input id="pdNome" name="nome" type="text" autocomplete="name" maxlength="80"></div>
-          <div><label for="pdWhats">Seu WhatsApp</label><input id="pdWhats" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="(63) 91234-5678" required aria-describedby="pdWhatsAjuda"><small id="pdWhatsAjuda">Com DDD. Eu aviso por aqui quando estiver pronto.</small></div>
+          <div><label for="pdWhats">Seu WhatsApp</label><input id="pdWhats" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="(63) 91234-5678" required aria-describedby="pdWhatsAjuda"><small id="pdWhatsAjuda">Com DDD. Eu aviso por este número quando estiver pronto.</small></div>
         </div>
         <div>
           <label for="pdArquivo">Arquivo do trabalho (Word .docx ou PDF, até 25 MB)</label>
@@ -39,7 +38,7 @@
           <small>Se o seu arquivo for .doc, abra no Word e use Salvar como .docx. Se a sua faculdade tem manual ou modelo próprio, me chame no WhatsApp depois de enviar.</small>
         </div>
         <div class="pd-armadilha" aria-hidden="true"><label>Não preencha este campo<input type="text" name="site" tabindex="-1" autocomplete="off"></label></div>
-        <label class="pd-consent"><input type="checkbox" id="pdConsent" required><span>Concordo com os <a href="/termos-de-uso/" target="_blank" rel="noopener">Termos de Uso</a> e a <a href="/politica-de-privacidade/#servico-formatacao" target="_blank" rel="noopener">Política de Privacidade</a>. Sei que o arquivo é guardado só para o serviço e apagado 15 dias depois da entrega.</span></label>
+        <label class="pd-consent"><input type="checkbox" id="pdConsent" required><span>Concordo com os <a href="/termos-de-uso/#servico-formatacao" target="_blank" rel="noopener">Termos de Uso</a> e a <a href="/politica-de-privacidade/#servico-formatacao" target="_blank" rel="noopener">Política de Privacidade</a>. Sei que o arquivo é guardado só para o serviço e apagado 15 dias depois da entrega (ou 15 dias depois de ficar pronto, se eu não pagar).</span></label>
         <p id="pdErro" class="pd-erro" role="alert" hidden></p>
         <div class="pd-acoes">
           <button class="btn btn-acento btn-grande" type="submit" id="pdEnviar">Enviar pedido</button>
@@ -64,7 +63,7 @@
         <b>{{WHATSAPP_EXIBICAO}}</b>
         <small>Só escrevo deste número. MEI registrado, CNPJ 67.704.102/0001-69.</small>
       </div>
-      <div class="pd-depois"><strong>Depois de enviar</strong><p>Você vê o aviso «Pedido recebido». Quando estiver pronto, chega uma mensagem no WhatsApp com o link para ver a prévia e pagar por Pix.</p></div>
+      <div class="pd-depois"><strong>Depois de enviar</strong><p>Você vê o aviso "Pedido recebido". Quando estiver pronto, chega uma mensagem no WhatsApp com o link para ver a prévia e pagar por Pix.</p></div>
     </aside>
   </div>
 </main>

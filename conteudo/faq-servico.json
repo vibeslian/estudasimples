@@ -8,7 +8,7 @@
   {
     "p": "Em quanto tempo o trabalho fica pronto?",
     "r": [
-      "O prazo é de {{PRAZO}}, conforme o tamanho do trabalho. Ele começa a contar quando eu confirmo o pagamento por Pix e recebo todos os arquivos necessários. O prazo exato vem junto com o orçamento."
+      "O prazo é de {{PRAZO}}, conforme o tamanho do trabalho. Pelo WhatsApp, ele começa a contar quando eu confirmo o pagamento por Pix e recebo todos os arquivos necessários; pelo site, conta a partir do recebimento do arquivo. O prazo exato vem junto com o orçamento."
     ]
   },
   {
@@ -51,7 +51,7 @@
   {
     "p": "Como funciona o pagamento?",
     "r": [
-      "Você pode pedir pelo WhatsApp ou pelo formulário do site. Pelo WhatsApp, você envia o arquivo, recebe o orçamento e uma prévia em PDF (a capa e uma página do texto já formatadas) e, se aceitar, paga por Pix direto para mim; o nome que aparece no Pix é o meu, Lian Marcos Martinez Navarro, e o prazo começa a contar quando eu confirmo o pagamento. Pelo formulário do site, você envia o arquivo e o seu WhatsApp, eu aviso quando estiver pronto, você vê a prévia, paga por Pix na página do Mercado Pago e baixa o trabalho na hora, depois que o pagamento é confirmado."
+      "Você pode pedir pelo WhatsApp ou pelo formulário do site. Pelo WhatsApp, você envia o arquivo, recebe o orçamento e uma prévia em PDF (a capa e uma página do texto já formatadas) e, se aceitar, paga por Pix direto para mim; o nome que aparece no Pix é o meu, Lian Marcos Martinez Navarro, e o prazo começa a contar quando eu confirmo o pagamento. Pelo formulário do site, você envia o arquivo e o seu WhatsApp e eu aviso quando estiver pronto. Você vê a prévia, paga por Pix na página do Mercado Pago e baixa o trabalho assim que o pagamento é confirmado."
     ]
   },
   {
@@ -69,7 +69,7 @@
   {
     "p": "O que acontece com o meu arquivo?",
     "r": [
-      "Ele é usado só para o serviço. Para formatar, uso o Claude, uma ferramenta de inteligência artificial da empresa Anthropic, e o arquivo passa por ele. Eu apago do meu computador o arquivo, as mídias dele no WhatsApp e a conversa com o Claude em que ele foi usado 15 dias depois da entrega (cópias de segurança automáticas podem demorar um pouco mais). Se o seu trabalho tiver dados de outras pessoas, como entrevistados, tire-os antes de enviar. Os detalhes estão na <a href=\"/politica-de-privacidade/#servico-formatacao\">Política de Privacidade</a>."
+      "Ele é usado só para o serviço. Para formatar, uso o Claude, uma ferramenta de inteligência artificial da empresa Anthropic, e o arquivo passa por ele. Eu apago do meu computador o arquivo, as mídias dele no WhatsApp e a conversa com o Claude em que ele foi usado 15 dias depois da entrega (no pedido pelo site, 15 dias depois do pagamento ou de o trabalho ficar pronto, e até 30 dias se o pedido não for concluído; cópias de segurança automáticas podem demorar um pouco mais). Se o seu trabalho tiver dados de outras pessoas, como entrevistados, tire-os antes de enviar. Os detalhes estão na <a href=\"/politica-de-privacidade/#servico-formatacao\">Política de Privacidade</a>."
     ]
   },
   {

@@ -85,7 +85,7 @@ const values = {
   ...kit.valores,
 };
 // "Última atualização" dos Termos e da Política: a mais recente entre os links de afiliado (se há produtos à mostra), o AdSense (se ligado) e o Kit TCC (se ligado)
-const datasLegais = [afiliados.visiveis > 0 ? config.afiliados.legalAtualizadoEm : null, adsense.legalAtualizadoEm, kit.legalAtualizadoEm].filter(Boolean).sort();
+const datasLegais = [afiliados.visiveis > 0 ? config.afiliados.legalAtualizadoEm : null, adsense.legalAtualizadoEm, kit.legalAtualizadoEm, config.servico.legalAtualizadoEm].filter(Boolean).sort();
 if (datasLegais.length) values["{{LEGAL_ATUALIZADO}}"] = dataLonga(datasLegais[datasLegais.length - 1]);
 
 const TEXT_EXT = new Set([".html", ".css", ".js", ".json", ".xml", ".txt", ".svg", ".webmanifest"]);
@@ -258,7 +258,9 @@ writeFileSync(join(OUT, "robots.txt"), `User-agent: *\nAllow: /\n\n` + ROBOS_DE_
 
 // Páginas de pedido e painel: política de segurança de conteúdo (só o próprio site; sem frames; o aviso de visitas da Cloudflare continua permitido)
 const CSP = "default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'";
-const CSP_PEDIDOS = ["/pedir-formatacao/", "/pedido/", "/painel/"].map((r) => `${r}\n  Content-Security-Policy: ${CSP}\n\n${r}*\n  Content-Security-Policy: ${CSP}\n\n`).join("");
+// Na página do pedido, a prévia em PDF abre numa aba nova a partir de um endereço blob: (que herda esta política); por isso ali o visualizador de PDF precisa de object-src com blob:
+const CSP_DO = (r) => (r === "/pedido/" ? CSP.replace("object-src 'none'", "object-src 'self' blob:") : CSP);
+const CSP_PEDIDOS = ["/pedir-formatacao/", "/pedido/", "/painel/"].map((r) => `${r}\n  Content-Security-Policy: ${CSP_DO(r)}\n\n${r}*\n  Content-Security-Policy: ${CSP_DO(r)}\n\n`).join("");
 
 // Cloudflare Pages: cache longo para fontes e bibliotecas (têm a versão no nome do arquivo)
 writeFileSync(

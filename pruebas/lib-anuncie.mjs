@@ -32,7 +32,8 @@ const mezcla = (base, mod) => {
 /** Construye el sitio con la configuración real + los cambios de `mod`. Devuelve {dir, ok, salida}. */
 export function construye(mod = {}, nombre = "sitio") {
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), `es-${nombre}-`));
-  const cfg = mezcla(CONFIG_REAL, mod);
+  // La fecha legal del servicio (10/11/2026) es la más reciente; en estas pruebas de fechas se deja una antigua, salvo que la prueba pida otra.
+  const cfg = mezcla(mezcla(CONFIG_REAL, { servico: { legalAtualizadoEm: "2026-10-14" } }), mod);
   const cfgPath = path.join(tmp, "site.config.json");
   fs.writeFileSync(cfgPath, JSON.stringify(cfg, null, 2));
   const dir = path.join(tmp, "dist");

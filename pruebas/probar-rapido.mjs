@@ -37,7 +37,7 @@ for (const f of htmls) {
   if (!f.endsWith("404.html")) {
     if ((t.match(/<h1[\s>]/g) || []).length !== 1) sinH1.push(rel(f));
     if (!/<title>[^<]{5,}<\/title>/.test(t)) sinTitulo.push(rel(f));
-    if (!/<link rel="canonical" href="https:\/\/[^"]+">/.test(t)) sinCanon.push(rel(f));
+    if (!/<link rel="canonical" href="https:\/\/[^"]+">/.test(t) && !/<meta name="robots" content="noindex/.test(t)) sinCanon.push(rel(f)); // as páginas com noindex (pedido, painel) não precisam de canonical
   }
   for (const m of t.matchAll(/(?:href|src)="(\/[^"]*)"/g)) if (!existe(m[1])) rotos.add(`${rel(f)} -> ${m[1]}`);
   for (const m of t.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) { try { JSON.parse(m[1]); } catch { ldMalo.push(rel(f)); } }
