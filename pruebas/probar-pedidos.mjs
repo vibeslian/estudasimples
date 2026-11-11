@@ -50,6 +50,8 @@ const tgEnvios = []; let tgUpdates = [];
 const tg = http.createServer((req, res) => { let c = ""; req.on("data", (d) => (c += d)); req.on("end", () => {
   const u = new URL(req.url, "http://x"); const env = (o, s = 200) => { res.writeHead(s, { "Content-Type": "application/json" }); res.end(JSON.stringify(o)); };
   if (!u.pathname.startsWith("/bottoken-tg/")) return env({ ok: false }, 401);
+  if (u.pathname.endsWith("/getMe")) return env({ ok: true, result: { username: "estudasimples_avisos_bot" } });
+  if (u.pathname.endsWith("/getWebhookInfo")) return env({ ok: true, result: { url: "", pending_update_count: tgUpdates.length } });
   if (u.pathname.endsWith("/getUpdates")) return env({ ok: true, result: tgUpdates });
   if (u.pathname.endsWith("/sendMessage")) { tgEnvios.push(JSON.parse(c)); return env({ ok: true, result: {} }); }
   env({ ok: false }, 404);
@@ -129,7 +131,7 @@ try {
   ok((await fetch(BASE + "/api/admin/teste-aviso", { method: "POST", headers: H })).status === 403, "el aviso de prueba exige la cabecera del panel (anti-CSRF)");
   const vinc = () => fetch(BASE + "/api/admin/vincular-telegram", { method: "POST", headers: HA }).then((x) => x.json());
   ok((await fetch(BASE + "/api/admin/vincular-telegram", { method: "POST", headers: H })).status === 403, "vincular Telegram exige la cabecera del panel (anti-CSRF)");
-  let vr = await vinc(); ok(vr.resultado.ok === false && /mande \/start|ninguém/.test(vr.resultado.motivo), "vincular sin que nadie haya escrito al bot: explica qué hacer");
+  let vr = await vinc(); ok(vr.resultado.ok === false && /mande \/start|ninguém/.test(vr.resultado.motivo) && vr.resultado.bot === "@estudasimples_avisos_bot" && vr.resultado.pendentes === 0 && !JSON.stringify(vr).includes("token-tg"), "vincular sin que nadie haya escrito al bot: explica qué hacer y dice de qué bot es el token (sin mostrar el token)");
   tgUpdates = [{ message: { chat: { id: 111, type: "group" } } }]; vr = await vinc(); ok(vr.resultado.ok === false, "un grupo no cuenta: solo la conversación privada de Lian");
   tgUpdates = [{ message: { chat: { id: 7000123, type: "private" }, text: "/start" } }]; vr = await vinc();
   ok(vr.resultado.vinculado === true && vr.resultado.ok === true && tgEnvios.length === 1 && tgEnvios[0].chat_id === "7000123" && /Telegram vinculado/.test(tgEnvios[0].text), "Lian manda /start al bot y aprieta «Vincular»: se guarda su conversación y llega el mensaje de confirmación");

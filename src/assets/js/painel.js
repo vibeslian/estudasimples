@@ -130,7 +130,7 @@
       bv.disabled = true; msgV.textContent = "Procurando a sua conversa com o bot…";
       fetch("/api/admin/vincular-telegram", { method: "POST", headers: { "X-Painel": "1" } }).then(function (r) { return r.json(); }).then(function (j) {
         var r = j.resultado || {};
-        msgV.textContent = r.vinculado ? (r.ok ? "Vinculado! Deve ter chegado uma mensagem no seu Telegram." : "Vinculado, mas o envio falhou.") : "Não vinculou: " + (r.motivo || "erro") + ".";
+        msgV.textContent = r.vinculado ? (r.ok ? "Vinculado! Deve ter chegado uma mensagem no seu Telegram." : "Vinculado, mas o envio falhou.") : "Não vinculou: " + (r.motivo || "erro") + (r.bot ? " (o token guardado é do bot " + r.bot + (r.pendentes != null ? "; mensagens esperando: " + r.pendentes : "") + ")" : "") + ".";
       }).catch(function () { msgV.textContent = "Não consegui chamar o servidor."; }).then(function () { bv.disabled = false; });
     } });
     lista.parentNode.insertBefore(el("p", {}, [bv, " ", msgV]), lista.parentNode.firstChild);

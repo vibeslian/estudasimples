@@ -173,11 +173,16 @@ export async function avisarLian(env, titulo, texto, esperar = false) {
 export async function vincularTelegram(env) {
   if (!env.TELEGRAM_TOKEN) return { ok: false, motivo: "TELEGRAM_TOKEN não configurado" };
   try {
-    const r = await fetch(`${apiTelegram(env)}/bot${env.TELEGRAM_TOKEN}/getUpdates?limit=20`, { signal: AbortSignal.timeout(10000) });
-    const j = await r.json();
-    if (!r.ok || !j.ok) return { ok: false, motivo: "o Telegram não aceitou o token" };
+    const chamar = async (metodo) => { try { const x = await fetch(`${apiTelegram(env)}/bot${env.TELEGRAM_TOKEN}/${metodo}`, { signal: AbortSignal.timeout(10000) }); return await x.json(); } catch { return {}; } };
+    // Diagnóstico (sem mostrar o token): de qual bot é o token e quantas mensagens estão esperando
+    const eu = await chamar("getMe"), gancho = await chamar("getWebhookInfo");
+    const bot = eu.ok && eu.result ? "@" + eu.result.username : "desconhecido";
+    const pendentes = gancho.ok && gancho.result ? gancho.result.pending_update_count : null;
+    const comWebhook = !!(gancho.ok && gancho.result && gancho.result.url);
+    const j = await chamar("getUpdates?limit=20");
+    if (!j.ok) return { ok: false, bot, motivo: comWebhook ? "este bot tem um webhook ativo (ele já é usado por outro sistema): crie um bot novo só para o Estuda Simples" : "o Telegram não aceitou o token" };
     const msgs = (j.result || []).map((x) => x.message).filter((m) => m && m.chat && m.chat.type === "private");
-    if (!msgs.length) return { ok: false, motivo: "ninguém escreveu ao bot ainda: abra o bot no Telegram e mande /start" };
+    if (!msgs.length) return { ok: false, bot, pendentes, motivo: "ninguém escreveu ao bot ainda: abra o bot no Telegram e mande /start" };
     const chat = msgs[msgs.length - 1].chat.id;
     await env.DB.prepare("INSERT INTO ajustes (chave, valor) VALUES ('telegram_chat', ?1) ON CONFLICT(chave) DO UPDATE SET valor=?1").bind(String(chat)).run();
     const teste = await enviarTelegram(env, "Telegram vinculado", "A partir de agora voce recebe aqui o aviso de cada pedido e pagamento.");
