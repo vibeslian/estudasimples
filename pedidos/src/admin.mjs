@@ -1,7 +1,7 @@
 // Parte privada (solo Lian, detrás de Cloudflare Access): ver pedidos, bajar el original, subir el trabajo y marcar «pronto».
 import {
   MAX_ARCHIVO, DIAS_APAGAR_ENTREGA, DIAS_APAGAR_SIN_CONCLUIR, TIPOS, ID_RE, ahora, json, erro, arquivo, tipoReal, primeiroNome, temChave,
-  novoId, novoToken, normalizaWhatsapp, nomeLimpo, nomeArquivoSeguro, avisarLian,
+  novoId, novoToken, normalizaWhatsapp, nomeLimpo, nomeArquivoSeguro, avisarLian, vincularTelegram,
 } from "./util.mjs";
 
 // Pedido criado pelo Lian quando o cliente mandou o arquivo pelo WhatsApp (o cliente aceitou as condições ao pedir pelo WhatsApp).
@@ -27,6 +27,10 @@ export async function criarManual(request, env) {
 }
 
 const CAMPOS_LISTA = "id, nome, whatsapp, tamanho, arquivo_nome, arquivo_tipo, arquivo_bytes, status, valor_centavos, tem_previa, previa_imgs, tem_docx, tem_pdf, aviso, criado_em, pronto_em, pago_em, apagar_em";
+
+export async function vincular(env) {
+  return json({ ok: true, resultado: await vincularTelegram(env) });
+}
 
 // Botão do painel: manda um aviso de teste ao celular e devolve o que o ntfy respondeu (sem mostrar o nome do tópico).
 export async function testarAviso(env) {

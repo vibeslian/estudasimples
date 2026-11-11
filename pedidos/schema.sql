@@ -40,6 +40,11 @@ CREATE TABLE IF NOT EXISTS pedidos (
 CREATE INDEX IF NOT EXISTS idx_pedidos_status ON pedidos (status, criado_em);
 CREATE INDEX IF NOT EXISTS idx_pedidos_apagar ON pedidos (apagado_em, apagar_em);
 
+CREATE TABLE IF NOT EXISTS ajustes (
+  chave TEXT PRIMARY KEY,
+  valor TEXT NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS limites (
   chave TEXT PRIMARY KEY,
   n INTEGER NOT NULL,

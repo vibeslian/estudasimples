@@ -9,7 +9,7 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 
 const RAIZ = path.resolve("..");
-const PUERTO = 8799, PUERTO_MP = 8798, PUERTO_NTFY = 8794;
+const PUERTO = 8799, PUERTO_MP = 8798, PUERTO_NTFY = 8794, PUERTO_TG = 8793;
 const BASE = `http://localhost:${PUERTO}`;
 const persist = fs.mkdtempSync(path.join(os.tmpdir(), "pedidos-test-"));
 let fallos = 0, total = 0;
@@ -45,6 +45,17 @@ const avisos = [];
 const aguardaAviso = async (n) => { for (let i = 0; i < 40 && avisos.length < n; i++) await new Promise((x) => setTimeout(x, 100)); };
 const ntfy = http.createServer((req, res) => { let c = ""; req.on("data", (d) => (c += d)); req.on("end", () => { avisos.push({ ruta: req.url, titulo: req.headers.title, click: req.headers.click, cuerpo: c }); res.writeHead(200); res.end("{}"); }); });
 await new Promise((r) => ntfy.listen(PUERTO_NTFY, r));
+// Telegram de mentira: getUpdates (con o sin mensajes de Lian) y sendMessage
+const tgEnvios = []; let tgUpdates = [];
+const tg = http.createServer((req, res) => { let c = ""; req.on("data", (d) => (c += d)); req.on("end", () => {
+  const u = new URL(req.url, "http://x"); const env = (o, s = 200) => { res.writeHead(s, { "Content-Type": "application/json" }); res.end(JSON.stringify(o)); };
+  if (!u.pathname.startsWith("/bottoken-tg/")) return env({ ok: false }, 401);
+  if (u.pathname.endsWith("/getUpdates")) return env({ ok: true, result: tgUpdates });
+  if (u.pathname.endsWith("/sendMessage")) { tgEnvios.push(JSON.parse(c)); return env({ ok: true, result: {} }); }
+  env({ ok: false }, 404);
+}); });
+await new Promise((r) => tg.listen(PUERTO_TG, r));
+const aguardaTg = async (n) => { for (let i = 0; i < 40 && tgEnvios.length < n; i++) await new Promise((x) => setTimeout(x, 100)); };
 
 function arrancar(puerto, vars, dirPersist) {
   const args = ["wrangler", "dev", "--local", "--port", String(puerto), "--persist-to", dirPersist, "--ip", "127.0.0.1"];
@@ -65,7 +76,7 @@ const sinWorkerd = async () => { for (let i = 0; i < 30; i++) { try { if (!/work
 const parar = (srv) => { try { execFileSync("taskkill", ["/pid", String(srv.p.pid), "/T", "/F"], { stdio: "ignore" }); } catch { try { srv.p.kill(); } catch { /* ya cerró */ } } };
 
 execFileSync(WR, ["wrangler", "d1", "execute", "estudasimples-pedidos", "--local", "--persist-to", persist, "--file=pedidos/schema.sql"], { cwd: RAIZ, shell: process.platform === "win32", stdio: "ignore" });
-let comAdmin = arrancar(PUERTO, { PUBLIC_BASE: BASE, DEV_ADMIN_BYPASS: "sim-local", MP_ACCESS_TOKEN: "token-de-prueba", MP_API_BASE: `http://127.0.0.1:${PUERTO_MP}`, NTFY_TOPIC: "topico-de-prueba", NTFY_BASE: `http://127.0.0.1:${PUERTO_NTFY}` }, persist);
+let comAdmin = arrancar(PUERTO, { PUBLIC_BASE: BASE, DEV_ADMIN_BYPASS: "sim-local", MP_ACCESS_TOKEN: "token-de-prueba", MP_API_BASE: `http://127.0.0.1:${PUERTO_MP}`, NTFY_TOPIC: "topico-de-prueba", NTFY_BASE: `http://127.0.0.1:${PUERTO_NTFY}`, TELEGRAM_TOKEN: "token-tg", TELEGRAM_API_BASE: `http://127.0.0.1:${PUERTO_TG}` }, persist);
 try {
   await esperar(PUERTO, comAdmin);
 
@@ -114,8 +125,15 @@ try {
 
   console.log("== 3) Panel de Lian ==");
   const antesTeste = avisos.length; r = await fetch(BASE + "/api/admin/teste-aviso", { method: "POST", headers: HA }); const te = await r.json();
-  ok(r.status === 200 && te.resultado.ok === true && te.resultado.status === 200 && avisos.length === antesTeste + 1 && /Teste de aviso/.test(avisos[avisos.length - 1].titulo) && !JSON.stringify(te).includes("topico-de-prueba"), "el botón «Testar o aviso do celular» manda un aviso de prueba y no muestra el nombre secreto del tópico");
+  ok(r.status === 200 && te.resultado.ntfy.ok === true && te.resultado.ntfy.status === 200 && te.resultado.telegram.ok === false && /vincular/.test(te.resultado.telegram.motivo) && avisos.length === antesTeste + 1 && /Teste de aviso/.test(avisos[avisos.length - 1].titulo) && !JSON.stringify(te).includes("topico-de-prueba"), "el botón «Testar o aviso do celular» manda un aviso de prueba y no muestra el nombre secreto del tópico");
   ok((await fetch(BASE + "/api/admin/teste-aviso", { method: "POST", headers: H })).status === 403, "el aviso de prueba exige la cabecera del panel (anti-CSRF)");
+  const vinc = () => fetch(BASE + "/api/admin/vincular-telegram", { method: "POST", headers: HA }).then((x) => x.json());
+  ok((await fetch(BASE + "/api/admin/vincular-telegram", { method: "POST", headers: H })).status === 403, "vincular Telegram exige la cabecera del panel (anti-CSRF)");
+  let vr = await vinc(); ok(vr.resultado.ok === false && /mande \/start|ninguém/.test(vr.resultado.motivo), "vincular sin que nadie haya escrito al bot: explica qué hacer");
+  tgUpdates = [{ message: { chat: { id: 111, type: "group" } } }]; vr = await vinc(); ok(vr.resultado.ok === false, "un grupo no cuenta: solo la conversación privada de Lian");
+  tgUpdates = [{ message: { chat: { id: 7000123, type: "private" }, text: "/start" } }]; vr = await vinc();
+  ok(vr.resultado.vinculado === true && vr.resultado.ok === true && tgEnvios.length === 1 && tgEnvios[0].chat_id === "7000123" && /Telegram vinculado/.test(tgEnvios[0].text), "Lian manda /start al bot y aprieta «Vincular»: se guarda su conversación y llega el mensaje de confirmación");
+  r = await fetch(BASE + "/api/admin/teste-aviso", { method: "POST", headers: HA }); const te2 = await r.json(); ok(te2.resultado.telegram.ok === true && tgEnvios.length === 2, "con Telegram vinculado, el botón de prueba manda el mensaje");
   r = await fetch(BASE + "/api/admin/pedidos"); let lista = await r.json();
   ok(r.status === 200 && lista.pedidos.some((p) => p.id === c1.id), "el pedido aparece en el panel");
   r = await fetch(BASE + "/api/admin/pedidos/" + c1.id + "/andamento", { method: "POST", headers: H }); ok(r.status === 403, "acción del panel sin la cabecera anti-CSRF: 403");
@@ -152,7 +170,8 @@ try {
   r = await post("/api/pedido/baixar/docx", { codigo: c1.codigo }); ok(r.status === 402, "con todos esos avisos falsos, la descarga sigue cerrada");
   pagamentos.set("1004", { id: 1004, status: "approved", external_reference: c1.id, transaction_amount: 80, currency_id: "BRL" });
   const antes = avisos.length;
-  r = await avisar("1004"); e = await (await post("/api/pedido/estado", { codigo: c1.codigo })).json(); await aguardaAviso(antes + 1);
+  r = await avisar("1004"); e = await (await post("/api/pedido/estado", { codigo: c1.codigo })).json(); await aguardaAviso(antes + 1); await aguardaTg(3);
+  ok(tgEnvios.length >= 3 && /Pagamento confirmado/.test(tgEnvios[tgEnvios.length - 1].text) && !/Maria|639|@/.test(tgEnvios[tgEnvios.length - 1].text), "un pago confirmado también llega por Telegram, sin datos personales");
   ok(avisos.length === antes + 1 && /Pagamento confirmado/.test(avisos[avisos.length - 1].titulo) && avisos[avisos.length - 1].cuerpo.includes("5") === false || avisos.length === antes + 1, "un pago confirmado manda un aviso al celular de Lian");
   ok(r.status === 200 && e.pedido.status === "pago" && e.pedido.pode_baixar && e.pedido.apagar_em > Date.now() / 1000 + 14 * 86400, "pago aprobado, del pedido y de R$ 80: libera la descarga (borrado a 15 días)");
   r = await avisar("1004"); ok(r.status === 200, "el mismo aviso repetido es inofensivo");
@@ -206,7 +225,7 @@ try {
   pagamentos.set("3001", { id: 3001, status: "approved", external_reference: c3.id, transaction_amount: 80, currency_id: "BRL" });
   await avisar("3001"); e = await (await post("/api/pedido/estado", { codigo: c3.codigo })).json(); ok(e.pedido.status === "pago", "pago con tarjeta aprobado: libera");
   pagamentos.set("3001", { id: 3001, status: "charged_back", external_reference: c3.id, transaction_amount: 80, currency_id: "BRL" });
-  const avisosAntes = avisos.length; await avisar("3001"); e = await (await post("/api/pedido/estado", { codigo: c3.codigo })).json(); await aguardaAviso(avisosAntes + 1);
+  await new Promise((x) => setTimeout(x, 1000)); const avisosAntes = avisos.length; await avisar("3001"); e = await (await post("/api/pedido/estado", { codigo: c3.codigo })).json(); await aguardaAviso(avisosAntes + 1);
   ok(e.pedido.status === "reembolsado" && !e.pedido.pode_baixar, "el mismo pago pasa a «charged_back»: el pedido queda reembolsado y se corta la descarga");
   r = await post("/api/pedido/baixar/docx", { codigo: c3.codigo }); ok(r.status === 402, "ya no se puede descargar tras el contracargo");
   ok(avisos.length === avisosAntes + 1 && /revertido/.test(avisos[avisos.length - 1].titulo), "y a Lian le llega un aviso al celular: «Pagamento revertido»");
@@ -230,7 +249,7 @@ try {
   fs.writeFileSync(sqlVencer, `UPDATE pedidos SET apagar_em = 1 WHERE id = '${c1.id}';\n`);
   parar(comAdmin); await sinWorkerd(); await new Promise((x) => setTimeout(x, 2000)); // se cierra el Worker local para poder tocar su base
   execFileSync(WR, ["wrangler", "d1", "execute", "estudasimples-pedidos", "--local", "--persist-to", persist, `--file=${sqlVencer.replace(/\\/g, "/")}`], { cwd: RAIZ, shell: process.platform === "win32", stdio: "ignore" });
-  comAdmin = arrancar(PUERTO, { PUBLIC_BASE: BASE, DEV_ADMIN_BYPASS: "sim-local", MP_ACCESS_TOKEN: "token-de-prueba", MP_API_BASE: `http://127.0.0.1:${PUERTO_MP}`, NTFY_TOPIC: "topico-de-prueba", NTFY_BASE: `http://127.0.0.1:${PUERTO_NTFY}` }, persist);
+  comAdmin = arrancar(PUERTO, { PUBLIC_BASE: BASE, DEV_ADMIN_BYPASS: "sim-local", MP_ACCESS_TOKEN: "token-de-prueba", MP_API_BASE: `http://127.0.0.1:${PUERTO_MP}`, NTFY_TOPIC: "topico-de-prueba", NTFY_BASE: `http://127.0.0.1:${PUERTO_NTFY}`, TELEGRAM_TOKEN: "token-tg", TELEGRAM_API_BASE: `http://127.0.0.1:${PUERTO_TG}` }, persist);
   await esperar(PUERTO, comAdmin);
   r = await fetch(BASE + "/api/admin/limpeza", { method: "POST", headers: HA }); const lim = await r.json(); ok(r.status === 200 && lim.apagados === 1, "la limpieza (la misma que corre cada día) borra el pedido vencido y solo ese");
   r = await post("/api/pedido/baixar/docx", { codigo: c1.codigo }); ok(r.status === 404, "pedido vencido: archivos y enlace borrados");
@@ -277,7 +296,7 @@ try {
 } catch (e) {
   fallos++; console.log("FALLA (error inesperado)", e && e.stack ? e.stack : e);
 } finally {
-  parar(comAdmin); mp.close(); ntfy.close();
+  parar(comAdmin); mp.close(); ntfy.close(); tg.close();
 }
 console.log(fallos ? `\n${fallos} FALLA(S) de ${total}` : `\nTodo OK: ${total} comprobaciones`);
 process.exit(fallos ? 1 : 0);

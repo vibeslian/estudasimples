@@ -121,10 +121,19 @@
     var b = el("button", { type: "button", class: "btn", texto: "Testar o aviso do celular", onclick: function () {
       b.disabled = true; msg.textContent = "Enviando (pode demorar uns 5 segundos)…";
       fetch("/api/admin/teste-aviso", { method: "POST", headers: { "X-Painel": "1" } }).then(function (r) { return r.json(); }).then(function (j) {
-        var r = j.resultado || {};
-        msg.textContent = r.ok ? "Enviado ao ntfy (resposta " + r.status + "). Veja o celular: deve chegar «Teste de aviso»." : "Não funcionou: " + (r.motivo || ("o ntfy respondeu " + r.status)) + (r.topico_com_espacos ? " (o nome do tópico tinha espaços)" : "") + ".";
+        var r = j.resultado || {}, tg = r.telegram || {};
+        msg.textContent = "Telegram: " + (tg.ok ? "enviado (veja o Telegram do celular)" : "não funcionou (" + (tg.motivo || ("resposta " + tg.status)) + ")") + ".";
       }).catch(function () { msg.textContent = "Não consegui chamar o servidor."; }).then(function () { b.disabled = false; });
     } });
+    var msgV = el("span", { class: "pn-ok", role: "status" });
+    var bv = el("button", { type: "button", class: "btn", texto: "Vincular Telegram", onclick: function () {
+      bv.disabled = true; msgV.textContent = "Procurando a sua conversa com o bot…";
+      fetch("/api/admin/vincular-telegram", { method: "POST", headers: { "X-Painel": "1" } }).then(function (r) { return r.json(); }).then(function (j) {
+        var r = j.resultado || {};
+        msgV.textContent = r.vinculado ? (r.ok ? "Vinculado! Deve ter chegado uma mensagem no seu Telegram." : "Vinculado, mas o envio falhou.") : "Não vinculou: " + (r.motivo || "erro") + ".";
+      }).catch(function () { msgV.textContent = "Não consegui chamar o servidor."; }).then(function () { bv.disabled = false; });
+    } });
+    lista.parentNode.insertBefore(el("p", {}, [bv, " ", msgV]), lista.parentNode.firstChild);
     lista.parentNode.insertBefore(el("p", {}, [b, " ", msg]), lista.parentNode.firstChild);
   })();
   carregaLista();

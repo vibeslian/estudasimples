@@ -120,28 +120,71 @@ export async function hmacHex(env, texto) {
   return Array.from(new Uint8Array(s), (x) => x.toString(16).padStart(2, "0")).join("").slice(0, 32);
 }
 
-// Aviso para o celular do Lian (app ntfy). Só leva o código do pedido e o valor: nunca nome nem telefone do cliente.
-// Só funciona se o segredo NTFY_TOPIC existir; se falhar, não atrapalha o pedido.
+// Aviso para o Lian (nunca leva nome nem telefone do cliente: só o código do pedido e o valor).
+// Dois canais, cada um só se estiver configurado: e-mail pelo Cloudflare Email Routing (para o Gmail do administrador)
+// e notificação pelo app ntfy (segredo NTFY_TOPIC). Se algum falhar, não atrapalha o pedido.
+async function enviarNtfy(env, titulo, texto) {
+  if (!env.NTFY_TOPIC) return { ok: false, motivo: "NTFY_TOPIC não configurado" };
+  try {
+    const r = await fetch(`${(env.NTFY_BASE || "https://ntfy.sh").replace(/\/$/, "")}/${encodeURIComponent(String(env.NTFY_TOPIC).trim())}`, {
+      method: "POST",
+      headers: { Title: titulo, Click: `${env.PUBLIC_BASE}/painel/`, Priority: "high", Tags: "bell" },
+      body: texto,
+      signal: AbortSignal.timeout(15000),
+    });
+    if (!r.ok) console.error("aviso ntfy: respondeu", r.status);
+    return { ok: r.ok, status: r.status };
+  } catch (e) {
+    console.error("aviso ntfy falhou", e && e.message);
+    return { ok: false, motivo: String((e && e.message) || e) };
+  }
+}
+
+const apiTelegram = (env) => (env.TELEGRAM_API_BASE || "https://api.telegram.org").replace(/\/$/, "");
+
+// Telegram: o Worker só sabe para quem mandar depois que o Lian manda «/start» ao bot e aperta «Vincular Telegram» no painel.
+async function enviarTelegram(env, titulo, texto) {
+  if (!env.TELEGRAM_TOKEN) return { ok: false, motivo: "TELEGRAM_TOKEN não configurado" };
+  try {
+    const linha = await env.DB.prepare("SELECT valor FROM ajustes WHERE chave='telegram_chat'").first();
+    if (!linha) return { ok: false, motivo: "falta vincular: mande /start ao bot e aperte «Vincular Telegram» no painel" };
+    const r = await fetch(`${apiTelegram(env)}/bot${env.TELEGRAM_TOKEN}/sendMessage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ chat_id: linha.valor, text: `${titulo}\n${texto}\n${env.PUBLIC_BASE}/painel/`, disable_web_page_preview: true }),
+      signal: AbortSignal.timeout(10000),
+    });
+    if (!r.ok) console.error("aviso telegram: respondeu", r.status);
+    return { ok: r.ok, status: r.status };
+  } catch (e) {
+    console.error("aviso telegram falhou", e && e.message);
+    return { ok: false, motivo: String((e && e.message) || e) };
+  }
+}
+
 export async function avisarLian(env, titulo, texto, esperar = false) {
-  if (!env.NTFY_TOPIC) return { ok: false, motivo: "o segredo NTFY_TOPIC não está configurado" };
-  const enviar = async () => {
-    try {
-      const r = await fetch(`${(env.NTFY_BASE || "https://ntfy.sh").replace(/\/$/, "")}/${encodeURIComponent(String(env.NTFY_TOPIC).trim())}`, {
-        method: "POST",
-        headers: { Title: titulo, Click: `${env.PUBLIC_BASE}/painel/`, Priority: "high", Tags: "bell" },
-        body: texto,
-        signal: AbortSignal.timeout(15000), // o ntfy.sh costuma demorar uns 3 a 4 segundos
-      });
-      if (!r.ok) console.error("aviso ao Lian: o ntfy respondeu", r.status);
-      return { ok: r.ok, status: r.status, tamanho_topico: String(env.NTFY_TOPIC).length };
-    } catch (e) {
-      console.error("aviso ao Lian falhou", e && e.message);
-      return { ok: false, motivo: String((e && e.message) || e) };
-    }
-  };
+  const enviar = async () => { const [telegram, ntfy] = await Promise.all([enviarTelegram(env, titulo, texto), enviarNtfy(env, titulo, texto)]); return { telegram, ntfy }; };
   // Em segundo plano (o cliente não espera pelo aviso); só o botão de teste do painel espera pelo resultado.
-  if (!esperar && env.__ctx) { env.__ctx.waitUntil(enviar()); return { ok: true, emSegundoPlano: true }; }
+  if (!esperar && env.__ctx) { env.__ctx.waitUntil(enviar()); return { emSegundoPlano: true }; }
   return enviar();
+}
+
+// Procura no Telegram a conversa do administrador (a última pessoa que escreveu ao bot) e guarda o seu número.
+export async function vincularTelegram(env) {
+  if (!env.TELEGRAM_TOKEN) return { ok: false, motivo: "TELEGRAM_TOKEN não configurado" };
+  try {
+    const r = await fetch(`${apiTelegram(env)}/bot${env.TELEGRAM_TOKEN}/getUpdates?limit=20`, { signal: AbortSignal.timeout(10000) });
+    const j = await r.json();
+    if (!r.ok || !j.ok) return { ok: false, motivo: "o Telegram não aceitou o token" };
+    const msgs = (j.result || []).map((x) => x.message).filter((m) => m && m.chat && m.chat.type === "private");
+    if (!msgs.length) return { ok: false, motivo: "ninguém escreveu ao bot ainda: abra o bot no Telegram e mande /start" };
+    const chat = msgs[msgs.length - 1].chat.id;
+    await env.DB.prepare("INSERT INTO ajustes (chave, valor) VALUES ('telegram_chat', ?1) ON CONFLICT(chave) DO UPDATE SET valor=?1").bind(String(chat)).run();
+    const teste = await enviarTelegram(env, "Telegram vinculado", "A partir de agora voce recebe aqui o aviso de cada pedido e pagamento.");
+    return { ok: !!teste.ok, vinculado: true, envio: teste };
+  } catch (e) {
+    return { ok: false, motivo: String((e && e.message) || e) };
+  }
 }
 
 export async function ipHash(request, env) {
