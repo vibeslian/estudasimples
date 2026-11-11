@@ -119,7 +119,7 @@
   (function testeAviso() {
     var msg = el("span", { class: "pn-ok", role: "status" });
     var b = el("button", { type: "button", class: "btn", texto: "Testar o aviso do celular", onclick: function () {
-      b.disabled = true; msg.textContent = "Enviando…";
+      b.disabled = true; msg.textContent = "Enviando (pode demorar uns 5 segundos)…";
       fetch("/api/admin/teste-aviso", { method: "POST", headers: { "X-Painel": "1" } }).then(function (r) { return r.json(); }).then(function (j) {
         var r = j.resultado || {};
         msg.textContent = r.ok ? "Enviado ao ntfy (resposta " + r.status + "). Veja o celular: deve chegar «Teste de aviso»." : "Não funcionou: " + (r.motivo || ("o ntfy respondeu " + r.status)) + (r.topico_com_espacos ? " (o nome do tópico tinha espaços)" : "") + ".";

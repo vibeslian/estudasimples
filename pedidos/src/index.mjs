@@ -34,7 +34,8 @@ async function rotaAdmin(request, env, partes) {
 }
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
+    env = Object.assign(Object.create(env), { __ctx: ctx }); // permite mandar o aviso do celular em segundo plano
     const url = new URL(request.url);
     const partes = url.pathname.replace(/\/+$/, "").split("/"); // ["", "api", ...]
     if (partes[1] !== "api") return env.ASSETS.fetch(request);

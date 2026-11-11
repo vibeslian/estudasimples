@@ -30,7 +30,7 @@ const CAMPOS_LISTA = "id, nome, whatsapp, tamanho, arquivo_nome, arquivo_tipo, a
 
 // Botão do painel: manda um aviso de teste ao celular e devolve o que o ntfy respondeu (sem mostrar o nome do tópico).
 export async function testarAviso(env) {
-  const r = await avisarLian(env, "Teste de aviso", "Se voce viu isto, o aviso do celular funciona.");
+  const r = await avisarLian(env, "Teste de aviso", "Se voce viu isto, o aviso do celular funciona.", true);
   return json({ ok: true, resultado: r });
 }
 

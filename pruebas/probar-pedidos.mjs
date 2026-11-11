@@ -42,6 +42,7 @@ const mp = http.createServer((req, res) => {
 await new Promise((r) => mp.listen(PUERTO_MP, r));
 // ntfy de mentira: guarda los avisos que el Worker manda al celular de Lian
 const avisos = [];
+const aguardaAviso = async (n) => { for (let i = 0; i < 40 && avisos.length < n; i++) await new Promise((x) => setTimeout(x, 100)); };
 const ntfy = http.createServer((req, res) => { let c = ""; req.on("data", (d) => (c += d)); req.on("end", () => { avisos.push({ ruta: req.url, titulo: req.headers.title, click: req.headers.click, cuerpo: c }); res.writeHead(200); res.end("{}"); }); });
 await new Promise((r) => ntfy.listen(PUERTO_NTFY, r));
 
@@ -98,6 +99,7 @@ try {
   r = await fetch(BASE + "/api/pedidos", { method: "POST", headers: { Origin: "https://malo.example" }, body: new FormData() }); ok(r.status === 403, "pedido desde otro sitio (Origin ajeno): 403");
   r = await pedir(); const c1 = await r.json(); ok(r.status === 200 && c1.ok && c1.id && c1.codigo && c1.codigo.length === 43, "pedido válido: devuelve código corto y código secreto de 43 caracteres");
 
+  await aguardaAviso(1);
   ok(avisos.length === 1 && /ntfy|topico-de-prueba/.test(avisos[0].ruta) && /Novo pedido/.test(avisos[0].titulo) && avisos[0].cuerpo.includes(c1.id) && avisos[0].click === BASE + "/painel/", "un pedido nuevo manda un aviso al celular de Lian (con el código del pedido y el enlace al panel)");
   ok(!/Maria|639|55/.test(avisos[0].cuerpo.replace(c1.id, "")), "el aviso no lleva nombre ni teléfono del cliente");
   console.log("== 2) Estado y accesos sin pagar ==");
@@ -150,7 +152,7 @@ try {
   r = await post("/api/pedido/baixar/docx", { codigo: c1.codigo }); ok(r.status === 402, "con todos esos avisos falsos, la descarga sigue cerrada");
   pagamentos.set("1004", { id: 1004, status: "approved", external_reference: c1.id, transaction_amount: 80, currency_id: "BRL" });
   const antes = avisos.length;
-  r = await avisar("1004"); e = await (await post("/api/pedido/estado", { codigo: c1.codigo })).json();
+  r = await avisar("1004"); e = await (await post("/api/pedido/estado", { codigo: c1.codigo })).json(); await aguardaAviso(antes + 1);
   ok(avisos.length === antes + 1 && /Pagamento confirmado/.test(avisos[avisos.length - 1].titulo) && avisos[avisos.length - 1].cuerpo.includes("5") === false || avisos.length === antes + 1, "un pago confirmado manda un aviso al celular de Lian");
   ok(r.status === 200 && e.pedido.status === "pago" && e.pedido.pode_baixar && e.pedido.apagar_em > Date.now() / 1000 + 14 * 86400, "pago aprobado, del pedido y de R$ 80: libera la descarga (borrado a 15 días)");
   r = await avisar("1004"); ok(r.status === 200, "el mismo aviso repetido es inofensivo");
@@ -204,7 +206,7 @@ try {
   pagamentos.set("3001", { id: 3001, status: "approved", external_reference: c3.id, transaction_amount: 80, currency_id: "BRL" });
   await avisar("3001"); e = await (await post("/api/pedido/estado", { codigo: c3.codigo })).json(); ok(e.pedido.status === "pago", "pago con tarjeta aprobado: libera");
   pagamentos.set("3001", { id: 3001, status: "charged_back", external_reference: c3.id, transaction_amount: 80, currency_id: "BRL" });
-  const avisosAntes = avisos.length; await avisar("3001"); e = await (await post("/api/pedido/estado", { codigo: c3.codigo })).json();
+  const avisosAntes = avisos.length; await avisar("3001"); e = await (await post("/api/pedido/estado", { codigo: c3.codigo })).json(); await aguardaAviso(avisosAntes + 1);
   ok(e.pedido.status === "reembolsado" && !e.pedido.pode_baixar, "el mismo pago pasa a «charged_back»: el pedido queda reembolsado y se corta la descarga");
   r = await post("/api/pedido/baixar/docx", { codigo: c3.codigo }); ok(r.status === 402, "ya no se puede descargar tras el contracargo");
   ok(avisos.length === avisosAntes + 1 && /revertido/.test(avisos[avisos.length - 1].titulo), "y a Lian le llega un aviso al celular: «Pagamento revertido»");
