@@ -50,9 +50,19 @@
         var ja = { previa: p.tem_previa, docx: p.tem_docx, pdf: p.tem_pdf }[qual];
         return el("div", { class: "pn-arq" }, [el("label", { for: "pn-" + qual, texto: rotulo + (ja ? " (já enviado)" : "") }), inp]);
       }
+      var imgs = null;
+      function campoImagens() {
+        imgs = el("input", { type: "file", accept: "image/png,image/jpeg,image/webp", id: "pn-imgs", multiple: "" });
+        return el("div", { class: "pn-arq" }, [el("label", { for: "pn-imgs", texto: "1. Prévia em imagens (até 3, PNG ou JPG)" + (p.previa_imgs ? " (já enviadas: " + [1, 2, 4].filter(function (b) { return p.previa_imgs & b; }).length + ")" : "") }), imgs]);
+      }
       function enviaArquivos() {
+        var extras = [];
+        if (imgs && imgs.files.length) {
+          if (imgs.files.length > 3) return Promise.reject(new Error("Escolha no máximo 3 imagens."));
+          Array.prototype.forEach.call(imgs.files, function (f, i) { extras.push(fetch("/api/admin/pedidos/" + id + "/arquivo/imagem" + (i + 1) + (i === 0 ? "?limpar=1" : ""), { method: "PUT", headers: { "X-Painel": "1" }, body: f }).then(function (r) { if (!r.ok) return r.json().then(function (j) { throw new Error("imagem " + (i + 1) + ": " + (j.erro || r.status)); }); })); });
+        }
         var tarefas = Object.keys(entradas).filter(function (q) { return entradas[q].files[0]; }).map(function (q) { return fetch("/api/admin/pedidos/" + id + "/arquivo/" + q, { method: "PUT", headers: { "X-Painel": "1" }, body: entradas[q].files[0] }).then(function (r) { if (!r.ok) return r.json().then(function (j) { throw new Error(q + ": " + (j.erro || r.status)); }); }); });
-        return Promise.all(tarefas);
+        return Promise.all(tarefas.concat(extras));
       }
       var fechado = p.status === "pago" || p.status === "reembolsado";
       var corpo = [
@@ -63,7 +73,7 @@
       if (p.aviso) corpo.push(el("p", { class: "pd-erro", role: "alert", texto: "Atenção: " + p.aviso }));
       corpo.push(el("p", {}, [el("button", { type: "button", class: "btn", texto: "Baixar o arquivo original", onclick: function () { api("/pedidos/" + id + "/original").then(function (b) { baixaArquivo(b, "original-" + id + "." + p.arquivo_tipo); }).catch(function (e) { erro(e.message); }); } })]));
       if (!fechado) {
-        corpo.push(el("h4", { texto: "Quando o trabalho estiver feito" }), campoArquivo("previa", "1. Prévia (PDF)", ".pdf,application/pdf"), campoArquivo("docx", "2. Trabalho em Word", ".docx"), campoArquivo("pdf", "3. Trabalho em PDF", ".pdf,application/pdf"),
+        corpo.push(el("h4", { texto: "Quando o trabalho estiver feito" }), campoImagens(), campoArquivo("previa", "1b. Prévia em PDF (opcional)", ".pdf,application/pdf"), campoArquivo("docx", "2. Trabalho em Word", ".docx"), campoArquivo("pdf", "3. Trabalho em PDF", ".pdf,application/pdf"),
           el("div", { class: "pn-arq" }, [el("label", { for: "pnValor", texto: "4. Valor final (R$)" }), valor]),
           el("div", { class: "pn-botoes" }, [
             el("button", { type: "button", class: "btn", texto: "Salvar arquivos", onclick: function () { enviaArquivos().then(function () { msg.textContent = "Arquivos salvos."; carregaLista(); abre(id); }).catch(function (e) { erro(e.message); }); } }),
@@ -74,8 +84,9 @@
       }
       if (p.status === "pronto" || p.status === "pago") {
         corpo.push(el("div", { class: "pn-botoes" }, [
-          el("a", { class: "btn btn-acento", id: "pnZap", href: "https://wa.me/" + p.whatsapp + "?text=" + encodeURIComponent("Oi" + (p.nome ? ", " + p.nome.split(" ")[0] : "") + "! Aqui é o Lian, do Estuda Simples. O seu trabalho está pronto. Veja a prévia e pague por Pix neste link: " + d.link), target: "_blank", rel: "noopener", texto: "Abrir WhatsApp com a mensagem" }),
+          el("a", { class: "btn btn-acento", id: "pnZap", href: "https://wa.me/" + p.whatsapp + "?text=" + encodeURIComponent("Oi" + (p.nome ? ", " + p.nome.split(" ")[0] : "") + "! Aqui é o Lian, do Estuda Simples. O seu trabalho está pronto. Veja a prévia e pague (Pix ou cartão) neste link: " + d.link), target: "_blank", rel: "noopener", texto: "Abrir WhatsApp com a mensagem" }),
           el("button", { type: "button", class: "btn", texto: "Copiar o link do cliente", onclick: function () { navigator.clipboard.writeText(d.link).then(function () { msg.textContent = "Link copiado."; }); } })]));
+        if (p.baixou_docx_em || p.baixou_pdf_em) corpo.push(el("p", { class: "pd-nota", texto: "Descargas do cliente: " + (p.baixou_docx_em ? "Word em " + quando(p.baixou_docx_em) : "Word ainda não") + "; " + (p.baixou_pdf_em ? "PDF em " + quando(p.baixou_pdf_em) : "PDF ainda não") + "." }));
         corpo.push(el("p", { class: "pd-nota", texto: "Valor: " + reais(p.valor_centavos) + (p.pago_em ? " · pago em " + quando(p.pago_em) : "") + ". Apago os arquivos em " + quando(p.apagar_em) + "." }));
       }
       corpo.push(msg, el("div", { class: "pn-botoes pn-perigo" }, [

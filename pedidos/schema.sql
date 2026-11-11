@@ -1,6 +1,10 @@
 -- Base de datos D1 de los pedidos de formatación. Se aplica con:
 --   npx.cmd wrangler d1 execute estudasimples-pedidos --remote --file=pedidos/schema.sql
 -- (para pruebas locales: --local en vez de --remote). Es seguro repetirlo: usa IF NOT EXISTS.
+-- En una base que YA existe antes de las imágenes de la prévia (10/11/2026), añadir la columna una sola vez:
+--   ALTER TABLE pedidos ADD COLUMN previa_imgs INTEGER NOT NULL DEFAULT 0;
+--   ALTER TABLE pedidos ADD COLUMN baixou_docx_em INTEGER;
+--   ALTER TABLE pedidos ADD COLUMN baixou_pdf_em INTEGER;
 
 CREATE TABLE IF NOT EXISTS pedidos (
   id TEXT PRIMARY KEY,                 -- código corto que ve Lian (8 letras/números)
@@ -16,6 +20,9 @@ CREATE TABLE IF NOT EXISTS pedidos (
   tem_previa INTEGER NOT NULL DEFAULT 0,
   tem_docx INTEGER NOT NULL DEFAULT 0,
   tem_pdf INTEGER NOT NULL DEFAULT 0,
+  baixou_docx_em INTEGER,               -- quando o cliente baixou o Word (primeira vez)
+  baixou_pdf_em INTEGER,                -- quando o cliente baixou o PDF (primeira vez)
+  previa_imgs INTEGER NOT NULL DEFAULT 0, -- imagens da prévia (até 3): 1 = imagem 1, 2 = imagem 2, 4 = imagem 3 (soma)
   mp_preferencia_id TEXT,
   mp_url TEXT,
   mp_pagamento_id TEXT,

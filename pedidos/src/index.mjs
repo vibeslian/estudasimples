@@ -46,6 +46,7 @@ export default {
         if (rota === "pedidos") return await cliente.criaPedido(request, env);
         if (rota === "pedido/estado") return await cliente.estado(request, env);
         if (rota === "pedido/previa") return await cliente.previa(request, env);
+        if (rota === "pedido/previa-imagem") return await cliente.previaImagem(request, env);
         if (rota === "pedido/pagar") return await cliente.pagar(request, env);
         if (rota === "pedido/baixar/docx") return await cliente.baixar(request, env, "docx");
         if (rota === "pedido/baixar/pdf") return await cliente.baixar(request, env, "pdf");

@@ -2,7 +2,7 @@
 import {
   MAX_ARCHIVO, DIAS_APAGAR_ENTREGA, DIAS_APAGAR_SIN_CONCLUIR, TIPOS, TOKEN_RE,
   ahora, json, erro, arquivo, novoId, novoToken, normalizaWhatsapp, nomeLimpo, primeiroNome,
-  nomeArquivoSeguro, tipoReal, limitar, ipHash, hmacHex, lerJson, temChave,
+  nomeArquivoSeguro, tipoReal, limitar, ipHash, hmacHex, lerJson, temChave, avisarLian,
 } from "./util.mjs";
 import { criaPreferencia, lePagamento, procuraPagamentos, pagamentoValeParaPedido } from "./mp.mjs";
 
@@ -47,7 +47,7 @@ export async function criaPedido(request, env) {
   if (!arq || typeof arq === "string" || !arq.size) return erro(400, "Anexe o arquivo do trabalho.");
   if (arq.size > MAX_ARCHIVO) return erro(413, "O arquivo é grande demais. O limite é de 25 MB.");
   const tipo = await tipoReal(arq);
-  if (!tipo) return erro(400, "O arquivo precisa ser Word (.docx) ou PDF. Se o seu for .doc, abra no Word e salve como .docx.");
+  if (tipo !== "docx" && tipo !== "pdf") return erro(400, "O arquivo precisa ser Word (.docx) ou PDF. Se o seu for .doc, abra no Word e salve como .docx.");
   if (!(await limitar(env, `ped-tel:${await hmacHex(env, whatsapp)}`, 3, 86400))) return erro(429, "Muitas tentativas. Tente de novo mais tarde ou chame no WhatsApp do site.");
 
   const id = novoId();
@@ -64,12 +64,13 @@ export async function criaPedido(request, env) {
     await env.ARQUIVOS.delete(chave); // não deixa arquivo solto se o registro falhar
     return erro(500, "Não foi possível registrar o pedido. Tente de novo em instantes.");
   }
+  await avisarLian(env, "Novo pedido de formatacao", `Pedido ${id} (${{ ate30: "ate 30 paginas", de31a60: "31 a 60 paginas", mais60: "mais de 60 paginas" }[tamanho]}). Abra o painel para ver.`);
   return json({ ok: true, id, codigo: token });
 }
 
 // ---------- ajudas do cliente ----------
 async function pedidoPorCodigo(request, env) {
-  if (!(await limitar(env, `api-ip:${await ipHash(request, env)}`, 240, 3600))) return { erroResp: erro(429, "Muitas tentativas. Tente de novo mais tarde.") };
+  if (!(await limitar(env, `api-ip:${await ipHash(request, env)}`, 600, 3600))) return { erroResp: erro(429, "Muitas tentativas. Tente de novo mais tarde.") };
   const corpo = await lerJson(request);
   const codigo = corpo && typeof corpo.codigo === "string" ? corpo.codigo : "";
   if (!TOKEN_RE.test(codigo)) return { erroResp: erro(404, "Pedido não encontrado.") };
@@ -84,6 +85,8 @@ const visao = (p) => ({
   nome: primeiroNome(p.nome),
   valor_centavos: p.status === "recebido" || p.status === "em_andamento" ? null : p.valor_centavos,
   tem_previa: !!p.tem_previa,
+  previa_imgs: [1, 2, 4].map((b, i) => ((p.previa_imgs & b) ? i + 1 : 0)).filter(Boolean),
+  pagamento_iniciado: !!p.mp_url,
   pode_baixar: p.status === "pago",
   apagar_em: p.status === "pago" ? p.apagar_em : null,
 });
@@ -91,9 +94,10 @@ const visao = (p) => ({
 // Marca o pedido como pago, uma única vez (a condição status='pronto' impede repetir).
 async function liberaPagamento(env, p, pagamentoId) { // só libera se o valor do pedido continua o mesmo que foi pago
   const t = ahora();
-  await env.DB.prepare(
+  const r = await env.DB.prepare(
     "UPDATE pedidos SET status='pago', aviso=NULL, pago_em=?2, apagar_em=?3, mp_pagamento_id=?4 WHERE id=?1 AND status='pronto' AND valor_centavos=?5",
   ).bind(p.id, t, t + DIAS_APAGAR_ENTREGA * 86400, String(pagamentoId), p.valor_centavos).run();
+  if (r.meta.changes) await avisarLian(env, "Pagamento confirmado", `Pedido ${p.id} pago: R$ ${(p.valor_centavos / 100).toFixed(2)}. O cliente ja pode baixar.`);
 }
 
 async function confereComMercadoPago(env, p) {
@@ -111,7 +115,7 @@ export async function estado(request, env) {
   const { p, corpo, erroResp } = await pedidoPorCodigo(request, env);
   if (erroResp) return erroResp;
   let atual = p;
-  if (corpo.verificar === true && p.status === "pronto" && p.mp_preferencia_id && env.MP_ACCESS_TOKEN && (await limitar(env, `ver:${p.id}`, 30, 3600))) {
+  if (corpo.verificar === true && p.status === "pronto" && p.mp_preferencia_id && env.MP_ACCESS_TOKEN && (await limitar(env, `ver:${p.id}`, 120, 3600))) {
     try {
       if (await confereComMercadoPago(env, p)) atual = await env.DB.prepare("SELECT * FROM pedidos WHERE id=?1").bind(p.id).first();
     } catch { /* se o Mercado Pago falhar, mostra o estado que já tem */ }
@@ -126,6 +130,18 @@ export async function previa(request, env) {
   const o = await env.ARQUIVOS.get(`previa/${p.id}/previa.pdf`);
   if (!o) return erro(404, "A prévia não foi encontrada.");
   return new Response(o.body, { headers: { "Content-Type": "application/pdf", "Content-Disposition": 'inline; filename="previa.pdf"', "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff", "Content-Security-Policy": "default-src 'none'; sandbox" } });
+}
+
+// Imagem da prévia (1 a 3), mostrada dentro da página do pedido.
+export async function previaImagem(request, env) {
+  const { p, corpo, erroResp } = await pedidoPorCodigo(request, env);
+  if (erroResp) return erroResp;
+  const n = Number(corpo.n);
+  if (![1, 2, 3].includes(n) || !(p.previa_imgs & (1 << (n - 1))) || !["pronto", "pago"].includes(p.status)) return erro(404, "Imagem não disponível.");
+  const o = await env.ARQUIVOS.get(`previa/${p.id}/img${n}`);
+  if (!o) return erro(404, "Imagem não encontrada.");
+  const mime = (o.httpMetadata && o.httpMetadata.contentType) || "image/png";
+  return new Response(o.body, { headers: { "Content-Type": mime, "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff", "Content-Security-Policy": "default-src 'none'; sandbox" } });
 }
 
 // ---------- 3) Pagar ----------
@@ -160,6 +176,10 @@ export async function baixar(request, env, tipo) {
   if (p.apagar_em <= ahora()) return erro(410, "O prazo de download acabou e o arquivo já foi apagado.");
   const o = await env.ARQUIVOS.get(`final/${p.id}/trabalho.${TIPOS[tipo].ext}`);
   if (!o) return erro(404, "Arquivo não encontrado.");
+  // registro da descarga (primeira vez de cada arquivo): serve de prova em caso de disputa
+  try {
+    await env.DB.prepare(tipo === "docx" ? "UPDATE pedidos SET baixou_docx_em = COALESCE(baixou_docx_em, ?2) WHERE id=?1" : "UPDATE pedidos SET baixou_pdf_em = COALESCE(baixou_pdf_em, ?2) WHERE id=?1").bind(p.id, ahora()).run();
+  } catch (e) { console.error("registro da descarga falhou", e && e.message); } // o registro nunca bloqueia a entrega
   return arquivo(o.body, TIPOS[tipo].mime, `trabalho-formatado-${p.id}.${TIPOS[tipo].ext}`);
 }
 
@@ -184,6 +204,11 @@ export async function webhookMp(request, env) {
   if (!/^[A-HJ-NP-Z2-9]{8}$/.test(pedidoId)) return json({ ok: true });
   const p = await env.DB.prepare("SELECT * FROM pedidos WHERE id=?1").bind(pedidoId).first();
   if (!p) return json({ ok: true });
+  if (p.status === "pago" && p.mp_pagamento_id === String(pagamento.id) && ["refunded", "charged_back", "cancelled"].includes(pagamento.status)) {
+    await env.DB.prepare("UPDATE pedidos SET status='reembolsado', aviso=?2 WHERE id=?1 AND status='pago'").bind(p.id, `Pagamento ${pagamento.id} agora consta como "${pagamento.status}" no Mercado Pago. A descarga foi bloqueada.`).run();
+    await avisarLian(env, "Pagamento revertido", `Pedido ${p.id}: pagamento ${pagamento.status}. Descarga bloqueada.`);
+    return json({ ok: true });
+  }
   const v = pagamentoValeParaPedido(pagamento, p);
   if (v.ok && p.status === "pronto") await liberaPagamento(env, p, pagamento.id);
   else if (v.ok && p.mp_pagamento_id !== String(pagamento.id)) await env.DB.prepare("UPDATE pedidos SET aviso=?2 WHERE id=?1").bind(p.id, `Pagamento ${pagamento.id} válido recebido, mas o pedido está "${p.status}". Confira e, se for o caso, reembolse no Mercado Pago.`).run();

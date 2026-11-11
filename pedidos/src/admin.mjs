@@ -16,7 +16,7 @@ export async function criarManual(request, env) {
   if (!arq || typeof arq === "string" || !arq.size) return erro(400, "Escolha o arquivo que o cliente mandou.");
   if (arq.size > MAX_ARCHIVO) return erro(413, "Arquivo grande demais (limite de 25 MB).");
   const tipo = await tipoReal(arq);
-  if (!tipo) return erro(400, "O arquivo precisa ser Word (.docx) ou PDF.");
+  if (tipo !== "docx" && tipo !== "pdf") return erro(400, "O arquivo precisa ser Word (.docx) ou PDF.");
   const id = novoId(), token = novoToken(), t = ahora();
   await env.ARQUIVOS.put(`orig/${id}/original.${TIPOS[tipo].ext}`, await arq.arrayBuffer(), { httpMetadata: { contentType: TIPOS[tipo].mime } });
   await env.DB.prepare(
@@ -26,7 +26,7 @@ export async function criarManual(request, env) {
   return json({ ok: true, id });
 }
 
-const CAMPOS_LISTA = "id, nome, whatsapp, tamanho, arquivo_nome, arquivo_tipo, arquivo_bytes, status, valor_centavos, tem_previa, tem_docx, tem_pdf, aviso, criado_em, pronto_em, pago_em, apagar_em";
+const CAMPOS_LISTA = "id, nome, whatsapp, tamanho, arquivo_nome, arquivo_tipo, arquivo_bytes, status, valor_centavos, tem_previa, previa_imgs, tem_docx, tem_pdf, aviso, criado_em, pronto_em, pago_em, apagar_em";
 
 export async function listar(env) {
   const r = await env.DB.prepare(`SELECT ${CAMPOS_LISTA} FROM pedidos WHERE status != 'apagado' OR aviso IS NOT NULL ORDER BY (status IN ('recebido','em_andamento','pronto')) DESC, criado_em DESC LIMIT 200`).all();
@@ -56,9 +56,12 @@ export async function baixarOriginal(env, id) {
 }
 
 const ONDE = {
-  previa: { tipo: "pdf", chave: (id) => `previa/${id}/previa.pdf`, coluna: "tem_previa" },
-  docx: { tipo: "docx", chave: (id) => `final/${id}/trabalho.docx`, coluna: "tem_docx" },
-  pdf: { tipo: "pdf", chave: (id) => `final/${id}/trabalho.pdf`, coluna: "tem_pdf" },
+  previa: { tipos: ["pdf"], chave: (id) => `previa/${id}/previa.pdf`, coluna: "tem_previa", valor: 1 },
+  imagem1: { tipos: ["png", "jpg", "webp"], chave: (id) => `previa/${id}/img1`, coluna: "previa_imgs", bit: 1 },
+  imagem2: { tipos: ["png", "jpg", "webp"], chave: (id) => `previa/${id}/img2`, coluna: "previa_imgs", bit: 2 },
+  imagem3: { tipos: ["png", "jpg", "webp"], chave: (id) => `previa/${id}/img3`, coluna: "previa_imgs", bit: 4 },
+  docx: { tipos: ["docx"], chave: (id) => `final/${id}/trabalho.docx`, coluna: "tem_docx", valor: 1 },
+  pdf: { tipos: ["pdf"], chave: (id) => `final/${id}/trabalho.pdf`, coluna: "tem_pdf", valor: 1 },
 };
 
 export async function subir(request, env, id, qual) {
@@ -67,13 +70,19 @@ export async function subir(request, env, id, qual) {
   if (!p || !alvo) return erro(404, "Pedido ou tipo de arquivo não encontrado.");
   if (["pago", "reembolsado", "apagado"].includes(p.status)) return erro(409, "Este pedido já foi concluído; não dá para trocar os arquivos.");
   if (Number(request.headers.get("Content-Length") || 0) > MAX_ARCHIVO) return erro(413, "Arquivo grande demais (limite de 25 MB).");
+  if (qual === "imagem1" && new URL(request.url).searchParams.get("limpar") === "1") { // novo lote de imagens: apaga as antigas
+    await env.ARQUIVOS.delete([`previa/${p.id}/img1`, `previa/${p.id}/img2`, `previa/${p.id}/img3`]);
+    await env.DB.prepare("UPDATE pedidos SET previa_imgs = 0 WHERE id=?1").bind(p.id).run();
+  }
   const corpo = await request.arrayBuffer();
   if (!corpo.byteLength || corpo.byteLength > MAX_ARCHIVO) return erro(400, "Arquivo vazio ou grande demais.");
   const blob = new Blob([corpo]);
-  if ((await tipoReal(blob)) !== alvo.tipo) return erro(400, alvo.tipo === "pdf" ? "Este arquivo precisa ser um PDF." : "Este arquivo precisa ser Word (.docx).");
-  await env.ARQUIVOS.put(alvo.chave(p.id), corpo, { httpMetadata: { contentType: TIPOS[alvo.tipo].mime } });
+  const real = await tipoReal(blob);
+  if (!alvo.tipos.includes(real)) return erro(400, qual.startsWith("imagem") ? "A imagem precisa ser PNG, JPG ou WEBP." : alvo.tipos[0] === "pdf" ? "Este arquivo precisa ser um PDF." : "Este arquivo precisa ser Word (.docx).");
+  await env.ARQUIVOS.put(alvo.chave(p.id), corpo, { httpMetadata: { contentType: TIPOS[real].mime } });
   const novoStatus = p.status === "recebido" ? "em_andamento" : p.status;
-  await env.DB.prepare(`UPDATE pedidos SET ${alvo.coluna}=1, status=?2 WHERE id=?1`).bind(p.id, novoStatus).run();
+  if (alvo.bit) await env.DB.prepare("UPDATE pedidos SET previa_imgs = previa_imgs | ?3, status=?2 WHERE id=?1").bind(p.id, novoStatus, alvo.bit).run();
+  else await env.DB.prepare(`UPDATE pedidos SET ${alvo.coluna}=1, status=?2 WHERE id=?1`).bind(p.id, novoStatus).run();
   return json({ ok: true });
 }
 
@@ -92,7 +101,7 @@ export async function marcarPronto(request, env, id) {
   try { c = await request.json(); } catch { /* sem corpo */ }
   const centavos = Math.round(Number(c && c.valor_reais) * 100);
   if (!Number.isInteger(centavos) || centavos < 500 || centavos > 100000) return erro(400, "Informe o valor em reais (entre 5 e 1.000).");
-  if (!p.tem_previa || !p.tem_docx || !p.tem_pdf) return erro(400, "Envie primeiro a prévia, o trabalho em Word e o trabalho em PDF.");
+  if ((!p.tem_previa && !p.previa_imgs) || !p.tem_docx || !p.tem_pdf) return erro(400, "Envie primeiro a prévia (imagens ou PDF), o trabalho em Word e o trabalho em PDF.");
   if (p.status === "pronto" && p.mp_url && centavos !== p.valor_centavos) return erro(409, "O link de pagamento já foi aberto com outro valor. Apague o pedido e crie de novo, ou fale com o suporte.");
   const t = ahora();
   await env.DB.prepare(
@@ -100,7 +109,7 @@ export async function marcarPronto(request, env, id) {
   ).bind(p.id, centavos, t, t + DIAS_APAGAR_ENTREGA * 86400).run();
   const link = `${env.PUBLIC_BASE}/pedido/#${p.token}`;
   const nome = primeiroNome(p.nome);
-  const texto = `Oi${nome ? ", " + nome : ""}! Aqui é o Lian, do Estuda Simples. O seu trabalho está pronto. Veja a prévia e pague por Pix neste link: ${link}`;
+  const texto = `Oi${nome ? ", " + nome : ""}! Aqui é o Lian, do Estuda Simples. O seu trabalho está pronto. Veja a prévia e pague (Pix ou cartão) neste link: ${link}`;
   return json({ ok: true, link, whatsapp: `https://wa.me/${p.whatsapp}?text=${encodeURIComponent(texto)}`, texto });
 }
 
@@ -116,10 +125,10 @@ export async function reembolsado(env, id) {
 export async function apagarPedido(env, p, soSeVencido = false) {
   const t = ahora();
   const r = await env.DB.prepare(
-    "UPDATE pedidos SET status='apagado', nome=NULL, whatsapp=NULL, arquivo_nome=NULL, ip_hash=NULL, mp_url=NULL, tem_previa=0, tem_docx=0, tem_pdf=0, apagado_em=?2 WHERE id=?1 AND status=?3 AND (?4=0 OR apagar_em <= ?2)",
+    "UPDATE pedidos SET status='apagado', nome=NULL, whatsapp=NULL, arquivo_nome=NULL, ip_hash=NULL, mp_url=NULL, tem_previa=0, previa_imgs=0, tem_docx=0, tem_pdf=0, apagado_em=?2 WHERE id=?1 AND status=?3 AND (?4=0 OR apagar_em <= ?2)",
   ).bind(p.id, t, p.status, soSeVencido ? 1 : 0).run();
   if (!r.meta.changes) return false;
-  await env.ARQUIVOS.delete([`orig/${p.id}/original.docx`, `orig/${p.id}/original.pdf`, `previa/${p.id}/previa.pdf`, `final/${p.id}/trabalho.docx`, `final/${p.id}/trabalho.pdf`]);
+  await env.ARQUIVOS.delete([`orig/${p.id}/original.docx`, `orig/${p.id}/original.pdf`, `previa/${p.id}/previa.pdf`, `previa/${p.id}/img1`, `previa/${p.id}/img2`, `previa/${p.id}/img3`, `final/${p.id}/trabalho.docx`, `final/${p.id}/trabalho.pdf`]);
   return true;
 }
 

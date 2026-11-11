@@ -93,7 +93,7 @@ ok(/em até 7 dias, contados da compra/.test(t) && /art\. 49/.test(t), "Término
 ok(/não detecta texto de inteligência artificial/.test(t) && /Google Docs/.test(t), "Términos: dice que no detecta IA y que no se probó en Google Docs");
 ok(/<h3 id="kit-tcc">2\.5\. Compra do Kit TCC<\/h3>/.test(pHtml) && /<h3>2\.6\. Publicidade/.test(pHtml), "Política: nueva sección 2.5 y Publicidade pasa a 2.6");
 ok(/<strong>a Hotmart<\/strong>/.test(pHtml) && /LGPD/.test(p), "Política: la Hotmart entra en la lista de quien recibe datos, con base legal");
-ok(/10 de novembro de 2026/.test(t) && /10 de novembro de 2026/.test(p), "«Última atualização» de Términos y Política = la fecha legal más reciente (afiliados 2026-11-07, que es posterior a la del kit de prueba)");
+ok(/7 de novembro de 2026/.test(t) && /7 de novembro de 2026/.test(p), "«Última atualização» de Términos y Política = la fecha legal más reciente (afiliados 2026-11-07, que es posterior a la del kit de prueba)");
 // numeración: sin repetidos, consecutiva, y referencias cruzadas coherentes (con afiliados visibles, como en la configuración real)
 const numeros = (html, re) => [...html.matchAll(re)].map((m) => m[1]);
 const consecutivos = (l, n) => l.length === n && l.every((x, i) => x === String(i + 1));

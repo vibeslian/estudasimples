@@ -34,7 +34,7 @@
         </div>
         <div>
           <label for="pdArquivo">Arquivo do trabalho (Word .docx ou PDF, até 25 MB)</label>
-          <input id="pdArquivo" name="arquivo" type="file" accept=".docx,.pdf,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required>
+          <div class="pd-arquivo"><input id="pdArquivo" name="arquivo" type="file" accept=".docx,.pdf,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required><label for="pdArquivo" class="pd-arquivo-caixa"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8l-5-5z"/><path d="M14 3v5h5M12 17v-6M9.5 13.5L12 11l2.5 2.5"/></svg><span id="pdArquivoNome" class="pd-arquivo-nome">Nenhum arquivo escolhido</span><span class="pd-arquivo-botao">Escolher arquivo</span></label></div>
           <small>Se o seu arquivo for .doc, abra no Word e use Salvar como .docx. Se a sua faculdade tem manual ou modelo próprio, me chame no WhatsApp depois de enviar.</small>
         </div>
         <div class="pd-armadilha" aria-hidden="true"><label>Não preencha este campo<input type="text" name="site" tabindex="-1" autocomplete="off"></label></div>
@@ -52,6 +52,7 @@
         <p class="lead">Em {{PRAZO}} o seu documento estará pronto e você vai receber uma mensagem no WhatsApp. Ela chega do número <strong>{{WHATSAPP_EXIBICAO}}</strong>, que é o meu: só escrevo deste número.</p>
         <p>Guarde este link: é por ele que você vê o andamento, a prévia e, depois de pagar, baixa o trabalho.</p>
         <p class="pd-link"><input id="pdLink" type="text" readonly aria-label="Link do seu pedido"><button class="btn" type="button" id="pdCopiar">Copiar</button></p>
+        <p id="pdCopiado" class="pd-nota" role="status"></p>
         <p><a class="btn btn-acento" href="#" id="pdAbrir">Abrir o meu pedido</a></p>
       </section>
     </div>
@@ -63,7 +64,7 @@
         <b>{{WHATSAPP_EXIBICAO}}</b>
         <small>Só escrevo deste número. MEI registrado, CNPJ 67.704.102/0001-69.</small>
       </div>
-      <div class="pd-depois"><strong>Depois de enviar</strong><p>Você vê o aviso "Pedido recebido". Quando estiver pronto, chega uma mensagem no WhatsApp com o link para ver a prévia e pagar por Pix.</p></div>
+      <div class="pd-depois"><strong>Depois de enviar</strong><p>Você vê o aviso "Pedido recebido". Quando estiver pronto, chega uma mensagem no WhatsApp com o link para ver a prévia e pagar (Pix ou cartão).</p></div>
     </aside>
   </div>
 </main>

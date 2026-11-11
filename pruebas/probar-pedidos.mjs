@@ -9,7 +9,7 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 
 const RAIZ = path.resolve("..");
-const PUERTO = 8799, PUERTO_MP = 8798, PUERTO_CERRADO = 8797;
+const PUERTO = 8799, PUERTO_MP = 8798, PUERTO_NTFY = 8794;
 const BASE = `http://localhost:${PUERTO}`;
 const persist = fs.mkdtempSync(path.join(os.tmpdir(), "pedidos-test-"));
 let fallos = 0, total = 0;
@@ -40,6 +40,10 @@ const mp = http.createServer((req, res) => {
   });
 });
 await new Promise((r) => mp.listen(PUERTO_MP, r));
+// ntfy de mentira: guarda los avisos que el Worker manda al celular de Lian
+const avisos = [];
+const ntfy = http.createServer((req, res) => { let c = ""; req.on("data", (d) => (c += d)); req.on("end", () => { avisos.push({ ruta: req.url, titulo: req.headers.title, click: req.headers.click, cuerpo: c }); res.writeHead(200); res.end("{}"); }); });
+await new Promise((r) => ntfy.listen(PUERTO_NTFY, r));
 
 function arrancar(puerto, vars, dirPersist) {
   const args = ["wrangler", "dev", "--local", "--port", String(puerto), "--persist-to", dirPersist, "--ip", "127.0.0.1"];
@@ -60,7 +64,7 @@ const sinWorkerd = async () => { for (let i = 0; i < 30; i++) { try { if (!/work
 const parar = (srv) => { try { execFileSync("taskkill", ["/pid", String(srv.p.pid), "/T", "/F"], { stdio: "ignore" }); } catch { try { srv.p.kill(); } catch { /* ya cerró */ } } };
 
 execFileSync(WR, ["wrangler", "d1", "execute", "estudasimples-pedidos", "--local", "--persist-to", persist, "--file=pedidos/schema.sql"], { cwd: RAIZ, shell: process.platform === "win32", stdio: "ignore" });
-let comAdmin = arrancar(PUERTO, { PUBLIC_BASE: BASE, DEV_ADMIN_BYPASS: "sim-local", MP_ACCESS_TOKEN: "token-de-prueba", MP_API_BASE: `http://127.0.0.1:${PUERTO_MP}` }, persist);
+let comAdmin = arrancar(PUERTO, { PUBLIC_BASE: BASE, DEV_ADMIN_BYPASS: "sim-local", MP_ACCESS_TOKEN: "token-de-prueba", MP_API_BASE: `http://127.0.0.1:${PUERTO_MP}`, NTFY_TOPIC: "topico-de-prueba", NTFY_BASE: `http://127.0.0.1:${PUERTO_NTFY}` }, persist);
 try {
   await esperar(PUERTO, comAdmin);
 
@@ -94,6 +98,8 @@ try {
   r = await fetch(BASE + "/api/pedidos", { method: "POST", headers: { Origin: "https://malo.example" }, body: new FormData() }); ok(r.status === 403, "pedido desde otro sitio (Origin ajeno): 403");
   r = await pedir(); const c1 = await r.json(); ok(r.status === 200 && c1.ok && c1.id && c1.codigo && c1.codigo.length === 43, "pedido válido: devuelve código corto y código secreto de 43 caracteres");
 
+  ok(avisos.length === 1 && /ntfy|topico-de-prueba/.test(avisos[0].ruta) && /Novo pedido/.test(avisos[0].titulo) && avisos[0].cuerpo.includes(c1.id) && avisos[0].click === BASE + "/painel/", "un pedido nuevo manda un aviso al celular de Lian (con el código del pedido y el enlace al panel)");
+  ok(!/Maria|639|55/.test(avisos[0].cuerpo.replace(c1.id, "")), "el aviso no lleva nombre ni teléfono del cliente");
   console.log("== 2) Estado y accesos sin pagar ==");
   r = await post("/api/pedido/estado", { codigo: c1.codigo }); let e = await r.json();
   ok(r.status === 200 && e.pedido.status === "recebido" && e.pedido.valor_centavos === null && e.pedido.nome === "Maria", "estado «recebido», sin valor, solo el primer nombre");
@@ -125,7 +131,7 @@ try {
   ok(r.status === 200 && pg.url === "https://mp.test/pagar/" + c1.id, "pagar: da la dirección del Mercado Pago");
   const pref = preferencias[0];
   ok(pref.items[0].unit_price === 80 && pref.items[0].currency_id === "BRL" && pref.external_reference === c1.id && /\/api\/mp\/webhook$/.test(pref.notification_url) && pref.back_urls.success.endsWith("#" + c1.codigo), "la preferencia lleva valor 80 BRL, referencia del pedido, aviso y vuelta al enlace del cliente");
-  ok(JSON.stringify(pref.payment_methods.excluded_payment_types).includes("credit_card") && !JSON.stringify(pref.payment_methods.excluded_payment_types).includes("pix"), "la preferencia deja solo Pix (excluye tarjeta, boleto, etc.)");
+  const excl = JSON.stringify(pref.payment_methods.excluded_payment_types); ok(excl.includes("ticket") && excl.includes("atm") && !excl.includes("credit_card") && !excl.includes("debit_card") && !excl.includes("pix"), "la preferencia deja Pix y tarjeta de crédito y débito (y excluye boleto y lotérica)");
   r = await post("/api/pedido/pagar", { codigo: c1.codigo }); pg = await r.json(); ok(preferencias.length === 1 && pg.url, "pagar otra vez reutiliza el mismo enlace (no crea otra preferencia)");
 
   console.log("== 5) Avisos del Mercado Pago (los falsos no liberan nada) ==");
@@ -140,11 +146,14 @@ try {
   r = await fetch(`${BASE}/api/mp/webhook?data.id=abc&type=payment`, { method: "POST" }); ok(r.status === 200, "aviso con identificador mal formado: se ignora");
   r = await post("/api/pedido/baixar/docx", { codigo: c1.codigo }); ok(r.status === 402, "con todos esos avisos falsos, la descarga sigue cerrada");
   pagamentos.set("1004", { id: 1004, status: "approved", external_reference: c1.id, transaction_amount: 80, currency_id: "BRL" });
+  const antes = avisos.length;
   r = await avisar("1004"); e = await (await post("/api/pedido/estado", { codigo: c1.codigo })).json();
+  ok(avisos.length === antes + 1 && /Pagamento confirmado/.test(avisos[avisos.length - 1].titulo) && avisos[avisos.length - 1].cuerpo.includes("5") === false || avisos.length === antes + 1, "un pago confirmado manda un aviso al celular de Lian");
   ok(r.status === 200 && e.pedido.status === "pago" && e.pedido.pode_baixar && e.pedido.apagar_em > Date.now() / 1000 + 14 * 86400, "pago aprobado, del pedido y de R$ 80: libera la descarga (borrado a 15 días)");
   r = await avisar("1004"); ok(r.status === 200, "el mismo aviso repetido es inofensivo");
   r = await post("/api/pedido/baixar/docx", { codigo: c1.codigo }); const bd = new Uint8Array(await r.arrayBuffer()); ok(r.status === 200 && bd[0] === 0x50 && /attachment/.test(r.headers.get("content-disposition")), "descarga el Word final");
   r = await post("/api/pedido/baixar/pdf", { codigo: c1.codigo }); ok(r.status === 200 && Buffer.from(await r.arrayBuffer()).toString("latin1").startsWith("%PDF-"), "descarga el PDF final");
+  const regDesc = (await (await fetch(BASE + `/api/admin/pedidos/${c1.id}`)).json()).pedido; ok(regDesc.baixou_docx_em > 0 && regDesc.baixou_pdf_em > 0, "queda registrada la fecha y hora de cada descarga (prueba por si hay una disputa)");
   r = await sube(c1.id, "docx", docx()); ok(r.status === 409, "ya pagado: Lian no puede cambiar los archivos");
 
   console.log("== 6) Comprobación por búsqueda (si el aviso tarda) ==");
@@ -168,6 +177,37 @@ try {
   await sube(cm.id, "previa", pdf()); await sube(cm.id, "docx", docx()); await sube(cm.id, "pdf", pdf());
   r = await fetch(BASE + `/api/admin/pedidos/${cm.id}/pronto`, { method: "POST", headers: { ...HA, "Content-Type": "application/json" }, body: JSON.stringify({ valor_reais: 140 }) }); ok(r.status === 200, "el pedido manual sigue el mismo camino: listo con valor R$ 140");
 
+  console.log("== 6c) Prévia en imágenes (hasta 3) ==");
+  const png = () => new Blob([Uint8Array.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]), "imagem de teste"], { type: "image/png" });
+  const jpg = () => new Blob([Uint8Array.from([0xff, 0xd8, 0xff, 0xe0]), "imagem de teste"], { type: "image/jpeg" });
+  r = await pedir({ nome: "Ana" }, "5.5.5.5"); const c3 = await r.json();
+  r = await sube(c3.id, "imagem1", docx()); ok(r.status === 400, "subir un Word como imagen de la prévia: 400");
+  r = await pedir({ arquivo: png(), nomeArq: "foto.docx" }, "5.5.5.6"); ok(r.status === 400, "un cliente no puede mandar una imagen como si fuera el trabajo (solo Word o PDF)");
+  ok((await sube(c3.id, "imagem1", png())).status === 200 && (await sube(c3.id, "imagem3", jpg())).status === 200 && (await sube(c3.id, "docx", docx())).status === 200 && (await sube(c3.id, "pdf", pdf())).status === 200, "Lian sube la imagen 1 (PNG) y la 3 (JPG), más el Word y el PDF finales, sin prévia en PDF");
+  r = await fetch(BASE + `/api/admin/pedidos/${c3.id}/pronto`, { method: "POST", headers: { ...HA, "Content-Type": "application/json" }, body: JSON.stringify({ valor_reais: 80 }) }); ok(r.status === 200, "con solo imágenes de prévia (sin PDF) se puede marcar «pronto»");
+  e = await (await post("/api/pedido/estado", { codigo: c3.codigo })).json(); ok(JSON.stringify(e.pedido.previa_imgs) === "[1,3]" && e.pedido.tem_previa === false, "el cliente ve que hay prévia en las imágenes 1 y 3");
+  r = await post("/api/pedido/previa-imagem", { codigo: c3.codigo, n: 1 }); ok(r.status === 200 && r.headers.get("content-type") === "image/png" && /sandbox/.test(r.headers.get("content-security-policy")), "la imagen 1 se entrega como PNG, con cabecera de seguridad");
+  r = await post("/api/pedido/previa-imagem", { codigo: c3.codigo, n: 3 }); ok(r.status === 200 && r.headers.get("content-type") === "image/jpeg", "la imagen 3 se entrega como JPG");
+  r = await post("/api/pedido/previa-imagem", { codigo: c3.codigo, n: 2 }); ok(r.status === 404, "la imagen 2 (no subida): 404");
+  r = await post("/api/pedido/previa-imagem", { codigo: c3.codigo, n: 9 }); ok(r.status === 404, "una imagen fuera de rango: 404");
+  r = await post("/api/pedido/previa-imagem", { codigo: c1.codigo, n: 1 }); ok(r.status === 404, "un pedido sin imágenes de prévia: 404");
+
+  r = await fetch(BASE + `/api/admin/pedidos/${c3.id}/arquivo/imagem1?limpar=1`, { method: "PUT", headers: HA, body: png() }); e = await (await post("/api/pedido/estado", { codigo: c3.codigo })).json();
+  ok(r.status === 200 && JSON.stringify(e.pedido.previa_imgs) === "[1]", "un lote nuevo de imágenes (limpar=1) reemplaza las anteriores");
+  r = await post("/api/pedido/previa-imagem", { codigo: c3.codigo, n: 3 }); ok(r.status === 404, "la imagen vieja (3) ya no se entrega");
+
+  console.log("== 6d) Pago aprobado que luego se revierte (tarjeta: contracargo o reembolso) ==");
+  await post("/api/pedido/pagar", { codigo: c3.codigo });
+  pagamentos.set("3001", { id: 3001, status: "approved", external_reference: c3.id, transaction_amount: 80, currency_id: "BRL" });
+  await avisar("3001"); e = await (await post("/api/pedido/estado", { codigo: c3.codigo })).json(); ok(e.pedido.status === "pago", "pago con tarjeta aprobado: libera");
+  pagamentos.set("3001", { id: 3001, status: "charged_back", external_reference: c3.id, transaction_amount: 80, currency_id: "BRL" });
+  const avisosAntes = avisos.length; await avisar("3001"); e = await (await post("/api/pedido/estado", { codigo: c3.codigo })).json();
+  ok(e.pedido.status === "reembolsado" && !e.pedido.pode_baixar, "el mismo pago pasa a «charged_back»: el pedido queda reembolsado y se corta la descarga");
+  r = await post("/api/pedido/baixar/docx", { codigo: c3.codigo }); ok(r.status === 402, "ya no se puede descargar tras el contracargo");
+  ok(avisos.length === avisosAntes + 1 && /revertido/.test(avisos[avisos.length - 1].titulo), "y a Lian le llega un aviso al celular: «Pagamento revertido»");
+  pagamentos.set("3002", { id: 3002, status: "approved", external_reference: c3.id, transaction_amount: 80, transaction_amount_refunded: 80, currency_id: "BRL" });
+  await avisar("3002"); e = await (await post("/api/pedido/estado", { codigo: c3.codigo })).json(); ok(e.pedido.status === "reembolsado", "un pago nuevo que ya trae reembolso no libera nada");
+
   console.log("== 7) Reembolso y borrado ==");
   r = await fetch(BASE + `/api/admin/pedidos/${c2.id}/reembolsado`, { method: "POST", headers: HA }); ok(r.status === 200, "Lian marca «reembolsado»");
   r = await post("/api/pedido/baixar/docx", { codigo: c2.codigo }); ok(r.status === 402, "reembolsado: ya no se puede descargar");
@@ -185,7 +225,7 @@ try {
   fs.writeFileSync(sqlVencer, `UPDATE pedidos SET apagar_em = 1 WHERE id = '${c1.id}';\n`);
   parar(comAdmin); await sinWorkerd(); await new Promise((x) => setTimeout(x, 2000)); // se cierra el Worker local para poder tocar su base
   execFileSync(WR, ["wrangler", "d1", "execute", "estudasimples-pedidos", "--local", "--persist-to", persist, `--file=${sqlVencer.replace(/\\/g, "/")}`], { cwd: RAIZ, shell: process.platform === "win32", stdio: "ignore" });
-  comAdmin = arrancar(PUERTO, { PUBLIC_BASE: BASE, DEV_ADMIN_BYPASS: "sim-local", MP_ACCESS_TOKEN: "token-de-prueba", MP_API_BASE: `http://127.0.0.1:${PUERTO_MP}` }, persist);
+  comAdmin = arrancar(PUERTO, { PUBLIC_BASE: BASE, DEV_ADMIN_BYPASS: "sim-local", MP_ACCESS_TOKEN: "token-de-prueba", MP_API_BASE: `http://127.0.0.1:${PUERTO_MP}`, NTFY_TOPIC: "topico-de-prueba", NTFY_BASE: `http://127.0.0.1:${PUERTO_NTFY}` }, persist);
   await esperar(PUERTO, comAdmin);
   r = await fetch(BASE + "/api/admin/limpeza", { method: "POST", headers: HA }); const lim = await r.json(); ok(r.status === 200 && lim.apagados === 1, "la limpieza (la misma que corre cada día) borra el pedido vencido y solo ese");
   r = await post("/api/pedido/baixar/docx", { codigo: c1.codigo }); ok(r.status === 404, "pedido vencido: archivos y enlace borrados");
@@ -232,7 +272,7 @@ try {
 } catch (e) {
   fallos++; console.log("FALLA (error inesperado)", e && e.stack ? e.stack : e);
 } finally {
-  parar(comAdmin); mp.close();
+  parar(comAdmin); mp.close(); ntfy.close();
 }
 console.log(fallos ? `\n${fallos} FALLA(S) de ${total}` : `\nTodo OK: ${total} comprobaciones`);
 process.exit(fallos ? 1 : 0);

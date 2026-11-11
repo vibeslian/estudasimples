@@ -45,6 +45,9 @@ const fDocx = path.join(tmp, "meu-tcc.docx"); fs.writeFileSync(fDocx, Buffer.con
 const fPdf = path.join(tmp, "previa.pdf"); fs.writeFileSync(fPdf, "%PDF-1.4\nprevia");
 const fDocx2 = path.join(tmp, "final.docx"); fs.writeFileSync(fDocx2, Buffer.concat([Buffer.from([0x50, 0x4b, 0x03, 0x04]), Buffer.from("trabalho formatado word/document.xml")]));
 const fPdf2 = path.join(tmp, "final.pdf"); fs.writeFileSync(fPdf2, "%PDF-1.4\nfinal");
+const PNG = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==", "base64");
+const fPng1 = path.join(tmp, "pagina1.png"); fs.writeFileSync(fPng1, PNG);
+const fPng2 = path.join(tmp, "pagina2.png"); fs.writeFileSync(fPng2, PNG);
 
 let browser;
 try {
@@ -68,6 +71,7 @@ try {
     await (await p.$("#pdEnviar")).click(); await new Promise((r) => setTimeout(r, 300));
     ok(await p.$eval("#pdErro", (e) => !e.hidden && /Anexe/.test(e.textContent)), `${nombre}: sin archivo muestra el aviso`);
     await (await p.$("#pdArquivo")).uploadFile(fDocx);
+    ok(/meu-tcc\.docx/.test(await p.$eval("#pdArquivoNome", (e) => e.textContent)), nombre + ": el campo de archivo muestra el nombre del archivo elegido");
     await (await p.$("#pdEnviar")).click(); await new Promise((r) => setTimeout(r, 300));
     ok(await p.$eval("#pdErro", (e) => !e.hidden && /concordar/.test(e.textContent)), `${nombre}: sin marcar la casilla muestra el aviso`);
     await p.click("#pdConsent");
@@ -89,7 +93,7 @@ try {
   const items = await pn.$$eval(".pn-item", (n) => n.map((x) => x.textContent));
   ok(items.length === 2 && items.every((t) => /Recebido/.test(t)), "el panel lista los 2 pedidos recibidos");
   await (await pn.$(".pn-item")).click(); await pn.waitForSelector("#pn-previa");
-  await (await pn.$("#pn-previa")).uploadFile(fPdf); await (await pn.$("#pn-docx")).uploadFile(fDocx2); await (await pn.$("#pn-pdf")).uploadFile(fPdf2);
+  await (await pn.$("#pn-previa")).uploadFile(fPdf); await (await pn.$("#pn-docx")).uploadFile(fDocx2); await (await pn.$("#pn-pdf")).uploadFile(fPdf2); await (await pn.$("#pn-imgs")).uploadFile(fPng1, fPng2);
   await pn.$eval("#pnValor", (e) => (e.value = "80.00"));
   await pn.screenshot({ path: path.join(SALIDA, "painel.png"), fullPage: true });
   const botones = await pn.$$(".pn-botoes button");
@@ -111,6 +115,9 @@ try {
   await cl.goto(linkListo, { waitUntil: "networkidle0" });
   ok(/Seu trabalho está pronto/.test(await cl.$eval("#pedidoApp", (e) => e.textContent)) && /R\$ 80,00/.test(await cl.$eval("#pedidoApp", (e) => e.textContent)), "el cliente ve «pronto», con el valor R$ 80,00");
   ok(await sinScrollH(cl), "celular: la página del pedido no tiene scroll horizontal");
+  await cl.waitForFunction(() => document.querySelectorAll(".pd-galeria img").length === 2 && [...document.querySelectorAll(".pd-galeria img")].every((i) => i.complete && i.naturalWidth > 0), { timeout: 10000 });
+  ok(true, "las 2 imágenes de la prévia aparecen dentro de la página del pedido");
+  ok(/Pagar com Pix ou cartão/.test(await cl.$eval("#pedidoApp button.btn-acento", (b) => b.textContent)), "el botón dice «Pagar com Pix ou cartão»");
   const prev = await cl.$eval("#pedidoApp a.btn", (a) => a.href); ok(prev.startsWith("blob:"), "la prévia se abre como PDF desde el propio pedido");
   await cl.screenshot({ path: path.join(SALIDA, "cliente-pronto.png"), fullPage: true });
   await cl.click("#pedidoApp button.btn-acento"); await new Promise((r) => setTimeout(r, 1500));

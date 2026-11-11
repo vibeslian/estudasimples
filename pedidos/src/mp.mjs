@@ -26,7 +26,7 @@ export async function criaPreferencia(env, pedido) {
     back_urls: { success: volta, pending: volta, failure: volta },
     auto_return: "approved",
     payment_methods: {
-      excluded_payment_types: [{ id: "credit_card" }, { id: "debit_card" }, { id: "ticket" }, { id: "atm" }, { id: "prepaid_card" }],
+      excluded_payment_types: [{ id: "ticket" }, { id: "atm" }], // fica Pix, cartão de crédito e débito e saldo do Mercado Pago; sem boleto (demora dias)
       installments: 1,
     },
     statement_descriptor: "ESTUDASIMPLES",
@@ -52,5 +52,6 @@ export function pagamentoValeParaPedido(pagamento, pedido) {
   if (pagamento.currency_id !== "BRL") return { ok: false, motivo: "moeda diferente" };
   const centavos = Math.round(Number(pagamento.transaction_amount) * 100);
   if (centavos !== pedido.valor_centavos) return { ok: false, motivo: "valor diferente" };
+  if (Number(pagamento.transaction_amount_refunded || 0) > 0) return { ok: false, motivo: "já com reembolso" };
   return { ok: true };
 }

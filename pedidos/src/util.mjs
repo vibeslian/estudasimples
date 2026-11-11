@@ -80,6 +80,9 @@ export async function tipoReal(blob) {
   const b = new Uint8Array(await blob.slice(0, 8).arrayBuffer());
   const txt = String.fromCharCode(...b);
   if (txt.startsWith("%PDF-")) return "pdf";
+  if (b[0] === 0x89 && txt.slice(1, 4) === "PNG") return "png";
+  if (b[0] === 0xff && b[1] === 0xd8 && b[2] === 0xff) return "jpg";
+  if (txt.startsWith("RIFF") && String.fromCharCode(...b.slice(0, 8)).length === 8 && String.fromCharCode(...new Uint8Array(await blob.slice(8, 12).arrayBuffer())) === "WEBP") return "webp";
   if (b[0] === 0x50 && b[1] === 0x4b && b[2] === 0x03 && b[3] === 0x04) {
     // zip: só vale como Word (.docx) se tiver o documento de Word dentro e NÃO tiver macros (os nomes dos arquivos do zip ficam em texto no final)
     const fim = String.fromCharCode(...new Uint8Array(await blob.slice(Math.max(0, blob.size - 262144)).arrayBuffer()));
@@ -91,6 +94,9 @@ export async function tipoReal(blob) {
 export const temChave = (objeto, chave) => Object.prototype.hasOwnProperty.call(objeto, chave);
 
 export const TIPOS = {
+  png: { mime: "image/png", ext: "png" },
+  jpg: { mime: "image/jpeg", ext: "jpg" },
+  webp: { mime: "image/webp", ext: "webp" },
   pdf: { mime: "application/pdf", ext: "pdf" },
   docx: { mime: "application/vnd.openxmlformats-officedocument.wordprocessingml.document", ext: "docx" },
 };
@@ -112,6 +118,22 @@ export async function hmacHex(env, texto) {
   const chave = await crypto.subtle.importKey("raw", new TextEncoder().encode(env.IP_SALT || env.PUBLIC_BASE), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
   const s = await crypto.subtle.sign("HMAC", chave, new TextEncoder().encode(texto));
   return Array.from(new Uint8Array(s), (x) => x.toString(16).padStart(2, "0")).join("").slice(0, 32);
+}
+
+// Aviso para o celular do Lian (app ntfy). Só leva o código do pedido e o valor: nunca nome nem telefone do cliente.
+// Só funciona se o segredo NTFY_TOPIC existir; se falhar, não atrapalha o pedido.
+export async function avisarLian(env, titulo, texto) {
+  if (!env.NTFY_TOPIC) return;
+  try {
+    await fetch(`${(env.NTFY_BASE || "https://ntfy.sh").replace(/\/$/, "")}/${encodeURIComponent(env.NTFY_TOPIC)}`, {
+      method: "POST",
+      headers: { Title: titulo, Click: `${env.PUBLIC_BASE}/painel/`, Priority: "high", Tags: "bell" },
+      body: texto,
+      signal: AbortSignal.timeout(1500),
+    });
+  } catch (e) {
+    console.error("aviso ao Lian falhou", e && e.message);
+  }
 }
 
 export async function ipHash(request, env) {
