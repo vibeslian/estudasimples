@@ -96,22 +96,22 @@
       "inicio-entre-secoes": "adsense",
       "capa-abaixo-da-ferramenta": "adsense",
       "capa-meio-1": "oferta:formatacao",
-      "capa-meio-2": "adsense",
+      "capa-meio-2": "oferta:kit",
       "capa-lateral": "adsense",
       "folha-abaixo-da-ferramenta": "adsense",
       "folha-meio-1": "oferta:formatacao",
-      "folha-meio-2": "adsense",
+      "folha-meio-2": "oferta:kit",
       "folha-lateral": "adsense",
       "sumario-abaixo-da-ferramenta": "adsense",
       "sumario-meio-1": "oferta:formatacao",
-      "sumario-meio-2": "adsense",
+      "sumario-meio-2": "oferta:kit",
       "sumario-lateral": "adsense",
       "guia-meio-1": "adsense",
       "guia-meio-2": "adsense",
       "guia-lateral": "adsense",
       "referencias-abaixo-da-ferramenta": "adsense",
       "referencias-meio-1": "oferta:formatacao",
-      "referencias-meio-2": "adsense",
+      "referencias-meio-2": "oferta:kit",
       "referencias-lateral": "adsense"
     },
     "ofertas": {
@@ -123,19 +123,43 @@
         "paginas": {
           "capa": {
             "titulo": "Capa pronta. E o resto do trabalho?",
-            "texto": "Posso deixar o trabalho inteiro nas normas da ABNT: margens, fonte, sumário, citações e referências. Orçamento pelo WhatsApp, a partir de {{PRECO_ATE30}}."
+            "texto": "Posso deixar o trabalho inteiro nas normas da ABNT: margens, fonte, sumário, citações e referências. Peça pelo site ou pelo WhatsApp, a partir de {{PRECO_ATE30}}."
           },
           "folha": {
             "titulo": "Folha de rosto pronta. Quer o trabalho todo formatado?",
-            "texto": "Eu cuido da forma do trabalho inteiro, do começo ao fim, e você só escreve. Orçamento pelo WhatsApp, a partir de {{PRECO_ATE30}}."
+            "texto": "Eu cuido da forma do trabalho inteiro, do começo ao fim, e você só escreve. Peça pelo site ou pelo WhatsApp, a partir de {{PRECO_ATE30}}."
           },
           "sumario": {
             "titulo": "Sumário pronto. Falta o resto?",
-            "texto": "Posso conferir e formatar todo o trabalho: títulos numerados, páginas, citações e referências. Orçamento pelo WhatsApp, a partir de {{PRECO_ATE30}}."
+            "texto": "Posso conferir e formatar todo o trabalho: títulos numerados, páginas, citações e referências. Peça pelo site ou pelo WhatsApp, a partir de {{PRECO_ATE30}}."
           },
           "referencias": {
             "titulo": "Referências prontas. E o resto do trabalho?",
-            "texto": "Posso conferir as suas referências e formatar o trabalho inteiro nas normas da ABNT: margens, fonte, sumário e citações. Orçamento pelo WhatsApp, a partir de {{PRECO_ATE30}}."
+            "texto": "Posso conferir as suas referências e formatar o trabalho inteiro nas normas da ABNT: margens, fonte, sumário e citações. Peça pelo site ou pelo WhatsApp, a partir de {{PRECO_ATE30}}."
+          }
+        }
+      },
+      "kit": {
+        "ativa": true,
+        "selo": "Kit TCC · produto pago",
+        "url": "/kit-tcc/",
+        "botao": "Ver o Kit TCC ({{KIT_PRECO}})",
+        "paginas": {
+          "capa": {
+            "titulo": "Prefere fazer sozinho? Comece num modelo já formatado",
+            "texto": "O Kit TCC é um modelo em Word já formatado: margens, títulos numerados, sumário que se atualiza com um F9 e numeração de páginas, mais checklist e guia rápido. {{KIT_PRECO}}, pagamento único pela Hotmart, com garantia de {{KIT_GARANTIA}} dias. Feito para o Word no computador."
+          },
+          "folha": {
+            "titulo": "Quer o trabalho inteiro já no formato certo?",
+            "texto": "O Kit TCC é um modelo em Word já formatado: margens, títulos numerados, sumário que se atualiza com um F9 e numeração de páginas, mais checklist e guia rápido. {{KIT_PRECO}}, pagamento único pela Hotmart, com garantia de {{KIT_GARANTIA}} dias. Feito para o Word no computador."
+          },
+          "sumario": {
+            "titulo": "Um sumário que se atualiza sozinho, no Word",
+            "texto": "O Kit TCC é um modelo em Word já formatado: margens, títulos numerados, sumário que se atualiza com um F9 e numeração de páginas, mais checklist e guia rápido. {{KIT_PRECO}}, pagamento único pela Hotmart, com garantia de {{KIT_GARANTIA}} dias. Feito para o Word no computador."
+          },
+          "referencias": {
+            "titulo": "Vai montar o trabalho no Word? Comece num modelo pronto",
+            "texto": "O Kit TCC é um modelo em Word já formatado: margens, títulos numerados, sumário que se atualiza com um F9 e numeração de páginas, mais checklist e guia rápido. {{KIT_PRECO}}, pagamento único pela Hotmart, com garantia de {{KIT_GARANTIA}} dias. Feito para o Word no computador."
           }
         }
       }

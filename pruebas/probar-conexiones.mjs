@@ -191,31 +191,40 @@ for (const [baixados, pagina, espera, etiqueta] of [
 }
 
 console.log("\n== 4) Ofertas propias en los espacios de anuncio ==");
-const slotsOferta = Object.entries(cfg.anuncios.espacos).filter(([, v]) => v.startsWith("oferta:") && cfg.anuncios.ofertas[v.slice(7)].ativa).map(([k]) => k);
-marca(slotsOferta.length > 0 && slotsOferta.every((s) => /-(meio-1|meio-2|lateral|entre-secoes)$/.test(s)), `la configuración asigna ofertas a: ${slotsOferta.join(", ")} (nunca junto a la herramienta)`);
+const slotsOfertaTodas = Object.entries(cfg.anuncios.espacos).filter(([, v]) => v.startsWith("oferta:") && cfg.anuncios.ofertas[v.slice(7)].ativa);
+const slotsOferta = slotsOfertaTodas.filter(([, v]) => v === "oferta:formatacao").map(([k]) => k); // las del servicio
+const slotsKit = slotsOfertaTodas.filter(([, v]) => v === "oferta:kit").map(([k]) => k); // las del Kit TCC
+marca(slotsOferta.length > 0 && [...slotsOferta, ...slotsKit].every((s) => /-(meio-1|meio-2|lateral|entre-secoes)$/.test(s)), `la configuración asigna ofertas a: ${[...slotsOferta, ...slotsKit].join(", ")} (nunca junto a la herramienta)`);
 {
-  const porPagina = {}; for (const s of slotsOferta) porPagina[s.split("-")[0]] = (porPagina[s.split("-")[0]] || 0) + 1;
-  marca(Object.values(porPagina).every((n) => n <= 1), "como máximo una oferta propia por página");
+  const porPagina = {}; for (const [s, v] of slotsOfertaTodas) { const k = s.split("-")[0] + "|" + v; porPagina[k] = (porPagina[k] || 0) + 1; }
+  marca(Object.values(porPagina).every((n) => n <= 1), "como máximo una oferta de cada producto por página (el servicio y el kit pueden convivir)");
 }
 for (const [id, url] of Object.entries(PAGINAS)) {
   for (const [nombre, vp] of [["computador 1280", { width: 1280, height: 900 }], ["celular 390", { width: 390, height: 844, isMobile: true, hasTouch: true, deviceScaleFactor: 2 }]]) {
     const q = await abre(browser, url, vp);
     const r = await q.evaluate(() => {
       const bb = (e) => { const x = e.getBoundingClientRect(); return { top: x.top + scrollY, bottom: x.bottom + scrollY }; };
-      const of = [...document.querySelectorAll(".oferta[data-oferta]")];
+      const of = [...document.querySelectorAll('.oferta[data-oferta="formatacao"]')];
+      const k = document.querySelector('.oferta[data-oferta="kit"]');
       const a = document.querySelector(".acoes"), l = document.getElementById("listaSumario"), ab = document.querySelector(".aviso-norma");
       const o = of[0];
-      return { n: of.length, slots: of.map((x) => x.dataset.slot), anuncios: [...document.querySelectorAll(".anuncio")].map((x) => x.dataset.slot), href: o && o.querySelector("a").getAttribute("href"), selo: o && o.querySelector(".oferta-selo").textContent, titulo: o && o.querySelector(".oferta-titulo").textContent, texto: o && o.querySelector(".oferta-texto").textContent, claseAd: o && /anuncio/.test(o.className), bg: o && getComputedStyle(o).backgroundImage !== "none", top: o && bb(o).top, acoes: a && bb(a).bottom, lista: l && bb(l).bottom, aviso: ab && bb(ab).bottom, ov: document.documentElement.scrollWidth - innerWidth, botH: o && Math.round(o.querySelector("a").getBoundingClientRect().height) };
+      return { n: of.length, slots: of.map((x) => x.dataset.slot), anuncios: [...document.querySelectorAll(".anuncio")].map((x) => x.dataset.slot), href: o && o.querySelector("a").getAttribute("href"), selo: o && o.querySelector(".oferta-selo").textContent, titulo: o && o.querySelector(".oferta-titulo").textContent, texto: o && o.querySelector(".oferta-texto").textContent, claseAd: o && /anuncio/.test(o.className), bg: o && getComputedStyle(o).backgroundImage !== "none", top: o && bb(o).top, acoes: a && bb(a).bottom, lista: l && bb(l).bottom, aviso: ab && bb(ab).bottom, ov: document.documentElement.scrollWidth - innerWidth, botH: o && Math.round(o.querySelector("a").getBoundingClientRect().height), kit: k && { slot: k.dataset.slot, href: k.querySelector("a").getAttribute("href"), texto: k.textContent, top: bb(k).top, botH: Math.round(k.querySelector("a").getBoundingClientRect().height), n: document.querySelectorAll('.oferta[data-oferta="kit"]').length } };
     });
     const esperado = slotsOferta.filter((s) => s.startsWith(id + "-"));
     if (!esperado.length) {
       marca(r.n === 0 && r.anuncios.length >= 1, `${id} ${nombre}: sin oferta propia (el espacio queda libre para el AdSense: ${r.anuncios.join(", ")})`);
     } else {
-      marca(r.n === 1 && r.slots[0] === esperado[0] && !r.anuncios.includes(esperado[0]), `${id} ${nombre}: una sola oferta propia, en el espacio ${r.slots[0]} (ya no es un espacio de anuncio vacío)`);
+      marca(r.n === 1 && r.slots[0] === esperado[0] && !r.anuncios.includes(esperado[0]), `${id} ${nombre}: una sola oferta del servicio, en el espacio ${r.slots[0]} (ya no es un espacio de anuncio vacío)`);
       marca(r.href === `${cfg.anuncios.ofertas.formatacao.url}#origem=${id}-oferta` && r.selo === cfg.anuncios.ofertas.formatacao.selo && !r.claseAd && r.bg, `${id} ${nombre}: enlace ${r.href}, sello "${r.selo}", con el estilo del sitio (no la clase de anuncio)`);
       marca(r.texto.includes("R$") && r.botH >= 44 && r.ov <= 0, `${id} ${nombre}: texto "${r.titulo}" con el precio de la configuración, botón de ${r.botH}px, sin scroll horizontal`);
       marca(r.top > (r.aviso || 0) + 150 && r.top > (r.acoes || 0) + 300 && (!r.lista || r.top > r.lista + 300), `${id} ${nombre}: lejos de los botones de descarga (${Math.round(r.top - r.acoes)}px) y de la lista del sumário`);
-      marca(r.anuncios.length === Object.keys(cfg.anuncios.espacos).filter((s) => s.startsWith(id + "-")).length - 1, `${id} ${nombre}: los demás espacios (${r.anuncios.join(", ")}) siguen libres para el AdSense`);
+      const kitEsperado = slotsKit.filter((s) => s.startsWith(id + "-"));
+      if (kitEsperado.length) {
+        marca(r.kit && r.kit.n === 1 && r.kit.slot === kitEsperado[0] && r.kit.href === `${cfg.anuncios.ofertas.kit.url}#origem=${id}-oferta`, `${id} ${nombre}: una sola oferta del Kit TCC, en el espacio ${r.kit && r.kit.slot}, con enlace a /kit-tcc/`);
+        marca(r.kit && /R\$\s?\d+,\d\d/.test(r.kit.texto) && /Hotmart/.test(r.kit.texto) && /produto pago/.test(r.kit.texto) && r.kit.botH >= 44, `${id} ${nombre}: la oferta del kit dice el precio, que se paga en la Hotmart y que es un producto pago; botón de ${r.kit && r.kit.botH}px`);
+        marca(r.kit && r.kit.top > r.top + 300 && r.kit.top > (r.acoes || 0) + 300, `${id} ${nombre}: el kit va más abajo que la oferta del servicio y lejos de la herramienta`);
+      }
+      marca(r.anuncios.length === Object.keys(cfg.anuncios.espacos).filter((s) => s.startsWith(id + "-")).length - 1 - kitEsperado.length, `${id} ${nombre}: los demás espacios (${r.anuncios.join(", ")}) siguen libres para el AdSense`);
     }
     await q.close();
   }
@@ -234,15 +243,17 @@ function construye(cambia, nombre) {
 }
 {
   const v = construye((c) => { c.anuncios.ofertas.formatacao.ativa = false; }, "oferta-apagada");
-  marca(v.ok && !/class="oferta"/.test(v.html("gerador-de-capa-abnt")) && /data-slot="capa-meio-1"/.test(v.html("gerador-de-capa-abnt")) && /class="anuncio[^"]*" data-slot="capa-meio-1"/.test(v.html("gerador-de-capa-abnt")), "con la oferta desactivada (ativa: false) no queda ninguna oferta y el espacio vuelve a ser un espacio libre para el AdSense");
+  marca(v.ok && !/data-oferta="formatacao"/.test(v.html("gerador-de-capa-abnt")) && /data-slot="capa-meio-1"/.test(v.html("gerador-de-capa-abnt")) && /class="anuncio[^"]*" data-slot="capa-meio-1"/.test(v.html("gerador-de-capa-abnt")), "con la oferta desactivada (ativa: false) no queda ninguna oferta y el espacio vuelve a ser un espacio libre para el AdSense");
 }
 {
   const v = construye((c) => { for (const k of Object.keys(c.anuncios.espacos)) c.anuncios.espacos[k] = "adsense"; }, "todo-adsense");
   marca(v.ok && ["gerador-de-capa-abnt", "gerador-de-folha-de-rosto-abnt", "gerador-de-sumario-abnt"].every((d) => !/class="oferta"/.test(v.html(d)) && (v.html(d).match(/class="anuncio/g) || []).length === 4), "con todos los espacios en \"adsense\": 4 espacios libres por herramienta y ninguna oferta");
 }
 {
+  const k = construye((c) => { c.kit.ativo = false; }, "kit-apagado");
+  marca(k.ok && ["gerador-de-capa-abnt", "gerador-de-sumario-abnt"].every((d) => !/data-oferta="kit"/.test(k.html(d)) && /data-oferta="formatacao"/.test(k.html(d)) && !/Kit TCC · produto pago/.test(k.html(d))), "con el Kit TCC apagado (kit.ativo: false) la oferta del kit desaparece de las herramientas y la del servicio sigue");
   const v = construye((c) => { c.anuncios.espacos["capa-meio-2"] = "oferta:formatacao"; }, "dos-ofertas");
-  marca(!v.ok && /duas ofertas/.test(v.error), "dos ofertas en una misma página: el build se detiene y lo explica (\"...duas ofertas próprias... o máximo é uma por página\")");
+  marca(!v.ok && /duas ofertas/.test(v.error), "la misma oferta dos veces en una página: el build se detiene y lo explica (\"...duas ofertas próprias iguais... o máximo é uma por página de cada produto\")");
 }
 {
   const v = construye((c) => { c.anuncios.espacos["capa-abaixo-da-ferramenta"] = "oferta:formatacao"; c.anuncios.espacos["capa-meio-1"] = "adsense"; }, "oferta-cerca");

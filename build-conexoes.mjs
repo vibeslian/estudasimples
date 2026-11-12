@@ -30,6 +30,8 @@ export function preparaConexoes(config, adsense) {
   if (!per || !Array.isArray(per.passos) || !per.final) throw new Error("site.config.json: falta o bloco percurso (passos e final)");
   if (!an || !an.espacos) throw new Error("site.config.json: falta o bloco anuncios (espacos)");
   const ofertas = an.ofertas || {};
+  // a oferta do kit só existe com o Kit TCC ligado (kit.ativo); desligado, o espaço volta a ser um espaço livre
+  const ligada = (nome) => !!ofertas[nome].ativa && (nome !== "kit" || !!(config.kit && config.kit.ativo === true));
 
   // ---- confere a configuração dos espaços ----
   const ofertaPorPagina = {};
@@ -38,12 +40,14 @@ export function preparaConexoes(config, adsense) {
     const m = /^oferta:(.+)$/.exec(destino);
     if (!m || !ofertas[m[1]]) throw new Error(`site.config.json: o espaço "${slot}" usa "${destino}", que não existe (use "adsense" ou "oferta:<nome>")`);
     const oferta = ofertas[m[1]];
-    if (!oferta.ativa) continue; // oferta desligada: o espaço continua livre para o AdSense
+    if (!ligada(m[1])) continue; // oferta desligada: o espaço continua livre para o AdSense
     if (!SLOT_PERMITIDO_PARA_OFERTA.test(slot)) throw new Error(`site.config.json: o espaço "${slot}" fica perto da ferramenta e não pode ter oferta própria (use meio-1, meio-2, lateral ou entre-secoes)`);
     const pagina = paginaDoSlot(slot);
     if (!oferta.paginas || !oferta.paginas[pagina]) throw new Error(`site.config.json: a oferta "${m[1]}" não tem texto para a página "${pagina}"`);
-    if (ofertaPorPagina[pagina]) throw new Error(`site.config.json: a página "${pagina}" teria duas ofertas próprias ("${ofertaPorPagina[pagina]}" e "${slot}"); o máximo é uma por página`);
-    ofertaPorPagina[pagina] = slot;
+    // no máximo uma oferta de cada produto por página (o serviço e o kit podem aparecer na mesma página, em espaços diferentes)
+    const chave = `${pagina}|${m[1]}`;
+    if (ofertaPorPagina[chave]) throw new Error(`site.config.json: a página "${pagina}" teria duas ofertas próprias iguais ("${ofertaPorPagina[chave]}" e "${slot}"); o máximo é uma por página de cada produto`);
+    ofertaPorPagina[chave] = slot;
   }
   const usados = new Set();
 
@@ -52,7 +56,7 @@ export function preparaConexoes(config, adsense) {
     if (!destino) throw new Error(`site.config.json: o espaço "${slot}" (usado no HTML) não está em anuncios.espacos`);
     usados.add(slot);
     const m = /^oferta:(.+)$/.exec(destino);
-    if (m && ofertas[m[1]].ativa) {
+    if (m && ligada(m[1])) {
       const o = ofertas[m[1]];
       const pagina = paginaDoSlot(slot);
       const t = o.paginas[pagina];

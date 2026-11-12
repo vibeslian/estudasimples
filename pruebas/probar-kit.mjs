@@ -77,13 +77,13 @@ const sinPie = htmls.filter((p) => !leer(on.dir, p).includes('<a href="/kit-tcc/
 ok(sinPie.length === 0, "encendido: el pie de TODAS las páginas enlaza el kit", sinPie.slice(0, 5).join(", "));
 ok(leer(on.dir, "formatacao-abnt-tcc/index.html").includes('href="/kit-tcc/#origem=servico">Kit TCC</a>, o modelo completo em Word, por R$\u00a029,90'), "encendido: la página del servicio menciona el kit con su precio");
 const GUIAS_KIT = ["sumario-automatico-word", "numeracao-de-paginas-abnt", "normas-abnt-no-word", "margens-abnt", "fonte-e-espacamento-abnt", "titulos-e-subtitulos-abnt", "normas-abnt-tcc", "normas-abnt", "como-fazer-tcc", "lista-de-ilustracoes-e-tabelas-abnt", "modelos-de-capa-abnt", "consideracoes-finais-tcc", "folha-de-aprovacao-abnt", "apendice-e-anexo-abnt", "agradecimentos-tcc", "dedicatoria-e-epigrafe-abnt"].map((g) => `guias/${g}/index.html`);
-const CON_KIT = ["formatacao-abnt-tcc/index.html", "index.html", "gerador-de-sumario-abnt/index.html", "guias/plagio-e-ia-no-tcc/index.html", ...GUIAS_KIT];
+const CON_KIT = ["formatacao-abnt-tcc/index.html", "index.html", "gerador-de-sumario-abnt/index.html", "gerador-de-capa-abnt/index.html", "gerador-de-folha-de-rosto-abnt/index.html", "gerador-de-referencias-abnt/index.html", "guias/plagio-e-ia-no-tcc/index.html", ...GUIAS_KIT];
 const sinTarjeta = GUIAS_KIT.filter((p) => !/<aside class="oferta" aria-label="Kit TCC">[\s\S]*href="\/kit-tcc\/#origem=guia-[a-z0-9-]+"/.test(leer(on.dir, p)));
 ok(sinTarjeta.length === 0, "encendido: las 16 guías de formato y de entrega llevan la tarjeta del Kit TCC", sinTarjeta.join(", "));
 ok(/id="kit-tcc-faixa"/.test(leer(on.dir, "index.html")) && /href="\/kit-tcc\/#origem=inicio-oferta"/.test(leer(on.dir, "index.html")), "encendido: la portada tiene la franja del Kit TCC");
 ok(/não se atualiza sozinho/.test(leer(on.dir, "gerador-de-sumario-abnt/index.html")) && /href="\/kit-tcc\/#origem=sumario-aviso"/.test(leer(on.dir, "gerador-de-sumario-abnt/index.html")), "encendido: el generador de sumario avisa que su Word no se actualiza solo y menciona el kit");
 const otrosConKit = htmls.filter((p) => !CON_KIT.includes(p) && /href="\/kit-tcc\/#/.test(leer(on.dir, p)));
-ok(otrosConKit.length === 0, "encendido: solo el pie, la portada, el servicio, el generador de sumario y las 16 guías de formato y de entrega enlazan el kit (ningún enlace extra)", otrosConKit.join(", "));
+ok(otrosConKit.length === 0, "encendido: solo el pie, la portada, el servicio, las 4 herramientas (oferta del kit) y las guías de formato y de entrega enlazan el kit (ningún enlace extra)", otrosConKit.join(", "));
 // textos legales
 const t = textoLegal(on.dir, "termos-de-uso/index.html"), p = textoLegal(on.dir, "politica-de-privacidade/index.html");
 const tHtml = leer(on.dir, "termos-de-uso/index.html"), pHtml = leer(on.dir, "politica-de-privacidade/index.html");
