@@ -39,7 +39,7 @@ export async function testarAviso(env) {
 }
 
 export async function listar(env) {
-  const r = await env.DB.prepare(`SELECT ${CAMPOS_LISTA} FROM pedidos WHERE status != 'apagado' OR aviso IS NOT NULL ORDER BY (status IN ('recebido','em_andamento','pronto')) DESC, criado_em DESC LIMIT 200`).all();
+  const r = await env.DB.prepare(`SELECT ${CAMPOS_LISTA} FROM pedidos WHERE status != 'apagado' OR aviso IS NOT NULL ORDER BY (status IN ('recebido','em_andamento','pronto')) DESC, (urgente = 1 AND status IN ('recebido','em_andamento')) DESC, criado_em DESC LIMIT 200`).all();
   return json({ ok: true, pedidos: r.results });
 }
 
@@ -49,11 +49,31 @@ async function pedido(env, id) {
   return p && (p.status !== "apagado" || p.aviso) ? p : null; // um pedido apagado só aparece se tiver um aviso para o Lian (por exemplo, pagamento depois do apagamento)
 }
 
+// Mensagem de boas-vindas que o Lian manda pelo WhatsApp assim que o pedido chega.
+// modo: "normal" (prazo de até 72 h), "urgente" (confirma as 24 h) ou "sem24" (pediu urgente, mas hoje não dá: segue no prazo normal, sem o acréscimo).
+export function textoBoasVindas(p, modo, site) {
+  const nome = nomeLimpo(p.nome);
+  const prazo = p.tamanho === "mais60"
+    ? "Como o trabalho tem mais de 60 páginas" + (p.urgente ? ", a entrega em 24 horas não vale para ele" : "") + ": eu te confirmo por aqui o prazo e o valor antes de começar."
+    : modo === "urgente"
+      ? "Pedido urgente confirmado: em até 24 horas eu te mando aqui um link com a prévia do trabalho formatado e o botão de pagamento (Pix ou cartão)."
+      : (modo === "sem24" ? "Hoje não consigo garantir as 24 horas, então o pedido segue no prazo normal, sem o acréscimo de R$ 50. " : "") +
+        "Em até 72 horas eu te mando aqui um link com a prévia do trabalho formatado e o botão de pagamento (Pix ou cartão).";
+  return [
+    `Oi${nome ? ", " + nome : ""}! Aqui é o Lian, fundador do Estuda Simples. Recebi o seu trabalho (pedido #${p.id}).`,
+    prazo + (p.tamanho === "mais60" ? "" : " Você só paga depois de ver a prévia, e o download libera assim que o pagamento é confirmado."),
+    `Importante: eu só atendo por este número, o mesmo que está no site (${String(site || "").replace(/^https?:\/\//, "")}). Se outro número pedir pagamento em nome do Estuda Simples, não sou eu: não pague e me avise.`,
+  ].join("\n\n");
+}
+
 export async function detalhe(env, id) {
   const p = await pedido(env, id);
   if (!p) return erro(404, "Pedido não encontrado.");
   const { token, ip_hash, mp_url, ...resto } = p;
-  return json({ ok: true, pedido: resto, link: `${env.PUBLIC_BASE}/pedido/#${token}` });
+  const zap = (modo) => `https://wa.me/${p.whatsapp}?text=${encodeURIComponent(textoBoasVindas(p, modo, env.PUBLIC_BASE))}`;
+  const boas_vindas = !p.whatsapp || !["recebido", "em_andamento"].includes(p.status) ? null
+    : p.urgente && p.tamanho !== "mais60" ? { urgente: zap("urgente"), sem24: zap("sem24") } : { normal: zap("normal") };
+  return json({ ok: true, pedido: resto, link: `${env.PUBLIC_BASE}/pedido/#${token}`, boas_vindas });
 }
 
 export async function baixarManual(env, id) {

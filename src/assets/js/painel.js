@@ -33,9 +33,11 @@
       erro("");
       if (!d.pedidos.length) return lista.replaceChildren(el("p", { texto: "Nenhum pedido por enquanto." }));
       lista.replaceChildren.apply(lista, d.pedidos.map(function (p) {
-        return el("button", { type: "button", class: "pn-item pn-" + p.status + (atual === p.id ? " pn-ativo" : ""), onclick: function () { atual = p.id; carregaLista(); abre(p.id); } }, [
+        var urg = p.urgente && (p.status === "recebido" || p.status === "em_andamento");
+        return el("button", { type: "button", class: "pn-item pn-" + p.status + (urg ? " pn-urgente" : "") + (atual === p.id ? " pn-ativo" : ""), onclick: function () { atual = p.id; carregaLista(); abre(p.id); } }, [
+          urg ? el("b", { class: "pn-selo-urgente", texto: "URGENTE · 24 h" }) : "",
           el("strong", { texto: "#" + p.id + " · " + (p.nome || "sem nome") }),
-          el("span", { texto: (p.urgente ? "URGENTE · " : "") + (p.pacote === "banca" ? "Pronto para a banca · " : "") + (TAM[p.tamanho] || "") + " · " + quando(p.criado_em) }),
+          el("span", { texto: (p.urgente && !urg ? "Urgente · " : "") + (p.pacote === "banca" ? "Pronto para a banca · " : "") + (TAM[p.tamanho] || "") + " · " + quando(p.criado_em) }),
           el("em", { texto: ROTULO[p.status] || p.status })]);
       }));
     }).catch(function (e) { erro(e.message); lista.replaceChildren(); });
@@ -71,9 +73,16 @@
       var corpo = [
         el("h3", { texto: "Pedido #" + p.id + " · " + (p.nome || "sem nome") }),
         el("p", { texto: ROTULO[p.status] || p.status }),
-        el("p", { texto: (p.pacote === "banca" ? "Pacote Pronto para a banca (conferir citações e referências, listas, relatório, 2 rodadas)" : "Pacote Formatação ABNT") + (p.urgente ? " · URGENTE: entrega em 24 h (confirme o prazo antes de mandar o link)" : "") }),
+        el("p", { texto: (p.pacote === "banca" ? "Pacote Pronto para a banca (conferir citações e referências, listas, relatório, 2 rodadas)" : "Pacote Formatação ABNT") + (p.urgente ? " · URGENTE: entrega em 24 h (confirme ou recuse as 24 h na mensagem de boas-vindas)" : "") }),
         el("p", { texto: "WhatsApp " + (p.whatsapp || "") + " · " + (TAM[p.tamanho] || "") + " · " + (p.arquivo_nome || "") + " (" + Math.round(p.arquivo_bytes / 1024) + " KB)" }),
       ];
+      if (d.boas_vindas) {
+        var bv = d.boas_vindas, zapBtn = function (href, texto, classe) { return el("a", { class: "btn " + classe, href: href, target: "_blank", rel: "noopener", texto: texto }); };
+        corpo.push(el("div", { class: "pn-boas" + (p.urgente ? " pn-boas--urgente" : "") }, [
+          el("p", { texto: "Primeiro passo: mande a mensagem de boas-vindas (abre o WhatsApp com o texto pronto; confira e toque em enviar)." }),
+          el("div", { class: "pn-botoes" }, bv.normal ? [zapBtn(bv.normal, "Mandar boas-vindas no WhatsApp", "btn-acento")]
+            : [zapBtn(bv.urgente, "Boas-vindas confirmando as 24 h", "btn-acento"), zapBtn(bv.sem24, "Não consigo 24 h: boas-vindas no prazo normal", "")])]));
+      }
       if (p.aviso) corpo.push(el("p", { class: "pd-erro", role: "alert", texto: "Atenção: " + p.aviso }));
       if (p.manual_tipo) corpo.push(el("p", {}, [el("button", { type: "button", class: "btn", texto: "Baixar o manual da faculdade", onclick: function () { api("/pedidos/" + id + "/manual").then(function (b) { baixaArquivo(b, "manual-" + id + "." + p.manual_tipo); }).catch(function (e) { erro(e.message); }); } })]));
       corpo.push(el("p", {}, [el("button", { type: "button", class: "btn", texto: "Baixar o arquivo original", onclick: function () { api("/pedidos/" + id + "/original").then(function (b) { baixaArquivo(b, "original-" + id + "." + p.arquivo_tipo); }).catch(function (e) { erro(e.message); }); } })]));

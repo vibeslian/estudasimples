@@ -127,6 +127,14 @@ try {
   ok(r.status === 200 && cb.ok && cb.id, "pedido «Pronto para a banca», urgente y con manual: aceptado");
   let det = await (await fetch(BASE + `/api/admin/pedidos/${cb.id}`)).json();
   ok(det.pedido.pacote === "banca" && det.pedido.urgente === 1 && det.pedido.manual_tipo === "pdf" && det.pedido.consentimento_versao === "2026-11-17", "el panel ve el paquete, la urgencia, el manual y la versión nueva de los términos");
+  const msgU = decodeURIComponent((det.boas_vindas?.urgente || "").split("text=")[1] || ""), msgS = decodeURIComponent((det.boas_vindas?.sem24 || "").split("text=")[1] || "");
+  ok(/^https:\/\/wa\.me\/\d+\?text=/.test(det.boas_vindas?.urgente || "") && /Oi, Maria Souza!/.test(msgU) && msgU.includes("#" + cb.id) && /24 horas/.test(msgU) && /não sou eu/.test(msgU), "urgente: boas-vindas com o nome registrado, o número do pedido, 24 h e o aviso de golpe");
+  ok(/prazo normal, sem o acréscimo/.test(msgS) && /72 horas/.test(msgS), "urgente sem 24 h: a segunda mensagem tira o acréscimo e volta às 72 h");
+  const lista1b = (await (await fetch(BASE + "/api/admin/pedidos")).json()).pedidos;
+  ok(lista1b[0].id === cb.id, "o pedido urgente aparece primeiro na lista do painel");
+  const detN = await (await fetch(BASE + `/api/admin/pedidos/${c1.id}`)).json();
+  const msgN = decodeURIComponent((detN.boas_vindas?.normal || "").split("text=")[1] || "");
+  ok(/72 horas/.test(msgN) && !/24 horas/.test(msgN) && !detN.boas_vindas.urgente, "pedido normal: uma só mensagem, com até 72 horas");
   r = await fetch(BASE + `/api/admin/pedidos/${cb.id}/manual`); const manTxt = await r.text();
   ok(r.status === 200 && manTxt.startsWith("%PDF") && manTxt.includes("manual da faculdade"), "Lian descarga el manual desde el panel");
   await aguardaAviso(avisosAntesBanca + 1);

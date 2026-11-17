@@ -61,6 +61,12 @@
 .pn-item span { font-size: .88rem; color: var(--texto-suave); }
 .pn-item em { font-style: normal; font-size: .85rem; font-weight: 700; color: var(--principal); }
 .pn-recebido { background: var(--acento-claro); }
+.pn-urgente { background: #fff1de; border-color: #b85f00; border-left: 6px solid #b85f00; }
+.pn-selo-urgente { justify-self: start; padding: 2px 10px; border-radius: 999px; background: #e07a00; color: #1e1400; font-size: .8rem; letter-spacing: .02em; }
+.pn-boas { margin: 12px 0; padding: 12px 14px; border-radius: 14px; background: var(--salvia-50); border: 1px solid var(--salvia-200); }
+.pn-boas p { margin: 0; }
+.pn-boas .pn-botoes { margin: 10px 0 0; }
+.pn-boas--urgente { background: #fff1de; border-color: #b85f00; }
 .pn-ativo { border-color: var(--principal); box-shadow: 0 0 0 2px var(--principal) inset; }
 .pn-detalhe { padding: 20px; background: var(--superficie); border: 1px solid var(--salvia-200); border-radius: var(--raio); }
 .pn-detalhe h3 { margin: 0 0 6px; }
