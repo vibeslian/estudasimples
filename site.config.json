@@ -147,9 +147,9 @@
       },
       "kit": {
         "ativa": true,
-        "selo": "Kit TCC · produto pago",
+        "selo": "Modelo de TCC pronto no Word · Kit TCC, produto pago",
         "url": "/kit-tcc/",
-        "botao": "Ver o Kit TCC ({{KIT_PRECO}})",
+        "botao": "Ver o modelo de TCC ({{KIT_PRECO}})",
         "paginas": {
           "capa": {
             "titulo": "Prefere fazer sozinho? Comece num modelo já formatado",

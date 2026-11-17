@@ -13,7 +13,7 @@
   <meta property="og:url" content="{{SITE_URL}}/formatacao-abnt-tcc/">
   <link rel="stylesheet" href="/assets/css/servico.css?v={{BUILD}}">
   <script src="/assets/js/servico.js?v={{BUILD}}" defer></script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"Formatação ABNT de TCC","serviceType":"Formatação de trabalhos acadêmicos nas normas da ABNT","url":"{{SITE_URL}}/formatacao-abnt-tcc/","inLanguage":"pt-BR","areaServed":{"@type":"Country","name":"Brasil"},"provider":{"@type":"Organization","name":"{{SITE_NAME}}","url":"{{SITE_URL}}/"},"description":"Formatação de TCC nas normas da ABNT: margens, fonte, espaçamento, títulos numerados, sumário, paginação, capa, folha de rosto, citações, referências, tabelas e figuras. Pedido pelo site ou pelo WhatsApp, prévia antes de pagar, pagamento por Pix ou cartão e entrega em {{PRAZO}}.","offers":[{"@type":"Offer","name":"Até 30 páginas","price":"{{PRECO_ATE30_NUM}}","priceCurrency":"BRL"},{"@type":"Offer","name":"De 31 a 60 páginas","price":"{{PRECO_31A60_NUM}}","priceCurrency":"BRL"},{"@type":"Offer","name":"Pronto para a banca, até 30 páginas","price":"{{PRECO_BANCA_ATE30_NUM}}","priceCurrency":"BRL"},{"@type":"Offer","name":"Pronto para a banca, de 31 a 60 páginas","price":"{{PRECO_BANCA_31A60_NUM}}","priceCurrency":"BRL"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"Formatação ABNT de TCC","serviceType":"Formatação de trabalhos acadêmicos nas normas da ABNT","url":"{{SITE_URL}}/formatacao-abnt-tcc/","inLanguage":"pt-BR","areaServed":{"@type":"Country","name":"Brasil"},"provider":{"@type":"Organization","name":"{{SITE_NAME}}","url":"{{SITE_URL}}/"},"description":"Formatação de TCC nas normas da ABNT: margens, fonte, espaçamento, títulos numerados, sumário, paginação, capa, folha de rosto, citações, referências, tabelas e figuras. Pedido pelo site ou pelo WhatsApp, prévia antes de pagar, pagamento por Pix ou cartão e entrega em {{PRAZO}}.","offers":[{"@type":"Offer","name":"Formatação ABNT (seu TCC nas normas da ABNT), até 30 páginas","price":"{{PRECO_ATE30_NUM}}","priceCurrency":"BRL"},{"@type":"Offer","name":"Formatação ABNT (seu TCC nas normas da ABNT), de 31 a 60 páginas","price":"{{PRECO_31A60_NUM}}","priceCurrency":"BRL"},{"@type":"Offer","name":"Pronto para a banca (formatação + revisão das citações e referências), até 30 páginas","price":"{{PRECO_BANCA_ATE30_NUM}}","priceCurrency":"BRL"},{"@type":"Offer","name":"Pronto para a banca (formatação + revisão das citações e referências), de 31 a 60 páginas","price":"{{PRECO_BANCA_31A60_NUM}}","priceCurrency":"BRL"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"{{SITE_NAME}}","item":"{{SITE_URL}}/"},{"@type":"ListItem","position":2,"name":"Formatação ABNT de TCC","item":"{{SITE_URL}}/formatacao-abnt-tcc/"}]}</script>
   {{FAQ_JSONLD:servico}}
 </head>
@@ -23,9 +23,9 @@
   {{include:header}}
   <div class="container hero-conteudo hero-grade" id="conteudo">
     <div class="hero-texto">
-      <span class="etiqueta">Serviço pago · Atendimento pelo WhatsApp</span>
-      <h1>Formatação ABNT de TCC</h1>
-      <p class="lead">Você escreve o trabalho, eu deixo o trabalho nas normas da ABNT. Mande o arquivo em Word pelo WhatsApp, receba o orçamento e o trabalho formatado, em Word e PDF, em {{PRAZO}}.</p>
+      <span class="etiqueta">Formatação ABNT de TCC · serviço pago</span>
+      <h1>Eu formato o seu TCC nas normas da ABNT</h1>
+      <p class="lead">Você escreve o trabalho, eu deixo o trabalho nas normas da ABNT. Mande o arquivo pelo site ou pelo WhatsApp, veja uma prévia antes de pagar e receba o trabalho formatado, em Word e PDF, em {{PRAZO}}.</p>
       <div class="hero-botoes">
         <a class="btn btn-acento btn-grande" href="/pedir-formatacao/">Pedir pelo site</a>
         <a class="btn btn-grande" href="{{WHATSAPP_URL}}" data-whatsapp target="_blank" rel="noopener">Pedir pelo WhatsApp</a>
@@ -242,7 +242,8 @@
       </div>
       <div class="pacotes revelar">
         <div class="cartao preco pacote">
-          <h3>Formatação ABNT</h3>
+          <p class="pacote-oficial">Formatação ABNT</p>
+          <h3>Seu TCC nas normas da ABNT</h3>
           <p class="pacote-sub">Para deixar o trabalho no formato da norma.</p>
           <div class="pacote-precos">
             <p><span>Até 30 páginas</span><b class="preco-valor">{{PRECO_ATE30}}</b></p>
@@ -259,15 +260,16 @@
         </div>
         <div class="cartao preco pacote pacote--destaque">
           <span class="pacote-selo">Mais completo</span>
-          <h3>Pronto para a banca</h3>
-          <p class="pacote-sub">Para entregar sem medo de o trabalho voltar.</p>
+          <p class="pacote-oficial">Pronto para a banca</p>
+          <h3>Formatação + revisão das citações e referências</h3>
+          <p class="pacote-sub">Para entregar sem medo de o trabalho voltar. Não é revisão de português: o texto continua o seu.</p>
           <div class="pacote-precos">
             <p><span>Até 30 páginas</span><b class="preco-valor">{{PRECO_BANCA_ATE30}}</b></p>
             <p><span>De 31 a 60 páginas</span><b class="preco-valor">{{PRECO_BANCA_31A60}}</b></p>
           </div>
           <ul class="pacote-lista">
             <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span><strong>Tudo da Formatação ABNT, e mais:</strong></span></li>
-            <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg><span><strong>Conferência de citações e referências:</strong> aponto o autor citado que falta nas referências e a referência que não foi citada</span></li>
+            <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg><span><strong>Revisão das citações e referências:</strong> aponto o autor citado que falta nas referências e a referência que não foi citada</span></li>
             <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg><span>Listas de siglas, de figuras e de tabelas</span></li>
             <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg><span>Relatório do que foi corrigido, para mostrar ao orientador</span></li>
             <li><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg><span>2 rodadas de ajustes</span></li>
@@ -277,7 +279,7 @@
       </div>
       <div class="urgente revelar">
         <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg>
-        <p><strong>Precisa para amanhã?</strong> Entrega em 24 horas por <strong>+ {{PRECO_URGENTE}}</strong> em qualquer pacote. Eu confirmo o prazo antes de você pagar.</p>
+        <p><strong>Precisa para amanhã? TCC formatado em 24 horas.</strong> Entrega em 24 horas por <strong>+ {{PRECO_URGENTE}}</strong> em qualquer pacote. Eu confirmo o prazo antes de você pagar.</p>
       </div>
       <p class="preco-mais60 revelar"><strong>Mais de 60 páginas:</strong> A consultar pelo WhatsApp.</p>
       <ul class="garantias revelar">

@@ -26,7 +26,7 @@
   {
     "p": "Qual a diferença entre a Formatação ABNT e o Pronto para a banca?",
     "r": [
-      "A Formatação ABNT deixa o trabalho no formato da norma. O Pronto para a banca faz tudo isso e ainda aponta o autor citado que falta nas referências e a referência que não foi citada, monta as listas de siglas, de figuras e de tabelas, traz um relatório do que foi corrigido e inclui duas rodadas de ajustes. Até 30 páginas custa {{PRECO_BANCA_ATE30}}; de 31 a 60, {{PRECO_BANCA_31A60}}."
+      "A Formatação ABNT (\"Seu TCC nas normas da ABNT\") deixa o trabalho no formato da norma. O Pronto para a banca (\"Formatação + revisão das citações e referências\") faz tudo isso e ainda aponta o autor citado que falta nas referências e a referência que não foi citada, monta as listas de siglas, de figuras e de tabelas, traz um relatório do que foi corrigido e inclui duas rodadas de ajustes. Até 30 páginas custa {{PRECO_BANCA_ATE30}}; de 31 a 60, {{PRECO_BANCA_31A60}}."
     ]
   },
   {

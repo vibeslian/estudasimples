@@ -73,7 +73,7 @@ const tabla = pagina.match(/<table class="kit-tabela">[\s\S]*?<\/table>/);
 ok(tabla && /<caption/.test(tabla[0]) && (tabla[0].match(/<th scope="row">/g) || []).length === 7 && (tabla[0].match(/<th scope="col"/g) || []).length === 3, "tabla gratis vs kit: caption, 3 columnas y 7 filas con encabezados");
 // enlaces en el resto del sitio
 const htmls = paginasHtml(on.dir).filter((p) => p !== "kit-tcc/index.html" && p !== "404.html");
-const sinPie = htmls.filter((p) => !leer(on.dir, p).includes('<a href="/kit-tcc/">Kit TCC (modelo em Word)</a>'));
+const sinPie = htmls.filter((p) => !leer(on.dir, p).includes('<a href="/kit-tcc/">Modelo de TCC pronto no Word (Kit TCC)</a>'));
 ok(sinPie.length === 0, "encendido: el pie de TODAS las páginas enlaza el kit", sinPie.slice(0, 5).join(", "));
 ok(leer(on.dir, "formatacao-abnt-tcc/index.html").includes('href="/kit-tcc/#origem=servico">Kit TCC</a>, o modelo completo em Word, por R$\u00a029,90'), "encendido: la página del servicio menciona el kit con su precio");
 const GUIAS_KIT = ["sumario-automatico-word", "numeracao-de-paginas-abnt", "normas-abnt-no-word", "margens-abnt", "fonte-e-espacamento-abnt", "titulos-e-subtitulos-abnt", "normas-abnt-tcc", "normas-abnt", "como-fazer-tcc", "lista-de-ilustracoes-e-tabelas-abnt", "modelos-de-capa-abnt", "consideracoes-finais-tcc", "folha-de-aprovacao-abnt", "apendice-e-anexo-abnt", "agradecimentos-tcc", "dedicatoria-e-epigrafe-abnt"].map((g) => `guias/${g}/index.html`);

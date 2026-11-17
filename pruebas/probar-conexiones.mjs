@@ -251,7 +251,7 @@ function construye(cambia, nombre) {
 }
 {
   const k = construye((c) => { c.kit.ativo = false; }, "kit-apagado");
-  marca(k.ok && ["gerador-de-capa-abnt", "gerador-de-sumario-abnt"].every((d) => !/data-oferta="kit"/.test(k.html(d)) && /data-oferta="formatacao"/.test(k.html(d)) && !/Kit TCC · produto pago/.test(k.html(d))), "con el Kit TCC apagado (kit.ativo: false) la oferta del kit desaparece de las herramientas y la del servicio sigue");
+  marca(k.ok && ["gerador-de-capa-abnt", "gerador-de-sumario-abnt"].every((d) => !/data-oferta="kit"/.test(k.html(d)) && /data-oferta="formatacao"/.test(k.html(d)) && !/Kit TCC, produto pago/.test(k.html(d))), "con el Kit TCC apagado (kit.ativo: false) la oferta del kit desaparece de las herramientas y la del servicio sigue");
   const v = construye((c) => { c.anuncios.espacos["capa-meio-2"] = "oferta:formatacao"; }, "dos-ofertas");
   marca(!v.ok && /duas ofertas/.test(v.error), "la misma oferta dos veces en una página: el build se detiene y lo explica (\"...duas ofertas próprias iguais... o máximo é uma por página de cada produto\")");
 }

@@ -34,10 +34,10 @@
       <form id="formPedido" class="pd-form" novalidate>
         <fieldset class="pd-tamanhos pd-pacotes">
           <legend>Pacote</legend>
-          <label class="pd-op"><input type="radio" name="pacote" value="formatacao" checked><span><strong>Formatação ABNT</strong><small>Formato da norma, 1 rodada de ajustes</small></span></label>
-          <label class="pd-op"><input type="radio" name="pacote" value="banca"><span><strong>Pronto para a banca</strong><small>+ conferência de citações e referências, listas, relatório e 2 rodadas</small></span></label>
+          <label class="pd-op"><input type="radio" name="pacote" value="formatacao" checked><span><strong>Seu TCC nas normas da ABNT</strong><small>Formatação ABNT · 1 rodada de ajustes</small></span></label>
+          <label class="pd-op"><input type="radio" name="pacote" value="banca"><span><strong>Formatação + revisão das citações e referências</strong><small>Pronto para a banca · aponto o que falta ou sobra nas citações e referências (não é revisão de português), listas, relatório e 2 rodadas</small></span></label>
         </fieldset>
-        <label class="pd-urgente"><input type="checkbox" name="urgente" value="sim"><span>Urgente: entrega em 24 horas (+ {{PRECO_URGENTE}}). Eu confirmo o prazo antes de você pagar.</span></label>
+        <label class="pd-urgente"><input type="checkbox" name="urgente" value="sim"><span>Urgente: TCC formatado em 24 horas (+ {{PRECO_URGENTE}}). Eu confirmo o prazo antes de você pagar.</span></label>
         <fieldset class="pd-tamanhos">
           <legend>Tamanho do trabalho <span class="pd-precos-aviso" aria-live="polite" id="pdPrecosAviso"></span></legend>
           <label class="pd-op"><input type="radio" name="tamanho" value="ate30" checked><span>Até 30 páginas</span><b data-formatacao="{{PRECO_ATE30}}" data-banca="{{PRECO_BANCA_ATE30}}">{{PRECO_ATE30}}</b></label>
