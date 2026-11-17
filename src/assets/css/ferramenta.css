@@ -167,8 +167,15 @@ dialog.zoom::backdrop { background: rgba(34, 54, 43, .6); }
 }
 
 /* Convite discreto para o serviço de formatação, logo depois dos botões de baixar (longe dos espaços de anúncio) */
-.convite-servico { margin: 22px 0 0; padding-top: 16px; border-top: 1px solid var(--salvia-200); font-size: .95rem; color: var(--texto-suave); }
-.convite-servico a { font-weight: 700; }
+.caixa-confianca { margin: 24px 0 0; padding: 24px 22px; border-radius: 22px; background: var(--superficie); box-shadow: var(--sombra-forte); }
+.confianca-titulo { margin: 0 0 6px; font-family: var(--fonte-titulo); font-weight: 800; font-size: 1.4rem; line-height: 1.25; color: var(--texto); }
+.confianca-texto { margin: 0 0 16px; color: var(--texto-suave); }
+.confianca-itens { list-style: none; margin: 0 0 18px; padding: 0; display: grid; gap: 10px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.confianca-itens li { display: flex; flex-direction: column; gap: 4px; padding: 12px; border-radius: 14px; background: var(--salvia-50); line-height: 1.35; }
+.confianca-itens svg { color: var(--principal); }
+.confianca-itens span { font-size: .9rem; color: var(--texto-suave); }
+.confianca-botoes { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; }
+.confianca-botoes .btn { white-space: normal; text-align: center; }
 
 /* Antes de o JS desenhar a prévia (classe "pronto" no body), mostra só as folhas que vão aparecer e reserva o espaço delas (sem salto de layout) */
 body[data-modo="folha"]:not(.pronto) #pagCapa,

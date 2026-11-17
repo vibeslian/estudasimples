@@ -97,6 +97,9 @@ try {
     f.set("consentimento", over.consentimento ?? "sim");
     if (over.sem_arquivo !== true) f.set("arquivo", over.arquivo ?? docx(), over.nomeArq ?? "meu tcc.docx");
     if (over.site) f.set("site", over.site);
+    if (over.pacote) f.set("pacote", over.pacote);
+    if (over.urgente) f.set("urgente", "sim");
+    if (over.manual) f.set("manual", over.manual, over.nomeManual ?? "manual.pdf");
     return fetch(BASE + "/api/pedidos", { method: "POST", headers: { ...H, "CF-Connecting-IP": ip }, body: f });
   };
 
@@ -115,6 +118,25 @@ try {
   await aguardaAviso(1);
   ok(avisos.length === 1 && /ntfy|topico-de-prueba/.test(avisos[0].ruta) && /Novo pedido/.test(avisos[0].titulo) && avisos[0].cuerpo.includes(c1.id) && avisos[0].click === BASE + "/painel/", "un pedido nuevo manda un aviso al celular de Lian (con el código del pedido y el enlace al panel)");
   ok(!/Maria|639|55/.test(avisos[0].cuerpo.replace(c1.id, "")), "el aviso no lleva nombre ni teléfono del cliente");
+
+  console.log("== 1b) Paquete, urgencia y manual de la facultad ==");
+  r = await pedir({ pacote: "vip" }, "8.8.8.8"); ok(r.status === 400, "paquete inventado: rechaza");
+  r = await pedir({ manual: new Blob(["MZ ejecutable disfrazado"]), nomeManual: "manual.pdf" }, "8.8.8.8"); ok(r.status === 400, "un manual que dice ser PDF pero no lo es: rechaza");
+  const avisosAntesBanca = avisos.length;
+  r = await pedir({ pacote: "banca", urgente: true, manual: pdf("manual da faculdade") }, "8.8.8.8"); const cb = await r.json();
+  ok(r.status === 200 && cb.ok && cb.id, "pedido «Pronto para a banca», urgente y con manual: aceptado");
+  let det = await (await fetch(BASE + `/api/admin/pedidos/${cb.id}`)).json();
+  ok(det.pedido.pacote === "banca" && det.pedido.urgente === 1 && det.pedido.manual_tipo === "pdf" && det.pedido.consentimento_versao === "2026-11-17", "el panel ve el paquete, la urgencia, el manual y la versión nueva de los términos");
+  r = await fetch(BASE + `/api/admin/pedidos/${cb.id}/manual`); const manTxt = await r.text();
+  ok(r.status === 200 && manTxt.startsWith("%PDF") && manTxt.includes("manual da faculdade"), "Lian descarga el manual desde el panel");
+  await aguardaAviso(avisosAntesBanca + 1);
+  const avB = avisos[avisos.length - 1];
+  ok(/URGENTE/.test(avB.titulo) && /Pronto para a banca/.test(avB.cuerpo) && /manual/.test(avB.cuerpo), `el aviso dice que es urgente, el paquete y que trae manual: «${avB.titulo} · ${avB.cuerpo}»`);
+  det = await (await fetch(BASE + `/api/admin/pedidos/${c1.id}`)).json();
+  ok(det.pedido.pacote === "formatacao" && det.pedido.urgente === 0 && det.pedido.manual_tipo === null, "un pedido sin elegir nada queda como Formatação ABNT, sin urgencia ni manual");
+  ok((await fetch(BASE + `/api/admin/pedidos/${c1.id}/manual`)).status === 404, "pedido sin manual: el panel no ofrece descarga (404)");
+  r = await fetch(BASE + `/api/admin/pedidos/${cb.id}/apagar`, { method: "POST", headers: HA }); ok(r.status === 200, "Lian apaga el pedido con manual");
+  ok((await fetch(BASE + `/api/admin/pedidos/${cb.id}/manual`)).status === 404, "al apagar, el manual también se borra");
   console.log("== 2) Estado y accesos sin pagar ==");
   r = await post("/api/pedido/estado", { codigo: c1.codigo }); let e = await r.json();
   ok(r.status === 200 && e.pedido.status === "recebido" && e.pedido.valor_centavos === null && e.pedido.nome === "Maria", "estado «recebido», sin valor, solo el primer nombre");

@@ -4,6 +4,9 @@
   var lista = document.getElementById("pnLista"), detalhe = document.getElementById("pnDetalhe"), erroEl = document.getElementById("pnErro");
   var ROTULO = { recebido: "Recebido", em_andamento: "Em andamento", pronto: "Pronto, aguarda pagamento", pago: "Pago", reembolsado: "Reembolsado" };
   var TAM = { ate30: "até 30 páginas", de31a60: "31 a 60 páginas", mais60: "mais de 60 páginas" };
+  // Valor sugerido pela tabela do site (o Lian pode mudar antes de mandar o link)
+  var TABELA = { formatacao: { ate30: 80, de31a60: 140 }, banca: { ate30: 129, de31a60: 189 } }, URGENTE = 50;
+  function sugerido(p) { var t = (TABELA[p.pacote] || TABELA.formatacao)[p.tamanho]; return t ? (t + (p.urgente ? URGENTE : 0)).toFixed(2) : ""; }
   var atual = null;
 
   function el(tag, attrs, filhos) {
@@ -32,7 +35,7 @@
       lista.replaceChildren.apply(lista, d.pedidos.map(function (p) {
         return el("button", { type: "button", class: "pn-item pn-" + p.status + (atual === p.id ? " pn-ativo" : ""), onclick: function () { atual = p.id; carregaLista(); abre(p.id); } }, [
           el("strong", { texto: "#" + p.id + " · " + (p.nome || "sem nome") }),
-          el("span", { texto: (TAM[p.tamanho] || "") + " · " + quando(p.criado_em) }),
+          el("span", { texto: (p.urgente ? "URGENTE · " : "") + (p.pacote === "banca" ? "Pronto para a banca · " : "") + (TAM[p.tamanho] || "") + " · " + quando(p.criado_em) }),
           el("em", { texto: ROTULO[p.status] || p.status })]);
       }));
     }).catch(function (e) { erro(e.message); lista.replaceChildren(); });
@@ -42,7 +45,7 @@
 
   function abre(id) {
     api("/pedidos/" + id).then(function (d) {
-      var p = d.pedido, entradas = {}, valor = el("input", { type: "number", min: "5", max: "1000", step: "0.01", id: "pnValor", value: p.valor_centavos ? (p.valor_centavos / 100).toFixed(2) : (p.tamanho === "ate30" ? "80.00" : p.tamanho === "de31a60" ? "140.00" : "") });
+      var p = d.pedido, entradas = {}, valor = el("input", { type: "number", min: "5", max: "1000", step: "0.01", id: "pnValor", value: p.valor_centavos ? (p.valor_centavos / 100).toFixed(2) : sugerido(p) });
       var msg = el("p", { class: "pn-ok", role: "status" });
       function campoArquivo(qual, rotulo, aceita) {
         var inp = el("input", { type: "file", accept: aceita, id: "pn-" + qual });
@@ -68,9 +71,11 @@
       var corpo = [
         el("h3", { texto: "Pedido #" + p.id + " · " + (p.nome || "sem nome") }),
         el("p", { texto: ROTULO[p.status] || p.status }),
+        el("p", { texto: (p.pacote === "banca" ? "Pacote Pronto para a banca (conferir citações e referências, listas, relatório, 2 rodadas)" : "Pacote Formatação ABNT") + (p.urgente ? " · URGENTE: entrega em 24 h (confirme o prazo antes de mandar o link)" : "") }),
         el("p", { texto: "WhatsApp " + (p.whatsapp || "") + " · " + (TAM[p.tamanho] || "") + " · " + (p.arquivo_nome || "") + " (" + Math.round(p.arquivo_bytes / 1024) + " KB)" }),
       ];
       if (p.aviso) corpo.push(el("p", { class: "pd-erro", role: "alert", texto: "Atenção: " + p.aviso }));
+      if (p.manual_tipo) corpo.push(el("p", {}, [el("button", { type: "button", class: "btn", texto: "Baixar o manual da faculdade", onclick: function () { api("/pedidos/" + id + "/manual").then(function (b) { baixaArquivo(b, "manual-" + id + "." + p.manual_tipo); }).catch(function (e) { erro(e.message); }); } })]));
       corpo.push(el("p", {}, [el("button", { type: "button", class: "btn", texto: "Baixar o arquivo original", onclick: function () { api("/pedidos/" + id + "/original").then(function (b) { baixaArquivo(b, "original-" + id + "." + p.arquivo_tipo); }).catch(function (e) { erro(e.message); }); } })]));
       if (!fechado) {
         corpo.push(el("h4", { texto: "Quando o trabalho estiver feito" }), campoImagens(), campoArquivo("previa", "1b. Prévia em PDF (opcional)", ".pdf,application/pdf"), campoArquivo("docx", "2. Trabalho em Word", ".docx"), campoArquivo("pdf", "3. Trabalho em PDF", ".pdf,application/pdf"),

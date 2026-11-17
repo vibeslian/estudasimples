@@ -7,7 +7,9 @@ import {
 import { criaPreferencia, lePagamento, procuraPagamentos, pagamentoValeParaPedido } from "./mp.mjs";
 
 const TAMANHOS = new Set(["ate30", "de31a60", "mais60"]);
-const VERSAO_TERMOS = "2026-11-07";
+const PACOTES = new Set(["formatacao", "banca"]);
+const MAX_MANUAL = 10 * 1024 * 1024; // 10 MB
+const VERSAO_TERMOS = "2026-11-17";
 
 async function turnstileOk(env, token, ip) {
   if (!env.TURNSTILE_SECRET) return true; // antispam opcional: só vale se a chave estiver configurada
@@ -27,7 +29,7 @@ async function turnstileOk(env, token, ip) {
 // ---------- 1) O cliente faz o pedido ----------
 export async function criaPedido(request, env) {
   const tamanhoDoCorpo = Number(request.headers.get("Content-Length") || 0);
-  if (tamanhoDoCorpo > MAX_ARCHIVO + 200 * 1024) return erro(413, "O arquivo é grande demais. O limite é de 25 MB.");
+  if (tamanhoDoCorpo > MAX_ARCHIVO + MAX_MANUAL + 200 * 1024) return erro(413, "O arquivo é grande demais. O limite é de 25 MB.");
   const ip = await ipHash(request, env);
   if (!(await limitar(env, `ped-ip:${ip}`, 12, 3600))) return erro(429, "Muitas tentativas. Tente de novo mais tarde.");
   const hoje = await env.DB.prepare("SELECT COUNT(*) AS n FROM pedidos WHERE criado_em > ?1").bind(ahora() - 86400).first();
@@ -40,6 +42,9 @@ export async function criaPedido(request, env) {
   if (!(await turnstileOk(env, f.get("cf-turnstile-response"), request.headers.get("CF-Connecting-IP") || ""))) return erro(400, "Não foi possível confirmar que você não é um robô. Tente de novo.");
   const tamanho = String(f.get("tamanho") || "");
   if (!TAMANHOS.has(tamanho)) return erro(400, "Escolha o tamanho do trabalho.");
+  const pacote = String(f.get("pacote") || "formatacao");
+  if (!PACOTES.has(pacote)) return erro(400, "Escolha o pacote.");
+  const urgente = f.get("urgente") === "sim" ? 1 : 0;
   const whatsapp = normalizaWhatsapp(f.get("whatsapp"));
   if (!whatsapp) return erro(400, "Confira o WhatsApp: use o DDD e o número, por exemplo (63) 91234-5678.");
   const nome = nomeLimpo(f.get("nome"));
@@ -48,23 +53,34 @@ export async function criaPedido(request, env) {
   if (arq.size > MAX_ARCHIVO) return erro(413, "O arquivo é grande demais. O limite é de 25 MB.");
   const tipo = await tipoReal(arq);
   if (tipo !== "docx" && tipo !== "pdf") return erro(400, "O arquivo precisa ser Word (.docx) ou PDF. Se o seu for .doc, abra no Word e salve como .docx.");
+  const man = f.get("manual");
+  const temManual = !!(man && typeof man !== "string" && man.size);
+  let tipoManual = null;
+  if (temManual) {
+    if (man.size > MAX_MANUAL) return erro(413, "O manual é grande demais. O limite é de 10 MB.");
+    tipoManual = await tipoReal(man);
+    if (tipoManual !== "docx" && tipoManual !== "pdf") return erro(400, "O manual precisa ser Word (.docx) ou PDF.");
+  }
   if (!(await limitar(env, `ped-tel:${await hmacHex(env, whatsapp)}`, 3, 86400))) return erro(429, "Muitas tentativas. Tente de novo mais tarde ou chame no WhatsApp do site.");
 
   const id = novoId();
   const token = novoToken();
   const t = ahora();
   const chave = `orig/${id}/original.${TIPOS[tipo].ext}`;
+  const chaveManual = temManual ? `orig/${id}/manual.${TIPOS[tipoManual].ext}` : null;
   await env.ARQUIVOS.put(chave, await arq.arrayBuffer(), { httpMetadata: { contentType: TIPOS[tipo].mime } });
   try {
+    if (chaveManual) await env.ARQUIVOS.put(chaveManual, await man.arrayBuffer(), { httpMetadata: { contentType: TIPOS[tipoManual].mime } });
     await env.DB.prepare(
-      "INSERT INTO pedidos (id, token, nome, whatsapp, tamanho, arquivo_nome, arquivo_tipo, arquivo_bytes, status, criado_em, apagar_em, consentimento_em, consentimento_versao, ip_hash) " +
-        "VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, 'recebido', ?9, ?10, ?9, ?11, ?12)",
-    ).bind(id, token, nome || null, whatsapp, tamanho, nomeArquivoSeguro(arq.name), tipo, arq.size, t, t + DIAS_APAGAR_SIN_CONCLUIR * 86400, VERSAO_TERMOS, ip).run();
+      "INSERT INTO pedidos (id, token, nome, whatsapp, tamanho, arquivo_nome, arquivo_tipo, arquivo_bytes, status, criado_em, apagar_em, consentimento_em, consentimento_versao, ip_hash, pacote, urgente, manual_tipo) " +
+        "VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, 'recebido', ?9, ?10, ?9, ?11, ?12, ?13, ?14, ?15)",
+    ).bind(id, token, nome || null, whatsapp, tamanho, nomeArquivoSeguro(arq.name), tipo, arq.size, t, t + DIAS_APAGAR_SIN_CONCLUIR * 86400, VERSAO_TERMOS, ip, pacote, urgente, tipoManual).run();
   } catch (e) {
-    await env.ARQUIVOS.delete(chave); // não deixa arquivo solto se o registro falhar
+    await env.ARQUIVOS.delete(chaveManual ? [chave, chaveManual] : chave); // não deixa arquivo solto se o registro falhar
     return erro(500, "Não foi possível registrar o pedido. Tente de novo em instantes.");
   }
-  await avisarLian(env, "Novo pedido de formatacao", `Pedido ${id} (${{ ate30: "ate 30 paginas", de31a60: "31 a 60 paginas", mais60: "mais de 60 paginas" }[tamanho]}). Abra o painel para ver.`);
+  const desc = [{ ate30: "ate 30 paginas", de31a60: "31 a 60 paginas", mais60: "mais de 60 paginas" }[tamanho], pacote === "banca" ? "Pronto para a banca" : "Formatacao ABNT", urgente ? "URGENTE 24 h" : null, temManual ? "com manual da faculdade" : null].filter(Boolean).join(", ");
+  await avisarLian(env, urgente ? "Novo pedido URGENTE" : "Novo pedido de formatacao", `Pedido ${id} (${desc}). Abra o painel para ver.`);
   return json({ ok: true, id, codigo: token });
 }
 

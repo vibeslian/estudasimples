@@ -73,3 +73,16 @@
 .pn-novo { margin: 0 0 14px; padding: 12px 14px; background: var(--superficie); border: 1.5px solid var(--salvia-200); border-radius: 14px; }
 .pn-novo summary { cursor: pointer; font-weight: 700; }
 .pn-arq select { width: 100%; box-sizing: border-box; min-height: 48px; padding: 10px 12px; font: inherit; border: 1.5px solid var(--borda-campo); border-radius: 12px; background: var(--superficie); }
+
+/* ---- Como funciona, pacote, urgência e manual (17/11/2026) ---- */
+.pd-como { margin: 0 0 24px; padding: 20px 22px; border-radius: 20px; background: var(--superficie); box-shadow: var(--sombra); }
+.pd-como strong { font-family: var(--fonte-titulo); font-size: 1.15rem; }
+.pd-como ol { margin: 10px 0 12px; padding-left: 1.3em; display: grid; gap: 8px; line-height: 1.45; }
+.pd-como p { margin: 0; padding-top: 10px; border-top: 1px solid var(--salvia-100); font-size: .92rem; color: var(--texto-suave); }
+.pd-pacotes .pd-op span { display: flex; flex-direction: column; gap: 2px; }
+.pd-pacotes .pd-op small { color: var(--texto-suave); font-size: .9rem; line-height: 1.35; }
+.pd-urgente { display: flex !important; align-items: flex-start; gap: 12px; margin: 4px 0 0 !important; padding: 6px 2px; font-weight: 400 !important; line-height: 1.45; cursor: pointer; }
+.pd-urgente input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--principal); flex-shrink: 0; }
+.pd-arquivo--opcional .pd-arquivo-caixa { border-color: var(--salvia-200); }
+.pd-duvida { margin: 4px 0 0; }
+.pd-precos-aviso { font-weight: 400; font-size: .92rem; color: var(--texto-suave); }

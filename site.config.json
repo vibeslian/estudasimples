@@ -7,7 +7,7 @@
     "_ajuda": "Serviço de formatação (página /formatacao-abnt-tcc/). Para mudar o WhatsApp, as mensagens, o prazo ou os preços, edite só aqui e rode o build: o site inteiro se atualiza. Cada mensagem diz de qual página o cliente veio (id = servico, inicio, capa, folha, sumario).",
     "whatsapp": "5563992167482",
     "whatsappExibicao": "(63) 99216-7482",
-    "legalAtualizadoEm": "2026-11-16",
+    "legalAtualizadoEm": "2026-11-17",
     "mensagens": {
       "servico": "Olá! Vim pelo site Estuda Simples (página de formatação) e quero formatar meu trabalho nas normas ABNT.",
       "inicio": "Olá! Vim pelo site Estuda Simples (página inicial) e quero formatar meu trabalho nas normas ABNT.",
@@ -21,6 +21,12 @@
       "ate30": 80,
       "de31a60": 140
     },
+    "_ajudaPacotes": "precosBanca = pacote «Pronto para a banca» (formatação + conferência de citações e referências, listas, relatório das correções e 2 rodadas de ajustes). precoUrgente = acréscimo para entrega em 24 horas, só quando o Lian confirma o prazo antes do pagamento.",
+    "precosBanca": {
+      "ate30": 129,
+      "de31a60": 189
+    },
+    "precoUrgente": 50,
     "modeloMensagem": "Olá! Vim pelo site Estuda Simples ({pagina} · {componente}) e quero formatar meu trabalho nas normas ABNT.",
     "origens": {
       "_ajuda": "As mensagens por página + componente (capa-proximo, inicio-percurso, folha-oferta...) saem deste modelo. Para uma mensagem diferente, ponha a chave em servico.mensagens.",

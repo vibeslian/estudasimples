@@ -26,7 +26,7 @@ export async function criarManual(request, env) {
   return json({ ok: true, id });
 }
 
-const CAMPOS_LISTA = "id, nome, whatsapp, tamanho, arquivo_nome, arquivo_tipo, arquivo_bytes, status, valor_centavos, tem_previa, previa_imgs, tem_docx, tem_pdf, aviso, criado_em, pronto_em, pago_em, apagar_em";
+const CAMPOS_LISTA = "id, nome, whatsapp, tamanho, pacote, urgente, manual_tipo, arquivo_nome, arquivo_tipo, arquivo_bytes, status, valor_centavos, tem_previa, previa_imgs, tem_docx, tem_pdf, aviso, criado_em, pronto_em, pago_em, apagar_em";
 
 export async function vincular(env) {
   return json({ ok: true, resultado: await vincularTelegram(env) });
@@ -54,6 +54,15 @@ export async function detalhe(env, id) {
   if (!p) return erro(404, "Pedido não encontrado.");
   const { token, ip_hash, mp_url, ...resto } = p;
   return json({ ok: true, pedido: resto, link: `${env.PUBLIC_BASE}/pedido/#${token}` });
+}
+
+export async function baixarManual(env, id) {
+  const p = await pedido(env, id);
+  if (!p) return erro(404, "Pedido não encontrado.");
+  if (p.status === "apagado" || !TIPOS[p.manual_tipo]) return erro(404, "Este pedido não tem manual.");
+  const o = await env.ARQUIVOS.get(`orig/${p.id}/manual.${TIPOS[p.manual_tipo].ext}`);
+  if (!o) return erro(404, "Arquivo não encontrado.");
+  return arquivo(o.body, TIPOS[p.manual_tipo].mime, `manual-${p.id}.${TIPOS[p.manual_tipo].ext}`);
 }
 
 export async function baixarOriginal(env, id) {
@@ -135,10 +144,10 @@ export async function reembolsado(env, id) {
 export async function apagarPedido(env, p, soSeVencido = false) {
   const t = ahora();
   const r = await env.DB.prepare(
-    "UPDATE pedidos SET status='apagado', nome=NULL, whatsapp=NULL, arquivo_nome=NULL, ip_hash=NULL, mp_url=NULL, tem_previa=0, previa_imgs=0, tem_docx=0, tem_pdf=0, apagado_em=?2 WHERE id=?1 AND status=?3 AND (?4=0 OR apagar_em <= ?2)",
+    "UPDATE pedidos SET status='apagado', nome=NULL, whatsapp=NULL, arquivo_nome=NULL, manual_tipo=NULL, ip_hash=NULL, mp_url=NULL, tem_previa=0, previa_imgs=0, tem_docx=0, tem_pdf=0, apagado_em=?2 WHERE id=?1 AND status=?3 AND (?4=0 OR apagar_em <= ?2)",
   ).bind(p.id, t, p.status, soSeVencido ? 1 : 0).run();
   if (!r.meta.changes) return false;
-  await env.ARQUIVOS.delete([`orig/${p.id}/original.docx`, `orig/${p.id}/original.pdf`, `previa/${p.id}/previa.pdf`, `previa/${p.id}/img1`, `previa/${p.id}/img2`, `previa/${p.id}/img3`, `final/${p.id}/trabalho.docx`, `final/${p.id}/trabalho.pdf`]);
+  await env.ARQUIVOS.delete([`orig/${p.id}/original.docx`, `orig/${p.id}/original.pdf`, `orig/${p.id}/manual.docx`, `orig/${p.id}/manual.pdf`, `previa/${p.id}/previa.pdf`, `previa/${p.id}/img1`, `previa/${p.id}/img2`, `previa/${p.id}/img3`, `final/${p.id}/trabalho.docx`, `final/${p.id}/trabalho.pdf`]);
   return true;
 }
 

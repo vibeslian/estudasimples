@@ -69,7 +69,7 @@ marca(!/\b\d+\s*a\s*\d+\s*horas/.test(fuenteTexto) && !fuenteTexto.includes("wa.
   marca(/Mais de 60 páginas/.test(t) && /A consultar/.test(t), "más de 60 páginas: \"A consultar\"");
   marca(t.includes(`Entrega em ${cfg.prazo}`), `el plazo "${cfg.prazo}" aparece desde la configuración`);
   marca(!/\{\{|\}\}/.test(d.texto) && !/\{\{/.test(await p.content()), "no queda ningún marcador {{...}} sin reemplazar");
-  marca(d.title.length <= 65 && d.desc.length >= 120 && d.desc.length <= 165 && d.title.includes("Formatação ABNT de TCC"), `title ${d.title.length}c y description ${d.desc.length}c dentro de lo recomendado`);
+  marca(d.title.length <= 65 && d.desc.length >= 120 && d.desc.length <= 165 && /Formatação (ABNT de TCC|de TCC ABNT)/.test(d.title), `title ${d.title.length}c y description ${d.desc.length}c dentro de lo recomendado`);
   console.log("   title:", d.title, "\n   h1:", d.h1);
 
   console.log("\n== 2) Contenido pedido ==");
@@ -99,7 +99,7 @@ marca(!/\b\d+\s*a\s*\d+\s*horas/.test(fuenteTexto) && !fuenteTexto.includes("wa.
     return { tipos: todos.map((x) => x["@type"]), service: todos.find((x) => x["@type"] === "Service"), faq: faq?.mainEntity.map((m) => ({ q: m.name, a: m.acceptedAnswer.text })), vis };
   });
   marca(["Service", "FAQPage", "BreadcrumbList"].every((x) => ld.tipos.includes(x)), `JSON-LD válido: ${ld.tipos.join(", ")}`);
-  marca(ld.service.offers.map((o) => o.price).join() === `${cfg.precos.ate30},${cfg.precos.de31a60}` && ld.service.offers.every((o) => o.priceCurrency === "BRL"), `Service: ofertas ${ld.service.offers.map((o) => o.name + " = " + o.price + " " + o.priceCurrency).join(" | ")} (iguales a la configuración)`);
+  marca(ld.service.offers.map((o) => o.price).join() === `${cfg.precos.ate30},${cfg.precos.de31a60},${cfg.precosBanca.ate30},${cfg.precosBanca.de31a60}` && ld.service.offers.every((o) => o.priceCurrency === "BRL"), `Service: ofertas ${ld.service.offers.map((o) => o.name + " = " + o.price + " " + o.priceCurrency).join(" | ")} (iguales a la configuración)`);
   marca(!ld.service.aggregateRating && !ld.service.review, "sin reseñas ni calificaciones inventadas");
   marca(ld.faq.length === ld.vis.length && ld.faq.length >= 10 && ld.faq.every((f, i) => norm(f.q) === norm(ld.vis[i].q) && norm(f.a) === norm(ld.vis[i].a)), `FAQPage: ${ld.faq.length} preguntas, idénticas al texto visible`);
   marca(ld.faq.some((f) => norm(f.a).includes(norm(brl(cfg.precos.ate30)))) && ld.faq.some((f) => f.a.includes(cfg.prazo)), "el FAQ también toma precios y plazo de la configuración");
@@ -140,7 +140,7 @@ for (const [nombre, vp] of [["computador 1280", { width: 1280, height: 900 }], [
   });
   marca(!!r, `${url} ${nombre}: existe el bloque`);
   if (!r) { await p.close(); continue; }
-  marca(r.texto === "Prefere receber o trabalho inteiro formatado? Conheça meu serviço." && r.href === SERVICO + "#origem=" + slotAbajo, `texto: "${r.texto}" → ${r.href}`);
+  marca(/^Quer o trabalho inteiro assim, nas normas da ABNT?/.test(r.texto) && /Prévia antes de pagar/.test(r.texto) && /MEI com CNPJ/.test(r.texto) && r.href === SERVICO + "#origem=" + slotAbajo, `caixa de confiança: "${r.texto.slice(0, 60)}…" → ${r.href}`);
   marca(r.dentroForm && !r.dentroAcoes && r.cTop >= r.botones + 12, `queda después de los botones de descarga (${Math.round(r.cTop - r.botones)} px por debajo), fuera del grupo de botones`);
   const visibles = r.anuncios.filter((x) => x.display !== "none");
   const cerca = Math.min(...visibles.map((x) => Math.abs(x.top - r.cBottom)));
@@ -213,7 +213,7 @@ console.log("\n== 6) Política de Privacidade y Termos ==");
   marca(/WhatsApp/.test(r.txt) && /inteligência artificial/.test(r.txt) && /apago do meu computador os arquivos/i.test(r.txt) && /só para prestar o serviço/i.test(r.txt) && /Pix/.test(r.txt) && /art\. 7º, V/.test(r.txt), "explica: WhatsApp, IA, uso solo para el servicio, borrado, Pix y base legal");
   marca(/WhatsApp \(Meta\)/.test(r.txt) && /Anthropic/.test(r.txt), "sección 5 (con quién se comparte) menciona WhatsApp, proveedores de IA y el banco");
   // la fecha es 14 de outubro (como siempre) o, desde que los links de afiliado están encendidos, la de afiliados.legalAtualizadoEm (21 de outubro de 2026, el curso de Hotmart)
-  marca(/16 de novembro de 2026|12 de novembro de 2026|10 de novembro de 2026|14 de outubro de 2026|20 de outubro de 2026|21 de outubro de 2026|27 de outubro de 2026|28 de outubro de 2026|2 de novembro de 2026|7 de novembro de 2026/.test(r.fecha), `fecha actualizada: ${r.fecha}`);
+  marca(/17 de novembro de 2026|16 de novembro de 2026|12 de novembro de 2026|10 de novembro de 2026|14 de outubro de 2026|20 de outubro de 2026|21 de outubro de 2026|27 de outubro de 2026|28 de outubro de 2026|2 de novembro de 2026|7 de novembro de 2026/.test(r.fecha), `fecha actualizada: ${r.fecha}`);
   marca(/15 dias depois da entrega/.test(r.txt) && !/Quando o serviço termina, apago/.test(r.txt), "Política: los archivos se borran 15 días después de la entrega (resumen, 2.4 y 6)");
   marca(/De qual página você veio/.test(r.txt) && /mensagem já escrita/.test(r.txt), "Política: explica que el mensaje de WhatsApp dice de qué página viene el visitante");
   const ancla = new URL("/politica-de-privacidade/#servico-formatacao", BASE).href;
@@ -223,7 +223,7 @@ console.log("\n== 6) Política de Privacidade y Termos ==");
   const t = await abre("/termos-de-uso/");
   const tt = await t.evaluate(() => ({ txt: document.querySelector("main").innerText.replace(/\s+/g, " "), ancla: !!document.getElementById("servico-formatacao"), subs: [...document.querySelectorAll("main h3")].map((h) => h.textContent.trim()) }));
   marca(tt.ancla && /Serviço pago de formatação/.test(tt.txt) && tt.subs.length >= 5, "los Termos de Uso describen el servicio pago (con ancla #servico-formatacao): " + tt.subs.join(" | "));
-  marca(/Word e em PDF/.test(tt.txt) && /confirmo o pagamento por Pix e recebo todos os arquivos necessários/.test(tt.txt) && /corrijo sem custo, mesmo depois dessa rodada/.test(tt.txt) && /novo orçamento/.test(tt.txt) && /(15|Quinze) dias depois da entrega/.test(tt.txt), "Termos: entrega Word y PDF, plazo desde el pago y los archivos, ajustes, nuevo presupuesto y borrado a los 15 días");
+  marca(/Word e em PDF/.test(tt.txt) && /confirmo o pagamento por Pix e recebo todos os arquivos necessários/.test(tt.txt) && /corrijo sem custo, mesmo depois dessas rodadas/.test(tt.txt) && /novo orçamento/.test(tt.txt) && /(15|Quinze) dias depois da entrega/.test(tt.txt), "Termos: entrega Word y PDF, plazo desde el pago y los archivos, ajustes, nuevo presupuesto y borrado a los 15 días");
   marca(/Devolvo o valor integral, pelo mesmo meio de pagamento \(Pix ou cartão\), em até 7 dias/.test(tt.txt) && /antes de eu começar/.test(tt.txt) && /não cumprir o prazo/.test(tt.txt) && /depois da entrega, o valor não é devolvido/.test(tt.txt) && /Arrependimento em 7 dias/.test(tt.txt) && /Código de Defesa do Consumidor/.test(tt.txt) && /art\. 49/.test(tt.txt) && /art\. 20/.test(tt.txt), "Termos: reembolso integral (antes de empezar / plazo incumplido), sin reembolso tras la entrega, y derechos del CDC (arts. 49 y 20) intactos");
   await t.close();
 }

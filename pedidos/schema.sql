@@ -34,7 +34,10 @@ CREATE TABLE IF NOT EXISTS pedidos (
   apagado_em INTEGER,
   consentimento_em INTEGER NOT NULL,
   consentimento_versao TEXT NOT NULL,
-  ip_hash TEXT
+  ip_hash TEXT,
+  pacote TEXT NOT NULL DEFAULT 'formatacao', -- formatacao | banca
+  urgente INTEGER NOT NULL DEFAULT 0,        -- 1 = pediu entrega em 24 h
+  manual_tipo TEXT                           -- docx | pdf quando o cliente anexou o manual da faculdade
 );
 
 CREATE INDEX IF NOT EXISTS idx_pedidos_status ON pedidos (status, criado_em);

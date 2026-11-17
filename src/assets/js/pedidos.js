@@ -32,6 +32,23 @@
       var f = campoArq.files[0];
       nomeArq.textContent = f ? f.name + " · " + tamanho(f.size) : "Nenhum arquivo escolhido";
     });
+    var campoManual = document.getElementById("pdManual");
+    var nomeManual = document.getElementById("pdManualNome");
+    if (campoManual && nomeManual) campoManual.addEventListener("change", function () {
+      var f = campoManual.files[0];
+      nomeManual.textContent = f ? f.name + " · " + tamanho(f.size) : "Nenhum manual anexado";
+    });
+    var atualizaPrecos = function () {
+      var marcado = form.querySelector('input[name="pacote"]:checked');
+      var pacote = marcado ? marcado.value : "formatacao";
+      Array.prototype.forEach.call(form.querySelectorAll("b[data-banca]"), function (b) { b.textContent = b.getAttribute("data-" + pacote); });
+      var aviso = document.getElementById("pdPrecosAviso");
+      if (aviso) aviso.textContent = pacote === "banca" ? "(preços do Pronto para a banca)" : "(preços da Formatação ABNT)";
+    };
+    var pedido = /[?&]pacote=(banca|formatacao)\b/.exec(location.search);
+    if (pedido) { var op = form.querySelector('input[name="pacote"][value="' + pedido[1] + '"]'); if (op) op.checked = true; }
+    Array.prototype.forEach.call(form.querySelectorAll('input[name="pacote"]'), function (r) { r.addEventListener("change", atualizaPrecos); });
+    atualizaPrecos();
     var mostrarErro = function (t, campo) {
       erro.textContent = t; erro.hidden = !t;
       if (t) { if (campo) { campo.focus(); campo.setAttribute("aria-invalid", "true"); } erro.scrollIntoView({ block: "center" }); }
@@ -47,6 +64,9 @@
       if (!arq) return mostrarErro("Anexe o arquivo do trabalho.", campoArq);
       if (arq.size > MAX) return mostrarErro("O arquivo é grande demais. O limite é de 25 MB.", campoArq);
       if (!/\.(docx|pdf)$/i.test(arq.name)) return mostrarErro("O arquivo precisa ser Word (.docx) ou PDF.", campoArq);
+      var man = campoManual && campoManual.files[0];
+      if (man && man.size > 10 * 1024 * 1024) return mostrarErro("O manual é grande demais. O limite é de 10 MB.", campoManual);
+      if (man && !/\.(docx|pdf)$/i.test(man.name)) return mostrarErro("O manual precisa ser Word (.docx) ou PDF.", campoManual);
       if (!document.getElementById("pdConsent").checked) return mostrarErro("É preciso concordar com os Termos de Uso e a Política de Privacidade.", document.getElementById("pdConsent"));
       var dados = new FormData(form);
       dados.set("consentimento", "sim");

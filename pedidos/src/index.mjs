@@ -29,6 +29,7 @@ async function rotaAdmin(request, env, partes) {
   const pid = p[1];
   if (p.length === 2 && metodo === "GET") return admin.detalhe(env, pid);
   if (p[2] === "original" && metodo === "GET") return admin.baixarOriginal(env, pid);
+  if (p[2] === "manual" && metodo === "GET") return admin.baixarManual(env, pid);
   if (p[2] === "arquivo" && metodo === "PUT") return admin.subir(request, env, pid, p[3]);
   if (p[2] === "andamento" && metodo === "POST") return admin.andamento(env, pid);
   if (p[2] === "pronto" && metodo === "POST") return admin.marcarPronto(request, env, pid);
