@@ -156,5 +156,6 @@ export async function limpezaDiaria(env) {
     try { if (await apagarPedido(env, p, true)) n++; } catch (e) { console.error("falha ao apagar", p.id, e && e.message); } // um pedido com problema não impede apagar os outros
   }
   await env.DB.prepare("DELETE FROM limites WHERE expira < ?1").bind(ahora()).run();
+  await env.DB.prepare("DELETE FROM metricas WHERE dia < ?1").bind(new Date(Date.now() - 400 * 86400 * 1000).toISOString().slice(0, 10)).run(); // contador: guarda ~13 meses
   return n;
 }

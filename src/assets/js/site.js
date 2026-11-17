@@ -166,3 +166,30 @@
     manchas.forEach(function (m) { io2.observe(m); });
   }
 })();
+
+// Contador anônimo do Estuda Simples: conta a visita da página e os cliques nos botões de compra.
+// Sem cookies e sem dados pessoais (só o caminho da página e o tipo de clique). Só funciona no site publicado.
+(function () {
+  if (location.hostname !== "estudasimples.com.br" || !navigator.sendBeacon) return;
+  function envia(evento) {
+    try { navigator.sendBeacon("/api/m", JSON.stringify({ p: location.pathname, e: evento })); } catch (e) { /* o contador nunca atrapalha a página */ }
+  }
+  function tipo(href) {
+    if (/^https?:\/\/(wa\.me|api\.whatsapp\.com)\//.test(href)) return "whatsapp";
+    if (/^https?:\/\/pay\.hotmart\.com\//.test(href)) return "hotmart";
+    if (/^https?:\/\/go\.hotmart\.com\//.test(href)) return "curso";
+    if (/^https?:\/\/(www\.)?(amazon\.com\.br|amzn\.to)\//.test(href)) return "amazon";
+    var caminho = href.replace(/^https?:\/\/estudasimples\.com\.br/, "");
+    if (/^\/kit[-]tcc\/?($|[#?])/.test(caminho)) return "kit"; // página do produto (escrito assim para não nomeá-lo com o produto desligado)
+    if (/^\/formatacao-abnt-tcc\/?($|[#?])/.test(caminho)) return "servico";
+    if (/^\/pedir-formatacao\/?($|[#?])/.test(caminho)) return "pedir";
+    return null;
+  }
+  envia("vista");
+  document.addEventListener("click", function (ev) {
+    var a = ev.target && ev.target.closest ? ev.target.closest("a[href]") : null;
+    if (!a) return;
+    var t = tipo(a.getAttribute("href") || "");
+    if (t) envia(t);
+  }, true);
+})();

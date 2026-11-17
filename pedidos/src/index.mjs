@@ -3,6 +3,8 @@ import { json, erro } from "./util.mjs";
 import { verificaAcesso } from "./access.mjs";
 import * as cliente from "./cliente.mjs";
 import * as admin from "./admin.mjs";
+import * as metricas from "./metricas.mjs";
+import * as hotmart from "./hotmart.mjs";
 
 function origemValida(request, env) {
   // Defensa contra pedidos enviados desde otro sitio: si el navegador manda «Origin», tiene que ser el nuestro.
@@ -19,6 +21,7 @@ async function rotaAdmin(request, env, partes) {
   const p = partes.slice(3);
   if (p[0] === "vincular-telegram" && metodo === "POST") return admin.vincular(env);
   if (p[0] === "teste-aviso" && metodo === "POST") return admin.testarAviso(env);
+  if (p[0] === "metricas" && metodo === "GET") return metricas.resumo(env, new URL(request.url).searchParams.get("dias"));
   if (p[0] === "limpeza" && metodo === "POST") return json({ ok: true, apagados: await admin.limpezaDiaria(env) }); // o mesmo que a limpeza diária, sob demanda
   if (p[0] !== "pedidos") return erro(404, "Não encontrado.");
   if (p.length === 1 && metodo === "GET") return admin.listar(env);
@@ -54,6 +57,8 @@ export default {
         if (rota === "pedido/baixar/docx") return await cliente.baixar(request, env, "docx");
         if (rota === "pedido/baixar/pdf") return await cliente.baixar(request, env, "pdf");
         if (rota === "mp/webhook") return await cliente.webhookMp(request, env);
+        if (rota === "m") return await metricas.registra(request, env);
+        if (rota === "hotmart/webhook") return await hotmart.webhook(request, env);
       }
       if (metodo === "GET" && rota === "mp/webhook") return await cliente.webhookMp(request, env); // formato antigo do aviso (IPN)
       if (rota === "saude" && metodo === "GET") return json({ ok: true });
