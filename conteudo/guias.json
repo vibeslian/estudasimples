@@ -54,13 +54,13 @@
     "ferramentas": [
       "capa"
     ],
-    "titulo": "Margens ABNT: medidas certas e como configurar no Word",
+    "titulo": "Margem ABNT: 3, 3, 2 e 2 cm e como configurar no Word",
     "h1": "Margens ABNT: quanto medem e como configurar",
-    "descricao": "Margens ABNT: 3 cm à esquerda e em cima, 2 cm à direita e embaixo. Veja a folha desenhada e como configurar no Word e no Google Docs.",
-    "lead": "Esquerda e superior de 3 cm, direita e inferior de 2 cm, em folha A4. Veja a folha desenhada e o passo a passo.",
+    "descricao": "Margem ABNT: 3 cm à esquerda e em cima, 2 cm à direita e embaixo, em A4. Veja a folha desenhada na escala e configure no Word ou no Google Docs.",
+    "lead": "O orientador devolveu por causa das margens? Na folha A4 são 3 cm à esquerda e em cima e 2 cm à direita e embaixo. Veja a folha desenhada e o passo a passo.",
     "resumoIndice": "As quatro medidas, a folha desenhada, o verso das folhas e como ajustar no Word e no Google Docs.",
     "norma": "ABNT NBR 14724:2024",
-    "atualizado": "2026-10-15",
+    "atualizado": "2026-11-12",
     "ferramenta": {
       "nome": "Gerador de capa ABNT",
       "texto": "A capa já sai em A4 com as margens de 3, 3, 2 e 2 cm, e você baixa em PDF ou Word.",
@@ -245,8 +245,8 @@
     "ferramenta": {
       "nome": "Formatação ABNT de TCC",
       "selo": "Serviço do Estuda Simples",
-      "texto": "Prefere receber o trabalho já formatado, em Word e PDF? Eu cuido da forma e você só escreve. Orçamento pelo WhatsApp.",
-      "botao": "Pedir orçamento",
+      "texto": "Prefere receber o trabalho já formatado, em Word e PDF? Eu cuido da forma e você só escreve. Você vê uma prévia antes de pagar. Peça pelo site ou pelo WhatsApp, a partir de {{PRECO_ATE30}}.",
+      "botao": "Conhecer o serviço",
       "url": "/formatacao-abnt-tcc/"
     },
     "relacionadas": [
@@ -378,8 +378,8 @@
     "ferramenta": {
       "nome": "Formatação ABNT de TCC",
       "selo": "Serviço do Estuda Simples",
-      "texto": "Prefere que eu formate o resumo e o resto do trabalho nas normas da ABNT? Orçamento pelo WhatsApp.",
-      "botao": "Pedir orçamento",
+      "texto": "Prefere que eu formate o resumo e o resto do trabalho nas normas da ABNT? Você vê uma prévia antes de pagar. Peça pelo site ou pelo WhatsApp, a partir de {{PRECO_ATE30}}.",
+      "botao": "Conhecer o serviço",
       "url": "/formatacao-abnt-tcc/"
     },
     "relacionadas": [
@@ -638,21 +638,21 @@
   },
   {
     "categoria": "TCC passo a passo",
-    "atualizado": "2026-10-15",
+    "atualizado": "2026-11-12",
     "norma": "ABNT NBR 14724:2024",
     "slug": "agradecimentos-tcc",
     "prioridade": 15,
     "rotulo": "Agradecimentos do TCC",
-    "titulo": "Agradecimentos TCC: como fazer, formato ABNT e 8 exemplos",
-    "h1": "Agradecimentos do TCC: como fazer, formato ABNT e 8 exemplos",
-    "descricao": "Como escrever os agradecimentos do TCC: formato ABNT, ordem, tamanho e 8 exemplos originais (curto, família, orientador, emocionante e em dupla).",
-    "lead": "O formato da página, a ordem de quem agradecer e oito exemplos escritos do zero para você adaptar.",
-    "resumoIndice": "Formato ABNT, ordem de quem agradecer e 8 exemplos originais para adaptar.",
+    "titulo": "Agradecimentos do TCC: modelo pronto e 8 exemplos (ABNT)",
+    "h1": "Agradecimentos do TCC: modelo pronto, formato ABNT e 8 exemplos",
+    "descricao": "Modelo pronto de agradecimentos do TCC para copiar e adaptar. Veja onde fica (antes do sumário), quem agradecer primeiro, o formato e 8 exemplos.",
+    "lead": "Não sabe o que escrever nesta página? Aqui estão um modelo para copiar, onde ela fica no trabalho, quem agradecer primeiro e oito exemplos escritos do zero.",
+    "resumoIndice": "Modelo pronto, onde fica (antes do sumário), ordem e 8 exemplos para adaptar.",
     "ferramenta": {
       "nome": "Formatação ABNT de TCC",
       "selo": "Serviço do Estuda Simples",
-      "texto": "Prefere que eu deixe todas as páginas iniciais do trabalho no formato da ABNT? Orçamento pelo WhatsApp.",
-      "botao": "Pedir orçamento",
+      "texto": "Prefere que eu deixe todas as páginas iniciais do trabalho no formato da ABNT? Você vê uma prévia antes de pagar. Peça pelo site ou pelo WhatsApp, a partir de {{PRECO_ATE30}}.",
+      "botao": "Conhecer o serviço",
       "url": "/formatacao-abnt-tcc/"
     },
     "relacionadas": [
@@ -691,8 +691,8 @@
     "ferramenta": {
       "nome": "Formatação ABNT de TCC",
       "selo": "Serviço do Estuda Simples",
-      "texto": "Quer ajuda para deixar o texto no formato da ABNT, com citações e referências? Eu cuido da forma. Orçamento pelo WhatsApp.",
-      "botao": "Pedir orçamento",
+      "texto": "Quer ajuda para deixar o texto no formato da ABNT, com citações e referências? Eu cuido da forma. Você vê uma prévia antes de pagar. Peça pelo site ou pelo WhatsApp, a partir de {{PRECO_ATE30}}.",
+      "botao": "Conhecer o serviço",
       "url": "/formatacao-abnt-tcc/"
     },
     "relacionadas": [
@@ -735,8 +735,8 @@
     "ferramenta": {
       "nome": "Formatação ABNT de TCC",
       "selo": "Serviço do Estuda Simples",
-      "texto": "Prefere que eu formate o trabalho inteiro nas normas da ABNT enquanto você cuida do texto? Orçamento pelo WhatsApp.",
-      "botao": "Pedir orçamento",
+      "texto": "Prefere que eu formate o trabalho inteiro nas normas da ABNT enquanto você cuida do texto? Você vê uma prévia antes de pagar. Peça pelo site ou pelo WhatsApp, a partir de {{PRECO_ATE30}}.",
+      "botao": "Conhecer o serviço",
       "url": "/formatacao-abnt-tcc/"
     },
     "relacionadas": [
@@ -770,21 +770,21 @@
   },
   {
     "categoria": "TCC passo a passo",
-    "atualizado": "2026-11-02",
+    "atualizado": "2026-11-12",
     "norma": "ABNT NBR 14724:2024",
     "slug": "consideracoes-finais-tcc",
     "prioridade": 18,
     "rotulo": "Considerações finais do TCC",
-    "titulo": "Conclusão do TCC (considerações finais): como escrever",
-    "h1": "Considerações finais (conclusão) do TCC: como escrever, com exemplo",
-    "descricao": "Como escrever as considerações finais ou a conclusão do TCC: retomar o problema, responder aos objetivos, limites e sugestões, com um exemplo.",
-    "lead": "O que a conclusão precisa trazer, o que ela não deve fazer e um exemplo com cada parte marcada.",
-    "resumoIndice": "Retomar o problema, responder aos objetivos, limites e sugestões, com exemplo.",
+    "titulo": "Considerações finais do TCC: modelo pronto e como escrever",
+    "h1": "Considerações finais (conclusão) do TCC: como escrever, com exemplo e modelo",
+    "descricao": "Como escrever as considerações finais (conclusão) do TCC: o que entra, se pode ter citação, como começar e um modelo pronto para adaptar.",
+    "lead": "Precisa entregar a conclusão e não sabe por onde começar? Veja o que ela leva, como abrir o texto, se pode ter citação e um modelo para adaptar.",
+    "resumoIndice": "O que entra, se pode ter citação, como começar e um modelo pronto para adaptar.",
     "ferramenta": {
       "nome": "Formatação ABNT de TCC",
       "selo": "Serviço do Estuda Simples",
-      "texto": "Terminou o texto? Eu posso deixar o trabalho inteiro no formato da ABNT, em Word e PDF. Orçamento pelo WhatsApp.",
-      "botao": "Pedir orçamento",
+      "texto": "Terminou o texto? Eu posso deixar o trabalho inteiro no formato da ABNT, em Word e PDF. Você vê uma prévia antes de pagar. Peça pelo site ou pelo WhatsApp, a partir de {{PRECO_ATE30}}.",
+      "botao": "Conhecer o serviço",
       "url": "/formatacao-abnt-tcc/"
     },
     "relacionadas": [
@@ -1001,8 +1001,8 @@
     "ferramenta": {
       "nome": "Formatação ABNT de TCC",
       "selo": "Serviço do Estuda Simples",
-      "texto": "Prefere que eu deixe as citações e as referências do trabalho no formato da ABNT? Orçamento pelo WhatsApp.",
-      "botao": "Pedir orçamento",
+      "texto": "Prefere que eu deixe as citações e as referências do trabalho no formato da ABNT? Você vê uma prévia antes de pagar. Peça pelo site ou pelo WhatsApp, a partir de {{PRECO_ATE30}}.",
+      "botao": "Conhecer o serviço",
       "url": "/formatacao-abnt-tcc/"
     },
     "relacionadas": [
@@ -1090,8 +1090,8 @@
     "ferramenta": {
       "nome": "Formatação ABNT de TCC",
       "selo": "Serviço do Estuda Simples",
-      "texto": "Vai usar as fichas no seu trabalho? Eu posso conferir as citações e as referências e deixar tudo no formato da ABNT. Orçamento pelo WhatsApp.",
-      "botao": "Pedir orçamento",
+      "texto": "Vai usar as fichas no seu trabalho? Eu posso conferir as citações e as referências e deixar tudo no formato da ABNT. Você vê uma prévia antes de pagar. Peça pelo site ou pelo WhatsApp, a partir de {{PRECO_ATE30}}.",
+      "botao": "Conhecer o serviço",
       "url": "/formatacao-abnt-tcc/"
     },
     "relacionadas": [
@@ -1228,8 +1228,8 @@
     "ferramenta": {
       "nome": "Formatação ABNT de TCC",
       "selo": "Serviço do Estuda Simples",
-      "texto": "Vai enviar um artigo e quer o texto no formato da ABNT, com citações e referências? Orçamento pelo WhatsApp.",
-      "botao": "Pedir orçamento",
+      "texto": "Vai enviar um artigo e quer o texto no formato da ABNT, com citações e referências? Você vê uma prévia antes de pagar. Peça pelo site ou pelo WhatsApp, a partir de {{PRECO_ATE30}}.",
+      "botao": "Conhecer o serviço",
       "url": "/formatacao-abnt-tcc/"
     },
     "relacionadas": [
@@ -1450,8 +1450,8 @@
     "ferramenta": {
       "nome": "Formatação ABNT de TCC",
       "selo": "Serviço do Estuda Simples",
-      "texto": "Fontes conferidas e trabalho pronto? Eu posso conferir se as citações e as referências estão no formato da ABNT e formatar o trabalho inteiro. Não faço análise de plágio nem de IA: cuido só da forma. Orçamento pelo WhatsApp.",
-      "botao": "Pedir orçamento",
+      "texto": "Fontes conferidas e trabalho pronto? Eu posso conferir se as citações e as referências estão no formato da ABNT e formatar o trabalho inteiro. Não faço análise de plágio nem de IA: cuido só da forma. Você vê uma prévia antes de pagar. Peça pelo site ou pelo WhatsApp, a partir de {{PRECO_ATE30}}.",
+      "botao": "Conhecer o serviço",
       "url": "/formatacao-abnt-tcc/"
     },
     "relacionadas": [

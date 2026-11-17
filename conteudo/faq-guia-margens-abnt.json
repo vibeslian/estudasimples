@@ -12,6 +12,12 @@
     ]
   },
   {
+    "p": "A margem ABNT é igual em todas as páginas?",
+    "r": [
+      "Sim, na frente da folha. Os manuais das universidades aplicam as mesmas margens (3, 3, 2 e 2 cm) à capa, à folha de rosto, ao sumário, ao texto e às referências."
+    ]
+  },
+  {
     "p": "As margens são as mesmas no verso da folha?",
     "r": [
       "Não. No verso, direita e superior têm 3 cm, e esquerda e inferior têm 2 cm. Isso só importa se você imprimir dos dois lados; em PDF ou impresso de um lado só, valem as margens do anverso."
@@ -26,13 +32,25 @@
   {
     "p": "O número da página fica dentro da margem?",
     "r": [
-      "Fica na região da margem superior: a 2 cm da borda de cima e com o último algarismo a 2 cm da borda direita. Veja como na <a href=\"/guias/numeracao-de-paginas-abnt/\">guia de numeração de páginas</a>."
+      "Fica na região da margem superior: a 2 cm da borda de cima e com o último algarismo a 2 cm da borda direita. Veja como no <a href=\"/guias/numeracao-de-paginas-abnt/\">guia de numeração de páginas</a>."
     ]
   },
   {
     "p": "Minha faculdade pede margens diferentes. Qual vale?",
     "r": [
       "Vale a da faculdade. A ABNT é a base, mas muitas instituições têm manual próprio e a banca segue o dele. Pergunte ao orientador ou à biblioteca antes de entregar."
+    ]
+  },
+  {
+    "p": "Qual é a margem padrão do Word? Ela serve para a ABNT?",
+    "r": [
+      "A margem \"Normal\" do Word tem 2,54 cm nos quatro lados e não atende à ABNT. Mude para 3 cm em cima e à esquerda e 2 cm embaixo e à direita, em Layout › Margens › Margens Personalizadas."
+    ]
+  },
+  {
+    "p": "Meu trabalho já está escrito. Ainda dá para ajustar as margens?",
+    "r": [
+      "Dá, mas o texto muda de lugar: figuras, tabelas e títulos podem pular de página, e o sumário precisa ser atualizado. Confira o trabalho inteiro depois de ajustar."
     ]
   }
 ]

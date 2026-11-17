@@ -1,42 +1,74 @@
 [
   {
     "p": "Os agradecimentos do TCC são obrigatórios?",
-    "r": ["Pela ABNT, não: é um elemento opcional. Algumas instituições os exigem em casos específicos; a UFV, por exemplo, pede agradecimentos em teses e dissertações defendidas lá, e opcionais nos demais trabalhos."]
+    "r": [
+      "Pela ABNT, não: é um elemento opcional. Algumas instituições os exigem em casos específicos; a UFV, por exemplo, pede agradecimentos em teses e dissertações defendidas lá, e opcionais nos demais trabalhos."
+    ]
   },
   {
     "p": "Como fazer agradecimentos no TCC?",
-    "r": ["Escreva AGRADECIMENTOS no alto da página, centralizado, em maiúsculas e negrito e sem número. Abaixo, o texto justificado, em fonte 12 com espaçamento 1,5, agradecendo a quem contribuiu de forma relevante: família, orientador, professores, colegas e quem financiou a pesquisa."]
+    "r": [
+      "Escreva AGRADECIMENTOS no alto da página, centralizado, em maiúsculas e negrito e sem número. Abaixo, o texto justificado, em fonte 12 com espaçamento 1,5, agradecendo a quem contribuiu de forma relevante: família, orientador, professores, colegas e quem financiou a pesquisa."
+    ]
   },
   {
     "p": "Qual é a ordem dos agradecimentos?",
-    "r": ["A norma não define uma ordem. Nos modelos dos manuais costuma vir primeiro o apoio pessoal e a família, depois a instituição, os professores e o orientador, os colegas, quem participou da pesquisa e quem a financiou. Você pode mudar a ordem."]
+    "r": [
+      "A norma não define uma ordem. Nos modelos dos manuais costuma vir primeiro o apoio pessoal e a família, depois a instituição, os professores e o orientador, os colegas, quem participou da pesquisa e quem a financiou. Você pode mudar a ordem."
+    ]
   },
   {
     "p": "Quantas linhas ou páginas devem ter os agradecimentos?",
-    "r": ["A norma não fixa. O costume é uma página, com um parágrafo curto para cada pessoa ou grupo. Se o manual da sua faculdade limitar o tamanho, siga o manual."]
+    "r": [
+      "A norma não fixa. O costume é uma página, com um parágrafo curto para cada pessoa ou grupo. Se o manual da sua faculdade limitar o tamanho, siga o manual."
+    ]
   },
   {
-    "p": "Em que parte do TCC ficam os agradecimentos?",
-    "r": ["Entre os elementos pré-textuais: depois da dedicatória e antes da epígrafe, e antes do resumo. Eles não entram no sumário."]
+    "p": "Os agradecimentos vêm antes ou depois do sumário?",
+    "r": [
+      "Antes. Os agradecimentos ficam entre os elementos pré-textuais: depois da dedicatória e antes da epígrafe, do resumo e do sumário. Eles também não aparecem listados no sumário. Veja <a href=\"#antes-do-sumario\">a ordem completa das páginas</a>."
+    ]
+  },
+  {
+    "p": "Pode citar nomes de pessoas e de empresas nos agradecimentos?",
+    "r": [
+      "Pode. A ABNT não regula o conteúdo dos agradecimentos. Cite pelo nome quem ajudou de verdade, inclusive a empresa ou a instituição que cedeu dados ou deu bolsa."
+    ]
   },
   {
     "p": "Pode agradecer a Deus nos agradecimentos?",
-    "r": ["Pode. Não há regra da ABNT sobre o conteúdo; os modelos de manuais, como o da UFV e o da UERN, trazem exemplos que agradecem a Deus. É uma escolha pessoal, e você decide como agradecer."]
+    "r": [
+      "Pode. Não há regra da ABNT sobre o conteúdo; os modelos de manuais, como o da UFV e o da UERN, trazem exemplos que agradecem a Deus. É uma escolha pessoal, e você decide como agradecer."
+    ]
   },
   {
     "p": "Como fazer agradecimentos em dupla ou em grupo?",
-    "r": ["Escreva no plural (\"Agradecemos...\") e inclua um parágrafo para o outro integrante, se quiserem. O formato da página é o mesmo. Veja o exemplo em dupla neste guia."]
+    "r": [
+      "Escreva no plural (\"Agradecemos...\") e inclua um parágrafo para o outro integrante, se quiserem. O formato da página é o mesmo. Veja o exemplo em dupla neste guia."
+    ]
   },
   {
     "p": "Preciso agradecer à agência que deu a bolsa?",
-    "r": ["Se houve bolsa ou apoio financeiro, sim. A UFV, por exemplo, exige o agradecimento à CAPES e a outras agências nas teses e dissertações. Muitos programas têm um texto padrão no edital; use o que eles pedirem."]
+    "r": [
+      "Se houve bolsa ou apoio financeiro, sim. A UFV, por exemplo, exige o agradecimento à CAPES e a outras agências nas teses e dissertações. Muitos programas têm um texto padrão no edital; use o que eles pedirem."
+    ]
   },
   {
     "p": "Os agradecimentos entram no sumário?",
-    "r": ["Não. Os elementos pré-textuais (folha de rosto, folha de aprovação, dedicatória, agradecimentos, epígrafe, resumos, listas) não entram no sumário. O sumário lista as partes que vêm depois dele."]
+    "r": [
+      "Não. Os elementos pré-textuais (folha de rosto, folha de aprovação, dedicatória, agradecimentos, epígrafe, resumos, listas) não entram no sumário. O sumário lista as partes que vêm depois dele."
+    ]
   },
   {
     "p": "Posso copiar um agradecimento pronto da internet?",
-    "r": ["Não é uma boa ideia. Além de ser um texto de outra pessoa, ele não fala de quem ajudou você. Use os exemplos como ponto de partida e troque os nomes e os detalhes."]
+    "r": [
+      "Não é uma boa ideia. Além de ser um texto de outra pessoa, ele não fala de quem ajudou você. Use os exemplos como ponto de partida e troque os nomes e os detalhes."
+    ]
+  },
+  {
+    "p": "Existe um modelo pronto de agradecimentos para TCC?",
+    "r": [
+      "Existe, e ele está <a href=\"#modelo-pronto\">no começo deste guia</a>: troque o que está entre colchetes e acrescente um detalhe seu em cada parágrafo, para o texto não ficar igual ao de outra pessoa."
+    ]
   }
 ]
