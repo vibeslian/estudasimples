@@ -475,8 +475,8 @@
     },
     "relacionadas": [
       "sumario-automatico-word",
-      "numeracao-de-paginas-abnt",
-      "normas-abnt-tcc"
+      "normas-abnt-no-word",
+      "numeracao-de-paginas-abnt"
     ],
     "fontes": [
       {
@@ -789,7 +789,7 @@
     },
     "relacionadas": [
       "introducao-do-tcc",
-      "resumo-abnt",
+      "apendice-e-anexo-abnt",
       "como-fazer-tcc"
     ],
     "fontes": [
@@ -1281,7 +1281,7 @@
     "relacionadas": [
       "modelos-de-capa-abnt",
       "margens-abnt",
-      "fonte-e-espacamento-abnt"
+      "normas-abnt-no-word"
     ],
     "fontes": [
       {
