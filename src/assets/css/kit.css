@@ -1,12 +1,35 @@
 /* Página do Kit TCC (/kit-tcc/). Cores e fontes vêm de tokens.css. Só é publicada com kit.ativo = true (ver build-kit.mjs). */
 
-/* colagem de páginas no herói (aparece também no celular) */
-.hero .kit-colagem { display: block; position: relative; width: min(100%, 300px); height: 350px; margin: 8px auto 0; }
-@media (min-width: 900px) { .hero .kit-colagem { width: 320px; height: 400px; margin: 0; } }
-.kit-pg { position: absolute; width: 56%; height: auto; border: 1px solid var(--salvia-200); border-radius: 6px; background: #fff; box-shadow: var(--sombra-forte); }
-.kit-pg--a { left: 0; top: 14%; transform: rotate(-4deg); }
-.kit-pg--b { right: 0; top: 0; width: 58%; transform: rotate(3deg); }
-.kit-pg--c { left: 22%; top: 40%; width: 54%; transform: rotate(-1deg); box-shadow: 0 20px 44px rgba(34, 54, 43, .22); }
+/* herói: teste grátis + vídeo de 15 s com páginas reais (aparece também no celular) */
+@media (min-width: 900px) { .com-barra-kit .hero-grade { grid-template-columns: minmax(0, 1fr) minmax(0, 460px); gap: 48px; } }
+.hero .kit-demo { margin: 28px 0 0; }
+@media (min-width: 900px) { .hero .kit-demo { margin: 0; } }
+.kit-demo-tela { padding: clamp(10px, 2vw, 16px); background: var(--principal-escuro); border-radius: var(--raio); box-shadow: 0 2px 4px rgba(34, 54, 43, .08), 0 24px 48px rgba(34, 54, 43, .2); }
+.kit-demo video { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; border-radius: 12px; background: #faf8f3; }
+.kit-demo figcaption { margin: 10px 4px 0; font-size: .92rem; line-height: 1.45; color: var(--texto-suave); text-align: center; }
+.hero-botoes .btn svg { flex-shrink: 0; }
+
+/* faixa de confiança logo depois do herói */
+.kit-faixa { padding: clamp(22px, 4vw, 36px) 0 clamp(36px, 6vw, 56px); }
+.kit-confianca { display: grid; gap: 14px; margin: 0; padding: 0; list-style: none; }
+@media (min-width: 760px) { .kit-confianca { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.kit-confianca li { display: flex; gap: 14px; align-items: flex-start; padding: 18px 20px; background: var(--superficie); border: 1px solid var(--salvia-200); border-radius: 18px; color: var(--principal); }
+.kit-confianca svg { flex-shrink: 0; }
+.kit-confianca img { flex-shrink: 0; width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
+.kit-confianca span { display: flex; flex-direction: column; gap: 2px; font-size: .95rem; line-height: 1.45; color: var(--texto-suave); }
+.kit-confianca strong { font-size: 1.08rem; color: var(--texto); }
+
+/* o que mais volta na formatação: no modelo ou no checklist */
+.kit-volta { display: grid; gap: 32px; align-items: center; }
+@media (min-width: 900px) { .kit-volta { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 48px; } }
+.kit-volta h2 { margin: 0 0 12px; }
+.kit-volta-texto p { margin: 0 0 20px; font-size: 1.1rem; line-height: 1.6; color: var(--texto-suave); }
+.kit-volta-texto img { display: block; width: 100%; max-width: 420px; height: 220px; object-fit: cover; object-position: top; border: 1px solid var(--salvia-200); border-radius: 16px; background: #fff; box-shadow: var(--sombra-forte); }
+.kit-volta-lista { margin: 0; padding: 6px clamp(16px, 3vw, 26px); list-style: none; background: var(--superficie); border-radius: var(--raio); box-shadow: var(--sombra-forte); }
+.kit-volta-lista li { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 15px 0; font-size: 1.05rem; line-height: 1.4; }
+.kit-volta-lista li + li { border-top: 1px solid var(--salvia-100); }
+.kit-selo-item { flex-shrink: 0; padding: 5px 12px; border-radius: 999px; background: var(--salvia-100); color: var(--certo-texto); font-weight: 700; font-size: .85rem; white-space: nowrap; }
+.kit-selo-item--check { background: var(--acento-claro); color: var(--erro-texto); }
 
 /* o que vem no kit */
 .kit-itens { display: grid; gap: 16px; margin: 0; padding: 0; list-style: none; }
@@ -64,10 +87,16 @@
 .kit-fatos strong { color: var(--texto); }
 
 /* chamada final */
-.kit-final { display: flex; flex-wrap: wrap; align-items: center; gap: 20px 32px; padding: clamp(26px, 4vw, 44px); background: var(--principal-escuro); border-radius: var(--raio); color: #fff; }
-.kit-final > div { flex: 1 1 340px; }
-.kit-final h2 { margin: 0 0 8px; color: #fff; }
-.kit-final p { margin: 0; color: var(--salvia-200); font-size: 1.1rem; }
+.kit-final { display: flex; flex-wrap: wrap; align-items: center; gap: 24px 36px; padding: clamp(26px, 5vw, 52px); background: var(--principal-escuro); border-radius: calc(var(--raio) + 8px); color: #fff; box-shadow: 0 30px 60px rgba(34, 54, 43, .25); }
+.kit-final-texto { flex: 1 1 340px; min-width: 0; }
+.kit-final h2 { margin: 0 0 10px; color: #fff; }
+.kit-final p { margin: 0; color: var(--salvia-200); font-size: 1.1rem; line-height: 1.55; }
+.kit-final .kit-final-botoes { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 20px; }
+.kit-final-amostra { color: #fff; font-weight: 700; text-underline-offset: 4px; }
+.kit-final-amostra:hover { color: var(--salvia-200); }
+.kit-selo { display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0; width: 112px; height: 112px; border: 3px solid var(--salvia-300); border-radius: 50%; text-align: center; }
+.kit-selo strong { font-family: var(--fonte-titulo); font-size: 2.6rem; line-height: 1; }
+.kit-selo span { font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 
 /* barra de compra fixa no celular */
 .barra-kit { display: none; }

@@ -22,30 +22,56 @@
   {{include:header}}
   <div class="container hero-conteudo hero-grade" id="conteudo">
     <div class="hero-texto">
-      <span class="etiqueta">Kit TCC · modelo de TCC pronto no Word + checklist</span>
-      <h1>Modelo de TCC em Word já formatado nas normas da ABNT</h1>
-      <p class="lead">Para escrever o seu TCC (trabalho de conclusão de curso) já no formato certo: margens, fonte, espaçamento, títulos numerados, sumário automático e numeração de páginas configurados. É só trocar os textos e escrever dentro do modelo. Vem com um checklist para conferir tudo antes de entregar.</p>
+      <span class="etiqueta">Modelo de TCC pronto no Word · Kit TCC</span>
+      <h1>Teste o modelo no seu Word antes de comprar</h1>
+      <p class="lead">Baixe grátis 3 páginas do modelo em Word: capa, sumário e uma página de texto, já nas normas da ABNT. Abra no seu computador, aperte F9 no sumário e veja o sumário se atualizar sozinho. Funcionou aí? O kit completo funciona igual.</p>
       <div class="hero-botoes">
-        <a class="btn btn-acento btn-grande" href="{{KIT_URL}}" target="_blank" rel="noopener noreferrer">Quero o Kit TCC<span class="sr-only"> (abre a página de compra da Hotmart em outra aba)</span></a>
-        <a class="btn btn-grande" href="#incluido">Ver o que vem no kit</a>
+        <a class="btn btn-acento btn-grande" href="/assets/downloads/amostra-kit-tcc.docx" download><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Baixar 3 páginas grátis (Word)</a>
+        <a class="btn btn-grande" href="{{KIT_URL}}" target="_blank" rel="noopener noreferrer">Quero o kit completo · {{KIT_PRECO}}<span class="sr-only"> (abre a página de compra da Hotmart em outra aba)</span></a>
       </div>
-      <p class="compra-nota" id="compra-nota">A compra é feita na Hotmart (Pix, cartão, boleto ou PayPal). Se não gostar, você pede o reembolso pela Hotmart em até {{KIT_GARANTIA}} dias.</p>
-      <p class="amostra-nota"><a href="/assets/downloads/amostra-kit-tcc.pdf" download>Baixar uma amostra grátis (PDF, 3 páginas do modelo)</a>, sem cadastro.</p>
-      <ul class="confianca">
-        <li>{{KIT_PRECO}}, pagamento único</li>
-        <li>Garantia de {{KIT_GARANTIA}} dias</li>
-        <li>Para o Word no computador (testado no Word para Windows)</li>
-      </ul>
+      <p class="amostra-nota">Sem cadastro e sem e-mail. O modelo foi feito e testado no Word para Windows; em outro programa, teste primeiro com a amostra. Prefere só olhar? <a href="/assets/downloads/amostra-kit-tcc.pdf" download>Amostra em PDF</a>.</p>
     </div>
-    <div class="hero-mini kit-colagem" role="group" aria-label="Páginas do modelo e do checklist">
-      <img class="kit-pg kit-pg--a" src="/assets/img/kit/modelo-sumario.webp" width="520" height="736" alt="Sumário do modelo, com os títulos numerados e as páginas">
-      <img class="kit-pg kit-pg--b" src="/assets/img/kit/modelo-texto.webp" width="520" height="736" alt="Página de texto do modelo, com títulos numerados e citação longa">
-      <img class="kit-pg kit-pg--c" src="/assets/img/kit/modelo-capa.webp" width="520" height="736" alt="Capa do modelo">
-    </div>
+    <figure class="kit-demo">
+      <div class="kit-demo-tela">
+        <video controls muted playsinline preload="none" width="1200" height="900" poster="/assets/img/kit/demo-poster.webp" aria-describedby="kitDemoLegenda"><source src="/assets/img/kit/kit-tcc-demo.mp4" type="video/mp4"></video>
+      </div>
+      <figcaption id="kitDemoLegenda">Vídeo de 15 segundos, sem som, com páginas reais do modelo: a capa, o sumário que se atualiza com F9, os títulos numerados e o número da página a partir da Introdução.</figcaption>
+    </figure>
   </div>
 </div>
 
 <main>
+
+  <section class="kit-faixa" aria-label="Preço, garantia e quem faz">
+    <div class="container">
+      <ul class="kit-confianca">
+        <li><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h4"/></svg><span><strong>{{KIT_PRECO}}, uma vez só</strong>Pix, cartão, boleto ou PayPal, na página da Hotmart</span></li>
+        <li><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg><span><strong>Garantia de {{KIT_GARANTIA}} dias</strong>Não serviu? Você pede o reembolso na própria Hotmart</span></li>
+        <li><img src="/assets/img/fotos/lian.webp" width="48" height="48" alt="Foto do Lian"><span><strong>Feito pelo Lian</strong>Criador do {{SITE_NAME}} · MEI com CNPJ</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="secao secao--salvia" id="antes-de-entregar" aria-labelledby="volta-titulo">
+    <div class="container">
+      <div class="kit-volta revelar">
+        <div class="kit-volta-texto">
+          <span class="etiqueta">Antes de entregar</span>
+          <h2 id="volta-titulo">O que mais volta na formatação, e o kit já resolve</h2>
+          <p>Parte já vem pronta no modelo. O resto, o checklist te lembra de conferir, item por item, seguindo a ABNT NBR 14724:2024.</p>
+          <img src="/assets/img/kit/checklist.webp" width="520" height="736" loading="lazy" decoding="async" alt="Primeira página do checklist do kit, com quadradinhos para marcar">
+        </div>
+        <ul class="kit-volta-lista">
+          <li><span>Margens de 3, 3, 2 e 2 cm</span><span class="kit-selo-item">No modelo</span></li>
+          <li><span>Número da página só a partir da Introdução</span><span class="kit-selo-item">No modelo</span></li>
+          <li><span>Sumário igual aos títulos do texto</span><span class="kit-selo-item">No modelo</span></li>
+          <li><span>Títulos numerados (1, 1.1, 1.1.1)</span><span class="kit-selo-item">No modelo</span></li>
+          <li><span>Toda citação com a sua referência</span><span class="kit-selo-item kit-selo-item--check">No checklist</span></li>
+          <li><span>Partes do trabalho na ordem certa</span><span class="kit-selo-item kit-selo-item--check">No checklist</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
   <section class="secao" id="incluido">
     <div class="container">
@@ -72,7 +98,7 @@
         <li class="cartao">
           <span class="kit-icone" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h12l4 4v12H4zM8 12h8M8 16h5"/></svg></span>
           <h3>Exemplo em PDF</h3>
-          <p>O modelo impresso (19 páginas), para ver como cada página fica antes de abrir o arquivo. Uma <a href="/assets/downloads/amostra-kit-tcc.pdf" download>amostra de 3 páginas</a> já está liberada, de graça.</p>
+          <p>O modelo impresso (19 páginas), para ver como cada página fica antes de abrir o arquivo. Uma amostra de 3 páginas já está liberada, de graça, <a href="/assets/downloads/amostra-kit-tcc.docx" download>em Word</a> e <a href="/assets/downloads/amostra-kit-tcc.pdf" download>em PDF</a>.</p>
         </li>
       </ul>
     </div>
@@ -168,7 +194,7 @@
           <ul>
             <li>não escreve o trabalho nem garante nota ou aprovação</li>
             <li>não substitui o manual da sua faculdade nem o seu orientador</li>
-            <li>foi feito e testado no Word para Windows; não foi testado no Google Docs, no Word para Mac, no Word online, no LibreOffice nem no celular</li>
+            <li>foi feito e testado no Word para Windows; não foi testado no Google Docs, no Word para Mac, no Word online, no LibreOffice nem no celular (por isso existe a amostra grátis: teste no seu programa antes)</li>
             <li>não é para quem tem de usar um modelo próprio da instituição: nesse caso, use o dela</li>
             <li>foi pensado para TCC; em dissertações e teses a norma é parecida, mas capa e ficha catalográfica variam por instituição</li>
           </ul>
@@ -218,11 +244,12 @@
   <section class="secao" id="comprar">
     <div class="container">
       <div class="kit-final revelar">
-        <div>
-          <h2>Comece o seu TCC já no formato certo</h2>
-          <p>Modelo em Word, guia rápido e checklist, por {{KIT_PRECO}}.</p>
+        <div class="kit-selo" aria-hidden="true"><strong>{{KIT_GARANTIA}}</strong><span>dias de</span><span>garantia</span></div>
+        <div class="kit-final-texto">
+          <h2>Entregue o TCC com a formatação já conferida</h2>
+          <p>Modelo em Word, checklist, guia rápido e exemplo, por {{KIT_PRECO}}. Testou e não serviu? Você tem {{KIT_GARANTIA}} dias para pedir o reembolso na Hotmart.</p>
+          <p class="kit-final-botoes"><a class="btn btn-acento btn-grande" href="{{KIT_URL}}" target="_blank" rel="noopener noreferrer">Quero o kit completo · {{KIT_PRECO}}<span class="sr-only"> (abre a página de compra da Hotmart em outra aba)</span></a> <a class="kit-final-amostra" href="/assets/downloads/amostra-kit-tcc.docx" download>Baixar 3 páginas grátis</a></p>
         </div>
-        <a class="btn btn-acento btn-grande" href="{{KIT_URL}}" target="_blank" rel="noopener noreferrer">Quero o Kit TCC<span class="sr-only"> (abre a página de compra da Hotmart em outra aba)</span></a>
       </div>
       <p class="artigo-meta revelar">Atualizado em 2 de novembro de 2026. O modelo segue a ABNT NBR 14724:2024 e as normas NBR 6027:2012, NBR 6024:2012, NBR 10520:2023 e NBR 6023:2025, lidas em textos de manuais de bibliotecas universitárias. As normas são documentos pagos da ABNT, e este material as resume com palavras próprias. Cada instituição pode ter um manual próprio: quando houver diferença, siga o manual. O {{SITE_NAME}} não tem ligação com a ABNT. Veja os <a href="/termos-de-uso/#kit-tcc">Termos de Uso</a>.</p>
     </div>

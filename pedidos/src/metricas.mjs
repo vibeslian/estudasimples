@@ -2,7 +2,7 @@
 // Sem cookies e sem dados pessoais: guarda só o dia, o caminho da página, o tipo de evento e um número.
 import { json, erro, lerJson, limitar } from "./util.mjs";
 
-export const EVENTOS = ["vista", "kit", "servico", "pedir", "whatsapp", "hotmart", "curso", "amazon"];
+export const EVENTOS = ["vista", "kit", "servico", "pedir", "whatsapp", "hotmart", "curso", "amazon", "amostra"];
 const PAGINA_RE = /^\/[a-z0-9\-\/]{0,90}$/;
 const ROBO_RE = /bot|crawl|spider|slurp|headless|lighthouse|preview|facebookexternalhit|curl|wget|python|node-fetch/i;
 const MAX_POR_DIA = 5000; // teto de registros por dia (contra abuso); não depende de quem envia

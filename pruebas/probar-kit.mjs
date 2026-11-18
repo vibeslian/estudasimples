@@ -55,7 +55,9 @@ ok(!/name="robots"/.test(pagina), "encendido: sin noindex");
 ok((pagina.match(/<h1[ >]/g) || []).length === 1, "un solo h1");
 ok(/<link rel="canonical" href="https:\/\/estudasimples\.com\.br\/kit-tcc\/">/.test(pagina), "canonical correcto");
 ok(pagina.includes(LINK), "el botón de compra lleva el link de Hotmart de la configuración");
-const botones = [...pagina.matchAll(/<a class="btn btn-acento[^"]*" href="([^"]+)"([^>]*)>Quero o Kit TCC/g)];
+const botones = [...pagina.matchAll(/<a class="btn[^"]*" href="([^"]+)"([^>]*)>Quero o (?:Kit TCC|kit completo)/g)];
+ok(/href="\/assets\/downloads\/amostra-kit-tcc\.docx" download/.test(pagina) && existe(on.dir, "assets/downloads/amostra-kit-tcc.docx"), "encendido: la muestra gratis en Word se publica y la página la ofrece");
+ok(/<video[^>]*preload="none"[^>]*poster="\/assets\/img\/kit\/demo-poster\.webp"/.test(pagina) && existe(on.dir, "assets/img/kit/kit-tcc-demo.mp4"), "encendido: el video de 15 s se publica y no se descarga hasta que la persona lo toca");
 ok(botones.length === 3 && botones.every((b) => b[1] === LINK && /target="_blank"/.test(b[2]) && /rel="noopener noreferrer"/.test(b[2])), "los 3 botones de compra (héroe, final y barra) llevan el link, target _blank y rel noopener", String(botones.length));
 ok(pagina.includes("R$\u00a029,90"), "el precio sale como R$ 29,90 (con espacio sin quiebre)");
 ok(/Garantia de 7 dias/.test(pagina), "la garantía sale de la configuración (7 días)");
@@ -208,8 +210,8 @@ for (const [w, h, movil] of [[320, 700, true], [390, 844, true], [768, 1000, fal
   const { pg, ctx } = await abre(1280, 900, false);
   const axe = await axeEn(pg);
   ok(axe.length === 0, "accesibilidad (axe) en computador", axe.length ? "\n" + describeAxe(axe) : "");
-  const dos = await pg.evaluate(() => { const c = document.querySelector(".hero-texto").getBoundingClientRect(), k = document.querySelector(".kit-colagem").getBoundingClientRect(); return k.left > c.right - 5; });
-  ok(dos, "computador: texto del héroe y colagem de páginas lado a lado");
+  const dos = await pg.evaluate(() => { const c = document.querySelector(".hero-texto").getBoundingClientRect(), k = document.querySelector(".kit-demo").getBoundingClientRect(); return k.left > c.right - 5; });
+  ok(dos, "computador: texto del héroe y video de demostración lado a lado");
   await ctx.close();
 }
 {

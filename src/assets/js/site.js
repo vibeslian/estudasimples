@@ -180,6 +180,7 @@
     if (/^https?:\/\/go\.hotmart\.com\//.test(href)) return "curso";
     if (/^https?:\/\/(www\.)?(amazon\.com\.br|amzn\.to)\//.test(href)) return "amazon";
     var caminho = href.replace(/^https?:\/\/estudasimples\.com\.br/, "");
+    if (/^\/assets\/downloads\/amostra-kit[-]tcc\./.test(caminho)) return "amostra"; // descarga da amostra grátis (Word ou PDF)
     if (/^\/kit[-]tcc\/?($|[#?])/.test(caminho)) return "kit"; // página do produto (escrito assim para não nomeá-lo com o produto desligado)
     if (/^\/formatacao-abnt-tcc\/?($|[#?])/.test(caminho)) return "servico";
     if (/^\/pedir-formatacao\/?($|[#?])/.test(caminho)) return "pedir";
