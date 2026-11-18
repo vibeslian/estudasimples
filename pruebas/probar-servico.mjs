@@ -66,7 +66,7 @@ marca(!/\b\d+\s*a\s*\d+\s*horas/.test(fuenteTexto) && !fuenteTexto.includes("wa.
   }
   const t = norm(d.texto);
   marca(t.includes(norm(brl(cfg.precos.ate30))) && t.includes(norm(brl(cfg.precos.de31a60))), `la página muestra ${brl(cfg.precos.ate30)} (hasta 30 páginas) y ${brl(cfg.precos.de31a60)} (31 a 60) tomados de la configuración`);
-  marca(/Mais de 60 páginas/.test(t) && /A consultar/.test(t), "más de 60 páginas: \"A consultar\"");
+  marca(/mais de 60 páginas/i.test(t) && /preço fechado/i.test(t), "más de 60 páginas: preço fechado antes de pagar");
   marca(t.includes(`Entrega em ${cfg.prazo}`), `el plazo "${cfg.prazo}" aparece desde la configuración`);
   marca(!/\{\{|\}\}/.test(d.texto) && !/\{\{/.test(await p.content()), "no queda ningún marcador {{...}} sin reemplazar");
   marca(d.title.length <= 65 && d.desc.length >= 120 && d.desc.length <= 165 && /Formatação (ABNT de TCC|de TCC ABNT)/.test(d.title), `title ${d.title.length}c y description ${d.desc.length}c dentro de lo recomendado`);
@@ -164,14 +164,14 @@ for (const [nombre, vp] of [["computador 1280", { width: 1280, height: 900 }], [
     const cont = folhas.map((f) => { const c = f.querySelector(".ad-conteudo"); const fb = f.getBoundingClientRect(); return [...c.querySelectorAll("p")].every((e) => { const b = e.getBoundingClientRect(); return b.bottom <= fb.bottom - fb.height * 0.1 && b.right <= fb.right + 1 && b.left >= fb.left - 1; }); });
     const hero = document.querySelector(".hero").getBoundingClientRect();
     return {
-      primera: document.querySelector("main > section")?.id, tras: sec.getBoundingClientRect().top >= hero.bottom - 1,
+      primera: document.querySelector("main > section")?.id, tras: sec.getBoundingClientRect().top >= hero.bottom - 1, antesIncluido: !!(sec.compareDocumentPosition(document.getElementById("incluido")) & Node.DOCUMENT_POSITION_FOLLOWING),
       alts: folhas.map((f) => ({ role: f.getAttribute("role"), alt: f.getAttribute("aria-label") || "" })), imgs: sec.querySelectorAll("img, svg, canvas, picture").length,
       lado: Math.abs(rects[0].top - rects[1].top) < 2 && rects[0].left < rects[1].left, apiladas: rects[1].top > rects[0].bottom - 1,
       cabe: cont, ov: document.documentElement.scrollWidth - innerWidth, legendas: [...sec.querySelectorAll(".ad-lista")].map((l) => l.children.length),
       texto: sec.innerText.replace(/\s+/g, " "), nota: !!sec.querySelector(".ad-nota"), ancho: Math.round(rects[0].width),
     };
   });
-  marca(!!r && r.primera === "antes-e-depois" && r.tras, nombre + ": el ejemplo va justo después de la portada, antes de \"O que está incluído\"");
+  marca(!!r && r.primera === "prazo-e-precos" && r.tras && r.antesIncluido, nombre + ": los precios van primero (pedido de Lian, 17/11) y el ejemplo antes de \"O que está incluído\"");
   marca(!!r && r.alts.length === 2 && r.alts.every((a) => a.role === "img" && a.alt.length > 80) && /sem formatação/.test(r.alts[0].alt) && /ABNT/.test(r.alts[1].alt), nombre + ": las dos páginas tienen texto alternativo (role=img + aria-label)");
   marca(!!r && r.imgs === 0, nombre + ": hecho solo con HTML y CSS (0 imágenes, svg ni canvas): casi no pesa");
   marca(!!r && (nombre.startsWith("computador") ? r.lado : r.apiladas), nombre + (nombre.startsWith("computador") ? ": lado a lado (antes a la izquierda, depois a la derecha)" : ": una debajo de la otra"));
